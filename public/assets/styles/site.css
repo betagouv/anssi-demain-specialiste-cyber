@@ -59,8 +59,9 @@ nav .liens #espace-enseignant::before {
   margin-top: 90px;
 }
 
-#marque-cadre h1 {
+#marque-cadre p {
   font-size: 1.5rem;
+  font-weight: 700;
   text-transform: uppercase;
   margin-top: 33px;
 }
