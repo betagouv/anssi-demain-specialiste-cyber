@@ -4,6 +4,7 @@
   "description": "Site web vitrine de la campagne « Demain Spécialiste Cyber »",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "homepage": "https://github.com/betagouv/anssi-demain-specialiste-cyber#readme",
   "engines": {
     "node": "^18"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "3.0.3"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }
