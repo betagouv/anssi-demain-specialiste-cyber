@@ -1,0 +1,19 @@
+{
+  "name": "anssi-demain-specialiste-cyber",
+  "version": "1.0.0",
+  "description": "Site web vitrine de la campagne « Demain Spécialiste Cyber »",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betagouv/anssi-demain-specialiste-cyber.git"
+  },
+  "bugs": {
+    "url": "https://github.com/betagouv/anssi-demain-specialiste-cyber/issues"
+  },
+  "homepage": "https://github.com/betagouv/anssi-demain-specialiste-cyber#readme",
+  "engines": {
+    "node": "^18"
+  }
+}
