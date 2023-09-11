@@ -5,13 +5,17 @@
 body {
   font-family: Marianne, Arial, sans-serif;
   font-size: 14px;
+  margin: 0;
 }
 
 .cadre {
   max-width: 1440px;
-  padding-left: 108px;
-  padding-right: 120px;
   margin: auto;
+}
+
+.gouttiere {
+  margin-left: 108px;
+  margin-right: 120px;
 }
 
 #marque-fond {
@@ -21,14 +25,14 @@ body {
 #marque-cadre {
   color: white;
   height: 632px;
+  background: url("../images/hero.svg") no-repeat;
 }
 
 nav {
+  height: 102px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: var(--bleu-fonce);
-  background: var(--bleu-fonce);
   margin: auto;
   padding-top: 12px;
   padding-bottom: 12px;
@@ -48,11 +52,11 @@ nav .liens #espace-enseignant::before {
   transform: translateY(2px);
   margin-right: 8px;
   content: "";
-  background: url("/assets/images/cahier.svg");
+  background: url("../images/cahier.svg");
 }
 
 #marque-cadre #bloc-marque {
-  margin-top: 105px;
+  margin-top: 90px;
 }
 
 #marque-cadre h1 {
