@@ -5,12 +5,22 @@
 body {
   font-family: Marianne, Arial, sans-serif;
   font-size: 14px;
+}
+
+.cadre {
+  max-width: 1440px;
+  padding-left: 108px;
+  padding-right: 120px;
   margin: auto;
 }
 
-#marque {
+#marque-fond {
   background: var(--bleu-fonce);
-  padding-top: 12px;
+}
+
+#marque-cadre {
+  color: white;
+  height: 632px;
 }
 
 nav {
@@ -18,10 +28,10 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   background: var(--bleu-fonce);
-  color: white;
   background: var(--bleu-fonce);
-  max-width: 1440px;
   margin: auto;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 nav .liens {
@@ -39,4 +49,14 @@ nav .liens #espace-enseignant::before {
   margin-right: 8px;
   content: "";
   background: url("/assets/images/cahier.svg");
+}
+
+#marque-cadre #bloc-marque {
+  margin-top: 105px;
+}
+
+#marque-cadre h1 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-top: 33px;
 }
