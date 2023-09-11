@@ -1,9 +1,11 @@
 :root {
   --bleu-fonce: #141425;
+  --noir: #13142a;
+  --fonts: Marianne, Arial, sans-serif;
 }
 
 body {
-  font-family: Marianne, Arial, sans-serif;
+  font-family: var(--fonts);
   font-size: 14px;
   margin: 0;
 }
@@ -66,11 +68,36 @@ nav .liens #espace-enseignant::before {
   margin-top: 33px;
 }
 
+#agir-cadre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 #agir-cadre h2 {
-  color: #13142a;
+  color: var(--noir);
   text-align: center;
   font-size: 3rem;
   font-style: normal;
   font-weight: 700;
   line-height: 3.5rem;
+  margin: 0;
+}
+
+#agir-cadre #agir-video {
+  margin: 64px auto;
+}
+
+#agir-cadre button {
+  display: flex;
+  padding: 10px 24px 14px 24px;
+  justify-content: center;
+  align-items: center;
+  background: var(--noir);
+  color: white;
+  border: none;
+  font: var(--fonts);
+  cursor: pointer;
 }
