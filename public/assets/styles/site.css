@@ -65,3 +65,12 @@ nav .liens #espace-enseignant::before {
   text-transform: uppercase;
   margin-top: 33px;
 }
+
+#agir-cadre h2 {
+  color: #13142a;
+  text-align: center;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.5rem;
+}
