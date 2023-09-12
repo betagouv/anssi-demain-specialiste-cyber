@@ -1,4 +1,5 @@
 const donnees = {
+  videosAgir: [{ idVideo: 1 }, { idVideo: 2 }],
   metiers: [
     { metier: "Pentester", identite: "Julie", idVideo: "pentester" },
     {
@@ -14,6 +15,12 @@ const donnees = {
   ],
 };
 
+const videoAgirAleatoire = () => {
+  const indexVideo = Math.floor(Math.random() * donnees.videosAgir.length);
+  const { idVideo } = donnees.videosAgir[indexVideo];
+  return `agir-video-${idVideo}-placeholder.png`;
+};
+
 const metiersAuHasard = (combien) => {
   const nbMetiers = donnees.metiers.length;
   const indexDepart = Math.floor(Math.random() * nbMetiers);
@@ -25,4 +32,4 @@ const metiersAuHasard = (combien) => {
   return selection;
 };
 
-module.exports = { metiersAuHasard };
+module.exports = { metiersAuHasard, videoAgirAleatoire };

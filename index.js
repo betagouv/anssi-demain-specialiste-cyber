@@ -1,5 +1,5 @@
 const express = require("express");
-const { metiersAuHasard } = require("./referentiel");
+const { metiersAuHasard, videoAgirAleatoire } = require("./referentiel");
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -9,10 +9,10 @@ app.set("views", "./vues");
 app.use(express.static("public"));
 
 app.get("/", (req, rep) => {
-  const indexVideoAgir = Math.floor(Math.random() * 2) + 1;
-  const videoAgir = `agir-video-${indexVideoAgir}-placeholder.png`;
-
-  rep.render("index", { videoAgir, fichesMetiers: metiersAuHasard(3) });
+  rep.render("index", {
+    videoAgir: videoAgirAleatoire(),
+    fichesMetiers: metiersAuHasard(3),
+  });
 });
 
 app.listen(port, () => {
