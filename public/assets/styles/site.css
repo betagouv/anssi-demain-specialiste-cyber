@@ -124,6 +124,10 @@ nav .liens #espace-enseignant::before {
   margin-top: 16px;
 }
 
+#metiers-cadre .fiche-metier {
+  max-width: 384px;
+}
+
 #metiers-cadre .fiche-metier .metier {
   font-size: 1.5rem;
   font-weight: 700;

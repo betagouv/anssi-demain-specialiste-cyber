@@ -31,8 +31,9 @@ html(lang = 'fr', xml:lang = 'fr', xmlns = 'http://www.w3.org/1999/xhtml')
       .grand-ecran.cadre#metiers-cadre
         h2.titre-cadre Découvre les métiers #[br] des Spécialistes Cyber
         .carrousel-fiches-metiers
-          .fiche-metier
-            img(control, width=384, src='/assets/videos/fiche-metier-video-pentester-placeholder.png')
-            .identite Julie
-            .metier Pentester
-            .en-savoir-plus En savoir plus
+          each f in fichesMetiers
+            .fiche-metier
+              img(control, width=384, src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
+              .identite #{f.identite}
+              .metier #{f.metier}
+              .en-savoir-plus En savoir plus
