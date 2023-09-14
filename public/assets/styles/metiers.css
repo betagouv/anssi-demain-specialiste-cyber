@@ -1,0 +1,36 @@
+#metiers-fond {
+  background: linear-gradient(to bottom, var(--jaune) 60%, white 60%);
+}
+
+#metiers-cadre .carrousel-fiches-metiers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  column-gap: 24px;
+}
+
+#metiers-cadre .fiche-metier .identite {
+  color: var(--gris);
+  font-size: 1.13rem;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+#metiers-cadre .fiche-metier {
+  max-width: 384px;
+}
+
+#metiers-cadre .fiche-metier .metier {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+#metiers-cadre .fiche-metier .en-savoir-plus {
+  font-size: 1.13rem;
+  font-weight: 400;
+  margin-top: 24px;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
