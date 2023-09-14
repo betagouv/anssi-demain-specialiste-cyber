@@ -1,0 +1,55 @@
+#defi-fond {
+  background: linear-gradient(to bottom, var(--rouge) 70%, #f6f6f6 70%);
+}
+
+#defi-cadre .gouttiere {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+#defi-cadre .titre-cadre {
+  color: white;
+}
+
+#defi-cadre .defi {
+  width: 588px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  background: white;
+  padding: 40px;
+  color: var(--noir);
+}
+
+#defi-cadre .defi .logo {
+  align-self: center;
+}
+
+#defi-cadre .defi .titre {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+}
+
+#defi-cadre .defi .details {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+#defi-cadre .action {
+  width: fit-content;
+  margin: auto;
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+
+#defi-cadre .action::after {
+  display: inline-block;
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  background: url("../images/lien-externe.svg");
+}
