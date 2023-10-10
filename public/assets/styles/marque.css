@@ -4,8 +4,20 @@
 
 #marque-cadre {
   color: white;
-  height: 632px;
-  background: url("../images/hero.svg") no-repeat;
+  background: url("../images/hero.svg") no-repeat center;
+  background-size: cover;
+}
+
+#marque {
+  width: 55%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+#marque-cadre img#bloc-marque {
+  width: 100%;
 }
 
 nav {
@@ -43,5 +55,5 @@ nav .liens #espace-enseignant::before {
   font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
-  margin-top: 33px;
+  margin: 35px 0 0 0;
 }
