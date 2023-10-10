@@ -2,6 +2,10 @@
   background: #f6f6f6;
 }
 
+#stats-cadre {
+  background: url(../images/action-cyberdefense.svg) no-repeat right;
+}
+
 #stats-cadre .gouttiere {
   color: white;
   display: flex;
