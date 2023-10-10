@@ -16,7 +16,7 @@
   background: white;
   padding: 40px;
   color: var(--noir);
-  width: 430px;
+  max-width: 430px;
 }
 
 #formation-fond .formation .titre {
@@ -44,7 +44,4 @@
   height: 24px;
   margin-left: 8px;
   background: url("../images/lien-externe.svg");
-}
-#formation-fond #telecharge-fiches {
-  width: 442px;
 }

@@ -50,7 +50,7 @@
 }
 
 #stats-cadre .info-1 {
-  width: 689px;
+  max-width: 689px;
   background: #234c9a;
 }
 
@@ -66,7 +66,7 @@
 }
 
 #stats-cadre .info-2 {
-  width: 384px;
+  max-width: 384px;
   background: var(--rouge);
 }
 
@@ -81,7 +81,7 @@
 }
 
 #stats-cadre .info-3 {
-  width: 218px;
+  max-width: 218px;
   background: var(--noir);
 }
 

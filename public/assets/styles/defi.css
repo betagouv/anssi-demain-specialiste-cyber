@@ -19,7 +19,7 @@
 }
 
 #defi-cadre .defi {
-  width: 588px;
+  max-width: 588px;
   display: flex;
   flex-direction: column;
   row-gap: 32px;
@@ -30,6 +30,12 @@
 
 #defi-cadre .defi .logo {
   align-self: center;
+}
+#defi-cadre #logo-ozint {
+  max-width: 202px;
+}
+#defi-cadre #logo-pix {
+  max-width: 115px;
 }
 
 #defi-cadre .defi .titre {

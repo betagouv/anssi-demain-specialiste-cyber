@@ -1,3 +1,8 @@
 #agir-cadre .titre-cadre {
   color: var(--noir);
 }
+
+#agir-cadre #agir-video {
+  width: 100%;
+  max-width: 1200px;
+}

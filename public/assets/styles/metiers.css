@@ -9,15 +9,19 @@
   column-gap: 24px;
 }
 
+#metiers-cadre .fiche-metier {
+  flex: 1;
+}
+
+#metiers-cadre .fiche-metier img {
+  width: 100%;
+}
+
 #metiers-cadre .fiche-metier .identite {
   color: var(--gris);
   font-size: 1.13rem;
   font-weight: 700;
   margin-top: 16px;
-}
-
-#metiers-cadre .fiche-metier {
-  max-width: 384px;
 }
 
 #metiers-cadre .fiche-metier .metier {
