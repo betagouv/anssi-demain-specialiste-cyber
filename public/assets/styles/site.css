@@ -15,8 +15,9 @@ body {
 }
 
 .grand-ecran {
-  max-width: 1440px;
+  max-width: 1400px;
   margin: auto;
+  padding: 0 20px;
 }
 
 .cadre {
@@ -48,9 +49,4 @@ body {
   border: none;
   font: var(--fonts);
   cursor: pointer;
-}
-
-.gouttiere {
-  margin-left: 108px;
-  margin-right: 120px;
 }

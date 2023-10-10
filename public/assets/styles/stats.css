@@ -6,10 +6,12 @@
   background: url(../images/action-cyberdefense.svg) no-repeat right;
 }
 
-#stats-cadre .gouttiere {
-  color: white;
+#stats-cadre .infos {
+  align-self: flex-start;
   display: flex;
   flex-direction: row;
+  max-width: 755px;
+  color: white;
   flex-wrap: wrap;
   column-gap: 24px;
   row-gap: 25px;

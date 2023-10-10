@@ -3,7 +3,7 @@
   color: white;
 }
 
-#formation-fond .gouttiere {
+#formation-fond .formations {
   display: flex;
   flex-direction: row;
   column-gap: 24px;
