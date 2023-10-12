@@ -1,0 +1,27 @@
+@media screen and (min-width: 1440px) {
+  .grand-ecran {
+    background-position-x: 220px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grand-ecran {
+    background-position: center;
+  }
+
+  #bloc-marque {
+    width: 70%;
+  }
+  #titre {
+    text-align: center;
+  }
+  #date-lancement {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  #bloc-marque {
+    width: 100%;
+  }
+}
