@@ -1,0 +1,46 @@
+body {
+  background: #14152a;
+  color: white;
+  height: 100vh;
+}
+
+.grand-ecran {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: url("../images/lancement.svg") no-repeat 90px 0;
+  background-size: cover;
+}
+
+#marianne {
+  margin-top: 12px;
+  width: 118px;
+}
+
+#lancement {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 70%;
+  text-transform: uppercase;
+}
+
+#bloc-marque {
+  max-width: 600px;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 700;
+}
+
+#titre {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+#date-lancement {
+  font-size: 6.25rem;
+  line-height: 6.25rem;
+}
