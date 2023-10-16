@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "node index.js",
-    "start:dev": "nodemon  index.js"
+    "start:dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "node": "^18"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "nodemon": "^3.0.1",
