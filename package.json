@@ -20,7 +20,6 @@
     "node": "^18"
   },
   "devDependencies": {
-    "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "nodemon": "^3.0.1",
@@ -30,6 +29,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "pug": "^3.0.2"
   }
