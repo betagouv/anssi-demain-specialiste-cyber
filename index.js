@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const { metiersAuHasard, videoAgirAleatoire } = require("./referentiel");
 const middleware = require("./middleware");
