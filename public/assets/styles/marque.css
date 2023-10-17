@@ -1,59 +1,52 @@
-#marque-fond {
-  background: var(--bleu-fonce);
-}
-
-#marque-cadre {
-  color: white;
-  background: url("../images/hero.svg") no-repeat center;
-  background-size: cover;
-}
-
 #marque {
-  width: 55%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 40px;
+  padding: 16px;
+  background-color: var(--noir);
+  color: white;
 }
 
-#marque-cadre img#bloc-marque {
-  width: 100%;
+#burger {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 3px;
 }
 
 nav {
-  height: 102px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  margin: auto;
-  padding-top: 12px;
-  padding-bottom: 12px;
 }
 
-nav .liens {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 28px;
+#marque img#bloc-marque {
+  width: 100%;
+  margin-top: 50px;
 }
 
-nav .liens #espace-enseignant::before {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  transform: translateY(2px);
-  margin-right: 8px;
-  content: "";
-  background: url("../images/cahier.svg");
-}
-
-#marque-cadre #bloc-marque {
-  margin-top: 90px;
-}
-
-#marque-cadre p {
-  font-size: 1.5rem;
-  font-weight: 700;
+#marque h2 {
   text-transform: uppercase;
-  margin: 35px 0 0 0;
+  text-align: justify;
+  font-size: 0.9rem;
+  margin: 0;
+  padding-top: 17px;
+}
+
+#marque h2::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+
+#conteneur-carrousel {
+  background: var(--noir);
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+#conteneur-carrousel img {
+  position: relative;
+}
+
+#conteneur-carrousel img:nth-child(2) {
+  z-index: 2;
+  transform: scale(1.1);
 }
