@@ -1,0 +1,101 @@
+#stats {
+  display: flex;
+  flex-direction: column;
+  background: #f6f6f6;
+  padding: 56px 0;
+}
+
+#stats .carrousel-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+#stats .fleche-gauche::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/fleche-gauche.svg") no-repeat left;
+  border-bottom: 1px solid var(--noir);
+}
+
+#stats .fleche-droite {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+#stats .fleche-droite::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/fleche-gauche.svg") no-repeat left;
+  transform: rotate(180deg);
+  border-top: 1px solid var(--noir);
+}
+
+#infos {
+  color: white;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 13px;
+}
+
+#infos .info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-width: 67%;
+}
+
+#infos .info .titre {
+  font-size: 1.71rem;
+  line-height: 2.285rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+#infos .info .source {
+  align-self: flex-end;
+  display: flex;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
+  border-bottom: 1px solid white;
+  margin-top: auto;
+  padding-bottom: 3px;
+}
+
+#infos .info .source::after {
+  display: inline-block;
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  background: url("../images/lien-externe.svg");
+}
+
+#infos .info-1 {
+  background: #234c9a;
+}
+#infos .info-1 .details {
+  font-size: 1.14rem;
+  line-height: 1.71rem;
+}
+#infos .info-2 {
+  background: var(--rouge);
+}
+#infos .info-2 .details {
+  font-size: 1.285rem;
+  line-height: 2rem;
+}
+#infos .info-3 {
+  background: var(--noir);
+}
+#infos .info-3 .titre {
+  font-weight: 700;
+}
