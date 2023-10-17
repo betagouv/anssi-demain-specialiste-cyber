@@ -7,6 +7,7 @@ block append styles
   link(href='/assets/styles/agir.css', rel='stylesheet')
   link(href='/assets/styles/agir.tablette.css', rel='stylesheet')
   link(href='/assets/styles/metiers.css', rel='stylesheet')
+  link(href='/assets/styles/metiers.tablette.css', rel='stylesheet')
 
 block body
   #marque
@@ -41,10 +42,10 @@ block body
 
   #metiers
     h2 Découvre les métiers des Spécialistes Cyber
-    #carrousel-navigation.piste
+    #carrousel-navigation
       #fleche-gauche
       #fleche-droite Témoignage suivant
-    #carrousel-fiches-metiers.piste
+    #carrousel-fiches-metiers
       each f in fichesMetiers
         .fiche-metier
           img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
