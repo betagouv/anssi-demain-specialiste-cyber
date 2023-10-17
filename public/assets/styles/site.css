@@ -43,7 +43,8 @@ button.action {
   cursor: pointer;
 }
 
-.responsive-visible-tablette {
+.responsive-visible-tablette,
+.responsive-visible-desktop {
   display: none !important;
 }
 
@@ -53,6 +54,14 @@ button.action {
   }
 
   .responsive-visible-tablette {
+    display: flex !important;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .responsive-invisible-desktop {
+    display: none !important;
+  }
+  .responsive-visible-desktop {
     display: flex !important;
   }
 }

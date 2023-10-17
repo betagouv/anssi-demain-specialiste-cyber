@@ -1,0 +1,26 @@
+@media screen and (min-width: 1440px) {
+  #marque {
+    padding: 24px 120px 0 120px;
+  }
+
+  #conteneur-marque h2 {
+    font-size: 1.6vw;
+  }
+}
+
+#menu-desktop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 28px;
+}
+
+#menu-desktop #espace-enseignant::before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  transform: translateY(2px);
+  margin-right: 8px;
+  content: "";
+  background: url("../images/cahier.svg");
+}
