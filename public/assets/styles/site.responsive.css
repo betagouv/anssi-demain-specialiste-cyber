@@ -3,3 +3,9 @@
     display: none !important;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .piste {
+    padding: 0 16px;
+  }
+}
