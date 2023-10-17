@@ -1,0 +1,27 @@
+#conteneur-marque {
+  flex-direction: row;
+  margin-top: 105px;
+}
+
+#boite-marque {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  position: relative;
+  z-index: 2;
+}
+
+#boite-heros {
+  width: 45%;
+  height: 500px;
+}
+
+#heros {
+  transform: scale(0.85) translate(-165px, -20px);
+  clip-path: inset(0 0 153px 0);
+}
+
+#conteneur-marque h2 {
+  font-size: 2vw;
+  margin-top: 20px;
+}
