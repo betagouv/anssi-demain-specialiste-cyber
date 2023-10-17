@@ -7,8 +7,9 @@
   #agir h2 {
     font-size: 3.5rem;
     line-height: 4rem;
-    margin: 0;
-    padding-top: 80px;
+    width: 736px;
+    margin: 0 auto;
+    padding: 80px 0 0 0;
   }
 
   #agir #agir-video {
