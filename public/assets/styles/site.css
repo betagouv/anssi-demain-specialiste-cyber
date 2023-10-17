@@ -14,6 +14,14 @@ body {
   margin: 0;
 }
 
+.piste {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 120px;
+}
+
 .grand-ecran {
   max-width: 1400px;
   margin: auto;
@@ -49,4 +57,9 @@ body {
   border: none;
   font: var(--fonts);
   cursor: pointer;
+}
+
+#marianne {
+  width: 118px;
+  transform: translateX(-12px);
 }
