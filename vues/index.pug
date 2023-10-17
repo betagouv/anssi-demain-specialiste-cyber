@@ -43,18 +43,15 @@ block body
     #carrousel-navigation.piste
       #fleche-gauche
       #fleche-droite Témoignage suivant
-  //
-  //#metiers-fond
-  //  .grand-ecran.cadre#metiers-cadre
-  //    .carrousel-fiches-metiers
-  //      each f in fichesMetiers
-  //        .fiche-metier
-  //          img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
-  //          .identite #{f.identite}
-  //          .metier #{f.metier}
-  //          .en-savoir-plus En savoir plus
-  //    button.action Accède aux témoignages
-  //
+    #carrousel-fiches-metiers.piste
+      each f in fichesMetiers
+        .fiche-metier
+          img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
+          .identite #{f.identite}
+          .metier #{f.metier}
+          .en-savoir-plus En savoir plus
+    button.action Accède aux témoignages
+
   //#stats-fond
   //  .grand-ecran.cadre#stats-cadre
   //    .infos
