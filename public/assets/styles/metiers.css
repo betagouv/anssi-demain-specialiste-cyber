@@ -6,7 +6,7 @@
 #metiers h2 {
   font-size: 2rem;
   text-align: center;
-  padding: 40px 30px 0 30px;
+  padding: 40px 16px 0 16px;
 }
 
 #metiers #carrousel-navigation {
@@ -39,4 +39,45 @@
   background: url("../images/fleche-gauche.svg") no-repeat left;
   transform: rotate(180deg);
   border-top: 1px solid var(--noir);
+}
+
+#carrousel-fiches-metiers {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+}
+
+.fiche-metier {
+  display: flex;
+  flex-direction: column;
+  min-width: 75%;
+  max-width: 384px;
+}
+
+.fiche-metier img {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.fiche-metier .identite {
+  color: var(--gris);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 2rem;
+}
+.fiche-metier .metier {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.fiche-metier .en-savoir-plus {
+  font-size: 1.15rem;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  margin-top: 16px;
+}
+
+#metiers button.action {
+  margin: 48px auto 40px auto;
+  font-weight: 700 !important;
+  font-size: 1.45rem !important;
 }
