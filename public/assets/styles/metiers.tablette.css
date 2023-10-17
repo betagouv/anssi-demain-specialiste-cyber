@@ -1,6 +1,8 @@
 @media screen and (min-width: 768px) {
   #metiers h2 {
-    padding: 40px 110px 64px 110px;
+    padding: 40px 0 64px 0;
+    width: 570px;
+    margin: auto;
     font-size: 3.43rem;
   }
 
@@ -19,10 +21,11 @@
   .fiche-metier .en-savoir-plus {
     font-size: 1.29rem;
     line-height: 2rem;
+    margin-top: 24px;
   }
 
   #metiers button.action {
-    margin-top: 66px;
+    margin-top: 64px;
     margin-bottom: 64px;
   }
 }
