@@ -1,5 +1,5 @@
 :root {
-  --bleu-fonce: #141425;
+  --bleu-fonce: #13152a;
   --noir: #13142a;
   --gris: #13142a80;
   --jaune: #fed068;
@@ -7,49 +7,33 @@
   --fonts: Marianne, Arial, sans-serif;
 }
 
-body {
-  font-family: var(--fonts);
+html {
+  overflow-x: hidden;
   font-size: 14px;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--fonts);
   color: var(--noir);
   margin: 0;
 }
 
 .piste {
-  max-width: 1440px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  padding: 0 120px;
+  padding: 0 16px;
 }
 
-.grand-ecran {
-  max-width: 1400px;
-  margin: auto;
-  padding: 0 20px;
+#marianne {
+  width: 118px;
+  transform: translateX(-12px) translateY(-12px);
 }
 
-.cadre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
-.cadre .titre-cadre {
-  text-align: center;
-  font-size: 3rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 3.5rem;
-  margin-top: 0;
-  margin-bottom: 64px;
-}
-
-.cadre .action {
+button.action {
   display: flex;
   align-items: center;
-  margin-top: 64px;
   padding: 10px 24px 14px 24px;
   justify-content: center;
   background: var(--noir);
@@ -59,7 +43,8 @@ body {
   cursor: pointer;
 }
 
-#marianne {
-  width: 118px;
-  transform: translateX(-12px);
+@media screen and (max-width: 768px) {
+  .responsive-invisible {
+    display: none !important;
+  }
 }

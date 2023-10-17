@@ -2,95 +2,94 @@ extends base
 
 block append styles
   link(href='/assets/styles/marque.css', rel='stylesheet')
-  link(href='/assets/styles/marque.responsive.css', rel='stylesheet')
   link(href='/assets/styles/agir.css', rel='stylesheet')
   link(href='/assets/styles/metiers.css', rel='stylesheet')
-  link(href='/assets/styles/stats.css', rel='stylesheet')
-  link(href='/assets/styles/defi.css', rel='stylesheet')
-  link(href='/assets/styles/formation.css', rel='stylesheet')
 
 block body
-  #marque-fond
-    .grand-ecran#marque-cadre
-      nav
-        div
-          img#marianne(src='/assets/images/marianne.svg')
-        .liens.responsive-invisible
-          div Découvrez les métiers
-          div Zoom sur la campagne
-          #espace-enseignant Espagne enseignant
+  #marque
+    nav
+      img#marianne(src='/assets/images/marianne.svg')
+      div#burger
 
-      #marque
-        img#bloc-marque(src='/assets/images/bloc-marque.svg')
-        p Découvrez la cybersécurité et ses métiers
+    img#bloc-marque(src='/assets/images/bloc-marque.svg')
+    h2 Découvrez la cybersécurité et ses métiers
 
-  #agir-fond
-    .grand-ecran.cadre#agir-cadre
-      h2.titre-cadre Agir pour prévenir les #[br] cyberattaques et y répondre
-      img#agir-video(src=`/assets/videos/${videoAgir}`)
-      button.action Découvre la campagne
+  div#conteneur-carrousel
+    img(src='/assets/images/elliot.svg')
+    img(src='/assets/images/leila.svg')
+    img(src='/assets/images/alix.svg')
 
-  #metiers-fond
-    .grand-ecran.cadre#metiers-cadre
-      h2.titre-cadre Découvre les métiers #[br] des Spécialistes Cyber
-      .carrousel-fiches-metiers
-        each f in fichesMetiers
-          .fiche-metier
-            img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
-            .identite #{f.identite}
-            .metier #{f.metier}
-            .en-savoir-plus En savoir plus
-      button.action Accède aux témoignages
+  #agir
+    h2 Agir pour prévenir les cyberattaques et y répondre
+    img#agir-video(src=`/assets/videos/${videoAgir}`)
+    button.action Découvre la campagne
 
-  #stats-fond
-    .grand-ecran.cadre#stats-cadre
-      .infos
-        .info.info-1
-          .titre 52 000 emplois en cybersécurité en France
-          .details.
-            Cela représente une hausse de 16% par rapport à 2021. La stratégie nationale
-            d’accélération cybersécurité, lancée en 2021, a pour objectif de créer #[b 37 000 emplois d’ici 2025].
-          .source Source
-        .info.info-2
-          .titre Une volonté forte de féminiser les métiers de la cyber
-          .details.
-            Seul 11% des professionnels de la cybersécurité en 2021 sont des femmes
-          .source Source
-        .info.info-3
-          .titre 71% des professionnels recrutés en cyber
-          .details sur les 5 dernières années n’ont pas pour expertise d’origine la cybersécurité
-          .source Source
-
-  #defi-fond
-    .grand-ecran.cadre#defi-cadre
-      h2.titre-cadre Accepte le défi et enquête comme #[br] les Spécialistes Cyber !
-      .defis
-        .defi
-          img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
-          .titre Mène l’enquête comme les Spécialistes Cyber
-          .details.
-            Tel un détective, et comme pour une enquête, localise les informations pertinentes pour
-            relever le défi ! Retrouve Plusieurs défi sur la plateforme TOP proposé par Le
-            Campus Cyber
-          button.action Mène l’enquête sur TOP
-        .defi
-          img.logo#logo-pix(src='/assets/images/logo-pix.png')
-          .titre Teste ton niveau sur les sujets du numérique
-          .details.
-            Le choix d’un mot de passe n’a plus de secret pour toi ? Tu sais reconnaitre une page
-            sécurisée ? Tu connais l’utilité d’un certificat ?
-            Si tu hésites un peu, entraîne-toi sur Pix proposé par l’Éducation nationale.
-          button.action Teste tes compétences sur PIX
-
-  #formation-fond
-    .grand-ecran.cadre#formation-cadre
-      h2.titre-cadre Commence à te former à la #[br] cybersécurité
-      .formations
-        .formation
-          .titre Des fiches pédagogiques simples pour t’initier à la cybersécurité
-          .details Télécharge des fiches simples créées par l’ANSSI pour comprendre la base de la cybersécurité et ses origines
-          button.action#telecharge-fiches Télécharge les fiches
-        .formation
-          .titre Pour les plus experts, un MOOC très complet sur la cybersécurité
-          .details Dans ce MOOC, tu trouveras des infos pour approfondir tes connaissances, et agir efficacement sur ta protection numérique.
-          button.action Découvrir le MOOC
+  #metiers
+    h2 Découvre les métiers des Spécialistes Cyber
+    #carrousel-navigation.piste
+      #fleche-gauche
+      #fleche-droite Témoignage suivant
+  //
+  //#metiers-fond
+  //  .grand-ecran.cadre#metiers-cadre
+  //    .carrousel-fiches-metiers
+  //      each f in fichesMetiers
+  //        .fiche-metier
+  //          img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
+  //          .identite #{f.identite}
+  //          .metier #{f.metier}
+  //          .en-savoir-plus En savoir plus
+  //    button.action Accède aux témoignages
+  //
+  //#stats-fond
+  //  .grand-ecran.cadre#stats-cadre
+  //    .infos
+  //      .info.info-1
+  //        .titre 52 000 emplois en cybersécurité en France
+  //        .details.
+  //          Cela représente une hausse de 16% par rapport à 2021. La stratégie nationale
+  //          d’accélération cybersécurité, lancée en 2021, a pour objectif de créer #[b 37 000 emplois d’ici 2025].
+  //        .source Source
+  //      .info.info-2
+  //        .titre Une volonté forte de féminiser les métiers de la cyber
+  //        .details.
+  //          Seul 11% des professionnels de la cybersécurité en 2021 sont des femmes
+  //        .source Source
+  //      .info.info-3
+  //        .titre 71% des professionnels recrutés en cyber
+  //        .details sur les 5 dernières années n’ont pas pour expertise d’origine la cybersécurité
+  //        .source Source
+  //
+  //#defi-fond
+  //  .grand-ecran.cadre#defi-cadre
+  //    h2.titre-cadre Accepte le défi et enquête comme #[br] les Spécialistes Cyber !
+  //    .defis
+  //      .defi
+  //        img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
+  //        .titre Mène l’enquête comme les Spécialistes Cyber
+  //        .details.
+  //          Tel un détective, et comme pour une enquête, localise les informations pertinentes pour
+  //          relever le défi ! Retrouve Plusieurs défi sur la plateforme TOP proposé par Le
+  //          Campus Cyber
+  //        button.action Mène l’enquête sur TOP
+  //      .defi
+  //        img.logo#logo-pix(src='/assets/images/logo-pix.png')
+  //        .titre Teste ton niveau sur les sujets du numérique
+  //        .details.
+  //          Le choix d’un mot de passe n’a plus de secret pour toi ? Tu sais reconnaitre une page
+  //          sécurisée ? Tu connais l’utilité d’un certificat ?
+  //          Si tu hésites un peu, entraîne-toi sur Pix proposé par l’Éducation nationale.
+  //        button.action Teste tes compétences sur PIX
+  //
+  //#formation-fond
+  //  .grand-ecran.cadre#formation-cadre
+  //    h2.titre-cadre Commence à te former à la #[br] cybersécurité
+  //    .formations
+  //      .formation
+  //        .titre Des fiches pédagogiques simples pour t’initier à la cybersécurité
+  //        .details Télécharge des fiches simples créées par l’ANSSI pour comprendre la base de la cybersécurité et ses origines
+  //        button.action#telecharge-fiches Télécharge les fiches
+  //      .formation
+  //        .titre Pour les plus experts, un MOOC très complet sur la cybersécurité
+  //        .details Dans ce MOOC, tu trouveras des infos pour approfondir tes connaissances, et agir efficacement sur ta protection numérique.
+  //        button.action Découvrir le MOOC

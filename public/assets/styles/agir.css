@@ -1,8 +1,15 @@
-#agir-cadre .titre-cadre {
-  color: var(--noir);
+#agir h2 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 40px 40px 0 40px;
 }
 
-#agir-cadre #agir-video {
+#agir #agir-video {
   width: 100%;
-  max-width: 1200px;
+  margin: 48px 0;
+}
+
+#agir button.action {
+  font-size: 1.45rem;
+  margin: 0 auto 56px auto;
 }

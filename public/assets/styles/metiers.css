@@ -1,40 +1,42 @@
-#metiers-fond {
-  background: linear-gradient(to bottom, var(--jaune) 60%, white 60%);
+#metiers {
+  background: linear-gradient(to bottom, var(--jaune) 50%, white 50%);
+  color: var(--noir);
 }
 
-#metiers-cadre .carrousel-fiches-metiers {
+#metiers h2 {
+  font-size: 2rem;
+  text-align: center;
+  padding: 40px 30px 0 30px;
+}
+
+#metiers #carrousel-navigation {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  column-gap: 24px;
+  margin-bottom: 16px;
 }
 
-#metiers-cadre .fiche-metier {
-  flex: 1;
+#metiers #fleche-gauche::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/fleche-gauche.svg") no-repeat left;
+  border-bottom: 1px solid var(--noir);
 }
 
-#metiers-cadre .fiche-metier img {
-  width: 100%;
-}
-
-#metiers-cadre .fiche-metier .identite {
-  color: var(--gris);
-  font-size: 1.13rem;
-  font-weight: 700;
-  margin-top: 16px;
-}
-
-#metiers-cadre .fiche-metier .metier {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 8px;
-}
-
-#metiers-cadre .fiche-metier .en-savoir-plus {
-  font-size: 1.13rem;
-  font-weight: 400;
-  margin-top: 24px;
+#metiers #fleche-droite {
+  display: flex;
+  justify-content: center;
   text-decoration: underline;
-  text-underline-offset: 6px;
-  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+}
+#metiers #fleche-droite::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/fleche-gauche.svg") no-repeat left;
+  transform: rotate(180deg);
+  border-top: 1px solid var(--noir);
 }
