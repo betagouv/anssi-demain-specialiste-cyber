@@ -1,0 +1,61 @@
+body {
+  background: url("../images/lancement.svg") var(--noir) no-repeat top;
+  background-size: cover;
+  color: white;
+}
+
+nav {
+  padding: 16px 16px 0 16px;
+  margin: auto;
+}
+
+#lancement {
+  padding: 56px 16px 0 16px;
+}
+
+#boite-marque {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 500px;
+}
+
+#bloc-marque {
+  width: 100%;
+}
+
+h2 {
+  text-transform: uppercase;
+  text-align: justify;
+  font-size: 3.6vw;
+  margin: 0;
+  padding-top: 30px;
+}
+
+h2::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.8rem;
+}
+
+@media screen and (min-width: 532px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 5rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  nav {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}

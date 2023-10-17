@@ -2,11 +2,13 @@ extends base
 
 block append styles
   link(href='/assets/styles/lancement.css', rel='stylesheet')
-  link(href='/assets/styles/lancement.responsive.css', rel='stylesheet')
 
 block body
-  .piste
+  nav
     img#marianne(src='/assets/images/marianne.svg')
-    #lancement
-      img#bloc-marque(src='/assets/images/demain-specialiste-cyber.svg')
-      h1#date-lancement #{dateDeMep.toLocaleDateString("fr-FR")}
+  #lancement
+    #boite-marque
+      img#bloc-marque(src='/assets/images/bloc-marque.svg')
+      h2 Découvrez la cybersécurité et ses métiers
+
+    h1#date-lancement #{dateDeMep.toLocaleDateString("fr-FR")}
