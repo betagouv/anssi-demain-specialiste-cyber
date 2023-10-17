@@ -1,7 +1,8 @@
 #agir h2 {
   font-size: 2rem;
   text-align: center;
-  padding: 40px 40px 0 40px;
+  padding: 40px 16px 0 16px;
+  margin: 0;
 }
 
 #agir #agir-video {
