@@ -6,6 +6,7 @@ block append styles
   link(href='/assets/styles/marque.desktop.css', rel='stylesheet')
   link(href='/assets/styles/agir.css', rel='stylesheet')
   link(href='/assets/styles/agir.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/agir.desktop.css', rel='stylesheet')
   link(href='/assets/styles/metiers.css', rel='stylesheet')
   link(href='/assets/styles/metiers.tablette.css', rel='stylesheet')
 
@@ -36,7 +37,7 @@ block body
     img(src='/assets/images/alix.svg')
 
   #agir
-    h2 Agir pour prévenir les cyberattaques et y répondre
+    h2 Agis pour prévenir les cyberattaques et y répondre
     img#agir-video(src=`/assets/videos/${videoAgir}`)
     button.action Découvre la campagne
 
@@ -53,6 +54,8 @@ block body
           .metier #{f.metier}
           .en-savoir-plus En savoir plus
     button.action Accède aux témoignages
+
+  #stats
 
   //#stats-fond
   //  .grand-ecran.cadre#stats-cadre

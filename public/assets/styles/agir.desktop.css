@@ -1,0 +1,19 @@
+@media screen and (min-width: 1440px) {
+  #agir {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  #agir h2 {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  #agir #agir-video {
+    margin: 64px 0;
+  }
+
+  #agir button.action {
+    margin-bottom: 80px;
+  }
+}
