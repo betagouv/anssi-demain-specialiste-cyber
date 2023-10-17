@@ -43,8 +43,16 @@ button.action {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .responsive-invisible {
+.responsive-visible-tablette {
+  display: none !important;
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-invisible-tablette {
     display: none !important;
+  }
+
+  .responsive-visible-tablette {
+    display: flex !important;
   }
 }

@@ -2,6 +2,7 @@ extends base
 
 block append styles
   link(href='/assets/styles/marque.css', rel='stylesheet')
+  link(href='/assets/styles/marque.tablette.css', rel='stylesheet')
   link(href='/assets/styles/agir.css', rel='stylesheet')
   link(href='/assets/styles/metiers.css', rel='stylesheet')
 
@@ -11,10 +12,18 @@ block body
       img#marianne(src='/assets/images/marianne.svg')
       div#burger
 
-    img#bloc-marque(src='/assets/images/bloc-marque.svg')
-    h2 Découvrez la cybersécurité et ses métiers
+    .responsive-invisible-tablette
+      img#bloc-marque(src='/assets/images/bloc-marque.svg')
+      h2 Découvrez la cybersécurité et ses métiers
 
-  div#conteneur-carrousel
+    #conteneur-marque.responsive-visible-tablette
+      #boite-marque
+        img#bloc-marque-tablette(src='/assets/images/bloc-marque.svg')
+        h2 Découvrez la cybersécurité et ses métiers
+      #boite-heros
+        img#heros(src='/assets/images/heros.svg')
+
+  div#conteneur-carrousel.responsive-invisible-tablette
     img(src='/assets/images/elliot.svg')
     img(src='/assets/images/leila.svg')
     img(src='/assets/images/alix.svg')
