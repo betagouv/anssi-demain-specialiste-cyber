@@ -1,0 +1,28 @@
+@media screen and (min-width: 768px) {
+  #metiers h2 {
+    padding: 40px 110px 64px 110px;
+    font-size: 3.43rem;
+  }
+
+  #metiers #carrousel-navigation {
+    align-self: flex-end;
+    column-gap: 16px;
+  }
+
+  .fiche-metier {
+    min-width: 40%;
+  }
+  .fiche-metier .metier {
+    font-size: 1.71rem;
+    line-height: 2.29rem;
+  }
+  .fiche-metier .en-savoir-plus {
+    font-size: 1.29rem;
+    line-height: 2rem;
+  }
+
+  #metiers button.action {
+    margin-top: 66px;
+    margin-bottom: 64px;
+  }
+}
