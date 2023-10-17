@@ -10,6 +10,7 @@ block append styles
   link(href='/assets/styles/metiers.css', rel='stylesheet')
   link(href='/assets/styles/metiers.tablette.css', rel='stylesheet')
   link(href='/assets/styles/metiers.desktop.css', rel='stylesheet')
+  link(href='/assets/styles/stats.css', rel='stylesheet')
 
 block body
   #marque
@@ -44,9 +45,9 @@ block body
 
   #metiers
     h2 Découvre les métiers des Spécialistes Cyber
-    #carrousel-navigation.responsive-invisible-desktop
-      #fleche-gauche
-      #fleche-droite Témoignage suivant
+    .carrousel-navigation.responsive-invisible-desktop
+      .fleche-gauche
+      .fleche-droite Témoignage suivant
     #carrousel-fiches-metiers
       each f in fichesMetiers
         .fiche-metier
@@ -57,26 +58,25 @@ block body
     button.action Accède aux témoignages
 
   #stats
+    .carrousel-navigation.responsive-invisible-desktop
+      .fleche-gauche
+      .fleche-droite Statistique suivante
+    #infos
+      .info.info-1
+        .titre 52 000 emplois
+        .details.
+          La stratégie nationale d’accélération cybersécurité a pour objectif de créer 37 000 emplois d’ici 2025.
+        .source Source
+      .info.info-2
+        .titre Féminisons les métiers de la cybersécurité !
+        .details.
+          11% seulement des spécialistes cyber sont des femmes.
+        .source Source
+      .info.info-3
+        .titre 71% des spécialistes cyber… n'ont pas étudié la cybersécurité
+        .source Source
 
-  //#stats-fond
-  //  .grand-ecran.cadre#stats-cadre
-  //    .infos
-  //      .info.info-1
-  //        .titre 52 000 emplois en cybersécurité en France
-  //        .details.
-  //          Cela représente une hausse de 16% par rapport à 2021. La stratégie nationale
-  //          d’accélération cybersécurité, lancée en 2021, a pour objectif de créer #[b 37 000 emplois d’ici 2025].
-  //        .source Source
-  //      .info.info-2
-  //        .titre Une volonté forte de féminiser les métiers de la cyber
-  //        .details.
-  //          Seul 11% des professionnels de la cybersécurité en 2021 sont des femmes
-  //        .source Source
-  //      .info.info-3
-  //        .titre 71% des professionnels recrutés en cyber
-  //        .details sur les 5 dernières années n’ont pas pour expertise d’origine la cybersécurité
-  //        .source Source
-  //
+
   //#defi-fond
   //  .grand-ecran.cadre#defi-cadre
   //    h2.titre-cadre Accepte le défi et enquête comme #[br] les Spécialistes Cyber !
