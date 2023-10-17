@@ -3,6 +3,7 @@ extends base
 block append styles
   link(href='/assets/styles/marque.css', rel='stylesheet')
   link(href='/assets/styles/marque.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/marque.desktop.css', rel='stylesheet')
   link(href='/assets/styles/agir.css', rel='stylesheet')
   link(href='/assets/styles/metiers.css', rel='stylesheet')
 
@@ -10,7 +11,11 @@ block body
   #marque
     nav
       img#marianne(src='/assets/images/marianne.svg')
-      div#burger
+      .responsive-invisible-desktop#burger
+      .responsive-visible-desktop#menu-desktop
+        div Découvrez les métiers
+        div Zoom sur la campagne
+        #espace-enseignant Espagne enseignant
 
     .responsive-invisible-tablette
       img#bloc-marque(src='/assets/images/bloc-marque.svg')
