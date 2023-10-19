@@ -23,6 +23,7 @@
 
   .defi {
     width: 53%;
+    max-width: 500px;
     padding: 24px;
     row-gap: 32px;
     position: relative;

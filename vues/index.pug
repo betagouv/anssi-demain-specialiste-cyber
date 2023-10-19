@@ -15,6 +15,7 @@ block append styles
   link(href='/assets/styles/stats.desktop.css', rel='stylesheet')
   link(href='/assets/styles/defi.css', rel='stylesheet')
   link(href='/assets/styles/defi.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/defi.desktop.css', rel='stylesheet')
 
 block body
   #marque
@@ -84,27 +85,28 @@ block body
 
   #defi
     h2 Deviens le spécialiste cyber de demain !
-    #defis
-      img(src='/assets/images/defi.svg')#decor.responsive-invisible-mobile.responsive-visible-tablette
-      .defi
-        img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
-        div
-          .titre Mène tes recherches sur le web comme les spécialistes cyber
-          .details.
-            Tel un détective, résous les énigmes cyber, relève les défis et deviens la
-            « Légende » du web ! Retrouve nos enquêtes sur sur la platerfome TOP proposée
-            par le Campus Cyber !
-        button.action Accepte le défi !
-      .defi
-        img.logo#logo-pix(src='/assets/images/logo-pix.png')
-        div
-          .titre Teste ton niveau sur les sujets du numérique
-          .details.
-            Le choix d’un mot de passe n’a plus de secret pour toi ?
-            Tu sais reconnaître une page sécurisée ?
-            Tu connais l’utilité d’un certificat ? Si tu hésites un peu,
-            entraîne-toi sur Pix proposé par l’Éducation nationale.
-        button.action Découvre Pix !
+    #defis-boite
+      #defis
+        img(src='/assets/images/defi.svg')#decor.responsive-invisible-mobile.responsive-visible-tablette
+        .defi
+          img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
+          div
+            .titre Mène tes recherches sur le web comme les spécialistes cyber
+            .details.
+              Tel un détective, résous les énigmes cyber, relève les défis et deviens la
+              « Légende » du web ! Retrouve nos enquêtes sur sur la platerfome TOP proposée
+              par le Campus Cyber !
+          button.action Accepte le défi !
+        .defi
+          img.logo#logo-pix(src='/assets/images/logo-pix.png')
+          div
+            .titre Teste ton niveau sur les sujets du numérique
+            .details.
+              Le choix d’un mot de passe n’a plus de secret pour toi ?
+              Tu sais reconnaître une page sécurisée ?
+              Tu connais l’utilité d’un certificat ? Si tu hésites un peu,
+              entraîne-toi sur Pix proposé par l’Éducation nationale.
+          button.action Découvre Pix !
 
 
   //
