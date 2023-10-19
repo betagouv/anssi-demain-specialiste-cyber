@@ -2,6 +2,9 @@
   #stats {
     padding-top: 115px;
     padding-bottom: 115px;
+    background: url("../images/cyberdefense.svg") #f6f6f6 right no-repeat;
+    background-size: 647px;
+    background-position-x: 370px;
   }
 
   #infos {
