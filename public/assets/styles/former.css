@@ -1,0 +1,52 @@
+#former {
+  display: flex;
+  flex-direction: column;
+  background: var(--noir);
+  color: white;
+  padding: 32px 0;
+}
+
+#former h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.571rem;
+  margin: 0 0 32px 0;
+  padding: 0 40px;
+  text-align: center;
+}
+
+#formations {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.formation p {
+  padding: 8px 16px 0 16px;
+  margin: 0;
+  font-size: 1.142rem;
+  line-height: 1.714rem;
+  background: #2b2c3f;
+}
+
+.formation .action-boite {
+  padding-top: 24px;
+  background: linear-gradient(to bottom, #2b2c3f 63%, var(--noir) 50%);
+}
+
+.formation button.action {
+  background: white;
+  color: var(--noir);
+  font-size: 1.285rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: auto;
+}
+.formation button.action::after {
+  display: inline-block;
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  background: url("../images/lien-externe-dark.svg") no-repeat center;
+}

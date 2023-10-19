@@ -16,6 +16,7 @@ block append styles
   link(href='/assets/styles/defi.css', rel='stylesheet')
   link(href='/assets/styles/defi.tablette.css', rel='stylesheet')
   link(href='/assets/styles/defi.desktop.css', rel='stylesheet')
+  link(href='/assets/styles/former.css', rel='stylesheet')
 
 block body
   #marque
@@ -109,17 +110,20 @@ block body
               entraîne-toi sur Pix proposé par l’Éducation nationale.
           button.action Découvre Pix !
 
-
-  //
-  //#formation-fond
-  //  .grand-ecran.cadre#formation-cadre
-  //    h2.titre-cadre Commence à te former à la #[br] cybersécurité
-  //    .formations
-  //      .formation
-  //        .titre Des fiches pédagogiques simples pour t’initier à la cybersécurité
-  //        .details Télécharge des fiches simples créées par l’ANSSI pour comprendre la base de la cybersécurité et ses origines
-  //        button.action#telecharge-fiches Télécharge les fiches
-  //      .formation
-  //        .titre Pour les plus experts, un MOOC très complet sur la cybersécurité
-  //        .details Dans ce MOOC, tu trouveras des infos pour approfondir tes connaissances, et agir efficacement sur ta protection numérique.
-  //        button.action Découvrir le MOOC
+  #former
+    h2 Commence à te former à la cybersécurité
+    #formations
+      .formation
+        p.
+          Télécharge des fiches simples créées par
+          l'Agence nationale de la sécurité des systèmes
+          d'information (ANSSI) pour comprendre la base de la
+          cybersécurité.
+        .action-boite
+          button.action Télécharge les fiches
+      .formation
+        p.
+          Dans ce MOOC, tu trouveras des informations pour approfondir
+           tes connaissances et agir efficacement sur ta protection numérique.
+        .action-boite
+          button.action Découvre le MOOC
