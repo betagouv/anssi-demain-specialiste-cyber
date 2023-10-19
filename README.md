@@ -1,6 +1,6 @@
 # DemainSpécialisteCyber
 
-Site web vitrine de la campagne « Demain Spécialiste Cyber »
+Site web vitrine de la campagne « DemainSpécialisteCyber »
 
 ## Pour le développement
 
