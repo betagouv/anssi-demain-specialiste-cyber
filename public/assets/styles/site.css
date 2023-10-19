@@ -41,11 +41,15 @@ button.action {
   display: none !important;
 }
 
+@media screen and (max-width: 768px) {
+  .responsive-invisible-mobile {
+    display: none !important;
+  }
+}
 @media screen and (min-width: 768px) {
   .responsive-invisible-tablette {
     display: none !important;
   }
-
   .responsive-visible-tablette {
     display: flex !important;
   }

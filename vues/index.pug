@@ -11,6 +11,7 @@ block append styles
   link(href='/assets/styles/metiers.tablette.css', rel='stylesheet')
   link(href='/assets/styles/metiers.desktop.css', rel='stylesheet')
   link(href='/assets/styles/stats.css', rel='stylesheet')
+  link(href='/assets/styles/stats.tablette.css', rel='stylesheet')
 
 block body
   #marque
@@ -58,12 +59,13 @@ block body
     button.action Accède aux témoignages
 
   #stats
-    .carrousel-navigation.responsive-invisible-desktop
+    .carrousel-navigation.responsive-invisible-tablette
       .fleche-gauche
       .fleche-droite Statistique suivante
     #infos
       .info.info-1
-        .titre 52 000 emplois
+        .titre.responsive-invisible-tablette 52 000 emplois
+        .titre.responsive-invisible-mobile.responsive-visible-tablette 52 000 spécialistes cyber en France aujourd'hui, des milliers à pourvoir demain
         .details.
           La stratégie nationale d’accélération cybersécurité a pour objectif de créer 37 000 emplois d’ici 2025.
         .source Source
