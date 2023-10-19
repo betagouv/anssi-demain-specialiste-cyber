@@ -21,6 +21,11 @@
   row-gap: 24px;
 }
 
+.formation {
+  display: flex;
+  flex-direction: column;
+}
+
 .formation p {
   padding: 8px 16px 0 16px;
   margin: 0;
