@@ -14,6 +14,7 @@
 
   .formation {
     flex-direction: row;
+    min-height: 87px;
   }
 
   .formation button.action {
