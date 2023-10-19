@@ -1,0 +1,31 @@
+@media screen and (min-width: 768px) {
+  #defi {
+    padding-top: 40px;
+    padding-bottom: 83px;
+  }
+
+  #decor {
+    position: absolute;
+    right: calc(0.7 * 100vw - 378px);
+  }
+
+  #defi h2 {
+    font-size: 3.429rem;
+    line-height: 4rem;
+    width: 500px;
+    margin: auto;
+  }
+
+  #defis {
+    align-items: flex-end;
+    row-gap: 24px;
+  }
+
+  .defi {
+    width: 53%;
+    padding: 24px;
+    row-gap: 32px;
+    position: relative;
+    z-index: 2;
+  }
+}
