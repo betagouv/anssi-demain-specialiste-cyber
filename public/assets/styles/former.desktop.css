@@ -1,0 +1,43 @@
+@media screen and (min-width: 1440px) {
+  #former {
+    padding-top: 64px;
+    padding-bottom: 64px;
+    background: url("../images/lancement.svg") var(--noir) no-repeat center;
+    background-size: 4000px;
+  }
+
+  #formations {
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .formation {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 40px;
+    row-gap: 24px;
+    color: var(--noir);
+  }
+  .formation .titre {
+    font-weight: 700;
+    font-size: 2.285rem;
+    line-height: 2.857rem;
+  }
+  .formation .details {
+    font-size: 1.143rem;
+    line-height: 1.714rem;
+  }
+  .formation button.action {
+    background: var(--noir);
+    color: white;
+    margin-top: auto;
+  }
+
+  .formation button.action::after {
+    background: url("../images/lien-externe.svg") no-repeat center;
+  }
+}

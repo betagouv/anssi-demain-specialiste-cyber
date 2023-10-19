@@ -18,6 +18,7 @@ block append styles
   link(href='/assets/styles/defi.desktop.css', rel='stylesheet')
   link(href='/assets/styles/former.css', rel='stylesheet')
   link(href='/assets/styles/former.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/former.desktop.css', rel='stylesheet')
 
 block body
   #marque
@@ -114,7 +115,7 @@ block body
   #former
     h2 Commence à te former à la cybersécurité
     #formations
-      .formation
+      .formation.responsive-invisible-desktop
         p.
           Télécharge des fiches simples créées par
           l'Agence nationale de la sécurité des systèmes
@@ -122,9 +123,23 @@ block body
           cybersécurité.
         .action-boite
           button.action Télécharge les fiches
-      .formation
+      .formation.responsive-invisible-desktop
         p.
           Dans ce MOOC, tu trouveras des informations pour approfondir
            tes connaissances et agir efficacement sur ta protection numérique.
         .action-boite
           button.action Découvre le MOOC
+
+      .formation.responsive-visible-desktop
+        .titre Des fiches pédagogiques simples pour t’initier à la cybersécurité
+        .details.
+          Télécharge des fiches simples créées par l'Agence nationale de la
+          sécurité des systèmes d'information (ANSSI) pour comprendre la base de
+          la cybersécurité.
+        button.action Télécharge les fiches d’apprentissage
+      .formation.responsive-visible-desktop
+        .titre Pour les (déjà) spécialistes, un MOOC très complet sur la cybersécurité
+        .details.
+          Dans ce MOOC, tu trouveras des informations pour approfondir tes connaissances et
+           agir efficacement sur ta protection numérique.
+        button.action Découvre le MOOC
