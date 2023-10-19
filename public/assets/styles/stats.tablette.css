@@ -1,0 +1,35 @@
+@media screen and (min-width: 768px) {
+  #stats {
+    padding-top: 115px;
+    padding-bottom: 115px;
+  }
+
+  #infos {
+    flex-wrap: wrap;
+    width: 70%;
+    row-gap: 16px;
+  }
+
+  #infos .info {
+    min-width: unset;
+  }
+
+  .info-1 {
+    width: 100%;
+  }
+  .info-2,
+  .info-3 {
+    flex: 1;
+  }
+
+  #infos .info .source {
+    font-size: 1.285rem;
+  }
+  #infos .info-2 .details {
+    font-size: 1.143rem;
+    line-height: 1.714rem;
+  }
+  #infos .info-3 .titre {
+    font-size: 1.857rem;
+  }
+}
