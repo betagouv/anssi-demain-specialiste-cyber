@@ -13,6 +13,7 @@ block append styles
   link(href='/assets/styles/stats.css', rel='stylesheet')
   link(href='/assets/styles/stats.tablette.css', rel='stylesheet')
   link(href='/assets/styles/stats.desktop.css', rel='stylesheet')
+  link(href='/assets/styles/defi.css', rel='stylesheet')
 
 block body
   #marque
@@ -80,13 +81,34 @@ block body
           .titre 71% des spécialistes cyber… n'ont pas étudié la cybersécurité
           .source Source
 
+  #defi
+    h2 Deviens le spécialiste cyber de demain !
+    #defis
+      .defi
+        img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
+        div
+          .titre Mène tes recherches sur le web comme les spécialistes cyber
+          .details.
+            Tel un détective, résous les énigmes cyber, relève les défis et deviens la
+            « Légende » du web ! Retrouve nos enquêtes sur sur la platerfome TOP proposée
+            par le Campus Cyber !
+        button.action Accepte le défi !
+      .defi
+        img.logo#logo-pix(src='/assets/images/logo-pix.png')
+        div
+          .titre Teste ton niveau sur les sujets du numérique
+          .details.
+            Le choix d’un mot de passe n’a plus de secret pour toi ?
+            Tu sais reconnaître une page sécurisée ?
+            Tu connais l’utilité d’un certificat ? Si tu hésites un peu,
+            entraîne-toi sur Pix proposé par l’Éducation nationale.
+        button.action Découvre Pix !
 
   //#defi-fond
   //  .grand-ecran.cadre#defi-cadre
   //    h2.titre-cadre Accepte le défi et enquête comme #[br] les Spécialistes Cyber !
   //    .defis
   //      .defi
-  //        img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
   //        .titre Mène l’enquête comme les Spécialistes Cyber
   //        .details.
   //          Tel un détective, et comme pour une enquête, localise les informations pertinentes pour
