@@ -14,6 +14,7 @@ block append styles
   link(href='/assets/styles/stats.tablette.css', rel='stylesheet')
   link(href='/assets/styles/stats.desktop.css', rel='stylesheet')
   link(href='/assets/styles/defi.css', rel='stylesheet')
+  link(href='/assets/styles/defi.tablette.css', rel='stylesheet')
 
 block body
   #marque
@@ -84,6 +85,7 @@ block body
   #defi
     h2 Deviens le spécialiste cyber de demain !
     #defis
+      img(src='/assets/images/defi.svg')#decor.responsive-invisible-mobile.responsive-visible-tablette
       .defi
         img.logo#logo-ozint(src='/assets/images/logo-ozint.png')
         div
@@ -104,25 +106,7 @@ block body
             entraîne-toi sur Pix proposé par l’Éducation nationale.
         button.action Découvre Pix !
 
-  //#defi-fond
-  //  .grand-ecran.cadre#defi-cadre
-  //    h2.titre-cadre Accepte le défi et enquête comme #[br] les Spécialistes Cyber !
-  //    .defis
-  //      .defi
-  //        .titre Mène l’enquête comme les Spécialistes Cyber
-  //        .details.
-  //          Tel un détective, et comme pour une enquête, localise les informations pertinentes pour
-  //          relever le défi ! Retrouve Plusieurs défi sur la plateforme TOP proposé par Le
-  //          Campus Cyber
-  //        button.action Mène l’enquête sur TOP
-  //      .defi
-  //        img.logo#logo-pix(src='/assets/images/logo-pix.png')
-  //        .titre Teste ton niveau sur les sujets du numérique
-  //        .details.
-  //          Le choix d’un mot de passe n’a plus de secret pour toi ? Tu sais reconnaitre une page
-  //          sécurisée ? Tu connais l’utilité d’un certificat ?
-  //          Si tu hésites un peu, entraîne-toi sur Pix proposé par l’Éducation nationale.
-  //        button.action Teste tes compétences sur PIX
+
   //
   //#formation-fond
   //  .grand-ecran.cadre#formation-cadre
