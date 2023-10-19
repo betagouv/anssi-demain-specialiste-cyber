@@ -1,0 +1,17 @@
+@media screen and (min-width: 1024px) {
+  #stats {
+    background-image: unset;
+    padding-top: 114px;
+    padding-bottom: 78px;
+  }
+  #infos-boite {
+    background: url("../images/cyberdefense.svg") right no-repeat;
+    background-size: contain;
+    max-width: 1200px;
+    margin: auto;
+  }
+  #infos {
+    width: 50%;
+    align-self: flex-start;
+  }
+}
