@@ -4,7 +4,7 @@
     padding-bottom: 83px;
   }
 
-  #decor {
+  #defi .decor {
     position: absolute;
     right: calc(0.7 * 100vw - 378px);
   }

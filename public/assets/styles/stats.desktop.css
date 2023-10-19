@@ -5,8 +5,6 @@
     padding-bottom: 78px;
   }
   #infos-boite {
-    background: url("../images/cyberdefense.svg") right no-repeat;
-    background-size: contain;
     max-width: 1200px;
     margin: auto;
   }

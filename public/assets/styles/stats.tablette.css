@@ -2,9 +2,16 @@
   #stats {
     padding-top: 115px;
     padding-bottom: 115px;
-    background: url("../images/cyberdefense.svg") #f6f6f6 right no-repeat;
-    background-size: 647px;
-    background-position-x: 370px;
+    background: #f6f6f6;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #stats .decor {
+    position: absolute;
+    z-index: 1;
+    top: 80px;
+    right: calc(0.38 * 100vw - 582px);
   }
 
   #infos {
@@ -15,6 +22,8 @@
 
   #infos .info {
     min-width: unset;
+    position: relative;
+    z-index: 2;
   }
 
   .info-1 {
