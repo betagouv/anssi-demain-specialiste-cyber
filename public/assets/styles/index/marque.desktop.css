@@ -20,6 +20,7 @@
     flex-direction: row;
     align-items: center;
     column-gap: 28px;
+    transform: translateY(-12px);
   }
 
   #menu-desktop #espace-enseignant::before {
