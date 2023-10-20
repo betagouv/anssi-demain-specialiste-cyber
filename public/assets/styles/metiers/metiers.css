@@ -103,3 +103,44 @@ nav.fil .precedent::after {
   text-decoration: underline;
   text-underline-offset: 5px;
 }
+
+.mais-aussi {
+  padding-bottom: 32px;
+  background: white;
+}
+
+.mais-aussi h3 {
+  padding: 32px 0;
+  text-align: center;
+  margin: 0;
+  font-size: 2.285rem;
+  line-height: 2.857rem;
+  font-weight: 700;
+  background: white;
+}
+
+.mais-aussi .details {
+  padding: 8px 16px 24px 16px;
+  font-size: 1.142rem;
+  line-height: 1.714rem;
+  font-weight: 500;
+  background: #f6f6f6;
+}
+
+.mais-aussi .action-boite {
+  background: linear-gradient(to bottom, #f6f6f6 40%, white 10%);
+}
+.mais-aussi button.action {
+  font-size: 1.285rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: auto;
+}
+.mais-aussi button.action::after {
+  display: inline-block;
+  content: "";
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  background: url(../../images/lien-externe.svg);
+}
