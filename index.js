@@ -12,12 +12,16 @@ app.use(express.static("public"));
 
 app.use(middleware.patienteJusqueMep);
 
-app.get("/", (req, rep) => {
-  rep.render("index", {
-    videoAgir: videoAgirAleatoire(),
-    fichesMetiers: metiersAuHasard(3),
+app
+  .get("/", (req, rep) => {
+    rep.render("index", {
+      videoAgir: videoAgirAleatoire(),
+      fichesMetiers: metiersAuHasard(3),
+    });
+  })
+  .get("/les-metiers", (req, rep) => {
+    rep.render("metiers");
   });
-});
 
 app.listen(port, () => {
   console.log(
