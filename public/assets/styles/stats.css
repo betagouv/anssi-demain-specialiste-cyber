@@ -25,9 +25,8 @@
 #stats .fleche-droite {
   display: flex;
   justify-content: center;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--noir);
 }
 #stats .fleche-droite::after {
   content: "";
@@ -36,7 +35,6 @@
   height: 24px;
   background: url("../images/fleche-gauche.svg") no-repeat left;
   transform: rotate(180deg);
-  border-top: 1px solid var(--noir);
 }
 
 #infos {
