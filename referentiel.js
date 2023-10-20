@@ -12,6 +12,17 @@ const donnees = {
       identite: "Gregory et Barbara",
       idVideo: "analyste-incidents",
     },
+    { metier: "Pentester", identite: "Julie", idVideo: "pentester" },
+    {
+      metier: "Responsable de la sécurité des systèmes d’information (RSSI)",
+      identite: "Edouard",
+      idVideo: "rssi",
+    },
+    {
+      metier: "Analyste réponse aux incidents",
+      identite: "Gregory et Barbara",
+      idVideo: "analyste-incidents",
+    },
   ],
 };
 
@@ -20,6 +31,8 @@ const videoAgirAleatoire = () => {
   const { idVideo } = donnees.videosAgir[indexVideo];
   return `agir-video-${idVideo}-placeholder.png`;
 };
+
+const tousLesMetiers = () => donnees.metiers;
 
 const metiersAuHasard = (combien) => {
   const nbMetiers = donnees.metiers.length;
@@ -32,4 +45,4 @@ const metiersAuHasard = (combien) => {
   return selection;
 };
 
-module.exports = { metiersAuHasard, videoAgirAleatoire };
+module.exports = { metiersAuHasard, tousLesMetiers, videoAgirAleatoire };
