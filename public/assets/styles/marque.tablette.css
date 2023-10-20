@@ -1,28 +1,37 @@
-#conteneur-marque {
-  flex-direction: row;
-  margin-top: 70px;
-}
+@media screen and (min-width: 768px) {
+  #marque {
+    max-height: 600px;
+    overflow: hidden;
+  }
 
-#boite-marque {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  position: relative;
-  z-index: 2;
-}
+  #conteneur-marque {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 70px;
+  }
 
-#boite-heros {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  #boite-marque {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 587px;
+    position: relative;
+    z-index: 2;
+  }
 
-#heros {
-  max-width: 40vw;
-}
+  #boite-heros {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-#conteneur-marque h2 {
-  font-size: 1.8vw;
-  margin-top: 20px;
+  #heros {
+    max-width: 40vw;
+  }
+
+  #conteneur-marque h2 {
+    font-size: 1.8vw;
+    margin-top: 20px;
+  }
 }
