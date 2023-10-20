@@ -2,16 +2,26 @@ extends base
 
 block append styles
   link(href='/assets/styles/metiers/metiers.css', rel='stylesheet')
+  link(href='/assets/styles/metiers/metiers.tablette.css', rel='stylesheet')
 
 
 mixin maisAussiMobile()
-  .mais-aussi
+  .mais-aussi.responsive-invisible-tablette
     h3 C'est aussi d'autres métiers…
     .details.
       Découvre plus de métiers de la cybersécurité dans le Panorama des métiers,
        un document proposé par l’ANSSI
     .action-boite
       button.action Accède au panorama
+
+mixin maisAussiTablette()
+  .mais-aussi.responsive-visible-tablette
+    h3 C'est aussi d'autres métiers…
+    .details
+      | Découvre plus de métiers de la cybersécurité dans le Panorama des métiers de la cybersécurité,
+      |  un document proposé par l’ANSSI.
+      button.action Accède au panorama
+
 
 block body
   nav.principale
@@ -36,3 +46,4 @@ block body
             .en-savoir-plus En savoir plus
 
       +maisAussiMobile()
+      +maisAussiTablette()
