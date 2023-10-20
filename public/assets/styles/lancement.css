@@ -1,5 +1,5 @@
 body {
-  background: url("../images/lancement.svg") var(--noir) no-repeat top;
+  background: url(../images/lancement.svg) var(--noir) no-repeat top;
   background-size: cover;
   color: white;
 }
