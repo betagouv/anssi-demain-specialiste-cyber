@@ -18,7 +18,7 @@
   display: block;
   width: 24px;
   height: 24px;
-  background: url("../images/fleche-gauche.svg") no-repeat left;
+  background: url(../../images/fleche-gauche.svg) no-repeat left;
   border-bottom: 1px solid var(--noir);
 }
 
@@ -33,7 +33,7 @@
   display: block;
   width: 24px;
   height: 24px;
-  background: url("../images/fleche-gauche.svg") no-repeat left;
+  background: url(../../images/fleche-gauche.svg) no-repeat left;
   transform: rotate(180deg);
 }
 
@@ -75,7 +75,7 @@
   width: 24px;
   height: 24px;
   margin-left: 8px;
-  background: url("../images/lien-externe.svg");
+  background: url(../../images/lien-externe.svg);
 }
 
 #infos .info-1 {
