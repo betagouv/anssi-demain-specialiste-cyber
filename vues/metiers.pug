@@ -1,6 +1,25 @@
 extends base
 
 block append styles
+  link(href='/assets/styles/metiers/metiers.css', rel='stylesheet')
 
 
 block body
+  nav.principale
+    img.marianne(src='/assets/images/marianne-dark.svg')
+    .responsive-invisible-desktop#burger
+  nav.fil
+    ul
+      li.precedent Accueil
+      li.courant Découvrir les métiers
+  #decouvre
+    h2 Découvre les métiers des Spécialistes Cyber
+    .fiches
+      each f in fichesMetiers
+        .fiche-metier
+          img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
+          .details
+            .identite #{f.identite}
+            .metier #{f.metier}
+            .en-savoir-plus En savoir plus
+

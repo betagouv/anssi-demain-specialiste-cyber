@@ -1,6 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const { metiersAuHasard, videoAgirAleatoire } = require("./referentiel");
+const {
+  metiersAuHasard,
+  videoAgirAleatoire,
+  tousLesMetiers,
+} = require("./referentiel");
 const middleware = require("./middleware");
 
 const app = express();
@@ -20,7 +24,7 @@ app
     });
   })
   .get("/les-metiers", (req, rep) => {
-    rep.render("metiers");
+    rep.render("metiers", { fichesMetiers: tousLesMetiers() });
   });
 
 app.listen(port, () => {
