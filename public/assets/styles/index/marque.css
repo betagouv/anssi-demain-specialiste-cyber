@@ -6,6 +6,11 @@
   color: white;
 }
 
+#marque a {
+  color: white;
+  text-decoration: none;
+}
+
 #burger {
   width: 16px;
   height: 16px;
