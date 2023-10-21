@@ -25,6 +25,9 @@ app
   })
   .get("/les-metiers", (req, rep) => {
     rep.render("metiers", { fichesMetiers: tousLesMetiers() });
+  })
+  .get("/espace-enseignant", (req, rep) => {
+    rep.render("espace-enseignant");
   });
 
 app.listen(port, () => {
