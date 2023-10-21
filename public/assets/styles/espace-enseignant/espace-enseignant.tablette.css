@@ -5,9 +5,13 @@
 
   #titre h2 {
     font-size: 3.428rem;
+    width: 736px;
+    margin: auto;
   }
   #titre h4 {
     font-size: 2.285rem;
+    width: 736px;
+    margin: auto;
   }
 
   .chapitres {
@@ -19,11 +23,6 @@
     padding-top: 68px;
     font-size: 2.285rem;
     line-height: 2.857rem;
-  }
-
-  .chapitre .accroche {
-    font-size: 1.428rem;
-    line-height: 2.285rem;
   }
 
   .formations {

@@ -1,0 +1,34 @@
+@media screen and (min-width: 1440px) {
+  .chapitres {
+    padding-bottom: 80px;
+    padding-top: 0;
+  }
+
+  .chapitre,
+  .formation {
+    max-width: 793px;
+    margin: auto;
+  }
+
+  .chapitre h3 {
+    padding-top: 80px;
+  }
+
+  .chapitre .accroche {
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+
+  .ressource {
+    margin-top: 24px;
+  }
+
+  .formations {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .formation h3 {
+    padding-bottom: 8px;
+  }
+}
