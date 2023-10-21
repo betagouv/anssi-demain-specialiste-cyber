@@ -1,0 +1,55 @@
+block append styles
+  style.
+    nav.fil {
+      background: #f6f6f6;
+      border-top: 1px solid #cecece;
+      padding: 32px 16px;
+    }
+
+    nav.fil ul {
+      display: flex;
+      gap: 4px;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.857rem;
+      line-height: 1.428rem;
+    }
+
+    nav.fil li {
+      display: flex;
+      align-items: center;
+    }
+
+    nav.fil a {
+      color: #666;
+    }
+
+    nav.fil .precedent {
+      color: #666;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    nav.fil .precedent::after {
+      display: block;
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: url("/assets/images/chevron.svg");
+      margin-left: 4px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      nav.fil ul {
+        max-width: 1200px;
+        margin: auto;
+      }
+    }
+
+mixin navFilAriane()
+  nav.fil
+    ul
+      li.precedent
+        a(href='/' title="Retourner à l'accueil") Accueil
+      li.courant Découvrir les métiers
