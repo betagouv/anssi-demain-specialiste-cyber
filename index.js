@@ -5,6 +5,7 @@ const {
   videoAgirAleatoire,
   tousLesMetiers,
   lesRessourcesEnseignant,
+  lesFormationsEnseignant,
 } = require("./referentiel");
 const middleware = require("./middleware");
 
@@ -28,7 +29,10 @@ app
     rep.render("metiers", { fichesMetiers: tousLesMetiers() });
   })
   .get("/espace-enseignant", (req, rep) => {
-    rep.render("espace-enseignant", { ressources: lesRessourcesEnseignant() });
+    rep.render("espace-enseignant", {
+      ressources: lesRessourcesEnseignant(),
+      formations: lesFormationsEnseignant(),
+    });
   });
 
 app.listen(port, () => {
