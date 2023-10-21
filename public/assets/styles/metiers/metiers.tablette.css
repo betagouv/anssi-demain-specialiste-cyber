@@ -2,6 +2,7 @@
   #decouvre {
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 80px;
     background: linear-gradient(to bottom, var(--jaune) 370px, #f6f6f6 100px);
   }
 
