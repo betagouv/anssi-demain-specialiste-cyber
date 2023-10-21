@@ -1,0 +1,60 @@
+block append styles
+  style.
+    nav.principale {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 16px 0 16px;
+    }
+
+    #burger {
+      width: 16px;
+      height: 16px;
+      background: var(--noir);
+      border-radius: 3px;
+    }
+
+    @media screen and (min-width: 1440px) {
+      .marianne {
+        transform: translateX(-12px);
+      }
+
+      nav.principale {
+        max-width: 1200px;
+        margin: auto;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      #menu-desktop {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 28px;
+      }
+
+      #menu-desktop a {
+        text-decoration: none;
+        color: var(--noir);
+      }
+
+      #menu-desktop #espace-enseignant::before {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        transform: translateY(2px);
+        margin-right: 8px;
+        content: "";
+        background: url("/assets/images/cahier-dark.svg");
+      }
+    }
+
+
+mixin navPrincipale()
+  nav.principale
+    a(href="/")
+      img.marianne(src='/assets/images/marianne-dark.svg')
+    .responsive-invisible-desktop#burger
+    .responsive-visible-desktop#menu-desktop
+      a(href='les-metiers') Découvrez les métiers
+      div Zoom sur la campagne
+      #espace-enseignant Espagne enseignant

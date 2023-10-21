@@ -1,37 +1,4 @@
 @media screen and (min-width: 1440px) {
-  .marianne {
-    transform: translateX(-12px);
-  }
-
-  nav.principale {
-    max-width: 1200px;
-    margin: auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  #menu-desktop {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 28px;
-  }
-
-  #menu-desktop a {
-    text-decoration: none;
-    color: var(--noir);
-  }
-
-  #menu-desktop #espace-enseignant::before {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    transform: translateY(2px);
-    margin-right: 8px;
-    content: "";
-    background: url(../../images/cahier-dark.svg);
-  }
-
   nav.fil ul {
     max-width: 1200px;
     margin: auto;
