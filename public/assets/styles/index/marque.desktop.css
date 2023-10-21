@@ -5,10 +5,22 @@
 }
 
 @media screen and (min-width: 1440px) {
+  #marque {
+    padding: 0;
+  }
+
+  .marianne {
+    transform: translateX(-12px);
+  }
+
   #marque nav,
   #conteneur-marque {
     max-width: 1200px;
     margin: auto;
+  }
+
+  #marque nav {
+    padding-top: 12px;
   }
 
   #conteneur-marque {
@@ -20,7 +32,6 @@
     flex-direction: row;
     align-items: center;
     column-gap: 28px;
-    transform: translateY(-12px);
   }
 
   #menu-desktop #espace-enseignant::before {
