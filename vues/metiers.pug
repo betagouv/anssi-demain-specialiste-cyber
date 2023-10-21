@@ -1,11 +1,11 @@
 extends base
 include kit/nav-principale
+include kit/nav-fil-ariane
 
 block append styles
   link(href='/assets/styles/metiers/metiers.css', rel='stylesheet')
   link(href='/assets/styles/metiers/metiers.tablette.css', rel='stylesheet')
   link(href='/assets/styles/metiers/metiers.desktop.css', rel='stylesheet')
-
 
 mixin maisAussiMobile()
   .mais-aussi.responsive-invisible-tablette
@@ -28,12 +28,7 @@ mixin maisAussiTablette()
 
 block body
   +navPrincipale()
-
-  nav.fil
-    ul
-      li.precedent
-        a(href='/' title="Retourner à l'accueil") Accueil
-      li.courant Découvrir les métiers
+  +navFilAriane()
 
   #decouvre
     h2 Découvre les métiers des Spécialistes Cyber
