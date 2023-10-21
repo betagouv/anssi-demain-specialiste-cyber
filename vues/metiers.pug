@@ -1,4 +1,5 @@
 extends base
+include kit/nav-principale
 
 block append styles
   link(href='/assets/styles/metiers/metiers.css', rel='stylesheet')
@@ -26,14 +27,7 @@ mixin maisAussiTablette()
 
 
 block body
-  nav.principale
-    a(href="/")
-      img.marianne(src='/assets/images/marianne-dark.svg')
-    .responsive-invisible-desktop#burger
-    .responsive-visible-desktop#menu-desktop
-      a(href='les-metiers') Découvrez les métiers
-      div Zoom sur la campagne
-      #espace-enseignant Espagne enseignant
+  +navPrincipale()
 
   nav.fil
     ul
