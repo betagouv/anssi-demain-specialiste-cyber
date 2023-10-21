@@ -3,6 +3,7 @@ extends base
 block append styles
   link(href='/assets/styles/metiers/metiers.css', rel='stylesheet')
   link(href='/assets/styles/metiers/metiers.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/metiers/metiers.desktop.css', rel='stylesheet')
 
 
 mixin maisAussiMobile()
@@ -16,22 +17,29 @@ mixin maisAussiMobile()
 
 mixin maisAussiTablette()
   .mais-aussi.responsive-visible-tablette
-    h3 C'est aussi d'autres métiers…
-    .details
-      | Découvre plus de métiers de la cybersécurité dans le Panorama des métiers de la cybersécurité,
-      |  un document proposé par l’ANSSI.
-      button.action Accède au panorama
+    .mais-aussi-boite
+      h3 C'est aussi d'autres métiers…
+      .details
+        | Découvre plus de métiers de la cybersécurité dans le Panorama des métiers de la cybersécurité,
+        |  un document proposé par l’ANSSI.
+        button.action Accède au panorama
 
 
 block body
   nav.principale
     img.marianne(src='/assets/images/marianne-dark.svg')
     .responsive-invisible-desktop#burger
+    .responsive-visible-desktop#menu-desktop
+      a(href='les-metiers') Découvrez les métiers
+      div Zoom sur la campagne
+      #espace-enseignant Espagne enseignant
+
   nav.fil
     ul
       li.precedent
         a(href='/' title="Retourner à l'accueil") Accueil
       li.courant Découvrir les métiers
+
   #decouvre
     h2 Découvre les métiers des Spécialistes Cyber
     .fiches
@@ -46,5 +54,5 @@ block body
             .metier #{f.metier}
             .en-savoir-plus En savoir plus
 
-      +maisAussiMobile()
-      +maisAussiTablette()
+    +maisAussiMobile()
+    +maisAussiTablette()

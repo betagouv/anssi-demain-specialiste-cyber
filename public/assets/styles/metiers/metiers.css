@@ -69,6 +69,7 @@ nav.fil .precedent::after {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 25px;
 }
 
 .fiche-metier {
@@ -102,7 +103,7 @@ nav.fil .precedent::after {
   color: #000;
 }
 .details .en-savoir-plus {
-  margin-top: 16px;
+  margin-top: 8px;
   line-height: 1.714rem;
   color: rgba(0, 0, 0, 0.5);
   text-decoration: underline;
