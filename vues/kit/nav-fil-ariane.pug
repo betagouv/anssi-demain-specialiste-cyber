@@ -47,9 +47,9 @@ block append styles
       }
     }
 
-mixin navFilAriane()
+mixin navFilAriane(pageCourante)
   nav.fil
     ul
       li.precedent
         a(href='/' title="Retourner à l'accueil") Accueil
-      li.courant Découvrir les métiers
+      li.courant #{pageCourante}

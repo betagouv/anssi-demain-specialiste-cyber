@@ -1,0 +1,10 @@
+extends base
+include kit/nav-principale
+include kit/nav-fil-ariane
+
+block append styles
+  link(href='/assets/styles/espace-enseignant/espace-enseignant.css', rel='stylesheet')
+
+block body
+  +navPrincipale()
+  +navFilAriane('Espace enseignant')
