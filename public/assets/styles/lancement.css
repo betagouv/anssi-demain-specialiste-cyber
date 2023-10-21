@@ -49,13 +49,19 @@ h1 {
   }
 }
 @media screen and (min-width: 768px) {
+  nav {
+    padding-top: 12px;
+  }
   h1 {
     font-size: 5rem;
   }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1220px) {
   nav {
-    padding-left: 120px;
-    padding-right: 120px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  .marianne {
+    transform: translateX(-12px);
   }
 }
