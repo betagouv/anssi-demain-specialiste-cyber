@@ -1,7 +1,5 @@
 @media screen and (min-width: 768px) {
   #decouvre {
-    padding-left: 16px;
-    padding-right: 16px;
     padding-bottom: 80px;
     background: linear-gradient(to bottom, var(--jaune) 370px, #f6f6f6 100px);
   }
@@ -11,8 +9,13 @@
     margin: auto;
   }
 
+  .fiches {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .fiche-metier img {
-    max-width: 182px;
+    max-width: 188px;
   }
 
   .details .identite {
