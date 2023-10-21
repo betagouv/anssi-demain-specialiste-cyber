@@ -24,6 +24,9 @@
   background: #f6f6f6;
   padding-left: 16px;
   padding-right: 16px;
+}
+
+.chapitre:last-of-type {
   padding-bottom: 56px;
 }
 
@@ -45,15 +48,14 @@
 .ressources {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .ressource {
   background: white;
   padding: 24px;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   border: 1px solid #dddddd;
 }
 
@@ -63,6 +65,12 @@
   line-height: 1.714rem;
 }
 
+.ressource .detail {
+  margin-top: 8px;
+  line-height: 1.714rem;
+  color: #3a3a3a;
+}
+
 .ressource .fichier {
   color: #666666;
   font-size: 0.857rem;
@@ -70,11 +78,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-decoration: none;
+  margin-top: 12px;
 }
 .ressource .fichier::after {
   display: inline-block;
   content: "";
   width: 16px;
   height: 16px;
-  background: url(../../images/telecharger.svg);
+}
+.ressource .fichier.telechargement::after {
+  background: url(../../images/telecharger.svg) no-repeat center;
+  background-size: contain;
+}
+.ressource .fichier.site::after {
+  background: url(../../images/lien-externe-dark.svg) no-repeat center;
+  background-size: contain;
 }
