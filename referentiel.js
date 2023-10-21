@@ -84,8 +84,23 @@ const donnees = {
       ],
     },
   ],
+  formationsEnseignant: [
+    {
+      nom: "Trouvez des formations sur le numérique et la cyber sur la plateforme M@gistère.",
+      fichier: "Accèdez à M@gistère",
+      url: "#",
+      classe: "telechargement",
+    },
+    {
+      nom: "Développez vos compétences et vos connaissances sur la cybersécurité.",
+      fichier: "Accèdez au MOOC",
+      url: "#",
+      classe: "telechargement",
+    },
+  ],
 };
 
+const lesFormationsEnseignant = () => donnees.formationsEnseignant;
 const lesRessourcesEnseignant = () => donnees.ressourcesEnseignant;
 
 const videoAgirAleatoire = () => {
@@ -108,6 +123,7 @@ const metiersAuHasard = (combien) => {
 };
 
 module.exports = {
+  lesFormationsEnseignant,
   lesRessourcesEnseignant,
   metiersAuHasard,
   tousLesMetiers,

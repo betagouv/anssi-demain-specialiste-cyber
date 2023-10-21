@@ -20,22 +20,28 @@
   font-weight: 500;
 }
 
-.chapitre {
+.chapitres {
+  padding-bottom: 56px;
   background: #f6f6f6;
   padding-left: 16px;
   padding-right: 16px;
 }
 
-.chapitre:last-of-type {
-  padding-bottom: 56px;
+.formations {
+  background: var(--jaune);
+  padding: 16px;
 }
 
-.chapitre h3 {
+.chapitre h3,
+.formation h3 {
   margin: 0;
   padding-top: 56px;
   font-size: 2rem;
   font-weight: 700;
   line-height: 2.571rem;
+}
+.formation h3 {
+  padding-top: 0;
 }
 
 .chapitre .accroche {
@@ -94,4 +100,9 @@
 .ressource .fichier.site::after {
   background: url(../../images/lien-externe-dark.svg) no-repeat center;
   background-size: contain;
+}
+
+.gap {
+  height: 56px;
+  background: #f6f6f6;
 }

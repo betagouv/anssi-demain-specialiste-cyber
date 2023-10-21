@@ -13,15 +13,29 @@ block body
     h2 Vous êtes enseignant·e ?
     h4 Ou vous travaillez au sein du ministère de l’éducation nationale et de la jeunesse ?
 
-  each chapitre in ressources
-    .chapitre
-      h3 #{chapitre.titre}
-      if chapitre.accroche
-        .accroche #{chapitre.accroche}
+  .chapitres
+    each chapitre in ressources
+      .chapitre
+        h3 #{chapitre.titre}
+        if chapitre.accroche
+          .accroche #{chapitre.accroche}
+        .ressources
+          each r in chapitre.ressources
+            .ressource
+              .nom #{r.nom}
+              if r.details
+                .detail #{r.details}
+              a.fichier(href=r.url class=r.classe) #{r.fichier}
+
+  .formations
+    .formation
+      h3 Formez-vous à la cyber
       .ressources
-        each r in chapitre.ressources
+        each f in formations
           .ressource
-            .nom #{r.nom}
-            if r.details
-              .detail #{r.details}
-            a.fichier(href=r.url class=r.classe) #{r.fichier}
+            .nom #{f.nom}
+            if f.details
+              .detail #{f.details}
+            a.fichier(href=f.url class=f.classe) #{f.fichier}
+
+  .gap
