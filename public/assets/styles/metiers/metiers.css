@@ -32,6 +32,10 @@ nav.fil li {
   align-items: center;
 }
 
+nav.fil a {
+  color: #666;
+}
+
 nav.fil .precedent {
   color: #666;
   text-decoration: underline;
