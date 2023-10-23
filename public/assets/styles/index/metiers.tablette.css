@@ -11,9 +11,6 @@
     column-gap: 16px;
   }
 
-  .fiche-metier {
-    min-width: 40%;
-  }
   .fiche-metier .metier {
     font-size: 1.71rem;
     line-height: 2.29rem;
