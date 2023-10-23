@@ -55,3 +55,8 @@
   margin-left: 8px;
   background: url(../../images/lien-externe-dark.svg) no-repeat center;
 }
+
+.gap {
+  height: 56px;
+  background: #f6f6f6;
+}

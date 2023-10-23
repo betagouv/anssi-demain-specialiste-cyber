@@ -40,4 +40,8 @@
   .formation button.action::after {
     background: url(../../images/lien-externe.svg) no-repeat center;
   }
+
+  .gap {
+    height: 150px;
+  }
 }
