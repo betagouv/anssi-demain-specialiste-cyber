@@ -4,8 +4,8 @@
     margin: auto;
   }
 
-  #defis {
-    row-gap: 0;
+  #defi {
+    padding-bottom: 24px;
   }
 
   .defi {
