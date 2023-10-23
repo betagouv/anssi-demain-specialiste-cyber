@@ -54,6 +54,7 @@
   flex-direction: column;
   min-width: 80%;
   padding-left: 16px;
+  padding-bottom: 8px;
 }
 
 .fiche-metier:last-of-type {
@@ -85,7 +86,7 @@
 }
 
 #metiers button.action {
-  margin: 48px auto 40px auto;
+  margin: 40px auto;
   font-weight: 700 !important;
   font-size: 1.45rem !important;
 }
