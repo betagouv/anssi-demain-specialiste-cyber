@@ -18,19 +18,25 @@
     flex-wrap: wrap;
     width: 70%;
     row-gap: 16px;
+    gap: 16px;
+    padding: 0 16px;
   }
 
-  #infos .info {
+  #infos .info-boite {
     min-width: unset;
     position: relative;
     z-index: 2;
+    padding: 0;
+  }
+  #infos .info-boite:last-of-type {
+    padding: 0;
   }
 
-  .info-1 {
+  .info-boite.info-1 {
     width: 100%;
   }
-  .info-2,
-  .info-3 {
+  .info-boite.info-2,
+  .info-boite.info-3 {
     flex: 1;
   }
 

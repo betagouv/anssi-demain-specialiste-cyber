@@ -47,14 +47,17 @@
 #carrousel-fiches-metiers {
   display: flex;
   flex-direction: row;
-  column-gap: 16px;
-  padding: 0 16px;
 }
 
 .fiche-metier {
   display: flex;
   flex-direction: column;
   min-width: 80%;
+  padding-left: 16px;
+}
+
+.fiche-metier:last-of-type {
+  padding-right: 16px;
 }
 
 .fiche-metier img {

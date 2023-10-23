@@ -36,6 +36,20 @@ button.action {
   cursor: pointer;
 }
 
+.carrousel {
+  overflow: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.carrousel::-webkit-scrollbar {
+  display: none;
+}
+.carrousel > * {
+  scroll-snap-align: start;
+}
+
 .responsive-visible-tablette,
 .responsive-visible-desktop {
   display: none !important;
