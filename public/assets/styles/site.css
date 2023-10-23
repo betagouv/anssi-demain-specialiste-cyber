@@ -68,7 +68,7 @@ button.action {
     display: flex !important;
   }
 }
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
   .responsive-invisible-desktop {
     display: none !important;
   }

@@ -1,15 +1,6 @@
-@media screen and (min-width: 1200px) {
-  #conteneur-marque h2 {
-    font-size: 1.543rem;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  #marque {
-    padding: 0;
-  }
-
+@media screen and (min-width: 1024px) {
   .marianne {
+    width: 118px;
     transform: translateX(-12px);
   }
 
@@ -17,10 +8,6 @@
   #conteneur-marque {
     max-width: 1200px;
     margin: auto;
-  }
-
-  #marque nav {
-    padding-top: 12px;
   }
 
   #conteneur-marque {
@@ -42,5 +29,11 @@
     margin-right: 8px;
     content: "";
     background: url(../../images/cahier.svg);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #conteneur-marque h2 {
+    font-size: 1.62rem;
   }
 }

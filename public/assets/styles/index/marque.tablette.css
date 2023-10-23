@@ -10,6 +10,11 @@
     margin-top: 70px;
   }
 
+  #conteneur-marque h2 {
+    font-size: 1.9vw;
+    padding-top: 30px;
+  }
+
   #boite-marque {
     display: flex;
     flex-direction: column;
@@ -28,10 +33,5 @@
 
   #heros {
     max-width: 40vw;
-  }
-
-  #conteneur-marque h2 {
-    font-size: 1.8vw;
-    padding-top: 30px;
   }
 }
