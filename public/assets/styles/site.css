@@ -27,7 +27,7 @@ body {
 button.action {
   display: flex;
   align-items: center;
-  padding: 10px 24px;
+  padding: 10px 24px 14px 24px;
   justify-content: center;
   background: var(--noir);
   color: white;
