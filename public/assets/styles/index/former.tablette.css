@@ -39,4 +39,8 @@
     align-self: center;
     margin: unset;
   }
+
+  .gap {
+    height: 83px;
+  }
 }
