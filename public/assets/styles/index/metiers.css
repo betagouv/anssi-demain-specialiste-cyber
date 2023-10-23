@@ -52,7 +52,7 @@
 .fiche-metier {
   display: flex;
   flex-direction: column;
-  min-width: 80%;
+  min-width: calc((0.1252 * 100vw) + 216px);
   padding-left: 16px;
   padding-bottom: 8px;
 }

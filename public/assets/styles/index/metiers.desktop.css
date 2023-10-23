@@ -1,17 +1,23 @@
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
   #metiers {
     margin: auto;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   #carrousel-fiches-metiers {
     max-width: 1200px;
     margin: auto;
-    column-gap: 24px;
+    justify-content: space-between;
     padding: 0;
   }
 
   .fiche-metier {
     min-width: unset;
-    max-width: 384px;
+    width: 31.5%;
+    padding-left: 0;
+  }
+  .fiche-metier:last-of-type {
+    padding-right: 0;
   }
 }
