@@ -11,13 +11,6 @@
   text-decoration: none;
 }
 
-#burger {
-  width: 16px;
-  height: 16px;
-  background: #ffffff;
-  border-radius: 3px;
-}
-
 nav {
   display: flex;
   justify-content: space-between;
