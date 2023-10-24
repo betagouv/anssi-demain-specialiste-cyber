@@ -7,10 +7,59 @@ block append styles
     }
 
     #burger {
-      width: 16px;
-      height: 16px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    #menu-burger {
+      position: fixed;
+      top: 0;
+      left: 100vw;
       background: var(--noir);
-      border-radius: 3px;
+      height: 100vh;
+      width: calc(100vw - 32px);
+      z-index: 10;
+      transition: left 0.2s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    #menu-burger.ouvert {
+      left: 0;
+    }
+
+    #menu-burger img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 32px;
+      margin-left: auto;
+      cursor: pointer;
+    }
+
+    #menu-burger a {
+      padding: 16px 0;
+      border-bottom: 1px solid #373a75;
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none;
+      color: white;
+    }
+
+    #menu-burger a::after {
+      content: "";
+        display: flex;
+        background-image: url("/assets/images/fleche-droite.svg");
+        width: 20px;
+          height: 20px;
+    }
+
+    @media screen and (min-width: 768px) {
+      #menu-burger {
+        width: calc(100vw - 64px);
+        padding: 32px;
+      }
     }
 
     @media screen and (min-width: 1024px) {
@@ -44,17 +93,27 @@ block append styles
         transform: translateY(2px);
         margin-right: 8px;
         content: "";
+        background: url("/assets/images/cahier.svg");
+      }
+
+      #menu-desktop #espace-enseignant.-dark::before {
         background: url("/assets/images/cahier-dark.svg");
       }
     }
 
-
-mixin navPrincipale()
+mixin navPrincipale(estClair = false)
+  - const suffixeCouleur = estClair ? '' : '-dark'
   nav.principale
     a(href="/")
-      img.marianne(src='/assets/images/marianne-dark.svg')
+      img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg`)
     .responsive-invisible-desktop#burger
+      img(src=`/assets/images/menu-burger${suffixeCouleur}.svg`)
+    .responsive-invisible-desktop#menu-burger
+      img#fermeture-menu(src='/assets/images/croix-fermeture.svg')
+      a(href="/les-metiers") Découvrir les métiers
+      a Zoom sur la campagne
+      a(href="/espace-enseignant") Espace enseignant
     .responsive-visible-desktop#menu-desktop
       a(href='les-metiers') Découvrez les métiers
       div Zoom sur la campagne
-      a#espace-enseignant(href='/espace-enseignant') Espagne enseignant
+      a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant') Espagne enseignant

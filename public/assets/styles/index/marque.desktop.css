@@ -13,23 +13,6 @@
   #conteneur-marque {
     margin-top: 70px;
   }
-
-  #menu-desktop {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 28px;
-  }
-
-  #menu-desktop #espace-enseignant::before {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    transform: translateY(2px);
-    margin-right: 8px;
-    content: "";
-    background: url(../../images/cahier.svg);
-  }
 }
 
 @media screen and (min-width: 1200px) {

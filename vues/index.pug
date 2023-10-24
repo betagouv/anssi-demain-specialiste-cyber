@@ -1,4 +1,5 @@
 extends base
+include kit/nav-principale
 
 block append styles
   link(href='/assets/styles/index/marque.css', rel='stylesheet')
@@ -22,15 +23,7 @@ block append styles
 
 block body
   #marque
-    nav
-      a(href="/")
-        img.marianne(src='/assets/images/marianne.svg')
-      .responsive-invisible-desktop#burger
-      .responsive-visible-desktop#menu-desktop
-        a(href='les-metiers') Découvrez les métiers
-        div Zoom sur la campagne
-        a#espace-enseignant(href='/espace-enseignant') Espagne enseignant
-
+    +navPrincipale(true)
     .responsive-invisible-tablette
       img#bloc-marque(src='/assets/images/bloc-marque.svg')
       h2 Découvrez la cybersécurité et ses métiers
@@ -149,5 +142,4 @@ block body
 
   .gap
 
-  script(type='text/javascript' src='/assets/librairies/jquery-3.7.1.min.js')
   script(type='text/javascript' src='/assets/scripts/index.js')
