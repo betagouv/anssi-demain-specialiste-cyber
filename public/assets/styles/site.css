@@ -36,6 +36,14 @@ button.action {
   cursor: pointer;
 }
 
+button.action:hover {
+  background: #234c9a;
+}
+
+button.action:active {
+  background: #252d5e;
+}
+
 .carrousel {
   overflow: auto;
   scroll-behavior: smooth;
