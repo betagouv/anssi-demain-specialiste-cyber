@@ -37,11 +37,11 @@ button.action {
 }
 
 button.action:hover {
-  background: #234c9a;
+  background: #234c9a !important;
 }
 
 button.action:active {
-  background: #252d5e;
+  background: #252d5e !important;
 }
 
 .carrousel {
