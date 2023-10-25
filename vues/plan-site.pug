@@ -1,0 +1,35 @@
+extends base
+include kit/nav-principale
+include kit/nav-fil-ariane
+
+block append styles
+  link(href='/assets/styles/plan-site/plan-site.css', rel='stylesheet')
+  link(href='/assets/styles/plan-site/plan-site.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/plan-site/plan-site.desktop.css', rel='stylesheet')
+
+block body
+  +navPrincipale()
+  +navFilAriane('Plan du site')
+
+  #plan-site
+    h1 Plan du site
+    ul
+      a(href="/")
+        li Accueil
+          ul
+            a(href="/les-metiers")
+              li Découvrir les métiers
+            a(href="/la-campagne")
+              li Découvrir la campagne
+            a(href="/espace-enseignant")
+              li Espace enseignant
+            a(href="/mentions-legales")
+              li Mentions légales
+            a(href="/politique-confidentialite")
+              li Politique de confidentialité
+            a(href="/kit-communication")
+              li Kit de communication
+            a(href="/partenaires")
+              li Les partenaires
+
+  .gap

@@ -33,7 +33,8 @@ app
       ressources: lesRessourcesEnseignant(),
       formations: lesFormationsEnseignant(),
     });
-  });
+  })
+  .get("/plan-site", (req, rep) => rep.render("plan-site"));
 
 app.listen(port, () => {
   console.log(
