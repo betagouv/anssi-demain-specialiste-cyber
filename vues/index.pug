@@ -43,7 +43,8 @@ block body
   #agir
     h2 Agis pour prévenir les cyberattaques et y répondre
     img#agir-video(src=`/assets/videos/${videoAgir}`)
-    button.action Découvre la campagne
+    a(href="/la-campagne")
+      button.action Découvre la campagne
 
   #metiers
     h2 Découvre les métiers des Spécialistes Cyber
@@ -56,8 +57,9 @@ block body
             img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
             .identite #{f.identite}
             .metier #{f.metier}
-            .en-savoir-plus En savoir plus
-    button.action Accède aux témoignages
+            a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
+    a(href="/les-metiers")
+      button.action Accède aux témoignages
 
   #stats
     .carrousel-navigation.responsive-invisible-tablette

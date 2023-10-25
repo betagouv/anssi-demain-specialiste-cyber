@@ -1,25 +1,21 @@
 const donnees = {
   videosAgir: [{ idVideo: 1 }, { idVideo: 2 }],
   metiers: [
-    { metier: "Pentester", identite: "Julie", idVideo: "pentester" },
+    {
+      metier: "Pentester",
+      id: "pentester",
+      identite: "Julie",
+      idVideo: "pentester",
+    },
     {
       metier: "Responsable de la sécurité des systèmes d’information (RSSI)",
+      id: "rssi",
       identite: "Edouard",
       idVideo: "rssi",
     },
     {
       metier: "Analyste réponse aux incidents",
-      identite: "Gregory et Barbara",
-      idVideo: "analyste-incidents",
-    },
-    { metier: "Pentester", identite: "Julie", idVideo: "pentester" },
-    {
-      metier: "Responsable de la sécurité des systèmes d’information (RSSI)",
-      identite: "Edouard",
-      idVideo: "rssi",
-    },
-    {
-      metier: "Analyste réponse aux incidents",
+      id: "analyste-incidents",
       identite: "Gregory et Barbara",
       idVideo: "analyste-incidents",
     },

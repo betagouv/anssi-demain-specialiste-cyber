@@ -83,6 +83,7 @@
   text-underline-offset: 5px;
   margin-top: 16px;
   font-weight: 400;
+  color: var(--noir);
 }
 
 #metiers button.action {
