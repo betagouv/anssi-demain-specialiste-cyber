@@ -44,6 +44,10 @@ button.action:active {
   background: #252d5e !important;
 }
 
+a {
+  text-decoration: none;
+}
+
 .carrousel {
   overflow: auto;
   scroll-behavior: smooth;
