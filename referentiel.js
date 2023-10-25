@@ -94,6 +94,35 @@ const donnees = {
       classe: "telechargement",
     },
   ],
+  personnages: [
+    {
+      nom: "Elliot",
+      age: 27,
+      idImage: "elliot",
+      poste: "Responsable Cybersécurité",
+      accroche: "Pilote la sécurité informatique d'une organisation.",
+      description:
+        "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
+    },
+    {
+      nom: "Leila",
+      age: 31,
+      idImage: "leila",
+      poste: "Responsable Cybersécurité",
+      accroche: "Pilote la sécurité informatique d'une organisation.",
+      description:
+        "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
+    },
+    {
+      nom: "Alix",
+      age: 23,
+      idImage: "alix",
+      poste: "Responsable Cybersécurité",
+      accroche: "Pilote la sécurité informatique d'une organisation.",
+      description:
+        "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
+    },
+  ],
 };
 
 const lesFormationsEnseignant = () => donnees.formationsEnseignant;
@@ -106,6 +135,7 @@ const videoAgirAleatoire = () => {
 };
 
 const tousLesMetiers = () => donnees.metiers;
+const tousLesPersonnages = () => donnees.personnages;
 
 const metiersAuHasard = (combien) => {
   const nbMetiers = donnees.metiers.length;
@@ -123,5 +153,6 @@ module.exports = {
   lesRessourcesEnseignant,
   metiersAuHasard,
   tousLesMetiers,
+  tousLesPersonnages,
   videoAgirAleatoire,
 };

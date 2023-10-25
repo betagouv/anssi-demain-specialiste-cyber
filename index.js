@@ -4,6 +4,7 @@ const {
   metiersAuHasard,
   videoAgirAleatoire,
   tousLesMetiers,
+  tousLesPersonnages,
   lesRessourcesEnseignant,
   lesFormationsEnseignant,
 } = require("./referentiel");
@@ -33,6 +34,9 @@ app
       ressources: lesRessourcesEnseignant(),
       formations: lesFormationsEnseignant(),
     });
+  })
+  .get("/la-campagne", (req, rep) => {
+    rep.render("campagne", { personnages: tousLesPersonnages() });
   })
   .get("/plan-site", (req, rep) => rep.render("plan-site"));
 

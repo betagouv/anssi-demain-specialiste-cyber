@@ -1,0 +1,180 @@
+.bloc-noir {
+  background: var(--noir);
+  padding: 40px 16px;
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+.bloc-noir h1,
+.bloc-noir h2 {
+  margin: 0;
+}
+
+.bloc-noir h1 {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.bloc-noir h2 {
+  font-size: 0.6em;
+  color: #ffffff80;
+  font-weight: 500;
+}
+
+#pourquoi-campagne-cyber {
+  padding: 56px 16px;
+}
+
+#pourquoi-campagne-cyber h3 {
+  margin: 0 0 12px 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#pourquoi-campagne-cyber p {
+  font-size: 1.4em;
+}
+
+#pourquoi-campagne-cyber p:last-of-type {
+  margin-bottom: 0;
+}
+
+#carrousel-personnages {
+  display: flex;
+  flex-direction: row;
+  /*padding: 0 200px;*/
+}
+
+#carrousel-personnages > * {
+  scroll-snap-align: center;
+}
+
+.carrousel-navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.fleche {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  background: #234c9a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.fleche img {
+  width: 32px;
+  height: 32px;
+}
+
+#personnages {
+  padding: 32px 0 40px 0;
+}
+
+#personnages .image-personnage {
+  width: 50vw;
+  flex-shrink: 0;
+}
+
+#personnages .image-personnage:first-of-type {
+  padding-left: 25vw;
+}
+
+#personnages .image-personnage:last-of-type {
+  padding-right: 25vw;
+}
+
+#personnages h3 {
+  margin: 0;
+  font-size: 0.7em;
+  margin-bottom: 32px;
+}
+
+#description-carrousel {
+  padding: 0 16px;
+}
+
+#description-carrousel .contenu-personnage {
+  display: none;
+}
+
+#description-carrousel h4 {
+  margin: 16px 0 0 0;
+  font-size: 0.45em;
+}
+
+#description-carrousel h5 {
+  margin: 0;
+  font-size: 0.6em;
+}
+
+#description-carrousel p {
+  margin: 24px 0 0 0;
+  font-size: 0.45em;
+}
+
+#affiches-visuels {
+  background: #f6f6f6;
+  padding-top: 56px;
+}
+
+#affiches-visuels h3 {
+  margin: 0;
+  background: white;
+  text-align: center;
+  padding: 32px 0;
+  font-size: 2.3em;
+  font-weight: bold;
+}
+
+#affiches-visuels p {
+  margin: 8px 16px;
+  font-size: 1.15em;
+}
+
+#lien-kit {
+  padding: 32px 0;
+  background: linear-gradient(to bottom, #f6f6f6 45%, white 45%);
+  display: flex;
+  justify-content: center;
+}
+
+#videos-metiers {
+  background: #f6f6f6;
+  padding-top: 56px;
+}
+
+#videos-metiers h3 {
+  padding: 0 16px 24px 16px;
+  margin: 0;
+  font-size: 2.3em;
+  text-align: center;
+}
+
+#videos-metiers img {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+#videos-metiers .conteneur-action {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 56px;
+}
+
+#videos-metiers .action-copier::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  display: flex;
+  background-image: url("/assets/images/copier.svg");
+  margin-left: 8px;
+}
