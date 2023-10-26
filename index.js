@@ -38,7 +38,8 @@ app
   .get("/la-campagne", (req, rep) => {
     rep.render("campagne", { personnages: tousLesPersonnages() });
   })
-  .get("/plan-site", (req, rep) => rep.render("plan-site"));
+  .get("/plan-site", (req, rep) => rep.render("plan-site"))
+  .get("/partenaires", (req, rep) => rep.render("partenaires"));
 
 app.listen(port, () => {
   console.log(

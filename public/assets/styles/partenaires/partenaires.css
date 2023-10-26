@@ -1,0 +1,24 @@
+#partenaires {
+  padding: 0 16px;
+}
+
+#partenaires h1 {
+  font-size: 2.85em;
+  margin: 23px 0 16px;
+}
+
+#partenaires h2 {
+  font-size: 2.3em;
+  margin: 32px 0 16px;
+}
+
+#partenaires img {
+  width: 160px;
+}
+
+#partenaires .conteneur-partenaires {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  flex-wrap: wrap;
+}
