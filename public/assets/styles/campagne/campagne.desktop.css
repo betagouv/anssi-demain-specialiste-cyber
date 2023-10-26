@@ -1,0 +1,41 @@
+@media screen and (min-width: 1024px) {
+  .bloc-noir h2 {
+    padding: 0 24vw;
+  }
+
+  #pourquoi-campagne-cyber {
+    padding: 80px 24vw;
+  }
+
+  #personnages {
+    padding: 64px 0;
+  }
+
+  #campagne .carrousel-navigation {
+    padding: 0 32vw;
+    width: calc(100% - 64vw);
+  }
+
+  #description-carrousel {
+    padding: 0 32vw;
+  }
+
+  #affiches-visuels {
+    display: flex;
+    gap: 60px;
+    padding: 64px 120px;
+    background: white;
+  }
+
+  #videos-metiers {
+    padding: 80px 120px;
+  }
+
+  #videos-metiers img {
+    margin-bottom: 42px;
+  }
+
+  #videos-metiers .conteneur-action:last-of-type {
+    padding-bottom: 40px;
+  }
+}
