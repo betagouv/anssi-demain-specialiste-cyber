@@ -42,4 +42,21 @@
   .mais-aussi .details {
     align-self: center;
   }
+
+  #decouvre.focus-metier h2 {
+    font-size: 2.85rem;
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  #focus-metier {
+    display: flex;
+    padding: 0 120px;
+  }
+
+  #focus-metier .conteneur-image {
+    display: unset;
+    width: 40%;
+    text-align: end;
+  }
 }

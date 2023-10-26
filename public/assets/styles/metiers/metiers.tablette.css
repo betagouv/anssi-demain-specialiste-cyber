@@ -55,4 +55,28 @@
     min-width: 270px;
     margin-left: 24px;
   }
+
+  #decouvre.focus-metier h2 {
+    font-size: 2.85rem;
+    padding-top: 72px;
+  }
+
+  #focus-metier {
+    background: linear-gradient(to bottom, var(--jaune) 300px, #f6f6f6 300px);
+  }
+
+  #focus-metier .details {
+    background: white;
+    border: 1px solid #dddddd;
+    padding: 40px;
+  }
+
+  #focus-metier .identite {
+    margin: 0;
+  }
+
+  #decouvre-autre-metier {
+    padding: 80px 16px 64px 16px;
+    border: none;
+  }
 }

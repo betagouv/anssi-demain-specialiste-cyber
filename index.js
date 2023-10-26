@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const {
+  autresMetiers,
+  leMetier,
   metiersAuHasard,
   videoAgirAleatoire,
   tousLesMetiers,
@@ -27,7 +29,11 @@ app
     });
   })
   .get("/les-metiers", (req, rep) => {
-    rep.render("metiers", { fichesMetiers: tousLesMetiers() });
+    const { metier: idMetier } = req.query;
+    rep.render("metiers", {
+      fichesMetiers: idMetier ? autresMetiers(idMetier) : tousLesMetiers(),
+      ...(idMetier && { focusMetier: leMetier(idMetier) }),
+    });
   })
   .get("/espace-enseignant", (req, rep) => {
     rep.render("espace-enseignant", {
