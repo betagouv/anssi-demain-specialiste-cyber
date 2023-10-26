@@ -43,7 +43,6 @@
 #carrousel-personnages {
   display: flex;
   flex-direction: row;
-  /*padding: 0 200px;*/
 }
 
 #carrousel-personnages > * {
@@ -108,7 +107,7 @@
 
 #description-carrousel h4 {
   margin: 16px 0 0 0;
-  font-size: 0.45em;
+  font-size: 0.42em;
 }
 
 #description-carrousel h5 {
@@ -118,7 +117,7 @@
 
 #description-carrousel p {
   margin: 24px 0 0 0;
-  font-size: 0.45em;
+  font-size: 0.42em;
 }
 
 #affiches-visuels {

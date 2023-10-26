@@ -4,6 +4,7 @@ include kit/nav-fil-ariane
 
 block append styles
   link(href='/assets/styles/campagne/campagne.css', rel='stylesheet')
+  link(href='/assets/styles/campagne/campagne.tablette.css', rel='stylesheet')
 
 block body
   +navPrincipale()
@@ -37,18 +38,27 @@ block body
 
     #affiches-visuels
       h3 Les affiches et visuels
-      p Télécharge les 6 affiches au format A3 ainsi que des visuels pour les réseaux sociaux
-      #lien-kit
+      .responsive-invisible-tablette
+        p Télécharge les 6 affiches au format A3 ainsi que des visuels pour les réseaux sociaux
+        #lien-kit
+          a(href="/kit-communication")
+            button.action Kit de communication
+      .responsive-visible-tablette#telechargement-kit
+        p Télécharge les 6 affiches au format A3 ainsi que des visuels pour les réseaux sociaux.
         a(href="/kit-communication")
-          button.action Kit de communication
+          button.action Télécharge le kit de communication
     #videos-metiers
       h3 Découvre leurs métiers en vidéo
       img(src="/assets/videos/agir-video-1-placeholder.png")
-      .conteneur-action
+      .conteneur-action.responsive-invisible-tablette
         button.action.action-copier Copier le lien
+      .conteneur-action.responsive-visible-tablette
+        button.action.action-copier Copier le lien de cette vidéo
       img(src="/assets/videos/agir-video-2-placeholder.png")
-      .conteneur-action
+      .conteneur-action.responsive-invisible-tablette
         button.action.action-copier Copier le lien
+      .conteneur-action.responsive-visible-tablette
+        button.action.action-copier Copier le lien de cette vidéo
 
   .gap
   script(type='text/javascript' src='/assets/scripts/campagne.js')
