@@ -6,6 +6,23 @@ const donnees = {
       id: "pentester",
       identite: "Julie",
       idVideo: "pentester",
+      description:
+        "Le pentester ou auditeur de sécurité technique réalise des évaluations techniques de la sécurité d’environnements informatiques. <br><br>" +
+        "Il identifie les vulnérabilités et propose des actions de remédiation. Il peut réaliser différents types d’audits en fonction de son périmètre d’activité (tests d’intrusion, audit de code, revue de configuration, etc.).",
+      formation:
+        "Formation : Bac +3 à Bac+5 dont spécialisation en cybersécurité<br><br>" +
+        "Type de certification : PASSI (Prestataire d’Audit de Sécurité des Systèmes d’Information)",
+      posture: [
+        "Sens éthique",
+        "Capacité de travail en équipe",
+        "Capacité de synthèse",
+        "Rigueur",
+        "Rédaction de rapports",
+      ],
+      metiersProches: [
+        "Expert technique en audit sécurité",
+        "Expert en tests d’intrusions",
+      ],
     },
     {
       metier: "Responsable de la sécurité des systèmes d’information (RSSI)",
@@ -134,6 +151,8 @@ const videoAgirAleatoire = () => {
   return `agir-video-${idVideo}-placeholder.png`;
 };
 
+const autresMetiers = (id) => donnees.metiers.filter((m) => m.id !== id);
+const leMetier = (id) => donnees.metiers.find((m) => m.id === id);
 const tousLesMetiers = () => donnees.metiers;
 const tousLesPersonnages = () => donnees.personnages;
 
@@ -149,6 +168,8 @@ const metiersAuHasard = (combien) => {
 };
 
 module.exports = {
+  autresMetiers,
+  leMetier,
   lesFormationsEnseignant,
   lesRessourcesEnseignant,
   metiersAuHasard,

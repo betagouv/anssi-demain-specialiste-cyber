@@ -30,8 +30,28 @@ block body
   +navPrincipale()
   +navFilAriane('Découvrir les métiers')
 
-  #decouvre
+  #decouvre(class=`${focusMetier ? 'focus-metier': ''}`)
     h2 Découvre les métiers des Spécialistes Cyber
+    if(focusMetier)
+        #focus-metier
+          .conteneur-image
+            img(src=`/assets/videos/fiche-metier-video-${focusMetier.idVideo}-placeholder.png`)
+          .details
+            .identite #{focusMetier.identite}
+            .metier #{focusMetier.metier}
+            p!= focusMetier.description
+            h3 Formation
+            p!= focusMetier.formation
+            h3 Posture
+            .postures
+              each p in focusMetier.posture
+                  span= p
+            h3#metiers-proches Métiers proches
+            .metiers-proches
+              each m in focusMetier.metiersProches
+                  p= m
+        #decouvre-autre-metier
+          h3 Découvre aussi leur métier...
     .fiches
       each f, index in fichesMetiers
         if(index > 0 && index % 3 === 0)
@@ -42,7 +62,7 @@ block body
           .details
             .identite #{f.identite}
             .metier #{f.metier}
-            .en-savoir-plus En savoir plus
+            a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
 
     +maisAussiMobile()
     +maisAussiTablette()

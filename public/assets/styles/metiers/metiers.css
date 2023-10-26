@@ -13,6 +13,11 @@
   text-align: center;
 }
 
+#decouvre.focus-metier h2 {
+  font-size: 2.85rem;
+  padding-bottom: 16px;
+}
+
 .fiches {
   display: flex;
   flex-direction: column;
@@ -97,4 +102,79 @@
   height: 24px;
   margin-left: 8px;
   background: url(../../images/lien-externe.svg);
+}
+
+#focus-metier {
+  padding: 16px;
+  background: linear-gradient(to bottom, var(--jaune) 180px, white 180px);
+}
+
+#focus-metier .conteneur-image {
+  display: flex;
+  justify-content: center;
+}
+
+#focus-metier img {
+  width: 100%;
+  max-width: 484px;
+}
+
+#focus-metier .identite {
+  font-size: 1.3em;
+  margin-top: 16px;
+}
+
+#focus-metier .metier {
+  font-size: 2em;
+  margin-bottom: 32px;
+}
+
+#focus-metier p {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+#focus-metier h3 {
+  margin: 0 0 16px;
+  font-size: 1.45em;
+}
+
+#focus-metier .postures {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+#focus-metier .postures span {
+  font-weight: bold;
+  padding: 8px;
+  background: #e7e8eb;
+}
+
+#focus-metier #metiers-proches {
+  margin-bottom: 32px;
+}
+
+#focus-metier .metiers-proches p {
+  margin: 0;
+  padding: 12px 0;
+  border-top: 1px solid #dddddd;
+}
+
+#focus-metier .metiers-proches p:last-of-type {
+  border-bottom: 1px solid #dddddd;
+}
+
+#decouvre-autre-metier {
+  padding: 56px 16px 48px 16px;
+  text-align: center;
+  font-size: 2em;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+
+#decouvre-autre-metier h3 {
+  margin: 0;
 }
