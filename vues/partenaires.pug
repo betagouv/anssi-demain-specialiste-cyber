@@ -1,0 +1,36 @@
+extends base
+include kit/nav-principale
+include kit/nav-fil-ariane
+
+block append styles
+  link(href='/assets/styles/partenaires/partenaires.css', rel='stylesheet')
+  link(href='/assets/styles/partenaires/partenaires.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/partenaires/partenaires.desktop.css', rel='stylesheet')
+
+block body
+  +navPrincipale()
+  +navFilAriane('Les partenaires')
+
+  #partenaires
+    h1 Les contributeurs de la campagne
+    h2 Les organisateurs
+      .conteneur-partenaires
+        img(src="/assets/images/partenaires/MinistereEducation.svg")
+        img(src="/assets/images/partenaires/ANSSI.svg")
+        img(src="/assets/images/partenaires/CampusCyber.svg")
+    h2 Les partenaires
+      .conteneur-partenaires
+        img(src="/assets/images/partenaires/FranceTV.svg")
+    h2 Les soutiens officiels
+      .conteneur-partenaires
+        img(src="/assets/images/partenaires/Cybermalveillance.svg")
+        img(src="/assets/images/partenaires/PIX.svg")
+        img(src="/assets/images/partenaires/Canope.svg")
+        img(src="/assets/images/partenaires/CNED.svg")
+        img(src="/assets/images/partenaires/ComCyberGend.svg")
+        img(src="/assets/images/partenaires/ComCyber.svg")
+        img(src="/assets/images/partenaires/MinistereTravail.svg")
+        img(src="/assets/images/partenaires/DGE.svg")
+        img(src="/assets/images/partenaires/CNAM.svg")
+        img(src="/assets/images/partenaires/Diagoriente.svg")
+  .gap
