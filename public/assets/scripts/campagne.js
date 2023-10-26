@@ -14,10 +14,14 @@ $(document).ready(() => {
   $carrouselPersonnage.on("scroll", () => {
     const decalageCourant = $carrouselPersonnage.scrollLeft();
     const idxPersonnageVisible = Math.floor(decalageCourant / largeurImage);
+    // console.log(idxPersonnageVisible);
+    console.log(decalageCourant, largeurImage);
     $(".contenu-personnage").hide();
-    $(`.contenu-personnage[data-id-personnage=${idxPersonnageVisible}]`).show();
+    $(
+      `.contenu-personnage[data-id-personnage='${idxPersonnageVisible}']`,
+    ).show();
   });
 
-  const largeurTotaleCarrousel = $carrouselPersonnage[0].scrollWidth;
-  $carrouselPersonnage.scrollLeft(largeurTotaleCarrousel / 4);
+  $carrouselPersonnage.scrollLeft(0);
+  $(".contenu-personnage[data-id-personnage='0'").show();
 });
