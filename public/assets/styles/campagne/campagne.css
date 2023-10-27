@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .bloc-noir {
   background: var(--noir);
   padding: 40px 16px;
