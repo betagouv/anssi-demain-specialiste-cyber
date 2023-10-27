@@ -35,9 +35,9 @@
     justify-content: flex-end;
   }
 
+  .formation a,
   .formation button.action {
     align-self: center;
-    margin: unset;
   }
 
   .gap {

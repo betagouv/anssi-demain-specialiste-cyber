@@ -49,6 +49,10 @@ a {
   text-decoration: none;
 }
 
+a:visited {
+  color: unset;
+}
+
 .carrousel {
   overflow: auto;
   scroll-behavior: smooth;
