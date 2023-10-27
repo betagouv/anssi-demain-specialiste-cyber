@@ -1,5 +1,7 @@
 html {
   scroll-behavior: smooth;
+  --carrousel-decalage-gauche: 0px;
+  --cible-scroll: 0px;
 }
 
 .bloc-noir {
@@ -78,27 +80,51 @@ html {
   height: 32px;
 }
 
+#personnages .conteneur-carrousel {
+  position: relative;
+}
+
+#personnages .filtre-carrousel {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  background: linear-gradient(
+    to right,
+    var(--noir) 0%,
+    transparent 20%,
+    transparent 80%,
+    var(--noir) 100%
+  );
+}
+
 #personnages {
   padding: 32px 0 40px 0;
 }
 
 #personnages .image-personnage {
-  width: 50vw;
+  width: 600px;
   flex-shrink: 0;
+  --z-translate: calc(
+    min(var(--carrousel-decalage-gauche), var(--cible-scroll)) -
+      max(var(--carrousel-decalage-gauche), var(--cible-scroll))
+  );
+  transform: perspective(100vw) translateZ(var(--z-translate));
 }
 
 #personnages .image-personnage:first-of-type {
-  padding-left: 25vw;
+  padding-left: calc((100vw - 600px) / 2);
 }
 
 #personnages .image-personnage:last-of-type {
-  padding-right: 25vw;
+  padding-right: calc((100vw - 600px) / 2);
 }
 
 #personnages h3 {
-  margin: 0;
   font-size: 0.7em;
-  margin-bottom: 32px;
+  margin: 0 0 32px;
 }
 
 #description-carrousel {

@@ -21,9 +21,11 @@ block body
       p Vous pouvez relayer cette campagne grâce à nos contenus : vidéos, affiches et visuels pour réseaux sociaux.
     #personnages.bloc-noir
       h3 Redécouvre les personnages de la campagne
-      .carrousel#carrousel-personnages
-          each p in personnages
-            img(src=`/assets/images/${p.idImage}.svg`).image-personnage
+      .conteneur-carrousel
+        .carrousel#carrousel-personnages
+            each p in personnages
+              img(src=`/assets/images/${p.idImage}.svg`).image-personnage
+        .filtre-carrousel
       .carrousel-navigation
         .fleche.fleche-gauche
           img(src="/assets/images/fleche-gauche-blanche.svg")

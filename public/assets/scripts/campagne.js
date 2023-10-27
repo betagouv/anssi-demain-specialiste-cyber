@@ -5,7 +5,7 @@ $(document).ready(() => {
   const glissePersonnageVers = (sens) => {
     const decalageCourant = $carrouselPersonnage.scrollLeft();
     $carrouselPersonnage.scrollLeft(
-      decalageCourant + (largeurImage / 2 + 1) * sens,
+      decalageCourant + ((3 * largeurImage) / 4) * sens,
     );
   };
   $(".fleche-droite", "#campagne").on("click", () => glissePersonnageVers(+1));
@@ -13,15 +13,22 @@ $(document).ready(() => {
 
   $carrouselPersonnage.on("scroll", () => {
     const decalageCourant = $carrouselPersonnage.scrollLeft();
-    const idxPersonnageVisible = Math.floor(decalageCourant / largeurImage);
-    // console.log(idxPersonnageVisible);
-    console.log(decalageCourant, largeurImage);
+    const idxPersonnageVisible = Math.round(decalageCourant / largeurImage);
+    $("body")[0].style.setProperty(
+      "--carrousel-decalage-gauche",
+      `${decalageCourant}px`,
+    );
+
     $(".contenu-personnage").hide();
     $(
       `.contenu-personnage[data-id-personnage='${idxPersonnageVisible}']`,
     ).show();
   });
 
-  $carrouselPersonnage.scrollLeft(0);
-  $(".contenu-personnage[data-id-personnage='0'").show();
+  $(".contenu-personnage[data-id-personnage='0']").show();
+
+  $("img", $carrouselPersonnage).each(function (idx) {
+    const cibleScroll = idx * largeurImage;
+    $(this).css("--cible-scroll", `${cibleScroll}px`);
+  });
 });
