@@ -24,13 +24,13 @@ block body
       .conteneur-carrousel
         .carrousel#carrousel-personnages
             each p in personnages
-              img(src=`/assets/images/personnages/${p.idImage}.svg`).image-personnage
+              img(src=`/assets/images/personnages/${p.idImage}.svg` alt=`Personnage ${p.nom}`).image-personnage
         .filtre-carrousel
       .carrousel-navigation
         .fleche.fleche-gauche
-          img(src="/assets/images/fleche-gauche-blanche.svg")
+          img(src="/assets/images/fleche-gauche-blanche.svg" alt="Flèche gauche")
         .fleche.fleche-droite
-          img(src="/assets/images/fleche-droite-blanche.svg")
+          img(src="/assets/images/fleche-droite-blanche.svg" alt="Flèche droite")
       #description-carrousel
           each p, idx in personnages
             .contenu-personnage(data-id-personnage=idx)
