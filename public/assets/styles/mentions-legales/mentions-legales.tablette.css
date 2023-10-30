@@ -1,0 +1,10 @@
+@media screen and (min-width: 768px) {
+  #mentions-legales h1 {
+    font-size: 3.15em;
+    margin-bottom: 80px;
+  }
+
+  #mentions-legales h2 {
+    font-size: 2.3em;
+  }
+}
