@@ -1,23 +1,19 @@
 extends base
 include kit/nav-principale
 include kit/nav-fil-ariane
-
-mixin blocContenu(titre, contenu)
-  h2= titre
-  each c in contenu
-    p!= c
+include kit/bloc-contenu-informatif
 
 block append styles
-  link(href='/assets/styles/mentions-legales/mentions-legales.css', rel='stylesheet')
-  link(href='/assets/styles/mentions-legales/mentions-legales.tablette.css', rel='stylesheet')
-  link(href='/assets/styles/mentions-legales/mentions-legales.desktop.css', rel='stylesheet')
+  link(href='/assets/styles/contenu-informatif/contenu-informatif.css', rel='stylesheet')
+  link(href='/assets/styles/contenu-informatif/contenu-informatif.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/contenu-informatif/contenu-informatif.desktop.css', rel='stylesheet')
 
 
 block body
   +navPrincipale()
   +navFilAriane('Mentions légales')
 
-  #mentions-legales
+  #mentions-legales.contenu-informatif
     h1 Mentions légales
     +blocContenu(
         "Éditeur",
