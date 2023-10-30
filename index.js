@@ -45,7 +45,8 @@ app
     rep.render("campagne", { personnages: tousLesPersonnages() });
   })
   .get("/plan-site", (req, rep) => rep.render("plan-site"))
-  .get("/partenaires", (req, rep) => rep.render("partenaires"));
+  .get("/partenaires", (req, rep) => rep.render("partenaires"))
+  .get("/mentions-legales", (req, rep) => rep.render("mentions-legales"));
 
 app.listen(port, () => {
   console.log(

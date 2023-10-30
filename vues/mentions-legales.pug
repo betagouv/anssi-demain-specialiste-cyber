@@ -1,0 +1,71 @@
+extends base
+include kit/nav-principale
+include kit/nav-fil-ariane
+
+mixin blocContenu(titre, contenu)
+  h2= titre
+  each c in contenu
+    p!= c
+
+block append styles
+  link(href='/assets/styles/mentions-legales/mentions-legales.css', rel='stylesheet')
+  link(href='/assets/styles/mentions-legales/mentions-legales.tablette.css', rel='stylesheet')
+  link(href='/assets/styles/mentions-legales/mentions-legales.desktop.css', rel='stylesheet')
+
+
+block body
+  +navPrincipale()
+  +navFilAriane('Mentions légales')
+
+  #mentions-legales
+    h1 Mentions légales
+    +blocContenu(
+        "Éditeur",
+        [
+            "Le site est édité par l'agence nationale de la sécurité des systèmes d'information (ANSSI) :",
+            "51 boulevard de la Tour-Maubourg 75700 Paris 07 SP France <a href='mailto:lab-inno@ssi.gouv.fr'>lab-inno@ssi.gouv.fr</a>"
+        ]
+    )
+    +blocContenu(
+        "Directeur de publication",
+        [
+            "Vincent Strubel, directeur général de l'ANSSI.",
+            "La conception éditoriale, le suivi et les mises à jour du site internet sont assurés par les services de l'ANSSI en étroite coordination avec le ministère de l’Education nationale et de la Jeunesse et le Campus Cyber"
+        ]
+    )
+    +blocContenu(
+        "Hébergement",
+        [
+            "L'hébergement du site est assuré par 3DS OUTSCALE SecNumCloud et SCALINGO, 15 avenue du Rhin, 67100 Strasbourg, société par actions simplifiée, immatriculée au RCS de Strasbourg sous le numéro 808 665 483.",
+            "Toute correspondance à leur attention doit être adressée à l'adresse suivante : <a href='mailto:support@scalingo.com'>support@scalingo.com</a>."
+        ]
+    )
+    +blocContenu(
+        "Sécurité",
+        [
+            "Le site DemainSpécialisteCyber a été homologué le XX octobre 2023 pour une durée de 2 ans.",
+        ]
+    )
+    +blocContenu(
+        "Crédits images et vidéos",
+        [
+            "– Les vidéos de témoignages ont été réalisées par le CampusCyber.",
+            "– Les affiches sur les métiers de la cybersécurité ont été élaborées par l’Agence nationale de la sécurité des systèmes d’information et le ministère de l’Education nationale et de la Jeunesse.",
+            "– Le design du site a été élaboré par <a href='https://www.wearespheres.com'>Sphères</a>."
+        ]
+    )
+    +blocContenu(
+        "Protection des contenus",
+        [
+            "Sauf mention expresse contraire telle que la mention de la licence ouverte Etalab, tous les contenus protégeables par le droit de la Propriété intellectuelle ne peuvent pas être reproduits ou réutilisés sans l'autorisation expresse de l'ANSSI.",
+        ]
+    )
+    +blocContenu(
+        "Demande d'autorisation",
+        [
+            "Les demandes d'autorisation de reproduction d'un contenu doivent au préalable être adressées à l'ANSSI, en écrivant à l'adresse suivante : <a href='mailto:lab-inno@ssi.gouv.fr'>lab-inno@ssi.gouv.fr</a>",
+            "La demande devra préciser le contenu visé ainsi que le contexte d'utilisation prévu (supports concernés, période, destinataires, etc.)."
+        ]
+    )
+
+  .gap
