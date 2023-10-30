@@ -28,3 +28,12 @@ body {
   margin-top: 0;
   margin-bottom: 32px;
 }
+
+.contenu-informatif ul {
+  margin-top: 0;
+  padding-left: 16px;
+}
+
+.contenu-informatif li {
+  font-size: 1.28em;
+}
