@@ -12,8 +12,8 @@
   }
 
   #campagne .carrousel-navigation {
-    padding: 0 32vw;
-    width: calc(100% - 64vw);
+    padding: 0 16vw;
+    width: calc(100% - 32vw);
   }
 
   #description-carrousel {

@@ -113,31 +113,63 @@ const donnees = {
   ],
   personnages: [
     {
-      nom: "Elliot",
-      age: 27,
-      idImage: "elliot",
+      nom: "Leila",
+      idImage: "Leila",
+      age: 31,
       poste: "Responsable Cybersécurité",
       accroche: "Pilote la sécurité informatique d'une organisation.",
       description:
         "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
     },
     {
-      nom: "Leila",
-      age: 31,
-      idImage: "leila",
-      poste: "Responsable Cybersécurité",
-      accroche: "Pilote la sécurité informatique d'une organisation.",
+      nom: "Kylian",
+      idImage: "Kylian",
+      age: 38,
+      poste: "Cryptologue",
+      accroche:
+        "Protège les informations sensibles détenues par les organisations.",
       description:
-        "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
+        "Il conçoit des algorithmes de sécurité permettant de chiffrer les échanges d'informations numériques pour assurer leur confidentialité et leur intégrité.",
     },
     {
       nom: "Alix",
-      age: 23,
-      idImage: "alix",
-      poste: "Responsable Cybersécurité",
-      accroche: "Pilote la sécurité informatique d'une organisation.",
+      idImage: "Alix",
+      age: 26,
+      poste: "Juriste Cyber",
+      accroche:
+        "Aide à protéger et défendre juridiquement les organisations face aux menaces informatiques.",
       description:
-        "Elle fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
+        "Elle veille à l’application de la réglementation en matière de cybersécurité et conseille sur les mesures juridiques permettant de prévenir et de faire face aux cyberattaques.",
+    },
+    {
+      nom: "Léo",
+      idImage: "Leo",
+      age: 22,
+      poste: "Hacker éthique",
+      accroche:
+        "Recherche les failles de sécurité pour les corriger avant que des attaquants ne puissent les exploiter.",
+      description:
+        "Il cherche à comprendre le fonctionnement des systèmes informatiques au niveau technique, réalise des tests d'intrusion et réfléchit à comment améliorer la sécurité de ces systèmes.",
+    },
+    {
+      nom: "Elliot",
+      idImage: "Elliot",
+      age: 26,
+      poste: "Analyste des cybermenaces",
+      accroche:
+        "Apprend à connaître et à reconnaître les cyberattaques pour mieux s'en protéger.",
+      description:
+        "Il étudie les modes opératoires des attaquants, leurs cibles, leurs motivations pour détecter et anticiper de nouvelles attaques et y faire face.",
+    },
+    {
+      nom: "Léonie",
+      idImage: "Leonie",
+      age: 32,
+      poste: "Experte cyberdéfense",
+      accroche:
+        "Porte secours aux personnes et aux organisations victimes de cyberattaques.",
+      description:
+        "Elle cherche à comprendre comment les attaquants sont parvenus à pénétrer un système pour mettre fin à l'attaque et revenir à une situation normale.",
     },
   ],
 };
