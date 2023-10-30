@@ -105,7 +105,8 @@ html {
 }
 
 #personnages .image-personnage {
-  width: 600px;
+  width: 50vw;
+  max-width: 600px;
   flex-shrink: 0;
   --z-translate: calc(
     min(var(--carrousel-decalage-gauche), var(--cible-scroll)) -
@@ -115,11 +116,11 @@ html {
 }
 
 #personnages .image-personnage:first-of-type {
-  padding-left: calc((100vw - 600px) / 2);
+  padding-left: max(25vw, calc((100vw - 600px) / 2));
 }
 
 #personnages .image-personnage:last-of-type {
-  padding-right: calc((100vw - 600px) / 2);
+  padding-right: max(25vw, calc((100vw - 600px) / 2));
 }
 
 #personnages h3 {
