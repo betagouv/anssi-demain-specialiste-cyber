@@ -49,7 +49,8 @@ app
   .get("/mentions-legales", (req, rep) => rep.render("mentions-legales"))
   .get("/politique-confidentialite", (req, rep) =>
     rep.render("politique-confidentialite"),
-  );
+  )
+  .get("/a-propos", (req, rep) => rep.render("a-propos"));
 
 app.listen(port, () => {
   console.log(
