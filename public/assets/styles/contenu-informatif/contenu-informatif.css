@@ -2,28 +2,28 @@ body {
   background: #f6f6f6;
 }
 
-#mentions-legales {
+.contenu-informatif {
   padding: 0 16px 56px 16px;
 }
 
-#mentions-legales a {
+.contenu-informatif a {
   color: var(--noir);
   text-decoration: underline;
 }
 
-#mentions-legales h1 {
+.contenu-informatif h1 {
   margin-top: 23px;
   margin-bottom: 56px;
   font-size: 2.85em;
 }
 
-#mentions-legales h2 {
+.contenu-informatif h2 {
   margin-top: 0;
   margin-bottom: 32px;
   font-size: 2em;
 }
 
-#mentions-legales p {
+.contenu-informatif p {
   font-size: 1.28em;
   margin-top: 0;
   margin-bottom: 32px;

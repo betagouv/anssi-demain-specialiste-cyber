@@ -1,9 +1,9 @@
 @media screen and (min-width: 1024px) {
-  #mentions-legales h1 {
+  .contenu-informatif h1 {
     margin-top: 0;
   }
 
-  #mentions-legales {
+  .contenu-informatif {
     padding: 0 22vw;
   }
 }
