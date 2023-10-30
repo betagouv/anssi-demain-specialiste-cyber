@@ -46,7 +46,10 @@ app
   })
   .get("/plan-site", (req, rep) => rep.render("plan-site"))
   .get("/partenaires", (req, rep) => rep.render("partenaires"))
-  .get("/mentions-legales", (req, rep) => rep.render("mentions-legales"));
+  .get("/mentions-legales", (req, rep) => rep.render("mentions-legales"))
+  .get("/politique-confidentialite", (req, rep) =>
+    rep.render("politique-confidentialite"),
+  );
 
 app.listen(port, () => {
   console.log(
