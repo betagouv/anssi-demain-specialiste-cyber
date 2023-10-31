@@ -50,9 +50,6 @@ a {
   color: white;
 }
 
-a:visited {
-}
-
 .carrousel {
   overflow: auto;
   scroll-behavior: smooth;
