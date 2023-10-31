@@ -3,11 +3,13 @@ include kit/nav-principale
 include kit/nav-fil-ariane
 include kit/bloc-contenu-informatif
 
+block title
+  title Mentions légales | DemainSpécialisteCyber
+
 block append styles
   link(href='/assets/styles/contenu-informatif/contenu-informatif.css', rel='stylesheet')
   link(href='/assets/styles/contenu-informatif/contenu-informatif.tablette.css', rel='stylesheet')
   link(href='/assets/styles/contenu-informatif/contenu-informatif.desktop.css', rel='stylesheet')
-
 
 block body
   +navPrincipale()
