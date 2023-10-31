@@ -44,104 +44,13 @@ html {
   margin-bottom: 0;
 }
 
-#carrousel-personnages {
-  display: flex;
-  flex-direction: row;
-}
-
-#carrousel-personnages > * {
-  scroll-snap-align: center;
-}
-
-.carrousel-navigation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding-top: 12px;
-}
-
-.fleche {
-  width: 32px;
-  height: 32px;
-  padding: 8px;
-  background: #234c9a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.fleche img {
-  width: 32px;
-  height: 32px;
-}
-
-#personnages .conteneur-carrousel {
-  position: relative;
-}
-
-#personnages .filtre-carrousel {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100vw;
-  background: linear-gradient(
-    to right,
-    var(--noir) 0%,
-    transparent 20%,
-    transparent 80%,
-    var(--noir) 100%
-  );
-}
-
 #personnages {
   padding: 32px 0 40px 0;
-}
-
-#personnages .image-personnage {
-  width: 50vw;
-  max-width: 600px;
-  flex-shrink: 0;
-}
-
-#personnages .image-personnage:first-of-type {
-  padding-left: max(25vw, calc((100vw - 600px) / 2));
-}
-
-#personnages .image-personnage:last-of-type {
-  padding-right: max(25vw, calc((100vw - 600px) / 2));
 }
 
 #personnages h3 {
   font-size: 0.7em;
   margin: 0 0 32px;
-}
-
-#description-carrousel {
-  padding: 0 16px;
-}
-
-#description-carrousel .contenu-personnage {
-  display: none;
-}
-
-#description-carrousel h4 {
-  margin: 16px 0 0 0;
-  font-size: 0.42em;
-}
-
-#description-carrousel h5 {
-  margin: 0;
-  font-size: 0.6em;
-}
-
-#description-carrousel p {
-  margin: 24px 0 0 0;
-  font-size: 0.42em;
 }
 
 #affiches-visuels {
