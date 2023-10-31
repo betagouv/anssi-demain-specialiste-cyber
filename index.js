@@ -26,6 +26,7 @@ app
     rep.render("index", {
       videoAgir: videoAgirAleatoire(),
       fichesMetiers: metiersAuHasard(3),
+      personnages: tousLesPersonnages(),
     });
   })
   .get("/les-metiers", (req, rep) => {

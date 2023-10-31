@@ -35,10 +35,8 @@ nav {
   width: 100%;
 }
 
-#conteneur-carrousel {
+.conteneur-carrousel {
   background: var(--noir);
-  display: flex;
-  justify-content: center;
   padding-bottom: 50px;
 }
 
