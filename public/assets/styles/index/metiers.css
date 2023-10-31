@@ -29,12 +29,17 @@
   border-bottom: 1px solid var(--noir);
 }
 
+#metiers :is(.fleche-gauche, .fleche-droite) {
+  cursor: pointer;
+}
+
 #metiers .fleche-droite {
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--noir);
 }
+
 #metiers .fleche-droite::after {
   content: "";
   display: block;
