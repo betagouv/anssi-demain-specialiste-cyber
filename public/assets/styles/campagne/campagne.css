@@ -1,7 +1,5 @@
 html {
   scroll-behavior: smooth;
-  --carrousel-decalage-gauche: 0px;
-  --cible-scroll: 0px;
 }
 
 .bloc-noir {
@@ -108,11 +106,6 @@ html {
   width: 50vw;
   max-width: 600px;
   flex-shrink: 0;
-  --z-translate: calc(
-    min(var(--carrousel-decalage-gauche), var(--cible-scroll)) -
-      max(var(--carrousel-decalage-gauche), var(--cible-scroll))
-  );
-  transform: perspective(100vw) translateZ(var(--z-translate));
 }
 
 #personnages .image-personnage:first-of-type {

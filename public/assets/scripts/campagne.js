@@ -14,11 +14,6 @@ $(document).ready(() => {
   $carrouselPersonnage.on("scroll", () => {
     const decalageCourant = $carrouselPersonnage.scrollLeft();
     const idxPersonnageVisible = Math.round(decalageCourant / largeurImage);
-    $("body")[0].style.setProperty(
-      "--carrousel-decalage-gauche",
-      `${decalageCourant}px`,
-    );
-
     $(".contenu-personnage").hide();
     $(
       `.contenu-personnage[data-id-personnage='${idxPersonnageVisible}']`,
@@ -26,9 +21,4 @@ $(document).ready(() => {
   });
 
   $(".contenu-personnage[data-id-personnage='0']").show();
-
-  $("img", $carrouselPersonnage).each(function (idx) {
-    const cibleScroll = idx * largeurImage;
-    $(this).css("--cible-scroll", `${cibleScroll}px`);
-  });
 });
