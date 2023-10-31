@@ -1,5 +1,6 @@
 extends base
 include kit/nav-principale
+include kit/carrousel-personnages
 
 block append styles
   link(href='/assets/styles/index/marque.css', rel='stylesheet')
@@ -35,10 +36,8 @@ block body
       #boite-heros
         img#heros(src='/assets/images/heros.svg' alt="Héros")
 
-  div#conteneur-carrousel.responsive-invisible-tablette
-    img(src='/assets/images/elliot.svg' alt="Personnage Elliot")
-    img(src='/assets/images/leila.svg' alt="Personnage Leila")
-    img(src='/assets/images/alix.svg' alt="Personnage Alix")
+  .responsive-invisible-tablette
+    +carrouselPersonnages(personnages, false, false)
 
   #agir
     h2 Agis pour prévenir les cyberattaques et y répondre
@@ -151,3 +150,5 @@ block body
   .gap
 
   script(type='text/javascript' src='/assets/scripts/index.js')
+  script(id='autoscroll-carrousel-personnages', type='application/json').
+      !{JSON.stringify({autoscroll: true})}

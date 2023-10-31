@@ -1,6 +1,10 @@
 $(document).ready(() => {
   const $carrouselPersonnage = $("#carrousel-personnages");
   const largeurImage = $carrouselPersonnage.find("img").width();
+  const $autoScroll = $("#autoscroll-carrousel-personnages");
+  const { autoscroll = false } = JSON.parse(
+    $autoScroll.text() === "" ? "{}" : $autoScroll.text(),
+  );
 
   const glissePersonnageVers = (sens) => {
     const decalageCourant = $carrouselPersonnage.scrollLeft();
@@ -21,4 +25,14 @@ $(document).ready(() => {
   });
 
   $(".contenu-personnage[data-id-personnage='0']").show();
+
+  if (autoscroll) {
+    setInterval(() => {
+      const estAuDernierSlide =
+        $carrouselPersonnage.scrollLeft() ===
+        $carrouselPersonnage[0].scrollWidth - 2 * largeurImage;
+      if (estAuDernierSlide) $carrouselPersonnage.scrollLeft(0);
+      else glissePersonnageVers(+1);
+    }, 5000);
+  }
 });
