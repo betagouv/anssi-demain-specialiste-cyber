@@ -3,7 +3,7 @@
   padding-bottom: 56px;
 }
 
-#decouvre h2 {
+#decouvre h1 {
   background: var(--jaune);
   margin: 0;
   padding: 40px 16px 63px 16px;
@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-#decouvre.focus-metier h2 {
+#decouvre.focus-metier h1 {
   font-size: 2.85rem;
   padding-bottom: 16px;
 }

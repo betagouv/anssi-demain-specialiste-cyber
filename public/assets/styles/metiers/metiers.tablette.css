@@ -4,7 +4,7 @@
     background: linear-gradient(to bottom, var(--jaune) 370px, #f6f6f6 100px);
   }
 
-  #decouvre h2 {
+  #decouvre h1 {
     width: 550px;
     margin: auto;
   }
@@ -56,7 +56,7 @@
     margin-left: 24px;
   }
 
-  #decouvre.focus-metier h2 {
+  #decouvre.focus-metier h1 {
     font-size: 2.85rem;
     padding-top: 72px;
   }
