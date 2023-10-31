@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-#titre h2 {
+#titre h1 {
   color: white;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@
   font-weight: 700;
 }
 
-#titre h4 {
+#titre h2 {
   color: #ffffff80;
   margin: 0;
   padding: 0;
