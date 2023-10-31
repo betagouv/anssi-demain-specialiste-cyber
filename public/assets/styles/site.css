@@ -47,10 +47,10 @@ button.action:active {
 
 a {
   text-decoration: none;
+  color: white;
 }
 
 a:visited {
-  color: unset;
 }
 
 .carrousel {
