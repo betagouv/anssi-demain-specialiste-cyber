@@ -313,6 +313,7 @@ const videoAgirAleatoire = () => {
 
 const autresMetiers = (id) => donnees.metiers.filter((m) => m.id !== id);
 const leMetier = (id) => donnees.metiers.find((m) => m.id === id);
+const tousLesIdsMetiers = () => donnees.metiers.map((m) => m.id);
 const tousLesMetiers = () => donnees.metiers;
 const tousLesPersonnages = () => donnees.personnages;
 
@@ -333,6 +334,7 @@ module.exports = {
   lesFormationsEnseignant,
   lesRessourcesEnseignant,
   metiersAuHasard,
+  tousLesIdsMetiers,
   tousLesMetiers,
   tousLesPersonnages,
   videoAgirAleatoire,
