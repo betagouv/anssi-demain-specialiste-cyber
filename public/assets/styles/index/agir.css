@@ -10,7 +10,7 @@
   margin: 48px 0;
 }
 
-#agir button.action {
+#agir .action {
   margin: 0 auto 56px auto;
   font-size: 1.45rem !important;
   font-weight: 700 !important;

@@ -17,7 +17,7 @@
     min-height: 87px;
   }
 
-  .formation button.action {
+  .formation .action {
     font-size: 1.428rem;
     line-height: 2.285rem;
   }
@@ -36,7 +36,7 @@
   }
 
   .formation a,
-  .formation button.action {
+  .formation .action {
     align-self: center;
   }
 

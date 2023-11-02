@@ -91,7 +91,7 @@
   color: var(--noir);
 }
 
-#metiers button.action {
+#metiers .action {
   margin: 40px auto;
   font-weight: 700 !important;
   font-size: 1.45rem !important;

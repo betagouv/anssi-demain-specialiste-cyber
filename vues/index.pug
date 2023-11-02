@@ -42,8 +42,7 @@ block body
   #agir
     h2 Agis pour prévenir les cyberattaques et y répondre
     img#agir-video(src=`/assets/videos/${videoAgir}`)
-    a(href="/la-campagne")
-      button.action Découvre la campagne
+    a(href="/la-campagne").action Découvre la campagne
 
   #metiers
     h2 Découvre les métiers des Spécialistes Cyber
@@ -57,8 +56,7 @@ block body
             .identite #{f.identite}
             .metier #{f.metier}
             a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
-    a(href="/les-metiers")
-      button.action Accède aux témoignages
+    a(href="/les-metiers").action Accède aux témoignages
 
   #stats
     .carrousel-navigation.responsive-invisible-tablette
@@ -97,8 +95,7 @@ block body
             .details.
               Résous les énigmes cyber, relève les défis et deviens la "Légende" du web !
               Retrouve tous les défis sur la plateforme TOP !
-          a(href="https://the-osint-project.fr")
-            button.action Accepte le défi !
+          a(href="https://the-osint-project.fr").action Accepte le défi !
         .defi
           img.logo#logo-pix(src='/assets/images/logo-pix.png' alt="PIX")
           div
@@ -108,8 +105,7 @@ block body
               Tu sais reconnaître une page sécurisée ?
               Tu connais l’utilité d’un certificat ? Si tu hésites un peu,
               entraîne-toi sur Pix proposé par l’Éducation nationale.
-          a(href="https://app.pix.fr/campagnes/QKSHQS257")
-            button.action Découvre Pix !
+          a(href="https://app.pix.fr/campagnes/QKSHQS257").action Découvre Pix !
 
   #former
     h2 Commence à te former à la cybersécurité
@@ -121,15 +117,13 @@ block body
           d'information (ANSSI) pour comprendre la base de la
           cybersécurité.
         .action-boite
-          a(href="https://www.ssi.gouv.fr/uploads/2021/09/livret-1-former-a-la-cybersecurite.pdf" target="_blank")
-            button.action Télécharge les fiches
+          a(href="https://www.ssi.gouv.fr/uploads/2021/09/livret-1-former-a-la-cybersecurite.pdf" target="_blank").action Télécharge les fiches
       .formation.responsive-invisible-desktop
         p.
           Dans ce MOOC, tu trouveras des informations pour approfondir
            tes connaissances et agir efficacement sur ta protection numérique.
         .action-boite
-          a(href="https://secnumacademie.gouv.fr/")
-            button.action Découvre le MOOC
+          a(href="https://secnumacademie.gouv.fr/").action Découvre le MOOC
 
       .formation.responsive-visible-desktop
         .titre Des fiches pédagogiques simples pour t’initier à la cybersécurité
@@ -137,15 +131,13 @@ block body
           Télécharge des fiches simples créées par l'Agence nationale de la
           sécurité des systèmes d'information (ANSSI) pour comprendre la base de
           la cybersécurité.
-        a(href="https://www.ssi.gouv.fr/uploads/2021/09/livret-1-former-a-la-cybersecurite.pdf" target="_blank")
-          button.action Télécharge les fiches d’apprentissage
+        a(href="https://www.ssi.gouv.fr/uploads/2021/09/livret-1-former-a-la-cybersecurite.pdf" target="_blank").action Télécharge les fiches d’apprentissage
       .formation.responsive-visible-desktop
         .titre Pour les (déjà) spécialistes, un MOOC très complet sur la cybersécurité
         .details.
           Dans ce MOOC, tu trouveras des informations pour approfondir tes connaissances et
            agir efficacement sur ta protection numérique.
-        a(href="https://secnumacademie.gouv.fr/")
-          button.action Découvre le MOOC
+        a(href="https://secnumacademie.gouv.fr/").action Découvre le MOOC
 
   .gap
 

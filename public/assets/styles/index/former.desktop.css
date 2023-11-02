@@ -15,7 +15,7 @@
   }
 
   .formation a,
-  .formation button.action {
+  .formation .action {
     margin-top: auto;
   }
 
@@ -37,13 +37,13 @@
     font-size: 1.143rem;
     line-height: 1.714rem;
   }
-  .formation button.action {
+  .formation .action {
     background: var(--noir);
     color: white;
     margin-top: auto;
   }
 
-  .formation button.action::after {
+  .formation .action::after {
     background: url(../../images/lien-externe.svg) no-repeat center;
   }
 
