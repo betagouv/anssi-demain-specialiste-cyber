@@ -20,6 +20,7 @@ app.set("views", "./vues");
 app.use(express.static("public"));
 
 app.use(middleware.patienteJusqueMep);
+app.use(middleware.protectionLimiteTrafic());
 
 app
   .get("/", (req, rep) => {
