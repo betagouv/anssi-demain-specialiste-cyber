@@ -62,7 +62,8 @@ app
   .get("/politique-confidentialite", (req, rep) =>
     rep.render("politique-confidentialite"),
   )
-  .get("/a-propos", (req, rep) => rep.render("a-propos"));
+  .get("/a-propos", (req, rep) => rep.render("a-propos"))
+  .get("/accessibilite", (req, rep) => rep.render("accessibilite"));
 
 app.listen(port, () => {
   console.log(
