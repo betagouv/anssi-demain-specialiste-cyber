@@ -24,7 +24,7 @@ body {
   transform: translateX(-12px) translateY(-12px);
 }
 
-button.action {
+.action {
   display: flex;
   align-items: center;
   padding: 10px 24px 14px 24px;
@@ -37,11 +37,11 @@ button.action {
   font-weight: bold;
 }
 
-button.action:hover {
+.action:hover {
   background: #234c9a !important;
 }
 
-button.action:active {
+.action:active {
   background: #252d5e !important;
 }
 

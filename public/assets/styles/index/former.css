@@ -39,7 +39,7 @@
   background: linear-gradient(to bottom, #2b2c3f 63%, var(--noir) 50%);
 }
 
-.formation button.action {
+.formation .action {
   background: white;
   color: var(--noir);
   font-size: 1.285rem;
@@ -47,7 +47,7 @@
   font-weight: 700;
   margin: auto;
 }
-.formation button.action::after {
+.formation .action::after {
   display: inline-block;
   content: "";
   width: 24px;

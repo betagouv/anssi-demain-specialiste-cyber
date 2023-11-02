@@ -16,7 +16,7 @@
     margin: 64px 0;
   }
 
-  #agir button.action {
+  #agir .action {
     margin-bottom: 80px;
   }
 }

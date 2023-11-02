@@ -47,7 +47,7 @@
   font-size: 1.143rem;
   line-height: 1.714rem;
 }
-.defi button.action {
+.defi .action {
   font-weight: 700;
   font-size: 1.428rem;
   width: fit-content;
@@ -55,7 +55,7 @@
   margin: auto;
   padding: 10px 24px 14px 24px;
 }
-.defi button.action::after {
+.defi .action::after {
   display: inline-block;
   content: "";
   width: 24px;

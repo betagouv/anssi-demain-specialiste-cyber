@@ -51,7 +51,7 @@
     padding: 0;
     margin: 0;
   }
-  .mais-aussi button.action {
+  .mais-aussi .action {
     min-width: 270px;
     margin-left: 24px;
   }

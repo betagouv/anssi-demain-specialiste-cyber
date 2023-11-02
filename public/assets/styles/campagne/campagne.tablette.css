@@ -61,7 +61,7 @@
     font-weight: 500;
   }
 
-  #telechargement-kit :is(a, button) {
+  #telechargement-kit :is(a, .action) {
     width: 100%;
   }
 

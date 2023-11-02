@@ -89,13 +89,13 @@
 .mais-aussi .action-boite {
   background: linear-gradient(to bottom, #f6f6f6 40%, white 10%);
 }
-.mais-aussi button.action {
+.mais-aussi .action {
   font-size: 1.285rem;
   line-height: 2rem;
   font-weight: 700;
   margin: auto;
 }
-.mais-aussi button.action::after {
+.mais-aussi .action::after {
   display: inline-block;
   content: "";
   width: 24px;
