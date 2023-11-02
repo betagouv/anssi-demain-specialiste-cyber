@@ -24,7 +24,7 @@ const donnees = {
       ],
     },
     {
-      id: "coordSecu",
+      id: "coordinatriceSecurite",
       idVideo: "pentester",
       metier: "Coordinatrice sécurité",
       identite: "Juliette",
@@ -39,7 +39,7 @@ const donnees = {
       metiersProches: ["Relais cybersécurité"],
     },
     {
-      id: "archiSecu",
+      id: "architecteSecurite",
       idVideo: "pentester",
       metier: "Architecte sécurité",
       identite: "Sandra et Matthieu",
@@ -118,7 +118,7 @@ const donnees = {
       ],
     },
     {
-      id: "formatriceCybe",
+      id: "formatriceCyber",
       idVideo: "pentester",
       metier: "Formatrice en cybersécurité",
       identite: "Maryline",
@@ -149,7 +149,7 @@ const donnees = {
       metiersProches: [],
     },
     {
-      id: "evaluatriceSecu",
+      id: "evaluatriceSecurite",
       idVideo: "pentester",
       metier: "Évaluatrice de la sécurité des technologies de l'information",
       identite: "Anne",
