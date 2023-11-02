@@ -9,8 +9,10 @@ const {
   tousLesPersonnages,
   lesRessourcesEnseignant,
   lesFormationsEnseignant,
+  tousLesIdsMetiers,
 } = require("./referentiel");
 const middleware = require("./middleware");
+const { query, validationResult } = require("express-validator");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,13 +32,21 @@ app
       personnages: tousLesPersonnages(),
     });
   })
-  .get("/les-metiers", (req, rep) => {
-    const { metier: idMetier } = req.query;
-    rep.render("metiers", {
-      fichesMetiers: idMetier ? autresMetiers(idMetier) : tousLesMetiers(),
-      ...(idMetier && { focusMetier: leMetier(idMetier) }),
-    });
-  })
+  .get(
+    "/les-metiers",
+    [query("metier").isString().trim().isIn(tousLesIdsMetiers())],
+    (req, rep) => {
+      const donneesReponse = {
+        fichesMetiers: tousLesMetiers(),
+      };
+      const { metier: idMetier } = req.query;
+      if (!validationResult(req).errors.length) {
+        donneesReponse.fichesMetiers = autresMetiers(idMetier);
+        donneesReponse.focusMetier = leMetier(idMetier);
+      }
+      rep.render("metiers", donneesReponse);
+    },
+  )
   .get("/espace-enseignant", (req, rep) => {
     rep.render("espace-enseignant", {
       ressources: lesRessourcesEnseignant(),
