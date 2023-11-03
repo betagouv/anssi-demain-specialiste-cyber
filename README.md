@@ -11,11 +11,20 @@ C'est ce qui explique l'organisation type « mono-repo » et l'utilisation de `p
 
 ## Pour le développement
 
+L'installation de l'environnement local se fait via le script dédié :
+
+```sh
+$ ./scripts/installation-dev.sh
+```
+
+Le lancement se fait via le script dédié :
+
+```sh
+$ ./scripts/start-dev.sh
+```
+
+C'est `concurrently` qui est utilisé pour lancer les 2 serveurs web. Il faudra accepter de l'installer lors de la première exécution du script.
+
 ### Généralités
 
 - Prettier est exécuté en `pre-commit hook`.
-- Pour développer en local, `concurrently` est utilisé pour lancer à la fois l'app et le serveur de média :
-
-```sh
-$ npm run start:dev
-```
