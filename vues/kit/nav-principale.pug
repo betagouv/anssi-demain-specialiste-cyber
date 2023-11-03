@@ -103,17 +103,18 @@ block append styles
 
 mixin navPrincipale(estClair = false)
   - const suffixeCouleur = estClair ? '' : '-dark'
-  nav.principale
-    a(href="/")
-      img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg` alt="Retour à l'accueil")
-    .responsive-invisible-desktop#burger
-      img(src=`/assets/images/menu-burger${suffixeCouleur}.svg` alt="Menu burger")
-    .responsive-invisible-desktop#menu-burger
-      img#fermeture-menu(src='/assets/images/croix-fermeture.svg' alt="Croix de fermeture")
-      a(href="/les-metiers") Découvrir les métiers
-      a(href="/la-campagne") Zoom sur la campagne
-      a(href="/espace-enseignant") Espace enseignant
-    .responsive-visible-desktop#menu-desktop
-      a(href='les-metiers') Découvrez les métiers
-      a(href="/la-campagne") Zoom sur la campagne
-      a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant') Espace enseignant
+  header
+    nav.principale
+      a(href="/")
+        img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg` alt="Retour à l'accueil")
+      .responsive-invisible-desktop#burger
+        img(src=`/assets/images/menu-burger${suffixeCouleur}.svg` alt="Menu burger")
+      .responsive-invisible-desktop#menu-burger
+        img#fermeture-menu(src='/assets/images/croix-fermeture.svg' alt="Croix de fermeture")
+        a(href="/les-metiers") Découvrir les métiers
+        a(href="/la-campagne") Zoom sur la campagne
+        a(href="/espace-enseignant") Espace enseignant
+      .responsive-visible-desktop#menu-desktop
+        a(href='les-metiers') Découvrez les métiers
+        a(href="/la-campagne") Zoom sur la campagne
+        a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant') Espace enseignant
