@@ -112,8 +112,8 @@ mixin lienNavigation(url, titre, pageCourante)
 
 mixin navPrincipale(estClair = false, pageCourante = false)
   - const suffixeCouleur = estClair ? '' : '-dark'
-  header(aria-role="banner")
-    nav.principale(aria-role="navigation" aria-label="Menu principal")
+  header(role="banner")
+    nav.principale(role="navigation" aria-label="Menu principal")
       a(href="/")
         img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg` alt="Retour à l'accueil")
       .responsive-invisible-desktop#burger
