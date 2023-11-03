@@ -55,6 +55,11 @@ block append styles
           height: 20px;
     }
 
+    :is(#menu-burger, #menu-desktop) ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
     @media screen and (min-width: 768px) {
       #menu-burger {
         width: calc(100vw - 64px);
@@ -74,11 +79,11 @@ block append styles
         padding-bottom: 12px;
       }
 
-      #menu-desktop {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        column-gap: 28px;
+      #menu-desktop ul {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          column-gap: 28px;
       }
 
       #menu-desktop a {
@@ -101,20 +106,27 @@ block append styles
       }
     }
 
-mixin navPrincipale(estClair = false)
+mixin lienNavigation(url, titre, pageCourante)
+  li
+    a(href=url aria-current=`${pageCourante === url ? 'page' : 'false'}`)= titre
+
+mixin navPrincipale(estClair = false, pageCourante = false)
   - const suffixeCouleur = estClair ? '' : '-dark'
   header
-    nav.principale
+    nav.principale(role="navigation" aria-label="Menu principal")
       a(href="/")
         img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg` alt="Retour à l'accueil")
       .responsive-invisible-desktop#burger
         img(src=`/assets/images/menu-burger${suffixeCouleur}.svg` alt="Menu burger")
       .responsive-invisible-desktop#menu-burger
         img#fermeture-menu(src='/assets/images/croix-fermeture.svg' alt="Croix de fermeture")
-        a(href="/les-metiers") Découvrir les métiers
-        a(href="/la-campagne") Zoom sur la campagne
-        a(href="/espace-enseignant") Espace enseignant
+        ul
+          +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
+          +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
+          +lienNavigation("/espace-enseignant", "Espace enseignant", pageCourante)
       .responsive-visible-desktop#menu-desktop
-        a(href='les-metiers') Découvrez les métiers
-        a(href="/la-campagne") Zoom sur la campagne
-        a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant') Espace enseignant
+        ul
+          +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
+          +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
+          li
+            a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant' aria-current=`${pageCourante === "/espace-enseignant" ? 'page' : 'false'}`) Espace enseignant
