@@ -86,6 +86,18 @@ block append styles
           column-gap: 28px;
       }
 
+      #menu-desktop ul li {
+          padding: 4px 8px;
+      }
+
+      #menu-desktop ul li:hover {
+          background: var(--noir);
+      }
+
+      #menu-desktop ul.-dark li:hover {
+          background: #f6f6f6;
+      }
+
       #menu-desktop a {
         text-decoration: none;
         color: var(--noir);
@@ -125,7 +137,7 @@ mixin navPrincipale(estClair = false, pageCourante = false)
           +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
           +lienNavigation("/espace-enseignant", "Espace enseignant", pageCourante)
       .responsive-visible-desktop#menu-desktop
-        ul
+        ul(class=suffixeCouleur)
           +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
           +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
           li
