@@ -95,17 +95,17 @@ block append styles
       }
 
 block append script
-  script(type='text/javascript' src='/assets/scripts/carrousel-personnages.js')
+  script(src='/assets/scripts/carrousel-personnages.js')
 
 mixin carrouselPersonnages(personnages, avecFleches = true, avecDescription = true, rotationAutomatique = false)
-  .conteneur-carrousel(aria-role="region" aria-roledescription="carousel" aria-label="Personnages de la campagne")
+  .conteneur-carrousel(role="region" aria-roledescription="carousel" aria-label="Personnages de la campagne")
     .carrousel#carrousel-personnages(aria-atomic=false aria-live=(rotationAutomatique ? 'off' : 'polite'))
         each p in personnages
           img(
             src=`/assets/images/personnages/${p.idImage}.svg`
             alt=""
             tabindex="0"
-            aria-role="group"
+            role="group"
             aria-roledescription="slide"
             aria-label=p.nom
           ).image-personnage
