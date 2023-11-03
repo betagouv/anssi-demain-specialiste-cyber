@@ -13,6 +13,8 @@ html(lang = 'fr', xml:lang = 'fr', xmlns = 'http://www.w3.org/1999/xhtml')
   block script
     script(src='/assets/librairies/jquery-3.7.1.min.js')
     script(src='/assets/scripts/nav-principale.js')
+    if(process.env.MATOMO_SITE_ID)
+      script(src='/assets/scripts/matomo.js' id="script-matomo" data-site-id=process.env.MATOMO_SITE_ID)
 
   block title
     title DemainSpécialisteCyber
