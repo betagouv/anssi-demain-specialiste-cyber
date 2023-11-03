@@ -56,7 +56,10 @@
 
   #focus-metier .conteneur-image {
     display: unset;
-    width: 40%;
     text-align: end;
+  }
+
+  #focus-metier video {
+    width: 484px;
   }
 }
