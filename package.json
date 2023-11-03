@@ -15,12 +15,9 @@
   },
   "homepage": "https://github.com/betagouv/anssi-demain-specialiste-cyber#readme",
   "scripts": {
-    "prepare": "husky install",
     "start:dev": "concurrently -p \"[{name}]\" -n \"APP,MEDIA\" \"npm run start:dev -w app\" \"npm run start:dev -w media\""
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "husky": "^8.0.3",
-    "prettier": "3.0.3"
+    "concurrently": "^8.2.2"
   }
 }

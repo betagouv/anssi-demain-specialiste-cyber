@@ -4,6 +4,7 @@
   "description": "Site web vitrine de la campagne « Demain Spécialiste Cyber »",
   "main": "index.js",
   "scripts": {
+    "prepare": "cd ../ && husky install ./app/.husky",
     "start": "node index.js",
     "start:dev": "nodemon index.js"
   },
@@ -12,7 +13,9 @@
   },
   "devDependencies": {
     "lint-staged": "^14.0.1",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "husky": "^8.0.3",
+    "prettier": "3.0.3"
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
