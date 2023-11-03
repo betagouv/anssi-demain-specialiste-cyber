@@ -38,7 +38,7 @@ block body
     if(focusMetier)
         #focus-metier
           .conteneur-image
-            img(src=`/assets/videos/fiche-metier-video-${focusMetier.idVideo}-placeholder.png`)
+            img(src=process.env.URL_SERVEUR_MEDIA + `/videos/fiche-metier-video-${focusMetier.idVideo}-placeholder.png`)
           .details
             .identite #{focusMetier.identite}
             .metier #{focusMetier.metier}
@@ -61,7 +61,7 @@ block body
           +maisAussiMobile()
 
         .fiche-metier
-          img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png` alt=`Photo de profil de ${f.identite}`)
+          img(src=process.env.URL_SERVEUR_MEDIA + `/videos/fiche-metier-video-${f.idVideo}-placeholder.png` alt=`Photo de profil de ${f.identite}`)
           .details
             .identite #{f.identite}
             .metier #{f.metier}

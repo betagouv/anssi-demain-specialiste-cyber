@@ -41,7 +41,7 @@ block body
 
   #agir
     h2 Agis pour prévenir les cyberattaques et y répondre
-    img#agir-video(src=`/assets/videos/${videoAgir}`)
+    img#agir-video(src=process.env.URL_SERVEUR_MEDIA  + `/videos/${videoAgir}`)
     a(href="/la-campagne").action Découvre la campagne
 
   #metiers
@@ -52,7 +52,7 @@ block body
     #carrousel-fiches-metiers.carrousel
         each f in fichesMetiers
           .fiche-metier
-            img(src=`/assets/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
+            img(src=process.env.URL_SERVEUR_MEDIA  + `/videos/fiche-metier-video-${f.idVideo}-placeholder.png`)
             .identite #{f.identite}
             .metier #{f.metier}
             a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
