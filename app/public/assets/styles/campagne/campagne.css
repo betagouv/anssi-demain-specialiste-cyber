@@ -50,12 +50,16 @@ html {
 
 #personnages h3 {
   font-size: 0.7em;
-  margin: 0 0 32px;
+  margin: 0;
 }
 
 #affiches-visuels {
   background: #f6f6f6;
-  padding-top: 56px;
+}
+
+#affiches-visuels .gap {
+  background: #f6f6f6;
+  height: 56px;
 }
 
 #affiches-visuels h3 {
@@ -73,7 +77,7 @@ html {
 }
 
 #lien-kit {
-  padding: 32px 0;
+  padding: 24px 0 32px 0;
   background: linear-gradient(to bottom, #f6f6f6 45%, white 45%);
   display: flex;
   justify-content: center;
