@@ -23,16 +23,27 @@
   #affiches-visuels {
     display: flex;
     gap: 60px;
-    padding: 64px 120px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 64px 0;
     background: white;
+  }
+
+  #affiches-visuels h3 {
+    text-align: left;
+    max-width: 384px;
   }
 
   #videos-metiers {
     padding: 80px 120px;
+    display: flex;
+    flex-direction: column;
   }
 
-  #videos-metiers img {
-    margin-bottom: 42px;
+  #videos-metiers img,
+  #videos-metiers video {
+    max-width: 1200px;
+    margin: auto auto 42px;
   }
 
   #videos-metiers .conteneur-action:last-of-type {
