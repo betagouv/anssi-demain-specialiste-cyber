@@ -60,12 +60,11 @@ block body
         if(index > 0 && index % 3 === 0)
           +maisAussiMobile()
 
-        .fiche-metier
+        a(href=`/les-metiers?metier=${f.id}` title=`En savoir plus sur le métier de ${f.metier}`).fiche-metier
           img(src=process.env.URL_SERVEUR_MEDIA + `/videos/fiche-metier-video-pentester-placeholder.png` alt=`Photo de profil de ${f.identite}`)
           .details
             .identite #{f.identite}
             .metier #{f.metier}
-            a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
 
     +maisAussiMobile()
     +maisAussiTablette()
