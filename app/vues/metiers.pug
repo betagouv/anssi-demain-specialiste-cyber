@@ -38,7 +38,7 @@ block body
     if(focusMetier)
         #focus-metier
           .conteneur-image
-            video(src=process.env.URL_SERVEUR_MEDIA + `/videos/${focusMetier.idVideo}_1080p.mp4` controls)
+            video(src=process.env.URL_SERVEUR_MEDIA + `/videos/${focusMetier.idVideo}_720p.mp4` controls)
           .details
             .identite #{focusMetier.identite}
             .metier #{focusMetier.metier}
