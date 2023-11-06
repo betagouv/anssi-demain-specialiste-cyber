@@ -13,6 +13,17 @@
   #conteneur-marque {
     margin-top: 70px;
   }
+
+  #conteneur-marque h1 {
+    font-size: 5vw;
+    line-height: 5vw;
+  }
+
+  #conteneur-marque h1:before, #conteneur-marque h1 span:last-of-type:after {
+    width: 2.3vw;
+    height: 4.1vw;
+    vertical-align: bottom;
+  }
 }
 
 @media screen and (min-width: 1200px) {

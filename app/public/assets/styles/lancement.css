@@ -2,6 +2,7 @@ body {
   background: url(../images/lancement.svg) var(--noir) no-repeat top;
   background-size: cover;
   color: white;
+  --facteur-taille: 14vw;
 }
 
 nav {
@@ -20,6 +21,42 @@ nav {
   max-width: 500px;
 }
 
+#boite-marque h1 {
+  margin-top: 30px;
+  text-transform: uppercase;
+  font-size: var(--facteur-taille);
+  font-weight: bold;
+  line-height: var(--facteur-taille);
+  margin-bottom: 0;
+}
+
+#boite-marque h1 span:first-of-type {
+  text-align: center;
+}
+
+#boite-marque h1 span:last-of-type {
+  text-align: right;
+}
+
+#boite-marque h1:before, #boite-marque h1 span:last-of-type:after {
+  content: '';
+  display: inline-block;
+  background: url("/assets/images/chevron-titre.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: calc(var(--facteur-taille) * 0.39);
+  height: calc(var(--facteur-taille) * 0.71);
+  vertical-align: bottom;
+}
+
+#boite-marque h1:before {
+  margin-right: 8px;
+}
+
+#boite-marque h1 span:last-of-type:after {
+  margin-left: 8px;
+}
+
 #bloc-marque {
   width: 100%;
 }
@@ -32,18 +69,16 @@ h2 {
   padding-top: 30px;
 }
 
-h2::after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
-
-h1 {
+h3 {
   text-align: center;
   font-size: 3.8rem;
 }
 
 @media screen and (min-width: 532px) {
+  body {
+    --facteur-taille: 10vw;
+  }
+
   h2 {
     font-size: 1.4rem;
   }
@@ -56,12 +91,27 @@ h1 {
     font-size: 5rem;
   }
 }
+@media screen and (min-width: 1024px) {
+  body {
+    --facteur-taille: 8vw;
+  }
+}
 @media screen and (min-width: 1220px) {
+  body {
+    --facteur-taille: 6vw;
+  }
+
   nav {
     max-width: 1200px;
     margin: auto;
   }
   .marianne {
     transform: translateX(-12px);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  body {
+    --facteur-taille: 5vw;
   }
 }
