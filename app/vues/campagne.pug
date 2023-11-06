@@ -38,12 +38,18 @@ block body
         a(href="" target="_blank").action Télécharge le kit de communication
     #videos-metiers
       h3 Découvre leurs métiers en vidéo
-      img(src=process.env.URL_SERVEUR_MEDIA + "/videos/agir-video-1-placeholder.png")
+      video(
+        src=process.env.URL_SERVEUR_MEDIA + "/videos/Cybersecurite_01_1080p.mp4"
+        controls
+        poster=process.env.URL_SERVEUR_MEDIA + "/videos/agir-video-1-placeholder.png")
       .conteneur-action.responsive-invisible-tablette
         button.action.action-copier Copier le lien
       .conteneur-action.responsive-visible-tablette
         button.action.action-copier Copier le lien de cette vidéo
-      img(src=process.env.URL_SERVEUR_MEDIA + "/videos/agir-video-2-placeholder.png")
+      video(
+        src=process.env.URL_SERVEUR_MEDIA + "/videos/Cybersecurite_02_1080p.mp4"
+        controls
+        poster=process.env.URL_SERVEUR_MEDIA + "/videos/agir-video-2-placeholder.png")
       .conteneur-action.responsive-invisible-tablette
         button.action.action-copier Copier le lien
       .conteneur-action.responsive-visible-tablette

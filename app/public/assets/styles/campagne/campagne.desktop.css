@@ -40,7 +40,6 @@
     flex-direction: column;
   }
 
-  #videos-metiers img,
   #videos-metiers video {
     max-width: 1200px;
     margin: auto auto 42px;
