@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "cd ../ && husky install ./app/.husky",
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon --inspect=9229 index.js "
   },
   "engines": {
     "node": "^18"
