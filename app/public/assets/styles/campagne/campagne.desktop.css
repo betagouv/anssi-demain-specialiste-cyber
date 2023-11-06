@@ -22,6 +22,7 @@
 
   #affiches-visuels {
     display: flex;
+    align-items: center;
     gap: 60px;
     max-width: 1200px;
     margin: auto;
@@ -32,6 +33,8 @@
   #affiches-visuels h3 {
     text-align: left;
     max-width: 384px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   #videos-metiers {

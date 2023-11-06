@@ -39,30 +39,45 @@
   }
 
   #affiches-visuels {
-    padding-top: 80px;
+    padding-top: 32px;
+    padding-bottom: 40px;
+    background: white;
+  }
+
+  .gap {
+    height: 80px;
+    background: #f6f6f6;
   }
 
   #affiches-visuels h3 {
     font-size: 4em;
-    padding: 32px 0 64px 0;
+    padding-top: 32px;
+    padding-bottom: 64px;
+    margin: 0;
   }
 
   #telechargement-kit {
     display: flex;
     flex-direction: row;
-    padding: 8px 16px;
-    gap: 24px;
+    margin: 0 16px;
     align-items: center;
+    background: linear-gradient(to right, #f6f6f6 75%, white 0%);
+    min-height: 88px;
   }
 
   #telechargement-kit p {
-    width: 75%;
-    margin: 0 0 0 16px;
+    padding: 8px 24px 8px 16px;
+    margin: 0;
     font-weight: 500;
+    line-height: 1.714rem;
   }
 
-  #telechargement-kit :is(a, .action) {
-    width: 100%;
+  #telechargement-kit .action {
+    width: 345px;
+    flex-shrink: 0;
+    font-size: 1.428rem;
+    font-weight: 700;
+    line-height: 2.285rem;
   }
 
   #videos-metiers h3 {
