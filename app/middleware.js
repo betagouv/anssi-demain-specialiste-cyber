@@ -2,10 +2,14 @@ const rateLimit = require("express-rate-limit");
 const { environnement } = require("./environnement");
 
 const patienteJusqueMep = (requete, reponse, suite) => {
+  const { query } = requete;
+
   const ajd = new Date();
   const mep = environnement().dateDeMep();
+  const doitPatienter = ajd < mep;
+  const coupeFile = environnement().peutCoupeFileDateDeMep(query["coupe-file"]);
 
-  if (ajd < mep) {
+  if (doitPatienter && !coupeFile) {
     reponse.render("lancement", { dateDeMep: environnement().dateDeMep() });
     return;
   }
