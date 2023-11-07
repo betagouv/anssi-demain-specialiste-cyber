@@ -53,11 +53,22 @@ footer .partenaires {
   margin-top: 24px;
 }
 
+footer .partenaires p {
+  margin: 0;
+  text-align: left;
+}
+
 footer .partenaires .galerie {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+footer .partenaires .galerie a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer .partenaires img {
