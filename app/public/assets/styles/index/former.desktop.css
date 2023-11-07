@@ -2,7 +2,7 @@
   #former {
     padding-top: 64px;
     padding-bottom: 64px;
-    background: url(../../images/lancement.svg) var(--noir) no-repeat center;
+    background: url("/assets/images/lancement.svg") var(--noir) no-repeat center;
     background-size: 4000px;
   }
 
@@ -44,7 +44,7 @@
   }
 
   .formation .action::after {
-    background: url(../../images/lien-externe.svg) no-repeat center;
+    background: url("/assets/images/lien-externe.svg") no-repeat center;
   }
 
   .gap {

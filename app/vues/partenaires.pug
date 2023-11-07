@@ -6,9 +6,10 @@ block title
   title Les contributeurs | DemainSpécialisteCyber
 
 block append styles
-  link(href='/assets/styles/partenaires/partenaires.css', rel='stylesheet')
-  link(href='/assets/styles/partenaires/partenaires.tablette.css', rel='stylesheet')
-  link(href='/assets/styles/partenaires/partenaires.desktop.css', rel='stylesheet')
+  style
+    include ../public/assets/styles/partenaires/partenaires.css
+    include ../public/assets/styles/partenaires/partenaires.tablette.css
+    include ../public/assets/styles/partenaires/partenaires.desktop.css
 
 block body
   +navPrincipale()
