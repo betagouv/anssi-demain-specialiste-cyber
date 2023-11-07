@@ -69,6 +69,7 @@
   font-size: 1.285rem;
   font-weight: 700;
   line-height: 1.714rem;
+  color: var(--noir);
 }
 
 .ressource .detail {

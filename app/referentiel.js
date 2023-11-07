@@ -179,16 +179,16 @@ const donnees = {
         },
         {
           nom: "Organiser un hackaton CyberEnjeux dans votre établissement pour former vos élèves par la création de jeux",
-          fichier: "PDF – 61,88 Ko",
-          url: "#",
-          classe: "telechargement",
+          fichier: "Accéder à Framaforms",
+          url: "https://framaforms.org/cyberenjeux-demande-de-kit-et-declaration-devenement-1686310460",
+          classe: "site",
         },
         {
           nom: "Découvrez plus d’informations sur Eduscol",
           details:
             "Eduscol la page éducation et cybersécurité du Ministère de l’Éducation Nationale et de la Jeunesse",
           fichier: "Accéder à Eduscol",
-          url: "#",
+          url: "https://eduscol.education.fr/3679/education-et-cybersecurite",
           classe: "site",
         },
       ],
@@ -199,15 +199,15 @@ const donnees = {
       ressources: [
         {
           nom: "Panorama des métiers de la cybersécurité",
-          fichier: "PDF – 61,88 Ko",
-          url: "#",
-          classe: "telechargement",
+          fichier: "Accéder au panorama",
+          url: "https://www.ssi.gouv.fr/uploads/2021/10/anssi-panorama_metiers_cybersecurite-2020.pdf",
+          classe: "site",
         },
         {
-          nom: "Référentiel des compétences des métiers de la cybersécurité (PDF)",
-          fichier: "PDF – 61,88 Ko",
-          url: "#",
-          classe: "telechargement",
+          nom: "Référentiel des compétences des métiers de la cybersécurité",
+          fichier: "Accéder au référentiel",
+          url: "https://campuscyber.fr/resources/referentiel-des-competences-des-metiers-de-la-cyber/",
+          classe: "site",
         },
       ],
     },
@@ -219,7 +219,7 @@ const donnees = {
           details:
             "Sur son site l’ANSSI répertorie toutes les formations cyber labelisées, n’hésitez pas à en prendre connaissances pour en parler à vos élèves.",
           fichier: "Accéder aux formations cyber labelisées ",
-          url: "#",
+          url: "https://cyber.gouv.fr/formations",
           classe: "site",
         },
       ],
@@ -229,14 +229,14 @@ const donnees = {
     {
       nom: "Trouvez des formations sur le numérique et la cyber sur la plateforme M@gistère.",
       fichier: "Accèdez à M@gistère",
-      url: "#",
-      classe: "telechargement",
+      url: "https://magistere.education.fr/dgesco/course/view.php?id=2646https://magistere.education.fr/dgesco/course/view.php?id=2646",
+      classe: "site",
     },
     {
       nom: "Développez vos compétences et vos connaissances sur la cybersécurité.",
       fichier: "Accèdez au MOOC",
-      url: "#",
-      classe: "telechargement",
+      url: "https://secnumacademie.gouv.fr/",
+      classe: "site",
     },
   ],
   personnages: [
