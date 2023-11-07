@@ -5,11 +5,13 @@ html(lang = 'fr', xml:lang = 'fr', xmlns = 'http://www.w3.org/1999/xhtml')
   each taille in [16, 24, 48, 96, 144]
     link(rel="icon" href=`/assets/favicon/favicon_${taille}.png` sizes=`${taille}x${taille}` type="image/png")
   block styles
-    link(href='/assets/styles/fonts.css', rel='stylesheet')
-    link(href='/assets/styles/site.css', rel='stylesheet')
-    link(href='/assets/styles/footer.css', rel='stylesheet')
-    link(href='/assets/styles/footer.tablette.css', rel='stylesheet')
-    link(href='/assets/styles/footer.desktop.css', rel='stylesheet')
+    style
+      include ../public/assets/styles/fonts.css
+      include ../public/assets/styles/site.css
+      include ../public/assets/styles/footer.css
+      include ../public/assets/styles/footer.tablette.css
+      include ../public/assets/styles/footer.desktop.css
+
   block script
     script(src='/assets/librairies/jquery-3.7.1.min.js')
     script(src='/assets/scripts/nav-principale.js')

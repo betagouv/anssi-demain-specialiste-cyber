@@ -7,9 +7,10 @@ block title
   title Zoom sur la campagne | DemainSpécialisteCyber
 
 block append styles
-  link(href='/assets/styles/campagne/campagne.css', rel='stylesheet')
-  link(href='/assets/styles/campagne/campagne.tablette.css', rel='stylesheet')
-  link(href='/assets/styles/campagne/campagne.desktop.css', rel='stylesheet')
+  style
+    include ../public/assets/styles/campagne/campagne.css
+    include ../public/assets/styles/campagne/campagne.tablette.css
+    include ../public/assets/styles/campagne/campagne.desktop.css
 
 block append script
   script(src='/assets/scripts/campagne.js')

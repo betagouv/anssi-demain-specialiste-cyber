@@ -1,6 +1,6 @@
 #marque {
   padding: 0 16px;
-  background: url(../../images/lancement.svg) var(--noir) no-repeat center;
+  background: url("/assets/images/lancement.svg") var(--noir) no-repeat center;
   background-size: cover;
   background-position-x: calc(0.19 * 100vw - 30px);
   color: white;
@@ -33,8 +33,9 @@ nav {
   text-align: right;
 }
 
-#marque h1:before, #marque h1 span:last-of-type:after {
-  content: '';
+#marque h1:before,
+#marque h1 span:last-of-type:after {
+  content: "";
   display: inline-block;
   background: url("/assets/images/chevron-titre.svg");
   background-size: contain;

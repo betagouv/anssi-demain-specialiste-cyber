@@ -38,7 +38,7 @@ footer .sites-gouv a::after {
   width: 16px;
   height: 16px;
   margin-left: 2px;
-  background: url("../images/lien-externe-dsfr.svg") no-repeat center;
+  background: url("/assets/images/lien-externe-dsfr.svg") no-repeat center;
 }
 
 footer .partenaires {
@@ -128,6 +128,6 @@ footer .licence a::after {
   width: 16px;
   height: 16px;
   margin-left: 2px;
-  background: url("../images/lien-externe-dsfr.svg") no-repeat center;
+  background: url("/assets/images/lien-externe-dsfr.svg") no-repeat center;
   transform: translateY(3px);
 }

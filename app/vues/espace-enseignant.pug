@@ -6,9 +6,10 @@ block title
   title Espace enseignant | DemainSpécialisteCyber
 
 block append styles
-  link(href='/assets/styles/espace-enseignant/espace-enseignant.css', rel='stylesheet')
-  link(href='/assets/styles/espace-enseignant/espace-enseignant.tablette.css', rel='stylesheet')
-  link(href='/assets/styles/espace-enseignant/espace-enseignant.desktop.css', rel='stylesheet')
+  style
+    include ../public/assets/styles/espace-enseignant/espace-enseignant.css
+    include ../public/assets/styles/espace-enseignant/espace-enseignant.tablette.css
+    include ../public/assets/styles/espace-enseignant/espace-enseignant.desktop.css
 
 block body
   +navPrincipale(false, "/espace-enseignant")

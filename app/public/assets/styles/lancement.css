@@ -1,5 +1,5 @@
 body {
-  background: url(../images/lancement.svg) var(--noir) no-repeat top;
+  background: url("/assets/images/lancement.svg") var(--noir) no-repeat top;
   background-size: cover;
   color: white;
   --facteur-taille: 14vw;
@@ -38,12 +38,12 @@ nav {
   text-align: right;
 }
 
-#boite-marque h1:before, #boite-marque h1 span:last-of-type:after {
-  content: '';
+#boite-marque h1:before,
+#boite-marque h1 span:last-of-type:after {
+  content: "";
   display: inline-block;
-  background: url("/assets/images/chevron-titre.svg");
+  background: url("/assets/images/chevron-titre.svg") no-repeat;
   background-size: contain;
-  background-repeat: no-repeat;
   width: calc(var(--facteur-taille) * 0.39);
   height: calc(var(--facteur-taille) * 0.71);
   vertical-align: bottom;

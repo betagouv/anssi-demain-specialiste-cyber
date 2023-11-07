@@ -7,9 +7,10 @@ block title
   title Mentions légales | DemainSpécialisteCyber
 
 block append styles
-  link(href='/assets/styles/contenu-informatif/contenu-informatif.css', rel='stylesheet')
-  link(href='/assets/styles/contenu-informatif/contenu-informatif.tablette.css', rel='stylesheet')
-  link(href='/assets/styles/contenu-informatif/contenu-informatif.desktop.css', rel='stylesheet')
+  style
+    include ../public/assets/styles/contenu-informatif/contenu-informatif.css
+    include ../public/assets/styles/contenu-informatif/contenu-informatif.tablette.css
+    include ../public/assets/styles/contenu-informatif/contenu-informatif.desktop.css
 
 block body
   +navPrincipale()
