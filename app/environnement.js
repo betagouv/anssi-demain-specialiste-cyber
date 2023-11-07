@@ -3,6 +3,8 @@ const environnement = () => ({
   peutCoupeFileDateDeMep: (secret) =>
     process.env.COUPE_FILE_DATE_MEP &&
     secret === process.env.COUPE_FILE_DATE_MEP,
+  limiteDeRequetesParIpParMinute: () =>
+    Number(process.env.LIMITE_DE_REQUETES_PAR_IP_PAR_MINUTE),
 });
 
 module.exports = { environnement };
