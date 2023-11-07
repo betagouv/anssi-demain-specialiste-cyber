@@ -19,14 +19,12 @@ const patienteJusqueMep = (requete, reponse, suite) => {
 
 const protectionLimiteTrafic = () => {
   const uneMinute = 60 * 1000;
-  const maxParFenetreParIp = 600;
+  const maxParFenetreParIp = environnement().limiteDeRequetesParIpParMinute();
 
   return rateLimit({
     windowMs: uneMinute,
     max: maxParFenetreParIp,
-    handler: (requete, reponse) => {
-      reponse.render("erreurTropDeTrafic");
-    },
+    handler: (requete, reponse) => reponse.render("erreurTropDeTrafic"),
     keyGenerator: (requete) =>
       // Utilise l'IP de l'utilisateur : https://doc.scalingo.com/platform/internals/routing
       requete.headers["x-real-ip"],
