@@ -26,21 +26,31 @@ block body
           .accroche #{chapitre.accroche}
         .ressources
           each r in chapitre.ressources
-            .ressource
+            a.ressource(
+              href=r.url
+              title=`${r.classe === 'site' ? r.fichier + ' | ' + 'Nouvelle fenêtre' : 'Télécharger le fichier au format ' + r.fichier}`
+              target="_blank"
+              rel="noopener noreferrer"
+            )
               .nom #{r.nom}
               if r.details
                 .detail #{r.details}
-              a.fichier(href=r.url class=r.classe) #{r.fichier}
+              .fichier(class=r.classe) #{r.fichier}
 
   .formations
     .formation
       h3 Formez-vous à la cyber
       .ressources
         each f in formations
-          .ressource
+          a.ressource(
+            href=f.url
+            title=`${f.classe === 'site' ? f.fichier + ' | ' + 'Nouvelle fenêtre' : 'Télécharger le fichier au format ' + f.fichier}`
+            target="_blank"
+            rel="noopener noreferrer"
+          )
             .nom #{f.nom}
             if f.details
               .detail #{f.details}
-            a.fichier(href=f.url class=f.classe) #{f.fichier}
+            .fichier(class=f.classe) #{f.fichier}
 
   .gap
