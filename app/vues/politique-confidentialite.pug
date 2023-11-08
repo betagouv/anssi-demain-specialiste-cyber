@@ -11,6 +11,15 @@ block append styles
     include ../public/assets/styles/contenu-informatif/contenu-informatif.css
     include ../public/assets/styles/contenu-informatif/contenu-informatif.tablette.css
     include ../public/assets/styles/contenu-informatif/contenu-informatif.desktop.css
+    .
+      .conteneur-checkbox {
+        margin-top: -1.5em;
+        margin-bottom: 32px;
+      }
+      #label-consentement-matomo {
+        font-size: 1.1em;
+        margin-left: 0.5em;
+      }
 
 block body
   +navPrincipale()
@@ -22,8 +31,13 @@ block body
         "Traçabilité",
         [
             "Le site internet DemainSpécialisteCyber n’utilise pas de cookies ou autres types de traçeurs.",
+            "DemainSpécialisteCyber utilise l'outil de mesure d'audience Matomo, paramétré en mode \"exempté\" conformément aux recommandations de la CNIL. Ainsi, DemainSpécialisteCyber n'est pas tenu de recueillir le consentement des personnes concernées. Toutefois, vous pouvez, à tout moment, refuser d'être suivi de manière anonyme en décochant la case ci-dessous :"
         ]
     )
+    .conteneur-checkbox
+      input(type="checkbox" id="consentement-matomo" name="consentement-matomo" checked)
+      label(for="consentement-matomo" id="label-consentement-matomo")
+
     +blocContenu(
         "Droit d’accès, de modification, de suppression et d’opposition",
         [
@@ -42,3 +56,5 @@ block body
         ]
     )
   .gap
+
+  script(src='/assets/scripts/optout-matomo.js')
