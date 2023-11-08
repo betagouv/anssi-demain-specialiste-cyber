@@ -1,5 +1,8 @@
 const donnees = {
-  videosAgir: [{ idVideo: 1 }, { idVideo: 2 }],
+  videosAgir: [
+    { idVideo: "Cybersecurite_01" },
+    { idVideo: "Cybersecurite_02" },
+  ],
   metiers: [
     {
       id: "rssi",
@@ -308,7 +311,7 @@ const lesRessourcesEnseignant = () => donnees.ressourcesEnseignant;
 const videoAgirAleatoire = () => {
   const indexVideo = Math.floor(Math.random() * donnees.videosAgir.length);
   const { idVideo } = donnees.videosAgir[indexVideo];
-  return `agir-video-${idVideo}-placeholder.png`;
+  return idVideo;
 };
 
 const autresMetiers = (id) => donnees.metiers.filter((m) => m.id !== id);
