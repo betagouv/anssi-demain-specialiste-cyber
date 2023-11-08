@@ -46,7 +46,10 @@ block body
 
   #agir
     h2 Agis pour prévenir les cyberattaques et y répondre
-    video#agir-video(src=process.env.URL_SERVEUR_MEDIA  + `/videos/${videoAgir}_1080p.mp4` controls)
+    video#agir-video(
+      src=process.env.URL_SERVEUR_MEDIA  + `/videos/${videoAgir}_1080p.mp4`
+      controls
+      poster=process.env.URL_SERVEUR_MEDIA + `/videos/${videoAgir}.png`)
     a(href="/la-campagne").action Découvre la campagne
 
   #metiers
