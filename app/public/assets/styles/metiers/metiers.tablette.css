@@ -18,6 +18,11 @@
     max-width: 188px;
   }
 
+  .fiche-metier .fleche-lien {
+    right: 24px;
+    bottom: 24px;
+  }
+
   .details .identite {
     font-size: 1.285rem;
     line-height: 2rem;
