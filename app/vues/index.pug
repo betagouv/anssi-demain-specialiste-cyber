@@ -55,11 +55,11 @@ block body
       .fleche-droite Témoignage suivant
     #carrousel-fiches-metiers.carrousel
         each f in fichesMetiers
-          .fiche-metier
-            img(src=process.env.URL_SERVEUR_MEDIA  + `/videos/${f.idVideo}.png`)
+          a(href=`/les-metiers?metier=${f.id}`).fiche-metier
+            img(src=process.env.URL_SERVEUR_MEDIA  + `/videos/${f.idVideo}.png` alt=`Photo de profil de ${f.identite}`)
             .identite #{f.identite}
             .metier #{f.metier}
-            a(href=`/les-metiers?metier=${f.id}`).en-savoir-plus En savoir plus
+            .en-savoir-plus En savoir plus
     a(href="/les-metiers").action Accède aux témoignages
 
   #stats
