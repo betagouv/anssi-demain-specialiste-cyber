@@ -11,6 +11,9 @@ NC="\033[0m"
 bucket="demain-specialiste-cyber-prod"
 signatureVide=$(echo -n "" | sha256sum | tr -d "[:space:]-")
 
+mkdir -p public
+mkdir -p public/videos
+
 printf "Récupération de la liste des objets S3"
 listeObjet=$(curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/" \
   -H "Content-Type: application/json" \
