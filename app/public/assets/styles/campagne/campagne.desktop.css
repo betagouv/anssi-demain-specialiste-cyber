@@ -20,7 +20,7 @@
     padding: 0 32vw;
   }
 
-  #affiches-visuels {
+  .bloc-telechargement {
     display: flex;
     align-items: center;
     gap: 60px;
@@ -30,7 +30,7 @@
     background: white;
   }
 
-  #affiches-visuels h3 {
+  .bloc-telechargement h3 {
     text-align: left;
     max-width: 384px;
     padding-top: 0;
