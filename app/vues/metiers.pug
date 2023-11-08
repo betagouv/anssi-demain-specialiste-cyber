@@ -62,7 +62,7 @@ block body
           +maisAussiMobile()
 
         a(href=`/les-metiers?metier=${f.id}` title=`En savoir plus sur le métier de ${f.metier}`).fiche-metier
-          img(src=process.env.URL_SERVEUR_MEDIA + `/videos/fiche-metier-video-pentester-placeholder.png` alt=`Photo de profil de ${f.identite}`)
+          img(src=process.env.URL_SERVEUR_MEDIA + `/videos/${f.idVideo}.png` alt=`Photo de profil de ${f.identite}`)
           .details
             .identite #{f.identite}
             .metier #{f.metier}
