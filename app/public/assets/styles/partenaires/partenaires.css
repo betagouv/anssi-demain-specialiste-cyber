@@ -16,6 +16,10 @@
   width: 160px;
 }
 
+#partenaires img.double-largeur {
+  width: 352px;
+}
+
 #partenaires .conteneur-partenaires {
   display: flex;
   flex-direction: row;
