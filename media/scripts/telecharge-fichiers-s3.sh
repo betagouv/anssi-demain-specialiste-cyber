@@ -42,7 +42,10 @@ telechargeFichier () {
   typeContenu="video/mp4"
   if [[ "$nomFichier" == *.png ]]; then
     typeContenu="image/png"
+    elif [[ "$nomFichier" == *.zip ]]; then
+    typeContenu="application/zip"
   fi
+
   curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/${nomFichier}" \
     -H "Content-Type: ${typeContenu}" \
     -H "Host: ${bucket}.s3.gra.perf.cloud.ovh.net" \

@@ -176,8 +176,10 @@ const donnees = {
       ressources: [
         {
           nom: "Télécharger 13 fiches et cartes pédagogiques sur la cybersécurité et une présentation clé en main",
-          fichier: "PPTX – 61,88 Ko",
-          url: "#",
+          fichier: "ZIP – 13,5 MB",
+          url:
+            process.env.URL_SERVEUR_MEDIA +
+            "/videos/DemainSpecialisteCyber_Kit_enseignant.zip",
           classe: "telechargement",
         },
         {
