@@ -17,6 +17,13 @@ L'installation de l'environnement local se fait via le script dédié :
 $ ./scripts/installation-dev.sh
 ```
 
+Cette installation permet aussi de télécharger tous les médias statiques disponibles dans le Storage OVH S3.
+Ce script peut être lancé séparament avec : 
+
+```sh
+$ ./scripts/telecharge-fichiers-s3.sh
+```
+
 Le lancement se fait via le script dédié :
 
 ```sh
