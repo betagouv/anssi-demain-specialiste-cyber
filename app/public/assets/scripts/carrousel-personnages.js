@@ -1,4 +1,7 @@
 $(document).ready(() => {
+  const donneesPersonnages = JSON.parse(
+    $("#carrousel-personnages-donnees").text(),
+  );
   const $carrouselPersonnage = $("#carrousel-personnages");
   const $autoScroll = $("#autoscroll-carrousel-personnages");
   const { autoscroll = false } = JSON.parse(
@@ -28,18 +31,24 @@ $(document).ready(() => {
       glissePersonnageVers(-1),
     );
 
+    const afficheContenuPersonnage = (idx) => {
+      const donnees = donneesPersonnages[idx];
+      const $conteneur = $("#description-carrousel");
+      $(".nom-personnage", $conteneur).text(
+        `${donnees.nom}, ${donnees.age} ans`,
+      );
+      $(".poste-personnage", $conteneur).text(donnees.poste);
+      $(".accroche-personnage", $conteneur).text(donnees.accroche);
+      $(".description-personnage", $conteneur).text(donnees.description);
+    };
+
     $carrouselPersonnage.on("scroll", () => {
       const decalageCourant = $carrouselPersonnage.scrollLeft();
       const idxPersonnageVisible = Math.round(
         decalageCourant / (largeurImage + margeColonne),
       );
-      $(".contenu-personnage").hide();
-      $(
-        `.contenu-personnage[data-id-personnage='${idxPersonnageVisible}']`,
-      ).show();
+      afficheContenuPersonnage(idxPersonnageVisible);
     });
-
-    $(".contenu-personnage[data-id-personnage='0']").show();
 
     if (autoscroll) {
       setInterval(() => {
@@ -53,6 +62,8 @@ $(document).ready(() => {
   };
 
   brancheComportementCarrousel();
+  $carrouselPersonnage.scrollLeft(0);
+  afficheContenuPersonnage(0);
 
   $(window).on("resize", () => {
     brancheComportementCarrousel();

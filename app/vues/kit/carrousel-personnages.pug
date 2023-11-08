@@ -75,10 +75,6 @@ block append styles
           padding: 0 16px;
       }
 
-      #description-carrousel .contenu-personnage {
-          display: none;
-      }
-
       #description-carrousel h4 {
           margin: 16px 0 0 0;
           font-size: 0.42em;
@@ -95,9 +91,12 @@ block append styles
       }
 
 block append script
+  script(id='carrousel-personnages-donnees', type='application/json').
+    !{JSON.stringify(personnages)}
   script(src='/assets/scripts/carrousel-personnages.js')
 
 mixin carrouselPersonnages(personnages, avecFleches = true, avecDescription = true, rotationAutomatique = false)
+
   .conteneur-carrousel(role="region" aria-roledescription="carousel" aria-label="Personnages de la campagne")
     .carrousel#carrousel-personnages(aria-atomic=false aria-live=(rotationAutomatique ? 'off' : 'polite'))
         each p in personnages
@@ -117,9 +116,8 @@ mixin carrouselPersonnages(personnages, avecFleches = true, avecDescription = tr
         img(src="/assets/images/fleche-droite-blanche.svg" alt="Flèche droite")
   if(avecDescription)
     #description-carrousel
-        each p, idx in personnages
-          .contenu-personnage(data-id-personnage=idx)
-            h4= `${p.nom}, ${p.age} ans`
-            h5= p.poste
-            p= p.accroche
-            p= p.description
+        .contenu-personnage
+          h4.nom-personnage
+          h5.poste-personnage
+          p.accroche-personnage
+          p.description-personnage
