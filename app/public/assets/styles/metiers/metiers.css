@@ -26,14 +26,14 @@
 }
 
 .fiche-metier {
-  display: flex;
+  display: grid;
   background: white;
   border: 1px solid #ddd;
+  grid-template-columns: 1fr 2fr;
 }
 
 .fiche-metier img {
-  width: 50%;
-  object-fit: scale-down;
+  width: 100%;
 }
 
 .fiche-metier .details {
