@@ -1,0 +1,1 @@
+postdeploy: bash scripts/telecharge-fichiers-s3.sh

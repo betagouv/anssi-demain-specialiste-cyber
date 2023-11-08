@@ -7,3 +7,5 @@ popd
 pushd media
 npm install
 popd
+
+bash ./scripts/telecharge-fichiers-s3.sh
