@@ -33,15 +33,15 @@ block body
 
     .gap
 
-    #affiches-visuels
-      h3 Kit de communication
+    #affiches-visuels.bloc-telechargement
+      h3 Les affiches et visuels
       .responsive-invisible-tablette
         p Télécharge les 6 affiches au format A3 ainsi que des visuels pour les réseaux sociaux.
-        #lien-kit
-          a(href="" target="_blank").action Kit de communication
-      .responsive-visible-tablette#telechargement-kit
+        .lien-kit
+          a(href="" target="_blank" rel="noopener noreferrer" title="Télécharger l'archive ZIP – XX MB").action Télécharge les affiches et visuels
+      .responsive-visible-tablette.telechargement-kit
         p Télécharge les 6 affiches au format A3 ainsi que des visuels pour les réseaux sociaux.
-        a(href="" target="_blank").action Télécharge le kit de communication
+        a(href="" target="_blank" rel="noopener noreferrer" title="Télécharger l'archive ZIP – XX MB").action Télécharge les affiches et visuels
     #videos-metiers
       h3 Découvre leurs métiers en vidéo
       video(
@@ -60,3 +60,14 @@ block body
         button.action.action-copier Copier le lien
       .conteneur-action.responsive-visible-tablette
         button.action.action-copier Copier le lien de cette vidéo
+    #kit-communication.bloc-telechargement
+      h3 Kit de communication
+      .responsive-invisible-tablette
+        p Télécharge tous les éléments  pour communiquer sur la campagne.
+        .lien-kit
+          a(href="" target="_blank" rel="noopener noreferrer" title="Télécharger l'archive ZIP – XX MB").action Télécharge le kit de communication
+      .responsive-visible-tablette.telechargement-kit
+        p Télécharge tous les éléments  pour communiquer sur la campagne.
+        a(href="" target="_blank" rel="noopener noreferrer" title="Télécharger l'archive ZIP – XX MB").action Télécharge le kit de communication
+
+    .gap

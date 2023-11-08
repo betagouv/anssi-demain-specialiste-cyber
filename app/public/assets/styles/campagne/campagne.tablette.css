@@ -38,7 +38,7 @@
     transform: translateY(56px);
   }
 
-  #affiches-visuels {
+  .bloc-telechargement {
     padding-top: 32px;
     padding-bottom: 40px;
     background: white;
@@ -49,14 +49,14 @@
     background: #f6f6f6;
   }
 
-  #affiches-visuels h3 {
+  .bloc-telechargement h3 {
     font-size: 4em;
     padding-top: 32px;
     padding-bottom: 64px;
     margin: 0;
   }
 
-  #telechargement-kit {
+  .telechargement-kit {
     display: flex;
     flex-direction: row;
     margin: 0 16px;
@@ -65,14 +65,14 @@
     min-height: 88px;
   }
 
-  #telechargement-kit p {
+  .telechargement-kit p {
     padding: 8px 24px 8px 16px;
     margin: 0;
     font-weight: 500;
     line-height: 1.714rem;
   }
 
-  #telechargement-kit .action {
+  .telechargement-kit .action {
     width: 345px;
     flex-shrink: 0;
     font-size: 1.428rem;

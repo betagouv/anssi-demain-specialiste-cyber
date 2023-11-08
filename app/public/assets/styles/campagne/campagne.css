@@ -53,16 +53,16 @@ html {
   margin: 0;
 }
 
-#affiches-visuels {
+.bloc-telechargement {
   background: #f6f6f6;
 }
 
-#affiches-visuels .gap {
+.bloc-telechargement .gap {
   background: #f6f6f6;
   height: 56px;
 }
 
-#affiches-visuels h3 {
+.bloc-telechargement h3 {
   margin: 0;
   background: white;
   text-align: center;
@@ -71,12 +71,12 @@ html {
   font-weight: bold;
 }
 
-#affiches-visuels p {
+.bloc-telechargement p {
   margin: 8px 16px;
   font-size: 1.15em;
 }
 
-#lien-kit {
+.lien-kit {
   padding: 24px 0 32px 0;
   background: linear-gradient(to bottom, #f6f6f6 45%, white 45%);
   display: flex;
