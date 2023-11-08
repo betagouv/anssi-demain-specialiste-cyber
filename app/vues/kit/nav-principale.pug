@@ -136,9 +136,11 @@ mixin navPrincipale(estClair = false, pageCourante = false)
           +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
           +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
           +lienNavigation("/espace-enseignant", "Espace enseignant", pageCourante)
+          +lienNavigation("/partenaires", "Les contributeurs", pageCourante)
       .responsive-visible-desktop#menu-desktop
         ul(class=suffixeCouleur)
           +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
           +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
           li
             a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant' aria-current=`${pageCourante === "/espace-enseignant" ? 'page' : 'false'}`) Espace enseignant
+          +lienNavigation("/partenaires", "Les contributeurs", pageCourante)
