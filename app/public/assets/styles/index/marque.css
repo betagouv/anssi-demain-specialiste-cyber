@@ -16,44 +16,12 @@ nav {
   justify-content: space-between;
 }
 
-#marque h1 {
+#marque img#bloc-marque {
+  width: 100%;
   margin-top: 30px;
-  text-transform: uppercase;
-  font-size: 14vw;
-  font-weight: bold;
-  line-height: 14vw;
-  margin-bottom: 0;
 }
 
-#marque h1 span:first-of-type {
-  text-align: center;
-}
-
-#marque h1 span:last-of-type {
-  text-align: right;
-}
-
-#marque h1:before,
-#marque h1 span:last-of-type:after {
-  content: "";
-  display: inline-block;
-  background: url("/assets/images/chevron-titre.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 5.4vw;
-  height: 9.6vw;
-  vertical-align: bottom;
-}
-
-#marque h1:before {
-  margin-right: 8px;
-}
-
-#marque h1 span:last-of-type:after {
-  margin-left: 8px;
-}
-
-#marque h2 {
+#marque h1 {
   text-transform: uppercase;
   text-align: justify;
   font-size: 3.6vw;
@@ -61,7 +29,7 @@ nav {
   padding-top: 17px;
 }
 
-#marque h2::after {
+#marque h1::after {
   content: "";
   display: inline-block;
   width: 100%;

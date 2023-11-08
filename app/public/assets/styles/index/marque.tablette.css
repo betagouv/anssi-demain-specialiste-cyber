@@ -11,17 +11,6 @@
   }
 
   #conteneur-marque h1 {
-    font-size: 8vw;
-    line-height: 8vw;
-  }
-
-  #conteneur-marque h1:before, #conteneur-marque h1 span:last-of-type:after {
-    width: 3.15vw;
-    height: 5.55vw;
-    vertical-align: bottom;
-  }
-
-  #conteneur-marque h2 {
     font-size: 1.9vw;
     padding-top: 30px;
   }

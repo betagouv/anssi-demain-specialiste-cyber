@@ -10,12 +10,10 @@ block body
       img.marianne(src='/assets/images/marianne.svg' alt="Retour à l'accueil")
   #lancement
     #boite-marque
-      h1 Demain
-        span(style="display: block;") spécialiste
-        span(style="display: block;") cyber
-      h2 Découvrez la cybersécurité et ses métiers
+      img#bloc-marque(src='/assets/images/bloc-marque.svg' alt="Demain spécialiste cyber")
+      h1 Découvrez la cybersécurité et ses métiers
 
-    h3#date-lancement #{dateDeMep.toLocaleDateString("fr-FR")}
+    h2#date-lancement #{dateDeMep.toLocaleDateString("fr-FR")}
 
 block footer
   // Pas de footer sur la page de lancement
