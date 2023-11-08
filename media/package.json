@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start:dev": "nodemon --inspect=9230 index.js"
+    "start:dev": "nodemon --inspect=9230 index.js",
+    "scalingo-postbuild": "bash ./scripts/telecharge-fichiers-s3.sh"
   },
   "engines": {
     "node": "^18"

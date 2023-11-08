@@ -14,7 +14,6 @@ signatureVide=$(echo -n "" | sha256sum | tr -d "[:space:]-")
 mkdir -p public
 mkdir -p public/videos
 
-printf "Récupération de la liste des objets S3"
 listeObjet=$(curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/" \
   -H "Content-Type: application/json" \
   -H "Host: ${bucket}.s3.gra.perf.cloud.ovh.net" \
@@ -24,19 +23,18 @@ listeObjet=$(curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/" \
   --retry 5 \
   --retry-max-time 120 \
   --silent)
-printf "\r${VERT}✔${NC}️ Récupération de la liste des objets S3\n"
+printf "${VERT}✔${NC}️ Récupération de la liste des objets S3\n"
 
 
 analyseReponseXML () { local IFS=\> ; read -d \< E C ;}
 
 tousFichiers=()
-printf "Analyse de la réponse XML"
 while analyseReponseXML; do
     if [[ $E = "Key" ]]; then
         tousFichiers+=("$C")
     fi
 done < <(echo "$listeObjet")
-printf "\r${VERT}✔${NC}️ Analyse de la réponse XML\n"
+printf "${VERT}✔${NC}️ Analyse de la réponse XML\n"
 
 
 telechargeFichier () {
@@ -45,7 +43,6 @@ telechargeFichier () {
   if [[ "$nomFichier" == *.png ]]; then
     typeContenu="image/png"
   fi
-  printf "\tTéléchargement du fichier ${nomFichier}"
   curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/${nomFichier}" \
     -H "Content-Type: ${typeContenu}" \
     -H "Host: ${bucket}.s3.gra.perf.cloud.ovh.net" \
@@ -56,7 +53,7 @@ telechargeFichier () {
     --retry-max-time 120 \
     --silent \
     --output "./public/videos/${nomFichier}"
-  printf "\r\t${VERT}✔${NC}️ Téléchargement du fichier ${nomFichier}\n"
+  printf "\t${VERT}✔${NC}️ Téléchargement du fichier ${nomFichier}\n"
 }
 
 for nomFichier in "${tousFichiers[@]}"; do
