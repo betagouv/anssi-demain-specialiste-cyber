@@ -62,9 +62,6 @@ block body
           h3 Découvre aussi leur métier...
     .fiches
       each f, index in fichesMetiers
-        if(index > 0 && index % 3 === 0)
-          +maisAussiMobile()
-
         a(href=`/les-metiers?metier=${f.id}` title=`En savoir plus sur le métier de ${f.metier}`).fiche-metier
           img(src=process.env.URL_SERVEUR_MEDIA + `/videos/${f.idVideo}.png` alt=`Photo de profil de ${f.identite}`)
           .details
