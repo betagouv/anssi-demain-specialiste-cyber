@@ -30,10 +30,19 @@
   background: white;
   border: 1px solid #ddd;
   grid-template-columns: 1fr 2fr;
+  position: relative;
 }
 
 .fiche-metier img {
   width: 100%;
+}
+
+.fiche-metier .fleche-lien {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
 }
 
 .fiche-metier .details {
