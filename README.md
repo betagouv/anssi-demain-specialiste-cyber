@@ -10,7 +10,6 @@ Les vidéos sont dans le répertoire `/media`. Elles sont déployées séparéme
 C'est ce qui explique l'organisation type « mono-repo » et l'utilisation de `process.env.URL_SERVEUR_MEDIA`.
 
 ## Pour le développement
-
 L'installation de l'environnement local se fait via le script dédié :
 
 ```sh
