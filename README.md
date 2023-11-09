@@ -6,21 +6,21 @@ Site web vitrine de la campagne « DemainSpécialisteCyber »
 
 ### Les vidéos et le CDN
 
-Les vidéos sont dans le répertoire `/media`. Elles sont déployées séparément, dans un CDN, pour des soucis d'optimisation de bande passante.  
+À l'exécution, les vidéos sont dans le répertoire `/media/public/videos`. Elles sont stockées séparément, dans un object storageOVH, et téléchargées au lancement de l'application. 
+Cela permet de ne pas les inclure dans le source control de github.
 C'est ce qui explique l'organisation type « mono-repo » et l'utilisation de `process.env.URL_SERVEUR_MEDIA`.
+
+Pour ajouter un nouveau média:
+- Uploader le fichier dans l'object storage OVH
+  - **Pour le dev local**: relancer le script `./media/scripts/telecharge-fichiers-s3.sh`
+- Utiliser le même nom de fichier dans le `pug`, en partant du principe qu'il sera disponible dans `/media/public/videos`
+    - ⚠ Pour les vidéos, il faut respecter le format `NomDeVideo_{720p || 1080p}.mp4` (_ex: `RSSI_720p.mp4`_)
 
 ## Pour le développement
 L'installation de l'environnement local se fait via le script dédié :
 
 ```sh
 $ ./scripts/installation-dev.sh
-```
-
-Cette installation permet aussi de télécharger tous les médias statiques disponibles dans le Storage OVH S3.
-Ce script peut être lancé séparament avec : 
-
-```sh
-$ ./scripts/telecharge-fichiers-s3.sh
 ```
 
 Le lancement se fait via le script dédié :
