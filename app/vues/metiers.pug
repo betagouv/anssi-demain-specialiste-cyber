@@ -54,10 +54,11 @@ block body
             .postures
               each p in focusMetier.posture
                   span= p
-            h3#metiers-proches Métiers proches
-            .metiers-proches
-              each m in focusMetier.metiersProches
-                  p= m
+            if(focusMetier.metiersProches.length)
+              h3#metiers-proches Métiers proches
+              .metiers-proches
+                each m in focusMetier.metiersProches
+                    p= m
         #decouvre-autre-metier
           h2 Découvre aussi leur métier...
     .fiches
