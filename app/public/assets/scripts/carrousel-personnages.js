@@ -8,6 +8,15 @@ $(document).ready(() => {
     $autoScroll.text() === "" ? "{}" : $autoScroll.text(),
   );
 
+  const afficheContenuPersonnage = (idx) => {
+    const donnees = donneesPersonnages[idx];
+    const $conteneur = $("#description-carrousel");
+    $(".nom-personnage", $conteneur).text(`${donnees.nom}, ${donnees.age} ans`);
+    $(".poste-personnage", $conteneur).text(donnees.poste);
+    $(".accroche-personnage", $conteneur).text(donnees.accroche);
+    $(".description-personnage", $conteneur).text(donnees.description);
+  };
+
   const brancheComportementCarrousel = () => {
     $(".fleche-droite", "#campagne").off("click");
     $(".fleche-gauche", "#campagne").off("click");
@@ -30,17 +39,6 @@ $(document).ready(() => {
     $(".fleche-gauche", "#campagne").on("click", () =>
       glissePersonnageVers(-1),
     );
-
-    const afficheContenuPersonnage = (idx) => {
-      const donnees = donneesPersonnages[idx];
-      const $conteneur = $("#description-carrousel");
-      $(".nom-personnage", $conteneur).text(
-        `${donnees.nom}, ${donnees.age} ans`,
-      );
-      $(".poste-personnage", $conteneur).text(donnees.poste);
-      $(".accroche-personnage", $conteneur).text(donnees.accroche);
-      $(".description-personnage", $conteneur).text(donnees.description);
-    };
 
     $carrouselPersonnage.on("scroll", () => {
       const decalageCourant = $carrouselPersonnage.scrollLeft();
