@@ -104,11 +104,12 @@ html {
   display: flex;
   justify-content: center;
   padding-bottom: 56px;
+  position: relative;
+  z-index: 1;
 }
 
 #videos-metiers .action-copier {
   position: relative;
-  transform-style: preserve-3d;
 }
 
 #videos-metiers .action-copier::before {
@@ -118,16 +119,17 @@ html {
   right: 0;
   top: 0;
   color: var(--noir);
-  transform: translateX(0) translateZ(-1px);
+  transform: translateX(0);
   border: 1px solid var(--noir);
   background: #d9d9d9;
   font-weight: 500;
   padding: 11px 8px;
   transition: transform 0.2s ease-in-out;
+  z-index: -1;
 }
 
 #videos-metiers .action-copier.copie-en-cours::before {
-  transform: translateX(100%) translateZ(-1px);
+  transform: translateX(100%);
 }
 
 #videos-metiers .action-copier::after {
