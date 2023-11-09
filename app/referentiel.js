@@ -12,7 +12,7 @@ const donnees = {
       description:
         "Le Responsable de la sécurité des systèmes d’information (RSSI) assure le pilotage de la démarche de cybersécurité sur un périmètre de l’organisation (l'entreprise ou l'administration). Il définit ou décline, selon la taille de l’organisation, la politique de sécurité des systèmes d’information (prévention, protection, détection, capacité à s'adapter en cas de crise, remédiation) et veille à son application. Il assure un rôle de conseil, d’assistance, d’information, de formation et d’alerte, en particulier auprès des directeurs métiers et/ou de la direction de son périmètre.<br><br>Il s’assure de la mise en place des solutions et des processus opérationnels pour garantir la protection des données et le niveau de sécurité des systèmes d’information.",
       formation:
-        "Formation : Bac + 5 avec une spécialisation en cybersécurité<br><br>Expérience professionnelle : supérieure à 5 ans dans le domaine de la cybersécurité",
+        "Formation : Bac +5 avec une spécialisation en cybersécurité<br><br>Expérience professionnelle : supérieure à 5 ans dans le domaine de la cybersécurité",
       posture: [
         "Capacité d’influence",
         "Sens de l’intérêt général",
@@ -34,7 +34,7 @@ const donnees = {
       description:
         "Le coordinateur sécurité assure un appui au pilotage des actions de sécurité des systèmes d'information (SI) sur un périmètre de l’organisation (sur une entité ou bien en lien avec une thématique : par exemple, coordination des actions de sécurité sur les environnements Cloud, coordination de la mise en conformité à une réglementation, etc.). Il apporte un support aux équipes opérationnelles pour la réalisation des actions de sécurité et assure le suivi des plans d’actions.",
       formation:
-        "Formation : Bac + 3, dont une spécialisation en lien avec la cybersécurité",
+        "Formation : Bac +3, dont une spécialisation en lien avec la cybersécurité",
       posture: [
         "Capacité de travail en équipe",
         "Pédagogie sur les sujets de cybersécurité",
@@ -64,7 +64,7 @@ const donnees = {
       description:
         'L’auditeur de sécurité technique ou sa cheffe réalisent des évaluations techniques de la sécurité d’environnements informatiques. Il identifie les vulnérabilités (failles et faiblesses) et propose des actions de correction, de remédiation. Il peut réaliser différents types d’audits (inspection) en fonction de son périmètre d’activité ("pentest" ou tests d’intrusion, audit de code, revue de configuration, etc.).<br><br>L\'auditeur ou sa cheffe interviennent en amont des problèmes, pour les éviter.',
       formation:
-        "Formation : Bac +3 à Bac+5 dont spécialisation en cybersécurité<br><br>type de certification : PASSi (Prestataire d’Audit de Sécurité des Systèmes d’information)",
+        "Formation : Bac +3 à Bac +5 dont spécialisation en cybersécurité<br><br>type de certification : PASSi (Prestataire d’Audit de Sécurité des Systèmes d’information)",
       posture: [
         "Capacité de synthèse et de vulgarisation pour des publics non techniques",
         "Rédaction de rapports adaptés à différents niveaux d’interlocuteurs",
@@ -142,7 +142,7 @@ const donnees = {
       description:
         "La chercheuse en sécurité des systèmes d’information se consacre à l’expérimentation, à  la recherche et au progrès de sa discipline. Elle met en œuvre, aux frontières de plusieurs champs scientifiques, ses acquis techniques et académiques au service d’une problématique de sécurité, au plus haut niveau scientifique.Elle mobilise des connaissances expertes pour contribuer à l’émergence de technologies novatrices et de savoirs inédits. Elle peut assurer, superviser ou déléguer l’exécution ou la restitution des travaux scientifiques, mener des activités d’enseignement et d’encadrement d’autres chercheurs ou étudiants/stagiaires. Elle peut également participer au développement de produits, de procédés ou de services innovants.",
       formation:
-        "Formation : Bac+5 à doctorat ou post-doctorat, Habilitation à diriger les Recherches",
+        "Formation : Bac +5 à doctorat ou post-doctorat, Habilitation à diriger les Recherches",
       posture: [
         "Capacité à travailler en transverse au sein de l’organisation",
         "Capacités d’encadrement",
@@ -159,7 +159,7 @@ const donnees = {
       description:
         "L’évaluatrice de la sécurité des technologies de l’information intervient au sein de laboratoires qui réalisent des évaluations de sécurité des technologies de l’information pour des commanditaires. Elle vérifie la conformité d’un produit, voire d’un système, par rapport à sa spécification de sécurité, selon une méthode et des critères normalisés, réglementaires ou privés (définis par le ceux qui commandent l'évaluation). Elle agit en tant que tierce partie indépendante des développeurs de produits et des commanditaires de l’évaluation de sécurité.<br><br>L’évaluateur peut être spécialisé sur l’évaluation de produits matériels (hardwares) ou logiciels (softwares).",
       formation:
-        "Formation : Bac+3 à doctorat dont spécialisation en cybersécurité<br><br>Métier accessible à partir d’une expérience professionnelle en audit de sécurité<br><br>Pour certains types d’évaluations, des profils doctorants spécialisés peuvent être nécessaires (cryptologie notamment)",
+        "Formation : Bac +3 à doctorat dont spécialisation en cybersécurité<br><br>Métier accessible à partir d’une expérience professionnelle en audit de sécurité<br><br>Pour certains types d’évaluations, des profils doctorants spécialisés peuvent être nécessaires (cryptologie notamment)",
       posture: [
         "Rigueur",
         "Rédaction de rapports adaptés à différents niveaux d’interlocuteurs",
