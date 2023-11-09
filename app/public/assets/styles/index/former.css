@@ -35,7 +35,7 @@
 }
 
 .formation .action-boite {
-  padding-top: 24px;
+  padding: 24px 24px 0 24px;
   background: linear-gradient(to bottom, #2b2c3f 63%, var(--noir) 50%);
 }
 
