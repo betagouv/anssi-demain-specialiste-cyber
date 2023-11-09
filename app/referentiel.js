@@ -233,13 +233,13 @@ const donnees = {
   formationsEnseignant: [
     {
       nom: "Trouvez des formations sur le numérique et la cyber sur la plateforme M@gistère.",
-      fichier: "Accèdez à M@gistère",
+      fichier: "Accédez à M@gistère",
       url: "https://magistere.education.fr/dgesco/course/view.php?id=2646https://magistere.education.fr/dgesco/course/view.php?id=2646",
       classe: "site",
     },
     {
       nom: "Développez vos compétences et vos connaissances sur la cybersécurité.",
-      fichier: "Accèdez au MOOC",
+      fichier: "Accédez au MOOC",
       url: "https://secnumacademie.gouv.fr/",
       classe: "site",
     },
