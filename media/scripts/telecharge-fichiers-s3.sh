@@ -15,7 +15,7 @@ mkdir -p public
 mkdir -p public/videos
 
 listeObjet=$(curl --request GET "https://${bucket}.s3.gra.perf.cloud.ovh.net/" \
-  -H "Content-Type: application/json" \
+  -H "Content-Type: application/xml" \
   -H "Host: ${bucket}.s3.gra.perf.cloud.ovh.net" \
   -H "x-amz-content-sha256: $signatureVide" \
   --user $OVH_S3_KEY:$OVH_S3_SECRET \
