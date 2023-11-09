@@ -45,8 +45,8 @@ block body
               poster=process.env.URL_SERVEUR_MEDIA + `/videos/${focusMetier.idVideo}.png`
             )
           .details
-            .identite #{focusMetier.identite}
-            .metier #{focusMetier.metier}
+            p.identite #{focusMetier.identite}
+            h2.metier #{focusMetier.metier}
             p!= focusMetier.description
             h3 Formation
             p!= focusMetier.formation
@@ -59,14 +59,14 @@ block body
               each m in focusMetier.metiersProches
                   p= m
         #decouvre-autre-metier
-          h3 Découvre aussi leur métier...
+          h2 Découvre aussi leur métier...
     .fiches
       each f, index in fichesMetiers
         a(href=`/les-metiers?metier=${f.id}` title=`En savoir plus sur le métier de ${f.metier}`).fiche-metier
           img(src=process.env.URL_SERVEUR_MEDIA + `/videos/${f.idVideo}.png` alt=`Photo de profil de ${f.identite}`)
           .details
-            .identite #{f.identite}
-            .metier #{f.metier}
+            p.identite #{f.identite}
+            h3.metier #{f.metier}
           img.fleche-lien(src="/assets/images/fleche-droite-grise.svg")
 
     +maisAussiMobile()
