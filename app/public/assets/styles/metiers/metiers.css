@@ -57,12 +57,15 @@
   font-size: 1rem;
   line-height: 1.428rem;
   color: rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
+
 .details .metier {
   font-weight: 700;
   font-size: 1.285rem;
   line-height: 1.714rem;
   color: #000;
+  margin: 0;
 }
 
 .mais-aussi {
@@ -129,6 +132,7 @@
 #focus-metier .metier {
   font-size: 2em;
   margin-bottom: 32px;
+  margin-top: 0;
 }
 
 #focus-metier p {
@@ -177,6 +181,6 @@
   border-bottom: 1px solid #dddddd;
 }
 
-#decouvre-autre-metier h3 {
+#decouvre-autre-metier h2 {
   margin: 0;
 }
