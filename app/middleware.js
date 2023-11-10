@@ -24,7 +24,9 @@ const protectionLimiteTrafic = () => {
   return rateLimit({
     windowMs: uneMinute,
     max: maxParFenetreParIp,
-    handler: (requete, reponse) => reponse.render("erreurTropDeTrafic"),
+    handler: (_, reponse) => {
+      reponse.end();
+    },
     keyGenerator: (requete) =>
       // Utilise l'IP de l'utilisateur : https://doc.scalingo.com/platform/internals/routing
       requete.headers["x-real-ip"],
