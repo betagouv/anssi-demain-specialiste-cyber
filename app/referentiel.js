@@ -184,8 +184,8 @@ const donnees = {
         },
         {
           nom: "Organiser un hackaton CyberEnjeux dans votre établissement pour former vos élèves par la création de jeux",
-          fichier: "Accéder à Framaforms",
-          url: "https://framaforms.org/cyberenjeux-demande-de-kit-et-declaration-devenement-1686310460",
+          fichier: " Accéder à la page CyberEnjeux",
+          url: "https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-la-cybersecurite-par-le-jeu",
           classe: "site",
         },
         {
