@@ -133,14 +133,14 @@ mixin navPrincipale(estClair = false, pageCourante = false)
       .responsive-invisible-desktop#menu-burger
         img#fermeture-menu(src='/assets/images/croix-fermeture.svg' alt="Croix de fermeture")
         ul
-          +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
-          +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
-          +lienNavigation("/espace-enseignant", "Espace enseignant", pageCourante)
+          +lienNavigation("/les-metiers", "Les métiers", pageCourante)
+          +lienNavigation("/la-campagne", "La campagne", pageCourante)
           +lienNavigation("/partenaires", "Les contributeurs", pageCourante)
+          +lienNavigation("/espace-enseignant", "Espace enseignant", pageCourante)
       .responsive-visible-desktop#menu-desktop
         ul(class=suffixeCouleur)
-          +lienNavigation("/les-metiers", "Découvrir les métiers", pageCourante)
-          +lienNavigation("/la-campagne", "Zoom sur la campagne", pageCourante)
+          +lienNavigation("/les-metiers", "Les métiers", pageCourante)
+          +lienNavigation("/la-campagne", "La campagne", pageCourante)
+          +lienNavigation("/partenaires", "Les contributeurs", pageCourante)
           li
             a#espace-enseignant(class=suffixeCouleur href='/espace-enseignant' aria-current=`${pageCourante === "/espace-enseignant" ? 'page' : 'false'}`) Espace enseignant
-          +lienNavigation("/partenaires", "Les contributeurs", pageCourante)
