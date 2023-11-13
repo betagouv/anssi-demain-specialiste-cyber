@@ -3,7 +3,12 @@ const { environnement } = require("./environnement");
 
 const filtreIpAutorisees = () => {
   const ips = environnement().ipAutorisees();
-  return ipfilter(ips, { mode: "allow", log: false });
+  return ipfilter(ips, {
+    // Utilise l'IP d'origine : https://doc.scalingo.com/platform/internals/routing
+    detectIp: (requete) => requete.headers["x-real-ip"],
+    mode: "allow",
+    log: false,
+  });
 };
 
 const patienteJusqueMep = (requete, reponse, suite) => {
