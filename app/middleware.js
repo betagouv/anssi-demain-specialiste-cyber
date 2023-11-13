@@ -1,4 +1,5 @@
 const ipfilter = require("express-ipfilter").IpFilter;
+const IpDeniedError = require("express-ipfilter").IpDeniedError;
 const { environnement } = require("./environnement");
 
 const filtreIpAutorisees = () => {
@@ -27,7 +28,15 @@ const patienteJusqueMep = (requete, reponse, suite) => {
   suite();
 };
 
+const gestionnaireErreur = (erreur, _req, res, suite) => {
+  // https://github.com/jetersen/express-ipfilter#error-handling
+  if (erreur instanceof IpDeniedError) res.end();
+
+  suite();
+};
+
 module.exports = {
+  gestionnaireErreur,
   filtreIpAutorisees,
   patienteJusqueMep,
 };

@@ -68,6 +68,8 @@ app
   .get("/a-propos", (req, rep) => rep.render("a-propos"))
   .get("/accessibilite", (req, rep) => rep.render("accessibilite"));
 
+app.use(middleware.gestionnaireErreur);
+
 app.listen(port, () => {
   console.log(
     `DemainSpécialisteCyber est démarré et écoute sur le port ${port} !…`,
