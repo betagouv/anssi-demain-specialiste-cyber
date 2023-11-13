@@ -13,6 +13,7 @@ const {
 } = require("./referentiel");
 const middleware = require("./middleware");
 const { query, validationResult } = require("express-validator");
+const { environnement } = require("./environnement");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +22,9 @@ app.set("view engine", "pug");
 app.set("views", "./vues");
 app.use(express.static("public", { maxAge: 3_600_000 }));
 
-app.use(middleware.filtreIpAutorisees());
+if (environnement().activerFiltrageIp()) {
+  app.use(middleware.filtreIpAutorisees());
+}
 app.use(middleware.patienteJusqueMep);
 
 app
