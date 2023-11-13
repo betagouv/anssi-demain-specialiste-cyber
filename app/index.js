@@ -23,7 +23,6 @@ app.use(express.static("public", { maxAge: 3_600_000 }));
 
 app.use(middleware.filtreIpAutorisees());
 app.use(middleware.patienteJusqueMep);
-app.use(middleware.protectionLimiteTrafic());
 
 app
   .get("/", (req, rep) => {
