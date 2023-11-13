@@ -5,6 +5,7 @@ const environnement = () => ({
     secret === process.env.COUPE_FILE_DATE_MEP,
   limiteDeRequetesParIpParMinute: () =>
     Number(process.env.LIMITE_DE_REQUETES_PAR_IP_PAR_MINUTE),
+  ipAutorisees: () => process.env.ADRESSES_IP_AUTORISEES?.split(",") ?? [],
 });
 
 module.exports = { environnement };
