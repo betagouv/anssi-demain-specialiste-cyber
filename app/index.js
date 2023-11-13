@@ -21,6 +21,7 @@ app.set("view engine", "pug");
 app.set("views", "./vues");
 app.use(express.static("public", { maxAge: 3_600_000 }));
 
+app.use(middleware.filtreIpAutorisees());
 app.use(middleware.patienteJusqueMep);
 app.use(middleware.protectionLimiteTrafic());
 
