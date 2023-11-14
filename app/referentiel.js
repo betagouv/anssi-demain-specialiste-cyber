@@ -183,13 +183,13 @@ const donnees = {
           classe: "telechargement",
         },
         {
-          nom: "Organiser un hackaton CyberEnjeux dans votre établissement pour former vos élèves par la création de jeux",
-          fichier: "Accéder à la page CyberEnjeux",
+          nom: "Organiser un hackathon CyberEnJeux dans votre établissement pour former vos élèves à la cybersécurité par la création de jeux",
+          fichier: "Accéder à la page CyberEnJeux",
           url: "https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-la-cybersecurite-par-le-jeu",
           classe: "site",
         },
         {
-          nom: "Déclarer l’organisation d’un hackaton à l’ANSSI et au ministère de l’Éducation nationale et de la Jeunesse",
+          nom: "Déclarer l’organisation d’un hackathon à l’ANSSI et au ministère de l’Éducation nationale et de la Jeunesse",
           fichier: "Accéder au formulaire",
           url: "https://framaforms.org/cyberenjeux-demande-de-kit-et-declaration-devenement-1686310460",
           classe: "site",
@@ -211,7 +211,7 @@ const donnees = {
         {
           nom: "Panorama des métiers de la cybersécurité",
           fichier: "Accéder au panorama",
-          url: "https://www.ssi.gouv.fr/uploads/2021/10/anssi-panorama_metiers_cybersecurite-2020.pdf",
+          url: "https://cyber.gouv.fr/publications/panorama-des-metiers-de-la-cybersecurite",
           classe: "site",
         },
         {
