@@ -5,7 +5,7 @@ $(document).ready(() => {
     setTimeout(() => {
       $bouton.removeClass("copie-en-cours");
     }, 5000);
-    const src = $bouton.parent().prev("video").attr("src");
+    const src = $bouton.parent().prevAll("video").attr("src");
     await navigator.clipboard.writeText(src);
   });
 });
