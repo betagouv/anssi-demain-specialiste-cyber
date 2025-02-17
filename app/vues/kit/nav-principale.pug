@@ -124,7 +124,7 @@ mixin lienNavigation(url, titre, pageCourante)
 
 mixin navPrincipale(estClair = false, pageCourante = false)
   - const suffixeCouleur = estClair ? '' : '-dark'
-  header
+  header.fr-header__brand
     nav.principale(aria-label="Menu principal")
       a(href="/")
         img.marianne(src=`/assets/images/marianne${suffixeCouleur}.svg` alt="Retour à l'accueil")
