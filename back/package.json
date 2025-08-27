@@ -2,9 +2,9 @@
   "name": "anssi-demain-specialiste-cyber",
   "version": "2.0.0",
   "description": "Backend « DemainSpécialisteCyber »",
-  "main": "serveur.ts",
+  "main": "src/serveur.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "prestart": "tsc",
     "start": "node ./dist/serveur.js"
   },
@@ -17,6 +17,9 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
-    "typescript": "^5.9.2"
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }

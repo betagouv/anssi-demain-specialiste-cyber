@@ -9,5 +9,8 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "allowJs": false
-  }
+  },
+  "include": [
+    "src"
+  ]
 }
