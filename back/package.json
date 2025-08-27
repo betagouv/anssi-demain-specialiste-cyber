@@ -1,0 +1,22 @@
+{
+  "name": "anssi-demain-specialiste-cyber",
+  "version": "2.0.0",
+  "description": "Backend « DemainSpécialisteCyber »",
+  "main": "serveur.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "tsc",
+    "start": "node ./dist/serveur.js"
+  },
+  "keywords": [],
+  "author": "Lab de l’ANSSI",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  }
+}
