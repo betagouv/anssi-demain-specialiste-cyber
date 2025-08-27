@@ -1,0 +1,16 @@
+{
+  "name": "anssi-demain-specialiste-cyber",
+  "version": "2.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/betagouv/anssi-demain-specialiste-cyber.git"
+  },
+  "scripts": {
+    "start": "npm start --workspaces --if-present"
+  },
+  "private": true,
+  "workspaces": [
+    "back"
+  ]
+}
