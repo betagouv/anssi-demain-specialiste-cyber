@@ -1,9 +1,0 @@
-@media screen and (min-width: 1024px) {
-  .contenu-informatif h1 {
-    margin-top: 0;
-  }
-
-  .contenu-informatif {
-    padding: 0 22vw 80px 22vw;
-  }
-}
