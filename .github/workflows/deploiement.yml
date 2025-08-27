@@ -4,10 +4,8 @@ permissions: {}
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch: # Pour activer le déclenchement manuel
-  pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch # Pour activer le déclenchement manuel
 
 jobs:
   deploiement-demo:
