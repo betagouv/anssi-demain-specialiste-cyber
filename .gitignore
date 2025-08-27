@@ -131,3 +131,6 @@ dist
 
 # S3 files
 media/public/videos/*
+
+/*.iml
+/.idea/
