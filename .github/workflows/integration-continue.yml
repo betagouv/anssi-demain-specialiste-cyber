@@ -1,0 +1,28 @@
+name: L'intégration continue
+permissions: {}
+
+on: pull_request
+
+jobs:
+  build:
+    name: Construction du site
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Déterminer la version de Node.js à utiliser
+        run: |
+          echo "NODE_VERSION=$(./scripts/get-node-version.sh)" >> $GITHUB_ENV
+
+      - name: Utiliser la version Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installe les dépendances
+        run: npm ci
+
+      - name: Exécute les tests
+        run: npm run test
