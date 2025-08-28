@@ -1,8 +1,10 @@
 import { creeServeur } from './api/dsc';
-import { entrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
+import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 
 const app = creeServeur({
-  entrepotRessourcesCyber: entrepotRessourcesCyberGrist,
+  entrepotRessourcesCyber: new EntrepotRessourcesCyberGrist({
+    get: async () => ({ records: [] }),
+  }),
 });
 
 const port = process.env.PORT || 3000;
