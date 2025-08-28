@@ -19,7 +19,7 @@ describe('La page Catalogue', () => {
   it('répond avec un contenu HTML', async () => {
     const reponse = await appelleCatalogue(serveur);
 
-    expect(reponse.headers['content-type']).toEqual('text/html; charset=utf-8');
+    expect(reponse.headers['content-type']).toEqual('text/html; charset=UTF-8');
   });
 
   it('répond avec le contenu HTML du catalogue', async () => {
