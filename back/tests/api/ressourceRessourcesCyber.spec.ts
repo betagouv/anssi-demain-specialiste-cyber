@@ -2,22 +2,13 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('La ressource des ressources cyber', () => {
   let serveur: Express;
-  let entrepotRessourcesCyber: EntrepotRessourcesCyber;
 
   beforeEach(() => {
-    entrepotRessourcesCyber = {
-      tous: async () => [
-        {
-          id: 'mon-id-ressource',
-          titre: 'ressource 1',
-        },
-      ],
-    };
-    serveur = creeServeur({ entrepotRessourcesCyber });
+    serveur = creeServeur(configurationDeTestDuServeur);
   });
 
   describe('sur une demande GET', () => {
