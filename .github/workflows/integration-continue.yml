@@ -24,6 +24,9 @@ jobs:
       - name: Installe les dépendances
         run: npm ci
 
+      - name: Vérfie le typage
+        run: npm run typecheck
+
       - name: Lint le projet
         run: npm run lint
 
