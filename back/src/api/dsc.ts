@@ -3,12 +3,10 @@ import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
 export type ConfigurationServeur = {
-  entrepotRessourcesCyber?: EntrepotRessourcesCyber;
+  entrepotRessourcesCyber: EntrepotRessourcesCyber;
 };
 
-export const creeServeur = (
-  configurationServeur: ConfigurationServeur = {}
-) => {
+export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
   app.get('/', (_requete, reponse) => {

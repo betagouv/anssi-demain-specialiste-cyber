@@ -1,6 +1,9 @@
 import { creeServeur } from './api/dsc';
+import { entrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 
-const app = creeServeur();
+const app = creeServeur({
+  entrepotRessourcesCyber: entrepotRessourcesCyberGrist,
+});
 
 const port = process.env.PORT || 3000;
 
