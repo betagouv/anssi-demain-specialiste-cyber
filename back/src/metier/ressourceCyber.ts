@@ -1,1 +1,4 @@
-export type RessourceCyber = { id: string; titre: string };
+export type RessourceCyber = {
+  id: number;
+  titre: string;
+};
