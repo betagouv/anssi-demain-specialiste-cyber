@@ -6,15 +6,9 @@ export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
 }
+
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
-  const app = creeServeurLab({
-    reseau: {
-      ipAutorisees: false,
-      trustProxy: 0,
-      maxRequetesParMinute:
-        configurationServeur.serveurLab.reseau.maxRequetesParMinute || 0,
-    },
-  });
+  const app = creeServeurLab(configurationServeur.serveurLab);
 
   app.get('/', (_requete, reponse) => {
     reponse.send('Bonjour DSC');
