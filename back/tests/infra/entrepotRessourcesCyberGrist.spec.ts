@@ -3,53 +3,51 @@ import {
   EntrepotRessourcesCyberGrist,
   ReponseRessourceCyberGrist,
 } from '../../src/infra/entrepotRessourcesCyberGrist';
-import { LectureHttp } from '../../src/infra/lectureHttp';
+import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
 describe("L'entrepôt de ressources cyber Grist ", () => {
-  const reponseVide = { data: { records: [] } };
+  const reponseVide = { records: [] };
 
   const reponseCyberEnJeux = {
-    data: {
-      records: [
-        {
-          id: 1,
-          fields: {
-            A: '4e24da60-90c0-4aee-baa3-8666fa816fed',
-            Titre: 'CyberEnJeux',
-            Description: 'Former à la cybersécurité par le jeu',
-            Besoins: ['L', "S'entraîner", 'Prévenir'],
-            Thematiques: [
-              'L',
-              'Techniques de sécurité numérique',
-              'Comportements numériques',
-              'Valoriser les talents féminins',
-            ],
-            Type: ['L', 'Jeux'],
-            Cible: ['L', 'Personnel éducatif', 'Elèves'],
-            Parcours_sur_page: [
-              'L',
-              'Accueil',
-              'Parcours Enseignant',
-              'Parcours Eleves',
-            ],
-            Label_DSC: true,
-            Cycle_si_eleves: ['L', 'Ecole', 'Collège', 'Lycée'],
-            Porteur: ['L', 'Etat (ministères, opérateurs)', 'ANSSI'],
-            Lien: 'https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu',
-          },
+    records: [
+      {
+        id: 1,
+        fields: {
+          A: '4e24da60-90c0-4aee-baa3-8666fa816fed',
+          Titre: 'CyberEnJeux',
+          Description: 'Former à la cybersécurité par le jeu',
+          Besoins: ['L', "S'entraîner", 'Prévenir'],
+          Thematiques: [
+            'L',
+            'Techniques de sécurité numérique',
+            'Comportements numériques',
+            'Valoriser les talents féminins',
+          ],
+          Type: ['L', 'Jeux'],
+          Cible: ['L', 'Personnel éducatif', 'Elèves'],
+          Parcours_sur_page: [
+            'L',
+            'Accueil',
+            'Parcours Enseignant',
+            'Parcours Eleves',
+          ],
+          Label_DSC: true,
+          Cycle_si_eleves: ['L', 'Ecole', 'Collège', 'Lycée'],
+          Porteur: ['L', 'Etat (ministères, opérateurs)', 'ANSSI'],
+          Lien: 'https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu',
         },
-      ],
-    },
+      },
+    ],
   };
 
   it('sait appeler la bonne ressource', async () => {
     let urlAppelee = '';
-    const clientHttp: LectureHttp<ReponseRessourceCyberGrist> = {
-      get: async (url: string) => {
-        urlAppelee = url;
-        return reponseVide;
-      },
+    const clientHttp: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async (url: string) => {
+      urlAppelee = url;
+      return reponseVide;
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
       clientHttp
@@ -64,14 +62,14 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it("vérifie l'entête d'authentification", async () => {
     let enteteAuthorisation: string | undefined = undefined;
-    const clientHttp: LectureHttp<ReponseRessourceCyberGrist> = {
-      get: async (_url: string, config) => {
-        enteteAuthorisation = config?.headers?.['authorization'];
-        return reponseVide;
-      },
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async (_url: string, config) => {
+      enteteAuthorisation = config?.headers?.['authorization'];
+      return reponseVide;
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      clientHttp
+      ressourcesCyberGrist
     );
 
     await entrepotRessourcesCyberGrist.tous();
@@ -80,13 +78,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist', async () => {
-    const clientHttp: LectureHttp<ReponseRessourceCyberGrist> = {
-      get: async () => {
-        return reponseCyberEnJeux;
-      },
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return reponseCyberEnJeux;
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      clientHttp
+      ressourcesCyberGrist
     );
 
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();

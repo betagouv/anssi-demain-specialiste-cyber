@@ -1,7 +1,9 @@
-import axios from 'axios';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
-import { LectureHttp } from './lectureHttp';
+import {
+  creeRecupereRessourceHttp,
+  RecupereRessourceHttp,
+} from './recupereRessourceHttp';
 
 export type ReponseRessourceCyberGrist = {
   records: {
@@ -30,7 +32,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
   private table: string;
 
   constructor(
-    private clientHttp: LectureHttp<ReponseRessourceCyberGrist> = axios
+    private ressourcesCyberGrist: RecupereRessourceHttp<ReponseRessourceCyberGrist> = creeRecupereRessourceHttp()
   ) {
     const grist = adaptateurEnvironnement.grist();
     this.urlDeBase = grist.urlDeBase;
@@ -44,13 +46,13 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       `api/docs/${this.schema}/tables/${this.table}/records`,
       this.urlDeBase
     );
-    const reponse = await this.clientHttp.get(url.toString(), {
+    const reponse = await this.ressourcesCyberGrist(url.toString(), {
       headers: {
         authorization: `Bearer ${this.cleApi}`,
         accept: 'application/json',
       },
     });
-    return reponse.data.records.map((record) => ({
+    return reponse.records.map((record) => ({
       id: record.id,
       titre: record.fields.Titre,
     }));
