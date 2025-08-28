@@ -4,6 +4,7 @@
   "description": "Backend « DemainSpécialisteCyber »",
   "main": "src/serveur.ts",
   "scripts": {
+    "dev": "node --import tsx --env-file .env --watch src/serveur.ts",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "prestart": "tsc",
@@ -33,6 +34,7 @@
     "supertest": "^7.1.4",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "tsx": "^4.20.5"
   }
 }
