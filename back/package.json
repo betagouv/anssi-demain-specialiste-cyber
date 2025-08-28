@@ -8,7 +8,8 @@
     "lint:fix": "npx eslint . --fix",
     "prestart": "tsc",
     "start": "node ./dist/serveur.js",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "Lab de l’ANSSI",

@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "npm run lint --workspaces --if-present",
     "start": "npm start --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "private": true,
   "workspaces": [
