@@ -1,6 +1,14 @@
 import express from 'express';
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
+import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
-export const creeServeur = () => {
+export type ConfigurationServeur = {
+  entrepotRessourcesCyber?: EntrepotRessourcesCyber;
+};
+
+export const creeServeur = (
+  configurationServeur: ConfigurationServeur = {}
+) => {
   const app = express();
 
   app.get('/', (_requete, reponse) => {
@@ -12,6 +20,11 @@ export const creeServeur = () => {
       root: '.',
     });
   });
+
+  app.use(
+    '/api/ressources-cyber',
+    ressourceRessourceCyber(configurationServeur)
+  );
 
   return app;
 };
