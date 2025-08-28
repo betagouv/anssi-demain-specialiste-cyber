@@ -1,13 +1,20 @@
-import express from 'express';
+import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
-export type ConfigurationServeur = {
+export interface ConfigurationServeur {
+  serveurLab: ConfigurationServeurLab;
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
-};
-
+}
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
-  const app = express();
+  const app = creeServeurLab({
+    reseau: {
+      ipAutorisees: false,
+      trustProxy: 0,
+      maxRequetesParMinute:
+        configurationServeur.serveurLab.reseau.maxRequetesParMinute || 0,
+    },
+  });
 
   app.get('/', (_requete, reponse) => {
     reponse.send('Bonjour DSC');
