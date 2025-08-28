@@ -1,8 +1,8 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config';
 export default defineConfig({
-  root: "./src",
+  root: './src',
   test: {
-    include: ["./**/*.{test,spec}.ts"],
-    root: "./tests",
+    include: ['./**/*.{test,spec}.ts'],
+    root: './tests',
   },
 });

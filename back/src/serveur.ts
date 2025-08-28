@@ -1,4 +1,4 @@
-import { creeServeur } from "./api/dsc";
+import { creeServeur } from './api/dsc';
 
 const app = creeServeur();
 
@@ -8,7 +8,7 @@ const serveur = app.listen(port, () => {
   console.log(`Le serveur écoute sur le port ${port}`);
 });
 
-serveur.on("error", (erreur) => {
+serveur.on('error', (erreur) => {
   console.error(erreur);
   process.exit(1);
 });
