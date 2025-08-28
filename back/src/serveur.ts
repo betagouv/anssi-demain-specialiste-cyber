@@ -1,7 +1,9 @@
 import { creeServeur } from './api/dsc';
+import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 
 const app = creeServeur({
+  serveurLab: configurationServeurLabEnvironnement(),
   entrepotRessourcesCyber: new EntrepotRessourcesCyberGrist(),
 });
 
