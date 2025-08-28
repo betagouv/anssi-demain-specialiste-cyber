@@ -5,7 +5,7 @@ permissions: {}
 on:
   push:
     branches: [main]
-  workflow_dispatch # Pour activer le déclenchement manuel
+  workflow_dispatch: # Pour activer le déclenchement manuel
 
 jobs:
   deploiement-demo:
