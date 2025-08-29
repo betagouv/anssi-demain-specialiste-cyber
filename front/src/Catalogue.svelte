@@ -1,4 +1,4 @@
-<svelte:options customElement="dsc-catalogue" />
+<svelte:options customElement={{ tag: 'dsc-catalogue', shadow: 'none' }} />
 
 <script lang="ts">
   import { onMount } from 'svelte';
@@ -7,11 +7,26 @@
   onMount(async () => {
     const reponse = await fetch('http://localhost:3000/api/ressources-cyber');
     listeRessourcesCyber = await reponse.json();
+    listeRessourcesCyber = listeRessourcesCyber.sort((a, b) =>
+      a.titre.localeCompare(b.titre)
+    );
   });
 </script>
 
-Catalogue des ressources cyber SVELTE
+<h3>Catalogue des ressources cyber</h3>
 
-{#each listeRessourcesCyber as { id, titre } (id)}
-  <span id={`${id}`}>{titre}</span>
-{/each}
+<div class="conteneur">
+  {#each listeRessourcesCyber as { id, titre } (id)}
+    <div id={`${id}`}>{titre}</div>
+  {:else}
+    <p>Chargement...</p>
+  {/each}
+</div>
+
+<style lang="scss">
+  .conteneur {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+</style>
