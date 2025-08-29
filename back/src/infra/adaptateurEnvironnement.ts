@@ -1,3 +1,10 @@
+type OIDC = {
+  urlRedirectionApresAuthentification: () => string;
+  urlRedirectionApresDeconnexion: () => string;
+  urlBase: () => string;
+  clientId: () => string;
+  clientSecret: () => string;
+};
 export type AdaptateurEnvironnement = {
   grist: () => {
     urlDeBase: string;
@@ -8,9 +15,19 @@ export type AdaptateurEnvironnement = {
     };
   };
   estEntrepotsStatiques(): boolean;
+  oidc: () => OIDC;
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
+  oidc: (): OIDC => ({
+    urlRedirectionApresAuthentification: () =>
+      `${process.env.URL_BASE_DSC}/oidc/apres-authentification`,
+    urlRedirectionApresDeconnexion: () =>
+      `${process.env.URL_BASE_DSC}/oidc/apres-deconnexion`,
+    urlBase: () => process.env.OIDC_URL_BASE || '/',
+    clientId: () => process.env.OIDC_CLIENT_ID || '',
+    clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
+  }),
   estEntrepotsStatiques(): boolean {
     return process.env.ENTREPOTS_STATIQUES === 'true';
   },
