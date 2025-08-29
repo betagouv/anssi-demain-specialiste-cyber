@@ -3,12 +3,15 @@ import { creeServeur } from './api/dsc';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
+import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 
 const app = creeServeur({
   serveurLab: configurationServeurLabEnvironnement(),
   entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
     ? new EntrepotRessourcesCyberStatique()
     : new EntrepotRessourcesCyberGrist(),
+  recupereCheminVersFichiersStatiques:
+    recupereCheminVersFichiersStatiquesParDefaut,
 });
 
 const port = process.env.PORT || 3000;

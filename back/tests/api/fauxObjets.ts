@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { ConfigurationServeur } from '../../src/api/dsc';
 import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 
@@ -10,4 +11,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     },
   },
   entrepotRessourcesCyber: entrepotRessourcesCyberMemoire,
+  recupereCheminVersFichiersStatiques: () => join(__dirname, '../pagesDeTest'),
 };
