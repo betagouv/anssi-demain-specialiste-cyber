@@ -1,14 +1,16 @@
 import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
-import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
-import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
-import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
-import { AdaptateurJWT } from './adaptateurJWT';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
+import express from 'express';
+import { join } from 'path';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { AdaptateurJWT } from './adaptateurJWT';
+import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
+import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
+import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
+import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -34,15 +36,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(cookieParser());
 
-  app.get('/', (_requete, reponse) => {
-    reponse.send('Bonjour DSC');
-  });
-
-  app.get('/catalogue', (_requete, reponse) => {
-    reponse.sendFile(`./pages/catalogue.html`, {
-      root: '.',
-    });
-  });
+  app.use('/', express.static(join(__dirname, '../../../front/dist')));
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
   app.use(
