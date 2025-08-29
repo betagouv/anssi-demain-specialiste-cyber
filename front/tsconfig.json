@@ -1,5 +1,5 @@
 {
-  "extends": ["@tsconfig/svelte/tsconfig.json", "../tsconfig.json"],
+  "extends": ["@tsconfig/svelte/tsconfig.json", "../tsconfig.base.json"],
   "compilerOptions": {
     "useDefineForClassFields": true,
     "module": "ESNext",
