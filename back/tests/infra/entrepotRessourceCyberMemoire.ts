@@ -3,7 +3,7 @@ import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCybe
 export const entrepotRessourcesCyberMemoire: EntrepotRessourcesCyber = {
   tous: async () => [
     {
-      id: 'mon-id-ressource',
+      id: 1,
       titre: 'ressource 1',
     },
   ],
