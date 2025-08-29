@@ -1,4 +1,6 @@
 import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
+import express from 'express';
+import { join } from 'path';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
@@ -10,15 +12,7 @@ export interface ConfigurationServeur {
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = creeServeurLab(configurationServeur.serveurLab);
 
-  app.get('/', (_requete, reponse) => {
-    reponse.send('Bonjour DSC');
-  });
-
-  app.get('/catalogue', (_requete, reponse) => {
-    reponse.sendFile(`./pages/catalogue.html`, {
-      root: '.',
-    });
-  });
+  app.use('/', express.static(join(__dirname, '../../../front/dist')));
 
   app.use(
     '/api/ressources-cyber',
