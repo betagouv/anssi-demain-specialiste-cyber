@@ -1,10 +1,11 @@
-import { ConfigurationServeur } from '../../src/api/dsc';
-import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
-import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
+import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { ConfigurationServeur } from '../../src/api/dsc';
+import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -71,4 +72,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurJWT: fauxAdaptateurJWT,
   entrepotUtilisateur,
+  recupereCheminVersFichiersStatiques: () => join(__dirname, '../pagesDeTest'),
 };

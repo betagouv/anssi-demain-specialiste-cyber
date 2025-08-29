@@ -2,8 +2,8 @@ import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express from 'express';
-import { join } from 'path';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
@@ -19,6 +19,7 @@ export interface ConfigurationServeur {
   adaptateurJWT: AdaptateurJWT;
   entrepotUtilisateur: EntrepotUtilisateur;
   adaptateurHachage: AdaptateurHachage;
+  recupereCheminVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -36,7 +37,10 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(cookieParser());
 
-  app.use('/', express.static(join(__dirname, '../../../front/dist')));
+  app.use(
+    '/',
+    express.static(configurationServeur.recupereCheminVersFichiersStatiques())
+  );
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
   app.use(

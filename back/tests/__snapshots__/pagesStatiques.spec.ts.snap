@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Le serveur de pages statiques > répond avec le contenu HTML 1`] = `
+"<!doctype html>
+<html>
+  <body>
+    Catalogue
+  </body>
+</html>
+"
+`;
