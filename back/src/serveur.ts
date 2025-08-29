@@ -7,6 +7,7 @@ import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
+import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 
 const app = creeServeur({
   adaptateurOIDC,
@@ -17,6 +18,8 @@ const app = creeServeur({
   adaptateurJWT,
   adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
   entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
+  recupereCheminVersFichiersStatiques:
+    recupereCheminVersFichiersStatiquesParDefaut,
 });
 
 const port = process.env.PORT || 3000;
