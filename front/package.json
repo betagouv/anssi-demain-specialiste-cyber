@@ -5,7 +5,9 @@
   "description": "Frontend svelte « DemainSpécialisteCyber »",
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",

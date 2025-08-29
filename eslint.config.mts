@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   {
-    ignores: ['dist/**'],
+    ignores: ['**/dist/**'],
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
@@ -13,6 +13,9 @@ export default defineConfig([
     extends: ['js/recommended'],
     languageOptions: {
       parser: tsparser,
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+      },
       sourceType: 'module',
     },
     rules: {
@@ -28,6 +31,7 @@ export default defineConfig([
           ignoreRestSiblings: false,
         },
       ],
+      'no-console': 'error',
     },
   },
   tseslint.configs.recommended,
