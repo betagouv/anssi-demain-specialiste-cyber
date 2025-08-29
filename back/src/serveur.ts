@@ -1,11 +1,11 @@
-import { creeServeur } from './api/dsc';
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
-import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
-import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
-import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { adaptateurJWT } from './api/adaptateurJWT';
+import { creeServeur } from './api/dsc';
+import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
+import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
+import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
+import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 
 const app = creeServeur({
@@ -22,10 +22,12 @@ const app = creeServeur({
 const port = process.env.PORT || 3000;
 
 const serveur = app.listen(port, () => {
-  console.log(`Le serveur écoute sur le port ${port}`);
+  // eslint-disable-next-line no-console
+  console.info(`Le serveur écoute sur le port ${port}`);
 });
 
 serveur.on('error', (erreur) => {
+  // eslint-disable-next-line no-console
   console.error(erreur);
   process.exit(1);
 });

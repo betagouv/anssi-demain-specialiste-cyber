@@ -1,6 +1,6 @@
-import { mount } from "svelte";
-import Catalogue from "./Catalogue.svelte";
+import { mount } from 'svelte';
+import Catalogue from './Catalogue.svelte';
 
 mount(Catalogue, {
-  target: document.getElementById("catalogue")!,
+  target: document.getElementById('catalogue')!,
 });
