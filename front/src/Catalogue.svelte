@@ -5,7 +5,7 @@
 
   let listeRessourcesCyber: { id: number; titre: string }[] = [];
   onMount(async () => {
-    const reponse = await fetch('http://localhost:3000/api/ressources-cyber');
+    const reponse = await fetch('/api/ressources-cyber');
     listeRessourcesCyber = await reponse.json();
     listeRessourcesCyber = listeRessourcesCyber.sort((a, b) =>
       a.titre.localeCompare(b.titre)
