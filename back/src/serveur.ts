@@ -1,10 +1,14 @@
 import { creeServeur } from './api/dsc';
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
+import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
+import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 
 const app = creeServeur({
   serveurLab: configurationServeurLabEnvironnement(),
-  entrepotRessourcesCyber: new EntrepotRessourcesCyberGrist(),
+  entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
+    ? new EntrepotRessourcesCyberStatique()
+    : new EntrepotRessourcesCyberGrist(),
 });
 
 const port = process.env.PORT || 3000;

@@ -7,9 +7,13 @@ export type AdaptateurEnvironnement = {
       idTable: string;
     };
   };
+  estEntrepotsStatiques(): boolean;
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
+  estEntrepotsStatiques(): boolean {
+    return process.env.ENTREPOTS_STATIQUES === 'true';
+  },
   grist: () => ({
     urlDeBase: process.env.GRIST_URL_BASE || '',
     cleApi: process.env.GRIST_CLE_API || '',
