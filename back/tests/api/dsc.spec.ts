@@ -1,6 +1,6 @@
+import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import request from 'supertest';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe("L'API DSC", () => {

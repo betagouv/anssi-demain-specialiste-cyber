@@ -10,7 +10,7 @@
     "prestart": "tsc",
     "start": "node ./dist/serveur.js",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json"
   },
   "keywords": [],
   "author": "Lab de l’ANSSI",
