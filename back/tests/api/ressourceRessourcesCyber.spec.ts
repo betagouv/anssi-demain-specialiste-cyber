@@ -3,6 +3,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { configurationDeTestDuServeur } from './fauxObjets';
+import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
 describe('La ressource des ressources cyber', () => {
   let serveur: Express;
@@ -20,9 +21,9 @@ describe('La ressource des ressources cyber', () => {
     it('renvoie une liste de ressources cyber', async () => {
       const reponse = await request(serveur).get('/api/ressources-cyber');
 
-      expect(reponse.body).toEqual([
+      expect(reponse.body).toStrictEqual<RessourceCyber[]>([
         {
-          id: 'mon-id-ressource',
+          id: 1,
           titre: 'ressource 1',
         },
       ]);

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import request from 'supertest';
+import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 
 describe("L'API DSC", () => {
   describe('concernant la limitation de trafic', () => {
-    const creeServeurAvecLimiteDeRequetes = (
-      maxRequetesParMinute: number
-    ) =>
+    const creeServeurAvecLimiteDeRequetes = (maxRequetesParMinute: number) =>
       creeServeur({
+        entrepotRessourcesCyber: entrepotRessourcesCyberMemoire,
         serveurLab: {
           reseau: {
             trustProxy: 0,
