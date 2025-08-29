@@ -1,5 +1,62 @@
 import { ConfigurationServeur } from '../../src/api/dsc';
 import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
+import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+
+export const fauxAdaptateurOIDC: AdaptateurOIDC = {
+  recupereInformationsUtilisateur: async (_accessToken: string) => ({
+    email: '',
+    nom: '',
+    prenom: '',
+    siret: '',
+  }),
+  recupereJeton: async (_requete) => ({ accessToken: '', idToken: '' }),
+  genereDemandeAutorisation: async () => ({
+    url: '',
+    nonce: '',
+    state: '',
+  }),
+  genereDemandeDeconnexion: async (_) => ({ url: '', state: '' }),
+};
+
+export const fauxAdaptateurJWT: AdaptateurJWT = {
+  genereToken: (_: Record<string, unknown>) => '',
+  decode: (_: string) => ({}),
+};
+
+export const fauxAdaptateurHachage: AdaptateurHachage = {
+  hache: (valeur: string): string => `${valeur}-hache`,
+  hacheBCrypt: async (valeur: string): Promise<string> =>
+    `${valeur}-hacheBCrypt`,
+  compareBCrypt: async (
+    _valeurEnClair: string,
+    _empreinte: string
+  ): Promise<boolean> => true,
+};
+
+export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  hachage: () => ({
+    tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
+  }),
+  oidc: () => ({
+    urlRedirectionApresAuthentification: () => '',
+    urlRedirectionApresDeconnexion: () => '',
+    urlBase: () => '',
+    clientId: () => '',
+    clientSecret: () => '',
+  }),
+  grist: () => ({
+    urlDeBase: '',
+    cleApi: '',
+    ressourcesCyber: () => ({ idDocument: '', idTable: '' }),
+  }),
+  estEntrepotsStatiques: () => true,
+};
+
+const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   serveurLab: {
@@ -10,4 +67,8 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     },
   },
   entrepotRessourcesCyber: entrepotRessourcesCyberMemoire,
+  adaptateurOIDC: fauxAdaptateurOIDC,
+  adaptateurHachage: fauxAdaptateurHachage,
+  adaptateurJWT: fauxAdaptateurJWT,
+  entrepotUtilisateur,
 };
