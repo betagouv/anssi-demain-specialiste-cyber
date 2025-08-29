@@ -30,7 +30,9 @@ const ressourceApresAuthentificationOIDC = ({
       requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token = adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
-      reponse.sendStatus(200);
+      reponse.sendFile(`./pages/apres-authentification.html`, {
+        root: '.',
+      });
     } catch {
       reponse.sendStatus(401);
     }

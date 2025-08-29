@@ -112,6 +112,15 @@ describe('La ressource apres authentification OIDC', () => {
         const session = decodeSessionDuCookie(reponse, 0);
         expect(session.AgentConnectIdToken).toBe('tokenAgentConnect');
       });
+
+      it('sert la page apres-authentification', async () => {
+        const reponse = await requeteGet();
+
+        expect(reponse.headers['content-type']).toEqual(
+          'text/html; charset=UTF-8'
+        );
+        expect(reponse.text).toMatchSnapshot();
+      });
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
