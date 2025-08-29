@@ -10,7 +10,7 @@
     "prestart": "tsc",
     "start": "node ./dist/serveur.js",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json"
   },
   "keywords": [],
   "author": "Lab de l’ANSSI",
@@ -21,21 +21,13 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.34.0",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
     "@types/supertest": "^6.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.41.0",
-    "@typescript-eslint/parser": "^8.41.0",
-    "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "jiti": "^2.5.1",
-    "prettier": "^3.6.2",
     "supertest": "^7.1.4",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.41.0",
-    "vitest": "^3.2.4",
     "tsx": "^4.20.5"
   }
 }

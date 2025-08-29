@@ -1,24 +1,22 @@
 import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
+import express from 'express';
+import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
+  recupereCheminVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = creeServeurLab(configurationServeur.serveurLab);
 
-  app.get('/', (_requete, reponse) => {
-    reponse.send('Bonjour DSC');
-  });
-
-  app.get('/catalogue', (_requete, reponse) => {
-    reponse.sendFile(`./pages/catalogue.html`, {
-      root: '.',
-    });
-  });
+  app.use(
+    '/',
+    express.static(configurationServeur.recupereCheminVersFichiersStatiques())
+  );
 
   app.use(
     '/api/ressources-cyber',
