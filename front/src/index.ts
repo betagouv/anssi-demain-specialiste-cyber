@@ -1,1 +1,1 @@
-export { default as Catalogue } from './Catalogue.svelte';
+export * from './Catalogue.svelte';
