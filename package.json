@@ -7,20 +7,20 @@
     "url": "https://github.com/betagouv/anssi-demain-specialiste-cyber.git"
   },
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
+    "dev": "npm-run-all --parallel dev:front dev:back",
+    "dev:front": "npm --workspace=front run dev",
+    "dev:back": "npm --workspace=back run dev",
     "lint": "npm run lint --workspaces --if-present",
     "start": "npm start --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
-  },
-  "dependencies": {
-
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "@typescript-eslint/parser": "^8.41.0",
     "eslint": "^9.34.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0",
@@ -28,6 +28,7 @@
   },
   "private": true,
   "workspaces": [
-    "back", "front"
+    "back",
+    "front"
   ]
 }

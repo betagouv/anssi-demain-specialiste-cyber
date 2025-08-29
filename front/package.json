@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "dev": "vite build --watch",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
   },
