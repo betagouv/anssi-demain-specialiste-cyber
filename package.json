@@ -11,7 +11,7 @@
     "dev:front": "npm --workspace=front run dev",
     "dev:back": "npm --workspace=back run dev",
     "lint": "npm run lint --workspaces --if-present",
-    "start": "npm start --workspaces --if-present",
+    "start": "npm run --workspace=front build && npm start --workspace=back",
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
