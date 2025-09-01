@@ -4,7 +4,9 @@
   "description": "Backend « DemainSpécialisteCyber »",
   "main": "src/serveur.ts",
   "scripts": {
-    "dev": "node --import tsx --env-file .env --watch src/serveur.ts",
+    "dev": "npm-run-all --parallel --race dev:bdd dev:server",
+    "dev:bdd": "docker compose up db",
+    "dev:server": "sleep 3 && npm run migre-bdd && node --import tsx --env-file .env --watch src/serveur.ts",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "prestart": "tsc",
@@ -12,7 +14,8 @@
     "start": "node ./dist/serveur.js",
     "test": "vitest",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
-    "cree-migration": "knex migrate:make -x ts"
+    "cree-migration": "knex migrate:make -x ts",
+    "migre-bdd": "node --env-file=.env --import tsx ../node_modules/knex/bin/cli.js migrate:latest"
   },
   "keywords": [],
   "author": "Lab de l’ANSSI",
