@@ -11,7 +11,8 @@
     "build": "tsc",
     "start": "node ./dist/serveur.js",
     "test": "vitest",
-    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json"
+    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
+    "cree-migration": "knex migrate:make -x ts"
   },
   "keywords": [],
   "author": "Lab de l’ANSSI",
@@ -25,7 +26,8 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
-    "openid-client": "^5.7.1"
+    "openid-client": "^5.7.1",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
@@ -40,6 +42,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "jiti": "^2.5.1",
     "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.41.0",
