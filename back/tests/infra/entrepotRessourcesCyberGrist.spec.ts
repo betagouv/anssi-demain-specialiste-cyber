@@ -6,78 +6,6 @@ import {
 import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
-type LigneGrist = {
-  id: number;
-  titre: string;
-};
-
-interface ConstructeurDeTest<T> {
-  construis(): T;
-}
-
-class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
-  _idLigne: number = 0;
-  _titreLigne: string = '';
-
-  avecId(id: number): ConstructeurDeTest<LigneGrist> {
-    this._idLigne = id;
-    return this;
-  }
-
-  avecTitre(titre: string): ConstructeurDeTest<LigneGrist> {
-    this._titreLigne = titre;
-    return this;
-  }
-
-  construis(): LigneGrist {
-    return { id: this._idLigne, titre: this._titreLigne };
-  }
-}
-
-class ConstructeurReponseRessourceCyberGrist
-  implements ConstructeurDeTest<ReponseRessourceCyberGrist>
-{
-  private _lignes: LigneGrist[] = [];
-
-  ajouteUneLigne(ligne: LigneGrist): ConstructeurReponseRessourceCyberGrist {
-    this._lignes.push(ligne);
-    return this;
-  }
-
-  construis(): ReponseRessourceCyberGrist {
-    return {
-      records: this._lignes.map((l) => ({
-        id: l.id,
-        fields: {
-          A: '',
-          Titre: l.titre,
-          Description: '',
-          Besoins: [],
-          Thematiques: [],
-          Type: [],
-          Cible: [],
-          Parcours_sur_page: [],
-          Label_DSC: false,
-          Cycle_si_eleves: [],
-          Porteur: [],
-          Lien: '',
-        },
-      })),
-    };
-  }
-}
-
-const reponseCyberEnJeux = (): ReponseRessourceCyberGrist => {
-  return new ConstructeurReponseRessourceCyberGrist()
-    .ajouteUneLigne(
-      new ConstructeurLigneGrist()
-        .avecId(1)
-        .avecTitre('CyberEnJeux')
-        .construis()
-    )
-    .construis();
-};
-
 describe("L'entrepôt de ressources cyber Grist ", () => {
   const reponseVide = { records: [] };
 
@@ -121,7 +49,14 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
       ReponseRessourceCyberGrist
     > = async () => {
-      return reponseCyberEnJeux();
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecId(1)
+            .avecTitre('CyberEnJeux')
+            .construis()
+        )
+        .construis();
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
       ressourcesCyberGrist
@@ -133,7 +68,109 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       {
         id: 1,
         titre: 'CyberEnJeux',
+        thematiques: [],
       },
     ]);
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne thématiques', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecThematiques([
+              'Techniques de sécurité numérique',
+              'Comportements numériques',
+              'Valoriser les talents féminins',
+            ])
+            .construis()
+        )
+        .construis();
+    };
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist
+    );
+
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].thematiques).toStrictEqual([
+      'Techniques de sécurité numérique',
+      'Comportements numériques',
+      'Valoriser les talents féminins',
+    ]);
+  });
 });
+
+type LigneGrist = {
+  id: number;
+  titre: string;
+  thematiques: string[];
+};
+
+interface ConstructeurDeTest<T> {
+  construis(): T;
+}
+
+class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
+  _idLigne: number = 0;
+  _titreLigne: string = '';
+  _thematiques: string[] = [];
+
+  avecId(id: number): ConstructeurLigneGrist {
+    this._idLigne = id;
+    return this;
+  }
+
+  avecTitre(titre: string): ConstructeurLigneGrist {
+    this._titreLigne = titre;
+    return this;
+  }
+
+  avecThematiques(thematiques: string[]): ConstructeurLigneGrist {
+    this._thematiques = ['L', ...thematiques];
+    return this;
+  }
+
+  construis(): LigneGrist {
+    return {
+      id: this._idLigne,
+      titre: this._titreLigne,
+      thematiques: this._thematiques,
+    };
+  }
+}
+
+class ConstructeurReponseRessourceCyberGrist
+  implements ConstructeurDeTest<ReponseRessourceCyberGrist>
+{
+  private _lignes: LigneGrist[] = [];
+
+  ajouteUneLigne(ligne: LigneGrist): ConstructeurReponseRessourceCyberGrist {
+    this._lignes.push(ligne);
+    return this;
+  }
+
+  construis(): ReponseRessourceCyberGrist {
+    return {
+      records: this._lignes.map((l) => ({
+        id: l.id,
+        fields: {
+          A: '',
+          Titre: l.titre,
+          Description: '',
+          Besoins: [],
+          Thematiques: l.thematiques,
+          Type: [],
+          Cible: [],
+          Parcours_sur_page: [],
+          Label_DSC: false,
+          Cycle_si_eleves: [],
+          Porteur: [],
+          Lien: '',
+        },
+      })),
+    };
+  }
+}

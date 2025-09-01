@@ -2,14 +2,19 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import { configurationDeTestDuServeur } from './fauxObjets';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
+import {
+  configurationDeTestDuServeur,
+  ConfigurationServeurDeTest,
+} from './fauxObjets';
 
 describe('La ressource des ressources cyber', () => {
+  let configuration: ConfigurationServeurDeTest;
   let serveur: Express;
 
   beforeEach(() => {
-    serveur = creeServeur(configurationDeTestDuServeur);
+    configuration = configurationDeTestDuServeur();
+    serveur = creeServeur(configuration);
   });
 
   describe('sur une demande GET', () => {
@@ -19,12 +24,19 @@ describe('La ressource des ressources cyber', () => {
     });
 
     it('renvoie une liste de ressources cyber', async () => {
+      configuration.entrepotRessourcesCyber.ajoute({
+        id: 1,
+        titre: 'ressource 1',
+        thematiques: ['theme 1', 'theme 2'],
+      });
+
       const reponse = await request(serveur).get('/api/ressources-cyber');
 
       expect(reponse.body).toStrictEqual<RessourceCyber[]>([
         {
           id: 1,
           titre: 'ressource 1',
+          thematiques: ['theme 1', 'theme 2'],
         },
       ]);
     });

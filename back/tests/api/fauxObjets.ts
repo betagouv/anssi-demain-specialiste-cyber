@@ -4,7 +4,7 @@ import { ConfigurationServeur } from '../../src/api/dsc';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { entrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
+import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
@@ -57,9 +57,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   estEntrepotsStatiques: () => true,
 };
 
-const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+export type ConfigurationServeurDeTest = ConfigurationServeur & {
+  entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;
+};
 
-export const configurationDeTestDuServeur: ConfigurationServeur = {
+export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   serveurLab: {
     reseau: {
       trustProxy: '0',
@@ -67,10 +69,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
       ipAutorisees: false,
     },
   },
-  entrepotRessourcesCyber: entrepotRessourcesCyberMemoire,
+  entrepotRessourcesCyber: new EntrepotRessourcesCyberMemoire(),
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurJWT: fauxAdaptateurJWT,
-  entrepotUtilisateur,
+  entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
   recupereCheminVersFichiersStatiques: () => join(__dirname, '../pagesDeTest'),
-};
+});

@@ -1,10 +1,17 @@
 import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
+import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
-export const entrepotRessourcesCyberMemoire: EntrepotRessourcesCyber = {
-  tous: async () => [
-    {
-      id: 1,
-      titre: 'ressource 1',
-    },
-  ],
-};
+export class EntrepotRessourcesCyberMemoire implements EntrepotRessourcesCyber {
+  _entites: RessourceCyber[] = [];
+
+  ajoute(ressourceCyber: RessourceCyber) {
+    this._entites.push(ressourceCyber);
+  }
+
+  async tous() {
+    return this._entites;
+  }
+}
+
+export const entrepotRessourcesCyberMemoire: EntrepotRessourcesCyberMemoire =
+  new EntrepotRessourcesCyberMemoire();
