@@ -5,6 +5,10 @@ import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurChiffrement } from './adaptateurChiffrement';
 import { AdaptateurHachage } from './adaptateurHachage';
 
+type UtilisateurBDD = {
+  email_hache: string;
+};
+
 export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
   adaptateurHachage: AdaptateurHachage;
@@ -27,8 +31,13 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
       throw new Error();
     }
   }
-  async parEmailHache(_emailHache: string): Promise<Utilisateur | undefined> {
-    throw new Error();
+  async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
+    if (!emailHache) return undefined;
+    const utilisateur = await this.knex('utilisateurs')
+      .where({ email_hache: emailHache })
+      .first();
+    if (!utilisateur) return undefined;
+    return this.hydrateUtilisateur(utilisateur);
   }
 
   async existe(emailHache: string) {
@@ -43,5 +52,16 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   }
   async taille(): Promise<number> {
     throw new Error();
+  }
+
+  private hydrateUtilisateur(_utilisateur: UtilisateurBDD): Utilisateur {
+    return new Utilisateur({
+      cguAcceptees: true,
+      email: '',
+      infolettreAcceptee: true,
+      nom: '',
+      prenom: '',
+      siretEntite: '',
+    });
   }
 }
