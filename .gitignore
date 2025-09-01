@@ -134,3 +134,7 @@ media/public/videos/*
 
 /*.iml
 /.idea/
+
+# Base de données
+
+bdd-dsc/

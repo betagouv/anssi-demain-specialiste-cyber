@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5435:5432'
+    volumes:
+      - ./bdd-dsc:/var/lib/postgresql/data
