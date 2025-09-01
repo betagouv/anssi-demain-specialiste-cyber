@@ -8,6 +8,7 @@ import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGri
 import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
+import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 
 const app = creeServeur({
   adaptateurOIDC,
@@ -19,6 +20,9 @@ const app = creeServeur({
   adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
   entrepotUtilisateur: new EntrepotUtilisateurPostgres({
     adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
+    adaptateurChiffrement: fabriqueAdaptateurChiffrement({
+      adaptateurEnvironnement,
+    }),
   }),
   recupereCheminVersFichiersStatiques:
     recupereCheminVersFichiersStatiquesParDefaut,
