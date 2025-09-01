@@ -17,7 +17,9 @@ const app = creeServeur({
     : new EntrepotRessourcesCyberGrist(),
   adaptateurJWT,
   adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
-  entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
+  entrepotUtilisateur: new EntrepotUtilisateurPostgres({
+    adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
+  }),
   recupereCheminVersFichiersStatiques:
     recupereCheminVersFichiersStatiquesParDefaut,
 });
