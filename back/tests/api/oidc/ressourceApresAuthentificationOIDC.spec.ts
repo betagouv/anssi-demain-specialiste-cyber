@@ -1,17 +1,17 @@
-import { beforeEach, describe, expect, it } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
+import { ConfigurationServeur, creeServeur } from '../../../src/api/dsc';
+import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
+import { Utilisateur } from '../../../src/metier/utilisateur';
+import { EntrepotUtilisateurMemoire } from '../../infra/entrepotUtilisateurMemoire';
+import { decodeSessionDuCookie } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
 } from '../fauxObjets';
-import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
-import { decodeSessionDuCookie } from '../cookie';
-import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
-import { Utilisateur } from '../../../src/metier/utilisateur';
-import { ConfigurationServeur, creeServeur } from '../../../src/api/dsc';
-import { EntrepotUtilisateurMemoire } from '../../infra/entrepotUtilisateurMemoire';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -25,7 +25,7 @@ describe('La ressource apres authentification OIDC', () => {
       adaptateurJWT = fauxAdaptateurJWT;
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       const configurationServeur: ConfigurationServeur = {
-        ...configurationDeTestDuServeur,
+        ...configurationDeTestDuServeur(),
         adaptateurOIDC,
         adaptateurJWT,
         entrepotUtilisateur,

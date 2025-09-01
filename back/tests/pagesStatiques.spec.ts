@@ -5,7 +5,7 @@ import { creeServeur } from '../src/api/dsc';
 import { configurationDeTestDuServeur } from './api/fauxObjets';
 
 describe('Le serveur de pages statiques', () => {
-  const serveur = creeServeur(configurationDeTestDuServeur);
+  const serveur = creeServeur(configurationDeTestDuServeur());
 
   const appelleUnePageStatique = (serveur: Express) =>
     request(serveur).get('/catalogue/');

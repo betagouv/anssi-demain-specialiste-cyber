@@ -55,6 +55,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
     return reponse.records.map((record) => ({
       id: record.id,
       titre: record.fields.Titre,
+      thematiques: record.fields.Thematiques.slice(1),
     }));
   }
 }

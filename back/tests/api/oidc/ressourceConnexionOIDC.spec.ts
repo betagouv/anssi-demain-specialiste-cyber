@@ -1,12 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { creeServeur } from '../../../src/api/dsc';
 import { AgentConnectInfo, enObjet } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurOIDC,
 } from '../fauxObjets';
-import { creeServeur } from '../../../src/api/dsc';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {
@@ -19,7 +19,7 @@ describe('La ressource connexion OIDC', () => {
         nonce: 'un faux nonce',
       });
       serveur = creeServeur({
-        ...configurationDeTestDuServeur,
+        ...configurationDeTestDuServeur(),
         adaptateurOIDC,
       });
     });

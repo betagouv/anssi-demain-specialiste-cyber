@@ -7,7 +7,7 @@ describe("L'API DSC", () => {
   describe('concernant la limitation de trafic', () => {
     const creeServeurAvecLimiteDeRequetes = (maxRequetesParMinute: number) =>
       creeServeur({
-        ...configurationDeTestDuServeur,
+        ...configurationDeTestDuServeur(),
         serveurLab: {
           reseau: {
             trustProxy: 0,
