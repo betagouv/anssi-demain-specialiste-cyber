@@ -6,40 +6,80 @@ import {
 import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
+type LigneGrist = {
+  id: number;
+  titre: string;
+};
+
+interface ConstructeurDeTest<T> {
+  construis(): T;
+}
+
+class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
+  _idLigne: number = 0;
+  _titreLigne: string = '';
+
+  avecId(id: number): ConstructeurDeTest<LigneGrist> {
+    this._idLigne = id;
+    return this;
+  }
+
+  avecTitre(titre: string): ConstructeurDeTest<LigneGrist> {
+    this._titreLigne = titre;
+    return this;
+  }
+
+  construis(): LigneGrist {
+    return { id: this._idLigne, titre: this._titreLigne };
+  }
+}
+
+class ConstructeurReponseRessourceCyberGrist
+  implements ConstructeurDeTest<ReponseRessourceCyberGrist>
+{
+  private _lignes: LigneGrist[] = [];
+
+  ajouteUneLigne(ligne: LigneGrist): ConstructeurReponseRessourceCyberGrist {
+    this._lignes.push(ligne);
+    return this;
+  }
+
+  construis(): ReponseRessourceCyberGrist {
+    return {
+      records: this._lignes.map((l) => ({
+        id: l.id,
+        fields: {
+          A: '',
+          Titre: l.titre,
+          Description: '',
+          Besoins: [],
+          Thematiques: [],
+          Type: [],
+          Cible: [],
+          Parcours_sur_page: [],
+          Label_DSC: false,
+          Cycle_si_eleves: [],
+          Porteur: [],
+          Lien: '',
+        },
+      })),
+    };
+  }
+}
+
+const reponseCyberEnJeux = (): ReponseRessourceCyberGrist => {
+  return new ConstructeurReponseRessourceCyberGrist()
+    .ajouteUneLigne(
+      new ConstructeurLigneGrist()
+        .avecId(1)
+        .avecTitre('CyberEnJeux')
+        .construis()
+    )
+    .construis();
+};
+
 describe("L'entrepôt de ressources cyber Grist ", () => {
   const reponseVide = { records: [] };
-
-  const reponseCyberEnJeux = {
-    records: [
-      {
-        id: 1,
-        fields: {
-          A: '4e24da60-90c0-4aee-baa3-8666fa816fed',
-          Titre: 'CyberEnJeux',
-          Description: 'Former à la cybersécurité par le jeu',
-          Besoins: ['L', "S'entraîner", 'Prévenir'],
-          Thematiques: [
-            'L',
-            'Techniques de sécurité numérique',
-            'Comportements numériques',
-            'Valoriser les talents féminins',
-          ],
-          Type: ['L', 'Jeux'],
-          Cible: ['L', 'Personnel éducatif', 'Elèves'],
-          Parcours_sur_page: [
-            'L',
-            'Accueil',
-            'Parcours Enseignant',
-            'Parcours Eleves',
-          ],
-          Label_DSC: true,
-          Cycle_si_eleves: ['L', 'Ecole', 'Collège', 'Lycée'],
-          Porteur: ['L', 'Etat (ministères, opérateurs)', 'ANSSI'],
-          Lien: 'https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu',
-        },
-      },
-    ],
-  };
 
   it('sait appeler la bonne ressource', async () => {
     let urlAppelee = '';
@@ -81,7 +121,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
       ReponseRessourceCyberGrist
     > = async () => {
-      return reponseCyberEnJeux;
+      return reponseCyberEnJeux();
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
       ressourcesCyberGrist
