@@ -1,16 +1,25 @@
 import Knex from 'knex';
+import config from '../../knexfile';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Utilisateur } from '../metier/utilisateur';
+import { AdaptateurChiffrement } from './adaptateurChiffrement';
 import { AdaptateurHachage } from './adaptateurHachage';
-import config from '../../knexfile';
 
 export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
   adaptateurHachage: AdaptateurHachage;
+  adaptateurChiffrement: AdaptateurChiffrement;
 
-  constructor({ adaptateurHachage }: { adaptateurHachage: AdaptateurHachage }) {
+  constructor({
+    adaptateurHachage,
+    adaptateurChiffrement,
+  }: {
+    adaptateurHachage: AdaptateurHachage;
+    adaptateurChiffrement: AdaptateurChiffrement;
+  }) {
     this.knex = Knex(config);
     this.adaptateurHachage = adaptateurHachage;
+    this.adaptateurChiffrement = adaptateurChiffrement;
   }
 
   async ajoute(_utilisateur: Utilisateur) {

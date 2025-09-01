@@ -6,6 +6,9 @@ type OIDC = {
   clientSecret: () => string;
 };
 export type AdaptateurEnvironnement = {
+  chiffrement: () => {
+    cleChaCha20Hex: () => string;
+  };
   grist: () => {
     urlDeBase: string;
     cleApi: string;
@@ -69,6 +72,17 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
         .sort(
           ({ version: version1 }, { version: version2 }) => version1 - version2
         );
+    },
+  }),
+  chiffrement: () => ({
+    cleChaCha20Hex: () => {
+      const cleHex = process.env.CHIFFREMENT_CHACHA20_CLE_HEX;
+      if (!cleHex) {
+        throw new Error(
+          `La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`
+        );
+      }
+      return cleHex;
     },
   }),
 };

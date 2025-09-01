@@ -55,6 +55,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     ressourcesCyber: () => ({ idDocument: '', idTable: '' }),
   }),
   estEntrepotsStatiques: () => true,
+  chiffrement: () => ({
+    cleChaCha20Hex: () => 'uneCléCha20Hex',
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
