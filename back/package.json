@@ -8,6 +8,7 @@
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "prestart": "tsc",
+    "build": "tsc",
     "start": "node ./dist/serveur.js",
     "test": "vitest",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json"
