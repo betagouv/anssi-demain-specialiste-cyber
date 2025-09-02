@@ -9,9 +9,10 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
+import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
-import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
+import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -49,6 +50,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceApresAuthentificationOIDC(configurationServeur)
   );
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
+  app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   app.use(
     '/api/ressources-cyber',
