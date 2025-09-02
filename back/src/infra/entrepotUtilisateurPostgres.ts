@@ -7,6 +7,10 @@ import { AdaptateurHachage } from './adaptateurHachage';
 
 type DonneesUtilisateurEnClair = {
   email: string;
+  prenom: string;
+  nom: string;
+  siret: string;
+  infolettreAcceptee: boolean;
 };
 
 type UtilisateurBDD = {
@@ -68,10 +72,10 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     return new Utilisateur({
       cguAcceptees: true,
       email: donnees.email,
-      infolettreAcceptee: true,
-      nom: '',
-      prenom: '',
-      siretEntite: '',
+      infolettreAcceptee: donnees.infolettreAcceptee,
+      nom: donnees.nom,
+      prenom: donnees.prenom,
+      siretEntite: donnees.siret,
     });
   }
 
@@ -80,6 +84,10 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   ): UtilisateurBDD {
     const donneesEnClair: DonneesUtilisateurEnClair = {
       email: utilisateur.email,
+      prenom: utilisateur.prenom,
+      nom: utilisateur.nom,
+      siret: utilisateur.siretEntite,
+      infolettreAcceptee: utilisateur.infolettreAcceptee,
     };
     const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
     return {
