@@ -24,11 +24,7 @@ $ docker compose up db
 $ docker compose up db -d # démarre en mode daemon
 ```
 
-- Se connecter au conteneur de la base de données et créer une nouvelle base `dsc` pour un utilisateur postgres.
-
-```shell
-$ docker compose exec db createdb -U postgres dsc
-```
+- La base de données `dsc` est créée automatiquement lors du premier lancement grâce au fichier d'initialisation `docker-entrypoint-initdb.d/initialise.sql`
 
 - Revenir à la racine, installer les dépendances Node et lancer le projet en mode "dev"
 
