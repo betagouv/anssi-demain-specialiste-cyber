@@ -2,17 +2,16 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { lesRessourcesCyberTriees, lesSelectionsDesRessourcesCyber } from './ressourceCyber';
+  import { lesRessourcesCyberTriees } from './ressourceCyber';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
-  import { ressourcesCyberFiltre } from './stores/ressourcesCyberFiltre.store';
+  import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
+  import { rechercheParSelection } from './stores/rechercheParSelection.store';
 
-  let selections: string[] = [];
 
   onMount(async () => {
     const reponse = await fetch('/api/ressources-cyber');
     const ressourcesCyber = lesRessourcesCyberTriees(await reponse.json());
-    selections = lesSelectionsDesRessourcesCyber(ressourcesCyber);
     ressourcesCyberStore.initialise(ressourcesCyber);
   });
 </script>
@@ -27,7 +26,7 @@
       <label>
         <select bind:value={$rechercheParThematique}>
           <option value="">Toutes les thématiques</option>
-          {#each $ressourcesCyberFiltre.thematiques as thematique}
+          {#each $ressourcesCyberFiltrees.thematiques as thematique}
             <option value={thematique}>{thematique}</option>
           {/each}
         </select>
@@ -36,10 +35,10 @@
     <fieldset>
       <legend>Sélection</legend>
       <ul>
-        {#each selections as selection}
+        {#each $ressourcesCyberFiltrees.selections as selection}
           <li>
             <label>
-              <input type="checkbox" value={selection} />
+              <input bind:group={$rechercheParSelection} type="checkbox" value={selection} />
               <span>{selection}</span>
             </label>
           </li>
@@ -49,7 +48,7 @@
   </div>
 
   <div class="conteneur">
-    {#each $ressourcesCyberFiltre.resultat as { id, titre } (id)}
+    {#each $ressourcesCyberFiltrees.resultat as { id, titre } (id)}
       <div id={`${id}`}>{titre}</div>
     {:else}
       <p>Chargement...</p>

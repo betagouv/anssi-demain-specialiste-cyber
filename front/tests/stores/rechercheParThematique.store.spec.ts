@@ -2,6 +2,7 @@ import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { RessourceCyber } from '../../src/ressourceCyber';
 import { rechercheParThematique } from '../../src/stores/rechercheParThematique.store';
+import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
 describe('La recherche par thématique', () => {
   it('est vide quand on la réinitialise', () => {
@@ -13,11 +14,9 @@ describe('La recherche par thématique', () => {
   });
 
   describe('permet de filtrer les ressources Cyber', () => {
-    const ressourceCyber: RessourceCyber = {
-      id: 1,
-      titre: 'Ressource 1',
-      thematiques: ['Thème 1'],
-    };
+    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
+      .avecThematiques(['Thème 1'])
+      .construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
       const resultat = rechercheParThematique.ok(ressourceCyber);
