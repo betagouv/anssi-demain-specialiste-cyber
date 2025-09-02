@@ -31,7 +31,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     this.adaptateurChiffrement = adaptateurChiffrement;
   }
 
-  async ajoute(utilisateur: Utilisateur) {
+  async ajoute(utilisateur: Utilisateur): Promise<void> {
     await this.knex('utilisateurs').insert(
       this.utilisateurBDDAvecDonneesChiffrees(utilisateur)
     );
@@ -46,19 +46,19 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     return this.hydrateUtilisateur(utilisateur);
   }
 
-  async existe(emailHache: string) {
+  async existe(emailHache: string): Promise<boolean> {
     const utilisateur = await this.knex('utilisateurs')
       .where({ email_hache: emailHache })
       .first();
     return !!utilisateur;
   }
 
-  async tous() {
+  async tous(): Promise<Utilisateur[]> {
     const utilisateursBDD = await this.knex('utilisateurs');
     return utilisateursBDD.map(this.hydrateUtilisateur);
   }
 
-  async taille() {
+  async taille(): Promise<number> {
     const resultat = await this.knex('utilisateurs').count({ count: '*' });
     return Number(resultat[0].count);
   }
