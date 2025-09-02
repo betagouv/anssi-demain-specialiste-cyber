@@ -53,8 +53,9 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     return !!utilisateur;
   }
 
-  async tous(): Promise<Utilisateur[]> {
-    throw new Error();
+  async tous() {
+    const utilisateursBDD = await this.knex('utilisateurs');
+    return utilisateursBDD.map(this.hydrateUtilisateur);
   }
 
   async taille() {
