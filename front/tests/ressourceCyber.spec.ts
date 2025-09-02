@@ -2,19 +2,19 @@ import { describe, expect, it } from 'vitest';
 import {
   lesSelectionsDesRessourcesCyber,
   lesThematiquesCyber,
-  RessourceCyber,
 } from '../src/ressourceCyber';
+import { unConstructeurDeRessourceCyber } from './constructeurRessourceCyber';
 
 describe('Les ressources Cyber', () => {
   it('sort la liste des thématiques', () => {
     const thematiques = lesThematiquesCyber([
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecThematiques(['Réseau', 'Sécurité'])
         .construis(),
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecThematiques(['Cryptographie'])
         .construis(),
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecThematiques(['Réseau', 'Cryptographie'])
         .construis(),
     ]);
@@ -24,13 +24,13 @@ describe('Les ressources Cyber', () => {
 
   it('sort la liste des sélections', () => {
     const selections = lesSelectionsDesRessourcesCyber([
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecSelections(['Parents', 'Enseignants'])
         .construis(),
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecSelections(['Enseignants', 'Élèves'])
         .construis(),
-      new ConstructeurRessourceCyber()
+      unConstructeurDeRessourceCyber()
         .avecSelections(['Parents', 'Élèves'])
         .construis(),
     ]);
@@ -38,33 +38,3 @@ describe('Les ressources Cyber', () => {
     expect(selections).toStrictEqual(['Élèves', 'Enseignants', 'Parents']);
   });
 });
-
-interface Constructeur<T> {
-  construis(): T;
-}
-
-class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
-  private _selections: string[] = [];
-  private _id: number = 1000;
-  private _titre: string = 'Un titre';
-  private _thematiques: string[] = [];
-
-  avecSelections(selections: string[]): ConstructeurRessourceCyber {
-    this._selections = selections;
-    return this;
-  }
-
-  avecThematiques(thematiques: string[]): ConstructeurRessourceCyber {
-    this._thematiques = thematiques;
-    return this;
-  }
-
-  construis(): RessourceCyber {
-    return {
-      id: this._id,
-      titre: this._titre,
-      thematiques: this._thematiques,
-      selections: this._selections,
-    };
-  }
-}
