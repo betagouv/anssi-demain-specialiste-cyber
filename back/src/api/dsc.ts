@@ -53,7 +53,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
-  app.use('/api/profil', ressourceProfil());
+  app.use('/api/profil', ressourceProfil(configurationServeur));
 
   app.use(
     '/api/ressources-cyber',
