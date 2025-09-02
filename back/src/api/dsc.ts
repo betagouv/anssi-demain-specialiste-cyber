@@ -11,6 +11,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
+import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -47,6 +48,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/oidc/apres-authentification',
     ressourceApresAuthentificationOIDC(configurationServeur)
   );
+  app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
   app.use(
     '/api/ressources-cyber',
