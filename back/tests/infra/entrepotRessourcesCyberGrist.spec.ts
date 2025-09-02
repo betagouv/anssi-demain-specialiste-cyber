@@ -69,6 +69,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         id: 1,
         titre: 'CyberEnJeux',
         thematiques: [],
+        selections: [],
       },
     ]);
   });
@@ -101,12 +102,34 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       'Valoriser les talents féminins',
     ]);
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne sélection', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecSelections(['Parents', 'Élèves'])
+            .construis()
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].selections).toStrictEqual(['Parents', 'Élèves']);
+  });
 });
 
 type LigneGrist = {
   id: number;
   titre: string;
   thematiques: string[];
+  cibles: string[];
 };
 
 interface ConstructeurDeTest<T> {
@@ -117,6 +140,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _idLigne: number = 0;
   _titreLigne: string = '';
   _thematiques: string[] = [];
+  _cibles: string[] = [];
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -133,11 +157,17 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
+  avecSelections(selections: string[]): ConstructeurLigneGrist {
+    this._cibles = ['L', ...selections];
+    return this;
+  }
+
   construis(): LigneGrist {
     return {
       id: this._idLigne,
       titre: this._titreLigne,
       thematiques: this._thematiques,
+      cibles: this._cibles,
     };
   }
 }
@@ -163,7 +193,7 @@ class ConstructeurReponseRessourceCyberGrist
           Besoins: [],
           Thematiques: l.thematiques,
           Type: [],
-          Cible: [],
+          Cible: l.cibles,
           Parcours_sur_page: [],
           Label_DSC: false,
           Cycle_si_eleves: [],

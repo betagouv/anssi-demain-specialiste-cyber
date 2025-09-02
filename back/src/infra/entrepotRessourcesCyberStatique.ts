@@ -10,6 +10,7 @@ export class EntrepotRessourcesCyberStatique
         id: 1000,
         titre: 'La sécurité pour tous',
         thematiques: [],
+        selections: [],
       },
     ];
   }

@@ -4,6 +4,7 @@ import {
   creeRecupereRessourceHttp,
   RecupereRessourceHttp,
 } from './recupereRessourceHttp';
+import { RessourceCyber } from '../metier/ressourceCyber';
 
 export type ReponseRessourceCyberGrist = {
   records: {
@@ -41,7 +42,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
     this.table = grist.ressourcesCyber().idTable;
   }
 
-  async tous() {
+  async tous(): Promise<RessourceCyber[]> {
     const url = new URL(
       `api/docs/${this.schema}/tables/${this.table}/records`,
       this.urlDeBase
@@ -56,6 +57,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       id: record.id,
       titre: record.fields.Titre,
       thematiques: record.fields.Thematiques.slice(1),
+      selections: record.fields.Cible.slice(1),
     }));
   }
 }
