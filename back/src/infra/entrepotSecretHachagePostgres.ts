@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile';
 
-type SecretHachage = { version: number; empreinte: string };
+export type SecretHachage = { version: number; empreinte: string };
 
 export interface EntrepotSecretHachage {
   tous: () => Promise<SecretHachage[]>;
