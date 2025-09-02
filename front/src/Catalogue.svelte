@@ -3,11 +3,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
+  import { rechercheParSelection } from './stores/rechercheParSelection.store';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
-  import { rechercheParSelection } from './stores/rechercheParSelection.store';
-
 
   onMount(async () => {
     const reponse = await fetch('/api/ressources-cyber');
@@ -38,7 +37,11 @@
         {#each $ressourcesCyberFiltrees.selections as selection}
           <li>
             <label>
-              <input bind:group={$rechercheParSelection} type="checkbox" value={selection} />
+              <input
+                bind:group={$rechercheParSelection}
+                type="checkbox"
+                value={selection}
+              />
               <span>{selection}</span>
             </label>
           </li>
@@ -67,5 +70,11 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .filtres {
+    select {
+      width: 100%;
+    }
   }
 </style>
