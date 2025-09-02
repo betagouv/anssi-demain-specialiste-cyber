@@ -58,6 +58,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
   }),
+  maintenance: () => ({
+    actif: () => false,
+    detailsPreparation: () => undefined,
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
