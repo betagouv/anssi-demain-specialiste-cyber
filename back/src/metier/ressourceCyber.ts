@@ -1,7 +1,9 @@
 export type RessourceCyber = {
   id: number;
-  titre: string;
+  selections: Selections;
   thematiques: Thematiques;
+  titre: string;
 };
 
+type Selections = string[];
 type Thematiques = string[];

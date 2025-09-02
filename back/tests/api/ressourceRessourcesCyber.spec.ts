@@ -26,8 +26,9 @@ describe('La ressource des ressources cyber', () => {
     it('renvoie une liste de ressources cyber', async () => {
       configuration.entrepotRessourcesCyber.ajoute({
         id: 1,
-        titre: 'ressource 1',
+        selections: ['sélection'],
         thematiques: ['theme 1', 'theme 2'],
+        titre: 'ressource 1',
       });
 
       const reponse = await request(serveur).get('/api/ressources-cyber');
@@ -35,8 +36,9 @@ describe('La ressource des ressources cyber', () => {
       expect(reponse.body).toStrictEqual<RessourceCyber[]>([
         {
           id: 1,
-          titre: 'ressource 1',
+          selections: ['sélection'],
           thematiques: ['theme 1', 'theme 2'],
+          titre: 'ressource 1',
         },
       ]);
     });
