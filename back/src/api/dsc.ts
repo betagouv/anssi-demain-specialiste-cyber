@@ -12,6 +12,7 @@ import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthent
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
+import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
 export interface ConfigurationServeur {
@@ -51,6 +52,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
+
+  app.use('/api/profil', ressourceProfil());
 
   app.use(
     '/api/ressources-cyber',
