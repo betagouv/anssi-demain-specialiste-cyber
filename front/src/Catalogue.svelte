@@ -2,11 +2,11 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import FiltreThematique from './FiltreThematique.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
   import { rechercheParSelection } from './stores/rechercheParSelection.store';
-  import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { rechercheParType } from './stores/rechercheParType.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
@@ -23,17 +23,8 @@
 <div class="catalogue">
   <div class="filtres">
     <p>Filtres</p>
-    <fieldset>
-      <legend>Thématique Cyber</legend>
-      <label>
-        <select bind:value={$rechercheParThematique}>
-          <option value="">Toutes les thématiques</option>
-          {#each $ressourcesCyberFiltrees.thematiques as thematique}
-            <option value={thematique}>{thematique}</option>
-          {/each}
-        </select>
-      </label>
-    </fieldset>
+    <FiltreThematique />
+
     <fieldset>
       <legend>Sélection</legend>
       <ul>
@@ -133,11 +124,5 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .filtres {
-    select {
-      width: 100%;
-    }
   }
 </style>
