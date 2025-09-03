@@ -3,12 +3,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
+  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
   import { rechercheParSelection } from './stores/rechercheParSelection.store';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
+  import { rechercheParType } from './stores/rechercheParType.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
-  import { rechercheParType } from './stores/rechercheParType.store';
 
   onMount(async () => {
     const reponse = await fetch('/api/ressources-cyber');
@@ -85,6 +86,30 @@
         {/each}
       </ul>
     </fieldset>
+
+    <fieldset>
+      <legend>Besoin</legend>
+      <ul>
+        <li>
+          <label>
+            <input bind:group={$rechercheParBesoin} type="radio" value="" />
+            <span>Tous les besoins</span>
+          </label>
+        </li>
+        {#each $ressourcesCyberFiltrees.besoins as besoin}
+          <li>
+            <label>
+              <input
+                bind:group={$rechercheParBesoin}
+                type="radio"
+                value={besoin}
+              />
+              <span>{besoin}</span>
+            </label>
+          </li>
+        {/each}
+      </ul>
+    </fieldset>
   </div>
 
   <div class="conteneur">
@@ -98,6 +123,7 @@
 
 <style lang="scss">
   .catalogue {
+    align-items: start;
     display: grid;
     gap: 1rem;
     grid-template-columns: 300px 1fr;
