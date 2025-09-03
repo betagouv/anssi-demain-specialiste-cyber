@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint . --fix",
     "prestart": "tsc",
     "build": "tsc",
-    "start": "node ./dist/serveur.js",
+    "start": "node ./dist/src/serveur.js",
     "test": "vitest",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
     "cree-migration": "knex migrate:make -x ts",
