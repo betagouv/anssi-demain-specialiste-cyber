@@ -96,14 +96,14 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
     ]);
   });
 
-  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne sélection', async () => {
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne publics cible', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
       ReponseRessourceCyberGrist
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
-            .avecSelections(['Parents', 'Élèves'])
+            .avecPublicsCible(['Parents', 'Élèves'])
             .construis()
         )
         .construis();
@@ -225,8 +225,8 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
-  avecSelections(selections: string[]): ConstructeurLigneGrist {
-    this._cibles = ['L', ...selections];
+  avecPublicsCible(publicsCible: string[]): ConstructeurLigneGrist {
+    this._cibles = ['L', ...publicsCible];
     return this;
   }
 
