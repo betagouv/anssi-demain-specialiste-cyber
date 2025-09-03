@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
+  import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
   import { rechercheParSelection } from './stores/rechercheParSelection.store';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
@@ -43,6 +44,23 @@
                 value={selection}
               />
               <span>{selection}</span>
+            </label>
+          </li>
+        {/each}
+      </ul>
+    </fieldset>
+    <fieldset>
+      <legend>Niveau</legend>
+      <ul>
+        {#each $ressourcesCyberFiltrees.niveaux as niveau}
+          <li>
+            <label>
+              <input
+                bind:group={$rechercheParNiveau}
+                type="checkbox"
+                value={niveau}
+              />
+              <span>{niveau}</span>
             </label>
           </li>
         {/each}
