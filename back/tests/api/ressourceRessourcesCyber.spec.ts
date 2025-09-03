@@ -30,6 +30,7 @@ describe('La ressource des ressources cyber', () => {
         selections: ['sélection'],
         thematiques: ['theme 1', 'theme 2'],
         titre: 'ressource 1',
+        types: ['type1', 'type2'],
       });
 
       const reponse = await request(serveur).get('/api/ressources-cyber');
@@ -41,6 +42,7 @@ describe('La ressource des ressources cyber', () => {
           selections: ['sélection'],
           thematiques: ['theme 1', 'theme 2'],
           titre: 'ressource 1',
+          types: ['type1', 'type2'],
         },
       ]);
     });

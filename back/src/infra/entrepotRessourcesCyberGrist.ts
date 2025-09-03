@@ -59,6 +59,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       thematiques: record.fields.Thematiques.slice(1),
       selections: record.fields.Cible.slice(1),
       niveaux: record.fields.Cycle_si_eleves.slice(1),
+      types: record.fields.Type.slice(1),
     }));
   }
 }
