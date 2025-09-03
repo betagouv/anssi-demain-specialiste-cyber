@@ -18,7 +18,12 @@ export type RessourcesCyberFiltrees = {
 };
 
 export const ressourcesCyberFiltrees = derived(
-  [ressourcesCyberStore, rechercheParThematique, rechercheParSelection],
+  [
+    ressourcesCyberStore,
+    rechercheParThematique,
+    rechercheParSelection,
+    rechercheParNiveau,
+  ],
   ([$store]): RessourcesCyberFiltrees => {
     const resultat = $store.filter(
       (ressourceCyber: RessourceCyber) =>
@@ -29,7 +34,7 @@ export const ressourcesCyberFiltrees = derived(
 
     const thematiques = lesThematiquesCyber($store);
     const selections = lesSelectionsDesRessourcesCyber($store);
-    const niveaux: string[] = lesNiveauxDesRessourcesCyber($store);
+    const niveaux = lesNiveauxDesRessourcesCyber($store);
 
     return { resultat, thematiques, selections, niveaux };
   }
