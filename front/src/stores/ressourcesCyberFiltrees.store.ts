@@ -11,6 +11,7 @@ import { rechercheParSelection } from './rechercheParSelection.store';
 import { rechercheParThematique } from './rechercheParThematique.store';
 import { ressourcesCyberStore } from './ressourcesCyber.store';
 import { rechercheParType } from './rechercheParType.store';
+import { rechercheParBesoin } from './rechercheParBesoin.store';
 
 export type RessourcesCyberFiltrees = {
   resultat: RessourceCyber[];
@@ -27,6 +28,7 @@ export const ressourcesCyberFiltrees = derived(
     rechercheParSelection,
     rechercheParNiveau,
     rechercheParType,
+    rechercheParBesoin,
   ],
   ([$store]): RessourcesCyberFiltrees => {
     const resultat = $store.filter(
@@ -34,7 +36,8 @@ export const ressourcesCyberFiltrees = derived(
         rechercheParThematique.ok(ressourceCyber) &&
         rechercheParSelection.ok(ressourceCyber) &&
         rechercheParNiveau.ok(ressourceCyber) &&
-        rechercheParType.ok(ressourceCyber)
+        rechercheParType.ok(ressourceCyber) &&
+        rechercheParBesoin.ok(ressourceCyber)
     );
 
     const thematiques = lesThematiquesCyber($store);

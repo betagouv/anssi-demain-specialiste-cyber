@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { RessourceCyber } from '../../src/ressourceCyber';
 import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
 import { rechercheParSelection } from '../../src/stores/rechercheParSelection.store';
@@ -7,9 +7,17 @@ import { ressourcesCyberStore } from '../../src/stores/ressourcesCyber.store';
 import { ressourcesCyberFiltrees } from '../../src/stores/ressourcesCyberFiltrees.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 import { rechercheParType } from '../../src/stores/rechercheParType.store';
+import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
+import { rechercheParThematique } from '../../src/stores/rechercheParThematique.store';
 
 describe('Le store qui contient la liste des ressources Cyber', () => {
-  beforeAll(() => {
+  beforeEach(() => {
+    rechercheParBesoin.reinitialise();
+    rechercheParNiveau.reinitialise();
+    rechercheParType.reinitialise();
+    rechercheParSelection.reinitialise();
+    rechercheParThematique.reinitialise();
+
     ressourcesCyberStore.initialise([
       unConstructeurDeRessourceCyber()
         .avecThematiques([
@@ -20,12 +28,14 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .avecSelections(['Élèves', 'Enseignants'])
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
         .avecTypes(['Jeux', 'Formation'])
+        .avecBesoins(['Découvrir les métiers', 'Découvrir la cyber'])
         .construis(),
       unConstructeurDeRessourceCyber()
         .avecThematiques(['Comportements numériques', 'Orientation'])
         .avecSelections(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
         .avecTypes(['Formation', 'Challenge'])
+        .avecBesoins(['Découvrir la cyber'])
         .construis(),
     ]);
   });
@@ -86,6 +96,16 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
   it('retourne la liste dédupliquée des types existants', () => {
     const resultat = get(ressourcesCyberFiltrees).types;
 
-    expect(resultat).toEqual(['Challenge',  'Formation', 'Jeux']);
+    expect(resultat).toEqual(['Challenge', 'Formation', 'Jeux']);
+  });
+
+  it('effectue le filtre en fonction du besoin', () => {
+    rechercheParBesoin.set('Découvrir les métiers');
+
+    const { resultat } = get(ressourcesCyberFiltrees);
+
+    expect(resultat).toStrictEqual<RessourceCyber[]>([
+      get(ressourcesCyberStore)[0],
+    ]);
   });
 });
