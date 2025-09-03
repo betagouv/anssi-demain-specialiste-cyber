@@ -2,11 +2,11 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import FiltreSelection from './FiltreSelection.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
-  import { rechercheParSelection } from './stores/rechercheParSelection.store';
   import { rechercheParType } from './stores/rechercheParType.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
@@ -24,24 +24,8 @@
   <div class="filtres">
     <p>Filtres</p>
     <FiltreThematique />
+    <FiltreSelection />
 
-    <fieldset>
-      <legend>Sélection</legend>
-      <ul>
-        {#each $ressourcesCyberFiltrees.selections as selection}
-          <li>
-            <label>
-              <input
-                bind:group={$rechercheParSelection}
-                type="checkbox"
-                value={selection}
-              />
-              <span>{selection}</span>
-            </label>
-          </li>
-        {/each}
-      </ul>
-    </fieldset>
     <fieldset>
       <legend>Niveau</legend>
       <ul>
