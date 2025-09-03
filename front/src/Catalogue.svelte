@@ -5,9 +5,9 @@
   import FiltreNiveau from './FiltreNiveau.svelte';
   import FiltreSelection from './FiltreSelection.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
+  import FiltreType from './FiltreType.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
-  import { rechercheParType } from './stores/rechercheParType.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -26,24 +26,7 @@
     <FiltreThematique />
     <FiltreSelection />
     <FiltreNiveau />
-
-    <fieldset>
-      <legend>Type</legend>
-      <ul>
-        {#each $ressourcesCyberFiltrees.types as type}
-          <li>
-            <label>
-              <input
-                bind:group={$rechercheParType}
-                type="checkbox"
-                value={type}
-              />
-              <span>{type}</span>
-            </label>
-          </li>
-        {/each}
-      </ul>
-    </fieldset>
+    <FiltreType />
 
     <fieldset>
       <legend>Besoin</legend>
