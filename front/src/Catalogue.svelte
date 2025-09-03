@@ -8,6 +8,7 @@
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
+  import { rechercheParType } from './stores/rechercheParType.store';
 
   onMount(async () => {
     const reponse = await fetch('/api/ressources-cyber');
@@ -61,6 +62,24 @@
                 value={niveau}
               />
               <span>{niveau}</span>
+            </label>
+          </li>
+        {/each}
+      </ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>Type</legend>
+      <ul>
+        {#each $ressourcesCyberFiltrees.types as type}
+          <li>
+            <label>
+              <input
+                bind:group={$rechercheParType}
+                type="checkbox"
+                value={type}
+              />
+              <span>{type}</span>
             </label>
           </li>
         {/each}
