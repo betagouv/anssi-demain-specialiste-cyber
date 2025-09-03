@@ -11,6 +11,7 @@ export class EntrepotRessourcesCyberStatique
         titre: 'La sécurité pour tous',
         thematiques: [],
         selections: [],
+        niveaux: [],
       },
     ];
   }

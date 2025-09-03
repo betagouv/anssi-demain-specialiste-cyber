@@ -1,10 +1,10 @@
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
+import { RessourceCyber } from '../metier/ressourceCyber';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import {
   creeRecupereRessourceHttp,
   RecupereRessourceHttp,
 } from './recupereRessourceHttp';
-import { RessourceCyber } from '../metier/ressourceCyber';
 
 export type ReponseRessourceCyberGrist = {
   records: {
@@ -58,6 +58,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       titre: record.fields.Titre,
       thematiques: record.fields.Thematiques.slice(1),
       selections: record.fields.Cible.slice(1),
+      niveaux: record.fields.Cycle_si_eleves.slice(1),
     }));
   }
 }
