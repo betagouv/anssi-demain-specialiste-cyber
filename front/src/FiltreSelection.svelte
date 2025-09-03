@@ -4,17 +4,17 @@
 </script>
 
 <fieldset>
-  <legend>Sélection</legend>
+  <legend>Public cible</legend>
   <ul>
-    {#each $ressourcesCyberFiltrees.publicsCible as selection}
+    {#each $ressourcesCyberFiltrees.publicsCible as publicCible}
       <li>
         <label>
           <input
             bind:group={$rechercheParPublicCible}
             type="checkbox"
-            value={selection}
+            value={publicCible}
           />
-          <span>{selection}</span>
+          <span>{publicCible}</span>
         </label>
       </li>
     {/each}
