@@ -57,7 +57,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       id: record.id,
       titre: record.fields.Titre,
       thematiques: record.fields.Thematiques.slice(1),
-      selections: record.fields.Cible.slice(1),
+      publicsCible: record.fields.Cible.slice(1),
       niveaux: record.fields.Cycle_si_eleves.slice(1),
       types: record.fields.Type.slice(1),
       besoins: record.fields.Besoins.slice(1),

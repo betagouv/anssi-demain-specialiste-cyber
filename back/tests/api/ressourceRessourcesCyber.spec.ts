@@ -24,7 +24,7 @@ describe('La ressource des ressources cyber', () => {
       configuration.entrepotRessourcesCyber.ajoute({
         id: 1,
         niveaux: ['niveau 1', 'niveau 2'],
-        selections: ['sélection'],
+        publicsCible: ['Parents'],
         thematiques: ['theme 1', 'theme 2'],
         titre: 'ressource 1',
         types: ['type1', 'type2'],
@@ -37,7 +37,7 @@ describe('La ressource des ressources cyber', () => {
         {
           id: 1,
           niveaux: ['niveau 1', 'niveau 2'],
-          selections: ['sélection'],
+          publicsCible: ['Parents'],
           thematiques: ['theme 1', 'theme 2'],
           titre: 'ressource 1',
           types: ['type1', 'type2'],

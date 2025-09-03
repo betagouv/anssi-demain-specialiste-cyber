@@ -114,7 +114,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].selections).toStrictEqual(['Parents', 'Élèves']);
+    expect(ressourcesCyber[0].publicsCible).toStrictEqual(['Parents', 'Élèves']);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne niveau', async () => {
