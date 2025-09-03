@@ -12,6 +12,7 @@ export class EntrepotRessourcesCyberStatique
         thematiques: [],
         selections: [],
         niveaux: [],
+        types: [],
       },
     ];
   }

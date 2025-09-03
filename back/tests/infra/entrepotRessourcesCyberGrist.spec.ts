@@ -71,6 +71,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         thematiques: [],
         selections: [],
         niveaux: [],
+        types: [],
       },
     ]);
   });
@@ -145,6 +146,30 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
     expect(ressourcesCyber[0].niveaux).toStrictEqual(['Cycle 1', 'Cycle 2']);
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne type', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecTypes(['Jeux & challenge', 'Parcours de formation'])
+            .construis()
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].types).toStrictEqual([
+      'Jeux & challenge',
+      'Parcours de formation',
+    ]);
+  });
 });
 
 type LigneGrist = {
@@ -153,6 +178,7 @@ type LigneGrist = {
   thematiques: string[];
   cibles: string[];
   cycles: string[];
+  types: string[];
 };
 
 interface ConstructeurDeTest<T> {
@@ -165,6 +191,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _thematiques: string[] = [];
   _cibles: string[] = [];
   _cycles: string[] = [];
+  _types: string[] = [];
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -191,6 +218,11 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
+  avecTypes(types: string[]) {
+    this._types = ['L', ...types];
+    return this;
+  }
+
   construis(): LigneGrist {
     return {
       id: this._idLigne,
@@ -198,6 +230,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
       thematiques: this._thematiques,
       cibles: this._cibles,
       cycles: this._cycles,
+      types: this._types,
     };
   }
 }
@@ -222,7 +255,7 @@ class ConstructeurReponseRessourceCyberGrist
           Description: '',
           Besoins: [],
           Thematiques: l.thematiques,
-          Type: [],
+          Type: l.types,
           Cible: l.cibles,
           Parcours_sur_page: [],
           Label_DSC: false,

@@ -3,9 +3,11 @@ export type RessourceCyber = {
   niveaux: Niveaux;
   selections: Selections;
   thematiques: Thematiques;
+  types: Types;
   titre: string;
 };
 
 type Niveaux = string[];
 type Selections = string[];
 type Thematiques = string[];
+type Types = string[];
