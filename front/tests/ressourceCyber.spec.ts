@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
-  lesSelectionsDesRessourcesCyber,
+  lesPublicsCibleDesRessourcesCyber,
   lesThematiquesCyber,
 } from '../src/ressourceCyber';
 import { unConstructeurDeRessourceCyber } from './constructeurRessourceCyber';
@@ -22,19 +22,19 @@ describe('Les ressources Cyber', () => {
     expect(thematiques).toStrictEqual(['Cryptographie', 'Réseau', 'Sécurité']);
   });
 
-  it('sort la liste des sélections', () => {
-    const selections = lesSelectionsDesRessourcesCyber([
+  it('sort la liste des publics cible', () => {
+    const publicsCible = lesPublicsCibleDesRessourcesCyber([
       unConstructeurDeRessourceCyber()
-        .avecSelections(['Parents', 'Enseignants'])
+        .avecPublicsCible(['Parents', 'Enseignants'])
         .construis(),
       unConstructeurDeRessourceCyber()
-        .avecSelections(['Enseignants', 'Élèves'])
+        .avecPublicsCible(['Enseignants', 'Élèves'])
         .construis(),
       unConstructeurDeRessourceCyber()
-        .avecSelections(['Parents', 'Élèves'])
+        .avecPublicsCible(['Parents', 'Élèves'])
         .construis(),
     ]);
 
-    expect(selections).toStrictEqual(['Élèves', 'Enseignants', 'Parents']);
+    expect(publicsCible).toStrictEqual(['Élèves', 'Enseignants', 'Parents']);
   });
 });

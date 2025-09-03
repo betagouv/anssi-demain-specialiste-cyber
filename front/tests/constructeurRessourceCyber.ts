@@ -5,7 +5,7 @@ interface Constructeur<T> {
 }
 
 class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
-  private _selections: string[] = [];
+  private _publicsCible: string[] = [];
   private _id: number = 1000;
   private _niveaux: string[] = [];
   private _titre: string = 'Un titre';
@@ -13,8 +13,8 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _types: string[] = [];
   private _besoins: string[];
 
-  avecSelections(selections: string[]): ConstructeurRessourceCyber {
-    this._selections = selections;
+  avecPublicsCible(publicsCible: string[]): ConstructeurRessourceCyber {
+    this._publicsCible = publicsCible;
     return this;
   }
 
@@ -43,7 +43,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       id: this._id,
       titre: this._titre,
       thematiques: this._thematiques,
-      selections: this._selections,
+      publicsCible: this._publicsCible,
       niveaux: this._niveaux,
       types: this._types,
       besoins: this._besoins,
