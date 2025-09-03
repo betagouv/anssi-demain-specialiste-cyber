@@ -10,6 +10,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _niveaux: string[] = [];
   private _titre: string = 'Un titre';
   private _thematiques: string[] = [];
+  private _types: string[] = [];
 
   avecSelections(selections: string[]): ConstructeurRessourceCyber {
     this._selections = selections;
@@ -26,6 +27,11 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return this;
   }
 
+  avecTypes(types: string[]) {
+    this._types = types;
+    return this;
+  }
+
   construis(): RessourceCyber {
     return {
       id: this._id,
@@ -33,6 +39,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       thematiques: this._thematiques,
       selections: this._selections,
       niveaux: this._niveaux,
+      types:this._types
     };
   }
 }

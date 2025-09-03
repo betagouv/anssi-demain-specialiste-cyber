@@ -6,6 +6,7 @@ import { rechercheParSelection } from '../../src/stores/rechercheParSelection.st
 import { ressourcesCyberStore } from '../../src/stores/ressourcesCyber.store';
 import { ressourcesCyberFiltrees } from '../../src/stores/ressourcesCyberFiltrees.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
+import { rechercheParType } from '../../src/stores/rechercheParType.store';
 
 describe('Le store qui contient la liste des ressources Cyber', () => {
   beforeAll(() => {
@@ -18,34 +19,32 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         ])
         .avecSelections(['Élèves', 'Enseignants'])
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
+        .avecTypes(['Jeux', 'Formation'])
         .construis(),
       unConstructeurDeRessourceCyber()
         .avecThematiques(['Comportements numériques', 'Orientation'])
         .avecSelections(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
+        .avecTypes(['Formation', 'Challenge'])
         .construis(),
     ]);
   });
 
   it('retourne la liste dédupliquée des thématiques existants', () => {
-    const thematiquesAttendues = [
+    const resultat = get(ressourcesCyberFiltrees).thematiques;
+
+    expect(resultat).toEqual([
       'Comportements numériques',
       'Orientation',
       'Techniques de sécurité numérique',
       'Valoriser les talents féminins',
-    ];
-
-    const resultat = get(ressourcesCyberFiltrees).thematiques;
-
-    expect(resultat).toEqual(thematiquesAttendues);
+    ]);
   });
 
   it('retourne la liste dédupliquée des sélections existants', () => {
-    const selectionsAttendues = ['Élèves', 'Enseignants', 'Parents'];
-
     const resultat = get(ressourcesCyberFiltrees).selections;
 
-    expect(resultat).toEqual(selectionsAttendues);
+    expect(resultat).toEqual(['Élèves', 'Enseignants', 'Parents']);
   });
 
   it('effectue le filtre en fonction de la sélection', () => {
@@ -69,10 +68,24 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
   });
 
   it('retourne la liste dédupliquée des niveaux existants', () => {
-    const niveauxAttendus = ['Cycle 1', 'Cycle 2', 'Cycle 3'];
-
     const resultat = get(ressourcesCyberFiltrees).niveaux;
 
-    expect(resultat).toEqual(niveauxAttendus);
+    expect(resultat).toEqual(['Cycle 1', 'Cycle 2', 'Cycle 3']);
+  });
+
+  it('effectue le filtre en fonction du type', () => {
+    rechercheParType.set(['Jeux']);
+
+    const { resultat } = get(ressourcesCyberFiltrees);
+
+    expect(resultat).toStrictEqual<RessourceCyber[]>([
+      get(ressourcesCyberStore)[0],
+    ]);
+  });
+
+  it('retourne la liste dédupliquée des types existants', () => {
+    const resultat = get(ressourcesCyberFiltrees).types;
+
+    expect(resultat).toEqual(['Challenge',  'Formation', 'Jeux']);
   });
 });

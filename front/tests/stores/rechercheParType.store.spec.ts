@@ -1,47 +1,47 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { RessourceCyber } from '../../src/ressourceCyber';
-import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
+import { rechercheParType } from '../../src/stores/rechercheParType.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
-describe('La recherche par niveau', () => {
-  it('peut être modifié avec des niveaux', () => {
-    rechercheParNiveau.set(['Cycle 3']);
+describe('La recherche par type', () => {
+  it('peut être modifié avec des types', () => {
+    rechercheParType.set(['Jeux']);
 
-    expect(get(rechercheParNiveau)).toEqual(['Cycle 3']);
+    expect(get(rechercheParType)).toEqual(['Jeux']);
   });
 
   it('est vide quand on la réinitialise', () => {
-    rechercheParNiveau.set(['Cycle 3']);
+    rechercheParType.set(['Jeux']);
 
-    rechercheParNiveau.reinitialise();
+    rechercheParType.reinitialise();
 
-    expect(get(rechercheParNiveau)).toEqual([]);
+    expect(get(rechercheParType)).toEqual([]);
   });
 
   describe('permet de filtrer les ressources Cyber', () => {
     const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
-      .avecNiveaux(['Cycle 2'])
+      .avecTypes(['Jeux'])
       .construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParNiveau.ok(ressourceCyber);
+      const resultat = rechercheParType.ok(ressourceCyber);
 
       expect(resultat).toBeTruthy();
     });
 
     it('en rejetant une ressource dont le niveau ne correspond pas', () => {
-      rechercheParNiveau.set(['Cycle 3']);
+      rechercheParType.set(['Challenge']);
 
-      const resultat = rechercheParNiveau.ok(ressourceCyber);
+      const resultat = rechercheParType.ok(ressourceCyber);
 
       expect(resultat).toBeFalsy();
     });
 
     it('en incluant une ressource dont le niveau correspond', () => {
-      rechercheParNiveau.set(['Cycle 2']);
+      rechercheParType.set(['Jeux']);
 
-      const resultat = rechercheParNiveau.ok(ressourceCyber);
+      const resultat = rechercheParType.ok(ressourceCyber);
 
       expect(resultat).toBeTruthy();
     });
