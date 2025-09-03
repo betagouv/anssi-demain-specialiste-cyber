@@ -6,12 +6,12 @@ import {
   lesTypesDesRessourcesCyber,
   type RessourceCyber,
 } from '../ressourceCyber';
+import { rechercheParBesoin } from './rechercheParBesoin.store';
 import { rechercheParNiveau } from './rechercheParNiveau.store';
 import { rechercheParSelection } from './rechercheParSelection.store';
 import { rechercheParThematique } from './rechercheParThematique.store';
-import { ressourcesCyberStore } from './ressourcesCyber.store';
 import { rechercheParType } from './rechercheParType.store';
-import { rechercheParBesoin } from './rechercheParBesoin.store';
+import { ressourcesCyberStore } from './ressourcesCyber.store';
 
 export type RessourcesCyberFiltrees = {
   resultat: RessourceCyber[];
@@ -19,7 +19,15 @@ export type RessourcesCyberFiltrees = {
   selections: string[];
   niveaux: string[];
   types: string[];
+  besoins: string[];
 };
+
+const besoins: string[] = [
+  'Se protéger des risques',
+  'Découvrir la cyber',
+  'Découvrir les métiers',
+  'Explorer les formations',
+];
 
 export const ressourcesCyberFiltrees = derived(
   [
@@ -45,6 +53,6 @@ export const ressourcesCyberFiltrees = derived(
     const niveaux = lesNiveauxDesRessourcesCyber($store);
     const types = lesTypesDesRessourcesCyber($store);
 
-    return { resultat, thematiques, selections, niveaux, types };
+    return { resultat, thematiques, selections, niveaux, types, besoins };
   }
 );
