@@ -3,6 +3,7 @@ export type RessourceCyber = {
   titre: string;
   thematiques: string[];
   selections: string[];
+  niveaux: string[];
 };
 
 export const lesRessourcesCyberTriees = (data: RessourceCyber[]) => {
@@ -20,5 +21,13 @@ export const lesSelectionsDesRessourcesCyber = (
 ): string[] => {
   return Array.from(new Set(ressourcesCyber.flatMap((r) => r.selections))).sort(
     (s1, s2) => s1.localeCompare(s2)
+  );
+};
+
+export const lesNiveauxDesRessourcesCyber = (
+  ressourcesCyber: RessourceCyber[]
+): string[] => {
+  return Array.from(new Set(ressourcesCyber.flatMap((r) => r.niveaux))).sort(
+    (n1, n2) => n1.localeCompare(n2)
   );
 };
