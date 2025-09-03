@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreNiveau from './FiltreNiveau.svelte';
-  import FiltreSelection from './FiltreSelection.svelte';
+  import FiltrePublicCible from './FiltrePublicCible.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
   import FiltreType from './FiltreType.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
@@ -24,7 +24,7 @@
   <div class="filtres">
     <p>Filtres</p>
     <FiltreThematique />
-    <FiltreSelection />
+    <FiltrePublicCible />
     <FiltreNiveau />
     <FiltreType />
     <FiltreBesoin />
