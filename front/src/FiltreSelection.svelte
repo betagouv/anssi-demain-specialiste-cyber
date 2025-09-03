@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { rechercheParSelection } from './stores/rechercheParSelection.store';
+  import { rechercheParPublicCible } from './stores/rechercheParPublicCible.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 </script>
 
 <fieldset>
   <legend>Sélection</legend>
   <ul>
-    {#each $ressourcesCyberFiltrees.selections as selection}
+    {#each $ressourcesCyberFiltrees.publicsCible as selection}
       <li>
         <label>
           <input
-            bind:group={$rechercheParSelection}
+            bind:group={$rechercheParPublicCible}
             type="checkbox"
             value={selection}
           />

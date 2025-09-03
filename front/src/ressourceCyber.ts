@@ -2,7 +2,7 @@ export type RessourceCyber = {
   id: number;
   titre: string;
   thematiques: string[];
-  selections: string[];
+  publicsCible: string[];
   niveaux: string[];
   types: string[];
   besoins: string[];
@@ -18,10 +18,10 @@ export const lesThematiquesCyber = (ressourcesCyber: RessourceCyber[]) => {
   ).sort();
 };
 
-export const lesSelectionsDesRessourcesCyber = (
+export const lesPublicsCibleDesRessourcesCyber = (
   ressourcesCyber: RessourceCyber[]
 ): string[] => {
-  return Array.from(new Set(ressourcesCyber.flatMap((r) => r.selections))).sort(
+  return Array.from(new Set(ressourcesCyber.flatMap((r) => r.publicsCible))).sort(
     (s1, s2) => s1.localeCompare(s2)
   );
 };

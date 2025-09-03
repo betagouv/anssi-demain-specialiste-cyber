@@ -1,14 +1,14 @@
 import { derived } from 'svelte/store';
 import {
   lesNiveauxDesRessourcesCyber,
-  lesSelectionsDesRessourcesCyber,
+  lesPublicsCibleDesRessourcesCyber,
   lesThematiquesCyber,
   lesTypesDesRessourcesCyber,
   type RessourceCyber,
 } from '../ressourceCyber';
 import { rechercheParBesoin } from './rechercheParBesoin.store';
 import { rechercheParNiveau } from './rechercheParNiveau.store';
-import { rechercheParSelection } from './rechercheParSelection.store';
+import { rechercheParPublicCible } from './rechercheParPublicCible.store';
 import { rechercheParThematique } from './rechercheParThematique.store';
 import { rechercheParType } from './rechercheParType.store';
 import { ressourcesCyberStore } from './ressourcesCyber.store';
@@ -16,7 +16,7 @@ import { ressourcesCyberStore } from './ressourcesCyber.store';
 export type RessourcesCyberFiltrees = {
   resultat: RessourceCyber[];
   thematiques: string[];
-  selections: string[];
+  publicsCible: string[];
   niveaux: string[];
   types: string[];
   besoins: string[];
@@ -33,7 +33,7 @@ export const ressourcesCyberFiltrees = derived(
   [
     ressourcesCyberStore,
     rechercheParThematique,
-    rechercheParSelection,
+    rechercheParPublicCible,
     rechercheParNiveau,
     rechercheParType,
     rechercheParBesoin,
@@ -42,17 +42,17 @@ export const ressourcesCyberFiltrees = derived(
     const resultat = $store.filter(
       (ressourceCyber: RessourceCyber) =>
         rechercheParThematique.ok(ressourceCyber) &&
-        rechercheParSelection.ok(ressourceCyber) &&
+        rechercheParPublicCible.ok(ressourceCyber) &&
         rechercheParNiveau.ok(ressourceCyber) &&
         rechercheParType.ok(ressourceCyber) &&
         rechercheParBesoin.ok(ressourceCyber)
     );
 
     const thematiques = lesThematiquesCyber($store);
-    const selections = lesSelectionsDesRessourcesCyber($store);
+    const publicsCible = lesPublicsCibleDesRessourcesCyber($store);
     const niveaux = lesNiveauxDesRessourcesCyber($store);
     const types = lesTypesDesRessourcesCyber($store);
 
-    return { resultat, thematiques, selections, niveaux, types, besoins };
+    return { resultat, thematiques, publicsCible, niveaux, types, besoins };
   }
 );

@@ -2,7 +2,7 @@ import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { RessourceCyber } from '../../src/ressourceCyber';
 import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
-import { rechercheParSelection } from '../../src/stores/rechercheParSelection.store';
+import { rechercheParPublicCible } from '../../src/stores/rechercheParPublicCible.store';
 import { ressourcesCyberStore } from '../../src/stores/ressourcesCyber.store';
 import { ressourcesCyberFiltrees } from '../../src/stores/ressourcesCyberFiltrees.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
@@ -15,7 +15,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     rechercheParBesoin.reinitialise();
     rechercheParNiveau.reinitialise();
     rechercheParType.reinitialise();
-    rechercheParSelection.reinitialise();
+    rechercheParPublicCible.reinitialise();
     rechercheParThematique.reinitialise();
 
     ressourcesCyberStore.initialise([
@@ -25,14 +25,14 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
           'Valoriser les talents féminins',
           'Orientation',
         ])
-        .avecSelections(['Élèves', 'Enseignants'])
+        .avecPublicsCible(['Élèves', 'Enseignants'])
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
         .avecTypes(['Jeux', 'Formation'])
         .avecBesoins(['Découvrir les métiers', 'Découvrir la cyber'])
         .construis(),
       unConstructeurDeRessourceCyber()
         .avecThematiques(['Comportements numériques', 'Orientation'])
-        .avecSelections(['Parents', 'Élèves'])
+        .avecPublicsCible(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
         .avecTypes(['Formation', 'Challenge'])
         .avecBesoins(['Découvrir la cyber'])
@@ -51,14 +51,14 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     ]);
   });
 
-  it('retourne la liste dédupliquée des sélections existants', () => {
-    const resultat = get(ressourcesCyberFiltrees).selections;
+  it('retourne la liste dédupliquée des publics cible existants', () => {
+    const resultat = get(ressourcesCyberFiltrees).publicsCible;
 
     expect(resultat).toEqual(['Élèves', 'Enseignants', 'Parents']);
   });
 
-  it('effectue le filtre en fonction de la sélection', () => {
-    rechercheParSelection.set(['Enseignants']);
+  it('effectue le filtre en fonction du public cible', () => {
+    rechercheParPublicCible.set(['Enseignants']);
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
