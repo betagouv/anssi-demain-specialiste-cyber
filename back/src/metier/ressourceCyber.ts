@@ -2,15 +2,14 @@ export type RessourceCyber = {
   besoins: Besoins;
   id: number;
   niveaux: Niveaux;
-  selections: Selections;
+  publicsCible: PublicsCible;
   thematiques: Thematiques;
   types: Types;
   titre: string;
 };
 
 type Niveaux = string[];
-
-type Selections = string[];
+type PublicsCible = string[];
 type Thematiques = string[];
 type Types = string[];
 type Besoins = string[];
