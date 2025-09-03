@@ -70,6 +70,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         titre: 'CyberEnJeux',
         thematiques: [],
         selections: [],
+        niveaux: [],
       },
     ]);
   });
@@ -123,6 +124,27 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
     expect(ressourcesCyber[0].selections).toStrictEqual(['Parents', 'Élèves']);
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne niveau', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecNiveaux(['Cycle 1', 'Cycle 2'])
+            .construis()
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].niveaux).toStrictEqual(['Cycle 1', 'Cycle 2']);
+  });
 });
 
 type LigneGrist = {
@@ -130,6 +152,7 @@ type LigneGrist = {
   titre: string;
   thematiques: string[];
   cibles: string[];
+  cycles: string[];
 };
 
 interface ConstructeurDeTest<T> {
@@ -141,6 +164,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _titreLigne: string = '';
   _thematiques: string[] = [];
   _cibles: string[] = [];
+  _cycles: string[] = [];
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -162,12 +186,18 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
+  avecNiveaux(niveaux: string[]): ConstructeurLigneGrist {
+    this._cycles = ['L', ...niveaux];
+    return this;
+  }
+
   construis(): LigneGrist {
     return {
       id: this._idLigne,
       titre: this._titreLigne,
       thematiques: this._thematiques,
       cibles: this._cibles,
+      cycles: this._cycles,
     };
   }
 }
@@ -196,7 +226,7 @@ class ConstructeurReponseRessourceCyberGrist
           Cible: l.cibles,
           Parcours_sur_page: [],
           Label_DSC: false,
-          Cycle_si_eleves: [],
+          Cycle_si_eleves: l.cycles,
           Porteur: [],
           Lien: '',
         },

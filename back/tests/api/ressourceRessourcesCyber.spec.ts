@@ -26,6 +26,7 @@ describe('La ressource des ressources cyber', () => {
     it('renvoie une liste de ressources cyber', async () => {
       configuration.entrepotRessourcesCyber.ajoute({
         id: 1,
+        niveaux: ['niveau 1', 'niveau 2'],
         selections: ['sélection'],
         thematiques: ['theme 1', 'theme 2'],
         titre: 'ressource 1',
@@ -36,6 +37,7 @@ describe('La ressource des ressources cyber', () => {
       expect(reponse.body).toStrictEqual<RessourceCyber[]>([
         {
           id: 1,
+          niveaux: ['niveau 1', 'niveau 2'],
           selections: ['sélection'],
           thematiques: ['theme 1', 'theme 2'],
           titre: 'ressource 1',
