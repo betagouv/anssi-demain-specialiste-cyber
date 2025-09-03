@@ -2,12 +2,12 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreNiveau from './FiltreNiveau.svelte';
   import FiltreSelection from './FiltreSelection.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
   import FiltreType from './FiltreType.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
-  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -27,30 +27,7 @@
     <FiltreSelection />
     <FiltreNiveau />
     <FiltreType />
-
-    <fieldset>
-      <legend>Besoin</legend>
-      <ul>
-        <li>
-          <label>
-            <input bind:group={$rechercheParBesoin} type="radio" value="" />
-            <span>Tous les besoins</span>
-          </label>
-        </li>
-        {#each $ressourcesCyberFiltrees.besoins as besoin}
-          <li>
-            <label>
-              <input
-                bind:group={$rechercheParBesoin}
-                type="radio"
-                value={besoin}
-              />
-              <span>{besoin}</span>
-            </label>
-          </li>
-        {/each}
-      </ul>
-    </fieldset>
+    <FiltreBesoin />
   </div>
 
   <div class="conteneur">
