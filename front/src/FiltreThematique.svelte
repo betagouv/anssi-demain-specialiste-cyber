@@ -4,7 +4,7 @@
 </script>
 
 <fieldset>
-  <legend>Thématique Cyber</legend>
+  <legend>Thématique</legend>
   <label>
     <select bind:value={$rechercheParThematique}>
       <option value="">Toutes les thématiques</option>
