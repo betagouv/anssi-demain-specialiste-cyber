@@ -1,4 +1,5 @@
 export type RessourceCyber = {
+  besoins: Besoins;
   id: number;
   niveaux: Niveaux;
   selections: Selections;
@@ -8,6 +9,8 @@ export type RessourceCyber = {
 };
 
 type Niveaux = string[];
+
 type Selections = string[];
 type Thematiques = string[];
 type Types = string[];
+type Besoins = string[];
