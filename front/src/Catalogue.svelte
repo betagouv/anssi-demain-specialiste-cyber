@@ -13,10 +13,21 @@
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
+  let chargementEnCours = $state(false);
+  let ressourcesNonTrouvees = $state(false);
+
   onMount(async () => {
-    const reponse = await fetch('/api/ressources-cyber');
-    const ressourcesCyber = lesRessourcesCyberTriees(await reponse.json());
-    ressourcesCyberStore.initialise(ressourcesCyber);
+    chargementEnCours = true;
+    try {
+      const reponse = await fetch('/api/ressources-cyber');
+      const ressourcesCyber = lesRessourcesCyberTriees(await reponse.json());
+      ressourcesCyberStore.initialise(ressourcesCyber);
+    } catch (e) {
+      ressourcesNonTrouvees = true;
+      console.error(e);
+    } finally {
+      chargementEnCours = false;
+    }
   });
 </script>
 
@@ -43,7 +54,13 @@
         <p>{description}</p>
       </div>
     {:else}
-      <p>Chargement...</p>
+      {#if chargementEnCours}
+        <p>Chargement...</p>
+      {:else if ressourcesNonTrouvees}
+        <p>Impossible de récupérer les ressources.</p>
+      {:else}
+        <p>Aucune ressource trouvée correspondant aux critères de recherche.</p>
+      {/if}
     {/each}
   </div>
 </div>
