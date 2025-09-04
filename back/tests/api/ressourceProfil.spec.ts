@@ -32,8 +32,14 @@ describe('La ressource Profil', () => {
   });
 
   describe('sur demande GET', () => {
-    it('répond 200', async () => {
-      const reponse = await request(serveur).get('/api/profil');
+    it('répond 200 quand un utilisateur est connecté', async () => {
+      const cookie = encodeSession({
+        email: 'jeanne.dupont@mail.com',
+      });
+
+      const reponse = await request(serveur)
+        .get('/api/profil')
+        .set('Cookie', [cookie]);
 
       expect(reponse.status).toEqual(200);
     });
@@ -48,6 +54,12 @@ describe('La ressource Profil', () => {
         .set('Cookie', [cookie]);
 
       expect(reponse.body.email).toEqual('jeanne.dupont@mail.com');
+    });
+
+    it("répond 204 lorsqu'aucun utilisateur est connecté", async () => {
+      const reponse = await request(serveur).get('/api/profil');
+
+      expect(reponse.status).toEqual(204);
     });
 
     it('supprime la session si le token JWT est invalide', async () => {
