@@ -22,6 +22,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     ressourcesCyberStore.initialise([
       unConstructeurDeRessourceCyber()
         .avecTitre('Sécurité numérique')
+        .avecDescription('Former à la cybersécurité par le jeu')
         .avecThematiques([
           'Techniques de sécurité numérique',
           'Valoriser les talents féminins',
@@ -34,6 +35,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .construis(),
       unConstructeurDeRessourceCyber()
         .avecTitre('Comportements numériques')
+        .avecDescription('Découvrir la cyber en famille')
         .avecThematiques(['Comportements numériques', 'Orientation'])
         .avecPublicsCible(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
@@ -147,6 +149,15 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
       expect(resultat).toHaveLength(1);
       expect(resultat[0].titre).toBe('Sécurité numérique');
+    });
+
+    it('effectue le filtre sur la description partiellement', () => {
+      rechercheTextuelle.set('fami');
+
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toHaveLength(1);
+      expect(resultat[0].description).toBe('Découvrir la cyber en famille');
     });
   });
 });

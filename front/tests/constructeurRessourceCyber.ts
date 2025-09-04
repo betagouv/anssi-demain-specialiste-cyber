@@ -9,6 +9,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _id: number = 1000;
   private _niveaux: string[] = [];
   private _titre: string = 'Un titre';
+  private _description: string = '';
   private _thematiques: string[] = [];
   private _types: string[] = [];
   private _besoins: string[];
@@ -33,6 +34,11 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return this;
   }
 
+  avecDescription(description: string): ConstructeurRessourceCyber {
+    this._description = description;
+    return this;
+  }
+
   avecTypes(types: string[]) {
     this._types = types;
     return this;
@@ -47,6 +53,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return {
       id: this._id,
       titre: this._titre,
+      description: this._description,
       thematiques: this._thematiques,
       publicsCible: this._publicsCible,
       niveaux: this._niveaux,

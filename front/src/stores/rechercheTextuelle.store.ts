@@ -7,7 +7,8 @@ export const rechercheTextuelle = {
   subscribe: store.subscribe,
   set: store.set,
   ok: (ressourceCyber: RessourceCyber) =>
-    contientLaRechercheSansDiacritique(ressourceCyber.titre, get(store)),
+    contientLaRechercheSansDiacritique(ressourceCyber.titre, get(store)) ||
+    contientLaRechercheSansDiacritique(ressourceCyber.description, get(store)),
 };
 
 function contientLaRechercheSansDiacritique(a: string, b: string): boolean {
