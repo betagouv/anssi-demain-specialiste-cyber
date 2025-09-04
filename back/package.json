@@ -12,6 +12,7 @@
     "prestart": "tsc",
     "build": "tsc",
     "start": "node ./dist/src/serveur.js",
+    "pretest": "npm-run-all --parallel typecheck lint",
     "test": "vitest",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
     "cree-migration": "knex migrate:make -x ts",
