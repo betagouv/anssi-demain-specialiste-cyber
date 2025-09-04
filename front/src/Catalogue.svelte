@@ -7,7 +7,9 @@
   import FiltrePublicCible from './FiltrePublicCible.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
   import FiltreType from './FiltreType.svelte';
+  import RechercheTextuelle from './RechercheTextuelle.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
+  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -22,6 +24,10 @@
 
 <div class="catalogue">
   <div class="filtres">
+    <RechercheTextuelle
+      bind:recherche={$rechercheTextuelle}
+      miseEnAvant="Rechercher une ressource"
+    />
     <p>Filtres</p>
     <FiltreThematique />
     <FiltrePublicCible />
