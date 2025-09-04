@@ -57,5 +57,23 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceRessourceCyber(configurationServeur)
   );
 
+  app.set('view engine', 'pug');
+  app.get('/', (_req, res) => {
+    res.render('index');
+  });
+
+  // Route pour les pages dynamiques pour rendre les pages PUG.
+  // Doit être en dernier pour ne pas interférer avec les autres routes.
+  app.get('/:page', (req, res) => {
+    const page = req.params.page;
+    res.render(page, (err: Error | null, html?: string) => {
+      if (err) {
+        res.status(404).render('404');
+      } else {
+        res.send(html);
+      }
+    });
+  });
+
   return app;
 };
