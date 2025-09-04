@@ -8,7 +8,9 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint:fix": "npx eslint . --fix",
+    "pretest": "npm-run-all --parallel lint",
+    "test": "vitest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
