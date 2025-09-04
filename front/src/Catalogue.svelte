@@ -37,8 +37,11 @@
   </div>
 
   <div class="conteneur">
-    {#each $ressourcesCyberFiltrees.resultat as { id, titre } (id)}
-      <div id={`${id}`}>{titre}</div>
+    {#each $ressourcesCyberFiltrees.resultat as { id, titre, description } (id)}
+      <div id={`${id}`}>
+        <h3>{titre}</h3>
+        <p>{description}</p>
+      </div>
     {:else}
       <p>Chargement...</p>
     {/each}
