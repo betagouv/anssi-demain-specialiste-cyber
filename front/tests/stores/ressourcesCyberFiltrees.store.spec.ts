@@ -1,14 +1,15 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { RessourceCyber } from '../../src/ressourceCyber';
+import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
 import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
 import { rechercheParPublicCible } from '../../src/stores/rechercheParPublicCible.store';
+import { rechercheParThematique } from '../../src/stores/rechercheParThematique.store';
+import { rechercheParType } from '../../src/stores/rechercheParType.store';
+import { rechercheTextuelle } from '../../src/stores/rechercheTextuelle.store';
 import { ressourcesCyberStore } from '../../src/stores/ressourcesCyber.store';
 import { ressourcesCyberFiltrees } from '../../src/stores/ressourcesCyberFiltrees.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
-import { rechercheParType } from '../../src/stores/rechercheParType.store';
-import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
-import { rechercheParThematique } from '../../src/stores/rechercheParThematique.store';
 
 describe('Le store qui contient la liste des ressources Cyber', () => {
   beforeEach(() => {
@@ -20,6 +21,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
     ressourcesCyberStore.initialise([
       unConstructeurDeRessourceCyber()
+        .avecTitre('Sécurité numérique')
         .avecThematiques([
           'Techniques de sécurité numérique',
           'Valoriser les talents féminins',
@@ -31,6 +33,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .avecBesoins(['Découvrir les métiers', 'Découvrir la cyber'])
         .construis(),
       unConstructeurDeRessourceCyber()
+        .avecTitre('Comportements numériques')
         .avecThematiques(['Comportements numériques', 'Orientation'])
         .avecPublicsCible(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
@@ -107,5 +110,43 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     expect(resultat).toStrictEqual<RessourceCyber[]>([
       get(ressourcesCyberStore)[0],
     ]);
+  });
+
+  describe('sur recherche textuelle', () => {
+    it('effectue le filtre sur le titre complet', () => {
+      rechercheTextuelle.set('Sécurité numérique');
+
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toHaveLength(1);
+      expect(resultat[0].titre).toBe('Sécurité numérique');
+    });
+
+    it('effectue le filtre sur le titre partiellement', () => {
+      rechercheTextuelle.set('portements');
+
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toHaveLength(1);
+      expect(resultat[0].titre).toBe('Comportements numériques');
+    });
+
+    it('effectue le filtre sur le titre insensible à la casse', () => {
+      rechercheTextuelle.set('PoRtEmEnTs');
+
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toHaveLength(1);
+      expect(resultat[0].titre).toBe('Comportements numériques');
+    });
+
+    it('effectue le filtre sur le titre sans tenir compte des accents', () => {
+      rechercheTextuelle.set('Securite numerique');
+
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toHaveLength(1);
+      expect(resultat[0].titre).toBe('Sécurité numérique');
+    });
   });
 });

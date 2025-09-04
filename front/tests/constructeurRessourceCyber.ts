@@ -28,6 +28,11 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return this;
   }
 
+  avecTitre(titre: string): ConstructeurRessourceCyber {
+    this._titre = titre;
+    return this;
+  }
+
   avecTypes(types: string[]) {
     this._types = types;
     return this;
