@@ -1,6 +1,7 @@
 export type RessourceCyber = {
   id: number;
   titre: string;
+  description: string;
   thematiques: string[];
   publicsCible: string[];
   niveaux: string[];
@@ -21,9 +22,9 @@ export const lesThematiquesCyber = (ressourcesCyber: RessourceCyber[]) => {
 export const lesPublicsCibleDesRessourcesCyber = (
   ressourcesCyber: RessourceCyber[]
 ): string[] => {
-  return Array.from(new Set(ressourcesCyber.flatMap((r) => r.publicsCible))).sort(
-    (s1, s2) => s1.localeCompare(s2)
-  );
+  return Array.from(
+    new Set(ressourcesCyber.flatMap((r) => r.publicsCible))
+  ).sort((s1, s2) => s1.localeCompare(s2));
 };
 
 export const lesNiveauxDesRessourcesCyber = (
