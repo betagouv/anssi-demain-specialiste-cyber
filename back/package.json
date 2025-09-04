@@ -13,7 +13,7 @@
     "build": "tsc",
     "start": "node ./dist/src/serveur.js",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "test": "vitest",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
     "cree-migration": "knex migrate:make -x ts",
     "migre-bdd": "node --env-file=.env --import tsx ../node_modules/knex/bin/cli.js migrate:latest",

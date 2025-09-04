@@ -10,7 +10,7 @@
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "pretest": "npm-run-all --parallel lint",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
