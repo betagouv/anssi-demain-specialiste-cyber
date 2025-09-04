@@ -10,9 +10,14 @@ export const ressourceProfil = ({ adaptateurJWT }: ConfigurationServeur) => {
     } catch {
       reponse.clearCookie('session');
     } finally {
-      reponse.send({
-        email: requete.session?.email,
-      });
+      const email = requete.session?.email;
+      if (email) {
+        reponse.status(200).send({
+          email,
+        });
+      } else {
+        reponse.status(204).send({});
+      }
     }
   });
 
