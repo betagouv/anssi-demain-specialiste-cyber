@@ -114,7 +114,10 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].publicsCible).toStrictEqual(['Parents', 'Élèves']);
+    expect(ressourcesCyber[0].publicsCible).toStrictEqual([
+      'Parents',
+      'Élèves',
+    ]);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne niveau', async () => {
@@ -185,6 +188,27 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       'Se protéger',
     ]);
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne description', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecDescription('Lorem ipsum')
+            .construis()
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].description).toStrictEqual('Lorem ipsum');
+  });
 });
 
 type LigneGrist = {
@@ -195,6 +219,7 @@ type LigneGrist = {
   cycles: string[];
   types: string[];
   besoins: string[];
+  description: string;
 };
 
 interface ConstructeurDeTest<T> {
@@ -209,6 +234,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _cycles: string[] = [];
   _types: string[] = [];
   _besoins: string[] = [];
+  _description: string = '';
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -235,13 +261,18 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
-  avecTypes(types: string[]) {
+  avecTypes(types: string[]): ConstructeurLigneGrist {
     this._types = ['L', ...types];
     return this;
   }
 
-  avecBesoins(besoins: string[]) {
+  avecBesoins(besoins: string[]): ConstructeurLigneGrist {
     this._besoins = ['L', ...besoins];
+    return this;
+  }
+
+  avecDescription(description: string): ConstructeurLigneGrist {
+    this._description = description;
     return this;
   }
 
@@ -254,6 +285,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
       cycles: this._cycles,
       types: this._types,
       besoins: this._besoins,
+      description: this._description,
     };
   }
 }
@@ -275,7 +307,7 @@ class ConstructeurReponseRessourceCyberGrist
         fields: {
           A: '',
           Titre: l.titre,
-          Description: '',
+          Description: l.description,
           Besoins: l.besoins,
           Thematiques: l.thematiques,
           Type: l.types,

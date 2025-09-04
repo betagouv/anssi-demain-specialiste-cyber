@@ -3,7 +3,10 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
-import { configurationDeTestDuServeur, ConfigurationServeurDeTest } from './fauxObjets';
+import {
+  configurationDeTestDuServeur,
+  ConfigurationServeurDeTest,
+} from './fauxObjets';
 
 describe('La ressource des ressources cyber', () => {
   let configuration: ConfigurationServeurDeTest;
@@ -29,6 +32,7 @@ describe('La ressource des ressources cyber', () => {
         titre: 'ressource 1',
         types: ['type1', 'type2'],
         besoins: ['besoin 1', 'besoin 2'],
+        description: 'La ressource 1',
       });
 
       const reponse = await request(serveur).get('/api/ressources-cyber');
@@ -42,6 +46,7 @@ describe('La ressource des ressources cyber', () => {
           titre: 'ressource 1',
           types: ['type1', 'type2'],
           besoins: ['besoin 1', 'besoin 2'],
+          description: 'La ressource 1',
         },
       ]);
     });
