@@ -1,4 +1,5 @@
 export type RessourceCyber = {
+  description: string;
   besoins: Besoins;
   id: number;
   niveaux: Niveaux;

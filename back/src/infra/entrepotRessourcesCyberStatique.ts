@@ -2,7 +2,8 @@ import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { RessourceCyber } from '../metier/ressourceCyber';
 
 export class EntrepotRessourcesCyberStatique
-  implements EntrepotRessourcesCyber {
+  implements EntrepotRessourcesCyber
+{
   async tous(): Promise<RessourceCyber[]> {
     return [
       {
@@ -13,6 +14,7 @@ export class EntrepotRessourcesCyberStatique
         niveaux: [],
         types: [],
         besoins: [],
+        description: 'Description',
       },
     ];
   }
