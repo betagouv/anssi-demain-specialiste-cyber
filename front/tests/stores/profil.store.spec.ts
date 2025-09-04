@@ -21,6 +21,6 @@ describe('Le store du profil', () => {
   });
 
   it("indique que l'utilisateur est connecté", async () => {
-    expect(profilStore.utilisateurEstConnecte()).toBeTruthy();
+    expect(get(profilStore)).toBeTruthy();
   });
 });
