@@ -1,4 +1,4 @@
-import { get, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 type Profil = {
   email: string;
@@ -17,5 +17,4 @@ fetch('/api/profil')
 
 export const profilStore = {
   subscribe,
-  utilisateurEstConnecte: (): boolean => !!get(profilStore)?.email,
 };
