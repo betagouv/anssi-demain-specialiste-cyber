@@ -165,7 +165,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     };
 
     const entrepotSecretHachage: EntrepotSecretHachage = {
-      tous: async () => [{ version: 1, empreinte: 'secret-crypte' }],
+      tous: async () => [],
     };
 
     const service = fabriqueServiceVerificationCoherenceSecretsHachage({

@@ -9,34 +9,60 @@ import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyber
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
+import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 
-const app = creeServeur({
-  adaptateurOIDC,
-  serveurLab: configurationServeurLabEnvironnement(),
-  entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
-    ? new EntrepotRessourcesCyberStatique()
-    : new EntrepotRessourcesCyberGrist(),
-  adaptateurJWT,
-  adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
-  entrepotUtilisateur: new EntrepotUtilisateurPostgres({
-    adaptateurHachage: fabriqueAdaptateurHachage({ adaptateurEnvironnement }),
-    adaptateurChiffrement: fabriqueAdaptateurChiffrement({
-      adaptateurEnvironnement,
-    }),
-  }),
-  recupereCheminsVersFichiersStatiques:
-    recupereCheminVersFichiersStatiquesParDefaut,
+const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
+
+const adaptateurHachage = fabriqueAdaptateurHachage({
+  adaptateurEnvironnement,
 });
 
-const port = process.env.PORT || 3005;
+const serviceCoherenceSecretsHachage =
+  fabriqueServiceVerificationCoherenceSecretsHachage({
+    adaptateurEnvironnement,
+    entrepotSecretHachage,
+    adaptateurHachage,
+  });
 
-const serveur = app.listen(port, () => {
+serviceCoherenceSecretsHachage
+  .verifieCoherenceSecrets()
+  .catch((raison) => {
+    // eslint-disable-next-line no-console
+    console.error(raison.message);
+    process.exit(1);
+  })
   // eslint-disable-next-line no-console
-  console.info(`Le serveur écoute sur le port ${port}`);
-});
+  .then(() => console.log('✅ Vérification des secrets réussie'))
+  .then(() => {
+    const app = creeServeur({
+      adaptateurOIDC,
+      serveurLab: configurationServeurLabEnvironnement(),
+      entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
+        ? new EntrepotRessourcesCyberStatique()
+        : new EntrepotRessourcesCyberGrist(),
+      adaptateurJWT,
+      adaptateurHachage,
+      entrepotUtilisateur: new EntrepotUtilisateurPostgres({
+        adaptateurHachage,
+        adaptateurChiffrement: fabriqueAdaptateurChiffrement({
+          adaptateurEnvironnement,
+        }),
+      }),
+      recupereCheminsVersFichiersStatiques:
+        recupereCheminVersFichiersStatiquesParDefaut,
+    });
 
-serveur.on('error', (erreur) => {
-  // eslint-disable-next-line no-console
-  console.error(erreur);
-  process.exit(1);
-});
+    const port = process.env.PORT || 3005;
+
+    const serveur = app.listen(port, () => {
+      // eslint-disable-next-line no-console
+      console.info(`Le serveur écoute sur le port ${port}`);
+    });
+
+    serveur.on('error', (erreur) => {
+      // eslint-disable-next-line no-console
+      console.error(erreur);
+      process.exit(1);
+    });
+  });
