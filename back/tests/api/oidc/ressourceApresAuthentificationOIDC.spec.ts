@@ -117,7 +117,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         expect(reponse.headers['content-type']).toEqual(
-          'text/html; charset=UTF-8'
+          'text/html; charset=utf-8'
         );
         expect(reponse.text).toMatchSnapshot();
       });
