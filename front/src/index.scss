@@ -1,10 +1,12 @@
+@use 'fonts';
+
 * {
   box-sizing: border-box;
 }
 
 html,
 body {
-  font-family: Marianne;
+  font-family: 'Marianne';
   margin: 0;
   overflow-x: hidden;
   padding: 0;
@@ -82,9 +84,21 @@ header {
 
   .titre {
     padding: 0.75rem 1rem;
+
     h1,
     p {
       margin: 0;
+    }
+
+    h1 {
+      color: #161616;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+
+    p {
+      color: #3A3A3A;
+      font-size: 0.875rem;
     }
   }
 
