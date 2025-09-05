@@ -1,0 +1,19 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Marianne';
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.carte {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #000;
+    padding: 2rem;
+}
