@@ -3,10 +3,10 @@
 />
 
 <script lang="ts">
-  import { profilStore } from './stores/profil.store';
+  import { profil } from './stores/profil';
 </script>
 
-{#if $profilStore}
+{#if $profil}
   <a class="deconnexion" href="/oidc/deconnexion">Se déconnecter</a>
 {:else}
   <a class="connexion" href="/oidc/connexion">Se connecter</a>
