@@ -4,6 +4,13 @@ Site web « DemainSpécialisteCyber »
 
 ## Développement
 
+### Ajouter pre commit
+
+Afin de s’assurer que chaque commit respecte les règles d’usage de l’équipe, on peut ajouter `pre-commit` qui s’assurera que les fichiers ajoutés / modifiés respectent nos usages.
+
+- **Installer pre-commit :** `pip install pre-commit`
+- **Mettre en place le hook git** `pre-commit install`
+
 ### Créer une migration KNEX
 
 On peut créer de nouveaux fichier de migration via un script NPM :
