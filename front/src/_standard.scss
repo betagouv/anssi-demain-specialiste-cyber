@@ -1,0 +1,24 @@
+fieldset {
+  border: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+
+  legend {
+    padding-right: 0.5rem;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul,
+ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
