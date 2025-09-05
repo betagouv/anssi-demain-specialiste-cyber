@@ -22,9 +22,17 @@ export type AdaptateurEnvironnement = {
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
   };
+  maintenance: () => {
+    actif: () => boolean;
+    detailsPreparation: () => string | undefined;
+  };
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
+  maintenance: () => ({
+    actif: () => process.env.MODE_MAINTENANCE === 'true',
+    detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,
+  }),
   oidc: (): OIDC => ({
     urlRedirectionApresAuthentification: () =>
       `${process.env.URL_BASE_DSC}/oidc/apres-authentification`,

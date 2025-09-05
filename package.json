@@ -15,7 +15,9 @@
     "migre-bdd": "npm run migre-bdd --workspace=back",
     "start": "npm start --workspace=back",
     "test": "npm run test --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
+    "admin:dev": "npm run build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",

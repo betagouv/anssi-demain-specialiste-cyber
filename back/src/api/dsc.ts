@@ -14,6 +14,7 @@ import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
+import { Middleware } from './middleware';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -23,6 +24,7 @@ export interface ConfigurationServeur {
   entrepotUtilisateur: EntrepotUtilisateur;
   adaptateurHachage: AdaptateurHachage;
   recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
+  middleware: Middleware;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -45,6 +47,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     .forEach((chemin) => {
       app.use('/', express.static(chemin));
     });
+
+  app.use(configurationServeur.middleware.verifieModeMaintenance);
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
   app.use(
