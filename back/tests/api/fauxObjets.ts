@@ -6,6 +6,7 @@ import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { fabriqueMiddleware } from '../../src/api/middleware';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -68,6 +69,10 @@ export type ConfigurationServeurDeTest = ConfigurationServeur & {
   entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;
 };
 
+const middleware = fabriqueMiddleware({
+  adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+});
+
 export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   serveurLab: {
     reseau: {
@@ -82,4 +87,5 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   adaptateurJWT: fauxAdaptateurJWT,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
   recupereCheminsVersFichiersStatiques: () => [join(__dirname, '../pagesDeTest')],
+  middleware
 });
