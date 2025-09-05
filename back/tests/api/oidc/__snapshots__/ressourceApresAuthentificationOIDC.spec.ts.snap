@@ -15,5 +15,6 @@ exports[`La ressource apres authentification OIDC > quand on fait un GET sur /oi
 <body>
 
 </body>
-</html>/"
+</html>/
+"
 `;
