@@ -24,7 +24,7 @@ const app = creeServeur({
       adaptateurEnvironnement,
     }),
   }),
-  recupereCheminVersFichiersStatiques:
+  recupereCheminsVersFichiersStatiques:
     recupereCheminVersFichiersStatiquesParDefaut,
 });
 

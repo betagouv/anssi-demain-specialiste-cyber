@@ -22,7 +22,7 @@ export interface ConfigurationServeur {
   adaptateurJWT: AdaptateurJWT;
   entrepotUtilisateur: EntrepotUtilisateur;
   adaptateurHachage: AdaptateurHachage;
-  recupereCheminVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
+  recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -40,10 +40,11 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(cookieParser());
 
-  app.use(
-    '/',
-    express.static(configurationServeur.recupereCheminVersFichiersStatiques())
-  );
+  configurationServeur
+    .recupereCheminsVersFichiersStatiques()
+    .forEach((chemin) => {
+      app.use('/', express.static(chemin));
+    });
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
   app.use(
