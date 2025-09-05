@@ -31,8 +31,6 @@
   });
 </script>
 
-<h3>Catalogue des ressources cyber</h3>
-
 <div class="catalogue">
   <div class="filtres">
     <RechercheTextuelle
