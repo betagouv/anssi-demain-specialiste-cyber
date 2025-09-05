@@ -8,7 +8,7 @@ describe('Le serveur de pages statiques', () => {
   const serveur = creeServeur(configurationDeTestDuServeur());
 
   const appelleUnePageStatique = (serveur: Express) =>
-    request(serveur).get('/catalogue/');
+    request(serveur).get('/');
 
   it('répond 200', async () => {
     const reponse = await appelleUnePageStatique(serveur);
