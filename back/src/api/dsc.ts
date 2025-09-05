@@ -61,6 +61,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.set('view engine', 'pug');
+  app.set('views', './vues');
+
   app.get('/', (_req, res) => {
     res.render('index');
   });
