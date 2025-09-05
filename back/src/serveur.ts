@@ -28,7 +28,7 @@ const app = creeServeur({
     recupereCheminVersFichiersStatiquesParDefaut,
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3005;
 
 const serveur = app.listen(port, () => {
   // eslint-disable-next-line no-console
