@@ -15,6 +15,6 @@ fetch('/api/profil')
   })
   .catch(() => set(undefined));
 
-export const profilStore = {
+export const profil = {
   subscribe,
 };

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { profilStore } from '../../src/stores/profil.store';
+import { profil } from '../../src/stores/profil';
 
 vi.hoisted(() => {
   const newFetch = vi.fn().mockResolvedValue({
@@ -15,12 +15,12 @@ describe('Le store du profil', () => {
   });
 
   it('récupère le profil et assigne sa valeur au store', async () => {
-    const profil = get(profilStore);
+    const valeurProfil = get(profil);
 
-    expect(profil?.email).toEqual('jeanne.dupond@mail.fr');
+    expect(valeurProfil?.email).toEqual('jeanne.dupond@mail.fr');
   });
 
   it("indique que l'utilisateur est connecté", async () => {
-    expect(get(profilStore)).toBeTruthy();
+    expect(get(profil)).toBeTruthy();
   });
 });
