@@ -4,7 +4,17 @@ block variables
   - var descriptionPage = "Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !"
 
 block contenu
-    p Contenu à venir
+    section(class='intro')
+        h2 La cybersécurité, un enjeu d’avenir&nbsp;!
+        p Accédez à un catalogue de ressources pensé pour découvrir et comprendre les enjeux de la cybersécurité, que vous soyez élève, enseignant ou parent.
+        section(class='carrousel')
+            article(class='carte')
+                h4 CyberEnJeux
+                p(class='important') Former vos élèves à la cybersécurité par le jeu
+        button(type='button') Explorer plus de ressources
+
 block apres-contenu
     include ./selections
-    
+    include ./cyberenjeux
+    include ./chiffres-cles
+    include ./soutiens
