@@ -1,4 +1,24 @@
+block variables
+  - var titrePage = ""
+  - var descriptionPage = ""
 header
-    h1 Demain Spécialiste Cyber
-    div
-        dsc-zone-identification
+    div(class='haut')
+        div(class='marque')
+            img(src='/assets/images/marianne.svg' alt='Marianne')
+            img(src='/assets/images/ANSSI.svg' alt='ANSSI')
+        nav(class='navigation-principale')
+            button(type='button' aria-label='Menu')
+                img(src='/assets/images/menu-gauffre.svg' alt='Menu')
+            div(class='menu-principal')
+                dsc-zone-identification
+
+    hgroup(class='titre')
+        h1 DemainSpécialisteCyber
+        p Innovation ANSSI
+
+    div(class='hero')
+        nav(class='ariane' aria-label='Fil d\'Ariane')
+            a(href='#') Voir le fil d'Ariane
+        h2 #{titrePage}
+        p #{descriptionPage}
+

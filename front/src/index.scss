@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  font-family: Marianne;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+}
+
 fieldset {
   border: 0;
   margin-bottom: 1rem;
@@ -20,4 +28,65 @@ ul,
 ul > li {
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// entête
+header {
+  .haut {
+    border-bottom: 1px solid #ddd;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-content: center;
+    margin: 0.75rem 1rem;
+
+    .marque {
+      img[alt='Marianne'] {
+        transform: translateX(-1rem);
+        width: 138px;
+      }
+
+      img[alt='ANSSI'] {
+        width: 66px;
+      }
+    }
+
+    nav {
+      transform: translateX(0.5rem);
+
+      button {
+        padding: 0.5rem;
+        img {
+          width: 24px;
+        }
+      }
+
+      .menu-principal {
+        display: none;
+      }
+    }
+  }
+
+  .titre {
+    padding: 0.75rem 1rem;
+    h1,
+    p {
+      margin: 0;
+    }
+  }
+
+  .hero {
+    background: linear-gradient(
+      90deg,
+      #131429 52.81%,
+      rgba(19, 20, 41, 0) 100%
+    );
+    background-color: #000091;
+    color: #fff;
+    padding: 1rem 1rem 1.5rem;
+  }
 }
