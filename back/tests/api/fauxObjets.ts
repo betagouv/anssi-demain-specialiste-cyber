@@ -77,5 +77,5 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurJWT: fauxAdaptateurJWT,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-  recupereCheminVersFichiersStatiques: () => join(__dirname, '../pagesDeTest'),
+  recupereCheminsVersFichiersStatiques: () => [join(__dirname, '../pagesDeTest')],
 });
