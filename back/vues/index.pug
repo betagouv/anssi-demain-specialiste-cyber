@@ -2,6 +2,9 @@ extends base
 block variables
   - var titrePage = "Demain Spécialiste Cyber"
   - var descriptionPage = "Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !"
-  - var afficheSelections = true
+
 block contenu
     p Contenu à venir
+block apres-contenu
+    include ./selections
+    
