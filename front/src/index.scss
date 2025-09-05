@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  max-width: 100%;
+}
+
 // entête
 header {
   .haut {
@@ -372,5 +376,42 @@ footer {
     color: #666;
     font-size: 0.75rem;
     line-height: 1.25rem;
+  }
+}
+
+.soutiens {
+  padding: 3.5rem 1rem;
+  
+  h2 {
+    color: #161616;
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 2.25rem;
+    margin: 0 0 2rem;
+  }
+
+  ul {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1.5rem 5.5rem;
+
+    li {
+      align-items: center;
+      display: grid;
+      flex: 2 1 100%;
+      justify-items: center;
+      
+      img[alt='ComCyberGend'] {
+        width: 112px;
+      }
+
+      &:has(img[alt='PIX']),
+      &:has(img[alt='France 2030']) 
+      {        
+        flex: 1 0 auto;
+        width: calc(50% - 3.5rem);
+      }
+    }
   }
 }
