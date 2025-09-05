@@ -91,6 +91,30 @@ header {
   }
 }
 
+// Sélections
+.selections {
+  background-color: #a94645;
+  color: #fff;
+  display: flex;
+  flex-flow: column;
+  gap: 1.5rem;
+  padding: 3.5rem 1rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .carte {
+    background-color: #fff;
+    color: #000;
+    padding: 2rem;
+
+    &:last-child {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
 // Pied de page
 footer {
   border-top: 2px solid #000091;

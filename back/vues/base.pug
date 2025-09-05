@@ -1,6 +1,8 @@
 block variables
   - var titrePage = "DemainSpécialisteCyber"
   - var descriptionPage = ""
+  - var afficheSelections = false
+  
 doctype html
 html(lang='fr')
   head
@@ -14,4 +16,6 @@ html(lang='fr')
     include ./entete
     main
       block contenu
+    if afficheSelections
+        include ./selections
     include ./pied-de-page
