@@ -1,0 +1,147 @@
+.cyberenjeux {
+  padding: 4.5rem 1rem;
+
+  h3 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    margin-bottom: 2rem;
+
+    &.introduction {
+      font-size: 1.75rem;
+      font-weight: bold;
+      line-height: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem; 
+    margin-bottom: 2rem;
+  }
+
+  .illustration {
+    background: url('/assets/images/blob.svg') no-repeat center;
+    background-size: calc(100% - 80px) auto; // Ce calcul affiche l'image de fond correctement suivant la maquette
+    display: block;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    padding: 10px 23px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      display: block;
+      padding: 1.18rem 1.66rem;
+      width: 100%;
+    }
+  }
+
+  .temoignages {.cyberenjeux {
+  padding: 4.5rem 1rem;
+
+  h3 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    margin-bottom: 2rem;
+
+    &.introduction {
+      font-size: 1.75rem;
+      font-weight: bold;
+      line-height: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem; 
+    margin-bottom: 2rem;
+  }
+
+  .illustration {
+    background: url('/assets/images/blob.svg') no-repeat center;
+    background-size: calc(100% - 80px) auto; // Ce calcul affiche l'image de fond correctement suivant la maquette
+    display: block;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    padding: 10px 23px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      display: block;
+      padding: 1.18rem 1.66rem;
+      width: 100%;
+    }
+  }
+
+  .temoignages {
+    h4 {
+      font-size: 1.75rem;
+      font-weight: normal;
+      line-height: 2.25rem;
+      margin-bottom: 2rem;
+    }
+
+    blockquote {
+      font-size: 1.25rem;
+      font-weight: bold;
+      line-height: 2rem;
+      margin: 0;
+      padding: 0;
+
+      &::before{
+        content: '« ';
+      }
+
+      &::after {
+        content: ' »';
+      }
+    }
+  }
+}
+    h4 {
+      font-size: 1.75rem;
+      font-weight: normal;
+      line-height: 2.25rem;
+      margin-bottom: 2rem;
+    }
+
+    blockquote {
+      font-size: 1.25rem;
+      font-weight: bold;
+      line-height: 2rem;
+      margin: 0;
+      padding: 0;
+
+      &::before{
+        content: '« ';
+      }
+
+      &::after {
+        content: ' »';
+      }
+    }
+  }
+}
