@@ -35,7 +35,7 @@ const ressourceApresAuthentificationOIDC = ({
       });
     } catch (e: unknown | Error) {
       // eslint-disable-next-line no-console
-      console.error("Erreur après authentification", e)
+      console.error('Erreur après authentification', e);
       reponse.sendStatus(401);
     }
   });
