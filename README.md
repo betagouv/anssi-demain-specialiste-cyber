@@ -41,7 +41,7 @@ $ npm install
 $ npm run dev
 ```
 
-- Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
+- Arrivé ici, le site doit être consultable sur http://127.0.0.1:3005
 
 ## Le build et la PROD
 
