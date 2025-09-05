@@ -1,20 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`La ressource apres authentification OIDC > quand on fait un GET sur /oidc/apres-authentification > si l'utilisateur est connu > sert la page apres-authentification 1`] = `
-"<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            window.location = '/catalogue';
-        });
-    </script>
-</head>
-<body>
-
-</body>
-</html>/
-"
+"<!DOCTYPE html><html><head><script>document.addEventListener('DOMContentLoaded', () => {
+  window.location = '/catalogue';
+});</script></head></html>"
 `;

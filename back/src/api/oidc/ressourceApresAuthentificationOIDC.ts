@@ -30,9 +30,7 @@ const ressourceApresAuthentificationOIDC = ({
       requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token = adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
-      reponse.sendFile(`./pages/apres-authentification.html`, {
-        root: '.',
-      });
+      reponse.render(`apres-authentification`);
     } catch (e: unknown | Error) {
       // eslint-disable-next-line no-console
       console.error('Erreur après authentification', e);
