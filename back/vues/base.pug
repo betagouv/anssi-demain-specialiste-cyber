@@ -1,3 +1,7 @@
+block variables
+  - var titrePage = "DemainSpécialisteCyber"
+  - var descriptionPage = ""
+  
 doctype html
 html(lang='fr')
   head
@@ -9,5 +13,8 @@ html(lang='fr')
 
   body
     include ./entete
-    block contenu
+    block avant-contenu
+    main
+      block contenu
+    block apres-contenu
     include ./pied-de-page
