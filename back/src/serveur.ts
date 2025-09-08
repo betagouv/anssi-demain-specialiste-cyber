@@ -12,6 +12,7 @@ import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { fabriqueMiddleware } from './api/middleware';
+import { moteurDeRenduExpress } from './api/moteurDeRendu';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -53,6 +54,7 @@ serviceCoherenceSecretsHachage
       recupereCheminsVersFichiersStatiques:
         recupereCheminVersFichiersStatiquesParDefaut,
       middleware: fabriqueMiddleware({ adaptateurEnvironnement }),
+      moteurDeRendu: moteurDeRenduExpress,
     });
 
     const port = process.env.PORT || 3005;

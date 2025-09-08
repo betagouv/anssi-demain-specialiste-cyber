@@ -9,11 +9,13 @@ import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { Middleware } from './middleware';
+import { MoteurDeRendu } from './moteurDeRendu';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
+import { ressourceCreationCompte } from './ressourceCreationCompte';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 
@@ -26,6 +28,7 @@ export interface ConfigurationServeur {
   adaptateurHachage: AdaptateurHachage;
   recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
   middleware: Middleware;
+  moteurDeRendu: MoteurDeRendu;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -73,6 +76,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     const nonce = randomBytes(24).toString('base64');
     res.render('index', { nonce } );
   });
+
+  app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
 
   // Route pour les pages dynamiques pour rendre les pages PUG.
   // Doit être en dernier pour ne pas interférer avec les autres routes.

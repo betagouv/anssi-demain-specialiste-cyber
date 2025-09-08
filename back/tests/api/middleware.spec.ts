@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, it } from 'vitest';
 import { Request, Response } from 'express';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { createRequest, createResponse, MockResponse } from 'node-mocks-http';
-import { fauxAdaptateurEnvironnement } from './fauxObjets';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { fauxAdaptateurEnvironnement } from './fauxObjets';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -19,7 +19,7 @@ describe('Le middleware', () => {
   beforeEach(() => {
     requete = createRequest();
     reponse = createResponse();
-    reponse.render = (vue) => (vueRendue = vue);
+    reponse.render = (vue: string) => (vueRendue = vue);
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     middleware = fabriqueMiddleware({
       adaptateurEnvironnement,
