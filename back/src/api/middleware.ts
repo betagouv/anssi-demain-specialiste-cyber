@@ -1,6 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { HttpStatusCode } from 'axios';
+import { NextFunction, Request, Response } from 'express';
+import { randomBytes } from 'node:crypto';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -23,10 +24,11 @@ export const fabriqueMiddleware = ({
     suite: NextFunction
   ) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
+      const nonce = randomBytes(24).toString('base64');
       reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .render('maintenance');
+        .render('maintenance', { nonce });
     } else {
       suite();
     }
