@@ -2,11 +2,13 @@ import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express from 'express';
+import { randomBytes } from 'node:crypto';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
+import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
@@ -14,7 +16,6 @@ import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
-import { Middleware } from './middleware';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -69,16 +70,18 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('views', './vues');
 
   app.get('/', (_req, res) => {
-    res.render('index');
+    const nonce = randomBytes(24).toString('base64');
+    res.render('index', { nonce } );
   });
 
   // Route pour les pages dynamiques pour rendre les pages PUG.
   // Doit être en dernier pour ne pas interférer avec les autres routes.
   app.get('/:page', (req, res) => {
     const page = req.params.page;
-    res.render(page, (err: Error | null, html?: string) => {
+    const nonce = randomBytes(24).toString('base64');
+    res.render(page, { nonce }, (err: Error | null, html?: string) => {
       if (err) {
-        res.status(404).render('404');
+        res.status(404).render('404', { nonce });
       } else {
         res.send(html);
       }
