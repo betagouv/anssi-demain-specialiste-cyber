@@ -1,12 +1,14 @@
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { ConfigurationServeur } from '../../src/api/dsc';
+import { fabriqueMiddleware } from '../../src/api/middleware';
+import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
-import { fabriqueMiddleware } from '../../src/api/middleware';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -73,6 +75,19 @@ const middleware = fabriqueMiddleware({
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
 });
 
+const fauxMoteurDeRendu: MoteurDeRendu = {
+  rends: (reponse, _vue, _options) => reponse.sendStatus(200),
+};
+
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
+  {
+    rechercheOrganisationParSiret: async (siret: string) => ({
+      nom: 'TEST',
+      departement: '86',
+      siret,
+    }),
+  };
+
 export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   serveurLab: {
     reseau: {
@@ -85,7 +100,11 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurJWT: fauxAdaptateurJWT,
+  adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-  recupereCheminsVersFichiersStatiques: () => [join(__dirname, '../pagesDeTest')],
-  middleware
+  recupereCheminsVersFichiersStatiques: () => [
+    join(__dirname, '../pagesDeTest'),
+  ],
+  middleware,
+  moteurDeRendu: fauxMoteurDeRendu,
 });
