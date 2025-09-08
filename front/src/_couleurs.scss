@@ -1,0 +1,20 @@
+@use 'sass:map';
+
+$couleurs-bouton: (
+    primaire-couleur-fond: #000091,
+    primaire-couleur-fond-survol: #0c5c98,
+    couleur-fond-clique: #09416a,
+    primaire-couleur-texte: #FFFFFF,
+);
+
+$toutes-couleurs: (
+  'bouton': $couleurs-bouton
+);
+
+:root {
+  @each $categorie, $map in $toutes-couleurs {
+    @each $nom, $valeur in map.get($map: $toutes-couleurs, $key: $categorie) {
+      --#{$categorie}-#{$nom}: #{$valeur};
+    }
+  }
+}
