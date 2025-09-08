@@ -1,15 +1,15 @@
 .pied-de-page {
   border-top: 2px solid #000091;
-  padding: 0 1rem;
 
-  > *:not(:last-child) {
-    border-bottom: 1px solid #ddd;
+  > *:not(:first-child) {
+    padding: 0 1rem;
   }
 
   .demain-spe-cyber {
+    border-bottom: 1px solid #ddd;
     font-size: 0.875rem;
     line-height: 1.5rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 1rem 0;
     padding-bottom: 1rem;
 
     a > img {
@@ -51,22 +51,6 @@
       img[alt='ANSSI'] {
         width: 90px;
       }
-    }
-  }
-
-  .infos-legales {
-    color: #666;
-    display: inline-flex;
-    flex-flow: row wrap;
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    gap: 1rem 0;
-    padding-top: 1rem;
-
-    a:not(:last-child) {
-      border-right: 1px solid #ddd;
-      margin-right: 0.5rem;
-      padding-right: 0.5rem;
     }
   }
 }
