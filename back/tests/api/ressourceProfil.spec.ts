@@ -15,7 +15,6 @@ describe('La ressource Profil', () => {
 
   const jeanneDupont = new Utilisateur({
     email: 'jeanne.dupont@mail.com',
-    cguAcceptees: true,
     infolettreAcceptee: true,
     prenom: '',
     nom: '',

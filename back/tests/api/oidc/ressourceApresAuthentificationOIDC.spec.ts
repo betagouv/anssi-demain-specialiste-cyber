@@ -42,7 +42,6 @@ describe('La ressource apres authentification OIDC', () => {
       beforeEach(async () => {
         const jeanneDupont = new Utilisateur({
           email: 'jeanne.dupont',
-          cguAcceptees: true,
           infolettreAcceptee: true,
           prenom: '',
           nom: '',

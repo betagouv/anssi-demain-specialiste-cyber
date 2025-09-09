@@ -1,7 +1,7 @@
 import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
-import express from 'express';
+import express, { json } from 'express';
 import { randomBytes } from 'node:crypto';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
@@ -19,6 +19,7 @@ import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourceCreationCompte } from './ressourceCreationCompte';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
+import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -36,6 +37,7 @@ export interface ConfigurationServeur {
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = creeServeurLab(configurationServeur.serveurLab);
 
+  app.use(json());
   app.use(
     cookieSession({
       name: 'session',
@@ -65,6 +67,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   app.use('/api/profil', ressourceProfil(configurationServeur));
+  app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
   app.use(
     '/api/ressources-cyber',
