@@ -79,4 +79,45 @@ describe('La ressource utilisateur', () => {
       expect(jeanne?.infolettreAcceptee).toBe(true);
     });
   });
+
+  describe('concernant la validation des données', () => {
+    it("valide l'acceptation de l'infolettre", async () => {
+      const reponse = await request(serveur)
+        .post('/api/utilisateurs')
+        .send({
+          ...donneesUtilisateur,
+          infolettreAcceptee: 12,
+        });
+      expect(reponse.status).toBe( 400);
+      expect(reponse.body.erreur).toBe("L'acceptation de l'infolettre est invalide"
+      );
+    });
+
+    describe('valide le token', () => {
+      it("lorsqu'il est vide", async () => {
+        const reponse = await request(serveur)
+          .post('/api/utilisateurs')
+          .send({
+            ...donneesUtilisateur,
+            token: '',
+          });
+        expect(reponse.status).toBe( 400);
+        expect(reponse.body.erreur).toBe('Le token est invalide');
+      });
+
+      it("lorsqu'il est mal signé", async () => {
+        adaptateurJWT.decode = () => {
+          throw new Error('Le token est invalide');
+        };
+        const reponse = await request(serveur)
+          .post('/api/utilisateurs')
+          .send({
+            ...donneesUtilisateur,
+            token: 'azertyui',
+          });
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toBe('Le token est invalide');
+      });
+    });
+  });
 });
