@@ -57,7 +57,7 @@ serviceCoherenceSecretsHachage
       recupereCheminsVersFichiersStatiques:
         recupereCheminVersFichiersStatiquesParDefaut,
       middleware: fabriqueMiddleware({ adaptateurEnvironnement }),
-      moteurDeRendu: moteurDeRenduExpress,
+      moteurDeRendu: moteurDeRenduExpress(),
       entrepotJeux: new EntrepotJeuxPostgres(),
     });
 

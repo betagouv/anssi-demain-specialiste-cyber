@@ -38,7 +38,9 @@ export interface ConfigurationServeur {
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
-  const app = creeServeurLab(configurationServeur.serveurLab);
+  const { moteurDeRendu, serveurLab } = configurationServeur;
+
+  const app = creeServeurLab(serveurLab);
 
   app.use(json());
   app.use(
@@ -83,7 +85,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.get('/', (_req, res) => {
     const nonce = randomBytes(24).toString('base64');
-    res.render('index', { nonce });
+    moteurDeRendu.rends(res, 'index', { nonce });
   });
 
   app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
@@ -93,13 +95,18 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.get('/:page', (req, res) => {
     const page = req.params.page;
     const nonce = randomBytes(24).toString('base64');
-    res.render(page, { nonce }, (err: Error | null, html?: string) => {
-      if (err) {
-        res.status(404).render('404', { nonce });
-      } else {
-        res.send(html);
+    moteurDeRendu.rends(
+      res,
+      page,
+      { nonce },
+      (err: Error | null, html?: string) => {
+        if (err) {
+          res.status(404).render('404', { nonce });
+        } else {
+          res.send(html);
+        }
       }
-    });
+    );
   });
 
   return app;

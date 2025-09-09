@@ -1,15 +1,15 @@
 block variables
   - var titrePage = "DemainSpécialisteCyber"
   - var descriptionPage = ""
-  
+
 doctype html
 html(lang='fr')
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     title DemainSpécialisteCyber
-    script(type='module' defer src='/assets/dsc.js')
-    link(rel="stylesheet" type="text/css" href="/assets/style.css")
+    script(type='module' defer src=`/${dsc}`)
+    link(rel="stylesheet" type="text/css" href=`/${style}`)
 
   body
     include ./entete
