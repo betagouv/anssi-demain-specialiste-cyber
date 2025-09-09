@@ -9,15 +9,6 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
 
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v9.34.0'
-    hooks:
-      - id: eslint
-        files: \.(?:[jt]s?|svelte)$
-        types: [file]
-        additional_dependencies:
-          - jiti
-
   - repo: local
     hooks:
       - id: prettier
@@ -26,3 +17,9 @@ repos:
         language: system
         files: \.(?:[jt]s?|md|svelte)$
         types: [ file ]
+      - id: eslint
+        name: eslint
+        entry: npx eslint
+        language: system
+        files: \.(?:[jt]s?|svelte)$
+        types: [file]
