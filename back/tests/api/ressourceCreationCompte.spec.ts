@@ -52,6 +52,7 @@ describe('La ressource création de compte', () => {
           siret: '134',
         },
       },
+      token: 'TOKEN-jeanne',
     });
   });
 
