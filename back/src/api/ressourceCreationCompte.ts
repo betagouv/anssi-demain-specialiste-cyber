@@ -30,6 +30,7 @@ export const ressourceCreationCompte = ({
           siret: informationsProfessionnelles.siret,
         },
       },
+      token,
     });
   });
 
