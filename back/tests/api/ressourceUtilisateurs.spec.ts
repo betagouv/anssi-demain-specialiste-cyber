@@ -13,9 +13,6 @@ describe('La ressource utilisateur', () => {
   let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   let adaptateurJWT: AdaptateurJWT;
   const donneesUtilisateur = {
-    telephone: '0123456789',
-    domainesSpecialite: ['RSSI'],
-    siretEntite: '13000766900018',
     infolettreAcceptee: true,
     token:
       JSON.stringify({
