@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { JwtPayload } from 'jsonwebtoken';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/dsc';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import { describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { creeServeur } from '../../src/api/dsc';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 
 describe('La ressource création de compte', () => {
   it('injecte les informations professionnelles à partir du token', async () => {
@@ -19,14 +20,15 @@ describe('La ressource création de compte', () => {
     const adaptateurJWT: AdaptateurJWT = {
       ...fauxAdaptateurJWT,
       decode: (token) => {
-        return token === 'TOKEN-jeanne'
-          ? {
-              prenom: 'Jeanne',
-              nom: 'Dupont',
-              email: 'jeanne.dupont@example.fr',
-              siret: '134',
-            }
-          : null;
+        if (token === 'TOKEN-jeanne')
+          return {
+            prenom: 'Jeanne',
+            nom: 'Dupont',
+            email: 'jeanne.dupont@example.fr',
+            siret: '134',
+          } as JwtPayload;
+
+        throw new Error('Token invalide');
       },
     };
 
@@ -44,7 +46,11 @@ describe('La ressource création de compte', () => {
         prenom: 'Jeanne',
         nom: 'Dupont',
         email: 'jeanne.dupont@example.fr',
-        siret: '134',
+        organisation: {
+          departement: '86',
+          nom: 'TEST',
+          siret: '134',
+        },
       },
     });
   });

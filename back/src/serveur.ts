@@ -1,18 +1,19 @@
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { creeServeur } from './api/dsc';
-import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
-import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
-import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
-import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
-import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
-import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
-import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
-import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { fabriqueMiddleware } from './api/middleware';
 import { moteurDeRenduExpress } from './api/moteurDeRendu';
+import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
+import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
+import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
+import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
+import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
+import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
+import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
+import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
+import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -45,6 +46,7 @@ serviceCoherenceSecretsHachage
         : new EntrepotRessourcesCyberGrist(),
       adaptateurJWT,
       adaptateurHachage,
+      adaptateurRechercheEntreprise,
       entrepotUtilisateur: new EntrepotUtilisateurPostgres({
         adaptateurHachage,
         adaptateurChiffrement: fabriqueAdaptateurChiffrement({
