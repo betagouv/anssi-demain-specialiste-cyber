@@ -70,7 +70,6 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   private hydrateUtilisateur(utilisateur: UtilisateurBDD): Utilisateur {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
     return new Utilisateur({
-      cguAcceptees: true,
       email: donnees.email,
       infolettreAcceptee: donnees.infolettreAcceptee,
       nom: donnees.nom,
