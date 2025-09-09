@@ -85,12 +85,24 @@ describe('La ressource utilisateur', () => {
           ...donneesUtilisateur,
           infolettreAcceptee: 12,
         });
-      expect(reponse.status).toBe( 400);
-      expect(reponse.body.erreur).toBe("L'acceptation de l'infolettre est invalide"
+      expect(reponse.status).toBe(400);
+      expect(reponse.body.erreur).toBe(
+        "L'acceptation de l'infolettre est invalide"
       );
     });
 
     describe('valide le token', () => {
+      it("lorsqu'il est absent", async () => {
+        const donnees = { infolettreAcceptee: true };
+
+        const reponse = await request(serveur)
+          .post('/api/utilisateurs')
+          .send(donnees);
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toBe('Le token est invalide');
+      });
+
       it("lorsqu'il est vide", async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
@@ -98,7 +110,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             token: '',
           });
-        expect(reponse.status).toBe( 400);
+        expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toBe('Le token est invalide');
       });
 
