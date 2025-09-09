@@ -4,6 +4,7 @@ import cookieSession from 'cookie-session';
 import express from 'express';
 import { randomBytes } from 'node:crypto';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -24,6 +25,7 @@ export interface ConfigurationServeur {
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
+  adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
   adaptateurHachage: AdaptateurHachage;
   recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
@@ -74,7 +76,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.get('/', (_req, res) => {
     const nonce = randomBytes(24).toString('base64');
-    res.render('index', { nonce } );
+    res.render('index', { nonce });
   });
 
   app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
