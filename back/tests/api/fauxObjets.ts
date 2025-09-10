@@ -9,6 +9,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -37,7 +38,7 @@ export const fauxAdaptateurHachage: AdaptateurHachage = {
     `${valeur}-hacheBCrypt`,
   compareBCrypt: async (
     _valeurEnClair: string,
-    _empreinte: string
+    _empreinte: string,
   ): Promise<boolean> => true,
 };
 
@@ -107,4 +108,5 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   ],
   middleware,
   moteurDeRendu: fauxMoteurDeRendu,
+  entrepotJeux: new EntrepotJeuxMemoire(),
 });
