@@ -1,6 +1,7 @@
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
+import { Jeu } from '../../src/metier/jeu';
 import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotJeuxMemoire
-  extends EntrepotMemoire<unknown>
+  extends EntrepotMemoire<Jeu>
   implements EntrepotJeux {}
