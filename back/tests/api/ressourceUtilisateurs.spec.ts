@@ -6,6 +6,11 @@ import { creeServeur } from '../../src/api/dsc';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
+import {
+  fabriqueBusPourLesTests,
+  MockBusEvenement,
+} from '../bus/busPourLesTests';
+import { CompteCree } from '../../src/bus/evenements/compteCree';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -22,9 +27,11 @@ describe('La ressource utilisateur', () => {
         siret: '13000766900018',
       }) + '-code',
   };
+  let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    busEvenements = fabriqueBusPourLesTests();
     adaptateurRechercheEntreprise = {
       rechercheOrganisationParSiret: async (_: string) => undefined,
     };
@@ -36,6 +43,7 @@ describe('La ressource utilisateur', () => {
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
       entrepotUtilisateur,
+      busEvenements,
       adaptateurRechercheEntreprise,
       adaptateurJWT,
     });
@@ -66,7 +74,7 @@ describe('La ressource utilisateur', () => {
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       const jeanne = await entrepotUtilisateur.parEmailHache(
-        'jeanne.dupont@user.com-hache'
+        'jeanne.dupont@user.com-hache',
       );
       expect(jeanne).toBeDefined();
       expect(jeanne?.email).toBe('jeanne.dupont@user.com');
@@ -74,6 +82,17 @@ describe('La ressource utilisateur', () => {
       expect(jeanne?.nom).toBe('Dupont');
       expect(jeanne?.siretEntite).toBe('13000766900018');
       expect(jeanne?.infolettreAcceptee).toBe(true);
+    });
+
+    it('publie un événement de création de compte', async () => {
+      await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
+
+      busEvenements.aRecuUnEvenement(CompteCree);
+      const evenement = busEvenements.recupereEvenement(CompteCree);
+      expect(evenement!.email).toBe('jeanne.dupont@user.com');
+      expect(evenement!.prenom).toBe('Jeanne');
+      expect(evenement!.nom).toBe('Dupont');
+      expect(evenement!.infolettreAcceptee).toBe(true);
     });
   });
 
@@ -87,7 +106,7 @@ describe('La ressource utilisateur', () => {
         });
       expect(reponse.status).toBe(400);
       expect(reponse.body.erreur).toBe(
-        "L'acceptation de l'infolettre est invalide"
+        "L'acceptation de l'infolettre est invalide",
       );
     });
 

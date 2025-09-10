@@ -22,6 +22,7 @@ import { ressourceJeux } from './ressourceJeux';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
+import { BusEvenements } from '../bus/busEvenements';
 
 export interface ConfigurationServeur {
   serveurLab: ConfigurationServeurLab;
@@ -34,6 +35,7 @@ export interface ConfigurationServeur {
   recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
   middleware: Middleware;
   moteurDeRendu: MoteurDeRendu;
+  busEvenements: BusEvenements;
   entrepotJeux: EntrepotJeux;
 }
 

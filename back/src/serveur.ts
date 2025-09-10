@@ -15,8 +15,11 @@ import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePost
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { BusEvenements } from './bus/busEvenements';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
+
+const busEvenements = new BusEvenements();
 
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
@@ -59,6 +62,7 @@ serviceCoherenceSecretsHachage
       middleware: fabriqueMiddleware({ adaptateurEnvironnement }),
       moteurDeRendu: moteurDeRenduExpress(),
       entrepotJeux: new EntrepotJeuxPostgres(),
+      busEvenements,
     });
 
     const port = process.env.PORT || 3005;

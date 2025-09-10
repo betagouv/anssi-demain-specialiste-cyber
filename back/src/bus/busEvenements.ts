@@ -34,6 +34,7 @@ export class BusEvenements {
     this.gestionnaires[evenement.constructor.name]?.forEach(
       (gestionnaire: GestionnaireDEvenement<T>) => {
         gestionnaire(evenement).catch((e: Error) => {
+          // eslint-disable-next-line no-console
           console.error(`Erreur lors du traitement de l'évènement`, e.message);
         });
       }
