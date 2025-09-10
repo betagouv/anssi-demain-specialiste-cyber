@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Jeu } from '../metier/jeu';
-import { ConfigurationServeur } from './dsc';
 import z from 'zod';
+import { ConfigurationServeur } from './configurationServeur';
 
 export const ressourceJeux = ({
   adaptateurJWT,

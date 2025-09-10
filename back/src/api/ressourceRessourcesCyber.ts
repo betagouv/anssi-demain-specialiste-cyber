@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './dsc';
+
+import { ConfigurationServeur } from "./configurationServeur";
 
 export const ressourceRessourceCyber = ({
   entrepotRessourcesCyber,
