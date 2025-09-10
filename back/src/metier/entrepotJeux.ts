@@ -1,4 +1,6 @@
+import { Jeu } from './jeu';
+
 export interface EntrepotJeux {
-  ajoute(jeu: unknown): Promise<void>;
-  tous(): Promise<unknown[]>;
+  ajoute(jeu: Jeu): Promise<void>;
+  tous(): Promise<Jeu[]>;
 }
