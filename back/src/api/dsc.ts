@@ -6,6 +6,7 @@ import { randomBytes } from 'node:crypto';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
+import { EntrepotJeux } from '../metier/entrepotJeux';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
@@ -17,6 +18,7 @@ import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionO
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourceCreationCompte } from './ressourceCreationCompte';
+import { ressourceJeux } from './ressourceJeux';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
@@ -32,6 +34,7 @@ export interface ConfigurationServeur {
   recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
   middleware: Middleware;
   moteurDeRendu: MoteurDeRendu;
+  entrepotJeux: EntrepotJeux;
 }
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -45,7 +48,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
       secret: process.env.SECRET_COOKIE,
       secure: process.env.NODE_ENV === 'production',
       signed: process.env.NODE_ENV === 'production',
-    })
+    }),
   );
 
   app.use(cookieParser());
@@ -61,17 +64,18 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
   app.use(
     '/oidc/apres-authentification',
-    ressourceApresAuthentificationOIDC(configurationServeur)
+    ressourceApresAuthentificationOIDC(configurationServeur),
   );
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   app.use('/api/profil', ressourceProfil(configurationServeur));
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
+  app.use('/api/jeux', ressourceJeux(configurationServeur));
 
   app.use(
     '/api/ressources-cyber',
-    ressourceRessourceCyber(configurationServeur)
+    ressourceRessourceCyber(configurationServeur),
   );
 
   app.set('view engine', 'pug');
