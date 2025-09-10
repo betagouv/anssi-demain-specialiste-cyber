@@ -2,7 +2,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
-import { ConfigurationServeur, creeServeur } from '../../../src/api/dsc';
+import { creeServeur } from '../../../src/api/dsc';
 import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../../infra/entrepotUtilisateurMemoire';
@@ -12,6 +12,7 @@ import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
 } from '../fauxObjets';
+import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {

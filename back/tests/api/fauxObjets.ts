@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { ConfigurationServeur } from '../../src/api/dsc';
 import { fabriqueMiddleware } from '../../src/api/middleware';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
@@ -10,6 +9,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
+import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {

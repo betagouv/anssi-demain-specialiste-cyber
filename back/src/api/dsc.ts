@@ -1,18 +1,8 @@
-import { ConfigurationServeurLab, creeServeurLab } from '@lab-anssi/lib';
+import { creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
 import { randomBytes } from 'node:crypto';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
-import { EntrepotJeux } from '../metier/entrepotJeux';
-import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { AdaptateurJWT } from './adaptateurJWT';
-import { Middleware } from './middleware';
-import { MoteurDeRendu } from './moteurDeRendu';
-import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
@@ -22,22 +12,7 @@ import { ressourceJeux } from './ressourceJeux';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
-import { BusEvenements } from '../bus/busEvenements';
-
-export interface ConfigurationServeur {
-  serveurLab: ConfigurationServeurLab;
-  entrepotRessourcesCyber: EntrepotRessourcesCyber;
-  adaptateurOIDC: AdaptateurOIDC;
-  adaptateurJWT: AdaptateurJWT;
-  adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
-  entrepotUtilisateur: EntrepotUtilisateur;
-  adaptateurHachage: AdaptateurHachage;
-  recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
-  middleware: Middleware;
-  moteurDeRendu: MoteurDeRendu;
-  busEvenements: BusEvenements;
-  entrepotJeux: EntrepotJeux;
-}
+import { ConfigurationServeur } from './configurationServeur';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { moteurDeRendu, serveurLab } = configurationServeur;
