@@ -9,6 +9,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
@@ -108,5 +109,6 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   ],
   middleware,
   moteurDeRendu: fauxMoteurDeRendu,
+  busEvenements: fabriqueBusPourLesTests(),
   entrepotJeux: new EntrepotJeuxMemoire(),
 });

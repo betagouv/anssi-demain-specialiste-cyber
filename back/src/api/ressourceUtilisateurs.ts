@@ -2,10 +2,12 @@ import { Router } from 'express';
 import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './dsc';
 import z from 'zod';
+import { CompteCree } from '../bus/evenements/compteCree';
 
 const ressourceUtilisateurs = ({
   entrepotUtilisateur,
   adaptateurJWT,
+  busEvenements,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -35,6 +37,10 @@ const ressourceUtilisateurs = ({
         });
 
         await entrepotUtilisateur.ajoute(utilisateur);
+
+        await busEvenements.publie(
+          new CompteCree(email, prenom, nom, infolettreAcceptee),
+        );
 
         reponse.sendStatus(201);
       } catch {
