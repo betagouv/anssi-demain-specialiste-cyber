@@ -1,11 +1,20 @@
+import Knex from 'knex';
+import config from '../../knexfile';
 import { EntrepotJeux } from '../metier/entrepotJeux';
 import { Jeu } from '../metier/jeu';
+import { randomUUID } from 'crypto';
 
 export class EntrepotJeuxPostgres implements EntrepotJeux {
-  ajoute(_jeu: Jeu): Promise<void> {
-    throw new Error('Method not implemented.');
+  knex: Knex.Knex;
+
+  constructor() {
+    this.knex = Knex(config);
   }
-  tous(): Promise<Jeu[]> {
-    throw new Error('Method not implemented.');
+  async ajoute(jeu: Jeu): Promise<void> {
+    jeu.id = randomUUID();
+    await this.knex('jeux').insert(jeu);
+  }
+  async tous(): Promise<Jeu[]> {
+    return this.knex('jeux');
   }
 }
