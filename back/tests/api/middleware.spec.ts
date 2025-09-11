@@ -1,13 +1,17 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { createRequest, createResponse, MockResponse } from 'node-mocks-http';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import {
+  fabriqueMiddleware,
+  Middleware,
+  RequeteNonTypee,
+} from '../../src/api/middleware';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurEnvironnement } from './fauxObjets';
 
 describe('Le middleware', () => {
-  let requete: Request & {
+  let requete: RequeteNonTypee & {
     emailUtilisateurCourant?: string;
     utilisateur?: Utilisateur | undefined;
   };
