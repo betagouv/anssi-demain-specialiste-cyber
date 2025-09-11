@@ -1,10 +1,4 @@
-import {
-  NextFunction,
-  Request,
-  RequestHandler,
-  Response,
-  Router,
-} from 'express';
+import { Request, Response, Router } from 'express';
 import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './dsc';
 import z from 'zod';
@@ -12,6 +6,7 @@ import z from 'zod';
 export const ressourceJeux = ({
   adaptateurJWT,
   entrepotJeux,
+  middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -22,21 +17,9 @@ export const ressourceJeux = ({
       .min(1, 'Le nom est obligatoire'),
   });
 
-  const valideLaCoherenceDuCorps = (objet: z.ZodType): RequestHandler => {
-    return async (requete: Request, reponse: Response, suite: NextFunction) => {
-      const resultat = objet.safeParse(requete.body);
-      if (!resultat.success) {
-        return reponse
-          .status(400)
-          .json({ erreur: resultat.error.issues[0].message });
-      }
-      return suite();
-    };
-  };
-
   routeur.post(
     '/',
-    valideLaCoherenceDuCorps(schema),
+    middleware.valideLaCoherenceDuCorps(schema),
     async (requete: Request, reponse: Response) => {
       try {
         adaptateurJWT.decode(requete.session?.token);
