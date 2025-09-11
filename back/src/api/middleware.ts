@@ -4,16 +4,23 @@ import { randomBytes } from 'node:crypto';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import z from 'zod';
 
-type FonctionMiddleware = (
-  requete: Request,
+type FonctionMiddleware<TBody> = (
+  requete: Request<unknown, unknown, TBody, unknown, never>,
   reponse: Response,
   suite: NextFunction,
 ) => Promise<void>;
 
 export type Middleware = {
-  verifieModeMaintenance: FonctionMiddleware;
-  valideLaCoherenceDuCorps: (objet: z.ZodType) => FonctionMiddleware;
+  verifieModeMaintenance: FonctionMiddleware<unknown>;
+  valideLaCoherenceDuCorps: <
+    TZod extends z.ZodType,
+    TBody extends z.infer<TZod>,
+  >(
+    object: TZod,
+  ) => FonctionMiddleware<TBody>;
 };
+
+export type RequeteNonTypee = Request<unknown, unknown, unknown, unknown, never>;
 
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
@@ -21,7 +28,7 @@ export const fabriqueMiddleware = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): Middleware => {
   const verifieModeMaintenance = async (
-    _requete: Request,
+    _requete: RequeteNonTypee,
     reponse: Response,
     suite: NextFunction,
   ) => {
@@ -36,8 +43,13 @@ export const fabriqueMiddleware = ({
     }
   };
 
-  const valideLaCoherenceDuCorps = (objet: z.ZodType): FonctionMiddleware => {
-    return async (requete: Request, reponse: Response, suite: NextFunction) => {
+  const valideLaCoherenceDuCorps =
+    <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
+    async (
+      requete: Request<unknown, unknown, TBody, unknown, never>,
+      reponse: Response,
+      suite: NextFunction,
+    ) => {
       const resultat = objet.safeParse(requete.body);
       if (!resultat.success) {
         reponse.status(400).json({ erreur: resultat.error.issues[0].message });
@@ -45,7 +57,6 @@ export const fabriqueMiddleware = ({
         suite();
       }
     };
-  };
 
   return {
     verifieModeMaintenance,

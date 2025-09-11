@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './dsc';
 import z from 'zod';
@@ -20,7 +20,7 @@ export const ressourceJeux = ({
   routeur.post(
     '/',
     middleware.valideLaCoherenceDuCorps(schema),
-    async (requete: Request, reponse: Response) => {
+    async (requete, reponse) => {
       try {
         adaptateurJWT.decode(requete.session?.token);
         const { nom } = requete.body;
