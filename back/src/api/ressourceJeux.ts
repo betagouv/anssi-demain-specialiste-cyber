@@ -41,7 +41,7 @@ export const ressourceJeux = ({
       try {
         adaptateurJWT.decode(requete.session?.token);
         const { nom } = requete.body;
-        entrepotJeux.ajoute(new Jeu({ nom }));
+        await entrepotJeux.ajoute(new Jeu({ nom }));
         reponse.sendStatus(201);
       } catch {
         reponse.sendStatus(401);
