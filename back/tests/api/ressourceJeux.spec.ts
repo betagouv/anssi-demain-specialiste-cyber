@@ -32,7 +32,7 @@ describe('La ressource des jeux', () => {
       const reponse = await request(serveur)
         .post('/api/jeux')
         .set('Cookie', [cookie])
-        .send();
+        .send({ nom: 'Cluedo' });
 
       expect(reponse.status).toEqual(201);
     });
@@ -41,13 +41,13 @@ describe('La ressource des jeux', () => {
       adaptateurJWT.decode = () => {
         throw new Error('erreur de décodage');
       };
-      const reponse = await request(serveur).post('/api/jeux').send();
+      const reponse = await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
 
       expect(reponse.status).toEqual(401);
     });
 
     it("ajoute un jeu dans l'entrepot des jeux", async () => {
-      await request(serveur).post('/api/jeux').send();
+      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux).toHaveLength(1);
@@ -59,6 +59,24 @@ describe('La ressource des jeux', () => {
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
       expect(mesJeux[0].nom).toEqual('cybercluedo');
+    });
+
+    describe('concernant la vérification du nom', () => {
+      it('vérifie que le nom est fourni', async () => {
+        const reponse = await request(serveur).post('/api/jeux').send({});
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
+      });
+
+      it("vérifie que le nom n'est pas vide", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({ nom: '   ' });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
+      });
     });
   });
 });
