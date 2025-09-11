@@ -57,7 +57,8 @@ describe('La ressource des jeux', () => {
       await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
 
       const mesJeux = await entrepotJeux.tous();
-      expect(mesJeux[0]).toStrictEqual({ nom: 'cybercluedo' });
+      expect(mesJeux[0].id).toBeDefined();
+      expect(mesJeux[0].nom).toEqual('cybercluedo');
     });
   });
 });

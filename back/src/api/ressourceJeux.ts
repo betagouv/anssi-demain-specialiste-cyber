@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './dsc';
 
 export const ressourceJeux = ({
@@ -11,7 +12,7 @@ export const ressourceJeux = ({
     try {
       adaptateurJWT.decode(requete.session?.token);
       const { nom } = requete.body;
-      entrepotJeux.ajoute({ nom });
+      entrepotJeux.ajoute(new Jeu({ nom }));
       reponse.sendStatus(201);
     } catch {
       reponse.sendStatus(401);
