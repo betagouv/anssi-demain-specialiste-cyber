@@ -71,6 +71,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     actif: () => false,
     detailsPreparation: () => undefined,
   }),
+  journal: () => ({
+    enMemoire: () => true,
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
