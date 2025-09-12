@@ -4,12 +4,7 @@ import fs from 'fs';
 import { join } from 'path';
 
 export interface MoteurDeRendu {
-  rends: (
-    reponse: express.Response,
-    vue: string,
-    options?: object,
-    callback?: (err: Error | null, html?: string, options?: object) => void,
-  ) => void;
+  rends: (reponse: express.Response, vue: string, options?: object) => void;
 }
 
 export const moteurDeRenduExpress = (): MoteurDeRendu => {
@@ -23,11 +18,19 @@ export const moteurDeRenduExpress = (): MoteurDeRendu => {
 
   const nonce = randomBytes(24).toString('base64');
   return {
-    rends(reponse, vue, options, callback) {
+    rends(reponse, vue, options) {
       options = { ...options, ...manifestOptions, nonce };
-      reponse.render(vue, options, (err, html) =>
-        callback?.(err, html, options),
-      );
+      reponse.render(vue, options, (err, html) => {
+        if (err.message.startsWith('Failed to lookup view')) {
+          return reponse.status(404).render('404', options);
+        }
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.error(err);
+          return reponse.status(500).render('500', options);
+        }
+        return reponse.send(html);
+      });
     },
   };
 };
