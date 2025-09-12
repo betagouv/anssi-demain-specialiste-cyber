@@ -1,24 +1,32 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { creeServeur } from '../../src/api/dsc';
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 import { encodeSession } from './cookie';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import {
+  fabriqueBusPourLesTests,
+  MockBusEvenement,
+} from '../bus/busPourLesTests';
+import { JeuCree } from '../../src/bus/evenements/jeu/jeuCree';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
   let adaptateurJWT: AdaptateurJWT;
   let entrepotJeux: EntrepotJeux;
+  let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
     adaptateurJWT = { ...fauxAdaptateurJWT };
+    busEvenements = fabriqueBusPourLesTests();
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
       adaptateurJWT,
+      busEvenements,
       entrepotJeux,
     });
   });
@@ -41,7 +49,9 @@ describe('La ressource des jeux', () => {
       adaptateurJWT.decode = () => {
         throw new Error('erreur de décodage');
       };
-      const reponse = await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
+      const reponse = await request(serveur)
+        .post('/api/jeux')
+        .send({ nom: 'Cluedo' });
 
       expect(reponse.status).toEqual(401);
     });
@@ -59,6 +69,19 @@ describe('La ressource des jeux', () => {
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
       expect(mesJeux[0].nom).toEqual('cybercluedo');
+    });
+
+    it('publie un événement de création de jeu', async () => {
+      adaptateurJWT.decode = () => ({
+        email: 'jeanne.dupont@user.com',
+      });
+
+      await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
+
+      busEvenements.aRecuUnEvenement(JeuCree);
+      const evenement = busEvenements.recupereEvenement(JeuCree);
+      expect(evenement!.emailAuteur).toBe('jeanne.dupont@user.com');
+      expect(evenement!.nom).toBe('cybercluedo');
     });
 
     describe('concernant la vérification du nom', () => {

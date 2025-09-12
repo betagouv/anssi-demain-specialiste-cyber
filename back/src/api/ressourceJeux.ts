@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { Jeu } from '../metier/jeu';
 import z from 'zod';
+import { JeuCree } from '../bus/evenements/jeu/jeuCree';
+import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './configurationServeur';
 
 export const ressourceJeux = ({
   adaptateurJWT,
   entrepotJeux,
   middleware,
+  busEvenements,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -22,9 +24,10 @@ export const ressourceJeux = ({
     middleware.valideLaCoherenceDuCorps(schema),
     async (requete, reponse) => {
       try {
-        adaptateurJWT.decode(requete.session?.token);
+        const { email } = adaptateurJWT.decode(requete.session?.token);
         const { nom } = requete.body;
         await entrepotJeux.ajoute(new Jeu({ nom }));
+        await busEvenements.publie(new JeuCree(email, nom));
         reponse.sendStatus(201);
       } catch {
         reponse.sendStatus(401);
