@@ -2,7 +2,7 @@ import { creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
-import { randomBytes } from 'node:crypto';
+import { ConfigurationServeur } from './configurationServeur';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
@@ -12,7 +12,6 @@ import { ressourceJeux } from './ressourceJeux';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
-import { ConfigurationServeur } from './configurationServeur';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { moteurDeRendu, serveurLab } = configurationServeur;
@@ -61,8 +60,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('views', './vues');
 
   app.get('/', (_req, res) => {
-    const nonce = randomBytes(24).toString('base64');
-    moteurDeRendu.rends(res, 'index', { nonce });
+    moteurDeRendu.rends(res, 'index');
   });
 
   app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
@@ -71,19 +69,13 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   // Doit être en dernier pour ne pas interférer avec les autres routes.
   app.get('/:page', (req, res) => {
     const page = req.params.page;
-    const nonce = randomBytes(24).toString('base64');
-    moteurDeRendu.rends(
-      res,
-      page,
-      { nonce },
-      (err: Error | null, html?: string) => {
-        if (err) {
-          res.status(404).render('404', { nonce });
-        } else {
-          res.send(html);
-        }
+    moteurDeRendu.rends(res, page, {}, (err: Error | null, html?: string) => {
+      if (err) {
+        res.status(404).render('404');
+      } else {
+        res.send(html);
       }
-    );
+    });
   });
 
   return app;
