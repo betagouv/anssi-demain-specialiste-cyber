@@ -17,13 +17,19 @@ import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCh
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { BusEvenements } from './bus/busEvenements';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
+import { cableTousLesAbonnes } from './bus/cablage';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
-const busEvenements = new BusEvenements();
-
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
+});
+
+const busEvenements = new BusEvenements();
+cableTousLesAbonnes({
+  busEvenements,
+  adaptateurHachage,
+  adaptateurJournal: fabriqueAdaptateurJournal(),
 });
 
 const serviceCoherenceSecretsHachage =
