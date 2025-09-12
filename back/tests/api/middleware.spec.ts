@@ -11,7 +11,9 @@ import { Utilisateur } from '../../src/metier/utilisateur';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnvironnement,
+  fauxAdaptateurJWT,
 } from './fauxObjets';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -21,6 +23,7 @@ describe('Le middleware', () => {
   let reponse: MockResponse<Response>;
   let middleware: Middleware;
   let adaptateurEnvironnement: AdaptateurEnvironnement;
+  let adaptateurJWT: AdaptateurJWT;
   let vueRendue: string;
 
   beforeEach(() => {
@@ -28,8 +31,10 @@ describe('Le middleware', () => {
     reponse = createResponse();
     reponse.render = (vue: string) => (vueRendue = vue);
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
+    adaptateurJWT = { ...fauxAdaptateurJWT };
     middleware = fabriqueMiddleware({
       ...configurationDeTestDuServeur(),
+      adaptateurJWT,
       adaptateurEnvironnement,
     });
   });
@@ -59,6 +64,41 @@ describe('Le middleware', () => {
       });
 
       expect(suiteAppelee).toBeTruthy();
+    });
+  });
+
+  describe('sur demande de validation du token JWT en cas de navigation', () => {
+    it("redirige vers la page de connexion si le token n'est pas présent", async () => {
+      let urlRecu;
+      // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
+      reponse.redirect = (url: string) => {
+        urlRecu = url;
+        return;
+      };
+
+      await middleware.verifieJWTNavigation(requete, reponse, () => {});
+
+      expect(urlRecu).toEqual('/connexion');
+    });
+
+    it('redirige vers la page de connexion si le token ne peut pas être décodé', async () => {
+      adaptateurJWT.decode = () => {
+        throw new Error('Erreur de token');
+      };
+      requete.session = {
+        token: 'unToken',
+      };
+
+      let urlRecu;
+      // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
+      reponse.redirect = (url: string) => {
+        urlRecu = url;
+        return;
+      };
+
+      await middleware.verifieJWTNavigation(requete, reponse, () => {});
+
+      expect(urlRecu).toEqual('/connexion');
     });
   });
 });
