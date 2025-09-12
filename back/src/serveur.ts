@@ -1,5 +1,6 @@
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
+import { ConfigurationServeurSansMiddleware } from './api/configurationServeur';
 import { creeServeur } from './api/dsc';
 import { fabriqueMiddleware } from './api/middleware';
 import { moteurDeRenduExpress } from './api/moteurDeRendu';
@@ -49,29 +50,36 @@ serviceCoherenceSecretsHachage
   // eslint-disable-next-line no-console
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
-    const app = creeServeur({
-      adaptateurOIDC,
-      serveurLab: configurationServeurLabEnvironnement(),
-      entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
-        ? new EntrepotRessourcesCyberStatique()
-        : new EntrepotRessourcesCyberGrist(),
-      adaptateurJWT,
-      adaptateurHachage,
-      adaptateurRechercheEntreprise,
-      entrepotUtilisateur: new EntrepotUtilisateurPostgres({
+    const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
+      {
+        adaptateurEnvironnement,
+        adaptateurOIDC,
+        serveurLab: configurationServeurLabEnvironnement(),
+        entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
+          ? new EntrepotRessourcesCyberStatique()
+          : new EntrepotRessourcesCyberGrist(),
+        adaptateurJWT,
         adaptateurHachage,
-        adaptateurChiffrement: fabriqueAdaptateurChiffrement({
-          adaptateurEnvironnement,
+        adaptateurRechercheEntreprise,
+        entrepotUtilisateur: new EntrepotUtilisateurPostgres({
+          adaptateurHachage,
+          adaptateurChiffrement: fabriqueAdaptateurChiffrement({
+            adaptateurEnvironnement,
+          }),
         }),
-      }),
-      recupereCheminsVersFichiersStatiques:
-        recupereCheminVersFichiersStatiquesParDefaut,
-      middleware: fabriqueMiddleware({ adaptateurEnvironnement }),
-      moteurDeRendu: moteurDeRenduExpress(),
-      entrepotJeux: new EntrepotJeuxPostgres(),
-      busEvenements,
-      adaptateurJournal: fabriqueAdaptateurJournal(),
-    });
+        recupereCheminsVersFichiersStatiques:
+          recupereCheminVersFichiersStatiquesParDefaut,
+
+        moteurDeRendu: moteurDeRenduExpress(),
+        entrepotJeux: new EntrepotJeuxPostgres(),
+        busEvenements,
+        adaptateurJournal: fabriqueAdaptateurJournal(),
+      };
+    const configurationServeur = {
+      ...configurationServeurSansMiddleware,
+      middleware: fabriqueMiddleware(configurationServeurSansMiddleware),
+    };
+    const app = creeServeur(configurationServeur);
 
     const port = process.env.PORT || 3005;
 
