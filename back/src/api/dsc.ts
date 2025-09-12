@@ -3,19 +3,12 @@ import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
-import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
-import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
-import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
-import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
-import { ressourceCreationCompte } from './ressourceCreationCompte';
-import { ressourceJeux } from './ressourceJeux';
-import { ressourceProfil } from './ressourceProfil';
-import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
-import { ressourceUtilisateurs } from './ressourceUtilisateurs';
+import { ressourcesApi } from './ressourcesApi';
+import { ressourcesOidc } from './ressourcesOidc';
+import { ressourcesPages } from './ressourcesPages';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
-  const { moteurDeRendu, serveurLab } = configurationServeur;
-
+  const { serveurLab } = configurationServeur;
   const app = creeServeurLab(serveurLab);
 
   app.use(json());
@@ -38,54 +31,12 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
     });
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
-
-  app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
-  app.use(
-    '/oidc/apres-authentification',
-    ressourceApresAuthentificationOIDC(configurationServeur),
-  );
-  app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
-  app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
-
-  app.use('/api/profil', ressourceProfil(configurationServeur));
-  app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
-  app.use('/api/jeux', ressourceJeux(configurationServeur));
-
-  app.use(
-    '/api/ressources-cyber',
-    ressourceRessourceCyber(configurationServeur),
-  );
+  app.use('/oidc', ressourcesOidc(configurationServeur));
+  app.use('/api', ressourcesApi(configurationServeur));
 
   app.set('view engine', 'pug');
   app.set('views', './vues');
-
-  app.get('/', (_req, res) => {
-    moteurDeRendu.rends(res, 'index');
-  });
-
-  app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
-
-  ['/nouveau-jeu'].forEach((pageProtegee) =>
-    app.use(pageProtegee, configurationServeur.middleware.verifieJWTNavigation),
-  );
-
-  // Route pour les pages dynamiques pour rendre les pages PUG.
-  // Doit être en dernier pour ne pas interférer avec les autres routes.
-  app.get('/:page', (req, res) => {
-    const page = req.params.page;
-    moteurDeRendu.rends(
-      res,
-      page,
-      {},
-      (err: Error | null, html?: string, options?: object) => {
-        if (err) {
-          res.status(404).render('404', options);
-        } else {
-          res.send(html);
-        }
-      },
-    );
-  });
+  app.use(ressourcesPages(configurationServeur));
 
   return app;
 };
