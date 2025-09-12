@@ -9,12 +9,12 @@ import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
+import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
