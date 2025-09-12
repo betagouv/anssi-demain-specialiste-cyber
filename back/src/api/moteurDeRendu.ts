@@ -1,14 +1,10 @@
+import { randomBytes } from 'crypto';
 import express from 'express';
 import fs from 'fs';
 import { join } from 'path';
 
 export interface MoteurDeRendu {
-  rends: (
-    reponse: express.Response,
-    vue: string,
-    options: object,
-    callback?: (err: Error | null, html?: string) => void
-  ) => void;
+  rends: (reponse: express.Response, vue: string, options: object) => void;
 }
 
 export const moteurDeRenduExpress = (): MoteurDeRendu => {
@@ -20,9 +16,10 @@ export const moteurDeRenduExpress = (): MoteurDeRendu => {
     style: manifest['style.css'].file,
   };
 
+  const nonce = randomBytes(24).toString('base64');
   return {
     rends(reponse, vue, options) {
-      reponse.render(vue, { ...options, ...manifestOptions });
+      reponse.render(vue, { ...options, ...manifestOptions, nonce });
     },
   };
 };
