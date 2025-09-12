@@ -84,8 +84,6 @@ describe("L'API DSC", () => {
       expect(moteurDeRendu.rends).toHaveBeenCalledExactlyOnceWith(
         expect.any(Object),
         'nouveau-jeu',
-        expect.any(Object),
-        expect.any(Function),
       );
     });
   });
