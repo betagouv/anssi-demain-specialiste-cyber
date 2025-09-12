@@ -4,7 +4,12 @@ import fs from 'fs';
 import { join } from 'path';
 
 export interface MoteurDeRendu {
-  rends: (reponse: express.Response, vue: string, options: object) => void;
+  rends: (
+    reponse: express.Response,
+    vue: string,
+    options?: object,
+    callback?: (err: Error | null, html?: string, options?: object) => void,
+  ) => void;
 }
 
 export const moteurDeRenduExpress = (): MoteurDeRendu => {
@@ -18,8 +23,11 @@ export const moteurDeRenduExpress = (): MoteurDeRendu => {
 
   const nonce = randomBytes(24).toString('base64');
   return {
-    rends(reponse, vue, options) {
-      reponse.render(vue, { ...options, ...manifestOptions, nonce });
+    rends(reponse, vue, options, callback) {
+      options = { ...options, ...manifestOptions, nonce };
+      reponse.render(vue, options, (err, html) =>
+        callback?.(err, html, options),
+      );
     },
   };
 };

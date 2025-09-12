@@ -69,13 +69,18 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   // Doit être en dernier pour ne pas interférer avec les autres routes.
   app.get('/:page', (req, res) => {
     const page = req.params.page;
-    moteurDeRendu.rends(res, page, {}, (err: Error | null, html?: string) => {
-      if (err) {
-        res.status(404).render('404');
-      } else {
-        res.send(html);
-      }
-    });
+    moteurDeRendu.rends(
+      res,
+      page,
+      {},
+      (err: Error | null, html?: string, options?: object) => {
+        if (err) {
+          res.status(404).render('404', options);
+        } else {
+          res.send(html);
+        }
+      },
+    );
   });
 
   return app;
