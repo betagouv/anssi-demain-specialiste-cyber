@@ -10,7 +10,7 @@ import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { CompteCree } from '../../src/bus/evenements/compteCree';
+import { CompteCree } from '../../src/bus/evenements/compteCree/compteCree';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;

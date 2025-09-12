@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { Utilisateur } from '../metier/utilisateur';
 import z from 'zod';
-import { CompteCree } from '../bus/evenements/compteCree';
 import { ConfigurationServeur } from './configurationServeur';
+import { CompteCree } from '../bus/evenements/compteCree/compteCree';
 
 const ressourceUtilisateurs = ({
   entrepotUtilisateur,
