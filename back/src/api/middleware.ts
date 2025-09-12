@@ -1,8 +1,8 @@
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { randomBytes } from 'node:crypto';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import z from 'zod';
+import { ConfigurationServeurSansMiddleware } from './configurationServeur';
 
 type FonctionMiddleware<TBody> = (
   requete: Request<unknown, unknown, TBody, unknown, never>,
@@ -20,13 +20,17 @@ export type Middleware = {
   ) => FonctionMiddleware<TBody>;
 };
 
-export type RequeteNonTypee = Request<unknown, unknown, unknown, unknown, never>;
+export type RequeteNonTypee = Request<
+  unknown,
+  unknown,
+  unknown,
+  unknown,
+  never
+>;
 
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
-}: {
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-}): Middleware => {
+}: ConfigurationServeurSansMiddleware): Middleware => {
   const verifieModeMaintenance = async (
     _requete: RequeteNonTypee,
     reponse: Response,

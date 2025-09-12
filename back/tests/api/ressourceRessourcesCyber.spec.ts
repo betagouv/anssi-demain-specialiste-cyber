@@ -1,15 +1,13 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { creeServeur } from '../../src/api/dsc';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
-import {
-  configurationDeTestDuServeur,
-  ConfigurationServeurDeTest,
-} from './fauxObjets';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('La ressource des ressources cyber', () => {
-  let configuration: ConfigurationServeurDeTest;
+  let configuration: ConfigurationServeur;
   let serveur: Express;
 
   beforeEach(() => {

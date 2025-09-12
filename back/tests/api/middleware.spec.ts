@@ -8,7 +8,10 @@ import {
 } from '../../src/api/middleware';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurEnvironnement } from './fauxObjets';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
+} from './fauxObjets';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -26,6 +29,7 @@ describe('Le middleware', () => {
     reponse.render = (vue: string) => (vueRendue = vue);
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     middleware = fabriqueMiddleware({
+      ...configurationDeTestDuServeur(),
       adaptateurEnvironnement,
     });
   });

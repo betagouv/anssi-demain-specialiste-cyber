@@ -1,18 +1,20 @@
 import { ConfigurationServeurLab } from '@lab-anssi/lib';
-import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
-import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { AdaptateurJWT } from './adaptateurJWT';
-import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { BusEvenements } from '../bus/busEvenements';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
+import { EntrepotJeux } from '../metier/entrepotJeux';
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { AdaptateurJWT } from './adaptateurJWT';
 import { Middleware } from './middleware';
 import { MoteurDeRendu } from './moteurDeRendu';
-import { BusEvenements } from '../bus/busEvenements';
-import { EntrepotJeux } from '../metier/entrepotJeux';
+import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 
 export interface ConfigurationServeur {
+  adaptateurEnvironnement: AdaptateurEnvironnement;
   serveurLab: ConfigurationServeurLab;
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
   adaptateurOIDC: AdaptateurOIDC;
@@ -24,6 +26,10 @@ export interface ConfigurationServeur {
   middleware: Middleware;
   moteurDeRendu: MoteurDeRendu;
   busEvenements: BusEvenements;
-  entrepotJeux: EntrepotJeux;
-  adaptateurJournal: AdaptateurJournal;
+  entrepotJeux: EntrepotJeux;adaptateurJournal: AdaptateurJournal;
 }
+
+export type ConfigurationServeurSansMiddleware = Omit<
+  ConfigurationServeur,
+  'middleware'
+>;
