@@ -1,3 +1,6 @@
+import { adaptateurEnvironnement } from './adaptateurEnvironnement';
+import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
+
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
   | DonneesEvenementJeuCree;
@@ -35,5 +38,7 @@ export const adaptateurJournalMemoire: AdaptateurJournal = {
 };
 
 export const fabriqueAdaptateurJournal = () => {
-  return adaptateurJournalMemoire;
+  return adaptateurEnvironnement.journal().enMemoire()
+    ? adaptateurJournalMemoire
+    : adaptateurJournalPostgres();
 };
