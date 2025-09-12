@@ -5,9 +5,12 @@ import { creeServeur } from './api/dsc';
 import { fabriqueMiddleware } from './api/middleware';
 import { moteurDeRenduExpress } from './api/moteurDeRendu';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
+import { BusEvenements } from './bus/busEvenements';
+import { cableTousLesAbonnes } from './bus/cablage';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
+import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
@@ -16,9 +19,6 @@ import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePost
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
-import { BusEvenements } from './bus/busEvenements';
-import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
-import { cableTousLesAbonnes } from './bus/cablage';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
