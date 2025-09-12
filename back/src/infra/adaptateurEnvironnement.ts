@@ -26,6 +26,9 @@ export type AdaptateurEnvironnement = {
     actif: () => boolean;
     detailsPreparation: () => string | undefined;
   };
+  journal: () => {
+    enMemoire: () => boolean;
+  };
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -69,7 +72,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
         .map(({ version, valeur }) => {
           if (!valeur) {
             throw new Error(
-              `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`
+              `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`,
             );
           }
           return {
@@ -78,7 +81,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
           };
         })
         .sort(
-          ({ version: version1 }, { version: version2 }) => version1 - version2
+          ({ version: version1 }, { version: version2 }) => version1 - version2,
         );
     },
   }),
@@ -87,10 +90,13 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const cleHex = process.env.CHIFFREMENT_CHACHA20_CLE_HEX;
       if (!cleHex) {
         throw new Error(
-          `La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`
+          `La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`,
         );
       }
       return cleHex;
     },
+  }),
+  journal: () => ({
+    enMemoire: () => process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE === 'true',
   }),
 };
