@@ -22,7 +22,7 @@ describe('La ressource des ressources cyber', () => {
     });
 
     it('renvoie une liste de ressources cyber', async () => {
-      configuration.entrepotRessourcesCyber.ajoute({
+      await configuration.entrepotRessourcesCyber.ajoute({
         id: 1,
         niveaux: ['niveau 1', 'niveau 2'],
         publicsCible: ['Parents'],
