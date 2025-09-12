@@ -18,6 +18,7 @@ export type Middleware = {
   >(
     object: TZod,
   ) => FonctionMiddleware<TBody>;
+  verifieJWTNavigation: FonctionMiddleware<unknown>;
 };
 
 export type RequeteNonTypee = Request<
@@ -30,6 +31,7 @@ export type RequeteNonTypee = Request<
 
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
+  adaptateurJWT,
 }: ConfigurationServeurSansMiddleware): Middleware => {
   const verifieModeMaintenance = async (
     _requete: RequeteNonTypee,
@@ -62,8 +64,25 @@ export const fabriqueMiddleware = ({
       }
     };
 
+  const verifieJWTNavigation = async (
+    requete: RequeteNonTypee,
+    reponse: Response,
+    suite: NextFunction,
+  ) => {
+    if (!requete.session?.token) {
+      return reponse.redirect('/connexion');
+    }
+    try {
+      adaptateurJWT.decode(requete.session.token);
+      suite();
+    } catch {
+      reponse.redirect('/connexion');
+    }
+  };
+
   return {
     verifieModeMaintenance,
     valideLaCoherenceDuCorps,
+    verifieJWTNavigation,
   };
 };
