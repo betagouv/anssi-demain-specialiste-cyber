@@ -10,18 +10,20 @@ import { Middleware } from './middleware';
 import { MoteurDeRendu } from './moteurDeRendu';
 import { BusEvenements } from '../bus/busEvenements';
 import { EntrepotJeux } from '../metier/entrepotJeux';
+import { AdaptateurJournal } from '../infra/adaptateurJournal';
 
 export interface ConfigurationServeur {
-                    serveurLab: ConfigurationServeurLab;
-                    entrepotRessourcesCyber: EntrepotRessourcesCyber;
-                    adaptateurOIDC: AdaptateurOIDC;
-                    adaptateurJWT: AdaptateurJWT;
-                    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
-                    entrepotUtilisateur: EntrepotUtilisateur;
-                    adaptateurHachage: AdaptateurHachage;
-                    recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
-                    middleware: Middleware;
-                    moteurDeRendu: MoteurDeRendu;
-                    busEvenements: BusEvenements;
-                    entrepotJeux: EntrepotJeux;
+  serveurLab: ConfigurationServeurLab;
+  entrepotRessourcesCyber: EntrepotRessourcesCyber;
+  adaptateurOIDC: AdaptateurOIDC;
+  adaptateurJWT: AdaptateurJWT;
+  adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  entrepotUtilisateur: EntrepotUtilisateur;
+  adaptateurHachage: AdaptateurHachage;
+  recupereCheminsVersFichiersStatiques: RecupereCheminVersFichiersStatiques;
+  middleware: Middleware;
+  moteurDeRendu: MoteurDeRendu;
+  busEvenements: BusEvenements;
+  entrepotJeux: EntrepotJeux;
+  adaptateurJournal: AdaptateurJournal;
 }

@@ -16,6 +16,7 @@ import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { BusEvenements } from './bus/busEvenements';
+import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -63,6 +64,7 @@ serviceCoherenceSecretsHachage
       moteurDeRendu: moteurDeRenduExpress(),
       entrepotJeux: new EntrepotJeuxPostgres(),
       busEvenements,
+      adaptateurJournal: fabriqueAdaptateurJournal(),
     });
 
     const port = process.env.PORT || 3005;

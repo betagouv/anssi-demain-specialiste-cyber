@@ -11,6 +11,7 @@ import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire'
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
+import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -111,4 +112,5 @@ export const configurationDeTestDuServeur = (): ConfigurationServeurDeTest => ({
   moteurDeRendu: fauxMoteurDeRendu,
   busEvenements: fabriqueBusPourLesTests(),
   entrepotJeux: new EntrepotJeuxMemoire(),
+  adaptateurJournal: adaptateurJournalMemoire,
 });
