@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './dsc';
 import z from 'zod';
@@ -14,12 +14,13 @@ const ressourceUtilisateurs = ({
     infolettreAcceptee: z.boolean({
       message: "L'acceptation de l'infolettre est invalide",
     }),
+    token: z.string('Le token est invalide'),
   });
 
   routeur.post(
     '/',
     middleware.valideLaCoherenceDuCorps(schema),
-    async (requete: Request, reponse: Response) => {
+    async (requete, reponse) => {
       const { infolettreAcceptee, token } = requete.body;
 
       try {
