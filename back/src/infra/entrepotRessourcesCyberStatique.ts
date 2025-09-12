@@ -18,4 +18,8 @@ export class EntrepotRessourcesCyberStatique
       },
     ];
   }
+
+  async ajoute() {
+    throw new Error('Pas supportée');
+  }
 }

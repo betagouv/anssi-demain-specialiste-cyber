@@ -33,7 +33,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
   private table: string;
 
   constructor(
-    private ressourcesCyberGrist: RecupereRessourceHttp<ReponseRessourceCyberGrist> = creeRecupereRessourceHttp()
+    private ressourcesCyberGrist: RecupereRessourceHttp<ReponseRessourceCyberGrist> = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
     this.urlDeBase = grist.urlDeBase;
@@ -45,7 +45,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
   async tous(): Promise<RessourceCyber[]> {
     const url = new URL(
       `api/docs/${this.schema}/tables/${this.table}/records`,
-      this.urlDeBase
+      this.urlDeBase,
     );
     const reponse = await this.ressourcesCyberGrist(url.toString(), {
       headers: {
@@ -63,5 +63,9 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       besoins: record.fields.Besoins.slice(1),
       description: record.fields.Description,
     }));
+  }
+
+  async ajoute() {
+    throw new Error('Pas supportée');
   }
 }

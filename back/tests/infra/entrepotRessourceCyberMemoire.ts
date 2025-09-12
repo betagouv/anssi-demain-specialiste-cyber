@@ -4,7 +4,7 @@ import { RessourceCyber } from '../../src/metier/ressourceCyber';
 export class EntrepotRessourcesCyberMemoire implements EntrepotRessourcesCyber {
   _entites: RessourceCyber[] = [];
 
-  ajoute(ressourceCyber: RessourceCyber) {
+  async ajoute(ressourceCyber: RessourceCyber) {
     this._entites.push(ressourceCyber);
   }
 
