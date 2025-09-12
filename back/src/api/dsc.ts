@@ -65,6 +65,10 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/creation-compte', ressourceCreationCompte(configurationServeur));
 
+  ['/nouveau-jeu'].forEach((pageProtegee) =>
+    app.use(pageProtegee, configurationServeur.middleware.verifieJWTNavigation),
+  );
+
   // Route pour les pages dynamiques pour rendre les pages PUG.
   // Doit être en dernier pour ne pas interférer avec les autres routes.
   app.get('/:page', (req, res) => {
