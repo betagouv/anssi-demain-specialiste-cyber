@@ -1,4 +1,6 @@
-export type DonneesEvenement = DonneesEvenementNouvelUtilisateur;
+export type DonneesEvenement =
+  | DonneesEvenementNouvelUtilisateur
+  | DonneesEvenementJeuCree;
 
 type DonneesCommunesEvenement = {
   date: Date;
@@ -9,6 +11,14 @@ type DonneesEvenementNouvelUtilisateur = DonneesCommunesEvenement & {
     idUtilisateur: string;
   };
   type: 'NOUVEL_UTILISATEUR_INSCRIT';
+};
+
+type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
+  donnees: {
+    idUtilisateur: string;
+    nom: string;
+  };
+  type: 'JEU_CREE';
 };
 
 export type AdaptateurJournal = {
