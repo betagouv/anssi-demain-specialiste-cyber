@@ -19,7 +19,7 @@ export const adaptateurJournalMemoire: AdaptateurJournal = {
   async consigneEvenement(donneesEvenement: DonneesEvenement): Promise<void> {
     // eslint-disable-next-line no-console
     console.log(
-      `[JOURNAL MSC] Nouvel évènement \n${JSON.stringify(donneesEvenement)}`,
+      `[JOURNAL DSC] Nouvel évènement \n${JSON.stringify(donneesEvenement)}`,
     );
   },
 };
