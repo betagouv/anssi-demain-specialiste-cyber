@@ -50,6 +50,13 @@ serviceCoherenceSecretsHachage
   // eslint-disable-next-line no-console
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
+    const entrepotUtilisateur = new EntrepotUtilisateurPostgres({
+      adaptateurHachage,
+      adaptateurChiffrement: fabriqueAdaptateurChiffrement({
+        adaptateurEnvironnement,
+      }),
+    });
+
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
@@ -61,17 +68,15 @@ serviceCoherenceSecretsHachage
         adaptateurJWT,
         adaptateurHachage,
         adaptateurRechercheEntreprise,
-        entrepotUtilisateur: new EntrepotUtilisateurPostgres({
-          adaptateurHachage,
-          adaptateurChiffrement: fabriqueAdaptateurChiffrement({
-            adaptateurEnvironnement,
-          }),
-        }),
+        entrepotUtilisateur,
         recupereCheminsVersFichiersStatiques:
           recupereCheminVersFichiersStatiquesParDefaut,
 
         moteurDeRendu: moteurDeRenduExpress(),
-        entrepotJeux: new EntrepotJeuxPostgres({adaptateurHachage}),
+        entrepotJeux: new EntrepotJeuxPostgres({
+          adaptateurHachage,
+          entrepotUtilisateur,
+        }),
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
       };
