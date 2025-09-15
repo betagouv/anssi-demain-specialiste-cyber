@@ -8,14 +8,14 @@
   <ul>
     {#each $ressourcesCyberFiltrees.niveaux as niveau}
       <li>
-        <label>
-          <input
-            bind:group={$rechercheParNiveau}
-            type="checkbox"
-            value={niveau}
-          />
-          <span>{niveau}</span>
-        </label>
+        <dsfr-checkbox
+          id={niveau}
+          label={niveau}
+          value={niveau}
+          name={$rechercheParNiveau}
+          onvaluechanged={(e: CustomEvent) => ($rechercheParNiveau = e.detail)}
+        >
+        </dsfr-checkbox>
       </li>
     {/each}
   </ul>

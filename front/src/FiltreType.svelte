@@ -8,10 +8,14 @@
   <ul>
     {#each $ressourcesCyberFiltrees.types as type}
       <li>
-        <label>
-          <input bind:group={$rechercheParType} type="checkbox" value={type} />
-          <span>{type}</span>
-        </label>
+        <dsfr-checkbox
+          id={type}
+          label={type}
+          value={type}
+          name={$rechercheParType}
+          onvaluechanged={(e: CustomEvent) => ($rechercheParType = e.detail)}
+        >
+        </dsfr-checkbox>
       </li>
     {/each}
   </ul>

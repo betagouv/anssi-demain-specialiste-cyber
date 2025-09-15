@@ -7,7 +7,12 @@
 </script>
 
 <fieldset>
-  <input type="text" bind:value={recherche} placeholder={miseEnAvant} />
+  <dsfr-input
+    type="search"
+    placeholder={miseEnAvant}
+    value={recherche}
+    onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
+  ></dsfr-input>
 </fieldset>
 
 <style lang="scss">
