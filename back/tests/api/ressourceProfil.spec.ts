@@ -4,22 +4,14 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import { encodeSession, enObjet } from './cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
   let entrepotUtilisateur: EntrepotUtilisateur;
-
-  const jeanneDupont = new Utilisateur({
-    email: 'jeanne.dupont@mail.com',
-    infolettreAcceptee: true,
-    prenom: '',
-    nom: '',
-    siretEntite: '',
-  });
 
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
