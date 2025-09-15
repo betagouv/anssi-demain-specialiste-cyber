@@ -8,14 +8,15 @@
   <ul>
     {#each $ressourcesCyberFiltrees.publicsCible as publicCible}
       <li>
-        <label>
-          <input
-            bind:group={$rechercheParPublicCible}
-            type="checkbox"
-            value={publicCible}
-          />
-          <span>{publicCible}</span>
-        </label>
+        <dsfr-checkbox
+          id={publicCible}
+          label={publicCible}
+          value={publicCible}
+          name={$rechercheParPublicCible}
+          onvaluechanged={(e: CustomEvent) =>
+            ($rechercheParPublicCible = e.detail)}
+        >
+        </dsfr-checkbox>
       </li>
     {/each}
   </ul>

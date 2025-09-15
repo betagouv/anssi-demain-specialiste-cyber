@@ -5,14 +5,17 @@
 
 <fieldset>
   <legend>Thématique</legend>
-  <label>
-    <select bind:value={$rechercheParThematique}>
-      <option value="">Toutes les thématiques</option>
-      {#each $ressourcesCyberFiltrees.thematiques as thematique}
-        <option value={thematique}>{thematique}</option>
-      {/each}
-    </select>
-  </label>
+  <dsfr-select
+    value={$rechercheParThematique}
+    onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
+    placeholder="Toutes les thématiques"
+    placeholderDisabled={false}
+    options={$ressourcesCyberFiltrees.thematiques.map((thematique) => ({
+      label: thematique,
+      value: thematique,
+    }))}
+  >
+  </dsfr-select>
 </fieldset>
 
 <style lang="scss">
