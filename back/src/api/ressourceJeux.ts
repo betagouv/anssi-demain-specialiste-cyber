@@ -7,6 +7,8 @@ import { ConfigurationServeur } from './configurationServeur';
 export const ressourceJeux = ({
   adaptateurJWT,
   entrepotJeux,
+  entrepotUtilisateur,
+  adaptateurHachage,
   middleware,
   busEvenements,
 }: ConfigurationServeur) => {
@@ -25,8 +27,13 @@ export const ressourceJeux = ({
     async (requete, reponse) => {
       try {
         const { email } = adaptateurJWT.decode(requete.session?.token);
+        const utilisateurConnecte = await entrepotUtilisateur.parEmailHache(
+          adaptateurHachage.hache(email),
+        );
         const { nom } = requete.body;
-        await entrepotJeux.ajoute(new Jeu({ nom }));
+        await entrepotJeux.ajoute(
+          new Jeu({ nom, enseignant: utilisateurConnecte }),
+        );
         await busEvenements.publie(new JeuCree(email, nom));
         reponse.sendStatus(201);
       } catch {
