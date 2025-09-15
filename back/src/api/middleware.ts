@@ -3,6 +3,9 @@ import { NextFunction, Request, Response } from 'express';
 import { randomBytes } from 'node:crypto';
 import z from 'zod';
 import { ConfigurationServeurSansMiddleware } from './configurationServeur';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 
 type FonctionMiddleware<TBody> = (
   requete: Request<unknown, unknown, TBody, unknown, never>,
@@ -19,6 +22,10 @@ export type Middleware = {
     object: TZod,
   ) => FonctionMiddleware<TBody>;
   verifieJWTNavigation: FonctionMiddleware<unknown>;
+  ajouteUtilisateurARequete(
+    entrepotUtilisateur: EntrepotUtilisateur,
+    adaptateurHachage: AdaptateurHachage,
+  ): FonctionMiddleware<unknown>;
 };
 
 export type RequeteNonTypee = Request<
@@ -80,9 +87,33 @@ export const fabriqueMiddleware = ({
     }
   };
 
+  const ajouteUtilisateurARequete =
+    (
+      entrepotUtilisateur: EntrepotUtilisateur,
+      adaptateurHachage: AdaptateurHachage,
+    ) =>
+    async (
+      requete: RequeteNonTypee & { utilisateur?: Utilisateur | undefined },
+      reponse: Response,
+      suite: NextFunction,
+    ) => {
+      try {
+        const { email } = adaptateurJWT.decode(requete.session?.token);
+        requete.utilisateur = email
+          ? await entrepotUtilisateur.parEmailHache(
+              adaptateurHachage.hache(email),
+            )
+          : undefined;
+        suite();
+      } catch {
+        reponse.sendStatus(500);
+      }
+    };
+
   return {
     verifieModeMaintenance,
     valideLaCoherenceDuCorps,
     verifieJWTNavigation,
+    ajouteUtilisateurARequete,
   };
 };
