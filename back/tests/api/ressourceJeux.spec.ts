@@ -91,12 +91,18 @@ describe('La ressource des jeux', () => {
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
+      const cookie = encodeSession({
+        email: 'jeanne.dupont@mail.com',
+      });
       adaptateurJWT.decode = () => ({
         email: 'jeanne.dupont@mail.com',
       });
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
+      await request(serveur)
+        .post('/api/jeux')
+        .set('Cookie', [cookie])
+        .send({ nom: 'Cluedo' });
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');

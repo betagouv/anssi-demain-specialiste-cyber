@@ -11,9 +11,14 @@ import { Utilisateur } from '../../src/metier/utilisateur';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnvironnement,
+  fauxAdaptateurHachage,
   fauxAdaptateurJWT,
 } from './fauxObjets';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { jeanneDupont } from './objetsPretsALEmploi';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -99,6 +104,90 @@ describe('Le middleware', () => {
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
       expect(urlRecu).toEqual('/connexion');
+    });
+  });
+
+  describe("sur demande d'ajout de l'utilisateur courant", () => {
+    let adaptateurHachage: AdaptateurHachage;
+    let entrepotUtilisateur: EntrepotUtilisateur;
+
+    beforeEach(() => {
+      adaptateurHachage = fauxAdaptateurHachage;
+      entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    });
+
+    it("ajoute l'utilisateur dont l'email est dans le token de la session liée à la requête", async () => {
+      adaptateurJWT.decode = () => ({
+        email: 'jeanne.dupont@mail.com',
+      });
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {});
+
+      expect(requete.utilisateur).toStrictEqual(jeanneDupont);
+    });
+
+    it("n'assigne pas l'utilisateur si non défini dans la session", async () => {
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {});
+
+      expect(requete.utilisateur).toBeUndefined();
+    });
+
+    it('appelle la suite', async () => {
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      expect(suiteAppelee).toBeTruthy();
+    });
+
+    it("n'essaie pas de hacher si l'email est absent", async () => {
+      adaptateurHachage.hache = (_) => {
+        throw new Error();
+      };
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      expect(suiteAppelee).toBeTruthy();
+    });
+
+    it("renvoie une erreur 500 lorsque l'entrepôt ne fonctionne pas", async () => {
+      adaptateurJWT.decode = () => ({
+        email: 'jeanne.dupont@mail.com',
+      });
+      entrepotUtilisateur.parEmailHache = (_emailHache: string) => {
+        throw new Error();
+      };
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      expect(reponse.statusCode).toEqual(500);
+      expect(suiteAppelee).toBeFalsy();
     });
   });
 });

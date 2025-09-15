@@ -24,12 +24,17 @@ export const ressourceJeux = ({
   routeur.post(
     '/',
     middleware.valideLaCoherenceDuCorps(schema),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage,
+    ),
     async (requete, reponse) => {
       try {
         const { email } = adaptateurJWT.decode(requete.session?.token);
         const utilisateurConnecte = await entrepotUtilisateur.parEmailHache(
           adaptateurHachage.hache(email),
         );
+
         const { nom } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({ nom, enseignant: utilisateurConnecte }),
