@@ -12,15 +12,20 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { JeuCree } from '../../src/bus/evenements/jeu/jeuCree';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
   let adaptateurJWT: AdaptateurJWT;
   let entrepotJeux: EntrepotJeux;
+  let entrepotUtilisateur: EntrepotUtilisateur;
   let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurJWT = { ...fauxAdaptateurJWT };
     busEvenements = fabriqueBusPourLesTests();
     serveur = creeServeur({
@@ -28,6 +33,7 @@ describe('La ressource des jeux', () => {
       adaptateurJWT,
       busEvenements,
       entrepotJeux,
+      entrepotUtilisateur,
     });
   });
 
@@ -73,15 +79,27 @@ describe('La ressource des jeux', () => {
 
     it('publie un événement de création de jeu', async () => {
       adaptateurJWT.decode = () => ({
-        email: 'jeanne.dupont@user.com',
+        email: 'jeanne.dupont@mail.com',
       });
 
       await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree);
-      expect(evenement!.emailAuteur).toBe('jeanne.dupont@user.com');
+      expect(evenement!.emailAuteur).toBe('jeanne.dupont@mail.com');
       expect(evenement!.nom).toBe('cybercluedo');
+    });
+
+    it("associe le jeu à l'utilisateur connecté", async () => {
+      adaptateurJWT.decode = () => ({
+        email: 'jeanne.dupont@mail.com',
+      });
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+
+      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
+
+      const mesJeux = await entrepotJeux.tous();
+      expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');
     });
 
     describe('concernant la vérification du nom', () => {
