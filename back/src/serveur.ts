@@ -71,7 +71,7 @@ serviceCoherenceSecretsHachage
           recupereCheminVersFichiersStatiquesParDefaut,
 
         moteurDeRendu: moteurDeRenduExpress(),
-        entrepotJeux: new EntrepotJeuxPostgres(),
+        entrepotJeux: new EntrepotJeuxPostgres({adaptateurHachage}),
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
       };
