@@ -8,7 +8,8 @@
     "checkJs": false,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "allowArbitraryExtensions": true
+    "allowArbitraryExtensions": true,
+    "types": ["@testing-library/jest-dom"] // Utile pour rendre les types disponible dans l'IDE
   },
   "include": ["src/**/*.ts", "test/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
   "references": [{ "path": "./tsconfig.node.json" }]
