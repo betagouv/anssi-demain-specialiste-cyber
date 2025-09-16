@@ -9,6 +9,7 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
       compilerOptions: { customElement: true },
       preprocess: vitePreprocess(),
     }),
+    injecteNonce(),
   ],
   build: {
     manifest: true,
@@ -36,3 +37,40 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
     'process.env.NODE_ENV': "'production'",
   },
 }));
+
+const injecteNonceWebcomponents = (code: string) => {
+  let codeAvecNonce = `const dscNonce = document.currentScript?.nonce;\n${code}`;
+  codeAvecNonce = codeAvecNonce
+    .replace(
+      /const (.)\s*=\s*.\(["']style["']\);/gm,
+      (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
+    )
+    .replace(
+      /const (.)\s*=\s*document\.createElement\(["']style["']\);/gm,
+      (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
+    );
+
+  return codeAvecNonce;
+};
+
+function injecteNonce(): Vite.Plugin {
+  return {
+    name: 'injecte-nonce',
+    enforce: 'post',
+    generateBundle(_options, bundle) {
+      // eslint-disable-next-line no-console
+      console.log('📝 Ajout de la gestion du Nonce');
+
+      for (const file of Object.values(bundle)) {
+        if (file.type === 'chunk' && file.code) {
+          // Remplace `const a = u("style");`
+          // par `const a = u("style");a.nonce=nonce;`
+          file.code = injecteNonceWebcomponents(file.code);
+        }
+      }
+
+      // eslint-disable-next-line no-console
+      console.log('✅');
+    },
+  };
+}
