@@ -9,5 +9,14 @@ describe('Le formulaire de dépose de jeu', () => {
 
       expect(getByRole('textbox', { name: 'Nom du jeu' })).toBeVisible();
     });
+
+    it('de selectionner une séquence', () => {
+      const { getAllByRole, getByRole } = render(NouveauJeu);
+
+      expect(getAllByRole('radio')).toHaveLength(3);
+      expect(getByRole('radio', { name: 'Heure de cours' })).toBeVisible();
+      expect(getByRole('radio', { name: 'Demi-journee' })).toBeVisible();
+      expect(getByRole('radio', { name: 'Journée' })).toBeVisible();
+    });
   });
 });
