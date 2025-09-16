@@ -20,8 +20,15 @@
   <button type="submit">Terminer</button>
 </form>
 
-<style>
-  input:user-invalid {
-    border: 2px solid red;
+<style lang="scss">
+  form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 792px;
+
+    input:user-invalid {
+      border: 2px solid red;
+    }
   }
 </style>
