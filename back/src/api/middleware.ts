@@ -6,6 +6,7 @@ import { ConfigurationServeurSansMiddleware } from './configurationServeur';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Utilisateur } from '../metier/utilisateur';
+import helmet from 'helmet';
 
 type FonctionMiddleware<TBody> = (
   requete: Request<unknown, unknown, TBody, unknown, never>,
@@ -14,6 +15,7 @@ type FonctionMiddleware<TBody> = (
 ) => Promise<void>;
 
 export type Middleware = {
+  positionneLesCsp: FonctionMiddleware<unknown>;
   verifieModeMaintenance: FonctionMiddleware<unknown>;
   valideLaCoherenceDuCorps: <
     TZod extends z.ZodType,
@@ -116,7 +118,36 @@ export const fabriqueMiddleware = ({
       }
     };
 
+  const positionneLesCsp = async (
+    requete: RequeteNonTypee,
+    reponse: Response,
+    suite: NextFunction,
+  ) =>
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          scriptSrc: [
+            "'self'",
+            'https://stats.beta.gouv.fr',
+            'https://browser.sentry-cdn.com',
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+          ],
+          imgSrc: [
+            "'self'",
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+          ],
+          connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+          mediaSrc: [
+            "'self'",
+            'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
+          ],
+          styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
+        },
+      },
+    })(requete, reponse, suite);
+
   return {
+    positionneLesCsp,
     verifieModeMaintenance,
     valideLaCoherenceDuCorps,
     verifieJWTNavigation,
