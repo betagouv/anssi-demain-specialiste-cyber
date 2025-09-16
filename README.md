@@ -38,6 +38,19 @@ $ docker compose up db -d # démarre en mode daemon
 ```shell
 $ cd ..
 $ npm install
+```
+
+- Sauvegarder les empreintes des secrets pour le hachage via la console d'administration
+
+```shell
+$ npm run admin:dev
+> await admin.sauvegardeLesEmpreintesDesSecretsDeHachage()
+> .exit
+```
+
+- Lancer le serveur de dev
+
+```shell
 $ npm run dev
 ```
 
