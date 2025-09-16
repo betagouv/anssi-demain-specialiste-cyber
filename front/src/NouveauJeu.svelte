@@ -3,20 +3,36 @@
 <script lang="ts">
   import axios from 'axios';
 
+  type Erreurs = {
+    nom?: string;
+    sequence?: string;
+  };
+
   let nom = $state('');
   let sequence = $state('');
+  let erreurs = $state<Erreurs>({});
 
-  const soumets = async (event: SubmitEvent) => {
+  const soumets = async (event: Event) => {
     event.preventDefault();
+    erreurs = {
+      nom: nom ? undefined : 'Le nom est obligatoire',
+      sequence: sequence ? undefined : 'La séquence est obligatoire',
+    };
+    if (erreurs.nom || erreurs.sequence) {
+      return;
+    }
     await axios.post('/api/jeux', { nom, sequence });
   };
 </script>
 
-<form onsubmit={soumets}>
+<form novalidate>
   <label>
     Nom du jeu
     <input type="text" bind:value={nom} required />
   </label>
+  {#if erreurs.nom}
+    <span class="erreur" role="alert">{erreurs.nom}</span>
+  {/if}
 
   <div class="sequence">
     <p>Format de la séquence CyberEnJeux</p>
@@ -50,9 +66,12 @@
         Journée
       </label>
     </div>
+    {#if erreurs.sequence}
+      <span class="erreur" role="alert">{erreurs.sequence}</span>
+    {/if}
   </div>
 
-  <button type="submit">Terminer</button>
+  <button type="submit" onclick={soumets}>Terminer</button>
 </form>
 
 <style lang="scss">
@@ -70,6 +89,10 @@
         display: flex;
         flex-direction: column;
       }
+    }
+
+    .erreur {
+      color: red;
     }
 
     input:user-invalid {
