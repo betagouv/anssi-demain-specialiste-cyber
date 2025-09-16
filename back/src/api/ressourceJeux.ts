@@ -39,7 +39,7 @@ export const ressourceJeux = ({
         await entrepotJeux.ajoute(
           new Jeu({ nom, enseignant: utilisateurConnecte, sequence }),
         );
-        await busEvenements.publie(new JeuCree(utilisateurConnecte.email, nom));
+        await busEvenements.publie(new JeuCree(utilisateurConnecte.email, nom, sequence));
         reponse.sendStatus(201);
       } catch {
         reponse.sendStatus(401);

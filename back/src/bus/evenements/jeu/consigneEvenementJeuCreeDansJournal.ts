@@ -16,6 +16,7 @@ export const consigneEvenementJeuCreeDansJournal = ({
       donnees: {
         idUtilisateur: adaptateurHachage.hache(evenement.emailAuteur),
         nom: evenement.nom,
+        sequence: evenement.sequence
       },
       type: 'JEU_CREE',
       date: FournisseurHorloge.maintenant(),

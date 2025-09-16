@@ -30,11 +30,11 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
     await consigneEvenementJeuCreeDansJournal({
       adaptateurJournal,
       adaptateurHachage,
-    })(new JeuCree('u1@mail.com', 'cyberUno'));
+    })(new JeuCree('u1@mail.com', 'cyberUno', 'heure'));
 
     expect(evenementRecu).toStrictEqual({
       type: 'JEU_CREE',
-      donnees: { idUtilisateur: 'u1@mail.com-hacheHMAC', nom: 'cyberUno' },
+      donnees: { idUtilisateur: 'u1@mail.com-hacheHMAC', nom: 'cyberUno', sequence: 'heure' },
       date: new Date('2025-03-10'),
     });
   });
