@@ -82,6 +82,7 @@ describe('La ressource des jeux', () => {
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
       expect(mesJeux[0].nom).toEqual('Cluedo');
+      expect(mesJeux[0].sequence).toEqual('heure');
     });
 
     it('publie un événement de création de jeu', async () => {

@@ -35,9 +35,9 @@ export const ressourceJeux = ({
       try {
         const utilisateurConnecte = requete.utilisateur;
 
-        const { nom } = requete.body;
+        const { nom, sequence } = requete.body;
         await entrepotJeux.ajoute(
-          new Jeu({ nom, enseignant: utilisateurConnecte }),
+          new Jeu({ nom, enseignant: utilisateurConnecte, sequence }),
         );
         await busEvenements.publie(new JeuCree(utilisateurConnecte.email, nom));
         reponse.sendStatus(201);
