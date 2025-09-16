@@ -5,25 +5,30 @@ import { configurationDeTestDuServeur } from './fauxObjets';
 import { encodeSession } from './cookie';
 
 describe('Les ressources de page', () => {
-  it("renvoie une page pour les jeux d'un enseignant", async () => {
-    const serveur = creeServeur(configurationDeTestDuServeur());
-    const cookie = encodeSession({
-      token: 'jeton de test',
-    });
+  describe.each(['nouveau-jeu', 'mes-jeux'])(
+    `concernant la page protégée /%s`,
+    (nomPage) => {
+      it('renvoie la page pour un utilisateur connecté', async () => {
+        const serveur = creeServeur(configurationDeTestDuServeur());
+        const cookie = encodeSession({
+          token: 'jeton de test',
+        });
 
-    const reponse = await request(serveur)
-      .get('/mes-jeux')
-      .set('Cookie', [cookie]);
+        const reponse = await request(serveur)
+          .get(`/${nomPage}`)
+          .set('Cookie', [cookie]);
 
-    expect(reponse.status).toBe(200);
-  });
+        expect(reponse.status).toBe(200);
+      });
 
-  it('protège la page des jeux', async () => {
-    const serveur = creeServeur(configurationDeTestDuServeur());
+      it("redirige s'il n'y a pas d'utilisateur connecté", async () => {
+        const serveur = creeServeur(configurationDeTestDuServeur());
 
-    const reponse = await request(serveur).get('/mes-jeux');
+        const reponse = await request(serveur).get(`/${nomPage}`);
 
-    expect(reponse.status).toBe(302);
-    expect(reponse.headers.location).toBe('/connexion');
-  });
+        expect(reponse.status).toBe(302);
+        expect(reponse.headers.location).toBe('/connexion');
+      });
+    },
+  );
 });
