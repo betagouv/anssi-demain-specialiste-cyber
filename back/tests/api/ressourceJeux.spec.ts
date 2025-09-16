@@ -29,6 +29,11 @@ describe('La ressource des jeux', () => {
       suite();
     });
 
+  const corpsNouveauJeuValide = {
+    nom: 'Cluedo',
+    sequence: 'heure',
+  };
+
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
     busEvenements = fabriqueBusPourLesTests();
@@ -46,7 +51,7 @@ describe('La ressource des jeux', () => {
     it("retourne un 201 si l'utilisateur est connecté", async () => {
       const reponse = await request(serveur)
         .post('/api/jeux')
-        .send({ nom: 'Cluedo' });
+        .send(corpsNouveauJeuValide);
 
       expect(reponse.status).toEqual(201);
     });
@@ -59,37 +64,37 @@ describe('La ressource des jeux', () => {
       );
       const reponse = await request(serveur)
         .post('/api/jeux')
-        .send({ nom: 'Cluedo' });
+        .send(corpsNouveauJeuValide);
 
       expect(reponse.status).toEqual(401);
     });
 
     it("ajoute un jeu dans l'entrepot des jeux", async () => {
-      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
+      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux).toHaveLength(1);
     });
 
     it('peut fournir les informations sur le jeu', async () => {
-      await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
+      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
-      expect(mesJeux[0].nom).toEqual('cybercluedo');
+      expect(mesJeux[0].nom).toEqual('Cluedo');
     });
 
     it('publie un événement de création de jeu', async () => {
-      await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
+      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree);
       expect(evenement!.emailAuteur).toBe('jeanne.dupont@mail.com');
-      expect(evenement!.nom).toBe('cybercluedo');
+      expect(evenement!.nom).toBe('Cluedo');
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
-      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
+      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');
@@ -97,7 +102,10 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification du nom', () => {
       it('vérifie que le nom est fourni', async () => {
-        const reponse = await request(serveur).post('/api/jeux').send({});
+        const reponse = await request(serveur).post('/api/jeux').send({
+          ...corpsNouveauJeuValide,
+          nom: undefined
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
@@ -106,11 +114,47 @@ describe('La ressource des jeux', () => {
       it("vérifie que le nom n'est pas vide", async () => {
         const reponse = await request(serveur)
           .post('/api/jeux')
-          .send({ nom: '   ' });
+          .send({ ...corpsNouveauJeuValide, nom: '   ' });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
       });
+    });
+
+    describe('concernant la vérification de la séquence', () => {
+      it('vérifie que la séquence est fournie', async () => {
+        const reponse = await request(serveur).post('/api/jeux').send({
+          ...corpsNouveauJeuValide,
+          sequence: undefined
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La séquence est invalide');
+      });
+
+      it("vérifie que la séquence n'est pas vide", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            sequence: '      ',
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La séquence est invalide');
+      });
+
+      it("vérifie que la séquence fait partie des valeurs attendues", async () => {
+        const reponse = await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          sequence: 'mauvaise-sequence',
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual("La séquence est invalide");
+      })
     });
   });
 });

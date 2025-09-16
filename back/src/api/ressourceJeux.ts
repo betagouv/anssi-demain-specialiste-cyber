@@ -3,6 +3,7 @@ import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
 import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './configurationServeur';
+import { sequences } from '../metier/sequence';
 
 export const ressourceJeux = ({
   entrepotJeux,
@@ -18,6 +19,9 @@ export const ressourceJeux = ({
       .string('Le nom est obligatoire')
       .trim()
       .min(1, 'Le nom est obligatoire'),
+    sequence: z.enum(sequences, {
+      error: "La séquence est invalide"
+    })
   });
 
   routeur.post(
