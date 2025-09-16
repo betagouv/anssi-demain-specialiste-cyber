@@ -207,4 +207,28 @@ describe('Le middleware', () => {
       expect(suiteAppelee).toBeFalsy();
     });
   });
+
+  describe("sur demande d'ajout du nonce", () => {
+    it('ajoute le nonce à la réponse', async () => {
+      await middleware.ajouteLeNonceALaReponse(requete, reponse, () => {});
+
+      expect(reponse.locals.nonce).toBeDefined();
+    });
+
+    it('le nonce a une longueur de 32', async () => {
+      await middleware.ajouteLeNonceALaReponse(requete, reponse, () => {});
+
+      expect(reponse.locals.nonce).toHaveLength(32);
+    });
+
+    it('la suite est appelée', async () => {
+      let laSuiteEstAppelee = false;
+
+      await middleware.ajouteLeNonceALaReponse(requete, reponse, () => {
+        laSuiteEstAppelee = true;
+      });
+
+      expect(laSuiteEstAppelee).toBeTruthy();
+    });
+  });
 });

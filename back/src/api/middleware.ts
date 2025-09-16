@@ -15,6 +15,7 @@ type FonctionMiddleware<TBody> = (
 ) => Promise<void>;
 
 export type Middleware = {
+  ajouteLeNonceALaReponse: FonctionMiddleware<unknown>;
   positionneLesCsp: FonctionMiddleware<unknown>;
   verifieModeMaintenance: FonctionMiddleware<unknown>;
   valideLaCoherenceDuCorps: <
@@ -42,6 +43,15 @@ export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
   adaptateurJWT,
 }: ConfigurationServeurSansMiddleware): Middleware => {
+  const ajouteLeNonceALaReponse = async (
+    _requete: RequeteNonTypee,
+    reponse: Response,
+    suite: NextFunction,
+  ) => {
+    reponse.locals.nonce = randomBytes(24).toString('base64');
+    suite();
+  };
+
   const verifieModeMaintenance = async (
     _requete: RequeteNonTypee,
     reponse: Response,
@@ -147,6 +157,7 @@ export const fabriqueMiddleware = ({
     })(requete, reponse, suite);
 
   return {
+    ajouteLeNonceALaReponse,
     positionneLesCsp,
     verifieModeMaintenance,
     valideLaCoherenceDuCorps,
