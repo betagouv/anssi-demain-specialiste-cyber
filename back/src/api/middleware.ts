@@ -97,8 +97,14 @@ export const fabriqueMiddleware = ({
       reponse: Response,
       suite: NextFunction,
     ) => {
+      let email: string | undefined;
       try {
-        const { email } = adaptateurJWT.decode(requete.session?.token);
+        email = adaptateurJWT.decode(requete.session?.token)?.email;
+      } catch {
+        reponse.sendStatus(401);
+        return;
+      }
+      try {
         requete.utilisateur = email
           ? await entrepotUtilisateur.parEmailHache(
               adaptateurHachage.hache(email),

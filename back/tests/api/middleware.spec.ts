@@ -1,24 +1,24 @@
 import { Response } from 'express';
 import { createRequest, createResponse, MockResponse } from 'node-mocks-http';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
   fabriqueMiddleware,
   Middleware,
   RequeteNonTypee,
 } from '../../src/api/middleware';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
 } from './fauxObjets';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -187,6 +187,23 @@ describe('Le middleware', () => {
       });
 
       expect(reponse.statusCode).toEqual(500);
+      expect(suiteAppelee).toBeFalsy();
+    });
+
+    it('renvoie une erreur 401 si le jeton est invalide', async () => {
+      adaptateurJWT.decode = () => {
+        throw new Error('Token invalide');
+      };
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage,
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      expect(reponse.statusCode).toEqual(401);
       expect(suiteAppelee).toBeFalsy();
     });
   });
