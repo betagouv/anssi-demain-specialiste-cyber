@@ -20,6 +20,7 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
   donnees: {
     idUtilisateur: string;
     nom: string;
+    sequence: string;
   };
   type: 'JEU_CREE';
 };

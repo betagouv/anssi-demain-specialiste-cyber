@@ -92,6 +92,7 @@ describe('La ressource des jeux', () => {
       const evenement = busEvenements.recupereEvenement(JeuCree);
       expect(evenement!.emailAuteur).toBe('jeanne.dupont@mail.com');
       expect(evenement!.nom).toBe('Cluedo');
+      expect(evenement!.sequence).toBe('heure');
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
