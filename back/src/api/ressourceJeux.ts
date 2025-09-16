@@ -5,7 +5,6 @@ import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './configurationServeur';
 
 export const ressourceJeux = ({
-  adaptateurJWT,
   entrepotJeux,
   entrepotUtilisateur,
   adaptateurHachage,
@@ -30,16 +29,13 @@ export const ressourceJeux = ({
     ),
     async (requete, reponse) => {
       try {
-        const { email } = adaptateurJWT.decode(requete.session?.token);
-        const utilisateurConnecte = await entrepotUtilisateur.parEmailHache(
-          adaptateurHachage.hache(email),
-        );
+        const utilisateurConnecte = requete.utilisateur;
 
         const { nom } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({ nom, enseignant: utilisateurConnecte }),
         );
-        await busEvenements.publie(new JeuCree(email, nom));
+        await busEvenements.publie(new JeuCree(utilisateurConnecte.email, nom));
         reponse.sendStatus(201);
       } catch {
         reponse.sendStatus(401);

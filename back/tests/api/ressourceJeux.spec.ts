@@ -1,60 +1,62 @@
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { JeuCree } from '../../src/bus/evenements/jeu/jeuCree';
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
-import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-import { encodeSession } from './cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { JeuCree } from '../../src/bus/evenements/jeu/jeuCree';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
+import {
+  configurationDeTestDuServeur,
+  configurationServeurSansMiddleware,
+} from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
-  let adaptateurJWT: AdaptateurJWT;
+
   let entrepotJeux: EntrepotJeux;
-  let entrepotUtilisateur: EntrepotUtilisateur;
   let busEvenements: MockBusEvenement;
+  let middleware: Middleware;
+  const ajouteUtilisateurARequeteMock = vi
+    .fn()
+    .mockImplementation((req, _res, suite) => {
+      req.utilisateur = jeanneDupont;
+      suite();
+    });
 
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
-    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    adaptateurJWT = { ...fauxAdaptateurJWT };
     busEvenements = fabriqueBusPourLesTests();
+    middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
+    middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
-      adaptateurJWT,
+      middleware,
       busEvenements,
       entrepotJeux,
-      entrepotUtilisateur,
     });
   });
 
   describe('sur un POST', () => {
     it("retourne un 201 si l'utilisateur est connecté", async () => {
-      const cookie = encodeSession({
-        email: 'jeanne.dupont@mail.com',
-      });
-
       const reponse = await request(serveur)
         .post('/api/jeux')
-        .set('Cookie', [cookie])
         .send({ nom: 'Cluedo' });
 
       expect(reponse.status).toEqual(201);
     });
 
     it("retourne un 401 si il n'y a pas d'utilisateur connecté", async () => {
-      adaptateurJWT.decode = () => {
-        throw new Error('erreur de décodage');
-      };
+      ajouteUtilisateurARequeteMock.mockImplementationOnce(
+        (_req, res, _suite) => {
+          res.sendStatus(401);
+        },
+      );
       const reponse = await request(serveur)
         .post('/api/jeux')
         .send({ nom: 'Cluedo' });
@@ -78,10 +80,6 @@ describe('La ressource des jeux', () => {
     });
 
     it('publie un événement de création de jeu', async () => {
-      adaptateurJWT.decode = () => ({
-        email: 'jeanne.dupont@mail.com',
-      });
-
       await request(serveur).post('/api/jeux').send({ nom: 'cybercluedo' });
 
       busEvenements.aRecuUnEvenement(JeuCree);
@@ -91,18 +89,7 @@ describe('La ressource des jeux', () => {
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
-      const cookie = encodeSession({
-        email: 'jeanne.dupont@mail.com',
-      });
-      adaptateurJWT.decode = () => ({
-        email: 'jeanne.dupont@mail.com',
-      });
-      await entrepotUtilisateur.ajoute(jeanneDupont);
-
-      await request(serveur)
-        .post('/api/jeux')
-        .set('Cookie', [cookie])
-        .send({ nom: 'Cluedo' });
+      await request(serveur).post('/api/jeux').send({ nom: 'Cluedo' });
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');
