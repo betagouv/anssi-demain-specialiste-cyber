@@ -3,3 +3,4 @@ export * from './Catalogue.svelte';
 export * from './ZoneIdentification.svelte';
 export * from './CreationCompte.svelte';
 export * from './NouveauJeu.svelte';
+export * from './jeux/MesJeux.svelte';
