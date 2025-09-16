@@ -93,7 +93,7 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     }),
   };
 
-const configurationServeurSansMiddleware =
+export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => ({
     serveurLab: {
       reseau: {
