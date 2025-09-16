@@ -81,7 +81,7 @@ export type ConfigurationServeurDeTest = ConfigurationServeur & {
 };
 
 const fauxMoteurDeRendu: MoteurDeRendu = {
-  rends: (reponse, _vue, _options) => reponse.sendStatus(200),
+  rends: (reponse, _vue, _options) => reponse.sendStatus(reponse.statusCode || 200),
 };
 
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
