@@ -1,4 +1,3 @@
-import { randomBytes } from 'crypto';
 import express from 'express';
 import fs from 'fs';
 import { join } from 'path';
@@ -7,24 +6,33 @@ export interface MoteurDeRendu {
   rends: (reponse: express.Response, vue: string, options?: object) => void;
 }
 
-export const moteurDeRenduExpress = (): MoteurDeRendu => {
-  const manifestPath = join(process.cwd(), '../front/dist/.vite/manifest.json');
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-  const manifestOptions = {
-    dsc: manifest['src/index.ts'].file,
-    style: manifest['style.css'].file,
+type FournisseurDeChemins = () => { dsc: string; style: string };
+
+const lisLesCheminsDesFichiersGeneresParLeFront: FournisseurDeChemins = () => {
+  const cheminVersLeFichierManifeste = join(
+    process.cwd(),
+    '../front/dist/.vite/manifest.json',
+  );
+  const manifeste = JSON.parse(
+    fs.readFileSync(cheminVersLeFichierManifeste, 'utf-8'),
+  );
+  return {
+    dsc: manifeste['src/index.ts'].file,
+    style: manifeste['style.css'].file,
   };
+};
 
-  const nonce = randomBytes(24).toString('base64');
-
+export const moteurDeRenduExpress = (
+  fournisseurDeChemins: FournisseurDeChemins = lisLesCheminsDesFichiersGeneresParLeFront,
+): MoteurDeRendu => {
   return {
     rends(reponse, vue, options) {
-      const optionsAvecManifestEtNonce = {
+      const optionsAvecManifesteEtNonce = {
         ...options,
-        ...manifestOptions,
-        nonce,
+        ...fournisseurDeChemins(),
+        nonce: reponse.locals.nonce,
       };
-      reponse.render(vue, optionsAvecManifestEtNonce);
+      reponse.render(vue, optionsAvecManifesteEtNonce);
     },
   };
 };
