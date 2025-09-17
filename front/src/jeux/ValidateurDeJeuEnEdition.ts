@@ -10,39 +10,41 @@ export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
   schema: z.ZodObject;
 
   constructor() {
+    const chaineNonVide = (messageErreur: string) => {
+      return z.string(messageErreur).trim().min(1, messageErreur);
+    };
     this.schema = z.object({
-      nom: z
-        .string('Le nom est obligatoire')
-        .trim()
-        .min(1, 'Le nom est obligatoire'),
-      sequence: z
-        .string('La séquence est obligatoire')
-        .trim()
-        .min(1, 'La séquence est obligatoire'),
-      nomEtablissement: z
-        .string("Le nom de l'établissement est obligatoire")
-        .trim()
-        .min(1, "Le nom de l'établissement est obligatoire"),
+      nom: chaineNonVide('Le nom est obligatoire'),
+      sequence: chaineNonVide('La séquence est obligatoire'),
+      nomEtablissement: chaineNonVide(
+        "Le nom de l'établissement est obligatoire",
+      ),
+      discipline: chaineNonVide('La discipline est obligatoire'),
+      classe: chaineNonVide('La classe est obligatoire'),
     });
   }
-
-  valide(jeu: JeuEnEdition): Record<keyof JeuEnEdition, string | undefined> {
+  valide(jeu: JeuEnEdition): ErreursValidationJeuEnEdition {
     try {
       this.schema.parse(jeu);
       return {
         nom: undefined,
         nomEtablissement: undefined,
         sequence: undefined,
+        discipline: undefined,
+        classe: undefined,
       };
     } catch (e) {
       const zodError = e as z.ZodError;
+      const extracteurErreurZod = (erreur: z.ZodError, nomDuChamp: string) => {
+        return erreur.issues.find((issue) => issue.path[0] === nomDuChamp)
+          ?.message;
+      };
       return {
-        nom: zodError.issues.find((issue) => issue.path[0] === 'nom')?.message,
-        nomEtablissement: zodError.issues.find(
-          (issue) => issue.path[0] === 'nomEtablissement',
-        )?.message,
-        sequence: zodError.issues.find((issue) => issue.path[0] === 'sequence')
-          ?.message,
+        nom: extracteurErreurZod(zodError, 'nom'),
+        nomEtablissement: extracteurErreurZod(zodError, 'nomEtablissement'),
+        sequence: extracteurErreurZod(zodError, 'sequence'),
+        discipline: extracteurErreurZod(zodError, 'discipline'),
+        classe: extracteurErreurZod(zodError, 'classe'),
       };
     }
   }
