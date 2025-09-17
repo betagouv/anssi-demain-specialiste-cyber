@@ -97,10 +97,13 @@ describe('La ressource des jeux', () => {
       await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
       busEvenements.aRecuUnEvenement(JeuCree);
-      const evenement = busEvenements.recupereEvenement(JeuCree);
-      expect(evenement!.emailAuteur).toBe('jeanne.dupont@mail.com');
-      expect(evenement!.nom).toBe('Cluedo');
-      expect(evenement!.sequence).toBe('heure');
+      const evenement = busEvenements.recupereEvenement(JeuCree)!;
+      expect(evenement.emailAuteur).toBe('jeanne.dupont@mail.com');
+      expect(evenement.nom).toBe('Cluedo');
+      expect(evenement.sequence).toBe('heure');
+      expect(evenement.nomEtablissement).toBe('Lycée de la mer');
+      expect(evenement.classe).toBe('cp');
+      expect(evenement.discipline).toBe('mathematiques');
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {

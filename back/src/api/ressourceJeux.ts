@@ -60,7 +60,14 @@ export const ressourceJeux = ({
           }),
         );
         await busEvenements.publie(
-          new JeuCree(utilisateurConnecte.email, nom, sequence),
+          new JeuCree(
+            utilisateurConnecte.email,
+            nom,
+            sequence,
+            nomEtablissement,
+            classe,
+            discipline,
+          ),
         );
         reponse.sendStatus(201);
       } catch {

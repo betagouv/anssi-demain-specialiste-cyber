@@ -21,6 +21,9 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     idUtilisateur: string;
     nom: string;
     sequence: string;
+    nomEtablissement: string;
+    classe: string;
+    discipline: string;
   };
   type: 'JEU_CREE';
 };

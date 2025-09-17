@@ -3,5 +3,8 @@ export class JeuCree {
     public readonly emailAuteur: string,
     public readonly nom: string,
     public readonly sequence: string,
+    public readonly nomEtablissement: string,
+    public readonly classe: string,
+    public readonly discipline: string,
   ) {}
 }
