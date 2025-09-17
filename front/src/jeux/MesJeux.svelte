@@ -37,9 +37,19 @@
     </div>
     <div class="jeux">
       {#each listeDesJeux as jeu (jeu.id)}
-        <div class="carte">
-          <h3>{jeu.nom}</h3>
-        </div>
+        <dsfr-card
+          title={jeu.nom}
+          description="Description texte SM regular Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus sit amet volutpat consequat mauris nunc congue. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra."
+          href={`/mes-jeux/${jeu.id}`}
+          src="/assets/images/image-generique.svg"
+          hasHeaderBadge={true}
+        >
+          <dsfr-badges-group
+            slot="headerbadges"
+            badges={[{ label: 'Thématique cyber', accent: 'purple-glycine' }]}
+            size="sm"
+          ></dsfr-badges-group>
+        </dsfr-card>
       {/each}
     </div>
   {:else}
