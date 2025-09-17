@@ -15,7 +15,7 @@ describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
 
   const validateurEnSuccess: Validateur<JeuEnEdition> = {
-    estValide: () => true,
+    estValide: vi.fn().mockReturnValue(true),
     valide: () => ({
       nom: undefined,
       sequence: undefined,
@@ -53,6 +53,18 @@ describe('Le formulaire de dépose de jeu', () => {
         getByRole('textbox', { name: 'Nom de votre établissement' }),
       ).toBeVisible();
     });
+
+    it('de selectionner une discipline', async () => {
+      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+
+      expect(getByRole('combobox', { name: 'Discipline' })).toBeVisible();
+    });
+
+    it('de selectionner une classe', async () => {
+      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+
+      expect(getByRole('combobox', { name: 'Classe' })).toBeVisible();
+    });
   });
 
   describe('lors de la soumission', () => {
@@ -68,12 +80,29 @@ describe('Le formulaire de dépose de jeu', () => {
         'Mon lycée',
       );
       await user.click(getByRole('radio', { name: 'Heure de cours' }));
+      await user.selectOptions(
+        getByRole('combobox', { name: 'Discipline' }),
+        'Mathématiques',
+      );
+      await user.selectOptions(
+        getByRole('combobox', { name: 'Classe' }),
+        'Seconde',
+      );
       await user.click(getByRole('button', { name: 'Terminer' }));
 
+      expect(validateurEnSuccess.estValide).toHaveBeenCalledExactlyOnceWith({
+        nom: 'TEST',
+        sequence: 'heure',
+        nomEtablissement: 'Mon lycée',
+        discipline: 'mathematiques',
+        classe: 'seconde',
+      });
       expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/jeux', {
         nom: 'TEST',
         sequence: 'heure',
         nomEtablissement: 'Mon lycée',
+        discipline: 'mathematiques',
+        classe: 'seconde',
       });
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
@@ -97,6 +126,8 @@ describe('Le formulaire de dépose de jeu', () => {
           nom: 'Le nom est obligatoire',
           sequence: "Le nom de l'établissement est obligatoire",
           nomEtablissement: 'La séquence est obligatoire',
+          discipline: 'La discipline est obligatoire',
+          classe: 'La classe est obligatoire',
         }),
       };
       const { getByRole, getByText } = render(NouveauJeu, {
@@ -112,6 +143,8 @@ describe('Le formulaire de dépose de jeu', () => {
         getByText("Le nom de l'établissement est obligatoire"),
       ).toBeVisible();
       expect(getByText('La séquence est obligatoire')).toBeVisible();
+      expect(getByText('La discipline est obligatoire')).toBeVisible();
+      expect(getByText('La classe est obligatoire')).toBeVisible();
     });
   });
 });

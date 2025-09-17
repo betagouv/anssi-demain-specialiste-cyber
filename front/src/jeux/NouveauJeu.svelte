@@ -15,12 +15,15 @@
   let nom = $state('');
   let nomEtablissement = $state('');
   let sequence = $state('');
+  let discipline = $state('');
+  let classe = $state('');
+
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
     nomEtablissement: undefined,
     sequence: undefined,
     classe: undefined,
-    discipline: undefined,
+    discipline: undefined
   });
 
   const soumets = async (event: Event) => {
@@ -29,14 +32,16 @@
     const jeu: JeuEnEdition = {
       nom,
       sequence,
-      nomEtablissement
+      nomEtablissement,
+      discipline,
+      classe
     };
     if (!validateur.estValide(jeu)) {
       erreurs = validateur.valide(jeu);
       return;
     }
 
-    await axios.post('/api/jeux', { nom, sequence, nomEtablissement });
+    await axios.post('/api/jeux', jeu);
   };
 </script>
 
@@ -93,6 +98,50 @@
       <span class="erreur" role="alert">{erreurs.sequence}</span>
     {/if}
   </div>
+
+  <label>
+    Discipline
+    <select placeholder="Sélectionner une option" bind:value={discipline}>
+      <option value="francais">Français</option>
+      <option value="langues-vivantes">Langues vivantes</option>
+      <option value="arts-plastiques">Arts plastiques</option>
+      <option value="education-musicale">Éducation musicale</option>
+      <option value="histoire-des-arts">Histoire des arts</option>
+      <option value="education-physique-et-sportive">Éducation physique et sportive</option>
+      <option value="enseignement-moral-et-civique">Enseignement moral et civique</option>
+      <option value="histoire-et-geographie">Histoire et géographie</option>
+      <option value="sciences-et-technologie">Sciences et technologie</option>
+      <option value="mathematiques">Mathématiques</option>
+    </select>
+  </label>
+  {#if erreurs.discipline}
+    <span class="erreur" role="alert">{erreurs.discipline}</span>
+  {/if}
+
+  <label>
+    Classe
+    <select placeholder="Sélectionner une option" bind:value={classe}>
+      <option value="maternelle">Maternelle</option>
+      <option value="cp">CP</option>
+      <option value="ce1">CE1</option>
+      <option value="ce2">CE2</option>
+      <option value="cm1">CM1</option>
+      <option value="cm2">CM2</option>
+      <option value="6e">6e</option>
+      <option value="5e">5e</option>
+      <option value="4e">4e</option>
+      <option value="3e">3e</option>
+      <option value="seconde">Seconde</option>
+      <option value="premiere">Première</option>
+      <option value="terminale">Terminale</option>
+      <option value="classe-prepa">Classe prépa</option>
+      <option value="bts">BTS</option>
+      <option value="superieur-hors-bts-et-prep">Supérieur (hors BTS et Prepa)</option>
+    </select>
+  </label>
+  {#if erreurs.classe}
+    <span class="erreur" role="alert">{erreurs.classe}</span>
+  {/if}
 
   <button type="submit" onclick={soumets}>Terminer</button>
 </form>
