@@ -31,6 +31,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       id_enseignant: jeu.enseignant
         ? this.adaptateurHachage.hache(jeu.enseignant.email)
         : null,
+      nom_etablissement: jeu.nomEtablissement,
+      classe: jeu.classe,
+      discipline: jeu.discipline,
     });
   }
 
@@ -45,6 +48,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
           nom: jeuEnDB.nom,
           enseignant,
           sequence: jeuEnDB.sequence,
+          nomEtablissement: jeuEnDB.nomEtablissement,
+          classe: jeuEnDB.classe,
+          discipline: jeuEnDB.discipline,
         });
       }),
     );
@@ -65,6 +71,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
           nom: jeuEnDB.nom,
           enseignant,
           sequence: jeuEnDB.sequence,
+          nomEtablissement: jeuEnDB.nomEtablissement,
+          classe: jeuEnDB.classe,
+          discipline: jeuEnDB.discipline,
         });
       }),
     );

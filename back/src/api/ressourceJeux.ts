@@ -47,9 +47,17 @@ export const ressourceJeux = ({
       try {
         const utilisateurConnecte = requete.utilisateur;
 
-        const { nom, sequence } = requete.body;
+        const { nom, sequence, nomEtablissement, classe, discipline } =
+          requete.body;
         await entrepotJeux.ajoute(
-          new Jeu({ nom, enseignant: utilisateurConnecte, sequence }),
+          new Jeu({
+            nom,
+            enseignant: utilisateurConnecte,
+            sequence,
+            nomEtablissement,
+            classe,
+            discipline,
+          }),
         );
         await busEvenements.publie(
           new JeuCree(utilisateurConnecte.email, nom, sequence),

@@ -34,9 +34,9 @@ describe('La ressource des jeux', () => {
   const corpsNouveauJeuValide = {
     nom: 'Cluedo',
     sequence: 'heure',
-    nomEtablissement: 'Lycée de la Mer',
+    nomEtablissement: 'Lycée de la mer',
     discipline: 'mathematiques',
-    classe: 'CP',
+    classe: 'cp',
   };
 
   beforeEach(() => {
@@ -88,6 +88,9 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].id).toBeDefined();
       expect(mesJeux[0].nom).toEqual('Cluedo');
       expect(mesJeux[0].sequence).toEqual('heure');
+      expect(mesJeux[0].nomEtablissement).toEqual('Lycée de la mer');
+      expect(mesJeux[0].classe).toEqual('cp');
+      expect(mesJeux[0].discipline).toEqual('mathematiques');
     });
 
     it('publie un événement de création de jeu', async () => {
@@ -273,6 +276,9 @@ describe('La ressource des jeux', () => {
           nom: 'cybercluedo',
           enseignant: jeanneDupont,
           sequence: 'heure',
+          classe: 'cp',
+          discipline: 'histoire-et-geographie',
+          nomEtablissement: 'Lycée de la mer',
         }),
       );
 
@@ -296,6 +302,9 @@ describe('La ressource des jeux', () => {
           nom: 'cybercluedo',
           enseignant: patrickDurand,
           sequence: 'heure',
+          classe: 'cp',
+          discipline: 'histoire-et-geographie',
+          nomEtablissement: 'Lycée de la mer',
         }),
       );
       await entrepotJeux.ajoute(
@@ -304,6 +313,9 @@ describe('La ressource des jeux', () => {
           nom: 'cyberuno',
           enseignant: jeanneDupont,
           sequence: 'heure',
+          classe: 'cp',
+          discipline: 'histoire-et-geographie',
+          nomEtablissement: 'Lycée de la mer',
         }),
       );
 
