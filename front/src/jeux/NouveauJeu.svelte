@@ -18,13 +18,15 @@
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
     nomEtablissement: undefined,
-    sequence: undefined
+    sequence: undefined,
+    classe: undefined,
+    discipline: undefined,
   });
 
   const soumets = async (event: Event) => {
     event.preventDefault();
 
-    const jeu: Jeu = {
+    const jeu: JeuEnEdition = {
       nom,
       sequence,
       nomEtablissement
