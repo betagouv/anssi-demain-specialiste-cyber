@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { Utilisateur } from './utilisateur';
-import { Sequence } from './sequence';
+import { Sequence } from './referentiels/sequence';
 
 export class Jeu {
   readonly id: string;
@@ -12,7 +12,7 @@ export class Jeu {
     id,
     nom,
     enseignant,
-    sequence
+    sequence,
   }: {
     id?: string;
     nom: string;

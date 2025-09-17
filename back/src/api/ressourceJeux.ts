@@ -3,7 +3,13 @@ import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
 import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './configurationServeur';
-import { sequences } from '../metier/sequence';
+import { sequences } from '../metier/referentiels/sequence';
+import { classes } from '../metier/referentiels/classes';
+import { disciplines } from '../metier/referentiels/disciplines';
+
+function chaineNonVide(message: string) {
+  return z.string(message).trim().min(1, message);
+}
 
 export const ressourceJeux = ({
   entrepotJeux,
@@ -15,10 +21,16 @@ export const ressourceJeux = ({
   const routeur = Router();
 
   const schema = z.strictObject({
-    nom: z
-      .string('Le nom est obligatoire')
-      .trim()
-      .min(1, 'Le nom est obligatoire'),
+    nom: chaineNonVide('Le nom est obligatoire'),
+    nomEtablissement: chaineNonVide(
+      'Le nom de l‘établissement est obligatoire',
+    ),
+    discipline: z.enum(disciplines, {
+      error: 'La discipline est invalide',
+    }),
+    classe: z.enum(classes, {
+      error: 'La classe est invalide',
+    }),
     sequence: z.enum(sequences, {
       error: 'La séquence est invalide',
     }),

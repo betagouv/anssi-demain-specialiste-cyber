@@ -34,6 +34,9 @@ describe('La ressource des jeux', () => {
   const corpsNouveauJeuValide = {
     nom: 'Cluedo',
     sequence: 'heure',
+    nomEtablissement: 'Lycée de la Mer',
+    discipline: 'mathematiques',
+    classe: 'CP',
   };
 
   beforeEach(() => {
@@ -124,6 +127,85 @@ describe('La ressource des jeux', () => {
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
+      });
+    });
+
+    describe('concernant la vérification du nom de l‘établissement', () => {
+      it('vérifie que le nom de l‘établissement est fourni', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            nomEtablissement: undefined,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le nom de l‘établissement est obligatoire',
+        );
+      });
+
+      it("vérifie que le nom n'est pas vide", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({ ...corpsNouveauJeuValide, nomEtablissement: '   ' });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le nom de l‘établissement est obligatoire',
+        );
+      });
+    });
+
+    describe('concernant la vérification de la discipline', () => {
+      it('vérifie que la discipline est fournie', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            discipline: undefined,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La discipline est invalide');
+      });
+
+      it('vérifie que la discipline fait partie des valeurs attendues', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            discipline: 'mauvaise-discipline',
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La discipline est invalide');
+      });
+    });
+
+    describe('concernant la vérification de la classe', () => {
+      it('vérifie que la classe est fournie', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            classe: undefined,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La classe est invalide');
+      });
+
+      it('vérifie que la classe fait partie des valeurs attendues', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            classe: 'mauvaise-classe',
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La classe est invalide');
       });
     });
 
