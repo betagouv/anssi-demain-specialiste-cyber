@@ -2,30 +2,38 @@
 
 <script lang="ts">
   import axios from 'axios';
+  import type { Validateur } from '../validateur';
+  import type { JeuEnEdition } from './jeu';
+  import { type ErreursValidationJeuEnEdition, ValidateurDeJeuEnEdition } from './ValidateurDeJeuEnEdition';
 
-  type Erreurs = {
-    nom?: string;
-    sequence?: string;
-    nomEtablissement?: string;
-  };
+  interface Props {
+    validateur: Validateur<JeuEnEdition>;
+  }
+
+  const { validateur = new ValidateurDeJeuEnEdition() }: Props = $props();
 
   let nom = $state('');
   let nomEtablissement = $state('');
   let sequence = $state('');
-  let erreurs = $state<Erreurs>({});
+  let erreurs = $state<ErreursValidationJeuEnEdition>({
+    nom: undefined,
+    nomEtablissement: undefined,
+    sequence: undefined
+  });
 
   const soumets = async (event: Event) => {
     event.preventDefault();
-    erreurs = {
-      nom: nom ? undefined : 'Le nom est obligatoire',
-      sequence: sequence ? undefined : 'La séquence est obligatoire',
-      nomEtablissement: nomEtablissement
-        ? undefined
-        : "Le nom de l'établissement est obligatoire",
+
+    const jeu: Jeu = {
+      nom,
+      sequence,
+      nomEtablissement
     };
-    if (erreurs.nom || erreurs.sequence || erreurs.nomEtablissement) {
+    if (!validateur.estValide(jeu)) {
+      erreurs = validateur.valide(jeu);
       return;
     }
+
     await axios.post('/api/jeux', { nom, sequence, nomEtablissement });
   };
 </script>
