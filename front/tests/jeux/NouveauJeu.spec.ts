@@ -1,7 +1,9 @@
 import { render } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { JeuEnEdition } from '../../src/jeux/jeu';
 import NouveauJeu from '../../src/jeux/NouveauJeu.svelte';
+import { Validateur } from '../../src/validateur';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
@@ -12,18 +14,31 @@ vi.mock('axios', () => {
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
 
+  const validateurEnSuccess: Validateur<JeuEnEdition> = {
+    estValide: () => true,
+    valide: () => ({
+      nom: undefined,
+      sequence: undefined,
+      nomEtablissement: undefined,
+    }),
+  };
+  const proprietesParDefaut = { validateur: validateurEnSuccess };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
   describe('propose', () => {
     it('de saisir le nom du jeu', () => {
-      const { getByRole } = render(NouveauJeu);
+      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
 
       expect(getByRole('textbox', { name: 'Nom du jeu' })).toBeVisible();
     });
 
     it('de selectionner une séquence', () => {
-      const { getAllByRole, getByRole } = render(NouveauJeu);
+      const { getAllByRole, getByRole } = render(
+        NouveauJeu,
+        proprietesParDefaut,
+      );
 
       expect(getAllByRole('radio')).toHaveLength(3);
       expect(getByRole('radio', { name: 'Heure de cours' })).toBeVisible();
@@ -32,7 +47,7 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("de saisir un nom d'établissement", () => {
-      const { getByRole } = render(NouveauJeu);
+      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
 
       expect(
         getByRole('textbox', { name: 'Nom de votre établissement' }),
@@ -42,7 +57,10 @@ describe('Le formulaire de dépose de jeu', () => {
 
   describe('lors de la soumission', () => {
     it("envoie le formulaire à l'api des jeux", async () => {
-      const { getByRole, queryAllByRole } = render(NouveauJeu);
+      const { getByRole, queryAllByRole } = render(
+        NouveauJeu,
+        proprietesParDefaut,
+      );
 
       await user.type(getByRole('textbox', { name: 'Nom du jeu' }), 'TEST');
       await user.type(
@@ -61,7 +79,30 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("n'envoie pas le formulaire si il y a un souci de validation", async () => {
-      const { getByRole, getByText } = render(NouveauJeu);
+      const { getByRole, queryAllByRole } = render(NouveauJeu, {
+        ...proprietesParDefaut,
+        validateur: { ...validateurEnSuccess, estValide: () => false },
+      });
+
+      await user.click(getByRole('button', { name: 'Terminer' }));
+
+      expect(axiosMock.post).not.toHaveBeenCalled();
+      expect(queryAllByRole('alert')).toHaveLength(0);
+    });
+
+    it("affiche pour chaque champ non valide, un message d'erreur", async () => {
+      const validateurEnErreur: Validateur<JeuEnEdition> = {
+        estValide: () => false,
+        valide: () => ({
+          nom: 'Le nom est obligatoire',
+          sequence: "Le nom de l'établissement est obligatoire",
+          nomEtablissement: 'La séquence est obligatoire',
+        }),
+      };
+      const { getByRole, getByText } = render(NouveauJeu, {
+        ...proprietesParDefaut,
+        validateur: validateurEnErreur,
+      });
 
       await user.click(getByRole('button', { name: 'Terminer' }));
 
