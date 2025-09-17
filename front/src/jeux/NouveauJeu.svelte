@@ -6,9 +6,11 @@
   type Erreurs = {
     nom?: string;
     sequence?: string;
+    nomEtablissement?: string;
   };
 
   let nom = $state('');
+  let nomEtablissement = $state('');
   let sequence = $state('');
   let erreurs = $state<Erreurs>({});
 
@@ -17,11 +19,14 @@
     erreurs = {
       nom: nom ? undefined : 'Le nom est obligatoire',
       sequence: sequence ? undefined : 'La séquence est obligatoire',
+      nomEtablissement: nomEtablissement
+        ? undefined
+        : "Le nom de l'établissement est obligatoire",
     };
-    if (erreurs.nom || erreurs.sequence) {
+    if (erreurs.nom || erreurs.sequence || erreurs.nomEtablissement) {
       return;
     }
-    await axios.post('/api/jeux', { nom, sequence });
+    await axios.post('/api/jeux', { nom, sequence, nomEtablissement });
   };
 </script>
 
@@ -32,6 +37,14 @@
   </label>
   {#if erreurs.nom}
     <span class="erreur" role="alert">{erreurs.nom}</span>
+  {/if}
+
+  <label>
+    Nom de votre établissement
+    <input type="text" bind:value={nomEtablissement} required />
+  </label>
+  {#if erreurs.nomEtablissement}
+    <span class="erreur" role="alert">{erreurs.nomEtablissement}</span>
   {/if}
 
   <div class="sequence">

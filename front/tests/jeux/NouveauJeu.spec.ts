@@ -1,7 +1,7 @@
 import { render } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import NouveauJeu from '../src/NouveauJeu.svelte';
+import NouveauJeu from '../../src/jeux/NouveauJeu.svelte';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
@@ -30,6 +30,14 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(getByRole('radio', { name: 'Demi-journee' })).toBeVisible();
       expect(getByRole('radio', { name: 'Journée' })).toBeVisible();
     });
+
+    it("de saisir un nom d'établissement", () => {
+      const { getByRole } = render(NouveauJeu);
+
+      expect(
+        getByRole('textbox', { name: 'Nom de votre établissement' }),
+      ).toBeVisible();
+    });
   });
 
   describe('lors de la soumission', () => {
@@ -37,12 +45,17 @@ describe('Le formulaire de dépose de jeu', () => {
       const { getByRole, queryAllByRole } = render(NouveauJeu);
 
       await user.type(getByRole('textbox', { name: 'Nom du jeu' }), 'TEST');
+      await user.type(
+        getByRole('textbox', { name: 'Nom de votre établissement' }),
+        'Mon lycée',
+      );
       await user.click(getByRole('radio', { name: 'Heure de cours' }));
       await user.click(getByRole('button', { name: 'Terminer' }));
 
       expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/jeux', {
         nom: 'TEST',
         sequence: 'heure',
+        nomEtablissement: 'Mon lycée',
       });
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
@@ -54,6 +67,9 @@ describe('Le formulaire de dépose de jeu', () => {
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(getByText('Le nom est obligatoire')).toBeVisible();
+      expect(
+        getByText("Le nom de l'établissement est obligatoire"),
+      ).toBeVisible();
       expect(getByText('La séquence est obligatoire')).toBeVisible();
     });
   });
