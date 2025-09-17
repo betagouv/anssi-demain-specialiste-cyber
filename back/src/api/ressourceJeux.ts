@@ -20,8 +20,8 @@ export const ressourceJeux = ({
       .trim()
       .min(1, 'Le nom est obligatoire'),
     sequence: z.enum(sequences, {
-      error: "La séquence est invalide"
-    })
+      error: 'La séquence est invalide',
+    }),
   });
 
   routeur.post(
@@ -39,12 +39,27 @@ export const ressourceJeux = ({
         await entrepotJeux.ajoute(
           new Jeu({ nom, enseignant: utilisateurConnecte, sequence }),
         );
-        await busEvenements.publie(new JeuCree(utilisateurConnecte.email, nom, sequence));
+        await busEvenements.publie(
+          new JeuCree(utilisateurConnecte.email, nom, sequence),
+        );
         reponse.sendStatus(201);
       } catch {
         reponse.sendStatus(401);
       }
     },
   );
+
+  routeur.get(
+    '/',
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage,
+    ),
+    async (requete, reponse) => {
+      const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
+      reponse.send(jeux.map((jeu) => ({ id: jeu.id, nom: jeu.nom })));
+    },
+  );
+
   return routeur;
 };

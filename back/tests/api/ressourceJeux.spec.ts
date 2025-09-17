@@ -15,6 +15,8 @@ import {
   configurationServeurSansMiddleware,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
+import { Jeu } from '../../src/metier/jeu';
+import { Utilisateur } from '../../src/metier/utilisateur';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
@@ -104,10 +106,12 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification du nom', () => {
       it('vérifie que le nom est fourni', async () => {
-        const reponse = await request(serveur).post('/api/jeux').send({
-          ...corpsNouveauJeuValide,
-          nom: undefined
-        });
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            nom: undefined,
+          });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
@@ -125,10 +129,12 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la séquence', () => {
       it('vérifie que la séquence est fournie', async () => {
-        const reponse = await request(serveur).post('/api/jeux').send({
-          ...corpsNouveauJeuValide,
-          sequence: undefined
-        });
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            sequence: undefined,
+          });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
@@ -146,17 +152,82 @@ describe('La ressource des jeux', () => {
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
       });
 
-      it("vérifie que la séquence fait partie des valeurs attendues", async () => {
+      it('vérifie que la séquence fait partie des valeurs attendues', async () => {
         const reponse = await request(serveur)
-        .post('/api/jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          sequence: 'mauvaise-sequence',
-        });
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            sequence: 'mauvaise-sequence',
+          });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual("La séquence est invalide");
-      })
+        expect(reponse.body.erreur).toEqual('La séquence est invalide');
+      });
+    });
+  });
+
+  describe('sur un GET', () => {
+    it('retourne un 200 si l’utilisateur est connecté', async () => {
+      const reponse = await request(serveur).get('/api/jeux');
+
+      expect(reponse.status).toEqual(200);
+    });
+
+    it("retourne un 401 si il n'y a pas d'utilisateur connecté", async () => {
+      ajouteUtilisateurARequeteMock.mockImplementationOnce(
+        (_req, res, _suite) => {
+          res.sendStatus(401);
+        },
+      );
+      const reponse = await request(serveur).get('/api/jeux');
+
+      expect(reponse.status).toEqual(401);
+    });
+
+    it('retourne la liste des jeux', async () => {
+      await entrepotJeux.ajoute(
+        new Jeu({
+          id: '1',
+          nom: 'cybercluedo',
+          enseignant: jeanneDupont,
+          sequence: 'heure',
+        }),
+      );
+
+      const reponse = await request(serveur).get('/api/jeux');
+
+      expect(reponse.body).toStrictEqual([{ id: '1', nom: 'cybercluedo' }]);
+    });
+
+    it("retourne la liste des jeux de l'utilisateur connecté", async () => {
+      const patrickDurand = new Utilisateur({
+        email: 'patrick.durand@mail.com',
+        infolettreAcceptee: true,
+        prenom: '',
+        nom: '',
+        siretEntite: '',
+      });
+
+      await entrepotJeux.ajoute(
+        new Jeu({
+          id: '1',
+          nom: 'cybercluedo',
+          enseignant: patrickDurand,
+          sequence: 'heure',
+        }),
+      );
+      await entrepotJeux.ajoute(
+        new Jeu({
+          id: '2',
+          nom: 'cyberuno',
+          enseignant: jeanneDupont,
+          sequence: 'heure',
+        }),
+      );
+
+      const reponse = await request(serveur).get('/api/jeux');
+
+      expect(reponse.body).toStrictEqual([{ id: '2', nom: 'cyberuno' }]);
     });
   });
 });
