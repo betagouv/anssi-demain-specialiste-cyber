@@ -15,9 +15,12 @@ header(class='entete')
             div(class='menu-principal')
                 dsc-zone-identification
                 menu
-                    li Accueil
-                    li Catalogue des ressources
-                    li Sélection enseignants
+                    li
+                        a(href='/') Accueil
+                    li
+                        a(href='/catalogue') Catalogue des ressources
+                    li
+                        a(href='/mes-jeux') Sélection enseignants
                     li Sélection élèves
                     li CuberEnJeux
                     li Événements
@@ -28,4 +31,3 @@ header(class='entete')
             a(href='#') Voir le fil d'Ariane
         h2 #{titrePage}
         p #{descriptionPage}
-
