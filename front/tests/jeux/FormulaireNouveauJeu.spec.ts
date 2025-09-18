@@ -3,7 +3,7 @@ import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { type JeuEnEdition } from '../../src/jeux/jeu';
-import NouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
+import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
 import { type Validateur } from '../../src/validateur';
 import { getByRoleDeep } from '../shadow-dom-utilitaires';
 
@@ -31,14 +31,14 @@ describe('Le formulaire de dépose de jeu', () => {
   });
   describe('propose', () => {
     it('de saisir le nom du jeu', () => {
-      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
       expect(getByRole('textbox', { name: 'Nom du jeu' })).toBeVisible();
     });
 
     it('de selectionner une séquence', () => {
       const { getAllByRole, getByRole } = render(
-        NouveauJeu,
+        FormulaireNouveauJeu,
         proprietesParDefaut,
       );
 
@@ -49,7 +49,7 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("de saisir un nom d'établissement", () => {
-      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
       expect(
         getByRole('textbox', { name: 'Nom de votre établissement' }),
@@ -57,13 +57,13 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it('de selectionner une discipline', async () => {
-      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
       expect(getByRole('combobox', { name: 'Discipline' })).toBeVisible();
     });
 
     it('de selectionner une classe', async () => {
-      const { getByRole } = render(NouveauJeu, proprietesParDefaut);
+      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
       expect(getByRole('combobox', { name: 'Classe' })).toBeVisible();
     });
@@ -72,7 +72,7 @@ describe('Le formulaire de dépose de jeu', () => {
   describe('lors de la soumission', () => {
     it("envoie le formulaire à l'api des jeux", async () => {
       const { getByRole, queryAllByRole } = render(
-        NouveauJeu,
+        FormulaireNouveauJeu,
         proprietesParDefaut,
       );
 
@@ -111,7 +111,7 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("n'envoie pas le formulaire si il y a un souci de validation", async () => {
-      const { queryAllByRole } = render(NouveauJeu, {
+      const { queryAllByRole } = render(FormulaireNouveauJeu, {
         ...proprietesParDefaut,
         validateur: { ...validateurEnSuccess, estValide: () => false },
       });
@@ -136,7 +136,7 @@ describe('Le formulaire de dépose de jeu', () => {
           classe: 'La classe est obligatoire',
         }),
       };
-      const { getByText } = render(NouveauJeu, {
+      const { getByText } = render(FormulaireNouveauJeu, {
         ...proprietesParDefaut,
         validateur: validateurEnErreur,
       });
