@@ -9,4 +9,5 @@ export type JeuEnEdition = {
   nomEtablissement?: string;
   discipline?: string;
   classe?: string;
+  eleves?: string[];
 };

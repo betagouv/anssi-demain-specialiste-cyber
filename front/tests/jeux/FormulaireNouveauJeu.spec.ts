@@ -1,11 +1,15 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
-
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { type JeuEnEdition } from '../../src/jeux/jeu';
 import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
 import { type Validateur } from '../../src/validateur';
-import { getByRoleDeep } from '../shadow-dom-utilitaires';
+import {
+  findAllByRoleDeep,
+  findByRoleDeep,
+  getAllByRoleDeep,
+  getByRoleDeep,
+} from '../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
@@ -67,6 +71,38 @@ describe('Le formulaire de dépose de jeu', () => {
 
       expect(getByRole('combobox', { name: 'Classe' })).toBeVisible();
     });
+
+    it('de saisir 4 prénoms', async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
+
+      await waitFor(() =>
+        expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(4),
+      );
+    });
+
+    it('d‘ajouter un prénom d‘élève', async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
+
+      await waitFor(() =>
+        expect(
+          getByRoleDeep('button', { name: 'Ajouter un élève' }),
+        ).toBeVisible(),
+      );
+    });
+
+    it('de saisir plus que 4 élèves', async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
+      const boutonAjouterEleve = await findByRoleDeep('button', {
+        name: 'Ajouter un élève',
+      });
+
+      await user.click(boutonAjouterEleve);
+      await user.click(boutonAjouterEleve);
+
+      await waitFor(() =>
+        expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(6),
+      );
+    });
   });
 
   describe('lors de la soumission', () => {
@@ -75,23 +111,28 @@ describe('Le formulaire de dépose de jeu', () => {
         FormulaireNouveauJeu,
         proprietesParDefaut,
       );
+      const champClasse = getByRole('combobox', { name: 'Classe' });
+      const champNomDuJeu = getByRole('textbox', { name: 'Nom du jeu' });
+      const champNomEtablissement = getByRole('textbox', {
+        name: 'Nom de votre établissement',
+      });
+      const champSequence = getByRole('radio', { name: 'Heure de cours' });
+      const champDiscipline = getByRole('combobox', { name: 'Discipline' });
+      const champsPrenom = await findAllByRoleDeep('textbox', {
+        name: 'Prénom',
+      });
+      const boutonTerminer = await findByRoleDeep('button', {
+        name: 'Terminer',
+      });
 
-      await user.type(getByRole('textbox', { name: 'Nom du jeu' }), 'TEST');
-      await user.type(
-        getByRole('textbox', { name: 'Nom de votre établissement' }),
-        'Mon lycée',
-      );
-      await user.click(getByRole('radio', { name: 'Heure de cours' }));
-      await user.selectOptions(
-        getByRole('combobox', { name: 'Discipline' }),
-        'Mathématiques',
-      );
-      await user.selectOptions(
-        getByRole('combobox', { name: 'Classe' }),
-        'Seconde',
-      );
-
-      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
+      await user.type(champNomDuJeu, 'TEST');
+      await user.type(champNomEtablissement, 'Mon lycée');
+      await user.click(champSequence);
+      await user.selectOptions(champDiscipline, 'Mathématiques');
+      await user.selectOptions(champClasse, 'Seconde');
+      await user.type(champsPrenom[0], 'Brice');
+      await user.type(champsPrenom[1], 'Gontran');
+      await user.click(boutonTerminer);
 
       expect(validateurEnSuccess.estValide).toHaveBeenCalledExactlyOnceWith({
         nom: 'TEST',
@@ -99,6 +140,7 @@ describe('Le formulaire de dépose de jeu', () => {
         nomEtablissement: 'Mon lycée',
         discipline: 'mathematiques',
         classe: 'seconde',
+        eleves: ['Brice', 'Gontran'],
       });
       expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/jeux', {
         nom: 'TEST',
@@ -106,6 +148,7 @@ describe('Le formulaire de dépose de jeu', () => {
         nomEtablissement: 'Mon lycée',
         discipline: 'mathematiques',
         classe: 'seconde',
+        eleves: ['Brice', 'Gontran'],
       });
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
@@ -115,11 +158,11 @@ describe('Le formulaire de dépose de jeu', () => {
         ...proprietesParDefaut,
         validateur: { ...validateurEnSuccess, estValide: () => false },
       });
+      const boutonTerminer = await findByRoleDeep('button', {
+        name: 'Terminer',
+      });
 
-      await waitFor(() =>
-        expect(getByRoleDeep('button', { name: 'Terminer' })).toBeDefined(),
-      );
-      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
+      await user.click(boutonTerminer);
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(queryAllByRole('alert')).toHaveLength(0);
@@ -134,16 +177,18 @@ describe('Le formulaire de dépose de jeu', () => {
           nomEtablissement: 'La séquence est obligatoire',
           discipline: 'La discipline est obligatoire',
           classe: 'La classe est obligatoire',
+          eleves: 'Au moins un élève est requis',
         }),
       };
       const { getByText } = render(FormulaireNouveauJeu, {
         ...proprietesParDefaut,
         validateur: validateurEnErreur,
       });
-      await waitFor(() =>
-        expect(getByRoleDeep('button', { name: 'Terminer' })).toBeDefined(),
-      );
-      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
+      const boutonTerminer = await findByRoleDeep('button', {
+        name: 'Terminer',
+      });
+
+      await user.click(boutonTerminer);
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(getByText('Le nom est obligatoire')).toBeVisible();
@@ -153,6 +198,7 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(getByText('La séquence est obligatoire')).toBeVisible();
       expect(getByText('La discipline est obligatoire')).toBeVisible();
       expect(getByText('La classe est obligatoire')).toBeVisible();
+      expect(getByText('Au moins un élève est requis')).toBeVisible();
     });
   });
 });

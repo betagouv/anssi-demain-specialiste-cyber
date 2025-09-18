@@ -4,13 +4,13 @@
 
 <script lang="ts">
   import axios from 'axios';
+  import { clic } from '../actions.svelte';
   import type { Validateur } from '../validateur';
   import type { JeuEnEdition } from './jeu';
   import {
     type ErreursValidationJeuEnEdition,
     ValidateurDeJeuEnEdition,
   } from './ValidateurDeJeuEnEdition';
-  import { clic } from '../actions.svelte';
 
   interface Props {
     validateur: Validateur<JeuEnEdition>;
@@ -23,6 +23,7 @@
   let sequence = $state('');
   let discipline = $state('');
   let classe = $state('');
+  let eleves = $state(['', '', '', '']);
 
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
@@ -41,6 +42,7 @@
       nomEtablissement,
       discipline,
       classe,
+      eleves: eleves.filter((e) => !!e?.trim()),
     };
     if (!validateur.estValide(jeu)) {
       erreurs = validateur.valide(jeu);
@@ -48,6 +50,10 @@
     }
 
     await axios.post('/api/jeux', jeu);
+  };
+
+  const ajouteEleve = () => {
+    eleves.push('');
   };
 </script>
 
@@ -114,11 +120,11 @@
       <option value="education-musicale">Éducation musicale</option>
       <option value="histoire-des-arts">Histoire des arts</option>
       <option value="education-physique-et-sportive"
-        >Éducation physique et sportive</option
-      >
+        >Éducation physique et sportive
+      </option>
       <option value="enseignement-moral-et-civique"
-        >Enseignement moral et civique</option
-      >
+        >Enseignement moral et civique
+      </option>
       <option value="histoire-et-geographie">Histoire et géographie</option>
       <option value="sciences-et-technologie">Sciences et technologie</option>
       <option value="mathematiques">Mathématiques</option>
@@ -147,13 +153,33 @@
       <option value="classe-prepa">Classe prépa</option>
       <option value="bts">BTS</option>
       <option value="superieur-hors-bts-et-prep"
-        >Supérieur (hors BTS et Prepa)</option
-      >
+        >Supérieur (hors BTS et Prepa)
+      </option>
     </select>
   </label>
   {#if erreurs.classe}
     <span class="erreur" role="alert">{erreurs.classe}</span>
   {/if}
+
+  <div class="eleves">
+    <h5>Elèves participants</h5>
+    {#if erreurs.eleves}
+      <span class="erreur" role="alert">{erreurs.eleves}</span>
+    {/if}
+    {#each eleves as eleve, index}
+      <dsfr-input
+        label="Prénom"
+        id="prenom-{index}"
+        value={eleve}
+        onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
+      ></dsfr-input>
+    {/each}
+    <dsfr-button
+      label="Ajouter un élève"
+      kind="secondary"
+      use:clic={ajouteEleve}
+    ></dsfr-button>
+  </div>
 
   <div class="actions">
     <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
