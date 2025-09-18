@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   lesPublicsCibleDesRessourcesCyber,
   lesThematiquesCyber,
-} from '../src/ressourceCyber';
+} from '../../src/catalogue/ressourceCyber';
 import { unConstructeurDeRessourceCyber } from './constructeurRessourceCyber';
 
 describe('Les ressources Cyber', () => {

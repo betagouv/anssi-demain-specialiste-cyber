@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { type RessourceCyber } from '../../src/ressourceCyber';
+import { type RessourceCyber } from '../../../src/catalogue/ressourceCyber';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
-import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
+import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
 
 describe('La recherche par besoin', () => {
   it('peut être modifié avec des besoins', () => {

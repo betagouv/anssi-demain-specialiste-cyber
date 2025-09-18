@@ -48,7 +48,7 @@ export const ressourcesCyberFiltrees = derived(
         rechercheParNiveau.ok(ressourceCyber) &&
         rechercheParType.ok(ressourceCyber) &&
         rechercheParBesoin.ok(ressourceCyber) &&
-        rechercheTextuelle.ok(ressourceCyber)
+        rechercheTextuelle.ok(ressourceCyber),
     );
 
     const thematiques = lesThematiquesCyber($store);
@@ -57,5 +57,5 @@ export const ressourcesCyberFiltrees = derived(
     const types = lesTypesDesRessourcesCyber($store);
 
     return { resultat, thematiques, publicsCible, niveaux, types, besoins };
-  }
+  },
 );

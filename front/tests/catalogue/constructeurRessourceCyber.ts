@@ -1,4 +1,4 @@
-import { type RessourceCyber } from '../src/ressourceCyber';
+import { type RessourceCyber } from '../../src/catalogue/ressourceCyber';
 
 interface Constructeur<T> {
   construis(): T;

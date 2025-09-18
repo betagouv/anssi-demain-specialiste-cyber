@@ -1,14 +1,14 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { type RessourceCyber } from '../../src/ressourceCyber';
-import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
-import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
-import { rechercheParPublicCible } from '../../src/stores/rechercheParPublicCible.store';
-import { rechercheParThematique } from '../../src/stores/rechercheParThematique.store';
-import { rechercheParType } from '../../src/stores/rechercheParType.store';
-import { rechercheTextuelle } from '../../src/stores/rechercheTextuelle.store';
-import { ressourcesCyberStore } from '../../src/stores/ressourcesCyber.store';
-import { ressourcesCyberFiltrees } from '../../src/stores/ressourcesCyberFiltrees.store';
+import { type RessourceCyber } from '../../../src/catalogue/ressourceCyber';
+import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
+import { rechercheParNiveau } from '../../../src/catalogue/stores/rechercheParNiveau.store';
+import { rechercheParPublicCible } from '../../../src/catalogue/stores/rechercheParPublicCible.store';
+import { rechercheParThematique } from '../../../src/catalogue/stores/rechercheParThematique.store';
+import { rechercheParType } from '../../../src/catalogue/stores/rechercheParType.store';
+import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
+import { ressourcesCyberStore } from '../../../src/catalogue/stores/ressourcesCyber.store';
+import { ressourcesCyberFiltrees } from '../../../src/catalogue/stores/ressourcesCyberFiltrees.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
 describe('Le store qui contient la liste des ressources Cyber', () => {

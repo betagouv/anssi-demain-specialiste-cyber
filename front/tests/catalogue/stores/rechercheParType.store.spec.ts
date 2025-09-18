@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { type RessourceCyber } from '../../src/ressourceCyber';
-import { rechercheParType } from '../../src/stores/rechercheParType.store';
+import { type RessourceCyber } from '../../../src/catalogue/ressourceCyber';
+import { rechercheParType } from '../../../src/catalogue/stores/rechercheParType.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
 describe('La recherche par type', () => {

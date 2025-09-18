@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { type RessourceCyber } from '../../src/ressourceCyber';
-import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
+import { type RessourceCyber } from '../../../src/catalogue/ressourceCyber';
+import { rechercheParNiveau } from '../../../src/catalogue/stores/rechercheParNiveau.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
 describe('La recherche par niveau', () => {

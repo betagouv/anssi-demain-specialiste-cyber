@@ -21,3 +21,21 @@
     {/each}
   </ul>
 </fieldset>
+
+<style lang="scss">
+  fieldset {
+    margin: 0;
+
+    legend {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    ul {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+</style>

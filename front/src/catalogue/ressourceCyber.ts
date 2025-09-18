@@ -15,30 +15,30 @@ export const lesRessourcesCyberTriees = (data: RessourceCyber[]) => {
 
 export const lesThematiquesCyber = (ressourcesCyber: RessourceCyber[]) => {
   return Array.from(
-    new Set(ressourcesCyber.flatMap((r) => r.thematiques))
+    new Set(ressourcesCyber.flatMap((r) => r.thematiques)),
   ).sort();
 };
 
 export const lesPublicsCibleDesRessourcesCyber = (
-  ressourcesCyber: RessourceCyber[]
+  ressourcesCyber: RessourceCyber[],
 ): string[] => {
   return Array.from(
-    new Set(ressourcesCyber.flatMap((r) => r.publicsCible))
+    new Set(ressourcesCyber.flatMap((r) => r.publicsCible)),
   ).sort((s1, s2) => s1.localeCompare(s2));
 };
 
 export const lesNiveauxDesRessourcesCyber = (
-  ressourcesCyber: RessourceCyber[]
+  ressourcesCyber: RessourceCyber[],
 ): string[] => {
   return Array.from(new Set(ressourcesCyber.flatMap((r) => r.niveaux))).sort(
-    (n1, n2) => n1.localeCompare(n2)
+    (n1, n2) => n1.localeCompare(n2),
   );
 };
 
 export const lesTypesDesRessourcesCyber = (
-  ressourcesCyber: RessourceCyber[]
+  ressourcesCyber: RessourceCyber[],
 ): string[] => {
   return Array.from(new Set(ressourcesCyber.flatMap((r) => r.types))).sort(
-    (n1, n2) => n1.localeCompare(n2)
+    (n1, n2) => n1.localeCompare(n2),
   );
 };
