@@ -2,7 +2,7 @@ import { render } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { JeuEnEdition } from '../../src/jeux/jeu';
-import NouveauJeu from '../../src/jeux/NouveauJeu.svelte';
+import NouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
 import { Validateur } from '../../src/validateur';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));

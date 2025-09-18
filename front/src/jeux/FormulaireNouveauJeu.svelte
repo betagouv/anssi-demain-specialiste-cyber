@@ -1,4 +1,4 @@
-<svelte:options customElement={{ tag: 'dsc-nouveau-jeu', shadow: 'none' }} />
+<svelte:options customElement={{ tag: 'dsc-formulaire-nouveau-jeu', shadow: 'none' }} />
 
 <script lang="ts">
   import axios from 'axios';
