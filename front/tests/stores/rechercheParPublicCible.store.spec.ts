@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RessourceCyber } from '../../src/ressourceCyber';
+import { type RessourceCyber } from '../../src/ressourceCyber';
 import { get } from 'svelte/store';
 import { rechercheParPublicCible } from '../../src/stores/rechercheParPublicCible.store';
 import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';

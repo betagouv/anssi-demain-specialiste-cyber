@@ -1,4 +1,4 @@
-import { RessourceCyber } from './ressourceCyber';
+import { type RessourceCyber } from './ressourceCyber';
 
 export interface EntrepotRessourcesCyber {
   tous: () => Promise<RessourceCyber[]>;

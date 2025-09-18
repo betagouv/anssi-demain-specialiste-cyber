@@ -1,5 +1,5 @@
 import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
-import { RessourceCyber } from '../../src/metier/ressourceCyber';
+import { type RessourceCyber } from '../../src/metier/ressourceCyber';
 import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotRessourcesCyberMemoire
