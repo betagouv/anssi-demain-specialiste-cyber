@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RessourceCyber } from '../../src/ressourceCyber';
+import { type RessourceCyber } from '../../src/ressourceCyber';
 import { rechercheParBesoin } from '../../src/stores/rechercheParBesoin.store';
 import { rechercheParNiveau } from '../../src/stores/rechercheParNiveau.store';
 import { rechercheParPublicCible } from '../../src/stores/rechercheParPublicCible.store';

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { ValidateurDeJeuEnEdition } from '../../src/jeux/ValidateurDeJeuEnEdition';
-import { Jeu } from '../../src/jeux/jeu';
+import { type JeuEnEdition } from '../../src/jeux/jeu';
 
-describe('Le validateur de jeu', () => {
-  const jeuValide: Jeu = {
+describe('Le validateur de jeu en édition', () => {
+  const jeuValide: JeuEnEdition = {
     nom: 'nom du jeu',
     sequence: 'heure',
     nomEtablissement: "nom de l'établissement",

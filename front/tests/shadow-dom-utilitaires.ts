@@ -1,8 +1,8 @@
 import {
-  AllByRole,
+  type AllByRole,
   buildQueries,
-  ByRoleMatcher,
-  ByRoleOptions,
+  type ByRoleMatcher,
+  type ByRoleOptions,
   queryAllByRole,
 } from '@testing-library/dom';
 

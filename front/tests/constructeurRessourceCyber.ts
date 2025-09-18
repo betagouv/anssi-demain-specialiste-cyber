@@ -1,4 +1,4 @@
-import { RessourceCyber } from '../src/ressourceCyber';
+import { type RessourceCyber } from '../src/ressourceCyber';
 
 interface Constructeur<T> {
   construis(): T;
@@ -12,7 +12,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _description: string = '';
   private _thematiques: string[] = [];
   private _types: string[] = [];
-  private _besoins: string[];
+  private _besoins: string[] = [];
 
   avecPublicsCible(publicsCible: string[]): ConstructeurRessourceCyber {
     this._publicsCible = publicsCible;

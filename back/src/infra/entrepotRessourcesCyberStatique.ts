@@ -1,5 +1,5 @@
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
-import { RessourceCyber } from '../metier/ressourceCyber';
+import { type RessourceCyber } from '../metier/ressourceCyber';
 
 export class EntrepotRessourcesCyberStatique
   implements EntrepotRessourcesCyber
