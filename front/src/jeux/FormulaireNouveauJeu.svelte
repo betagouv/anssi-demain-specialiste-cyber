@@ -4,7 +4,10 @@
   import axios from 'axios';
   import type { Validateur } from '../validateur';
   import type { JeuEnEdition } from './jeu';
-  import { type ErreursValidationJeuEnEdition, ValidateurDeJeuEnEdition } from './ValidateurDeJeuEnEdition';
+  import {
+    type ErreursValidationJeuEnEdition,
+    ValidateurDeJeuEnEdition,
+  } from './ValidateurDeJeuEnEdition';
 
   interface Props {
     validateur: Validateur<JeuEnEdition>;
@@ -23,9 +26,14 @@
     nomEtablissement: undefined,
     sequence: undefined,
     classe: undefined,
-    discipline: undefined
+    discipline: undefined,
   });
 
+  const soumetsParClavier = (event: KeyboardEvent) => {
+    if (event.code === 'Enter' || event.code === 'Space') {
+      soumets(event);
+    }
+  };
   const soumets = async (event: Event) => {
     event.preventDefault();
 
@@ -34,7 +42,7 @@
       sequence,
       nomEtablissement,
       discipline,
-      classe
+      classe,
     };
     if (!validateur.estValide(jeu)) {
       erreurs = validateur.valide(jeu);
@@ -107,8 +115,12 @@
       <option value="arts-plastiques">Arts plastiques</option>
       <option value="education-musicale">Éducation musicale</option>
       <option value="histoire-des-arts">Histoire des arts</option>
-      <option value="education-physique-et-sportive">Éducation physique et sportive</option>
-      <option value="enseignement-moral-et-civique">Enseignement moral et civique</option>
+      <option value="education-physique-et-sportive"
+        >Éducation physique et sportive</option
+      >
+      <option value="enseignement-moral-et-civique"
+        >Enseignement moral et civique</option
+      >
       <option value="histoire-et-geographie">Histoire et géographie</option>
       <option value="sciences-et-technologie">Sciences et technologie</option>
       <option value="mathematiques">Mathématiques</option>
@@ -136,14 +148,25 @@
       <option value="terminale">Terminale</option>
       <option value="classe-prepa">Classe prépa</option>
       <option value="bts">BTS</option>
-      <option value="superieur-hors-bts-et-prep">Supérieur (hors BTS et Prepa)</option>
+      <option value="superieur-hors-bts-et-prep"
+        >Supérieur (hors BTS et Prepa)</option
+      >
     </select>
   </label>
   {#if erreurs.classe}
     <span class="erreur" role="alert">{erreurs.classe}</span>
   {/if}
 
-  <button type="submit" onclick={soumets}>Terminer</button>
+  <div class="actions">
+    <dsfr-button
+      label="Terminer"
+      kind="primary"
+      onclick={soumets}
+      role="button"
+      onkeydown={soumetsParClavier}
+      tabindex={0}
+    ></dsfr-button>
+  </div>
 </form>
 
 <style lang="scss">
@@ -161,6 +184,11 @@
         display: flex;
         flex-direction: column;
       }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
     }
 
     .erreur {
