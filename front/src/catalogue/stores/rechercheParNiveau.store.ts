@@ -9,6 +9,6 @@ export const rechercheParNiveau = {
   reinitialise: () => niveaux.set([]),
   ok: (ressourceCyber: RessourceCyber) =>
     ressourceCyber.niveaux.some(
-      (niveau) => !get(niveaux).length || get(niveaux).includes(niveau)
+      (niveau) => !get(niveaux).length || get(niveaux).includes(niveau),
     ),
 };

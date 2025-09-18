@@ -6,6 +6,7 @@
 <fieldset>
   <legend>Thématique</legend>
   <dsfr-select
+    id="thematiques"
     value={$rechercheParThematique}
     onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
     placeholder="Toutes les thématiques"
@@ -19,7 +20,12 @@
 </fieldset>
 
 <style lang="scss">
-  select {
-    width: 100%;
+  fieldset {
+    margin: 0;
+
+    legend {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
   }
 </style>

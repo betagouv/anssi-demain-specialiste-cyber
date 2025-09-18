@@ -6,17 +6,18 @@
   let { recherche = $bindable(), miseEnAvant = 'Rechercher' }: Props = $props();
 </script>
 
-<fieldset>
-  <dsfr-input
-    type="search"
-    placeholder={miseEnAvant}
-    value={recherche}
-    onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
-  ></dsfr-input>
-</fieldset>
+<dsfr-input
+  id="recherche"
+  class="recherche-textuelle"
+  type="search"
+  placeholder={miseEnAvant}
+  value={recherche}
+  onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
+></dsfr-input>
 
 <style lang="scss">
-  input {
+  .recherche-textuelle {
+    display: block;
     width: 100%;
   }
 </style>
