@@ -9,6 +9,7 @@ describe('Le validateur de jeu en édition', () => {
     nomEtablissement: "nom de l'établissement",
     discipline: 'Français',
     classe: 'terminale',
+    eleves: ['René', '   '],
   };
   const validateur = new ValidateurDeJeuEnEdition();
   describe("vérifie qu'un jeu'", () => {
@@ -48,6 +49,14 @@ describe('Le validateur de jeu en édition', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         classe: '   ',
+      });
+      expect(validation).toBeFalsy();
+    });
+
+    it("est invalide lorsqu'il n'y a aucun élève", () => {
+      const validation = validateur.estValide({
+        ...jeuValide,
+        eleves: [],
       });
       expect(validation).toBeFalsy();
     });
@@ -105,6 +114,16 @@ describe('Le validateur de jeu en édition', () => {
       });
       expect(erreurs).toEqual({
         classe: 'La classe est obligatoire',
+      });
+    });
+
+    it("'Au moins un élève est requis' lorsqu'il n'y a aucun élève", () => {
+      const erreurs = validateur.valide({
+        ...jeuValide,
+        eleves: ['   '],
+      });
+      expect(erreurs).toEqual({
+        eleves: 'Au moins un élève est requis',
       });
     });
   });

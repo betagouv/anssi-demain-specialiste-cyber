@@ -21,18 +21,19 @@ export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
       ),
       discipline: chaineNonVide('La discipline est obligatoire'),
       classe: chaineNonVide('La classe est obligatoire'),
+      eleves: z
+        .array(z.string())
+        .refine(
+          (prenoms) =>
+            !!prenoms?.length && prenoms.some((prenom) => !!prenom.trim()),
+          'Au moins un élève est requis',
+        ),
     });
   }
   valide(jeu: JeuEnEdition): ErreursValidationJeuEnEdition {
     try {
       this.schema.parse(jeu);
-      return {
-        nom: undefined,
-        nomEtablissement: undefined,
-        sequence: undefined,
-        discipline: undefined,
-        classe: undefined,
-      };
+      return {};
     } catch (e) {
       const zodError = e as z.ZodError;
       const extracteurErreurZod = (erreur: z.ZodError, nomDuChamp: string) => {
@@ -45,6 +46,7 @@ export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
         sequence: extracteurErreurZod(zodError, 'sequence'),
         discipline: extracteurErreurZod(zodError, 'discipline'),
         classe: extracteurErreurZod(zodError, 'classe'),
+        eleves: extracteurErreurZod(zodError, 'eleves'),
       };
     }
   }
