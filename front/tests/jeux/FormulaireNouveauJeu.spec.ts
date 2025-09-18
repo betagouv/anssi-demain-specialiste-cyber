@@ -1,9 +1,11 @@
-import { render } from '@testing-library/svelte/svelte5';
+import { render, waitFor } from '@testing-library/svelte/svelte5';
+
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { JeuEnEdition } from '../../src/jeux/jeu';
 import NouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
 import { Validateur } from '../../src/validateur';
+import { getByRoleDeep } from '../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
@@ -88,7 +90,8 @@ describe('Le formulaire de dépose de jeu', () => {
         getByRole('combobox', { name: 'Classe' }),
         'Seconde',
       );
-      await user.click(getByRole('button', { name: 'Terminer' }));
+
+      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
 
       expect(validateurEnSuccess.estValide).toHaveBeenCalledExactlyOnceWith({
         nom: 'TEST',
@@ -108,12 +111,15 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("n'envoie pas le formulaire si il y a un souci de validation", async () => {
-      const { getByRole, queryAllByRole } = render(NouveauJeu, {
+      const { queryAllByRole } = render(NouveauJeu, {
         ...proprietesParDefaut,
         validateur: { ...validateurEnSuccess, estValide: () => false },
       });
 
-      await user.click(getByRole('button', { name: 'Terminer' }));
+      await waitFor(() =>
+        expect(getByRoleDeep('button', { name: 'Terminer' })).toBeDefined(),
+      );
+      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(queryAllByRole('alert')).toHaveLength(0);
@@ -130,12 +136,14 @@ describe('Le formulaire de dépose de jeu', () => {
           classe: 'La classe est obligatoire',
         }),
       };
-      const { getByRole, getByText } = render(NouveauJeu, {
+      const { getByText } = render(NouveauJeu, {
         ...proprietesParDefaut,
         validateur: validateurEnErreur,
       });
-
-      await user.click(getByRole('button', { name: 'Terminer' }));
+      await waitFor(() =>
+        expect(getByRoleDeep('button', { name: 'Terminer' })).toBeDefined(),
+      );
+      await user.click(getByRoleDeep('button', { name: 'Terminer' }));
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(getByText('Le nom est obligatoire')).toBeVisible();
