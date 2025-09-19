@@ -34,6 +34,7 @@ export const ressourceJeux = ({
     sequence: z.enum(sequences, {
       error: 'La séquence est invalide',
     }),
+    eleves: z.array(chaineNonVide('Les prénoms fournis sont invalides')).nonempty('Au moins un élève est requis')
   });
 
   routeur.post(

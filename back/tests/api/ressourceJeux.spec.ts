@@ -37,6 +37,7 @@ describe('La ressource des jeux', () => {
     nomEtablissement: 'Lycée de la mer',
     discipline: 'mathematiques',
     classe: 'cp',
+    eleves: ['Gontran']
   };
 
   beforeEach(() => {
@@ -250,6 +251,32 @@ describe('La ressource des jeux', () => {
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
+      });
+    });
+
+    describe('concernant la vérification de la liste des élèves', () => {
+      it('vérifie qu‘au moins un élève est renseigné', async () => {
+        const reponse = await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          eleves: [],
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('Au moins un élève est requis');
+      });
+
+      it('vérifie que les prénoms fournis ne soient pas vides', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            eleves: ['Gontran', ''],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('Les prénoms fournis sont invalides');
       });
     });
   });
