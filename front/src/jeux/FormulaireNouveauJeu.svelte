@@ -57,164 +57,242 @@
   };
 </script>
 
-<form novalidate>
-  <label>
-    Nom du jeu
-    <input type="text" bind:value={nom} required />
-  </label>
-  {#if erreurs.nom}
-    <span class="erreur" role="alert">{erreurs.nom}</span>
-  {/if}
-
-  <label>
-    Nom de votre établissement
-    <input type="text" bind:value={nomEtablissement} required />
-  </label>
-  {#if erreurs.nomEtablissement}
-    <span class="erreur" role="alert">{erreurs.nomEtablissement}</span>
-  {/if}
-
-  <div class="sequence">
-    <p>Format de la séquence CyberEnJeux</p>
-    <div class="boutons">
-      <label>
-        <input
-          type="radio"
-          name="sequence"
-          value="heure"
-          required
-          bind:group={sequence}
-        />
-        Heure de cours
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="sequence"
-          value="demi-journee"
-          bind:group={sequence}
-        />
-        Demi-journee
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="sequence"
-          value="journee"
-          bind:group={sequence}
-        />
-        Journée
-      </label>
-    </div>
-    {#if erreurs.sequence}
-      <span class="erreur" role="alert">{erreurs.sequence}</span>
-    {/if}
-  </div>
-
-  <label>
-    Discipline
-    <select placeholder="Sélectionner une option" bind:value={discipline}>
-      <option value="francais">Français</option>
-      <option value="langues-vivantes">Langues vivantes</option>
-      <option value="arts-plastiques">Arts plastiques</option>
-      <option value="education-musicale">Éducation musicale</option>
-      <option value="histoire-des-arts">Histoire des arts</option>
-      <option value="education-physique-et-sportive"
-        >Éducation physique et sportive
-      </option>
-      <option value="enseignement-moral-et-civique"
-        >Enseignement moral et civique
-      </option>
-      <option value="histoire-et-geographie">Histoire et géographie</option>
-      <option value="sciences-et-technologie">Sciences et technologie</option>
-      <option value="mathematiques">Mathématiques</option>
-    </select>
-  </label>
-  {#if erreurs.discipline}
-    <span class="erreur" role="alert">{erreurs.discipline}</span>
-  {/if}
-
-  <label>
-    Classe
-    <select placeholder="Sélectionner une option" bind:value={classe}>
-      <option value="maternelle">Maternelle</option>
-      <option value="cp">CP</option>
-      <option value="ce1">CE1</option>
-      <option value="ce2">CE2</option>
-      <option value="cm1">CM1</option>
-      <option value="cm2">CM2</option>
-      <option value="6e">6e</option>
-      <option value="5e">5e</option>
-      <option value="4e">4e</option>
-      <option value="3e">3e</option>
-      <option value="seconde">Seconde</option>
-      <option value="premiere">Première</option>
-      <option value="terminale">Terminale</option>
-      <option value="classe-prepa">Classe prépa</option>
-      <option value="bts">BTS</option>
-      <option value="superieur-hors-bts-et-prep"
-        >Supérieur (hors BTS et Prepa)
-      </option>
-    </select>
-  </label>
-  {#if erreurs.classe}
-    <span class="erreur" role="alert">{erreurs.classe}</span>
-  {/if}
-
-  <div class="eleves">
-    <h5>Elèves participants</h5>
-    {#if erreurs.eleves}
-      <span class="erreur" role="alert">{erreurs.eleves}</span>
-    {/if}
-    {#each eleves as eleve, index}
+<dsfr-container>
+  <div class="formulaire-jeu">
+    <hr />
+    <p class="mention">
+      Sauf mention contraire, les informations demandées sont obligatoires.
+    </p>
+    <form novalidate>
       <dsfr-input
-        label="Prénom"
-        id="prenom-{index}"
-        value={eleve}
-        onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
-      ></dsfr-input>
-    {/each}
-    <dsfr-button
-      label="Ajouter un élève"
-      kind="secondary"
-      use:clic={ajouteEleve}
-    ></dsfr-button>
-  </div>
+        errorMessage={erreurs.nom}
+        id="nomDuJeu"
+        label="Nom du jeu"
+        onvaluechanged={(e: CustomEvent) => (nom = e.detail)}
+        status={erreurs.nom ? 'error' : 'default'}
+        value={nom}
+      >
+      </dsfr-input>
 
-  <div class="actions">
-    <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
-    ></dsfr-button>
+      <dsfr-input
+        errorMessage={erreurs.nomEtablissement}
+        id="nomEtablissement"
+        label="Nom de votre établissement"
+        onvaluechanged={(e: CustomEvent) => (nomEtablissement = e.detail)}
+        status={erreurs.nomEtablissement ? 'error' : 'default'}
+        value={nomEtablissement}
+      >
+      </dsfr-input>
+
+      <div class="sequence">
+        <p>Format de la séquence CyberEnJeux</p>
+        <div class="boutons">
+          <label>
+            <input
+              type="radio"
+              name="sequence"
+              value="heure"
+              required
+              bind:group={sequence}
+            />
+            Heure de cours
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="sequence"
+              value="demi-journee"
+              bind:group={sequence}
+            />
+            Demi-journee
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="sequence"
+              value="journee"
+              bind:group={sequence}
+            />
+            Journée
+          </label>
+        </div>
+        {#if erreurs.sequence}
+          <span class="erreur" role="alert">{erreurs.sequence}</span>
+        {/if}
+      </div>
+
+      <fieldset class="eleves">
+        <legend>Elèves participants</legend>
+
+        {#if erreurs.eleves}
+          <span class="erreur" role="alert">{erreurs.eleves}</span>
+        {/if}
+        <div class="prenoms">
+          {#each eleves as eleve, index}
+            <dsfr-input
+              label="Prénom"
+              id="prenom-{index}"
+              value={eleve}
+              onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
+            ></dsfr-input>
+          {/each}
+        </div>
+        <dsfr-button
+          label="Ajouter un élève"
+          kind="secondary"
+          use:clic={ajouteEleve}
+        ></dsfr-button>
+      </fieldset>
+
+      <dsfr-select
+        errorMessage={erreurs.discipline}
+        id="discipline"
+        label="Discipline"
+        value={discipline}
+        onvaluechanged={(e: CustomEvent) => (discipline = e.detail)}
+        options={[
+          { value: 'francais', label: 'Français' },
+          { value: 'langues-vivantes', label: 'Langues vivantes' },
+          { value: 'arts-plastiques', label: 'Arts plastiques' },
+          { value: 'education-musicale', label: 'Éducation musicale' },
+          { value: 'histoire-des-arts', label: 'Histoire des arts' },
+          {
+            value: 'education-physique-et-sportive',
+            label: 'Éducation physique et sportive',
+          },
+          {
+            value: 'enseignement-moral-et-civique',
+            label: 'Enseignement moral et civique',
+          },
+          { value: 'histoire-et-geographie', label: 'Histoire et géographie' },
+          {
+            value: 'sciences-et-technologie',
+            label: 'Sciences et technologie',
+          },
+          { value: 'mathematiques', label: 'Mathématiques' },
+        ]}
+        placeholder="Sélectionner une option"
+        placeholderDisabled={true}
+        status={erreurs.discipline ? 'error' : 'default'}
+      >
+      </dsfr-select>
+
+      <dsfr-select
+        errorMessage={erreurs.classe}
+        id="classe"
+        label="Classe"
+        value={classe}
+        onvaluechanged={(e: CustomEvent) => (classe = e.detail)}
+        options={[
+          { value: 'maternelle', label: 'Maternelle' },
+          { value: 'cp', label: 'CP' },
+          { value: 'ce1', label: 'CE1' },
+          { value: 'ce2', label: 'CE2' },
+          { value: 'cm1', label: 'CM1' },
+          { value: 'cm2', label: 'CM2' },
+          { value: '6e', label: '6e' },
+          { value: '5e', label: '5e' },
+          { value: '4e', label: '4e' },
+          { value: '3e', label: '3e' },
+          { value: 'seconde', label: 'Seconde' },
+          { value: 'premiere', label: 'Première' },
+          { value: 'terminale', label: 'Terminale' },
+          { value: 'classe-prepa', label: 'Classe prépa' },
+          { value: 'bts', label: 'BTS' },
+          {
+            value: 'superieur-hors-bts-et-prep',
+            label: 'Supérieur (hors BTS et Prepa)',
+          },
+        ]}
+        placeholder="Sélectionner une option"
+        placeholderDisabled={true}
+        status={erreurs.classe ? 'error' : 'default'}
+      >
+      </dsfr-select>
+
+      <div class="actions">
+        <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+        ></dsfr-button>
+      </div>
+    </form>
   </div>
-</form>
+</dsfr-container>
 
 <style lang="scss">
-  form {
+  @use '../points-de-rupture' as *;
+  .formulaire-jeu {
+    max-width: 792px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    max-width: 792px;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    padding: 56px 16px;
+    gap: 10px;
 
-    .sequence {
+    hr {
+      align-self: stretch;
+      height: 1px;
+      border: 0;
+      background-color: #dddddd;
+      margin: 2rem 0;
+    }
+
+    .mention {
+      margin: 0;
+      align-self: flex-start;
+      color: #666;
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+    }
+    form {
       display: flex;
       flex-direction: column;
-
-      .boutons {
+      align-self: stretch;
+      .sequence {
         display: flex;
         flex-direction: column;
+
+        .boutons {
+          display: flex;
+          flex-direction: column;
+        }
       }
-    }
 
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-    }
+      .eleves {
+        legend {
+          color: #161616;
+          font-weight: 700;
+          line-height: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .prenoms {
+          display: grid;
+          gap: 1rem;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
 
-    .erreur {
-      color: red;
-    }
+        @include a-partir-de(sm) {
+          .prenoms {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      }
 
-    input:user-invalid {
-      border: 2px solid red;
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .erreur {
+        color: red;
+      }
+
+      input:user-invalid {
+        border: 2px solid red;
+      }
     }
   }
 </style>

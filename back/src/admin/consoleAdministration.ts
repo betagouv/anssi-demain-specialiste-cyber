@@ -1,8 +1,10 @@
-/* eslint-disable no-console */
 import Knex from 'knex';
 import config from '../../knexfile';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { AdaptateurHachage, fabriqueAdaptateurHachage, } from '../infra/adaptateurHachage';
+import {
+  AdaptateurHachage,
+  fabriqueAdaptateurHachage,
+} from '../infra/adaptateurHachage';
 
 export class ConsoleAdministration {
   private readonly adaptateurHachage: AdaptateurHachage;
@@ -32,5 +34,4 @@ export class ConsoleAdministration {
       await Promise.all(maj);
     });
   }
-
 }

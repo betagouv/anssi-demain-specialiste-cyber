@@ -1,14 +1,15 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { type JeuEnEdition } from '../../src/jeux/jeu';
 import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
+import { type JeuEnEdition } from '../../src/jeux/jeu';
 import { type Validateur } from '../../src/validateur';
 import {
   findAllByRoleDeep,
   findByRoleDeep,
   getAllByRoleDeep,
   getByRoleDeep,
+  getByTextDeep,
 } from '../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
@@ -33,11 +34,24 @@ describe('Le formulaire de dépose de jeu', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
-  describe('propose', () => {
-    it('de saisir le nom du jeu', () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+  describe('indique', () => {
+    it('que tous les champs sont obligatoire sauf mention contraire', async () => {
+      const { getByText } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(getByRole('textbox', { name: 'Nom du jeu' })).toBeVisible();
+      expect(
+        getByText(
+          'Sauf mention contraire, les informations demandées sont obligatoires.',
+        ),
+      ).toBeVisible();
+    });
+  });
+  describe('propose', () => {
+    it('de saisir le nom du jeu', async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
+
+      await waitFor(() =>
+        expect(getByRoleDeep('textbox', { name: 'Nom du jeu' })).toBeVisible(),
+      );
     });
 
     it('de selectionner une séquence', () => {
@@ -52,24 +66,30 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(getByRole('radio', { name: 'Journée' })).toBeVisible();
     });
 
-    it("de saisir un nom d'établissement", () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+    it("de saisir un nom d'établissement", async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(
-        getByRole('textbox', { name: 'Nom de votre établissement' }),
-      ).toBeVisible();
+      await waitFor(() =>
+        expect(
+          getByRoleDeep('textbox', { name: 'Nom de votre établissement' }),
+        ).toBeVisible(),
+      );
     });
 
     it('de selectionner une discipline', async () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(getByRole('combobox', { name: 'Discipline' })).toBeVisible();
+      await waitFor(() =>
+        expect(getByRoleDeep('combobox', { name: 'Discipline' })).toBeVisible(),
+      );
     });
 
     it('de selectionner une classe', async () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(getByRole('combobox', { name: 'Classe' })).toBeVisible();
+      await waitFor(() =>
+        expect(getByRoleDeep('combobox', { name: 'Classe' })).toBeVisible(),
+      );
     });
 
     it('de saisir 4 prénoms', async () => {
@@ -111,13 +131,17 @@ describe('Le formulaire de dépose de jeu', () => {
         FormulaireNouveauJeu,
         proprietesParDefaut,
       );
-      const champClasse = getByRole('combobox', { name: 'Classe' });
-      const champNomDuJeu = getByRole('textbox', { name: 'Nom du jeu' });
-      const champNomEtablissement = getByRole('textbox', {
+      const champNomDuJeu = await findByRoleDeep('textbox', {
+        name: 'Nom du jeu',
+      });
+      const champNomEtablissement = await findByRoleDeep('textbox', {
         name: 'Nom de votre établissement',
       });
       const champSequence = getByRole('radio', { name: 'Heure de cours' });
-      const champDiscipline = getByRole('combobox', { name: 'Discipline' });
+      const champDiscipline = await findByRoleDeep('combobox', {
+        name: 'Discipline',
+      });
+      const champClasse = await findByRoleDeep('combobox', { name: 'Classe' });
       const champsPrenom = await findAllByRoleDeep('textbox', {
         name: 'Prénom',
       });
@@ -173,8 +197,8 @@ describe('Le formulaire de dépose de jeu', () => {
         estValide: () => false,
         valide: () => ({
           nom: 'Le nom est obligatoire',
-          sequence: "Le nom de l'établissement est obligatoire",
-          nomEtablissement: 'La séquence est obligatoire',
+          nomEtablissement: "Le nom de l'établissement est obligatoire",
+          sequence: 'La séquence est obligatoire',
           discipline: 'La discipline est obligatoire',
           classe: 'La classe est obligatoire',
           eleves: 'Au moins un élève est requis',
@@ -191,13 +215,15 @@ describe('Le formulaire de dépose de jeu', () => {
       await user.click(boutonTerminer);
 
       expect(axiosMock.post).not.toHaveBeenCalled();
-      expect(getByText('Le nom est obligatoire')).toBeVisible();
+      await waitFor(() =>
+        expect(getByTextDeep('Le nom est obligatoire')).toBeVisible(),
+      );
       expect(
-        getByText("Le nom de l'établissement est obligatoire"),
+        getByTextDeep("Le nom de l'établissement est obligatoire"),
       ).toBeVisible();
       expect(getByText('La séquence est obligatoire')).toBeVisible();
-      expect(getByText('La discipline est obligatoire')).toBeVisible();
-      expect(getByText('La classe est obligatoire')).toBeVisible();
+      expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
+      expect(getByTextDeep('La classe est obligatoire')).toBeVisible();
       expect(getByText('Au moins un élève est requis')).toBeVisible();
     });
   });
