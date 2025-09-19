@@ -145,32 +145,38 @@
   >
   </dsfr-select>
 
-  <label>
-    Classe
-    <select placeholder="Sélectionner une option" bind:value={classe}>
-      <option value="maternelle">Maternelle</option>
-      <option value="cp">CP</option>
-      <option value="ce1">CE1</option>
-      <option value="ce2">CE2</option>
-      <option value="cm1">CM1</option>
-      <option value="cm2">CM2</option>
-      <option value="6e">6e</option>
-      <option value="5e">5e</option>
-      <option value="4e">4e</option>
-      <option value="3e">3e</option>
-      <option value="seconde">Seconde</option>
-      <option value="premiere">Première</option>
-      <option value="terminale">Terminale</option>
-      <option value="classe-prepa">Classe prépa</option>
-      <option value="bts">BTS</option>
-      <option value="superieur-hors-bts-et-prep"
-        >Supérieur (hors BTS et Prepa)
-      </option>
-    </select>
-  </label>
-  {#if erreurs.classe}
-    <span class="erreur" role="alert">{erreurs.classe}</span>
-  {/if}
+  <dsfr-select
+    errorMessage={erreurs.classe}
+    id="classe"
+    label="Classe"
+    value={classe}
+    onvaluechanged={(e: CustomEvent) => (classe = e.detail)}
+    options={[
+      { value: 'maternelle', label: 'Maternelle' },
+      { value: 'cp', label: 'CP' },
+      { value: 'ce1', label: 'CE1' },
+      { value: 'ce2', label: 'CE2' },
+      { value: 'cm1', label: 'CM1' },
+      { value: 'cm2', label: 'CM2' },
+      { value: '6e', label: '6e' },
+      { value: '5e', label: '5e' },
+      { value: '4e', label: '4e' },
+      { value: '3e', label: '3e' },
+      { value: 'seconde', label: 'Seconde' },
+      { value: 'premiere', label: 'Première' },
+      { value: 'terminale', label: 'Terminale' },
+      { value: 'classe-prepa', label: 'Classe prépa' },
+      { value: 'bts', label: 'BTS' },
+      {
+        value: 'superieur-hors-bts-et-prep',
+        label: 'Supérieur (hors BTS et Prepa)',
+      },
+    ]}
+    placeholder="Sélectionner une option"
+    placeholderDisabled={true}
+    status={erreurs.classe ? 'error' : 'default'}
+  >
+  </dsfr-select>
 
   <div class="eleves">
     <h5>Elèves participants</h5>
