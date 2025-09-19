@@ -66,9 +66,11 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it('de selectionner une discipline', async () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(getByRole('combobox', { name: 'Discipline' })).toBeVisible();
+      await waitFor(() =>
+        expect(getByRoleDeep('combobox', { name: 'Discipline' })).toBeVisible(),
+      );
     });
 
     it('de selectionner une classe', async () => {
@@ -124,7 +126,9 @@ describe('Le formulaire de dépose de jeu', () => {
         name: 'Nom de votre établissement',
       });
       const champSequence = getByRole('radio', { name: 'Heure de cours' });
-      const champDiscipline = getByRole('combobox', { name: 'Discipline' });
+      const champDiscipline = await findByRoleDeep('combobox', {
+        name: 'Discipline',
+      });
       const champsPrenom = await findAllByRoleDeep('textbox', {
         name: 'Prénom',
       });
@@ -205,7 +209,7 @@ describe('Le formulaire de dépose de jeu', () => {
         getByTextDeep("Le nom de l'établissement est obligatoire"),
       ).toBeVisible();
       expect(getByText('La séquence est obligatoire')).toBeVisible();
-      expect(getByText('La discipline est obligatoire')).toBeVisible();
+      expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
       expect(getByText('La classe est obligatoire')).toBeVisible();
       expect(getByText('Au moins un élève est requis')).toBeVisible();
     });
