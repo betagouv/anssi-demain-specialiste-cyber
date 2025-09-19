@@ -4,6 +4,9 @@ Site web « DemainSpécialisteCyber »
 
 ## Développement
 
+- **Node :** Une version récente (>= 18) de [Node.js](https://nodejs.org/en/) :\
+  Nous vous conseillons d'utiliser [`nvm use`](https://github.com/nvm-sh/nvm), pour utiliser la même version que dans les environnements d'intégration continue et de production, car nous spécifions la version de Node.js à utiliser dans le fichier `.nvmrc`.
+
 ### Ajouter pre commit
 
 Afin de s’assurer que chaque commit respecte les règles d’usage de l’équipe, on peut ajouter `pre-commit` qui s’assurera que les fichiers ajoutés / modifiés respectent nos usages.
