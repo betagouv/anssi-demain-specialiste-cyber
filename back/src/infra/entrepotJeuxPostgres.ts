@@ -34,6 +34,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       nom_etablissement: jeu.nomEtablissement,
       classe: jeu.classe,
       discipline: jeu.discipline,
+      eleves: JSON.stringify(jeu.eleves), // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
     });
   }
 
@@ -51,6 +52,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
           nomEtablissement: jeuEnDB.nomEtablissement,
           classe: jeuEnDB.classe,
           discipline: jeuEnDB.discipline,
+          eleves: jeuEnDB.eleves ?? [],
         });
       }),
     );
@@ -74,6 +76,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
           nomEtablissement: jeuEnDB.nomEtablissement,
           classe: jeuEnDB.classe,
           discipline: jeuEnDB.discipline,
+          eleves: jeuEnDB.eleves ?? [],
         });
       }),
     );

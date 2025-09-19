@@ -12,6 +12,7 @@ export class Jeu {
   nomEtablissement: string;
   classe: Classe;
   discipline: Discipline;
+  eleves: string[];
 
   constructor({
     id,
@@ -21,6 +22,7 @@ export class Jeu {
     nomEtablissement,
     classe,
     discipline,
+    eleves,
   }: {
     id?: string;
     nom: string;
@@ -29,6 +31,7 @@ export class Jeu {
     nomEtablissement: string;
     classe: Classe;
     discipline: Discipline;
+    eleves: string[];
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -37,5 +40,6 @@ export class Jeu {
     this.nomEtablissement = nomEtablissement;
     this.classe = classe;
     this.discipline = discipline;
+    this.eleves = eleves;
   }
 }

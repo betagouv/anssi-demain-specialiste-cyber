@@ -37,7 +37,7 @@ describe('La ressource des jeux', () => {
     nomEtablissement: 'Lycée de la mer',
     discipline: 'mathematiques',
     classe: 'cp',
-    eleves: ['Gontran']
+    eleves: ['Gontran'],
   };
 
   beforeEach(() => {
@@ -92,6 +92,7 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].nomEtablissement).toEqual('Lycée de la mer');
       expect(mesJeux[0].classe).toEqual('cp');
       expect(mesJeux[0].discipline).toEqual('mathematiques');
+      expect(mesJeux[0].eleves).toStrictEqual(['Gontran']);
     });
 
     it('publie un événement de création de jeu', async () => {
@@ -257,11 +258,11 @@ describe('La ressource des jeux', () => {
     describe('concernant la vérification de la liste des élèves', () => {
       it('vérifie qu‘au moins un élève est renseigné', async () => {
         const reponse = await request(serveur)
-        .post('/api/jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          eleves: [],
-        });
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            eleves: [],
+          });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Au moins un élève est requis');
@@ -276,7 +277,9 @@ describe('La ressource des jeux', () => {
           });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual('Les prénoms fournis sont invalides');
+        expect(reponse.body.erreur).toEqual(
+          'Les prénoms fournis sont invalides',
+        );
       });
     });
   });
@@ -309,6 +312,7 @@ describe('La ressource des jeux', () => {
           classe: 'cp',
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
+          eleves: [],
         }),
       );
 
@@ -335,6 +339,7 @@ describe('La ressource des jeux', () => {
           classe: 'cp',
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
+          eleves: [],
         }),
       );
       await entrepotJeux.ajoute(
@@ -346,6 +351,7 @@ describe('La ressource des jeux', () => {
           classe: 'cp',
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
+          eleves: [],
         }),
       );
 
