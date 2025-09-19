@@ -11,6 +11,7 @@
 
 <script lang="ts">
   import axios from 'axios';
+  import { clic } from './actions.svelte';
 
   const { informationsProfessionnelles, token } = $props();
 
@@ -90,11 +91,8 @@
       variante="primaire"
       taille="lg"
       largeurMaximale
-      onclick={valide}
-      onkeypress={valide}
+      use:clic={valide}
       disabled={!enCoursEnvoi}
-      role="button"
-      tabindex="0"
     ></lab-anssi-bouton>
   </form>
 </section>

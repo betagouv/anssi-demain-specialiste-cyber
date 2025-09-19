@@ -4,6 +4,7 @@
   import type { Jeu } from './jeu';
   import { onMount } from 'svelte';
   import axios from 'axios';
+  import { clic } from '../actions.svelte';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -29,10 +30,7 @@
       <dsfr-button
         label="Déposer un jeu"
         kind="secondary"
-        onclick={deposeUnJeu}
-        role="button"
-        onkeydown={deposeUnJeu}
-        tabindex={0}
+        use:clic={deposeUnJeu}
       ></dsfr-button>
     </div>
     <div class="jeux">
@@ -58,13 +56,7 @@
       <p>
         Partagez les jeux élaborés par vos élèves lors de séquence CyberEnJeux.
       </p>
-      <dsfr-button
-        label="Déposer un jeu"
-        onclick={deposeUnJeu}
-        role="button"
-        onkeydown={deposeUnJeu}
-        tabindex={0}
-      ></dsfr-button>
+      <dsfr-button label="Déposer un jeu" use:clic={deposeUnJeu}></dsfr-button>
     </div>
     <div>
       <span>

@@ -1,4 +1,6 @@
-<svelte:options customElement={{ tag: 'dsc-formulaire-nouveau-jeu', shadow: 'none' }} />
+<svelte:options
+  customElement={{ tag: 'dsc-formulaire-nouveau-jeu', shadow: 'none' }}
+/>
 
 <script lang="ts">
   import axios from 'axios';
@@ -8,6 +10,7 @@
     type ErreursValidationJeuEnEdition,
     ValidateurDeJeuEnEdition,
   } from './ValidateurDeJeuEnEdition';
+  import { clic } from '../actions.svelte';
 
   interface Props {
     validateur: Validateur<JeuEnEdition>;
@@ -29,11 +32,6 @@
     discipline: undefined,
   });
 
-  const soumetsParClavier = (event: KeyboardEvent) => {
-    if (event.code === 'Enter' || event.code === 'Space') {
-      soumets(event);
-    }
-  };
   const soumets = async (event: Event) => {
     event.preventDefault();
 
@@ -158,13 +156,7 @@
   {/if}
 
   <div class="actions">
-    <dsfr-button
-      label="Terminer"
-      kind="primary"
-      onclick={soumets}
-      role="button"
-      onkeydown={soumetsParClavier}
-      tabindex={0}
+    <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
     ></dsfr-button>
   </div>
 </form>
