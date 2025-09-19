@@ -11,6 +11,7 @@
   import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { rechercheParType } from './stores/rechercheParType.store';
+  import { clic } from '../actions.svelte';
 
   let menuContextuelEstOuvert = $state(false);
 
@@ -33,20 +34,8 @@
     rechercheParType.reinitialise();
   };
 
-  const reinitialiseLesFiltresAuClavier = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      reinitialiseLesFiltres();
-    }
-  };
-
   const ferme = () => {
     menuContextuelEstOuvert = false;
-  };
-
-  const fermeAuClavier = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      ferme();
-    }
   };
 </script>
 
@@ -59,10 +48,7 @@
     class="affiche-filtres"
     label="Voir les filtres"
     kind="secondary"
-    onclick={afficheLesFiltres}
-    onkeydown={afficheLesFiltresAuClavier}
-    role="button"
-    tabindex={0}
+    use:clic={afficheLesFiltres}
   >
   </dsfr-button>
 
@@ -74,19 +60,13 @@
         label="Fermer"
         size="sm"
         kind="tertiary-no-outline"
-        onclick={ferme}
-        onkeydown={fermeAuClavier}
-        role="button"
-        tabindex={0}
+        use:clic={ferme}
       ></dsfr-button>
       <dsfr-button
         class="reinitialise-filtres"
         label="Réinitialiser les filtres"
         kind="tertiary"
-        onclick={reinitialiseLesFiltres}
-        onkeydown={reinitialiseLesFiltresAuClavier}
-        role="button"
-        tabindex={0}
+        use:clic={reinitialiseLesFiltres}
       ></dsfr-button>
     </div>
     <div class="filtres-besoins" class:ouvert={menuContextuelEstOuvert}>
@@ -102,10 +82,7 @@
       <dsfr-button
         label="Afficher les ressources"
         kind="primary"
-        onclick={ferme}
-        onkeydown={fermeAuClavier}
-        role="button"
-        tabindex={0}
+        use:clic={ferme}
       ></dsfr-button>
     </div>
   </div>
