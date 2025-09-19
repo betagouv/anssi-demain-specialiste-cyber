@@ -59,6 +59,7 @@
 
 <dsfr-container>
   <div class="formulaire-jeu">
+    <hr />
     <p class="mention">
       Sauf mention contraire, les informations demandées sont obligatoires.
     </p>
@@ -229,7 +230,17 @@
     align-items: center;
     padding: 56px 16px;
     gap: 10px;
+
+    hr {
+      align-self: stretch;
+      height: 1px;
+      border: 0;
+      background-color: #dddddd;
+      margin: 2rem 0;
+    }
+
     .mention {
+      margin: 0;
       align-self: flex-start;
       color: #666;
       font-size: 0.75rem;
