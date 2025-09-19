@@ -1,14 +1,15 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { type JeuEnEdition } from '../../src/jeux/jeu';
 import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
+import { type JeuEnEdition } from '../../src/jeux/jeu';
 import { type Validateur } from '../../src/validateur';
 import {
   findAllByRoleDeep,
   findByRoleDeep,
   getAllByRoleDeep,
   getByRoleDeep,
+  getByTextDeep,
 } from '../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
@@ -52,12 +53,14 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(getByRole('radio', { name: 'Journée' })).toBeVisible();
     });
 
-    it("de saisir un nom d'établissement", () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+    it("de saisir un nom d'établissement", async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(
-        getByRole('textbox', { name: 'Nom de votre établissement' }),
-      ).toBeVisible();
+      await waitFor(() =>
+        expect(
+          getByRoleDeep('textbox', { name: 'Nom de votre établissement' }),
+        ).toBeVisible(),
+      );
     });
 
     it('de selectionner une discipline', async () => {
@@ -113,7 +116,7 @@ describe('Le formulaire de dépose de jeu', () => {
       );
       const champClasse = getByRole('combobox', { name: 'Classe' });
       const champNomDuJeu = getByRole('textbox', { name: 'Nom du jeu' });
-      const champNomEtablissement = getByRole('textbox', {
+      const champNomEtablissement = await findByRoleDeep('textbox', {
         name: 'Nom de votre établissement',
       });
       const champSequence = getByRole('radio', { name: 'Heure de cours' });
@@ -173,8 +176,8 @@ describe('Le formulaire de dépose de jeu', () => {
         estValide: () => false,
         valide: () => ({
           nom: 'Le nom est obligatoire',
-          sequence: "Le nom de l'établissement est obligatoire",
-          nomEtablissement: 'La séquence est obligatoire',
+          nomEtablissement: "Le nom de l'établissement est obligatoire",
+          sequence: 'La séquence est obligatoire',
           discipline: 'La discipline est obligatoire',
           classe: 'La classe est obligatoire',
           eleves: 'Au moins un élève est requis',
@@ -193,7 +196,7 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(axiosMock.post).not.toHaveBeenCalled();
       expect(getByText('Le nom est obligatoire')).toBeVisible();
       expect(
-        getByText("Le nom de l'établissement est obligatoire"),
+        getByTextDeep("Le nom de l'établissement est obligatoire"),
       ).toBeVisible();
       expect(getByText('La séquence est obligatoire')).toBeVisible();
       expect(getByText('La discipline est obligatoire')).toBeVisible();
