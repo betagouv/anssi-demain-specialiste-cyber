@@ -106,6 +106,7 @@ describe('La ressource des jeux', () => {
       expect(evenement.nomEtablissement).toBe('Lycée de la mer');
       expect(evenement.classe).toBe('cp');
       expect(evenement.discipline).toBe('mathematiques');
+      expect(evenement.nombreEleves).toBe(1);
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {

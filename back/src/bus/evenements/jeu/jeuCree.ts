@@ -6,5 +6,6 @@ export class JeuCree {
     public readonly nomEtablissement: string,
     public readonly classe: string,
     public readonly discipline: string,
+    public readonly nombreEleves: number,
   ) {}
 }
