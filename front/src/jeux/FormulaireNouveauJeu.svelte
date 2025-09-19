@@ -121,6 +121,29 @@
         {/if}
       </div>
 
+      <fieldset class="eleves">
+        <legend>Elèves participants</legend>
+
+        {#if erreurs.eleves}
+          <span class="erreur" role="alert">{erreurs.eleves}</span>
+        {/if}
+        <div class="prenoms">
+          {#each eleves as eleve, index}
+            <dsfr-input
+              label="Prénom"
+              id="prenom-{index}"
+              value={eleve}
+              onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
+            ></dsfr-input>
+          {/each}
+        </div>
+        <dsfr-button
+          label="Ajouter un élève"
+          kind="secondary"
+          use:clic={ajouteEleve}
+        ></dsfr-button>
+      </fieldset>
+
       <dsfr-select
         errorMessage={erreurs.discipline}
         id="discipline"
@@ -186,29 +209,6 @@
         status={erreurs.classe ? 'error' : 'default'}
       >
       </dsfr-select>
-
-      <fieldset class="eleves">
-        <legend>Elèves participants</legend>
-
-        {#if erreurs.eleves}
-          <span class="erreur" role="alert">{erreurs.eleves}</span>
-        {/if}
-        <div class="prenoms">
-          {#each eleves as eleve, index}
-            <dsfr-input
-              label="Prénom"
-              id="prenom-{index}"
-              value={eleve}
-              onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
-            ></dsfr-input>
-          {/each}
-        </div>
-        <dsfr-button
-          label="Ajouter un élève"
-          kind="secondary"
-          use:clic={ajouteEleve}
-        ></dsfr-button>
-      </fieldset>
 
       <div class="actions">
         <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
