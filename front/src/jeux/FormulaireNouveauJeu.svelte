@@ -66,13 +66,15 @@
     <span class="erreur" role="alert">{erreurs.nom}</span>
   {/if}
 
-  <label>
-    Nom de votre établissement
-    <input type="text" bind:value={nomEtablissement} required />
-  </label>
-  {#if erreurs.nomEtablissement}
-    <span class="erreur" role="alert">{erreurs.nomEtablissement}</span>
-  {/if}
+  <dsfr-input
+    errorMessage={erreurs.nomEtablissement}
+    id="nomEtablissement"
+    label="Nom de votre établissement"
+    onvaluechanged={(e: CustomEvent) => (nomEtablissement = e.detail)}
+    status={erreurs.nomEtablissement ? 'error' : 'default'}
+    value={nomEtablissement}
+  >
+  </dsfr-input>
 
   <div class="sequence">
     <p>Format de la séquence CyberEnJeux</p>
