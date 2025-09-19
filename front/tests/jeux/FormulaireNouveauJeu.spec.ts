@@ -35,10 +35,12 @@ describe('Le formulaire de dépose de jeu', () => {
     vi.clearAllMocks();
   });
   describe('propose', () => {
-    it('de saisir le nom du jeu', () => {
-      const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+    it('de saisir le nom du jeu', async () => {
+      render(FormulaireNouveauJeu, proprietesParDefaut);
 
-      expect(getByRole('textbox', { name: 'Nom du jeu' })).toBeVisible();
+      await waitFor(() =>
+        expect(getByRoleDeep('textbox', { name: 'Nom du jeu' })).toBeVisible(),
+      );
     });
 
     it('de selectionner une séquence', () => {
@@ -115,7 +117,9 @@ describe('Le formulaire de dépose de jeu', () => {
         proprietesParDefaut,
       );
       const champClasse = getByRole('combobox', { name: 'Classe' });
-      const champNomDuJeu = getByRole('textbox', { name: 'Nom du jeu' });
+      const champNomDuJeu = await findByRoleDeep('textbox', {
+        name: 'Nom du jeu',
+      });
       const champNomEtablissement = await findByRoleDeep('textbox', {
         name: 'Nom de votre établissement',
       });
@@ -194,7 +198,9 @@ describe('Le formulaire de dépose de jeu', () => {
       await user.click(boutonTerminer);
 
       expect(axiosMock.post).not.toHaveBeenCalled();
-      expect(getByText('Le nom est obligatoire')).toBeVisible();
+      await waitFor(() =>
+        expect(getByTextDeep('Le nom est obligatoire')).toBeVisible(),
+      );
       expect(
         getByTextDeep("Le nom de l'établissement est obligatoire"),
       ).toBeVisible();

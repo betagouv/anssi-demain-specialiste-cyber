@@ -58,13 +58,15 @@
 </script>
 
 <form novalidate>
-  <label>
-    Nom du jeu
-    <input type="text" bind:value={nom} required />
-  </label>
-  {#if erreurs.nom}
-    <span class="erreur" role="alert">{erreurs.nom}</span>
-  {/if}
+  <dsfr-input
+    errorMessage={erreurs.nom}
+    id="nomDuJeu"
+    label="Nom du jeu"
+    onvaluechanged={(e: CustomEvent) => (nom = e.detail)}
+    status={erreurs.nom ? 'error' : 'default'}
+    value={nom}
+  >
+  </dsfr-input>
 
   <dsfr-input
     errorMessage={erreurs.nomEtablissement}
