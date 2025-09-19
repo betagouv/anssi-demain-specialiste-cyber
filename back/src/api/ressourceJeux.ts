@@ -71,6 +71,7 @@ export const ressourceJeux = ({
             nomEtablissement,
             classe,
             discipline,
+            eleves.length,
           ),
         );
         reponse.sendStatus(201);
