@@ -220,6 +220,8 @@
 <style lang="scss">
   @use '../points-de-rupture' as *;
   .formulaire-jeu {
+    max-width: 792px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-self: stretch;
