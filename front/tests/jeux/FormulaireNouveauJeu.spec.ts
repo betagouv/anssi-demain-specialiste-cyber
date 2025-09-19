@@ -34,6 +34,17 @@ describe('Le formulaire de dépose de jeu', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+  describe('indique', () => {
+    it('que tous les champs sont obligatoire sauf mention contraire', async () => {
+      const { getByText } = render(FormulaireNouveauJeu, proprietesParDefaut);
+
+      expect(
+        getByText(
+          'Sauf mention contraire, les informations demandées sont obligatoires.',
+        ),
+      ).toBeVisible();
+    });
+  });
   describe('propose', () => {
     it('de saisir le nom du jeu', async () => {
       render(FormulaireNouveauJeu, proprietesParDefaut);
