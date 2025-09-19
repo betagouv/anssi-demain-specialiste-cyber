@@ -115,28 +115,35 @@
     {/if}
   </div>
 
-  <label>
-    Discipline
-    <select placeholder="Sélectionner une option" bind:value={discipline}>
-      <option value="francais">Français</option>
-      <option value="langues-vivantes">Langues vivantes</option>
-      <option value="arts-plastiques">Arts plastiques</option>
-      <option value="education-musicale">Éducation musicale</option>
-      <option value="histoire-des-arts">Histoire des arts</option>
-      <option value="education-physique-et-sportive"
-        >Éducation physique et sportive
-      </option>
-      <option value="enseignement-moral-et-civique"
-        >Enseignement moral et civique
-      </option>
-      <option value="histoire-et-geographie">Histoire et géographie</option>
-      <option value="sciences-et-technologie">Sciences et technologie</option>
-      <option value="mathematiques">Mathématiques</option>
-    </select>
-  </label>
-  {#if erreurs.discipline}
-    <span class="erreur" role="alert">{erreurs.discipline}</span>
-  {/if}
+  <dsfr-select
+    errorMessage={erreurs.discipline}
+    id="discipline"
+    label="Discipline"
+    value={discipline}
+    onvaluechanged={(e: CustomEvent) => (discipline = e.detail)}
+    options={[
+      { value: 'francais', label: 'Français' },
+      { value: 'langues-vivantes', label: 'Langues vivantes' },
+      { value: 'arts-plastiques', label: 'Arts plastiques' },
+      { value: 'education-musicale', label: 'Éducation musicale' },
+      { value: 'histoire-des-arts', label: 'Histoire des arts' },
+      {
+        value: 'education-physique-et-sportive',
+        label: 'Éducation physique et sportive',
+      },
+      {
+        value: 'enseignement-moral-et-civique',
+        label: 'Enseignement moral et civique',
+      },
+      { value: 'histoire-et-geographie', label: 'Histoire et géographie' },
+      { value: 'sciences-et-technologie', label: 'Sciences et technologie' },
+      { value: 'mathematiques', label: 'Mathématiques' },
+    ]}
+    placeholder="Sélectionner une option"
+    placeholderDisabled={true}
+    status={erreurs.discipline ? 'error' : 'default'}
+  >
+  </dsfr-select>
 
   <label>
     Classe
