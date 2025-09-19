@@ -1,10 +1,11 @@
+import { NextFunction, Response } from 'express';
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
   ConfigurationServeur,
   ConfigurationServeurSansMiddleware,
 } from '../../src/api/configurationServeur';
-import { fabriqueMiddleware } from '../../src/api/middleware';
+import { fabriqueMiddleware, RequeteNonTypee } from '../../src/api/middleware';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
@@ -81,7 +82,8 @@ export type ConfigurationServeurDeTest = ConfigurationServeur & {
 };
 
 const fauxMoteurDeRendu: MoteurDeRendu = {
-  rends: (reponse, _vue, _options) => reponse.sendStatus(reponse.statusCode || 200),
+  rends: (reponse, _vue, _options) =>
+    reponse.sendStatus(reponse.statusCode || 200),
 };
 
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
@@ -118,9 +120,21 @@ export const configurationServeurSansMiddleware =
     adaptateurJournal: adaptateurJournalMemoire,
   });
 
+const ajouteUnNonceNonAleatoireALaReponse = async (
+  _requete: RequeteNonTypee,
+  reponse: Response,
+  suite: NextFunction,
+) => {
+  reponse.locals.nonce = 'ceciEstUnNonceUtiliséLorsDesTests';
+  suite();
+};
+
 const middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
 
 export const configurationDeTestDuServeur = (): ConfigurationServeur => ({
   ...configurationServeurSansMiddleware(),
-  middleware,
+  middleware: {
+    ...middleware,
+    ajouteLeNonceALaReponse: ajouteUnNonceNonAleatoireALaReponse,
+  },
 });
