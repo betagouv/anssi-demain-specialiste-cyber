@@ -186,25 +186,28 @@
       >
       </dsfr-select>
 
-      <div class="eleves">
-        <h5>Elèves participants</h5>
+      <fieldset class="eleves">
+        <legend>Elèves participants</legend>
+
         {#if erreurs.eleves}
           <span class="erreur" role="alert">{erreurs.eleves}</span>
         {/if}
-        {#each eleves as eleve, index}
-          <dsfr-input
-            label="Prénom"
-            id="prenom-{index}"
-            value={eleve}
-            onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
-          ></dsfr-input>
-        {/each}
+        <div class="prenoms">
+          {#each eleves as eleve, index}
+            <dsfr-input
+              label="Prénom"
+              id="prenom-{index}"
+              value={eleve}
+              onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
+            ></dsfr-input>
+          {/each}
+        </div>
         <dsfr-button
           label="Ajouter un élève"
           kind="secondary"
           use:clic={ajouteEleve}
         ></dsfr-button>
-      </div>
+      </fieldset>
 
       <div class="actions">
         <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
@@ -241,6 +244,27 @@
         .boutons {
           display: flex;
           flex-direction: column;
+        }
+      }
+
+      .eleves {
+        legend {
+          color: #161616;
+          font-weight: 700;
+          line-height: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .prenoms {
+          display: grid;
+          gap: 1rem;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+
+        @include a-partir-de(sm) {
+          .prenoms {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
       }
 
