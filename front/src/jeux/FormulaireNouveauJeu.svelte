@@ -215,7 +215,8 @@
 </dsfr-container>
 
 <style lang="scss">
-  form {
+  @use '../points-de-rupture' as *;
+  .formulaire-jeu {
     display: flex;
     flex-direction: column;
     align-self: stretch;
@@ -232,24 +233,29 @@
     form {
       display: flex;
       flex-direction: column;
-
-      .boutons {
+      align-self: stretch;
+      .sequence {
         display: flex;
         flex-direction: column;
+
+        .boutons {
+          display: flex;
+          flex-direction: column;
+        }
       }
-    }
 
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-    }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
 
-    .erreur {
-      color: red;
-    }
+      .erreur {
+        color: red;
+      }
 
-    input:user-invalid {
-      border: 2px solid red;
+      input:user-invalid {
+        border: 2px solid red;
+      }
     }
   }
 </style>
