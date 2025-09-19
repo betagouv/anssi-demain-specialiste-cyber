@@ -24,6 +24,7 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     nomEtablissement: string;
     classe: string;
     discipline: string;
+    nombreEleves: number;
   };
   type: 'JEU_CREE';
 };

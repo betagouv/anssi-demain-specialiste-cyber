@@ -38,6 +38,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         'Lycée de la mer',
         'cp',
         'mathematiques',
+        3,
       ),
     );
 
@@ -50,6 +51,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         nomEtablissement: 'Lycée de la mer',
         classe: 'cp',
         discipline: 'mathematiques',
+        nombreEleves: 3,
       },
       date: new Date('2025-03-10'),
     });
