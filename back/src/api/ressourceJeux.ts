@@ -34,7 +34,9 @@ export const ressourceJeux = ({
     sequence: z.enum(sequences, {
       error: 'La séquence est invalide',
     }),
-    eleves: z.array(chaineNonVide('Les prénoms fournis sont invalides')).nonempty('Au moins un élève est requis')
+    eleves: z
+      .array(chaineNonVide('Les prénoms fournis sont invalides'))
+      .nonempty('Au moins un élève est requis'),
   });
 
   routeur.post(
@@ -48,7 +50,7 @@ export const ressourceJeux = ({
       try {
         const utilisateurConnecte = requete.utilisateur;
 
-        const { nom, sequence, nomEtablissement, classe, discipline } =
+        const { nom, sequence, nomEtablissement, classe, discipline, eleves } =
           requete.body;
         await entrepotJeux.ajoute(
           new Jeu({
@@ -58,6 +60,7 @@ export const ressourceJeux = ({
             nomEtablissement,
             classe,
             discipline,
+            eleves,
           }),
         );
         await busEvenements.publie(
