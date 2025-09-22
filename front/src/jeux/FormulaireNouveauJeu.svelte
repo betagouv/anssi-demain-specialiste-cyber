@@ -242,7 +242,7 @@
               label: 'Jeu de carte',
             },
             {
-              value: 'jeu-plateau',
+              value: 'jeu-plateau-role',
               label: 'Jeu de plateau, jeu de rôle',
             },
             {
