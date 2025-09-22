@@ -96,6 +96,9 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].classe).toEqual('cp');
       expect(mesJeux[0].discipline).toEqual('mathematiques');
       expect(mesJeux[0].eleves).toStrictEqual(['Gontran']);
+      expect(mesJeux[0].categorie).toEqual('simulation');
+      expect(mesJeux[0].thematiques).toEqual(['menace-cyber', 'orientation']);
+      expect(mesJeux[0].description).toEqual('Un texte descriptif du jeu');
     });
 
     it('publie un événement de création de jeu', async () => {
@@ -407,6 +410,9 @@ describe('La ressource des jeux', () => {
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
           eleves: [],
+          categorie: 'simulation',
+          thematiques: ['menace-cyber', 'orientation'],
+          description: 'Une description',
         }),
       );
 
@@ -434,6 +440,9 @@ describe('La ressource des jeux', () => {
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
           eleves: [],
+          categorie: 'simulation',
+          thematiques: ['menace-cyber', 'orientation'],
+          description: 'Une description',
         }),
       );
       await entrepotJeux.ajoute(
@@ -446,6 +455,9 @@ describe('La ressource des jeux', () => {
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
           eleves: [],
+          categorie: 'simulation',
+          thematiques: ['menace-cyber', 'orientation'],
+          description: 'Une description',
         }),
       );
 

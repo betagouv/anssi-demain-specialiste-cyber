@@ -3,6 +3,8 @@ import { Utilisateur } from './utilisateur';
 import { Sequence } from './referentiels/sequence';
 import { Classe } from './referentiels/classes';
 import { Discipline } from './referentiels/disciplines';
+import { CategorieDeJeux } from './referentiels/categorieDeJeux';
+import { ThematiqueDeJeux } from './referentiels/thematiqueDeJeux';
 
 export class Jeu {
   readonly id: string;
@@ -13,6 +15,9 @@ export class Jeu {
   classe: Classe;
   discipline: Discipline;
   eleves: string[];
+  categorie: CategorieDeJeux;
+  thematiques: ThematiqueDeJeux[];
+  description: string;
 
   constructor({
     id,
@@ -23,6 +28,9 @@ export class Jeu {
     classe,
     discipline,
     eleves,
+    categorie,
+    thematiques,
+    description,
   }: {
     id?: string;
     nom: string;
@@ -32,6 +40,9 @@ export class Jeu {
     classe: Classe;
     discipline: Discipline;
     eleves: string[];
+    categorie: CategorieDeJeux;
+    thematiques: ThematiqueDeJeux[];
+    description: string;
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -41,5 +52,8 @@ export class Jeu {
     this.classe = classe;
     this.discipline = discipline;
     this.eleves = eleves;
+    this.categorie = categorie;
+    this.thematiques = thematiques;
+    this.description = description;
   }
 }

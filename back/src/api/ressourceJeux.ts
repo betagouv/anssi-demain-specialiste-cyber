@@ -6,8 +6,8 @@ import { ConfigurationServeur } from './configurationServeur';
 import { sequences } from '../metier/referentiels/sequence';
 import { classes } from '../metier/referentiels/classes';
 import { disciplines } from '../metier/referentiels/disciplines';
-import { categoriesDeJeux } from '../metier/referentiels/categoriesDeJeux';
-import { thematiquesDeJeux } from '../metier/referentiels/thematiquesDeJeux';
+import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
+import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 
 function chaineNonVide(message: string) {
   return z.string(message).trim().min(1, message);
@@ -66,8 +66,17 @@ export const ressourceJeux = ({
       try {
         const utilisateurConnecte = requete.utilisateur;
 
-        const { nom, sequence, nomEtablissement, classe, discipline, eleves } =
-          requete.body;
+        const {
+          nom,
+          sequence,
+          nomEtablissement,
+          classe,
+          discipline,
+          eleves,
+          categorie,
+          thematiques,
+          description,
+        } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({
             nom,
@@ -77,6 +86,9 @@ export const ressourceJeux = ({
             classe,
             discipline,
             eleves,
+            categorie,
+            thematiques,
+            description,
           }),
         );
         await busEvenements.publie(
