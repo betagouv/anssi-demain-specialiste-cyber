@@ -45,6 +45,7 @@ jobs:
     name: Déploiement en PROD
     environment: PROD
     runs-on: ubuntu-latest
+    needs: [deploiement-demo]
     steps:
       - name: Cloner le dépôt Git
         uses: actions/checkout@v4
