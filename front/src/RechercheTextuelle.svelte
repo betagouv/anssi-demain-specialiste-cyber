@@ -14,10 +14,3 @@
   value={recherche}
   onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
 ></dsfr-input>
-
-<style lang="scss">
-  .recherche-textuelle {
-    display: block;
-    width: 100%;
-  }
-</style>
