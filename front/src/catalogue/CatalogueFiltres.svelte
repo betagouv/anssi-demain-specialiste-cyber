@@ -218,7 +218,7 @@
       :global .recherche-textuelle {
         grid-column: 1;
         grid-row: 1;
-        margin: 0;
+        margin: 0 0 1rem;
       }
 
       .filtres-conteneur {
