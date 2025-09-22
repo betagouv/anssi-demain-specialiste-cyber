@@ -3,11 +3,13 @@ import config from '../../knexfile';
 import { EntrepotJeux } from '../metier/entrepotJeux';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Jeu } from '../metier/jeu';
+import { CategorieDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { Classe } from '../metier/referentiels/classes';
 import { Discipline } from '../metier/referentiels/disciplines';
 import { Sequence } from '../metier/referentiels/sequence';
 import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurHachage } from './adaptateurHachage';
+import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 
 type JeuEnDB = {
   id: string;
@@ -18,10 +20,14 @@ type JeuEnDB = {
   classe: string;
   discipline: string;
   eleves: string[];
+  categorie: string;
+  thematiques: string[];
+  description: string;
 };
 
-type JeuEnDBInsertion = Omit<JeuEnDB, 'eleves'> & {
+type JeuEnDBInsertion = Omit<JeuEnDB, 'eleves' | 'thematiques'> & {
   eleves: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
+  thematiques: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
 };
 
 export class EntrepotJeuxPostgres implements EntrepotJeux {
@@ -53,6 +59,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       classe: jeu.classe,
       discipline: jeu.discipline,
       eleves: JSON.stringify(jeu.eleves),
+      categorie: jeu.categorie,
+      thematiques: JSON.stringify(jeu.thematiques),
+      description: jeu.description,
     } satisfies JeuEnDBInsertion);
   }
 
@@ -85,6 +94,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       classe: jeuEnDB.classe as Classe,
       discipline: jeuEnDB.discipline as Discipline,
       eleves: jeuEnDB.eleves ?? [],
+      categorie: jeuEnDB.categorie as CategorieDeJeux,
+      thematiques: jeuEnDB.thematiques as ThematiqueDeJeux[],
+      description: jeuEnDB.description,
     });
   }
 }
