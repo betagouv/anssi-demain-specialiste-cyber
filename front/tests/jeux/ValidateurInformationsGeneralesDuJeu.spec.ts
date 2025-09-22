@@ -1,27 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { ValidateurDeJeuEnEdition } from '../../src/jeux/ValidateurDeJeuEnEdition';
+import { ValidateurInformationsGeneralesDuJeu } from '../../src/jeux/ValidateurInformationsGeneralesDuJeu';
 import { type JeuEnEdition } from '../../src/jeux/jeu';
 
-describe('Le validateur de jeu en édition', () => {
+describe('Le validateur des information générales de jeu', () => {
   const jeuValide: JeuEnEdition = {
-    nom: 'nom du jeu',
     sequence: 'heure',
     nomEtablissement: "nom de l'établissement",
     discipline: 'Français',
     classe: 'terminale',
     eleves: ['René', '   '],
   };
-  const validateur = new ValidateurDeJeuEnEdition();
-  describe("vérifie qu'un jeu'", () => {
-    it('est invalide lorsque son nom est vide', () => {
-      const validation = validateur.estValide({
-        ...jeuValide,
-        nom: '  ',
-      });
-      expect(validation).toBeFalsy();
-    });
-
-    it('est invalide lorsque sa sequence est vide', () => {
+  const validateur = new ValidateurInformationsGeneralesDuJeu();
+  describe("vérifie que les données'", () => {
+    it('sont invalides lorsque sa sequence est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         sequence: '   ',
@@ -29,7 +20,7 @@ describe('Le validateur de jeu en édition', () => {
       expect(validation).toBeFalsy();
     });
 
-    it("est invalide lorsque son nom d'établissement est vide", () => {
+    it("sont invalides lorsque son nom d'établissement est vide", () => {
       const validation = validateur.estValide({
         ...jeuValide,
         nomEtablissement: '  ',
@@ -37,7 +28,7 @@ describe('Le validateur de jeu en édition', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa discipline est vide', () => {
+    it('sont invalides lorsque sa discipline est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         discipline: '   ',
@@ -45,7 +36,7 @@ describe('Le validateur de jeu en édition', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa classe est vide', () => {
+    it('sont invalides lorsque sa classe est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         classe: '   ',
@@ -61,22 +52,12 @@ describe('Le validateur de jeu en édition', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est valide quand tous ses champs sont valides', () => {
+    it('sont valides quand tous ses champs sont valides', () => {
       const validation = validateur.estValide(jeuValide);
       expect(validation).toBeTruthy();
     });
   });
   describe('permet de renvoyer spécifiquement une erreur', () => {
-    it("'Le nom est obligatoire' lorsque le nom du jeu est vide", () => {
-      const erreurs = validateur.valide({
-        ...jeuValide,
-        nom: '  ',
-      });
-      expect(erreurs).toEqual({
-        nom: 'Le nom est obligatoire',
-      });
-    });
-
     it("'Le nom de l'établissement est obligatoire' lorsque le nom de l'établissement est vide", () => {
       const erreurs = validateur.valide({
         ...jeuValide,

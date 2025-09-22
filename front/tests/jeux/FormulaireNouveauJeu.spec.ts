@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
-import { type JeuEnEdition } from '../../src/jeux/jeu';
+import { InformationsGeneralesDuJeu } from '../../src/jeux/jeu';
 import { type Validateur } from '../../src/validateur';
 import {
   findAllByRoleDeep,
@@ -21,15 +21,18 @@ vi.mock('axios', () => {
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
 
-  const validateurEnSuccess: Validateur<JeuEnEdition> = {
-    estValide: vi.fn().mockReturnValue(true),
-    valide: () => ({
-      nom: undefined,
-      sequence: undefined,
-      nomEtablissement: undefined,
-    }),
+  const validateurInformationsGeneralesEnSuccess: Validateur<InformationsGeneralesDuJeu> =
+    {
+      estValide: vi.fn().mockReturnValue(true),
+      valide: () => ({
+        nom: undefined,
+        sequence: undefined,
+        nomEtablissement: undefined,
+      }),
+    };
+  const proprietesParDefaut = {
+    validateurInformationsGenerales: validateurInformationsGeneralesEnSuccess,
   };
-  const proprietesParDefaut = { validateur: validateurEnSuccess };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -158,7 +161,9 @@ describe('Le formulaire de dépose de jeu', () => {
       await user.type(champsPrenom[1], 'Gontran');
       await user.click(boutonTerminer);
 
-      expect(validateurEnSuccess.estValide).toHaveBeenCalledExactlyOnceWith({
+      expect(
+        validateurInformationsGeneralesEnSuccess.estValide,
+      ).toHaveBeenCalledExactlyOnceWith({
         nom: 'TEST',
         sequence: 'heure',
         nomEtablissement: 'Mon lycée',
@@ -180,7 +185,10 @@ describe('Le formulaire de dépose de jeu', () => {
     it("n'envoie pas le formulaire si il y a un souci de validation", async () => {
       const { queryAllByRole } = render(FormulaireNouveauJeu, {
         ...proprietesParDefaut,
-        validateur: { ...validateurEnSuccess, estValide: () => false },
+        validateurInformationsGenerales: {
+          ...validateurInformationsGeneralesEnSuccess,
+          estValide: () => false,
+        },
       });
       const boutonTerminer = await findByRoleDeep('button', {
         name: 'Terminer',
@@ -193,20 +201,21 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("affiche pour chaque champ non valide, un message d'erreur", async () => {
-      const validateurEnErreur: Validateur<JeuEnEdition> = {
-        estValide: () => false,
-        valide: () => ({
-          nom: 'Le nom est obligatoire',
-          nomEtablissement: "Le nom de l'établissement est obligatoire",
-          sequence: 'La séquence est obligatoire',
-          discipline: 'La discipline est obligatoire',
-          classe: 'La classe est obligatoire',
-          eleves: 'Au moins un élève est requis',
-        }),
-      };
+      const validateurInformationsGeneralesEnErreur: Validateur<InformationsGeneralesDuJeu> =
+        {
+          estValide: () => false,
+          valide: () => ({
+            nomEtablissement: "Le nom de l'établissement est obligatoire",
+            sequence: 'La séquence est obligatoire',
+            discipline: 'La discipline est obligatoire',
+            classe: 'La classe est obligatoire',
+            eleves: 'Au moins un élève est requis',
+          }),
+        };
       const { getByText } = render(FormulaireNouveauJeu, {
         ...proprietesParDefaut,
-        validateur: validateurEnErreur,
+        validateurInformationsGenerales:
+          validateurInformationsGeneralesEnErreur,
       });
       const boutonTerminer = await findByRoleDeep('button', {
         name: 'Terminer',
@@ -216,11 +225,8 @@ describe('Le formulaire de dépose de jeu', () => {
 
       expect(axiosMock.post).not.toHaveBeenCalled();
       await waitFor(() =>
-        expect(getByTextDeep('Le nom est obligatoire')).toBeVisible(),
-      );
-      expect(
         getByTextDeep("Le nom de l'établissement est obligatoire"),
-      ).toBeVisible();
+      );
       expect(getByText('La séquence est obligatoire')).toBeVisible();
       expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
       expect(getByTextDeep('La classe est obligatoire')).toBeVisible();

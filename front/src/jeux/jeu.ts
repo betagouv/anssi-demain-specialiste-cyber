@@ -11,3 +11,12 @@ export type JeuEnEdition = {
   classe?: string;
   eleves?: string[];
 };
+
+export type ErreursValidationJeuEnEdition = Partial<
+  Record<keyof JeuEnEdition, string>
+>;
+
+export type InformationsGeneralesDuJeu = Pick<
+  JeuEnEdition,
+  'nomEtablissement' | 'sequence' | 'discipline' | 'classe' | 'eleves'
+>;

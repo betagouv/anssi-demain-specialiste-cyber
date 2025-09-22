@@ -1,12 +1,14 @@
 import z from 'zod';
 import type { Validateur } from '../validateur';
-import type { JeuEnEdition } from './jeu';
+import type {
+  ErreursValidationJeuEnEdition,
+  InformationsGeneralesDuJeu,
+  JeuEnEdition,
+} from './jeu';
 
-export type ErreursValidationJeuEnEdition = Partial<
-  Record<keyof JeuEnEdition, string>
->;
-
-export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
+export class ValidateurInformationsGeneralesDuJeu
+  implements Validateur<InformationsGeneralesDuJeu>
+{
   schema: z.ZodObject;
 
   constructor() {
@@ -14,7 +16,6 @@ export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
       return z.string(messageErreur).trim().min(1, messageErreur);
     };
     this.schema = z.object({
-      nom: chaineNonVide('Le nom est obligatoire'),
       sequence: chaineNonVide('La séquence est obligatoire'),
       nomEtablissement: chaineNonVide(
         "Le nom de l'établissement est obligatoire",
@@ -41,7 +42,6 @@ export class ValidateurDeJeuEnEdition implements Validateur<JeuEnEdition> {
           ?.message;
       };
       return {
-        nom: extracteurErreurZod(zodError, 'nom'),
         nomEtablissement: extracteurErreurZod(zodError, 'nomEtablissement'),
         sequence: extracteurErreurZod(zodError, 'sequence'),
         discipline: extracteurErreurZod(zodError, 'discipline'),
