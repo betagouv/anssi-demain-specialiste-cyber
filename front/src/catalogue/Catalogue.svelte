@@ -66,7 +66,7 @@
   .catalogue {
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: auto;
     margin-bottom: 4.5rem;
 
@@ -75,30 +75,41 @@
       gap: 1rem;
       grid-template-columns: 1fr;
     }
+  }
 
-    @include a-partir-de(sm) {
+  @include a-partir-de(sm) {
+    .catalogue {
       .conteneur {
         grid-template-columns: repeat(2, 1fr);
       }
     }
+  }
 
-    @include a-partir-de(md) {
+  @include a-partir-de(md) {
+    .catalogue {
+      margin-top: 5.5rem;
+
       .conteneur {
-        grid-template-columns: repeat(3, minmax(220px, 1fr));
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
       }
     }
+  }
 
-    @include a-partir-de(md) {
-      padding-top: 80px;
-    }
-
-    @include a-partir-de(lg) {
-      grid-template-columns: repeat(4, minmax(220px, 1fr));
+  @include a-partir-de(lg) {
+    .catalogue {
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
+      margin-top: calc(9.5rem - 6px);
 
       .conteneur {
         grid-column: 2 / span 3;
         grid-row: 1;
       }
+    }
+  }
+
+  @media (min-width: 1210px) {
+    .catalogue {
+      margin-top: 7.5rem;
     }
   }
 </style>

@@ -95,16 +95,22 @@
   .filtres {
     box-sizing: border-box;
     display: grid;
+    grid-template-columns: 100%;
     grid-template-rows: auto;
     margin-bottom: 0.5rem;
     position: relative;
     width: 100%;
+
+    .affiche-filtres {
+      width: max-content;
+    }
 
     .filtres-conteneur {
       background-color: #ffffff;
       box-sizing: border-box;
       display: grid;
       gap: 1rem;
+      grid-template-columns: 100%;
       grid-template-rows: repeat(2, min-content) 1fr auto;
       height: 100vh;
       overflow-x: hidden;
@@ -114,7 +120,7 @@
       top: 0;
       left: 0;
       right: 0;
-      width: 100vw;
+      width: 100%;
       z-index: 5;
 
       .filtres-entete,
@@ -122,7 +128,7 @@
       .filtres-contenu,
       .applique-filtres {
         box-sizing: border-box;
-        width: clamp(220px, 100%, min(calc(100vw - 2rem), 1200px));
+        width: clamp(200px, 100%, 1200px);
       }
 
       &:not(.ouvert) {
@@ -166,7 +172,9 @@
     }
 
     :global .recherche-textuelle {
-      margin: 3rem 0;
+      display: block;
+      margin: 3rem auto;
+      width: clamp(200px, 100%, 588px);
     }
   }
 
@@ -182,9 +190,17 @@
           display: block;
           position: absolute;
           top: 0;
-          transform: translateY(-140px);
+          left: 0;
+          right: 0;
+          transform: translateY(-146px); /* 146px = height of the div */
           visibility: visible;
-          width: clamp(220px, calc(100vw - 64px), 1200px);
+          width: clamp(200px, 100%, 1200px);
+        }
+      }
+
+      .filtres-conteneur.ouvert {
+        .filtres-besoins {
+          display: none;
         }
       }
     }
@@ -195,8 +211,9 @@
       gap: 0 1rem;
       grid-column: 1 / span 4;
       grid-row: 1;
-      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, minmax(200px, 1fr));
       grid-template-rows: repeat(2, min-content) 1fr;
+      width: 100%;
 
       :global .recherche-textuelle {
         grid-column: 1;
@@ -244,7 +261,17 @@
         .filtres-besoins {
           grid-column: 1 / span 4;
           grid-row: 1;
-          transform: translateY(-140px);
+          top: -3.5rem;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1210px) {
+    .filtres {
+      .filtres-conteneur:not(.ouvert) {
+        .filtres-besoins {
+          transform: translateY(-120px); /* 120px = height of the div */
         }
       }
     }
