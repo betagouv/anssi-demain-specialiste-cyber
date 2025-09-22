@@ -146,6 +146,7 @@ export const fabriqueMiddleware = ({
           imgSrc: [
             "'self'",
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+            'data:',
           ],
           connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
           mediaSrc: [
