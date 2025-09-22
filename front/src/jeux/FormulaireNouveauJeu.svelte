@@ -6,17 +6,20 @@
   import axios from 'axios';
   import { clic } from '../actions.svelte';
   import type { Validateur } from '../validateur';
-  import type { JeuEnEdition } from './jeu';
-  import {
-    type ErreursValidationJeuEnEdition,
-    ValidateurDeJeuEnEdition,
-  } from './ValidateurDeJeuEnEdition';
+  import type {
+    ErreursValidationJeuEnEdition,
+    InformationsGeneralesDuJeu,
+    JeuEnEdition,
+  } from './jeu';
+  import { ValidateurInformationsGeneralesDuJeu } from './ValidateurInformationsGeneralesDuJeu';
 
   interface Props {
-    validateur: Validateur<JeuEnEdition>;
+    validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
   }
 
-  const { validateur = new ValidateurDeJeuEnEdition() }: Props = $props();
+  const {
+    validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
+  }: Props = $props();
 
   let nom = $state('');
   let nomEtablissement = $state('');
@@ -44,8 +47,8 @@
       classe,
       eleves: eleves.filter((e) => !!e?.trim()),
     };
-    if (!validateur.estValide(jeu)) {
-      erreurs = validateur.valide(jeu);
+    if (!validateurInformationsGenerales.estValide(jeu)) {
+      erreurs = validateurInformationsGenerales.valide(jeu);
       return;
     }
 
