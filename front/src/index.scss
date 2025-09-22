@@ -3,10 +3,13 @@
 @use 'standard';
 @use 'couleurs';
 
-@use 'entete';  
+@use 'entete';
 @use 'pied-de-page';
+
 @use 'encart-selections';
 @use 'encart-cyberenjeux';
 @use 'encart-chiffres-cles';
 @use 'encart-soutiens';
 @use 'encart-intro';
+
+@use 'page-catalogue';

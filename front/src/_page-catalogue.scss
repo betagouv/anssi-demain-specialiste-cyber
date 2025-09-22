@@ -1,0 +1,11 @@
+@use 'points-de-rupture' as *;
+
+.page-catalogue {
+  @include a-partir-de(md) {
+    .entete {
+      .hero {
+        padding-bottom: 6.5rem;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 block variables
   - var titrePage = "DemainSpécialisteCyber"
   - var descriptionPage = ""
+  - var classePage = undefined
 
 doctype html
 html(lang='fr')
@@ -11,7 +12,7 @@ html(lang='fr')
     script(defer src=`/${dsc}` nonce= nonce)
     link(rel="stylesheet" type="text/css" href=`/${style}`)
 
-  body
+  body(class= classePage)
     include ./entete
     block avant-contenu
     main
