@@ -10,23 +10,25 @@
     ErreursValidationJeuEnEdition,
     InformationsGeneralesDuJeu,
     JeuEnEdition,
+    PresentationDuJeu,
   } from './jeu';
   import { ValidateurInformationsGeneralesDuJeu } from './ValidateurInformationsGeneralesDuJeu';
+  import { ValidateurPresentationDuJeu } from './ValidateurPresentationDuJeu';
 
+  type Etape = 'informations-generales' | 'presentation';
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
+    validateurPresentation: Validateur<PresentationDuJeu>;
   }
 
   const {
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
+    validateurPresentation = new ValidateurPresentationDuJeu(),
   }: Props = $props();
 
-  let nom = $state('');
-  let nomEtablissement = $state('');
-  let sequence = $state('');
-  let discipline = $state('');
-  let classe = $state('');
-  let eleves = $state(['', '', '', '']);
+  let etape = $state<Etape>('informations-generales');
+
+  let jeu = $state<JeuEnEdition>({ eleves: ['', '', '', ''] });
 
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
@@ -36,27 +38,36 @@
     discipline: undefined,
   });
 
+  const etapeSuivante = () => {
+    switch (etape) {
+      case 'informations-generales':
+        if (validateurInformationsGenerales.estValide(jeu)) {
+          etape = 'presentation';
+        } else {
+          erreurs = validateurInformationsGenerales.valide(jeu);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   const soumets = async (event: Event) => {
     event.preventDefault();
+    if (!validateurPresentation.estValide(jeu)) {
+      erreurs = validateurPresentation.valide(jeu);
 
-    const jeu: JeuEnEdition = {
-      nom,
-      sequence,
-      nomEtablissement,
-      discipline,
-      classe,
-      eleves: eleves.filter((e) => !!e?.trim()),
-    };
-    if (!validateurInformationsGenerales.estValide(jeu)) {
-      erreurs = validateurInformationsGenerales.valide(jeu);
       return;
     }
 
-    await axios.post('/api/jeux', jeu);
+    await axios.post('/api/jeux', {
+      ...jeu,
+      eleves: jeu.eleves?.filter((e) => !!e?.trim()),
+    });
   };
 
   const ajouteEleve = () => {
-    eleves.push('');
+    jeu.eleves = [...(jeu.eleves ?? []), ''];
   };
 </script>
 
@@ -67,155 +78,167 @@
       Sauf mention contraire, les informations demandées sont obligatoires.
     </p>
     <form novalidate>
-      <dsfr-input
-        errorMessage={erreurs.nom}
-        id="nomDuJeu"
-        label="Nom du jeu"
-        onvaluechanged={(e: CustomEvent) => (nom = e.detail)}
-        status={erreurs.nom ? 'error' : 'default'}
-        value={nom}
-      >
-      </dsfr-input>
+      {#if etape === 'informations-generales'}
+        <dsfr-input
+          errorMessage={erreurs.nomEtablissement}
+          id="nomEtablissement"
+          label="Nom de votre établissement"
+          onvaluechanged={(e: CustomEvent) => (jeu.nomEtablissement = e.detail)}
+          status={erreurs.nomEtablissement ? 'error' : 'default'}
+          value={jeu.nomEtablissement}
+        >
+        </dsfr-input>
 
-      <dsfr-input
-        errorMessage={erreurs.nomEtablissement}
-        id="nomEtablissement"
-        label="Nom de votre établissement"
-        onvaluechanged={(e: CustomEvent) => (nomEtablissement = e.detail)}
-        status={erreurs.nomEtablissement ? 'error' : 'default'}
-        value={nomEtablissement}
-      >
-      </dsfr-input>
-
-      <div class="sequence">
-        <p>Format de la séquence CyberEnJeux</p>
-        <div class="boutons">
-          <label>
-            <input
-              type="radio"
-              name="sequence"
-              value="heure"
-              required
-              bind:group={sequence}
-            />
-            Heure de cours
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="sequence"
-              value="demi-journee"
-              bind:group={sequence}
-            />
-            Demi-journee
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="sequence"
-              value="journee"
-              bind:group={sequence}
-            />
-            Journée
-          </label>
+        <div class="sequence">
+          <p>Format de la séquence CyberEnJeux</p>
+          <div class="boutons">
+            <label>
+              <input
+                type="radio"
+                name="sequence"
+                value="heure"
+                required
+                bind:group={jeu.sequence}
+              />
+              Heure de cours
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="sequence"
+                value="demi-journee"
+                bind:group={jeu.sequence}
+              />
+              Demi-journee
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="sequence"
+                value="journee"
+                bind:group={jeu.sequence}
+              />
+              Journée
+            </label>
+          </div>
+          {#if erreurs.sequence}
+            <span class="erreur" role="alert">{erreurs.sequence}</span>
+          {/if}
         </div>
-        {#if erreurs.sequence}
-          <span class="erreur" role="alert">{erreurs.sequence}</span>
-        {/if}
-      </div>
 
-      <fieldset class="eleves">
-        <legend>Elèves participants</legend>
+        <fieldset class="eleves">
+          <legend>Elèves participants</legend>
 
-        {#if erreurs.eleves}
-          <span class="erreur" role="alert">{erreurs.eleves}</span>
-        {/if}
-        <div class="prenoms">
-          {#each eleves as eleve, index}
-            <dsfr-input
-              label="Prénom"
-              id="prenom-{index}"
-              value={eleve}
-              onvaluechanged={(e: CustomEvent) => (eleves[index] = e.detail)}
-            ></dsfr-input>
-          {/each}
-        </div>
-        <dsfr-button
-          label="Ajouter un élève"
-          kind="secondary"
-          use:clic={ajouteEleve}
-        ></dsfr-button>
-      </fieldset>
+          {#if erreurs.eleves}
+            <span class="erreur" role="alert">{erreurs.eleves}</span>
+          {/if}
+          <div class="prenoms">
+            {#each jeu.eleves ?? [] as eleve, index}
+              <dsfr-input
+                label="Prénom"
+                id="prenom-{index}"
+                value={eleve}
+                onvaluechanged={(e: CustomEvent) =>
+                  (jeu.eleves = jeu.eleves?.toSpliced(index, 1, e.detail))}
+              ></dsfr-input>
+            {/each}
+          </div>
+          <dsfr-button
+            label="Ajouter un élève"
+            kind="secondary"
+            use:clic={ajouteEleve}
+          ></dsfr-button>
+        </fieldset>
 
-      <dsfr-select
-        errorMessage={erreurs.discipline}
-        id="discipline"
-        label="Discipline"
-        value={discipline}
-        onvaluechanged={(e: CustomEvent) => (discipline = e.detail)}
-        options={[
-          { value: 'francais', label: 'Français' },
-          { value: 'langues-vivantes', label: 'Langues vivantes' },
-          { value: 'arts-plastiques', label: 'Arts plastiques' },
-          { value: 'education-musicale', label: 'Éducation musicale' },
-          { value: 'histoire-des-arts', label: 'Histoire des arts' },
-          {
-            value: 'education-physique-et-sportive',
-            label: 'Éducation physique et sportive',
-          },
-          {
-            value: 'enseignement-moral-et-civique',
-            label: 'Enseignement moral et civique',
-          },
-          { value: 'histoire-et-geographie', label: 'Histoire et géographie' },
-          {
-            value: 'sciences-et-technologie',
-            label: 'Sciences et technologie',
-          },
-          { value: 'mathematiques', label: 'Mathématiques' },
-        ]}
-        placeholder="Sélectionner une option"
-        placeholderDisabled={true}
-        status={erreurs.discipline ? 'error' : 'default'}
-      >
-      </dsfr-select>
+        <dsfr-select
+          errorMessage={erreurs.discipline}
+          id="discipline"
+          label="Discipline"
+          value={jeu.discipline}
+          onvaluechanged={(e: CustomEvent) => (jeu.discipline = e.detail)}
+          options={[
+            { value: 'francais', label: 'Français' },
+            { value: 'langues-vivantes', label: 'Langues vivantes' },
+            { value: 'arts-plastiques', label: 'Arts plastiques' },
+            { value: 'education-musicale', label: 'Éducation musicale' },
+            { value: 'histoire-des-arts', label: 'Histoire des arts' },
+            {
+              value: 'education-physique-et-sportive',
+              label: 'Éducation physique et sportive',
+            },
+            {
+              value: 'enseignement-moral-et-civique',
+              label: 'Enseignement moral et civique',
+            },
+            {
+              value: 'histoire-et-geographie',
+              label: 'Histoire et géographie',
+            },
+            {
+              value: 'sciences-et-technologie',
+              label: 'Sciences et technologie',
+            },
+            { value: 'mathematiques', label: 'Mathématiques' },
+          ]}
+          placeholder="Sélectionner une option"
+          placeholderDisabled={true}
+          status={erreurs.discipline ? 'error' : 'default'}
+        >
+        </dsfr-select>
 
-      <dsfr-select
-        errorMessage={erreurs.classe}
-        id="classe"
-        label="Classe"
-        value={classe}
-        onvaluechanged={(e: CustomEvent) => (classe = e.detail)}
-        options={[
-          { value: 'maternelle', label: 'Maternelle' },
-          { value: 'cp', label: 'CP' },
-          { value: 'ce1', label: 'CE1' },
-          { value: 'ce2', label: 'CE2' },
-          { value: 'cm1', label: 'CM1' },
-          { value: 'cm2', label: 'CM2' },
-          { value: '6e', label: '6e' },
-          { value: '5e', label: '5e' },
-          { value: '4e', label: '4e' },
-          { value: '3e', label: '3e' },
-          { value: 'seconde', label: 'Seconde' },
-          { value: 'premiere', label: 'Première' },
-          { value: 'terminale', label: 'Terminale' },
-          { value: 'classe-prepa', label: 'Classe prépa' },
-          { value: 'bts', label: 'BTS' },
-          {
-            value: 'superieur-hors-bts-et-prep',
-            label: 'Supérieur (hors BTS et Prepa)',
-          },
-        ]}
-        placeholder="Sélectionner une option"
-        placeholderDisabled={true}
-        status={erreurs.classe ? 'error' : 'default'}
-      >
-      </dsfr-select>
+        <dsfr-select
+          errorMessage={erreurs.classe}
+          id="classe"
+          label="Classe"
+          value={jeu.classe}
+          onvaluechanged={(e: CustomEvent) => (jeu.classe = e.detail)}
+          options={[
+            { value: 'maternelle', label: 'Maternelle' },
+            { value: 'cp', label: 'CP' },
+            { value: 'ce1', label: 'CE1' },
+            { value: 'ce2', label: 'CE2' },
+            { value: 'cm1', label: 'CM1' },
+            { value: 'cm2', label: 'CM2' },
+            { value: '6e', label: '6e' },
+            { value: '5e', label: '5e' },
+            { value: '4e', label: '4e' },
+            { value: '3e', label: '3e' },
+            { value: 'seconde', label: 'Seconde' },
+            { value: 'premiere', label: 'Première' },
+            { value: 'terminale', label: 'Terminale' },
+            { value: 'classe-prepa', label: 'Classe prépa' },
+            { value: 'bts', label: 'BTS' },
+            {
+              value: 'superieur-hors-bts-et-prep',
+              label: 'Supérieur (hors BTS et Prepa)',
+            },
+          ]}
+          placeholder="Sélectionner une option"
+          placeholderDisabled={true}
+          status={erreurs.classe ? 'error' : 'default'}
+        >
+        </dsfr-select>
+      {/if}
+      {#if etape === 'presentation'}
+        <dsfr-input
+          errorMessage={erreurs.nom}
+          id="nomDuJeu"
+          label="Nom du jeu"
+          onvaluechanged={(e: CustomEvent) => (jeu.nom = e.detail)}
+          status={erreurs.nom ? 'error' : 'default'}
+          value={jeu.nom}
+        >
+        </dsfr-input>
+      {/if}
 
       <div class="actions">
-        <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
-        ></dsfr-button>
+        {#if etape === 'informations-generales'}
+          <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
+          ></dsfr-button>
+        {:else}
+          <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+          ></dsfr-button>
+        {/if}
       </div>
     </form>
   </div>
