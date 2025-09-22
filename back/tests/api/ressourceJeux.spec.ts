@@ -326,7 +326,7 @@ describe('La ressource des jeux', () => {
         expect(reponse.body.erreur).toEqual('La thématique est invalide');
       });
 
-      it('vérifie que toutes ls thématiques font partie des valeurs attendues', async () => {
+      it('vérifie que toutes les thématiques font partie des valeurs attendues', async () => {
         const reponse = await request(serveur)
           .post('/api/jeux')
           .send({
