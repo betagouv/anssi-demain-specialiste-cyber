@@ -6,11 +6,11 @@
   let { recherche = $bindable(), miseEnAvant = 'Rechercher' }: Props = $props();
 </script>
 
-<dsfr-input
-  id="recherche"
+<dsfr-search
+  inputId="recherche"
   class="recherche-textuelle"
   type="search"
-  placeholder={miseEnAvant}
+  inputPlaceholder={miseEnAvant}
   value={recherche}
   onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
-></dsfr-input>
+></dsfr-search>
