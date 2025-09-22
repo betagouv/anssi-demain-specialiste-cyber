@@ -20,3 +20,5 @@ export type InformationsGeneralesDuJeu = Pick<
   JeuEnEdition,
   'nomEtablissement' | 'sequence' | 'discipline' | 'classe' | 'eleves'
 >;
+
+export type PresentationDuJeu = Pick<JeuEnEdition, 'nom'>;
