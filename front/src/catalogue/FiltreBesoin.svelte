@@ -32,12 +32,10 @@
   @use '../points-de-rupture' as *;
 
   fieldset {
-    background: #fff;
-    border-radius: 4px;
     margin: 0 0 0.5rem;
     overflow: hidden;
     position: relative;
-    width: clamp(220px, 100%, 1200px);
+    width: clamp(200px, 100%, 1200px);
 
     legend {
       font-size: 1rem;
@@ -53,7 +51,7 @@
 
     lab-anssi-filtres {
       display: block;
-      width: clamp(220px, 100%, 1200px);
+      width: clamp(200px, 100%, 1200px);
     }
   }
 </style>
