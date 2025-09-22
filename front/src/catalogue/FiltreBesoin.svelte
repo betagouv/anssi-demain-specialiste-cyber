@@ -33,7 +33,6 @@
 
   fieldset {
     margin: 0 0 0.5rem;
-    overflow: hidden;
     position: relative;
     width: clamp(200px, 100%, 1200px);
 
