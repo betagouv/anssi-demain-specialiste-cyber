@@ -1,6 +1,8 @@
+import { CategorieDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { Classe } from '../metier/referentiels/classes';
 import { Discipline } from '../metier/referentiels/disciplines';
 import { Sequence } from '../metier/referentiels/sequence';
+import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
 
@@ -28,6 +30,8 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     classe: Classe;
     discipline: Discipline;
     nombreEleves: number;
+    categorie: CategorieDeJeux;
+    thematiques: ThematiqueDeJeux[];
   };
   type: 'JEU_CREE';
 };

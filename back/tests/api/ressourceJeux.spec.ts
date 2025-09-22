@@ -113,6 +113,8 @@ describe('La ressource des jeux', () => {
       expect(evenement.classe).toBe('cp');
       expect(evenement.discipline).toBe('mathematiques');
       expect(evenement.nombreEleves).toBe(1);
+      expect(evenement.categorie).toBe('simulation');
+      expect(evenement.thematiques).toEqual(['menace-cyber', 'orientation']);
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {

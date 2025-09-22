@@ -2,12 +2,12 @@ import { Router } from 'express';
 import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
 import { Jeu } from '../metier/jeu';
-import { ConfigurationServeur } from './configurationServeur';
-import { sequences } from '../metier/referentiels/sequence';
+import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { classes } from '../metier/referentiels/classes';
 import { disciplines } from '../metier/referentiels/disciplines';
-import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
+import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
+import { ConfigurationServeur } from './configurationServeur';
 
 function chaineNonVide(message: string) {
   return z.string(message).trim().min(1, message);
@@ -100,6 +100,8 @@ export const ressourceJeux = ({
             classe,
             discipline,
             eleves.length,
+            categorie,
+            thematiques,
           ),
         );
         reponse.sendStatus(201);

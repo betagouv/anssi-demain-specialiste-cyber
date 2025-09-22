@@ -1,6 +1,8 @@
+import { CategorieDeJeux } from '../../../metier/referentiels/categorieDeJeux';
 import { Classe } from '../../../metier/referentiels/classes';
 import { Discipline } from '../../../metier/referentiels/disciplines';
 import { Sequence } from '../../../metier/referentiels/sequence';
+import { ThematiqueDeJeux } from '../../../metier/referentiels/thematiqueDeJeux';
 
 export class JeuCree {
   constructor(
@@ -11,5 +13,7 @@ export class JeuCree {
     public readonly classe: Classe,
     public readonly discipline: Discipline,
     public readonly nombreEleves: number,
+    public readonly categorie: CategorieDeJeux,
+    public readonly thematiques: ThematiqueDeJeux[],
   ) {}
 }

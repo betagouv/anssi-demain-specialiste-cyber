@@ -39,6 +39,8 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         'cp',
         'mathematiques',
         3,
+        'simulation',
+        ['menace-cyber', 'orientation'],
       ),
     );
 
@@ -52,6 +54,8 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         classe: 'cp',
         discipline: 'mathematiques',
         nombreEleves: 3,
+        categorie: 'simulation',
+        thematiques: ['menace-cyber', 'orientation'],
       },
       date: new Date('2025-03-10'),
     });
