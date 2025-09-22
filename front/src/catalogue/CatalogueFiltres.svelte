@@ -19,12 +19,6 @@
     menuContextuelEstOuvert = true;
   };
 
-  const afficheLesFiltresAuClavier = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      afficheLesFiltres();
-    }
-  };
-
   const reinitialiseLesFiltres = () => {
     rechercheTextuelle.set('');
     rechercheParBesoin.reinitialise();
