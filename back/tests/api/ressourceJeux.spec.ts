@@ -38,6 +38,9 @@ describe('La ressource des jeux', () => {
     discipline: 'mathematiques',
     classe: 'cp',
     eleves: ['Gontran'],
+    categorie: 'simulation',
+    thematiques: ['menace-cyber', 'orientation'],
+    description: 'Un texte descriptif du jeu',
   };
 
   beforeEach(() => {
@@ -280,6 +283,96 @@ describe('La ressource des jeux', () => {
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
           'Les prénoms fournis sont invalides',
+        );
+      });
+    });
+
+    describe('concernant la vérification de la catégorie', () => {
+      it('vérifie que la catégorie est fournie', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            categorie: undefined,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La catégorie est invalide');
+      });
+
+      it('vérifie que la catégorie fait partie des valeurs attendues', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            categorie: 'mauvaise-categorie',
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La catégorie est invalide');
+      });
+    });
+
+    describe('concernant la vérification des thématiques', () => {
+      it("vérifie qu'au moins une thématique est fournie", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            thematiques: [],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La thématique est invalide');
+      });
+
+      it('vérifie que toutes ls thématiques font partie des valeurs attendues', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            thematiques: ['orientation', 'mauvaise-thematique'],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual('La thématique est invalide');
+      });
+    });
+
+    describe('concernant la vérification de la description', () => {
+      it('vérifie que la description est fournie', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            description: undefined,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'La description du jeu est obligatoire',
+        );
+      });
+
+      it("vérifie que le nom n'est pas vide", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({ ...corpsNouveauJeuValide, description: '   ' });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'La description du jeu est obligatoire',
+        );
+      });
+
+      it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({ ...corpsNouveauJeuValide, description: 'mots'.repeat(2001) });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'La description ne peut contenir que 8000 caractères maximum',
         );
       });
     });

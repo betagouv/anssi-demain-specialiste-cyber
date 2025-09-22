@@ -4,12 +4,15 @@ export type Jeu = {
 };
 
 export type JeuEnEdition = {
-  nom?: string;
   sequence?: string;
   nomEtablissement?: string;
   discipline?: string;
   classe?: string;
   eleves?: string[];
+  nom?: string;
+  categorie?: string;
+  thematique?: string;
+  description?: string;
 };
 
 export type ErreursValidationJeuEnEdition = Partial<
@@ -21,4 +24,7 @@ export type InformationsGeneralesDuJeu = Pick<
   'nomEtablissement' | 'sequence' | 'discipline' | 'classe' | 'eleves'
 >;
 
-export type PresentationDuJeu = Pick<JeuEnEdition, 'nom'>;
+export type PresentationDuJeu = Pick<
+  JeuEnEdition,
+  'nom' | 'categorie' | 'thematique' | 'description'
+>;
