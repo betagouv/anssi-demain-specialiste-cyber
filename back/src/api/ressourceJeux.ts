@@ -6,6 +6,8 @@ import { ConfigurationServeur } from './configurationServeur';
 import { sequences } from '../metier/referentiels/sequence';
 import { classes } from '../metier/referentiels/classes';
 import { disciplines } from '../metier/referentiels/disciplines';
+import { categoriesDeJeux } from '../metier/referentiels/categoriesDeJeux';
+import { thematiquesDeJeux } from '../metier/referentiels/thematiquesDeJeux';
 
 function chaineNonVide(message: string) {
   return z.string(message).trim().min(1, message);
