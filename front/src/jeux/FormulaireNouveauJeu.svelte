@@ -38,6 +38,16 @@
     discipline: undefined,
   });
 
+  const etapePrecedente = () => {
+    switch (etape) {
+      case 'presentation':
+        etape = 'informations-generales';
+        break;
+      default:
+        break;
+    }
+  };
+
   const etapeSuivante = () => {
     switch (etape) {
       case 'informations-generales':
@@ -311,6 +321,11 @@
           <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
           ></dsfr-button>
         {:else}
+          <dsfr-button
+            label="Précédent"
+            kind="secondary"
+            use:clic={etapePrecedente}
+          ></dsfr-button>
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
           ></dsfr-button>
         {/if}
@@ -385,6 +400,7 @@
       .actions {
         display: flex;
         justify-content: flex-end;
+        gap: 1rem;
       }
 
       .erreur {

@@ -39,6 +39,13 @@ describe('Le formulaire de dépose de jeu', () => {
     validateurPresentation: validateurPresentationEnSucces,
   };
 
+  const etapePrecedente = async () => {
+    const boutonPrecedent = await findByRoleDeep('button', {
+      name: 'Précédent',
+    });
+    await user.click(boutonPrecedent);
+  };
+
   const etapeSuivante = async () => {
     const boutonSuivant = await findByRoleDeep('button', {
       name: 'Suivant',
@@ -191,6 +198,19 @@ describe('Le formulaire de dépose de jeu', () => {
             getByRoleDeep('textbox', {
               name: 'Description Présenter le jeu et son fonctionnement en quelques lignes.',
             }),
+          ).toBeVisible(),
+        );
+      });
+
+      it("de revenir à l'étape précédente", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapePrecedente();
+
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('textbox', { name: 'Nom de votre établissement' }),
           ).toBeVisible(),
         );
       });
