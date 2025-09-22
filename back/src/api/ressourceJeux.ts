@@ -37,6 +37,20 @@ export const ressourceJeux = ({
     eleves: z
       .array(chaineNonVide('Les prénoms fournis sont invalides'))
       .nonempty('Au moins un élève est requis'),
+    categorie: z.enum(categoriesDeJeux, {
+      error: 'La catégorie est invalide',
+    }),
+    thematiques: z
+      .array(
+        z.enum(thematiquesDeJeux, {
+          error: 'La thématique est invalide',
+        }),
+      )
+      .nonempty('La thématique est invalide'),
+    description: chaineNonVide('La description du jeu est obligatoire').max(
+      8000,
+      'La description ne peut contenir que 8000 caractères maximum',
+    ),
   });
 
   routeur.post(

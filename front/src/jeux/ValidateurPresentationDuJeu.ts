@@ -17,6 +17,12 @@ export class ValidateurPresentationDuJeu
     };
     this.schema = z.object({
       nom: chaineNonVide('Le nom est obligatoire'),
+      categorie: chaineNonVide('La catégorie est obligatoire'),
+      thematique: chaineNonVide('La thématique est obligatoire'),
+      description: chaineNonVide('La description est obligatoire').max(
+        8000,
+        'La description ne peut contenir que 8000 caractères maximum',
+      ),
     });
   }
   valide(jeu: JeuEnEdition): ErreursValidationJeuEnEdition {
@@ -31,6 +37,9 @@ export class ValidateurPresentationDuJeu
       };
       return {
         nom: extracteurErreurZod(zodError, 'nom'),
+        categorie: extracteurErreurZod(zodError, 'categorie'),
+        thematique: extracteurErreurZod(zodError, 'thematique'),
+        description: extracteurErreurZod(zodError, 'description'),
       };
     }
   }
