@@ -68,7 +68,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
         await this.knex<JeuEnDB>('jeux').where({
           id_enseignant: this.adaptateurHachage.hache(utilisateur.email),
         })
-      ).map(this.donneesEnDbVersMetier),
+      ).map((jeu) => this.donneesEnDbVersMetier(jeu)),
     );
   }
 
