@@ -18,7 +18,9 @@ export class ValidateurPresentationDuJeu
     this.schema = z.object({
       nom: chaineNonVide('Le nom est obligatoire'),
       categorie: chaineNonVide('La catégorie est obligatoire'),
-      thematique: chaineNonVide('La thématique est obligatoire'),
+      thematiques: z
+        .array(chaineNonVide('La thématique est invalide'))
+        .nonempty('La thématique est obligatoire'),
       description: chaineNonVide('La description est obligatoire').max(
         8000,
         'La description ne peut contenir que 8000 caractères maximum',
@@ -38,7 +40,7 @@ export class ValidateurPresentationDuJeu
       return {
         nom: extracteurErreurZod(zodError, 'nom'),
         categorie: extracteurErreurZod(zodError, 'categorie'),
-        thematique: extracteurErreurZod(zodError, 'thematique'),
+        thematiques: extracteurErreurZod(zodError, 'thematiques'),
         description: extracteurErreurZod(zodError, 'description'),
       };
     }

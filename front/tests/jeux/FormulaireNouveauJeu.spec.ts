@@ -172,14 +172,12 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner la thématique du jeu', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
         await waitFor(() =>
-          expect(
-            getByRoleDeep('combobox', { name: 'Thématique' }),
-          ).toBeVisible(),
+          expect(getByRole('listbox', { name: 'Thématiques' })).toBeVisible(),
         );
       });
 
@@ -238,11 +236,11 @@ describe('Le formulaire de dépose de jeu', () => {
           valide: () => ({
             nom: 'Le nom est obligatoire',
             categorie: 'La catégorie est obligatoire',
-            thematique: 'La thématique est obligatoire',
+            thematiques: 'La thématique est obligatoire',
             description: 'La description est obligatoire',
           }),
         };
-        render(FormulaireNouveauJeu, {
+        const { getByText } = render(FormulaireNouveauJeu, {
           ...proprietesParDefaut,
           validateurPresentation: validateurPresentationEnErreur,
         });
@@ -253,7 +251,7 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(axiosMock.post).not.toHaveBeenCalled();
         await waitFor(() => getByTextDeep('Le nom est obligatoire'));
         expect(getByTextDeep('La catégorie est obligatoire')).toBeVisible();
-        expect(getByTextDeep('La thématique est obligatoire')).toBeVisible();
+        expect(getByText('La thématique est obligatoire')).toBeVisible();
         expect(getByTextDeep('La description est obligatoire')).toBeVisible();
       });
     });
@@ -269,7 +267,7 @@ describe('Le formulaire de dépose de jeu', () => {
         eleves: ['Brice', 'Gontran', '', ''],
         nom: 'TEST',
         categorie: 'simulation',
-        thematique: 'orientation',
+        thematiques: ['menace-cyber', 'orientation'],
         description: 'Description du jeu',
       };
       const { getByRole, queryAllByRole } = render(
@@ -304,8 +302,8 @@ describe('Le formulaire de dépose de jeu', () => {
       const champCategorie = await findByRoleDeep('combobox', {
         name: 'Catégorie',
       });
-      const champThematique = await findByRoleDeep('combobox', {
-        name: 'Thématique',
+      const champThematique = getByRole('listbox', {
+        name: 'Thématiques',
       });
       const champDescription = await findByRoleDeep('textbox', {
         name: 'Description Présenter le jeu et son fonctionnement en quelques lignes.',
@@ -313,7 +311,10 @@ describe('Le formulaire de dépose de jeu', () => {
 
       await user.type(champNomDuJeu, 'TEST');
       await user.selectOptions(champCategorie, 'Simulation');
-      await user.selectOptions(champThematique, 'Orientation');
+      await user.selectOptions(champThematique, [
+        'Menace cyber',
+        'Orientation',
+      ]);
       await user.type(champDescription, 'Description du jeu');
 
       await terminer();
