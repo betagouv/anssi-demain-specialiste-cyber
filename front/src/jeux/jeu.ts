@@ -11,7 +11,7 @@ export type JeuEnEdition = {
   eleves?: string[];
   nom?: string;
   categorie?: string;
-  thematique?: string;
+  thematiques?: string[];
   description?: string;
 };
 
@@ -26,5 +26,5 @@ export type InformationsGeneralesDuJeu = Pick<
 
 export type PresentationDuJeu = Pick<
   JeuEnEdition,
-  'nom' | 'categorie' | 'thematique' | 'description'
+  'nom' | 'categorie' | 'thematiques' | 'description'
 >;

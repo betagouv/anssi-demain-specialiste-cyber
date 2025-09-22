@@ -6,7 +6,7 @@ describe('Le validateur des information générales de jeu', () => {
   const jeuValide: PresentationDuJeu = {
     nom: 'nom du jeu',
     categorie: 'MaCatégorie',
-    thematique: 'MaThématique',
+    thematiques: ['MaThématique'],
     description: 'mots'.repeat(2000),
   };
   const descriptionTropLongue = 'mots'.repeat(2001);
@@ -28,10 +28,18 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
+    it("est invalide lorsque sa thématique n'est pas définie", () => {
+      const validation = validateur.estValide({
+        ...jeuValide,
+        thematiques: undefined,
+      });
+      expect(validation).toBeFalsy();
+    });
+
     it('est invalide lorsque sa thématique est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
-        thematique: '  ',
+        thematiques: [],
       });
       expect(validation).toBeFalsy();
     });
@@ -62,13 +70,13 @@ describe('Le validateur des information générales de jeu', () => {
       const erreurs = validateur.valide({
         nom: '  ',
         categorie: '   ',
-        thematique: '     ',
+        thematiques: ['     '],
         description: '     ',
       });
       expect(erreurs).toEqual({
         nom: 'Le nom est obligatoire',
         categorie: 'La catégorie est obligatoire',
-        thematique: 'La thématique est obligatoire',
+        thematiques: 'La thématique est invalide',
         description: 'La description est obligatoire',
       });
     });
