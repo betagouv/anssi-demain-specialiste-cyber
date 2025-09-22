@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ValidateurPresentationDuJeu } from '../../src/jeux/ValidateurPresentationDuJeu';
-import { PresentationDuJeu } from '../../src/jeux/jeu';
+import { type PresentationDuJeu } from '../../src/jeux/jeu';
 
 describe('Le validateur des information générales de jeu', () => {
   const jeuValide: PresentationDuJeu = {

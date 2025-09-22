@@ -54,9 +54,9 @@
 
   const soumets = async (event: Event) => {
     event.preventDefault();
+
     if (!validateurPresentation.estValide(jeu)) {
       erreurs = validateurPresentation.valide(jeu);
-
       return;
     }
 
@@ -229,6 +229,88 @@
           value={jeu.nom}
         >
         </dsfr-input>
+
+        <dsfr-select
+          errorMessage={erreurs.categorie}
+          id="categorie"
+          label="Catégorie"
+          value={jeu.categorie}
+          onvaluechanged={(e: CustomEvent) => (jeu.categorie = e.detail)}
+          options={[
+            {
+              value: 'jeu-carte',
+              label: 'Jeu de carte',
+            },
+            {
+              value: 'jeu-plateau',
+              label: 'Jeu de plateau, jeu de rôle',
+            },
+            {
+              value: 'jeu-dessin',
+              label: 'Jeu de dessin',
+            },
+            {
+              value: 'simulation',
+              label: 'Simulation',
+            },
+            {
+              value: 'autre',
+              label: 'Autre',
+            },
+          ]}
+          placeholder="Sélectionner une option"
+          placeholderDisabled={true}
+          status={erreurs.categorie ? 'error' : 'default'}
+        >
+        </dsfr-select>
+
+        <dsfr-select
+          errorMessage={erreurs.thematique}
+          id="thematique"
+          label="Thématique"
+          value={jeu.thematique}
+          onvaluechanged={(e: CustomEvent) => (jeu.thematique = e.detail)}
+          options={[
+            {
+              value: 'comportements-numeriques',
+              label: 'Comportements numériques',
+            },
+            { value: 'cyberharcelement', label: 'Cyberharcelement' },
+            {
+              value: 'gestion-crise-cyber',
+              label: 'Gestion de crise cyber',
+            },
+            {
+              value: 'lutte-manipulation-information',
+              label: "Lutte contre la manipulation de l'information",
+            },
+            { value: 'menace-cyber', label: 'Menace cyber' },
+            { value: 'orientation', label: 'Orientation' },
+            {
+              value: 'techniques-securite-numerique',
+              label: 'Techniques de sécurité numérique',
+            },
+            {
+              value: 'valoriser-talents-feminins',
+              label: 'Valoriser les talents féminins',
+            },
+          ]}
+          placeholder="Sélectionner une option"
+          placeholderDisabled={true}
+          status={erreurs.thematique ? 'error' : 'default'}
+        >
+        </dsfr-select>
+
+        <dsfr-textarea
+          errorMessage={erreurs.description}
+          hint="Présenter le jeu et son fonctionnement en quelques lignes."
+          id="description"
+          label="Description"
+          onvaluechanged={(e: CustomEvent) => (jeu.description = e.detail)}
+          rows={8}
+          status={erreurs.description ? 'error' : 'default'}
+          value={jeu.description}
+        ></dsfr-textarea>
       {/if}
 
       <div class="actions">
