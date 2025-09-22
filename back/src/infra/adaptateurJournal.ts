@@ -1,3 +1,6 @@
+import { Classe } from '../metier/referentiels/classes';
+import { Discipline } from '../metier/referentiels/disciplines';
+import { Sequence } from '../metier/referentiels/sequence';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
 
@@ -20,10 +23,10 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
   donnees: {
     idUtilisateur: string;
     nom: string;
-    sequence: string;
+    sequence: Sequence;
     nomEtablissement: string;
-    classe: string;
-    discipline: string;
+    classe: Classe;
+    discipline: Discipline;
     nombreEleves: number;
   };
   type: 'JEU_CREE';
