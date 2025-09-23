@@ -14,6 +14,7 @@
   } from './jeu';
   import { ValidateurInformationsGeneralesDuJeu } from './ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPresentationDuJeu } from './ValidateurPresentationDuJeu';
+  import { jeuEnEditionStore } from './stores/jeuEnEdition.store';
 
   type Etape = 'informations-generales' | 'presentation';
   interface Props {
@@ -28,7 +29,7 @@
 
   let etape = $state<Etape>('informations-generales');
 
-  let jeu = $state<JeuEnEdition>({ eleves: ['', '', '', ''] });
+  $jeuEnEditionStore = { eleves: ['', '', '', ''] }
 
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
@@ -51,10 +52,10 @@
   const etapeSuivante = () => {
     switch (etape) {
       case 'informations-generales':
-        if (validateurInformationsGenerales.estValide(jeu)) {
+        if (validateurInformationsGenerales.estValide($jeuEnEditionStore)) {
           etape = 'presentation';
         } else {
-          erreurs = validateurInformationsGenerales.valide(jeu);
+          erreurs = validateurInformationsGenerales.valide($jeuEnEditionStore);
         }
         break;
       default:
@@ -65,19 +66,19 @@
   const soumets = async (event: Event) => {
     event.preventDefault();
 
-    if (!validateurPresentation.estValide(jeu)) {
-      erreurs = validateurPresentation.valide(jeu);
+    if (!validateurPresentation.estValide($jeuEnEditionStore)) {
+      erreurs = validateurPresentation.valide($jeuEnEditionStore);
       return;
     }
 
     await axios.post('/api/jeux', {
-      ...jeu,
-      eleves: jeu.eleves?.filter((e) => !!e?.trim()),
+      ...$jeuEnEditionStore,
+      eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
     });
   };
 
   const ajouteEleve = () => {
-    jeu.eleves = [...(jeu.eleves ?? []), ''];
+    $jeuEnEditionStore.eleves = [...($jeuEnEditionStore.eleves ?? []), ''];
   };
 </script>
 
@@ -93,9 +94,9 @@
           errorMessage={erreurs.nomEtablissement}
           id="nomEtablissement"
           label="Nom de votre établissement"
-          onvaluechanged={(e: CustomEvent) => (jeu.nomEtablissement = e.detail)}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.nomEtablissement = e.detail)}
           status={erreurs.nomEtablissement ? 'error' : 'default'}
-          value={jeu.nomEtablissement}
+          value={$jeuEnEditionStore.nomEtablissement}
         >
         </dsfr-input>
 
@@ -108,7 +109,7 @@
                 name="sequence"
                 value="heure"
                 required
-                bind:group={jeu.sequence}
+                bind:group={$jeuEnEditionStore.sequence}
               />
               Heure de cours
             </label>
@@ -117,7 +118,7 @@
                 type="radio"
                 name="sequence"
                 value="demi-journee"
-                bind:group={jeu.sequence}
+                bind:group={$jeuEnEditionStore.sequence}
               />
               Demi-journee
             </label>
@@ -126,7 +127,7 @@
                 type="radio"
                 name="sequence"
                 value="journee"
-                bind:group={jeu.sequence}
+                bind:group={$jeuEnEditionStore.sequence}
               />
               Journée
             </label>
@@ -143,13 +144,13 @@
             <span class="erreur" role="alert">{erreurs.eleves}</span>
           {/if}
           <div class="prenoms">
-            {#each jeu.eleves ?? [] as eleve, index}
+            {#each $jeuEnEditionStore.eleves ?? [] as eleve, index}
               <dsfr-input
                 label="Prénom"
                 id="prenom-{index}"
                 value={eleve}
                 onvaluechanged={(e: CustomEvent) =>
-                  (jeu.eleves = jeu.eleves?.toSpliced(index, 1, e.detail))}
+                  ($jeuEnEditionStore.eleves = $jeuEnEditionStore.eleves?.toSpliced(index, 1, e.detail))}
               ></dsfr-input>
             {/each}
           </div>
@@ -166,8 +167,8 @@
           errorMessage={erreurs.discipline}
           id="discipline"
           label="Discipline"
-          value={jeu.discipline}
-          onvaluechanged={(e: CustomEvent) => (jeu.discipline = e.detail)}
+          value={$jeuEnEditionStore.discipline}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.discipline = e.detail)}
           options={[
             { value: 'francais', label: 'Français' },
             { value: 'langues-vivantes', label: 'Langues vivantes' },
@@ -202,8 +203,8 @@
           errorMessage={erreurs.classe}
           id="classe"
           label="Classe"
-          value={jeu.classe}
-          onvaluechanged={(e: CustomEvent) => (jeu.classe = e.detail)}
+          value={$jeuEnEditionStore.classe}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.classe = e.detail)}
           options={[
             { value: 'maternelle', label: 'Maternelle' },
             { value: 'cp', label: 'CP' },
@@ -236,9 +237,9 @@
           errorMessage={erreurs.nom}
           id="nomDuJeu"
           label="Nom du jeu"
-          onvaluechanged={(e: CustomEvent) => (jeu.nom = e.detail)}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.nom = e.detail)}
           status={erreurs.nom ? 'error' : 'default'}
-          value={jeu.nom}
+          value={$jeuEnEditionStore.nom}
         >
         </dsfr-input>
 
@@ -246,8 +247,8 @@
           errorMessage={erreurs.categorie}
           id="categorie"
           label="Catégorie"
-          value={jeu.categorie}
-          onvaluechanged={(e: CustomEvent) => (jeu.categorie = e.detail)}
+          value={$jeuEnEditionStore.categorie}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.categorie = e.detail)}
           options={[
             {
               value: 'jeu-carte',
@@ -281,7 +282,7 @@
           <select
             multiple
             placeholder="Sélectionner une ou plusieurs options"
-            bind:value={jeu.thematiques}
+            bind:value={$jeuEnEditionStore.thematiques}
           >
             <option value="comportements-numeriques"
               >Comportements numériques</option
@@ -311,10 +312,10 @@
           hint="Présenter le jeu et son fonctionnement en quelques lignes."
           id="description"
           label="Description"
-          onvaluechanged={(e: CustomEvent) => (jeu.description = e.detail)}
+          onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.description = e.detail)}
           rows={8}
           status={erreurs.description ? 'error' : 'default'}
-          value={jeu.description}
+          value={$jeuEnEditionStore.description}
         ></dsfr-textarea>
       {/if}
 
