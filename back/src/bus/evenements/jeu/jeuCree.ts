@@ -16,5 +16,9 @@ export class JeuCree {
     public readonly categorie: CategorieDeJeux,
     public readonly thematiques: ThematiqueDeJeux[],
     public readonly nombreTemoignages: number,
+    public readonly evaluationDecouverte: number,
+    public readonly evaluationInteret: number,
+    public readonly evaluationSatisfactionGenerale: number,
+    public readonly precisions?: string,
   ) {}
 }

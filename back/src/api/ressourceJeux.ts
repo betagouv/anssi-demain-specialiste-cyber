@@ -9,9 +9,18 @@ import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { ConfigurationServeur } from './configurationServeur';
 
-function chaineNonVide(message: string) {
-  return z.string(message).trim().min(1, message);
-}
+const chaineNonVide = (message: string) =>
+  z.string(message).trim().min(1, message);
+
+const verifieNoteEvaluation = (message: string) =>
+  z
+    .number()
+    .min(1, {
+      error: message,
+    })
+    .max(5, {
+      error: message,
+    });
 
 export const ressourceJeux = ({
   entrepotJeux,
@@ -66,6 +75,20 @@ export const ressourceJeux = ({
         }),
       )
       .optional(),
+    evaluationDecouverte: verifieNoteEvaluation(
+      'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+    ),
+    evaluationInteret: verifieNoteEvaluation(
+      'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+    ),
+    evaluationSatisfactionGenerale: verifieNoteEvaluation(
+      'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+    ),
+    precisions: z
+      .string()
+      .trim()
+      .nonempty('Les précisions ne peuvent pas être vides')
+      .optional(),
   });
 
   routeur.post(
@@ -90,6 +113,10 @@ export const ressourceJeux = ({
           thematiques,
           description,
           temoignages,
+          evaluationDecouverte,
+          evaluationInteret,
+          evaluationSatisfactionGenerale,
+          precisions,
         } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({
@@ -118,6 +145,10 @@ export const ressourceJeux = ({
             categorie,
             thematiques,
             temoignages?.length || 0,
+            evaluationDecouverte,
+            evaluationInteret,
+            evaluationSatisfactionGenerale,
+            precisions,
           ),
         );
         reponse.sendStatus(201);

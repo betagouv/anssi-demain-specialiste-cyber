@@ -55,6 +55,9 @@ describe('La ressource des jeux', () => {
         details: 'Un troisième et dernier démoignage',
       },
     ],
+    evaluationInteret: 1,
+    evaluationSatisfactionGenerale: 2,
+    evaluationDecouverte: 3,
   };
 
   beforeEach(() => {
@@ -138,6 +141,25 @@ describe('La ressource des jeux', () => {
       expect(evenement.categorie).toBe('simulation');
       expect(evenement.thematiques).toEqual(['menace-cyber', 'orientation']);
       expect(evenement.nombreTemoignages).toBe(3);
+    });
+
+    it('publie un événement de création de jeu avec l’évaluation du jeu', async () => {
+      await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          evaluationDecouverte: 2,
+          evaluationInteret: 3,
+          evaluationSatisfactionGenerale: 1,
+          precisions: 'Des précisions',
+        });
+
+      busEvenements.aRecuUnEvenement(JeuCree);
+      const evenement = busEvenements.recupereEvenement(JeuCree)!;
+      expect(evenement.evaluationDecouverte).toBe(2);
+      expect(evenement.evaluationInteret).toBe(3);
+      expect(evenement.evaluationSatisfactionGenerale).toBe(1);
+      expect(evenement.precisions).toBe('Des précisions');
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
@@ -470,6 +492,73 @@ describe('La ressource des jeux', () => {
         expect(reponse.body.erreur).toEqual(
           'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
         );
+      });
+    });
+
+    describe('concernant la vérification de l’évaluation sur CyberEnjeux', () => {
+      it('accepte les précisions sur l‘évaluation CyberEnjeux non définies', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            precisions: undefined,
+          });
+
+        expect(reponse.status).toEqual(201);
+      });
+
+      it.each([
+        {
+          test: 'la note sur l‘évaluation découverte est inférieure ou égal à 5',
+          evaluation: { evaluationDecouverte: 6 },
+          erreurAttendue:
+            'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'la note sur l‘évaluation découverte est supérieure ou égal à 1',
+          evaluation: { evaluationDecouverte: 0 },
+          erreurAttendue:
+            'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'la note sur l‘évaluation intérêt est inférieure ou égal à 5',
+          evaluation: { evaluationInteret: 6 },
+          erreurAttendue:
+            'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'la note sur l‘évaluation intérêt est supérieure ou égal à 1',
+          evaluation: { evaluationInteret: 0 },
+          erreurAttendue:
+            'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'la note sur l‘évaluation satisfaction générale est inférieur ou égal à 5',
+          evaluation: { evaluationSatisfactionGenerale: 6 },
+          erreurAttendue:
+            'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'la note sur l‘évaluation satisfaction générale est supérieur ou égal à 1',
+          evaluation: { evaluationSatisfactionGenerale: 0 },
+          erreurAttendue:
+            'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+        },
+        {
+          test: 'les précisions ne sont pas vides',
+          evaluation: { precisions: '    ' },
+          erreurAttendue: 'Les précisions ne peuvent pas être vides',
+        },
+      ])('vérifie que $test', async (parametresDeTest) => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            ...parametresDeTest.evaluation,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(parametresDeTest.erreurAttendue);
       });
     });
   });
