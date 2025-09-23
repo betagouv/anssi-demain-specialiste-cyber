@@ -6,7 +6,7 @@
     $ressourcesCyberFiltrees.publicsCible.map((cible) => ({
       label: cible,
       id: cible,
-      name: cible,
+      name: 'public-cible',
       value: cible,
     })),
   );
@@ -16,7 +16,8 @@
   <dsfr-checkboxes-group
     legend="Public cible"
     checkboxes={casesACocher}
-    onvaluechanged={(e: CustomEvent) => ($rechercheParPublicCible = e.detail)}
+    values={$rechercheParPublicCible}
+    onvalueschanged={(e: CustomEvent) => ($rechercheParPublicCible = e.detail)}
   >
   </dsfr-checkboxes-group>
 {/if}

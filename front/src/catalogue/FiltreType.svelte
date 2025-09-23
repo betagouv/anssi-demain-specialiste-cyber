@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clic } from '../actions.svelte';
   import { rechercheParType } from './stores/rechercheParType.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -6,7 +7,7 @@
     $ressourcesCyberFiltrees.types.map((type) => ({
       label: type,
       id: type,
-      name: type,
+      name: 'type',
       value: type,
     })),
   );
@@ -16,7 +17,8 @@
   <dsfr-checkboxes-group
     legend="Type"
     checkboxes={casesACocher}
-    onvaluechanged={(e: CustomEvent) => ($rechercheParType = e.detail)}
+    values={$rechercheParType}
+    onvalueschanged={(e: CustomEvent) => ($rechercheParType = e.detail)}
   >
   </dsfr-checkboxes-group>
 {/if}
