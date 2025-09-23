@@ -27,8 +27,12 @@
       label: 'Jeu de carte',
     },
     {
-      value: 'jeu-plateau-role',
-      label: 'Jeu de plateau, jeu de rôle',
+      value: 'jeu-plateau',
+      label: 'Jeu de plateau',
+    },
+    {
+      value: 'jeu-role',
+      label: 'Jeu de rôle',
     },
     {
       value: 'jeu-dessin',
@@ -56,7 +60,7 @@
     placeholder="Sélectionner une ou plusieurs options"
     bind:value={$jeuEnEditionStore.thematiques}
   >
-    <option value="comportements-numeriques">Comportements numériques </option>
+    <option value="comportements-numeriques">Comportements numériques</option>
     <option value="cyberharcelement">Cyberharcelement</option>
     <option value="gestion-crise-cyber">Gestion de crise cyber</option>
     <option value="lutte-manipulation-information"
