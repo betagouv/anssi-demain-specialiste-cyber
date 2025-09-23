@@ -491,6 +491,79 @@ describe('La ressource des jeux', () => {
         );
       });
     });
+
+    describe('concernant la vérification de l’avis sur CyberEnjeux', () => {
+      it.each([
+        { evaluationDecouverte: 1 },
+        { evaluationInteret: 2 },
+        { evaluationSatisfactionGenerale: 3 },
+        { precisions: 'Des précisions' },
+      ])('accepte les avis CyberEnjeux non définis %s', async (avis) => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            avisCyberEnjeux: undefined,
+            ...avis,
+          });
+
+        expect(reponse.status).toEqual(201);
+      });
+
+      it.each([
+        {
+          test: 'niveau évaluation découverte est inférieur ou égal à 5',
+          avis: { evaluationDecouverte: 6 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour la découverte doit être compris entre 1 et 5',
+        },
+        {
+          test: 'niveau évaluation découverte est supérieur ou égal à 1',
+          avis: { evaluationDecouverte: 0 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour la découverte doit être compris entre 1 et 5',
+        },
+        {
+          test: 'niveau évaluation intérêt est inférieur ou égal à 5',
+          avis: { evaluationInteret: 6 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour l‘intérêt doit être compris entre 1 et 5',
+        },
+        {
+          test: 'niveau évaluation intérêt est supérieur ou égal à 1',
+          avis: { evaluationInteret: 0 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour l‘intérêt doit être compris entre 1 et 5',
+        },
+        {
+          test: 'niveau évaluation satisfaction générale est inférieur ou égal à 5',
+          avis: { evaluationSatisfactionGenerale: 6 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour la satisfaction générale doit être compris entre 1 et 5',
+        },
+        {
+          test: 'niveau évaluation satisfaction générale est supérieur ou égal à 1',
+          avis: { evaluationSatisfactionGenerale: 0 },
+          erreurAttendue:
+            'Le niveau d‘évaluation pour la satisfaction générale doit être compris entre 1 et 5',
+        },
+        {
+          test: 'les précisions ne sont pas vides',
+          avis: { precisions: '    ' },
+          erreurAttendue: 'Les précisions ne peuvent pas être vides',
+        },
+      ])('vérifie que le $test', async (avis) => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            ...avis.avis,
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(avis.erreurAttendue);
+      });
+    });
   });
 
   describe('sur un GET', () => {

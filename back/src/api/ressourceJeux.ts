@@ -9,9 +9,19 @@ import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { ConfigurationServeur } from './configurationServeur';
 
-function chaineNonVide(message: string) {
-  return z.string(message).trim().min(1, message);
-}
+const chaineNonVide = (message: string) =>
+  z.string(message).trim().min(1, message);
+
+const verifieNiveauEvaluation = (message: string) =>
+  z
+    .number()
+    .min(1, {
+      error: message,
+    })
+    .max(5, {
+      error: message,
+    })
+    .optional();
 
 export const ressourceJeux = ({
   entrepotJeux,
@@ -66,10 +76,20 @@ export const ressourceJeux = ({
         }),
       )
       .optional(),
-    evaluationDecouverte: z.number().optional(),
-    evaluationInteret: z.number().optional(),
-    evaluationSatisfactionGenerale: z.number().optional(),
-    precisions: z.string().optional(),
+    evaluationDecouverte: verifieNiveauEvaluation(
+      'Le niveau d‘évaluation pour la découverte doit être compris entre 1 et 5',
+    ),
+    evaluationInteret: verifieNiveauEvaluation(
+      'Le niveau d‘évaluation pour l‘intérêt doit être compris entre 1 et 5',
+    ),
+    evaluationSatisfactionGenerale: verifieNiveauEvaluation(
+      'Le niveau d‘évaluation pour la satisfaction générale doit être compris entre 1 et 5',
+    ),
+    precisions: z
+      .string()
+      .trim()
+      .nonempty('Les précisions ne peuvent pas être vides')
+      .optional(),
   });
 
   routeur.post(
