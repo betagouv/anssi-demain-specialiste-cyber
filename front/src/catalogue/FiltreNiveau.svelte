@@ -3,11 +3,11 @@
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
   const casesACocher = $derived(
-    $ressourcesCyberFiltrees.niveaux.map((type) => ({
-      label: type,
-      id: type,
-      name: type,
-      value: type,
+    $ressourcesCyberFiltrees.niveaux.map((niveau) => ({
+      label: niveau,
+      id: niveau,
+      name: 'niveau',
+      value: niveau,
     })),
   );
 </script>
@@ -16,7 +16,8 @@
   <dsfr-checkboxes-group
     legend="Niveau"
     checkboxes={casesACocher}
-    onvaluechanged={(e: CustomEvent) => ($rechercheParNiveau = e.detail)}
+    values={$rechercheParNiveau}
+    onvalueschanged={(e: CustomEvent) => ($rechercheParNiveau = e.detail)}
   >
   </dsfr-checkboxes-group>
 {/if}
