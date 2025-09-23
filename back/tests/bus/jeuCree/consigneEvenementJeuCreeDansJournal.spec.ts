@@ -42,6 +42,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         'simulation',
         ['menace-cyber', 'orientation'],
         1,
+        [{ libelle: 'Mon libellé', niveau: 3 }],
       ),
     );
 
@@ -58,6 +59,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         categorie: 'simulation',
         thematiques: ['menace-cyber', 'orientation'],
         nombreTemoignages: 1,
+        avisCyberEnjeux: [{ libelle: 'Mon libellé', niveau: 3 }],
       },
       date: new Date('2025-03-10'),
     });
