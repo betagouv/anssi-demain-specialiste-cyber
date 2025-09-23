@@ -1,20 +1,20 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import FormulaireNouveauJeu from '../../src/jeux/FormulaireNouveauJeu.svelte';
+import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
 import {
   type InformationsGeneralesDuJeu,
   type JeuEnEdition,
   type PresentationDuJeu,
-} from '../../src/jeux/jeu';
-import { type Validateur } from '../../src/validateur';
+} from '../../../src/jeux/jeu';
+import { type Validateur } from '../../../src/validateur';
 import {
   findAllByRoleDeep,
   findByRoleDeep,
   getAllByRoleDeep,
   getByRoleDeep,
   getByTextDeep,
-} from '../shadow-dom-utilitaires';
+} from '../../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
