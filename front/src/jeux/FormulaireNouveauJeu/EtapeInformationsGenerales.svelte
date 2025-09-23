@@ -84,6 +84,8 @@
     <dsfr-button
       label="Ajouter un élève"
       kind="secondary"
+      hasIcon="true"
+      icon="user-add-line"
       use:clic={ajouteEleve}
     ></dsfr-button>
   </div>
