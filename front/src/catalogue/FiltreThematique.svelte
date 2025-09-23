@@ -21,7 +21,7 @@
 
 <style lang="scss">
   fieldset {
-    margin: 0;
+    margin: 0 0 1rem;
 
     legend {
       font-size: 1rem;
