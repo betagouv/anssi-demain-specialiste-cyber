@@ -104,7 +104,6 @@ export const ressourceJeux = ({
             thematiques,
             description,
             temoignages,
-
           }),
         );
         await busEvenements.publie(
@@ -118,6 +117,7 @@ export const ressourceJeux = ({
             eleves.length,
             categorie,
             thematiques,
+            temoignages?.length || 0,
           ),
         );
         reponse.sendStatus(201);

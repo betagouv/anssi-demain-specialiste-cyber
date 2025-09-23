@@ -41,6 +41,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         3,
         'simulation',
         ['menace-cyber', 'orientation'],
+        1,
       ),
     );
 
@@ -56,6 +57,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         nombreEleves: 3,
         categorie: 'simulation',
         thematiques: ['menace-cyber', 'orientation'],
+        nombreTemoignages: 1,
       },
       date: new Date('2025-03-10'),
     });

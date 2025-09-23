@@ -41,6 +41,20 @@ describe('La ressource des jeux', () => {
     categorie: 'simulation',
     thematiques: ['menace-cyber', 'orientation'],
     description: 'Un texte descriptif du jeu',
+    temoignages: [
+      {
+        prenom: 'Jean',
+        details: 'Un premier témoignage',
+      },
+      {
+        prenom: 'Paul',
+        details: 'Un second témoignage',
+      },
+      {
+        prenom: 'Pierre',
+        details: 'Un troisième et dernier démoignage',
+      },
+    ],
   };
 
   beforeEach(() => {
@@ -123,6 +137,7 @@ describe('La ressource des jeux', () => {
       expect(evenement.nombreEleves).toBe(1);
       expect(evenement.categorie).toBe('simulation');
       expect(evenement.thematiques).toEqual(['menace-cyber', 'orientation']);
+      expect(evenement.nombreTemoignages).toBe(3);
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {

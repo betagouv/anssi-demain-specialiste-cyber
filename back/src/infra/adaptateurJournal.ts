@@ -32,6 +32,7 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     nombreEleves: number;
     categorie: CategorieDeJeux;
     thematiques: ThematiqueDeJeux[];
+    nombreTemoignages: number;
   };
   type: 'JEU_CREE';
 };
