@@ -42,6 +42,8 @@
       <dsfr-button
         label="Supprimer"
         kind="tertiary-no-outline"
+        hasIcon="true"
+        icon="delete-bin-line"
         use:clic={() => supprimeTemoignage(index)}
       ></dsfr-button>
     </div>
@@ -52,6 +54,8 @@
   <dsfr-button
     label="Ajouter un témoignage"
     kind="secondary"
+    hasIcon="true"
+    icon="add-line"
     use:clic={ajouteTemoignage}
   ></dsfr-button>
 </div>

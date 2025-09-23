@@ -54,12 +54,17 @@
         label="Fermer"
         size="sm"
         kind="tertiary-no-outline"
+        hasIcon="true"
+        icon="close-line"
+        iconPlace="right"
         use:clic={ferme}
       ></dsfr-button>
       <dsfr-button
         class="reinitialise-filtres"
         label="Réinitialiser les filtres"
         kind="tertiary"
+        hasIcon="true"
+        icon="close-circle-line"
         use:clic={reinitialiseLesFiltres}
       ></dsfr-button>
     </div>

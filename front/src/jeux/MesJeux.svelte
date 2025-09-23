@@ -30,6 +30,8 @@
       <dsfr-button
         label="Déposer un jeu"
         kind="secondary"
+        hasIcon="true"
+        icon="add-line"
         use:clic={deposeUnJeu}
       ></dsfr-button>
     </div>
@@ -56,7 +58,12 @@
       <p>
         Partagez les jeux élaborés par vos élèves lors de séquence CyberEnJeux.
       </p>
-      <dsfr-button label="Déposer un jeu" use:clic={deposeUnJeu}></dsfr-button>
+      <dsfr-button
+        label="Déposer un jeu"
+        hasIcon="true"
+        icon="add-line"
+        use:clic={deposeUnJeu}
+      ></dsfr-button>
     </div>
     <div>
       <span>
