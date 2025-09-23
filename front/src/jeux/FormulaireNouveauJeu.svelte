@@ -153,11 +153,13 @@
               ></dsfr-input>
             {/each}
           </div>
-          <dsfr-button
-            label="Ajouter un élève"
-            kind="secondary"
-            use:clic={ajouteEleve}
-          ></dsfr-button>
+          <div class="actions">
+            <dsfr-button
+              label="Ajouter un élève"
+              kind="secondary"
+              use:clic={ajouteEleve}
+            ></dsfr-button>
+          </div>
         </fieldset>
 
         <dsfr-select
@@ -345,7 +347,6 @@
     justify-content: center;
     align-items: center;
     padding: 56px 16px;
-    gap: 10px;
 
     hr {
       align-self: stretch;
@@ -366,6 +367,7 @@
       display: flex;
       flex-direction: column;
       align-self: stretch;
+      gap: 1.5rem;
       .sequence {
         display: flex;
         flex-direction: column;
@@ -377,6 +379,7 @@
       }
 
       .eleves {
+        margin: 0;
         legend {
           color: #161616;
           font-weight: 700;
@@ -390,6 +393,11 @@
           grid-template-rows: auto;
         }
 
+        .actions {
+          display: flex;
+          justify-content: start;
+        }
+
         @include a-partir-de(sm) {
           .prenoms {
             grid-template-columns: repeat(2, 1fr);
@@ -401,6 +409,7 @@
         display: flex;
         justify-content: flex-end;
         gap: 1rem;
+        margin-top: 1.5rem;
       }
 
       .erreur {
