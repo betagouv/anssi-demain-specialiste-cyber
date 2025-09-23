@@ -13,6 +13,7 @@ export type JeuEnEdition = {
   categorie?: string;
   thematiques?: string[];
   description?: string;
+  temoignages?: { prenom: string; details: string }[];
 };
 
 export type ErreursValidationJeuEnEdition = Partial<
