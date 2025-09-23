@@ -307,6 +307,16 @@ describe('Le formulaire de dépose de jeu', () => {
         categorie: 'simulation',
         thematiques: ['menace-cyber', 'orientation'],
         description: 'Description du jeu',
+        temoignages: [
+          {
+            prenom: 'Michel',
+            details: "C'était super",
+          },
+          {
+            prenom: 'Martin',
+            details: "J'ai aimé",
+          },
+        ],
       };
       const { getByRole, queryAllByRole } = render(
         FormulaireNouveauJeu,
@@ -357,6 +367,22 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
 
       // Etape témoignages
+      const ajouterTemoignage = await findByRoleDeep('button', {
+        name: 'Ajouter un témoignage',
+      });
+      await user.click(ajouterTemoignage);
+
+      const champsPrenomTemoignage = await findAllByRoleDeep('textbox', {
+        name: 'Prénom',
+      });
+      const champsTemoignage = await findAllByRoleDeep('textbox', {
+        name: 'Témoignage',
+      });
+      await user.type(champsPrenomTemoignage[0], 'Michel');
+      await user.type(champsTemoignage[0], "C'était super");
+      await user.type(champsPrenomTemoignage[1], 'Martin');
+      await user.type(champsTemoignage[1], "J'ai aimé");
+
       await terminer();
 
       expect(

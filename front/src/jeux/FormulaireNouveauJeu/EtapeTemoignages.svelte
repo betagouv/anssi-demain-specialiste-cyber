@@ -1,4 +1,11 @@
 <script lang="ts">
+  import { clic } from '../../actions.svelte';
+  import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+
+  const ajouteTemoignage = () => {
+    $jeuEnEditionStore.temoignages ??= [];
+    $jeuEnEditionStore.temoignages.push({ prenom: '', details: '' });
+  };
 </script>
 
 <div class="note">
@@ -7,6 +14,29 @@
     comme celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
     pour faire découvrir la cybersécurité à leurs élèves.
   </p>
-  <dsfr-input id="prenom-temoignage-1" label="Prénom"></dsfr-input>
-  <dsfr-textarea id="temoignage-1" label="Témoignage"></dsfr-textarea>
+  {#if $jeuEnEditionStore.temoignages}
+    {#each $jeuEnEditionStore.temoignages as temoignage, index}
+      <div class="temoignage">
+        <dsfr-input
+          label="Prénom"
+          id="prenom-temoignage-{index}"
+          value={temoignage.prenom}
+          onvaluechanged={(e: CustomEvent) => (temoignage.prenom = e.detail)}
+        ></dsfr-input>
+        <dsfr-textarea
+          id="temoignage-{index}"
+          value={temoignage.details}
+          onvaluechanged={(e: CustomEvent) => (temoignage.details = e.detail)}
+          label="Témoignage"
+        ></dsfr-textarea>
+      </div>
+    {/each}
+  {/if}
+  <div class="actions">
+    <dsfr-button
+      label="Ajouter un témoignage"
+      kind="secondary"
+      use:clic={ajouteTemoignage}
+    ></dsfr-button>
+  </div>
 </div>

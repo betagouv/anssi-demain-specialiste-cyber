@@ -32,7 +32,10 @@
 
   let etape = $state<Etape>('informations-generales');
 
-  $jeuEnEditionStore = { eleves: ['', '', '', ''] };
+  $jeuEnEditionStore = {
+    eleves: ['', '', '', ''],
+    temoignages: [{ prenom: '', details: '' }],
+  };
 
   let erreurs = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
