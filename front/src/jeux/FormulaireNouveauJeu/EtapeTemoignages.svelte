@@ -15,40 +15,80 @@
   };
 </script>
 
-<div class="note">
-  <p>
-    <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout
-    comme celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
-    pour faire découvrir la cybersécurité à leurs élèves.
-  </p>
-  {#if $jeuEnEditionStore.temoignages}
-    {#each $jeuEnEditionStore.temoignages as temoignage, index}
-      <div class="temoignage">
+<p>
+  <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout
+  comme celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
+  pour faire découvrir la cybersécurité à leurs élèves.
+</p>
+{#if $jeuEnEditionStore.temoignages}
+  {#each $jeuEnEditionStore.temoignages as temoignage, index}
+    <div class="temoignage">
+      <div class="prenom">
         <dsfr-input
           label="Prénom"
           id="prenom-temoignage-{index}"
           value={temoignage.prenom}
           onvaluechanged={(e: CustomEvent) => (temoignage.prenom = e.detail)}
         ></dsfr-input>
-        <dsfr-textarea
-          id="temoignage-{index}"
-          value={temoignage.details}
-          onvaluechanged={(e: CustomEvent) => (temoignage.details = e.detail)}
-          label="Témoignage"
-        ></dsfr-textarea>
       </div>
+      <dsfr-textarea
+        id="temoignage-{index}"
+        value={temoignage.details}
+        onvaluechanged={(e: CustomEvent) => (temoignage.details = e.detail)}
+        label="Témoignage"
+      ></dsfr-textarea>
+    </div>
+    <div class="actions">
       <dsfr-button
         label="Supprimer"
-        kind="secondary"
+        kind="tertiary-no-outline"
         use:clic={() => supprimeTemoignage(index)}
       ></dsfr-button>
-    {/each}
-  {/if}
-  <div class="actions">
-    <dsfr-button
-      label="Ajouter un témoignage"
-      kind="secondary"
-      use:clic={ajouteTemoignage}
-    ></dsfr-button>
-  </div>
+    </div>
+    <hr />
+  {/each}
+{/if}
+<div class="actions">
+  <dsfr-button
+    label="Ajouter un témoignage"
+    kind="secondary"
+    use:clic={ajouteTemoignage}
+  ></dsfr-button>
 </div>
+
+<style lang="scss">
+  @use '../../points-de-rupture' as *;
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  hr {
+    align-self: stretch;
+    height: 1px;
+    border: 0;
+    background-color: #dddddd;
+    margin: 0.5rem 0;
+  }
+
+  .temoignage {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .prenom {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @include a-partir-de(sm) {
+      .prenom {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+</style>

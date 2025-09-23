@@ -158,7 +158,7 @@
       display: flex;
       flex-direction: column;
       align-self: stretch;
-      gap: 1.5rem;
+      gap: 1rem;
 
       .actions {
         display: flex;
