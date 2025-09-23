@@ -104,6 +104,7 @@ export const ressourceJeux = ({
             thematiques,
             description,
             temoignages,
+
           }),
         );
         await busEvenements.publie(
