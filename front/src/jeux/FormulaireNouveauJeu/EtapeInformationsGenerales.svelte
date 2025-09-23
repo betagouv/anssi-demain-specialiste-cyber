@@ -160,6 +160,8 @@
 </dsfr-select>
 
 <style lang="scss">
+  @use '../../points-de-rupture' as *;
+
   .sequence {
     display: flex;
     flex-direction: column;
