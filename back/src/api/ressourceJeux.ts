@@ -66,6 +66,10 @@ export const ressourceJeux = ({
         }),
       )
       .optional(),
+    evaluationDecouverte: z.number().optional(),
+    evaluationInteret: z.number().optional(),
+    evaluationSatisfactionGenerale: z.number().optional(),
+    precisions: z.string().optional(),
   });
 
   routeur.post(
@@ -90,6 +94,10 @@ export const ressourceJeux = ({
           thematiques,
           description,
           temoignages,
+          evaluationDecouverte,
+          evaluationInteret,
+          evaluationSatisfactionGenerale,
+          precisions,
         } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({
@@ -118,6 +126,10 @@ export const ressourceJeux = ({
             categorie,
             thematiques,
             temoignages?.length || 0,
+            evaluationDecouverte,
+            evaluationInteret,
+            evaluationSatisfactionGenerale,
+            precisions,
           ),
         );
         reponse.sendStatus(201);

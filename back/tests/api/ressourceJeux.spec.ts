@@ -140,6 +140,25 @@ describe('La ressource des jeux', () => {
       expect(evenement.nombreTemoignages).toBe(3);
     });
 
+    it('publie un événement de création de jeu avec l’avis sur CyberEnjeux', async () => {
+      await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          evaluationDecouverte: 2,
+          evaluationInteret: 3,
+          evaluationSatisfactionGenerale: 1,
+          precisions: 'Des précisions',
+        });
+
+      busEvenements.aRecuUnEvenement(JeuCree);
+      const evenement = busEvenements.recupereEvenement(JeuCree)!;
+      expect(evenement.evaluationDecouverte).toBe(2);
+      expect(evenement.evaluationInteret).toBe(3);
+      expect(evenement.evaluationSatisfactionGenerale).toBe(1);
+      expect(evenement.precisions).toBe('Des précisions');
+    });
+
     it("associe le jeu à l'utilisateur connecté", async () => {
       await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
 
