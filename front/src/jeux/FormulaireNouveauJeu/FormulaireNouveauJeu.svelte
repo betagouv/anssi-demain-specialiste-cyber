@@ -11,13 +11,14 @@
     InformationsGeneralesDuJeu,
     PresentationDuJeu,
   } from '../jeu';
+  import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
-  import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
   import EtapePresentation from './EtapePresentation.svelte';
+  import EtapeTemoignages from './EtapeTemoignages.svelte';
 
-  type Etape = 'informations-generales' | 'presentation';
+  type Etape = 'informations-generales' | 'presentation' | 'temoignages';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
@@ -46,6 +47,9 @@
       case 'presentation':
         etape = 'informations-generales';
         break;
+      case 'temoignages':
+        etape = 'presentation';
+        break;
       default:
         break;
     }
@@ -60,6 +64,12 @@
           erreurs = validateurInformationsGenerales.valide($jeuEnEditionStore);
         }
         break;
+      case 'presentation':
+        if (validateurPresentation.estValide($jeuEnEditionStore)) {
+          etape = 'temoignages';
+        } else {
+          erreurs = validateurPresentation.valide($jeuEnEditionStore);
+        }
       default:
         break;
     }
@@ -67,11 +77,6 @@
 
   const soumets = async (event: Event) => {
     event.preventDefault();
-
-    if (!validateurPresentation.estValide($jeuEnEditionStore)) {
-      erreurs = validateurPresentation.valide($jeuEnEditionStore);
-      return;
-    }
 
     await axios.post('/api/jeux', {
       ...$jeuEnEditionStore,
@@ -83,27 +88,33 @@
 <dsfr-container>
   <div class="formulaire-jeu">
     <hr />
-    <p class="mention">
-      Sauf mention contraire, les informations demandées sont obligatoires.
-    </p>
+    {#if etape !== 'temoignages'}
+      <p class="mention">
+        Sauf mention contraire, les informations demandées sont obligatoires.
+      </p>
+    {/if}
     <form novalidate>
       {#if etape === 'informations-generales'}
         <EtapeInformationsGenerales {erreurs} />
       {:else if etape === 'presentation'}
         <EtapePresentation {erreurs} />
+      {:else if etape === 'temoignages'}
+        <EtapeTemoignages />
       {/if}
 
       <div class="actions">
-        {#if etape === 'informations-generales'}
-          <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
-          ></dsfr-button>
-        {:else}
+        {#if etape !== 'informations-generales'}
           <dsfr-button
             label="Précédent"
             kind="secondary"
             use:clic={etapePrecedente}
           ></dsfr-button>
+        {/if}
+        {#if etape === 'temoignages'}
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+          ></dsfr-button>
+        {:else}
+          <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
           ></dsfr-button>
         {/if}
       </div>

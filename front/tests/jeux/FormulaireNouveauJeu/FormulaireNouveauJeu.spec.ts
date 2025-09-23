@@ -14,6 +14,7 @@ import {
   getAllByRoleDeep,
   getByRoleDeep,
   getByTextDeep,
+  queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
@@ -215,6 +216,23 @@ describe('Le formulaire de dépose de jeu', () => {
         );
       });
     });
+    describe("lors de l'étape des temoignages", () => {
+      it('de saisir un témoignage', async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+
+        await waitFor(() =>
+          expect(getByRoleDeep('textbox', { name: 'Prénom' })).toBeVisible(),
+        );
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('textbox', { name: 'Témoignage' }),
+          ).toBeVisible(),
+        );
+      });
+    });
   });
 
   describe('lors de la validation', () => {
@@ -266,7 +284,7 @@ describe('Le formulaire de dépose de jeu', () => {
         });
         await etapeSuivante();
 
-        await terminer();
+        await etapeSuivante();
 
         expect(axiosMock.post).not.toHaveBeenCalled();
         await waitFor(() => getByTextDeep('Le nom est obligatoire'));
@@ -336,7 +354,9 @@ describe('Le formulaire de dépose de jeu', () => {
         'Orientation',
       ]);
       await user.type(champDescription, 'Description du jeu');
+      await etapeSuivante();
 
+      // Etape témoignages
       await terminer();
 
       expect(
@@ -361,10 +381,11 @@ describe('Le formulaire de dépose de jeu', () => {
         },
       });
       await etapeSuivante();
+      await etapeSuivante();
 
-      await terminer();
-
-      expect(axiosMock.post).not.toHaveBeenCalled();
+      await waitFor(() =>
+        expect(queryByRoleDeep('button', { name: 'Terminer' })).toBeNull(),
+      );
     });
   });
 });
