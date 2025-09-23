@@ -1,6 +1,7 @@
 export const categoriesDeJeux = [
   'jeu-carte',
-  'jeu-plateau-role',
+  'jeu-plateau',
+  'jeu-role',
   'jeu-dessin',
   'simulation',
   'autre',
