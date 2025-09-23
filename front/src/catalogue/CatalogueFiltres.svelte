@@ -155,7 +155,6 @@
       .filtres-contenu {
         display: flex;
         flex-flow: column nowrap;
-        gap: 1rem;
       }
 
       .applique-filtres {
@@ -222,6 +221,7 @@
 
       .filtres-conteneur {
         grid-row: 2;
+        padding: 0;
         position: relative;
       }
 
@@ -256,7 +256,6 @@
         }
 
         .filtres-contenu {
-          gap: 1rem;
           grid-row: 2;
         }
 
