@@ -14,6 +14,7 @@ import {
   getAllByRoleDeep,
   getByRoleDeep,
   getByTextDeep,
+  queryAllByRoleDeep,
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
 
@@ -231,6 +232,53 @@ describe('Le formulaire de dépose de jeu', () => {
             getByRoleDeep('textbox', { name: 'Témoignage' }),
           ).toBeVisible(),
         );
+      });
+
+      it("d'ajouter un témoignage", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+
+        const temoignages = await findAllByRoleDeep('textbox', {
+          name: 'Témoignage',
+        });
+        expect(temoignages).toHaveLength(1);
+
+        const boutonAjouterTemoignage = await findByRoleDeep('button', {
+          name: 'Ajouter un témoignage',
+        });
+        await user.click(boutonAjouterTemoignage);
+
+        const temoignagesApresAjout = await findAllByRoleDeep('textbox', {
+          name: 'Témoignage',
+        });
+        expect(temoignagesApresAjout).toHaveLength(2);
+      });
+
+      it('de supprimer un témoignage', async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+
+        const temoignages = await findAllByRoleDeep('textbox', {
+          name: 'Témoignage',
+        });
+        expect(temoignages).toHaveLength(1);
+
+        const boutonSupprimer = await findByRoleDeep('button', {
+          name: 'Supprimer',
+        });
+        await user.click(boutonSupprimer);
+
+        const temoignagesApresSuppression = await queryAllByRoleDeep(
+          'textbox',
+          {
+            name: 'Témoignage',
+          },
+        );
+        expect(temoignagesApresSuppression).toHaveLength(0);
       });
     });
   });

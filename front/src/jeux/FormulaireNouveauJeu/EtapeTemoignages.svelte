@@ -6,6 +6,13 @@
     $jeuEnEditionStore.temoignages ??= [];
     $jeuEnEditionStore.temoignages.push({ prenom: '', details: '' });
   };
+
+  const supprimeTemoignage = (index: number) => {
+    $jeuEnEditionStore.temoignages = $jeuEnEditionStore.temoignages?.toSpliced(
+      index,
+      1,
+    );
+  };
 </script>
 
 <div class="note">
@@ -30,6 +37,11 @@
           label="Témoignage"
         ></dsfr-textarea>
       </div>
+      <dsfr-button
+        label="Supprimer"
+        kind="secondary"
+        use:clic={() => supprimeTemoignage(index)}
+      ></dsfr-button>
     {/each}
   {/if}
   <div class="actions">
