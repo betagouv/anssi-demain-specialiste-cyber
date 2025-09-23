@@ -53,6 +53,19 @@ export const ressourceJeux = ({
       8000,
       'La description ne peut contenir que 8000 caractères maximum',
     ),
+    temoignages: z
+      .array(
+        z.strictObject({
+          prenom: z.string('Le prénom est obligatoire dans un témoignage'),
+          details: z
+            .string('Les détails sont obligatoires dans un témoignage')
+            .max(
+              8000,
+              'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
+            ),
+        }),
+      )
+      .optional(),
   });
 
   routeur.post(
@@ -76,6 +89,7 @@ export const ressourceJeux = ({
           categorie,
           thematiques,
           description,
+          temoignages,
         } = requete.body;
         await entrepotJeux.ajoute(
           new Jeu({
@@ -89,6 +103,7 @@ export const ressourceJeux = ({
             categorie,
             thematiques,
             description,
+            temoignages,
           }),
         );
         await busEvenements.publie(

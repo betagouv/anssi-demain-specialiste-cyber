@@ -86,7 +86,12 @@ describe('La ressource des jeux', () => {
     });
 
     it('peut fournir les informations sur le jeu', async () => {
-      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
+      await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          temoignages: [{ prenom: 'Michel', details: "C'était trop bien" }],
+        });
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
@@ -99,6 +104,9 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].categorie).toEqual('simulation');
       expect(mesJeux[0].thematiques).toEqual(['menace-cyber', 'orientation']);
       expect(mesJeux[0].description).toEqual('Un texte descriptif du jeu');
+      expect(mesJeux[0].temoignages).toStrictEqual([
+        { prenom: 'Michel', details: "C'était trop bien" },
+      ]);
     });
 
     it('publie un événement de création de jeu', async () => {
@@ -378,6 +386,74 @@ describe('La ressource des jeux', () => {
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
           'La description ne peut contenir que 8000 caractères maximum',
+        );
+      });
+    });
+
+    describe('concernant la vérification des témoignages', () => {
+      it('accepte les témoignages non définis', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            temoignages: undefined,
+          });
+
+        expect(reponse.status).toEqual(201);
+      });
+
+      it('accepte les témoignages vides', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            temoignages: [],
+          });
+
+        expect(reponse.status).toEqual(201);
+      });
+
+      it("vérifie que le prénom existe dans un témoignage'", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            temoignages: [
+              { nom: 'ça devrait être le prénom', details: 'un détail' },
+            ],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le prénom est obligatoire dans un témoignage',
+        );
+      });
+
+      it("vérifie que les détails existent dans un témoignage'", async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            temoignages: [{ prenom: 'Miche' }],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Les détails sont obligatoires dans un témoignage',
+        );
+      });
+
+      it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .send({
+            ...corpsNouveauJeuValide,
+            temoignages: [{ prenom: 'Jean', details: 'mots'.repeat(2001) }],
+          });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
         );
       });
     });
