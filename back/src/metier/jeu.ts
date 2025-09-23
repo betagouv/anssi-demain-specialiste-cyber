@@ -6,6 +6,11 @@ import { Discipline } from './referentiels/disciplines';
 import { CategorieDeJeux } from './referentiels/categorieDeJeux';
 import { ThematiqueDeJeux } from './referentiels/thematiqueDeJeux';
 
+export type Temoignage = {
+  prenom: string;
+  details: string;
+};
+
 export class Jeu {
   readonly id: string;
   nom: string;
@@ -18,6 +23,7 @@ export class Jeu {
   categorie: CategorieDeJeux;
   thematiques: ThematiqueDeJeux[];
   description: string;
+  temoignages: Temoignage[];
 
   constructor({
     id,
@@ -31,6 +37,7 @@ export class Jeu {
     categorie,
     thematiques,
     description,
+    temoignages = [],
   }: {
     id?: string;
     nom: string;
@@ -43,6 +50,7 @@ export class Jeu {
     categorie: CategorieDeJeux;
     thematiques: ThematiqueDeJeux[];
     description: string;
+    temoignages?: Temoignage[];
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -55,5 +63,6 @@ export class Jeu {
     this.categorie = categorie;
     this.thematiques = thematiques;
     this.description = description;
+    this.temoignages = temoignages;
   }
 }
