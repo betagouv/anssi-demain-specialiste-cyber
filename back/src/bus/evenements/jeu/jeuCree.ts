@@ -15,5 +15,6 @@ export class JeuCree {
     public readonly nombreEleves: number,
     public readonly categorie: CategorieDeJeux,
     public readonly thematiques: ThematiqueDeJeux[],
+    public readonly nombreTemoignages: number,
   ) {}
 }
