@@ -2,7 +2,7 @@ import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotJeux } from '../metier/entrepotJeux';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Jeu, Temoignage } from '../metier/jeu';
+import { AvisCyberEnjeux, Jeu, Temoignage } from '../metier/jeu';
 import { CategorieDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { Classe } from '../metier/referentiels/classes';
 import { Discipline } from '../metier/referentiels/disciplines';
@@ -24,15 +24,17 @@ type JeuEnDB = {
   thematiques: string[];
   description: string;
   temoignages: string[];
+  avis_cyber_enjeux: string[];
 };
 
 type JeuEnDBInsertion = Omit<
   JeuEnDB,
-  'eleves' | 'thematiques' | 'temoignages'
+  'eleves' | 'thematiques' | 'temoignages' | 'avis_cyber_enjeux'
 > & {
   eleves: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
   thematiques: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
   temoignages: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
+  avis_cyber_enjeux: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
 };
 
 export class EntrepotJeuxPostgres implements EntrepotJeux {
@@ -68,6 +70,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       thematiques: JSON.stringify(jeu.thematiques),
       description: jeu.description,
       temoignages: JSON.stringify(jeu.temoignages),
+      avis_cyber_enjeux: JSON.stringify(jeu.avisCyberEnjeux),
     } satisfies JeuEnDBInsertion);
   }
 
