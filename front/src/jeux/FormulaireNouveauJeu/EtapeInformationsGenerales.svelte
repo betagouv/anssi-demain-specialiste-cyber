@@ -121,6 +121,24 @@
       label: 'Sciences et technologie',
     },
     { value: 'mathematiques', label: 'Mathématiques' },
+    { value: 'physique-chimie', label: 'Physique-chimie' },
+    { value: 'svt', label: 'Sciences de la vie et de la Terre' },
+    { value: 'technologie', label: 'Technologie' },
+    {
+      value: 'education-médias-information',
+      label: "Éducation aux médias et à l'information",
+    },
+    {
+      value: 'sciences-economiques-sociales',
+      label: 'Sciences économiques et sociales',
+    },
+    {
+      value: 'sciences-numériques-technologie',
+      label: 'Sciences numériques et technologie',
+    },
+    { value: 'enseignement-scientifique', label: 'Enseignement scientifique' },
+    { value: 'post-bac', label: 'Post Bac' },
+    { value: 'autre', label: 'Autre' },
   ]}
   placeholder="Sélectionner une option"
   placeholderDisabled={true}

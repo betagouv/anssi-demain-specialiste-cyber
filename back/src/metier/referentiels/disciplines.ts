@@ -9,5 +9,14 @@ export const disciplines = [
   'histoire-et-geographie',
   'sciences-et-technologie',
   'mathematiques',
+  'physique-chimie',
+  'svt',
+  'technologie',
+  'education-médias-information',
+  'sciences-economiques-sociales',
+  'sciences-numériques-technologie',
+  'enseignement-scientifique',
+  'post-bac',
+  'autre',
 ] as const;
 export type Discipline = (typeof disciplines)[number];
