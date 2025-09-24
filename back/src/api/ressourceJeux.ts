@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
-import { Jeu } from '../metier/jeu';
+import { Jeu, NoteEvaluation } from '../metier/jeu';
 import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { classes } from '../metier/referentiels/classes';
 import { disciplines } from '../metier/referentiels/disciplines';
@@ -20,8 +20,7 @@ const verifieNiveauEvaluation = (message: string) =>
     })
     .max(5, {
       error: message,
-    })
-    .optional();
+    });
 
 export const ressourceJeux = ({
   entrepotJeux,
@@ -132,6 +131,11 @@ export const ressourceJeux = ({
             thematiques,
             description,
             temoignages,
+            evaluationDecouverte: evaluationDecouverte as NoteEvaluation,
+            evaluationInteret: evaluationInteret as NoteEvaluation,
+            evaluationSatisfactionGenerale:
+              evaluationSatisfactionGenerale as NoteEvaluation,
+            precisions,
           }),
         );
         await busEvenements.publie(

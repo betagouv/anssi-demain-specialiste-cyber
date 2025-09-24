@@ -55,6 +55,9 @@ describe('La ressource des jeux', () => {
         details: 'Un troisième et dernier démoignage',
       },
     ],
+    evaluationDecouverte: 2,
+    evaluationInteret: 3,
+    evaluationSatisfactionGenerale: 1,
   };
 
   beforeEach(() => {
@@ -121,6 +124,21 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].temoignages).toStrictEqual([
         { prenom: 'Michel', details: "C'était trop bien" },
       ]);
+      expect(mesJeux[0].evaluationDecouverte).toBe(2);
+      expect(mesJeux[0].evaluationInteret).toBe(3);
+      expect(mesJeux[0].evaluationSatisfactionGenerale).toBe(1);
+    });
+
+    it('peut fournir les informations sur le jeu en ajoutant des précisions sur l‘évaluation', async () => {
+      await request(serveur)
+        .post('/api/jeux')
+        .send({
+          ...corpsNouveauJeuValide,
+          precisions: 'Des précisions',
+        });
+
+      const mesJeux = await entrepotJeux.tous();
+      expect(mesJeux[0].precisions).toBe('Des précisions');
     });
 
     it('publie un événement de création de jeu', async () => {
@@ -598,6 +616,9 @@ describe('La ressource des jeux', () => {
           categorie: 'simulation',
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
+          evaluationInteret: 1,
+          evaluationSatisfactionGenerale: 2,
+          evaluationDecouverte: 3,
         }),
       );
 
@@ -628,6 +649,9 @@ describe('La ressource des jeux', () => {
           categorie: 'simulation',
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
+          evaluationInteret: 1,
+          evaluationSatisfactionGenerale: 2,
+          evaluationDecouverte: 3,
         }),
       );
       await entrepotJeux.ajoute(
@@ -643,6 +667,9 @@ describe('La ressource des jeux', () => {
           categorie: 'simulation',
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
+          evaluationInteret: 1,
+          evaluationSatisfactionGenerale: 2,
+          evaluationDecouverte: 3,
         }),
       );
 

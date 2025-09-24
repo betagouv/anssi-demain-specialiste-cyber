@@ -11,6 +11,8 @@ export type Temoignage = {
   details: string;
 };
 
+export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
+
 export class Jeu {
   readonly id: string;
   nom: string;
@@ -24,6 +26,10 @@ export class Jeu {
   thematiques: ThematiqueDeJeux[];
   description: string;
   temoignages: Temoignage[];
+  evaluationDecouverte: NoteEvaluation;
+  evaluationInteret: NoteEvaluation;
+  evaluationSatisfactionGenerale: NoteEvaluation;
+  precisions?: string;
 
   constructor({
     id,
@@ -38,6 +44,10 @@ export class Jeu {
     thematiques,
     description,
     temoignages = [],
+    evaluationDecouverte,
+    evaluationInteret,
+    evaluationSatisfactionGenerale,
+    precisions,
   }: {
     id?: string;
     nom: string;
@@ -51,6 +61,10 @@ export class Jeu {
     thematiques: ThematiqueDeJeux[];
     description: string;
     temoignages?: Temoignage[];
+    evaluationDecouverte: NoteEvaluation;
+    evaluationInteret: NoteEvaluation;
+    evaluationSatisfactionGenerale: NoteEvaluation;
+    precisions?: string;
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -64,5 +78,9 @@ export class Jeu {
     this.thematiques = thematiques;
     this.description = description;
     this.temoignages = temoignages;
+    this.evaluationDecouverte = evaluationDecouverte;
+    this.evaluationInteret = evaluationInteret;
+    this.evaluationSatisfactionGenerale = evaluationSatisfactionGenerale;
+    this.precisions = precisions;
   }
 }
