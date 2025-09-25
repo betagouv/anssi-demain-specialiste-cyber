@@ -74,10 +74,10 @@ describe('Le validateur des information générales de jeu', () => {
         description: '     ',
       });
       expect(erreurs).toEqual({
-        nom: 'Le nom est obligatoire',
-        categorie: 'La catégorie est obligatoire',
-        thematiques: 'La thématique est invalide',
-        description: 'La description est obligatoire',
+        nom: 'Cette information est obligatoire',
+        categorie: 'Cette information est obligatoire',
+        thematiques: 'Cette information est invalide',
+        description: 'Cette information est obligatoire',
       });
     });
 

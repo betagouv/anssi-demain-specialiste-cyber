@@ -16,18 +16,16 @@ export class ValidateurInformationsGeneralesDuJeu
       return z.string(messageErreur).trim().min(1, messageErreur);
     };
     this.schema = z.object({
-      sequence: chaineNonVide('La séquence est obligatoire'),
-      nomEtablissement: chaineNonVide(
-        "Le nom de l'établissement est obligatoire",
-      ),
-      discipline: chaineNonVide('La discipline est obligatoire'),
-      classe: chaineNonVide('La classe est obligatoire'),
+      sequence: chaineNonVide('Cette information est obligatoire'),
+      nomEtablissement: chaineNonVide('Cette information est obligatoire'),
+      discipline: chaineNonVide('Cette information est obligatoire'),
+      classe: chaineNonVide('Cette information est obligatoire'),
       eleves: z
         .array(z.string())
         .refine(
           (prenoms) =>
             !!prenoms?.length && prenoms.some((prenom) => !!prenom.trim()),
-          'Au moins un élève est requis',
+          'Cette information est obligatoire',
         ),
     });
   }

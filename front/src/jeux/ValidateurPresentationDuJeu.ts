@@ -16,12 +16,12 @@ export class ValidateurPresentationDuJeu
       return z.string(messageErreur).trim().min(1, messageErreur);
     };
     this.schema = z.object({
-      nom: chaineNonVide('Le nom est obligatoire'),
-      categorie: chaineNonVide('La catégorie est obligatoire'),
+      nom: chaineNonVide('Cette information est obligatoire'),
+      categorie: chaineNonVide('Cette information est obligatoire'),
       thematiques: z
-        .array(chaineNonVide('La thématique est invalide'))
-        .nonempty('La thématique est obligatoire'),
-      description: chaineNonVide('La description est obligatoire').max(
+        .array(chaineNonVide('Cette information est invalide'))
+        .nonempty('Cette information est obligatoire'),
+      description: chaineNonVide('Cette information est obligatoire').max(
         8000,
         'La description ne peut contenir que 8000 caractères maximum',
       ),
