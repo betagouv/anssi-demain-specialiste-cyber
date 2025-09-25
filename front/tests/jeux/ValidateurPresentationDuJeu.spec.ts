@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ValidateurPresentationDuJeu } from '../../src/jeux/ValidateurPresentationDuJeu';
 import { type PresentationDuJeu } from '../../src/jeux/jeu';
 
-describe('Le validateur des information générales de jeu', () => {
+describe('Le validateur de la présentation du jeu', () => {
   const jeuValide: PresentationDuJeu = {
     nom: 'nom du jeu',
     categorie: 'MaCatégorie',
@@ -12,7 +12,7 @@ describe('Le validateur des information générales de jeu', () => {
   const descriptionTropLongue = 'mots'.repeat(2001);
   const validateur = new ValidateurPresentationDuJeu();
   describe("vérifie que les données'", () => {
-    it('est invalide lorsque son nom est vide', () => {
+    it('sont invalides lorsque son nom est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         nom: '  ',
@@ -20,7 +20,7 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa catégorie est vide', () => {
+    it('sont invalides lorsque sa catégorie est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         categorie: '  ',
@@ -28,7 +28,7 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
-    it("est invalide lorsque sa thématique n'est pas définie", () => {
+    it("sont invalides lorsque sa thématique n'est pas définie", () => {
       const validation = validateur.estValide({
         ...jeuValide,
         thematiques: undefined,
@@ -36,7 +36,7 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa thématique est vide', () => {
+    it('sont invalides lorsque sa thématique est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         thematiques: [],
@@ -44,7 +44,7 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa description est vide', () => {
+    it('sont invalides lorsque sa description est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         description: '  ',
@@ -52,7 +52,7 @@ describe('Le validateur des information générales de jeu', () => {
       expect(validation).toBeFalsy();
     });
 
-    it('est invalide lorsque sa description contient plus de 8000 characters', () => {
+    it('sont invalides lorsque sa description contient plus de 8000 characters', () => {
       const validation = validateur.estValide({
         ...jeuValide,
         description: descriptionTropLongue,
