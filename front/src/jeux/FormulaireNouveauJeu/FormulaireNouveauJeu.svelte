@@ -85,6 +85,7 @@
       ...$jeuEnEditionStore,
       eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
     });
+    window.location.href = "/mes-jeux?jeu-ajoute"
   };
 </script>
 
