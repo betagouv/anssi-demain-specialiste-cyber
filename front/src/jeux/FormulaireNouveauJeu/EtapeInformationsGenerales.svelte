@@ -63,7 +63,16 @@
   <legend>Elèves participants</legend>
 
   {#if erreurs.eleves}
-    <span class="erreur" role="alert">{erreurs.eleves}</span>
+    <dsfr-alert
+      hasTitle={false}
+      hasDescription={true}
+      text={erreurs.eleves}
+      type="error"
+      size="sm"
+      id="erreurs-eleves"
+      icon=""
+      dismissible={false}
+    ></dsfr-alert>
   {/if}
   <div class="prenoms">
     {#each $jeuEnEditionStore.eleves ?? [] as eleve, index}

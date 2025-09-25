@@ -311,7 +311,7 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(getByText('La séquence est obligatoire')).toBeVisible();
         expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
         expect(getByTextDeep('La classe est obligatoire')).toBeVisible();
-        expect(getByText('Au moins un élève est requis')).toBeVisible();
+        expect(getByTextDeep('Au moins un élève est requis')).toBeVisible();
       });
     });
 
