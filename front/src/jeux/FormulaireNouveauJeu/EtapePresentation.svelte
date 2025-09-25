@@ -19,7 +19,7 @@
   errorMessage={erreurs.categorie}
   id="categorie"
   label="Catégorie"
-  value={$jeuEnEditionStore.categorie}
+  value={$jeuEnEditionStore.categorie ?? ''}
   onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.categorie = e.detail)}
   options={[
     {
