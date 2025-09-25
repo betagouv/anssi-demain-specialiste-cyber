@@ -8,12 +8,14 @@
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
+  let jeuAjoute = $state(false);
 
   onMount(async () => {
     chargementEnCours = true;
     const reponse = await axios.get('/api/jeux');
     listeDesJeux = reponse.data;
     chargementEnCours = false;
+    jeuAjoute = new URLSearchParams(window.location.search).has('jeu-ajoute');
   });
 
   const deposeUnJeu = () => {
@@ -35,6 +37,16 @@
         use:clic={deposeUnJeu}
       ></dsfr-button>
     </div>
+    {#if jeuAjoute}
+      <dsfr-alert
+        hasTitle={false}
+        text="Le jeu a bien été ajouté."
+        type="success"
+        size="sm"
+        dismissible
+        buttonCloseLabel="Masquer le message"
+      ></dsfr-alert>
+    {/if}
     <div class="jeux">
       {#each listeDesJeux as jeu (jeu.id)}
         <dsfr-card
@@ -108,5 +120,11 @@
     gap: 2rem;
     justify-content: center;
     padding: 2rem;
+  }
+
+  dsfr-alert {
+    margin-bottom: 2rem;
+    display: block;
+    max-width: 792px;
   }
 </style>
