@@ -95,7 +95,7 @@
   errorMessage={erreurs.discipline}
   id="discipline"
   label="Discipline"
-  value={$jeuEnEditionStore.discipline}
+  value={$jeuEnEditionStore.discipline ?? ''}
   onvaluechanged={(e: CustomEvent) =>
     ($jeuEnEditionStore.discipline = e.detail)}
   options={[
@@ -132,7 +132,7 @@
   errorMessage={erreurs.classe}
   id="classe"
   label="Classe"
-  value={$jeuEnEditionStore.classe}
+  value={$jeuEnEditionStore.classe ?? ''}
   onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.classe = e.detail)}
   options={[
     { value: 'maternelle', label: 'Maternelle' },
