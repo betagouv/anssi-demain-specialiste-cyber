@@ -1,5 +1,5 @@
 import z from 'zod';
-import type { Validateur } from '../validateur';
+import { extracteurErreursZod, type Validateur } from '../validateur';
 import type {
   ErreursValidationJeuEnEdition,
   InformationsGeneralesDuJeu,
@@ -35,17 +35,7 @@ export class ValidateurInformationsGeneralesDuJeu
       return {};
     } catch (e) {
       const zodError = e as z.ZodError;
-      const extracteurErreurZod = (erreur: z.ZodError, nomDuChamp: string) => {
-        return erreur.issues.find((issue) => issue.path[0] === nomDuChamp)
-          ?.message;
-      };
-      return {
-        nomEtablissement: extracteurErreurZod(zodError, 'nomEtablissement'),
-        sequence: extracteurErreurZod(zodError, 'sequence'),
-        discipline: extracteurErreurZod(zodError, 'discipline'),
-        classe: extracteurErreurZod(zodError, 'classe'),
-        eleves: extracteurErreurZod(zodError, 'eleves'),
-      };
+      return extracteurErreursZod<InformationsGeneralesDuJeu>(zodError.issues);
     }
   }
 
