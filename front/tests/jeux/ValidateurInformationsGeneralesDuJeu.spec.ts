@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ValidateurInformationsGeneralesDuJeu } from '../../src/jeux/ValidateurInformationsGeneralesDuJeu';
 import { type JeuEnEdition } from '../../src/jeux/jeu';
 
-describe('Le validateur des information générales de jeu', () => {
+describe('Le validateur des informations générales de jeu', () => {
   const jeuValide: JeuEnEdition = {
     sequence: 'heure',
     nomEtablissement: "nom de l'établissement",
