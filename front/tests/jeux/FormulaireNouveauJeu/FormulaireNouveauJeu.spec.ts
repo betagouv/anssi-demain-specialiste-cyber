@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
 import {
+  type EvaluationDuJeu,
   type InformationsGeneralesDuJeu,
   type JeuEnEdition,
   type PresentationDuJeu,
@@ -36,9 +37,14 @@ describe('Le formulaire de dépose de jeu', () => {
     estValide: vi.fn().mockReturnValue(true),
     valide: () => ({}),
   };
+  const validateurEvaluationEnSucces: Validateur<EvaluationDuJeu> = {
+    estValide: vi.fn().mockReturnValue(true),
+    valide: () => ({}),
+  };
   const proprietesParDefaut = {
     validateurInformationsGenerales: validateurInformationsGeneralesEnSucces,
     validateurPresentation: validateurPresentationEnSucces,
+    validateurEvaluation: validateurEvaluationEnSucces,
   };
 
   const etapePrecedente = async () => {
@@ -281,6 +287,35 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(temoignagesApresSuppression).toHaveLength(0);
       });
     });
+
+    describe("lors de l'étape de l'évaluation", () => {
+      it("d'évaluer la découverte des métiers de la cyber par les élèves", async () => {
+        const { getAllByRole, getByText } = render(
+          FormulaireNouveauJeu,
+          proprietesParDefaut,
+        );
+
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+
+        expect(
+          getByText(
+            'CyberEnJeux a-t-il permis aux élèves de découvrir les enjeux et les métiers de la cybersécurité ?',
+          ),
+        ).toBeVisible();
+        expect(getAllByRole('radio', { name: 'Pas du tout' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: 'Très peu' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: 'Moyennement' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: 'Plutôt' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: 'Tout à fait' })).toHaveLength(3);
+        expect(
+          getByRoleDeep('textbox', {
+            name: 'Souhaitez-vous nous en dire plus ? (facultatif)',
+          }),
+        ).toBeVisible();
+      });
+    });
   });
 
   describe('lors de la validation', () => {
@@ -341,6 +376,40 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(getByTextDeep('La description est obligatoire')).toBeVisible();
       });
     });
+
+    describe("de l'étape de l'évaluation'", () => {
+      it("affiche pour chaque champ non valide, un message d'erreur", async () => {
+        const validateurEvaluationEnErreur: Validateur<EvaluationDuJeu> = {
+          estValide: () => false,
+          valide: () => ({
+            evaluationDecouverte: 'Le score de découverte est obligatoire',
+            evaluationInteret: "Le score de l'intérêt est obligatoire",
+            evaluationSatisfactionGenerale:
+              'Le score de satisfaction est obligatoire',
+          }),
+        };
+        render(FormulaireNouveauJeu, {
+          ...proprietesParDefaut,
+          validateurEvaluation: validateurEvaluationEnErreur,
+        });
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await terminer();
+
+        expect(axiosMock.post).not.toHaveBeenCalled();
+
+        await waitFor(() =>
+          getByTextDeep('Le score de découverte est obligatoire'),
+        );
+        expect(
+          getByTextDeep("Le score de l'intérêt est obligatoire"),
+        ).toBeVisible();
+        expect(
+          getByTextDeep('Le score de satisfaction est obligatoire'),
+        ).toBeVisible();
+      });
+    });
   });
 
   describe('lors de la soumission', () => {
@@ -365,8 +434,12 @@ describe('Le formulaire de dépose de jeu', () => {
             details: "J'ai aimé",
           },
         ],
+        evaluationDecouverte: 2,
+        evaluationInteret: 3,
+        evaluationSatisfactionGenerale: 4,
+        precisions: "j'ai bien aimé",
       };
-      const { getByRole, queryAllByRole } = render(
+      const { getByRole, queryAllByRole, getAllByRole } = render(
         FormulaireNouveauJeu,
         proprietesParDefaut,
       );
@@ -430,6 +503,26 @@ describe('Le formulaire de dépose de jeu', () => {
       await user.type(champsTemoignage[0], "C'était super");
       await user.type(champsPrenomTemoignage[1], 'Martin');
       await user.type(champsTemoignage[1], "J'ai aimé");
+
+      await etapeSuivante();
+      // Etape évaluation
+      const radioEvaluationDecouverte = getAllByRole('radio', {
+        name: 'Très peu',
+      })[0];
+      const radioEvaluationInteret = getAllByRole('radio', {
+        name: 'Moyennement',
+      })[1];
+      const radioEvaluationSatisfaction = getAllByRole('radio', {
+        name: 'Plutôt',
+      })[2];
+      const champPrecisions = await findByRoleDeep('textbox', {
+        name: 'Souhaitez-vous nous en dire plus ? (facultatif)',
+      });
+
+      await user.click(radioEvaluationDecouverte);
+      await user.click(radioEvaluationInteret);
+      await user.click(radioEvaluationSatisfaction);
+      await user.type(champPrecisions, "j'ai bien aimé");
 
       await terminer();
 
