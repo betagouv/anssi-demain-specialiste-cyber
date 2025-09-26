@@ -24,6 +24,10 @@ export const consigneEvenementJeuCreeDansJournal = ({
         categorie: evenement.categorie,
         thematiques: evenement.thematiques,
         nombreTemoignages: evenement.nombreTemoignages,
+        evaluationDecouverte: evenement.evaluationDecouverte,
+        evaluationInteret: evenement.evaluationInteret,
+        evaluationSatisfactionGenerale:
+          evenement.evaluationSatisfactionGenerale,
       },
       type: 'JEU_CREE',
       date: FournisseurHorloge.maintenant(),
