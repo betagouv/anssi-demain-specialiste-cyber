@@ -8,6 +8,7 @@
   import type { Validateur } from '../../validateur';
   import type {
     ErreursValidationJeuEnEdition,
+    EvaluationDuJeu,
     InformationsGeneralesDuJeu,
     PresentationDuJeu,
   } from '../jeu';
@@ -17,17 +18,25 @@
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
+  import EtapeEvaluation from './EtapeEvaluation.svelte';
+  import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu.js';
 
-  type Etape = 'informations-generales' | 'presentation' | 'temoignages';
+  type Etape =
+    | 'informations-generales'
+    | 'presentation'
+    | 'temoignages'
+    | 'evaluation';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
     validateurPresentation: Validateur<PresentationDuJeu>;
+    validateurEvaluation: Validateur<EvaluationDuJeu>;
   }
 
   const {
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
     validateurPresentation = new ValidateurPresentationDuJeu(),
+    validateurEvaluation = new ValidateurEvaluationDuJeu(),
   }: Props = $props();
 
   let etape = $state<Etape>('informations-generales');
@@ -53,6 +62,9 @@
       case 'temoignages':
         etape = 'presentation';
         break;
+      case 'evaluation':
+        etape = 'temoignages';
+        break;
       default:
         break;
     }
@@ -73,6 +85,10 @@
         } else {
           erreurs = validateurPresentation.valide($jeuEnEditionStore);
         }
+        break;
+      case 'temoignages':
+        etape = 'evaluation';
+        break;
       default:
         break;
     }
@@ -81,11 +97,15 @@
   const soumets = async (event: Event) => {
     event.preventDefault();
 
-    await axios.post('/api/jeux', {
-      ...$jeuEnEditionStore,
-      eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
-    });
-    window.location.href = "/mes-jeux?jeu-ajoute"
+    if (validateurEvaluation.estValide($jeuEnEditionStore)) {
+      await axios.post('/api/jeux', {
+        ...$jeuEnEditionStore,
+        eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
+      });
+      window.location.href = '/mes-jeux?jeu-ajoute';
+    } else {
+      erreurs = validateurEvaluation.valide($jeuEnEditionStore);
+    }
   };
 </script>
 
@@ -104,6 +124,8 @@
         <EtapePresentation {erreurs} />
       {:else if etape === 'temoignages'}
         <EtapeTemoignages />
+      {:else if etape === 'evaluation'}
+        <EtapeEvaluation {erreurs} />
       {/if}
 
       <div class="actions">
@@ -114,7 +136,7 @@
             use:clic={etapePrecedente}
           ></dsfr-button>
         {/if}
-        {#if etape === 'temoignages'}
+        {#if etape === 'evaluation'}
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
           ></dsfr-button>
         {:else}
