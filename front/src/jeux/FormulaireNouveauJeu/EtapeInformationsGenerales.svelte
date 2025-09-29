@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte.js';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
@@ -9,6 +10,15 @@
     $jeuEnEditionStore.eleves ??= [];
     $jeuEnEditionStore.eleves.push('');
   };
+
+  let estPetitEcran = false;
+  onMount(() => {
+    const mql = window.matchMedia('(max-width: 576px)');
+    mql.addEventListener('change', (e: MediaQueryListEvent) => {
+      estPetitEcran = e.matches;
+    });
+    estPetitEcran = mql.matches;
+  });
 </script>
 
 <dsfr-input
@@ -25,6 +35,7 @@
 <dsfr-radios-group
   id="sequence"
   legend="Format de la séquence CyberEnJeux"
+  inline={!estPetitEcran}
   radios={[
     {
       label: 'Heure de cours',
