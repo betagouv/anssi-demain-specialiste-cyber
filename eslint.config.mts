@@ -33,6 +33,7 @@ export default defineConfig([
       ],
       'no-console': 'error',
     },
+    ignores: ['**/*matomo*.js']
   },
   tseslint.configs.recommended,
 ]);
