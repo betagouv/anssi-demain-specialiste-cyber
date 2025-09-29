@@ -84,16 +84,15 @@ describe('Le formulaire de dépose de jeu', () => {
   });
   describe('propose', () => {
     describe("lors de l'étape des informations générales", () => {
-      it('de selectionner une séquence', () => {
-        const { getAllByRole, getByRole } = render(
-          FormulaireNouveauJeu,
-          proprietesParDefaut,
-        );
+      it('de selectionner une séquence', async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
 
-        expect(getAllByRole('radio')).toHaveLength(3);
-        expect(getByRole('radio', { name: 'Heure de cours' })).toBeVisible();
-        expect(getByRole('radio', { name: 'Demi-journee' })).toBeVisible();
-        expect(getByRole('radio', { name: 'Journée' })).toBeVisible();
+        await waitFor(() => expect(getAllByRoleDeep('radio')).toHaveLength(3));
+        expect(
+          getByRoleDeep('radio', { name: 'Heure de cours' }),
+        ).toBeVisible();
+        expect(getByRoleDeep('radio', { name: 'Demi-journée' })).toBeVisible();
+        expect(getByRoleDeep('radio', { name: 'Journée' })).toBeVisible();
       });
 
       it("de saisir un nom d'établissement", async () => {
@@ -332,7 +331,7 @@ describe('Le formulaire de dépose de jeu', () => {
               eleves: 'Au moins un élève est requis',
             }),
           };
-        const { getByText } = render(FormulaireNouveauJeu, {
+        render(FormulaireNouveauJeu, {
           ...proprietesParDefaut,
           validateurInformationsGenerales:
             validateurInformationsGeneralesEnErreur,
@@ -343,7 +342,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await waitFor(() =>
           getByTextDeep("Le nom de l'établissement est obligatoire"),
         );
-        expect(getByText('La séquence est obligatoire')).toBeVisible();
+        expect(getByTextDeep('La séquence est obligatoire')).toBeVisible();
         expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
         expect(getByTextDeep('La classe est obligatoire')).toBeVisible();
         expect(getByTextDeep('Au moins un élève est requis')).toBeVisible();
@@ -447,7 +446,9 @@ describe('Le formulaire de dépose de jeu', () => {
       const champNomEtablissement = await findByRoleDeep('textbox', {
         name: 'Nom de votre établissement',
       });
-      const champSequence = getByRole('radio', { name: 'Heure de cours' });
+      const champSequence = await findByRoleDeep('radio', {
+        name: 'Heure de cours',
+      });
       const champDiscipline = await findByRoleDeep('combobox', {
         name: 'Discipline',
       });
