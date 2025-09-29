@@ -17,13 +17,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       return reponseVide;
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      clientHttp
+      clientHttp,
     );
 
     await entrepotRessourcesCyberGrist.tous();
 
     expect(urlAppelee).toEqual(
-      'http://example.com/api/docs/mon_id_document/tables/mon_id_table/records'
+      'http://example.com/api/docs/mon_id_document/tables/mon_id_table/records',
     );
   });
 
@@ -36,7 +36,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       return reponseVide;
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
 
     await entrepotRessourcesCyberGrist.tous();
@@ -53,12 +53,12 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
           new ConstructeurLigneGrist()
             .avecId(1)
             .avecTitre('CyberEnJeux')
-            .construis()
+            .construis(),
         )
         .construis();
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
 
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
@@ -79,12 +79,12 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
               'Comportements numériques',
               'Valoriser les talents féminins',
             ])
-            .construis()
+            .construis(),
         )
         .construis();
     };
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
 
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
@@ -104,13 +104,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
             .avecPublicsCible(['Parents', 'Élèves'])
-            .construis()
+            .construis(),
         )
         .construis();
     };
 
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -128,13 +128,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
             .avecNiveaux(['Cycle 1', 'Cycle 2'])
-            .construis()
+            .construis(),
         )
         .construis();
     };
 
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -149,13 +149,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
             .avecTypes(['Jeux & challenge', 'Parcours de formation'])
-            .construis()
+            .construis(),
         )
         .construis();
     };
 
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -173,13 +173,13 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
             .avecBesoins(['Découvrir', 'Se protéger'])
-            .construis()
+            .construis(),
         )
         .construis();
     };
 
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -197,17 +197,40 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
             .avecDescription('Lorem ipsum')
-            .construis()
+            .construis(),
         )
         .construis();
     };
 
     const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist
+      ressourcesCyberGrist,
     );
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     expect(ressourcesCyber[0].description).toStrictEqual('Lorem ipsum');
+  });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne URL illustration', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecURLIllustration('https/monillu.png')
+            .construis(),
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist,
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].urlIllustration).toStrictEqual(
+      'https/monillu.png',
+    );
   });
 });
 
@@ -220,6 +243,7 @@ type LigneGrist = {
   types: string[];
   besoins: string[];
   description: string;
+  urlIllustration: string;
 };
 
 interface ConstructeurDeTest<T> {
@@ -235,6 +259,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _types: string[] = [];
   _besoins: string[] = [];
   _description: string = '';
+  _urlIllustration: string = '';
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -276,6 +301,10 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
+  avecURLIllustration(URLImage: string): ConstructeurLigneGrist {
+    this._urlIllustration = URLImage;
+    return this;
+  }
   construis(): LigneGrist {
     return {
       id: this._idLigne,
@@ -286,6 +315,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
       types: this._types,
       besoins: this._besoins,
       description: this._description,
+      urlIllustration: this._urlIllustration,
     };
   }
 }
@@ -317,6 +347,7 @@ class ConstructeurReponseRessourceCyberGrist
           Cycle_si_eleves: l.cycles,
           Porteur: [],
           Lien: '',
+          URL_illustration: l.urlIllustration,
         },
       })),
     };

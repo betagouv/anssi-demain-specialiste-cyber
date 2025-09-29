@@ -22,6 +22,7 @@ export type ReponseRessourceCyberGrist = {
       Cycle_si_eleves: string[];
       Porteur: string[];
       Lien: string;
+      URL_illustration: string;
     };
   }[];
 };
@@ -62,6 +63,7 @@ export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
       types: record.fields.Type.slice(1),
       besoins: record.fields.Besoins.slice(1),
       description: record.fields.Description,
+      urlIllustration: record.fields.URL_illustration,
     }));
   }
 
