@@ -64,6 +64,7 @@
   @use '../points-de-rupture' as *;
 
   .catalogue {
+    align-items: start;
     display: grid;
     gap: 1rem;
     grid-template-columns: 100%;
