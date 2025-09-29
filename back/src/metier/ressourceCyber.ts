@@ -1,4 +1,5 @@
 export type RessourceCyber = {
+  urlIllustration: string;
   description: string;
   besoins: Besoins;
   id: number;
