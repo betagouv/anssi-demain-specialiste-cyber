@@ -29,6 +29,7 @@ export type AdaptateurEnvironnement = {
   journal: () => {
     enMemoire: () => boolean;
   };
+  matomo: () => { identifiant: string; tagManager: string } | undefined;
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -99,4 +100,13 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
   journal: () => ({
     enMemoire: () => process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE === 'true',
   }),
+  matomo: (): { identifiant: string; tagManager: string } | undefined => {
+    if (process.env.MATOMO_ID && process.env.MATOMO_URL_TAG_MANAGER) {
+      return {
+        identifiant: process.env.MATOMO_ID,
+        tagManager: process.env.MATOMO_URL_TAG_MANAGER,
+      };
+    }
+    return undefined;
+  },
 };

@@ -75,6 +75,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   journal: () => ({
     enMemoire: () => true,
   }),
+  matomo: (): { identifiant: string; tagManager: string } | undefined => ({
+    identifiant: '',
+    tagManager: '',
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {

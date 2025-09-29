@@ -11,6 +11,9 @@ html(lang='fr')
     title DemainSpécialisteCyber
     script(defer src=`/${dsc}` nonce= nonce)
     link(rel="stylesheet" type="text/css" href=`/${style}`)
+    if matomo
+      script(type="module" src="/scripts/matomo.js" data-id-site-matomo=`${matomo.identifiant}` id="script-matomo")
+      script(type="module" src="/scripts/matomoTagManager.js" data-url-tag-manager-matomo=`${matomo.tagManager}` id="script-matomo-tag-manager")
 
   body(class= classePage)
     include ./entete

@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import { join } from 'path';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 
 export interface MoteurDeRendu {
   rends: (reponse: express.Response, vue: string, options?: object) => void;
@@ -27,10 +28,12 @@ export const moteurDeRenduExpress = (
 ): MoteurDeRendu => {
   return {
     rends(reponse, vue, options) {
+      const matomo = adaptateurEnvironnement.matomo();
       const optionsAvecManifesteEtNonce = {
         ...options,
         ...fournisseurDeChemins(),
         nonce: reponse.locals.nonce,
+        ...(matomo && { matomo }),
       };
       reponse.render(vue, optionsAvecManifesteEtNonce);
     },
