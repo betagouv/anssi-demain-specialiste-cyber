@@ -1,3 +1,5 @@
+@use 'points-de-rupture' as *;
+
 fieldset {
   border: 0;
   margin-bottom: 1rem;
@@ -21,4 +23,18 @@ ul > li {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h4 {
+  color: var(--grey-50-1000);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  margin: 0 0 1.5rem;
+
+  @include a-partir-de(sm) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
