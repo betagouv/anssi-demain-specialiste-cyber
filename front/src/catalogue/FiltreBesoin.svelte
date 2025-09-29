@@ -16,16 +16,14 @@
   };
 
   const filtres = $ressourcesCyberFiltrees.besoins.map((besoin) => ({
-    id: besoin,
-    label: besoin,
-    value: besoin,
-    icon: icones[besoin],
+    icone: icones[besoin],
+    libelle: besoin,
+    valeur: besoin,
   }));
   filtres.unshift({
-    id: '',
-    label: 'Tous les besoins',
-    value: 'Tous les besoins',
-    icon: icones['Tous les besoins'],
+    icone: icones['Tous les besoins'],
+    libelle: 'Tous les besoins',
+    valeur: '',
   });
 </script>
 
@@ -34,7 +32,10 @@
   <lab-anssi-filtres
     class="filtres-besoins"
     {filtres}
-    idFiltreActif={$rechercheParBesoin}
+    valeur={$rechercheParBesoin}
+    onvaleurachangee={(e: CustomEvent) => {
+      $rechercheParBesoin = e.detail;
+    }}
   ></lab-anssi-filtres>
 </fieldset>
 
