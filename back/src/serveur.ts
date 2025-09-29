@@ -1,6 +1,9 @@
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
-import { ConfigurationServeurSansMiddleware } from './api/configurationServeur';
+import {
+  ConfigurationServeur,
+  ConfigurationServeurSansMiddleware,
+} from './api/configurationServeur';
 import { creeServeur } from './api/dsc';
 import { fabriqueMiddleware } from './api/middleware';
 import { moteurDeRenduExpress } from './api/moteurDeRendu';
@@ -19,6 +22,7 @@ import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePost
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { messagerieMattermost } from './infra/messagerieMattermost';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -31,6 +35,7 @@ cableTousLesAbonnes({
   busEvenements,
   adaptateurHachage,
   adaptateurJournal: fabriqueAdaptateurJournal(),
+  messagerieInstantanee: messagerieMattermost(),
 });
 
 const serviceCoherenceSecretsHachage =
@@ -80,7 +85,7 @@ serviceCoherenceSecretsHachage
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
       };
-    const configurationServeur = {
+    const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,
       middleware: fabriqueMiddleware(configurationServeurSansMiddleware),
     };
