@@ -13,6 +13,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _thematiques: string[] = [];
   private _types: string[] = [];
   private _besoins: string[] = [];
+  private _urlIllustration: string = 'http://monillu.png';
 
   avecPublicsCible(publicsCible: string[]): ConstructeurRessourceCyber {
     this._publicsCible = publicsCible;
@@ -59,6 +60,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       niveaux: this._niveaux,
       types: this._types,
       besoins: this._besoins,
+      urlIllustration: this._urlIllustration,
     };
   }
 }
