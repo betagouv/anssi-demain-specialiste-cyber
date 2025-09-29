@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { clic } from '../../actions.svelte.js';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
-  import { clic } from '../../actions.svelte.js';
 
   export let erreurs: ErreursValidationJeuEnEdition;
 
@@ -22,42 +22,34 @@
 >
 </dsfr-input>
 
-<div class="sequence">
-  <p>Format de la séquence CyberEnJeux</p>
-  <div class="boutons">
-    <label>
-      <input
-        type="radio"
-        name="sequence"
-        value="heure"
-        required
-        bind:group={$jeuEnEditionStore.sequence}
-      />
-      Heure de cours
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="sequence"
-        value="demi-journee"
-        bind:group={$jeuEnEditionStore.sequence}
-      />
-      Demi-journee
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="sequence"
-        value="journee"
-        bind:group={$jeuEnEditionStore.sequence}
-      />
-      Journée
-    </label>
-  </div>
-  {#if erreurs.sequence}
-    <span class="erreur" role="alert">{erreurs.sequence}</span>
-  {/if}
-</div>
+<dsfr-radios-group
+  id="sequence"
+  legend="Format de la séquence CyberEnJeux"
+  radios={[
+    {
+      label: 'Heure de cours',
+      id: 'heure',
+      name: 'sequence',
+      value: 'heure',
+    },
+    {
+      label: 'Demi-journée',
+      id: 'demi-journee',
+      name: 'sequence',
+      value: 'demi-journee',
+    },
+    {
+      label: 'Journée',
+      id: 'journee',
+      name: 'sequence',
+      value: 'journee',
+    },
+  ]}
+  value={$jeuEnEditionStore.sequence}
+  onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.sequence = e.detail)}
+  status={erreurs.sequence ? 'error' : 'default'}
+  errorMessage={erreurs.sequence}
+></dsfr-radios-group>
 
 <fieldset class="eleves">
   <legend>Elèves participants</legend>
