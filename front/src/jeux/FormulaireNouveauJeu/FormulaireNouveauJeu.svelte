@@ -13,13 +13,13 @@
     PresentationDuJeu,
   } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+  import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
+  import EtapeEvaluation from './EtapeEvaluation.svelte';
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
-  import EtapeEvaluation from './EtapeEvaluation.svelte';
-  import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu.js';
 
   type Etape =
     | 'informations-generales'
