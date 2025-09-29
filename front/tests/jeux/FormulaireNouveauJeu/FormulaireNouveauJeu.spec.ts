@@ -304,11 +304,11 @@ describe('Le formulaire de dépose de jeu', () => {
             'CyberEnJeux a-t-il permis aux élèves de découvrir les enjeux et les métiers de la cybersécurité ?',
           ),
         ).toBeVisible();
-        expect(getAllByRole('radio', { name: 'Pas du tout' })).toHaveLength(3);
-        expect(getAllByRole('radio', { name: 'Très peu' })).toHaveLength(3);
-        expect(getAllByRole('radio', { name: 'Moyennement' })).toHaveLength(3);
-        expect(getAllByRole('radio', { name: 'Plutôt' })).toHaveLength(3);
-        expect(getAllByRole('radio', { name: 'Tout à fait' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: '1' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: '2' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: '3' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: '4' })).toHaveLength(3);
+        expect(getAllByRole('radio', { name: '5' })).toHaveLength(3);
         expect(
           getByRoleDeep('textbox', {
             name: 'Souhaitez-vous nous en dire plus ? (facultatif)',
@@ -507,13 +507,13 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
       // Etape évaluation
       const radioEvaluationDecouverte = getAllByRole('radio', {
-        name: 'Très peu',
+        name: '2',
       })[0];
       const radioEvaluationInteret = getAllByRole('radio', {
-        name: 'Moyennement',
+        name: '3',
       })[1];
       const radioEvaluationSatisfaction = getAllByRole('radio', {
-        name: 'Plutôt',
+        name: '4',
       })[2];
       const champPrecisions = await findByRoleDeep('textbox', {
         name: 'Souhaitez-vous nous en dire plus ? (facultatif)',
