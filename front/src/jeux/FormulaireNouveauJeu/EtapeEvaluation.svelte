@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
-  import ScoreAvecSmiley from './NoteAvecSmiley.svelte';
+  import NoteAvecSmiley from './NoteAvecSmiley.svelte';
 
   export let erreurs: ErreursValidationJeuEnEdition;
 </script>
@@ -32,10 +32,10 @@
         dismissible={false}
       ></dsfr-alert>
     {/if}
-    <ScoreAvecSmiley
+    <NoteAvecSmiley
       bind:note={$jeuEnEditionStore.evaluationDecouverte}
       nom="evaluationDecouverte"
-    ></ScoreAvecSmiley>
+    />
   </div>
 
   <div class="question">
@@ -55,12 +55,12 @@
         dismissible={false}
       ></dsfr-alert>
     {/if}
-    <ScoreAvecSmiley
+    <NoteAvecSmiley
       bind:note={$jeuEnEditionStore.evaluationInteret}
       nom="evaluationInteret"
       borneMinimale="Pas intéressés"
       borneMaximale="Très intéressés"
-    ></ScoreAvecSmiley>
+    />
   </div>
 
   <div class="question">
@@ -80,12 +80,12 @@
         dismissible={false}
       ></dsfr-alert>
     {/if}
-    <ScoreAvecSmiley
+    <NoteAvecSmiley
       bind:note={$jeuEnEditionStore.evaluationSatisfactionGenerale}
       nom="evaluationSatisfactionGenerale"
       borneMinimale="Déçus"
       borneMaximale="Très satisfaits"
-    ></ScoreAvecSmiley>
+    />
   </div>
 
   <div class="question">
