@@ -3,64 +3,36 @@
 
   export let note: NoteEvaluation | undefined;
   export let nom: string;
+  export let borneMinimale: string = 'Pas du tout';
+  export let borneMaximale: string = 'Tout à fait';
 </script>
 
 <div class="evaluation">
   <div class="notes-evaluation">
-    <input
-      id="{nom}-pas-du-tout"
-      type="radio"
-      name={nom}
-      value={1}
-      bind:group={note}
-    />
-    <label for="{nom}-pas-du-tout" class="premier-libelle">
-      <span aria-label="Pas du tout" role="img">😠</span>
+    <input id="{nom}-1" type="radio" name={nom} value={1} bind:group={note} />
+    <label for="{nom}-1" class="premier-libelle">
+      <span aria-label="1" role="img">😠</span>
     </label>
-    <input
-      id="{nom}-tres-peu"
-      type="radio"
-      name={nom}
-      value={2}
-      bind:group={note}
-    />
-    <label for="{nom}-tres-peu">
-      <span aria-label="Très peu" role="img">☹️</span>
+    <input id="{nom}-2" type="radio" name={nom} value={2} bind:group={note} />
+    <label for="{nom}-2">
+      <span aria-label="2" role="img">☹️</span>
     </label>
-    <input
-      id="{nom}-moyennement"
-      type="radio"
-      name={nom}
-      value={3}
-      bind:group={note}
-    />
-    <label for="{nom}-moyennement">
-      <span aria-label="Moyennement" role="img">😕</span>
+    <input id="{nom}-3" type="radio" name={nom} value={3} bind:group={note} />
+    <label for="{nom}-3">
+      <span aria-label="3" role="img">😕</span>
     </label>
-    <input
-      id="{nom}-plutot"
-      type="radio"
-      name={nom}
-      value={4}
-      bind:group={note}
-    />
-    <label for="{nom}-plutot">
-      <span aria-label="Plutôt" role="img">😊</span>
+    <input id="{nom}-4" type="radio" name={nom} value={4} bind:group={note} />
+    <label for="{nom}-4">
+      <span aria-label="4" role="img">😊</span>
     </label>
-    <input
-      id="{nom}-tout-a-fait"
-      type="radio"
-      name={nom}
-      value={5}
-      bind:group={note}
-    />
-    <label for="{nom}-tout-a-fait" class="dernier-libelle">
-      <span aria-label="Tout à fait" role="img">🤩</span>
+    <input id="{nom}-5" type="radio" name={nom} value={5} bind:group={note} />
+    <label for="{nom}-5" class="dernier-libelle">
+      <span aria-label="5" role="img">🤩</span>
     </label>
   </div>
   <div class="descriptions">
-    <span class="premier">Pas du tout</span>
-    <span class="dernier">Tout à fait</span>
+    <span class="premier">{borneMinimale}</span>
+    <span class="dernier">{borneMaximale}</span>
   </div>
 </div>
 

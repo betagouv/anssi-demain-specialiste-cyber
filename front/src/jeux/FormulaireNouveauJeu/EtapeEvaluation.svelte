@@ -20,10 +20,6 @@
       CyberEnJeux a-t-il permis aux élèves de découvrir les enjeux et les
       métiers de la cybersécurité&nbsp;?
     </p>
-    <ScoreAvecSmiley
-      bind:note={$jeuEnEditionStore.evaluationDecouverte}
-      nom="evaluationDecouverte"
-    ></ScoreAvecSmiley>
     {#if erreurs.evaluationDecouverte}
       <dsfr-alert
         hasTitle={false}
@@ -32,10 +28,14 @@
         type="error"
         size="sm"
         id="erreurs-evaluation-decouverte"
-        icon=""
+        icon="error"
         dismissible={false}
       ></dsfr-alert>
     {/if}
+    <ScoreAvecSmiley
+      bind:note={$jeuEnEditionStore.evaluationDecouverte}
+      nom="evaluationDecouverte"
+    ></ScoreAvecSmiley>
   </div>
 
   <div class="question">
@@ -43,10 +43,6 @@
       Les élèves se montrent-ils désormais curieux ou intéressés par un futur
       métier dans la cybersécurité&nbsp;?
     </p>
-    <ScoreAvecSmiley
-      bind:note={$jeuEnEditionStore.evaluationInteret}
-      nom="evaluationInteret"
-    ></ScoreAvecSmiley>
     {#if erreurs.evaluationInteret}
       <dsfr-alert
         hasTitle={false}
@@ -55,10 +51,16 @@
         type="error"
         size="sm"
         id="erreurs-evaluation-interet"
-        icon=""
+        icon="error"
         dismissible={false}
       ></dsfr-alert>
     {/if}
+    <ScoreAvecSmiley
+      bind:note={$jeuEnEditionStore.evaluationInteret}
+      nom="evaluationInteret"
+      borneMinimale="Pas intéressés"
+      borneMaximale="Très intéressés"
+    ></ScoreAvecSmiley>
   </div>
 
   <div class="question">
@@ -66,10 +68,6 @@
       Comment qualifieriez-vous la satisfaction générale des élèves vis-à-vis de
       leur expérience CyberEnJeux&nbsp;?
     </p>
-    <ScoreAvecSmiley
-      bind:note={$jeuEnEditionStore.evaluationSatisfactionGenerale}
-      nom="evaluationSatisfactionGenerale"
-    ></ScoreAvecSmiley>
     {#if erreurs.evaluationSatisfactionGenerale}
       <dsfr-alert
         hasTitle={false}
@@ -78,10 +76,16 @@
         type="error"
         size="sm"
         id="erreurs-evaluation-satisfaction"
-        icon=""
+        icon="error"
         dismissible={false}
       ></dsfr-alert>
     {/if}
+    <ScoreAvecSmiley
+      bind:note={$jeuEnEditionStore.evaluationSatisfactionGenerale}
+      nom="evaluationSatisfactionGenerale"
+      borneMinimale="Déçus"
+      borneMaximale="Très satisfaits"
+    ></ScoreAvecSmiley>
   </div>
 
   <div class="question">
