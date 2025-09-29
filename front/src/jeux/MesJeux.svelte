@@ -66,22 +66,30 @@
     </div>
   {:else}
     <div class="pas-de-jeu">
-      <h4>Valorisez la créativité de vos élèves</h4>
-      <p>
-        Partagez les jeux élaborés par vos élèves lors de séquence CyberEnJeux.
-      </p>
-      <dsfr-button
-        label="Déposer un jeu"
-        hasIcon="true"
-        icon="add-line"
-        use:clic={deposeUnJeu}
-      ></dsfr-button>
-    </div>
-    <div>
-      <span>
-        Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
-        votre expérience. Rejoindre la communauté
-      </span>
+      <div class="encart">
+        <h4>Valorisez la créativité de vos élèves</h4>
+        <p>
+          Partagez les jeux élaborés par vos élèves lors de séquence
+          CyberEnJeux.
+        </p>
+        <dsfr-button
+          label="Déposer un jeu"
+          hasIcon="true"
+          icon="add-line"
+          use:clic={deposeUnJeu}
+        ></dsfr-button>
+      </div>
+      <div class="rejoindre-communaute">
+        <span>
+          Rejoignez la communauté CyberEnJeux pour poser vos questions ou
+          partager votre expérience. <lab-anssi-lien
+            cible="#"
+            titre="Rejoindre la communauté"
+            apparence="lien-texte"
+            target="_blank"
+          ></lab-anssi-lien>
+        </span>
+      </div>
     </div>
   {/if}
 </dsfr-container>
@@ -89,15 +97,22 @@
 <style lang="scss">
   @use '../points-de-rupture' as *;
 
+  dsfr-container {
+    display: block;
+    margin-bottom: 4.5rem;
+  }
+
   .zone-action {
     display: flex;
     justify-content: flex-end;
+    margin-top: 2rem;
     margin-bottom: 2rem;
   }
 
   .jeux {
     display: grid;
     gap: 1rem;
+    padding-bottom: 1rem;
 
     @include a-partir-de(sm) {
       grid-template-columns: repeat(2, 1fr);
@@ -111,15 +126,43 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
   .pas-de-jeu {
-    align-items: center;
-    align-self: stretch;
-    background: #f5f5fe;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    padding: 2rem;
+    margin: 4.5rem auto 7.5rem;
+    max-width: 524px;
+    .encart {
+      text-align: center;
+      align-items: center;
+      background: var(--blue-france-975-sun-113);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      h4 {
+        margin: 0;
+      }
+      p {
+        margin: 0.5rem 0 2rem;
+      }
+    }
+
+    .rejoindre-communaute {
+      font-weight: bold;
+      color: var(--grey-200-850);
+      display: flex;
+      gap: 0.5rem;
+
+      &:before {
+        content: url('/icons/system/question-answer-line.svg');
+        width: 24px;
+        height: 24px;
+      }
+
+      lab-anssi-lien {
+        color: var(--blue-france-sun-113-625);
+        font-weight: normal;
+      }
+    }
   }
 
   dsfr-alert {
