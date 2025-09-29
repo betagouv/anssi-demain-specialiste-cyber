@@ -30,13 +30,13 @@
     <CatalogueFiltres />
 
     <div class="conteneur">
-      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description } (id)}
+      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration } (id)}
         <dsfr-card
           title={description}
           hasDetailStart
           detailStart={titre}
           href={`/ressources-cyber/${id}`}
-          src="/assets/images/image-generique.svg"
+          src={urlIllustration || '/assets/images/image-generique.svg'}
           hasHeaderBadge
         >
           <dsfr-badges-group

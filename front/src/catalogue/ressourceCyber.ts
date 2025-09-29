@@ -7,6 +7,7 @@ export type RessourceCyber = {
   niveaux: string[];
   types: string[];
   besoins: string[];
+  urlIllustration: string;
 };
 
 export const lesRessourcesCyberTriees = (data: RessourceCyber[]) => {
