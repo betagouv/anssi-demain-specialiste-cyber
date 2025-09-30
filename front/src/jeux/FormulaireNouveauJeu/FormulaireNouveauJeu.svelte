@@ -20,12 +20,8 @@
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
-
-  type Etape =
-    | 'informations-generales'
-    | 'presentation'
-    | 'temoignages'
-    | 'evaluation';
+  import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
+  import type { EtapeDeposeJeu } from './FormulaireDeJeu.type.js';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
@@ -39,7 +35,7 @@
     validateurEvaluation = new ValidateurEvaluationDuJeu(),
   }: Props = $props();
 
-  let etape = $state<Etape>('informations-generales');
+  let etape = $state<EtapeDeposeJeu>('informations-generales');
 
   $jeuEnEditionStore = {
     eleves: ['', '', '', ''],
@@ -111,6 +107,7 @@
 
 <dsfr-container>
   <div class="formulaire-jeu">
+    <EtapierDeposeJeu etapeCourante={etape} />
     <hr />
     {#if etape !== 'temoignages'}
       <p class="mention">
