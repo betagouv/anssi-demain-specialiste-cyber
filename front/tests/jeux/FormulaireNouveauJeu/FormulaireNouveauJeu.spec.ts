@@ -186,13 +186,12 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner la thématique du jeu', async () => {
-        const { getByRole } = render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireNouveauJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
-        await waitFor(() =>
-          expect(getByRole('listbox', { name: 'Thématiques' })).toBeVisible(),
-        );
+        const thematiques = await findByRoleDeep('group');
+        expect(thematiques).toBeDefined();
       });
 
       it('de saisir la description du jeu', async () => {
@@ -360,7 +359,7 @@ describe('Le formulaire de dépose de jeu', () => {
             description: 'La description est obligatoire',
           }),
         };
-        const { getByText } = render(FormulaireNouveauJeu, {
+        render(FormulaireNouveauJeu, {
           ...proprietesParDefaut,
           validateurPresentation: validateurPresentationEnErreur,
         });
@@ -371,7 +370,7 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(axiosMock.post).not.toHaveBeenCalled();
         await waitFor(() => getByTextDeep('Le nom est obligatoire'));
         expect(getByTextDeep('La catégorie est obligatoire')).toBeVisible();
-        expect(getByText('La thématique est obligatoire')).toBeVisible();
+        expect(getByTextDeep('La thématique est obligatoire')).toBeVisible();
         expect(getByTextDeep('La description est obligatoire')).toBeVisible();
       });
     });
@@ -438,7 +437,7 @@ describe('Le formulaire de dépose de jeu', () => {
         evaluationSatisfactionGenerale: 4,
         precisions: "j'ai bien aimé",
       };
-      const { getByRole, queryAllByRole, getAllByRole } = render(
+      const { queryAllByRole, getAllByRole } = render(
         FormulaireNouveauJeu,
         proprietesParDefaut,
       );
@@ -472,19 +471,23 @@ describe('Le formulaire de dépose de jeu', () => {
       const champCategorie = await findByRoleDeep('combobox', {
         name: 'Catégorie',
       });
-      const champThematique = getByRole('listbox', {
-        name: 'Thématiques',
-      });
+      const groupThematiques = await findByRoleDeep('group');
       const champDescription = await findByRoleDeep('textbox', {
         name: 'Description Présenter le jeu et son fonctionnement en quelques lignes.',
       });
 
       await user.type(champNomDuJeu, 'TEST');
       await user.selectOptions(champCategorie, 'Simulation');
-      await user.selectOptions(champThematique, [
-        'Menace cyber',
-        'Orientation',
-      ]);
+      await user.click(groupThematiques);
+      const menaceCyber = await findByRoleDeep('checkbox', {
+        name: 'Menace cyber',
+      });
+      const orientation = await findByRoleDeep('checkbox', {
+        name: 'Orientation',
+      });
+      await user.click(menaceCyber);
+      await user.click(orientation);
+
       await user.type(champDescription, 'Description du jeu');
       await etapeSuivante();
 

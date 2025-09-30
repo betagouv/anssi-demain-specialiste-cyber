@@ -53,33 +53,50 @@
 >
 </dsfr-select>
 
-<label>
-  Thématiques
-  <select
-    multiple
-    placeholder="Sélectionner une ou plusieurs options"
-    bind:value={$jeuEnEditionStore.thematiques}
-  >
-    <option value="comportements-numeriques">Comportements numériques</option>
-    <option value="cyberharcelement">Cyberharcelement</option>
-    <option value="gestion-crise-cyber">Gestion de crise cyber</option>
-    <option value="lutte-manipulation-information"
-      >Lutte contre la manipulation de l'information
-    </option>
-    <option value="menace-cyber">Menace cyber</option>
-    <option value="orientation">Orientation</option>
-    <option value="techniques-securite-numerique"
-      >Techniques de sécurité numérique
-    </option>
-    <option value="valoriser-talents-feminins"
-      >Valoriser les talents féminins
-    </option>
-  </select>
-</label>
-
-{#if erreurs.thematiques}
-  <span class="erreur" role="alert">{erreurs.thematiques}</span>
-{/if}
+<lab-anssi-multi-select
+  id="thematique"
+  label="Thématiques"
+  options={[
+    {
+      id: 'comportements-numeriques',
+      value: 'comportements-numeriques',
+      label: 'Comportements numériques',
+    },
+    {
+      id: 'cyberharcelement',
+      value: 'cyberharcelement',
+      label: 'Cyberharcelement',
+    },
+    {
+      id: 'gestion-crise-cyber',
+      value: 'gestion-crise-cyber',
+      label: 'Gestion de crise cyber',
+    },
+    {
+      id: 'lutte-manipulation-information',
+      value: 'lutte-manipulation-information',
+      label: "Lutte contre la manipulation de l'information",
+    },
+    { id: 'menace-cyber', value: 'menace-cyber', label: 'Menace cyber' },
+    { id: 'orientation', value: 'orientation', label: 'Orientation' },
+    {
+      id: 'techniques-securite-numerique',
+      value: 'techniques-securite-numerique',
+      label: 'Techniques de sécurité numérique',
+    },
+    {
+      id: 'valoriser-talents-feminins',
+      value: 'valoriser-talents-feminins',
+      label: 'Valoriser les talents féminins',
+    },
+  ]}
+  placeholder="Sélectionner une ou plusieurs options"
+  values={$jeuEnEditionStore.thematiques}
+  onvaluechanged={(e: CustomEvent) =>
+    ($jeuEnEditionStore.thematiques = e.detail)}
+  status={erreurs.thematiques ? 'error' : 'default'}
+  errorMessage={erreurs.thematiques}
+></lab-anssi-multi-select>
 
 <dsfr-textarea
   errorMessage={erreurs.description}
