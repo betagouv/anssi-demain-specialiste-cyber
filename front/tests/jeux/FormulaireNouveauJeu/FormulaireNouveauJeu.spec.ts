@@ -81,6 +81,122 @@ describe('Le formulaire de dépose de jeu', () => {
         ),
       ).toBeVisible();
     });
+    describe("lors de l'étape des informations générales", () => {
+      it("qu'on est à l'étape 1 sur 4", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await waitFor(() =>
+          expect(getByTextDeep('Étape 1 sur 4')).toBeVisible(),
+        );
+      });
+
+      it("qu'on est à l'étape 'Informations Générales'", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('heading', {
+              name: /.*Informations générales.*/,
+            }),
+          ).toBeVisible(),
+        );
+      });
+
+      it("que l'étape suivante est 'Présentation du jeu'", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await waitFor(() =>
+          expect(getByTextDeep('Présentation du jeu')).toBeVisible(),
+        );
+      });
+    });
+
+    describe("lors de l'étape de présentation du jeu", () => {
+      beforeEach(async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+      });
+
+      it("qu'on est à l'étape 2 sur 4", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Étape 2 sur 4')).toBeVisible(),
+        );
+      });
+
+      it("qu'on est à l'étape 'Présentation du jeu'", async () => {
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('heading', {
+              name: /.*Présentation du jeu.*/,
+            }),
+          ).toBeVisible(),
+        );
+      });
+
+      it("que l'étape suivante est 'Témoignages (facultatif)'", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Témoignages (facultatif)')).toBeVisible(),
+        );
+      });
+    });
+
+    describe("lors de l'étape des témoignages", () => {
+      beforeEach(async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+      });
+
+      it("qu'on est à l'étape 3 sur 4", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Étape 3 sur 4')).toBeVisible(),
+        );
+      });
+
+      it("qu'on est à l'étape 'Témoignages (facultatif)'", async () => {
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('heading', {
+              name: /.*Témoignages \(facultatif\).*/,
+            }),
+          ).toBeVisible(),
+        );
+      });
+
+      it("que l'étape suivante est 'Votre avis nous intéresse'", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Votre avis nous intéresse')).toBeVisible(),
+        );
+      });
+    });
+
+    describe("lors de l'étape de l'évaluation", () => {
+      beforeEach(async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+      });
+
+      it("qu'on est à l'étape 4 sur 4", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Étape 4 sur 4')).toBeVisible(),
+        );
+      });
+
+      it("qu'on est à l'étape 'Votre avis nous intéresse'", async () => {
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('heading', {
+              name: /.*Votre avis nous intéresse [^!].*/,
+            }),
+          ).toBeVisible(),
+        );
+      });
+    });
   });
   describe('propose', () => {
     describe("lors de l'étape des informations générales", () => {
