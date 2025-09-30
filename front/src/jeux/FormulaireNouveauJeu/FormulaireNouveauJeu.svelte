@@ -155,7 +155,6 @@
     flex-direction: column;
     align-self: stretch;
     justify-content: center;
-    align-items: center;
     padding: 56px 16px;
 
     hr {
