@@ -79,6 +79,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     identifiant: '',
     tagManager: '',
   }),
+  nodeEnv: () => 'developpement',
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
