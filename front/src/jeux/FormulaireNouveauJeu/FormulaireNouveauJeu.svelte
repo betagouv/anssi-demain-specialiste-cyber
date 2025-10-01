@@ -22,7 +22,10 @@
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
   import type { EtapeDeposeJeu } from './FormulaireDeJeu.type';
-  import { type ReferentielEtablissement } from './ReferentielEtablissement';
+  import {
+    AdaptateurAnnuaireEducationNationale,
+    type ReferentielEtablissement,
+  } from './ReferentielEtablissement';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
@@ -35,9 +38,7 @@
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
     validateurPresentation = new ValidateurPresentationDuJeu(),
     validateurEvaluation = new ValidateurEvaluationDuJeu(),
-    referentielEtablissement = {
-      trouveParNom: () => Promise.resolve([]),
-    },
+    referentielEtablissement = new AdaptateurAnnuaireEducationNationale(),
   }: Props = $props();
 
   let etape = $state<EtapeDeposeJeu>('informations-generales');

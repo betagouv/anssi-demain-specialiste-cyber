@@ -149,7 +149,11 @@ export const fabriqueMiddleware = ({
             'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
             'data:',
           ],
-          connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+          connectSrc: [
+            "'self'",
+            'https://stats.beta.gouv.fr',
+            'https://data.education.gouv.fr',
+          ],
           mediaSrc: [
             "'self'",
             'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
