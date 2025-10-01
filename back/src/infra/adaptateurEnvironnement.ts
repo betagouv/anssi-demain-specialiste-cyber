@@ -30,6 +30,7 @@ export type AdaptateurEnvironnement = {
     enMemoire: () => boolean;
   };
   matomo: () => { identifiant: string; tagManager: string } | undefined;
+  nodeEnv: () => string | undefined;
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -109,4 +110,5 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }
     return undefined;
   },
+  nodeEnv: () => process.env.NODE_ENV,
 };
