@@ -3,8 +3,11 @@
   import { clic } from '../../actions.svelte.js';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+  import NomEtablissementAutoComplete from './NomEtablissementAutoComplete.svelte';
+  import type { ReferentielEtablissement } from './ReferentielEtablissement';
 
   export let erreurs: ErreursValidationJeuEnEdition;
+  export let referentielEtablissement: ReferentielEtablissement;
 
   const ajouteEleve = () => {
     $jeuEnEditionStore.eleves ??= [];
@@ -21,16 +24,11 @@
   });
 </script>
 
-<dsfr-input
-  errorMessage={erreurs.nomEtablissement}
-  id="nomEtablissement"
-  label="Nom de votre établissement"
-  onvaluechanged={(e: CustomEvent) =>
-    ($jeuEnEditionStore.nomEtablissement = e.detail)}
-  status={erreurs.nomEtablissement ? 'error' : 'default'}
-  value={$jeuEnEditionStore.nomEtablissement}
->
-</dsfr-input>
+<NomEtablissementAutoComplete
+  bind:valeur={$jeuEnEditionStore.nomEtablissement}
+  {referentielEtablissement}
+  messageErreur={erreurs.nomEtablissement}
+/>
 
 <dsfr-radios-group
   id="sequence"

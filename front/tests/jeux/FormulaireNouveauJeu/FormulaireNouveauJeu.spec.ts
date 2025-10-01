@@ -2,6 +2,7 @@ import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
+import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireNouveauJeu/ReferentielEtablissement';
 import {
   type EvaluationDuJeu,
   type InformationsGeneralesDuJeu,
@@ -41,10 +42,14 @@ describe('Le formulaire de dépose de jeu', () => {
     estValide: vi.fn().mockReturnValue(true),
     valide: () => ({}),
   };
+  const referentielEtablissement: ReferentielEtablissement = {
+    trouveParNom: async () => [],
+  };
   const proprietesParDefaut = {
     validateurInformationsGenerales: validateurInformationsGeneralesEnSucces,
     validateurPresentation: validateurPresentationEnSucces,
     validateurEvaluation: validateurEvaluationEnSucces,
+    referentielEtablissement,
   };
 
   const etapePrecedente = async () => {

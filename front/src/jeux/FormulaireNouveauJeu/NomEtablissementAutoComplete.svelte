@@ -3,9 +3,14 @@
 
   interface Props {
     referentielEtablissement: ReferentielEtablissement;
-    valeur: string;
+    valeur?: string;
+    messageErreur?: string;
   }
-  let { referentielEtablissement, valeur = $bindable('') }: Props = $props();
+  let {
+    messageErreur,
+    referentielEtablissement,
+    valeur = $bindable(),
+  }: Props = $props();
 
   let suggestions: string[] = $state([]);
 
@@ -36,10 +41,14 @@
 
 <div class="conteneur-autocompletion">
   <dsfr-input
+    errorMessage={messageErreur}
     id="nomEtablissement"
     label="Nom de votre établissement"
-    onvaluechanged={(e: CustomEvent) =>
-      rechercheEtablissementTemporise(e.detail)}
+    onvaluechanged={(e: CustomEvent) => {
+      valeur = e.detail;
+      rechercheEtablissementTemporise(e.detail);
+    }}
+    status={messageErreur ? 'error' : 'default'}
     value={valeur}
   >
   </dsfr-input>
