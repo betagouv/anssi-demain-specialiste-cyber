@@ -1,8 +1,9 @@
-import { describe, expect, it } from 'vitest';
 import request from 'supertest';
+import { describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { encodeSession } from './cookie';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('Les ressources de page', () => {
   describe.each(['nouveau-jeu', 'mes-jeux'])(
@@ -31,4 +32,25 @@ describe('Les ressources de page', () => {
       });
     },
   );
+
+  describe('concernant la fiche jeu', () => {
+    it('renvoie la page', async () => {
+      let vueRendue = '';
+      const moteurDeRendu: MoteurDeRendu = {
+        rends: (reponse, vue) => {
+          vueRendue = vue;
+          reponse.sendStatus(200);
+        },
+      };
+      const serveur = creeServeur({
+        ...configurationDeTestDuServeur(),
+        moteurDeRendu,
+      });
+
+      const reponse = await request(serveur).get(`/jeux/1234`);
+
+      expect(reponse.status).toBe(200);
+      expect(vueRendue).toEqual('jeux');
+    });
+  });
 });
