@@ -20,8 +20,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
       name: 'session',
       sameSite: true,
       secret: process.env.SECRET_COOKIE,
-      secure: process.env.NODE_ENV === 'production',
-      signed: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV !== 'developpement',
+      signed: process.env.NODE_ENV !== 'developpement',
     }),
   );
 
