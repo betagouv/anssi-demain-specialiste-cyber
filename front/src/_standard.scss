@@ -38,3 +38,16 @@ h4 {
     line-height: 2rem;
   }
 }
+
+.titre-alternatif-xs {
+  color: var(--text-default-grey, #3a3a3a);
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: bold;
+  margin: 0 0 2rem;
+
+  @include a-partir-de(sm) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
