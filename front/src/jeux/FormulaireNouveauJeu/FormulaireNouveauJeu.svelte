@@ -21,18 +21,23 @@
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
-  import type { EtapeDeposeJeu } from './FormulaireDeJeu.type.js';
+  import type { EtapeDeposeJeu } from './FormulaireDeJeu.type';
+  import { type ReferentielEtablissement } from './ReferentielEtablissement';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
     validateurPresentation: Validateur<PresentationDuJeu>;
     validateurEvaluation: Validateur<EvaluationDuJeu>;
+    referentielEtablissement: ReferentielEtablissement;
   }
 
   const {
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
     validateurPresentation = new ValidateurPresentationDuJeu(),
     validateurEvaluation = new ValidateurEvaluationDuJeu(),
+    referentielEtablissement = {
+      trouveParNom: () => Promise.resolve([]),
+    },
   }: Props = $props();
 
   let etape = $state<EtapeDeposeJeu>('informations-generales');
@@ -116,7 +121,7 @@
     {/if}
     <form novalidate>
       {#if etape === 'informations-generales'}
-        <EtapeInformationsGenerales {erreurs} />
+        <EtapeInformationsGenerales {erreurs} {referentielEtablissement} />
       {:else if etape === 'presentation'}
         <EtapePresentation {erreurs} />
       {:else if etape === 'temoignages'}
