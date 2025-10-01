@@ -22,8 +22,9 @@ header(class='entete')
                     li
                         a(href='/mes-jeux') Sélection enseignants
 
-    div(class='hero')
-        nav(class='ariane' aria-label='Fil d\'Ariane')
-            a(href='#') Voir le fil d'Ariane
-        h2 #{titrePage}
-        p #{descriptionPage}
+    block hero
+        div(class='hero')
+            nav(class='ariane' aria-label='Fil d\'Ariane')
+                a(href='#') Voir le fil d'Ariane
+            h2 #{titrePage}
+            p #{descriptionPage}
