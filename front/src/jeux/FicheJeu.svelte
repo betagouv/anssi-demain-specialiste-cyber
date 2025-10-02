@@ -31,6 +31,20 @@
       type: 'link',
     },
   ];
+  const temoignages = [
+    {
+      citation:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.',
+      source: 'Détails',
+      auteur: 'Kevin',
+    },
+    {
+      citation:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.',
+      source: 'Détails',
+      auteur: 'Mme A',
+    },
+  ];
 </script>
 
 <div class="hero">
@@ -57,6 +71,65 @@
   buttonId="menu-fiche-jeu"
   hasTitle={false}
 ></dsfr-side-menu>
+
+<dsfr-container>
+  <div class="contenu">
+    <section id="infos-generales">
+      <h2>Informations générales</h2>
+      <ul>
+        <li>
+          <span>Format</span>
+          <span>Demi journée </span>
+        </li>
+        <li>
+          <span>Établissement</span>
+          <span>Lycée Françoise de Tournefeuille (31)</span>
+        </li>
+        <li>
+          <span>Enseignant&middot;e</span>
+          <span>Delphine</span>
+        </li>
+        <li>
+          <span>Élèves</span>
+          <span>Cindy, Kilian, Kevin et Brenda</span>
+        </li>
+        <li>
+          <span>Discipline</span>
+          <span>Sciences économiques et sociales</span>
+        </li>
+        <li>
+          <span>Classe</span>
+          <span>Seconde</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="presentation">
+      <h2>Présentation du jeu</h2>
+      <p>
+        Inspirés du célèbre jeu de société, mes élèves ont imaginé Cyber Cluedo,
+        un jeu d’enquête autour d’une cyberattaque fictive. Le but ? Découvrir
+        qui a commis l’attaque, avec quel outil (clé USB piégée, phishing, etc.)
+        et dans quel service (CDI, administration, salle informatique…). Ce
+        projet leur a permis de réfléchir aux menaces numériques tout en
+        mobilisant leur créativité, leur logique et leur esprit d’équipe. Une
+        façon ludique et concrète d’aborder les enjeux de cybersécurité en
+        classe.
+      </p>
+    </section>
+
+    <section id="photos">
+      <h2>Photos</h2>
+      <div class="photos">
+        <img src="/assets/images/image-generique.svg" alt="generique" />
+        <img src="/assets/images/image-generique.svg" alt="generique" />
+        <img src="/assets/images/image-generique.svg" alt="generique" />
+      </div>
+    </section>
+  </div>
+</dsfr-container>
+<lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"
+></lab-anssi-temoignages>
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
@@ -98,5 +171,43 @@
         width: 100%;
       }
     }
+  }
+
+  .contenu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    section {
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        li {
+          span:nth-child(1) {
+            &::after {
+              content: '\00a0:\00a0';
+            }
+          }
+          span:nth-child(2) {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .photos {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+        img {
+          aspect-ratio: 4/3;
+          width: 100%;
+          background-color: var(--blue-france-975-sun-113);
+        }
+      }
+    }
+  }
+  lab-anssi-temoignages {
+    display: block;
+    margin-top: -44px;
   }
 </style>
