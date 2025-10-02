@@ -1,4 +1,5 @@
-import { Router } from 'express';
+import { Router, urlencoded, Request, Response } from 'express';
+import * as core from 'express-serve-static-core';
 import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
 import { Jeu } from '../metier/jeu';
@@ -8,6 +9,7 @@ import { disciplines } from '../metier/referentiels/disciplines';
 import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { ConfigurationServeur } from './configurationServeur';
+import multer from 'multer';
 
 const chaineNonVide = (message: string) =>
   z.string(message).trim().min(1, message);
@@ -80,25 +82,48 @@ export const schemaJeu = z.strictObject({
     .optional(),
 });
 
+type CorpsRequeteDeJeu = {
+  jeu: string;
+};
 export const ressourceJeux = ({
   entrepotJeux,
   entrepotUtilisateur,
   adaptateurHachage,
   middleware,
   busEvenements,
+  adaptateurTeleversement,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
     '/',
-    middleware.valideLaCoherenceDuCorps(schemaJeu),
+    urlencoded(),
+    multer({
+      storage: multer.memoryStorage(),
+    }).fields([{ name: 'photos' }, { name: 'couverture' }]),
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
       adaptateurHachage,
     ),
-    async (requete, reponse) => {
+    async (
+      requete: Request<
+        core.ParamsDictionary,
+        Jeu | { erreur: string },
+        CorpsRequeteDeJeu,
+        qs.ParsedQs
+      >,
+      reponse: Response,
+    ) => {
       try {
+        const corpsRequeteJeu = JSON.parse(requete.body.jeu);
+        const resultat = schemaJeu.safeParse(corpsRequeteJeu);
+        if (!resultat.success) {
+          return reponse
+            .status(400)
+            .json({ erreur: resultat.error.issues[0].message });
+        }
         const utilisateurConnecte = requete.utilisateur;
+        const photosJeu = adaptateurTeleversement.photosJeu(requete);
 
         const {
           nom,
@@ -115,7 +140,7 @@ export const ressourceJeux = ({
           evaluationInteret,
           evaluationSatisfactionGenerale,
           precisions,
-        } = requete.body;
+        } = resultat.data;
         await entrepotJeux.ajoute(
           new Jeu({
             nom,
@@ -129,6 +154,10 @@ export const ressourceJeux = ({
             thematiques,
             description,
             temoignages,
+            photos: {
+              couverture: { chemin: photosJeu.couverture.chemin },
+              photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
+            },
           }),
         );
         await busEvenements.publie(
