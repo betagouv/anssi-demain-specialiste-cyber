@@ -1,12 +1,9 @@
 import z from 'zod';
 import { schemaJeu } from '../../src/api/ressourceJeux';
 import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
+import { Constructeur } from '../constructeur';
 
-interface Constructeur<T> {
-  construis(): T;
-}
-
-type CorpsRequeteDeJeu = z.infer<typeof schemaJeu>;
+export type CorpsRequeteDeJeu = z.infer<typeof schemaJeu>;
 
 class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
   private nom: string = 'Cluedo';
@@ -108,7 +105,6 @@ class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
       ...this.evaluations,
     };
   }
-
 }
 
 export const uneRequeteDeJeuValide = () => new ConstructeurRequeteDeJeu();

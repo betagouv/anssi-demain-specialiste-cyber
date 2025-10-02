@@ -23,6 +23,7 @@ import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { messagerieMattermost } from './infra/messagerieMattermost';
+import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -84,6 +85,7 @@ serviceCoherenceSecretsHachage
         }),
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
+        adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

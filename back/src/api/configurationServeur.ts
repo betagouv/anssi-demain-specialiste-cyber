@@ -12,6 +12,7 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { Middleware } from './middleware';
 import { MoteurDeRendu } from './moteurDeRendu';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
+import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -28,6 +29,7 @@ export interface ConfigurationServeur {
   busEvenements: BusEvenements;
   entrepotJeux: EntrepotJeux;
   adaptateurJournal: AdaptateurJournal;
+  adaptateurTeleversement: AdaptateurTeleversement;
 }
 
 export type ConfigurationServeurSansMiddleware = Omit<
