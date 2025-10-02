@@ -21,9 +21,9 @@ header(class='entete')
                         a(href='/catalogue') Catalogue des ressources
                     li
                         a(href='/mes-jeux') Sélection enseignants
+                    li
+                        a(href='/cyber-en-jeux') CyberEnJeux
 
     div(class='hero')
-        nav(class='ariane' aria-label='Fil d\'Ariane')
-            a(href='#') Voir le fil d'Ariane
-        h2 #{titrePage}
-        p #{descriptionPage}
+        block hero
+            lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
