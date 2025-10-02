@@ -27,6 +27,7 @@ import {
 import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 import { MIMEType } from 'node:util';
 import { unJeu } from '../metier/construteurJeu';
+import { CINQ_MO } from '../../src/api/ressourceJeux';
 
 describe('La ressource de mes jeux', () => {
   let serveur: Express;
@@ -580,6 +581,62 @@ describe('La ressource de mes jeux', () => {
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(parametresDeTest.erreurAttendue);
+      });
+    });
+
+    describe('concernant la vérification du téléversement de photos d’un jeu', () => {
+      it('limite le nombre de couverture à 1', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('une-image'), 'test.jpg')
+          .attach('couverture', Buffer.from('une-image'), 'test-2.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Une seule photo de couverture est autorisée',
+        });
+      });
+
+      it('limite le nombre à 5 photos au total', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('une-image'), 'test.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-2.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-3.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-4.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-5.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-6.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le nombre de photos maximum par jeu est de 5',
+        });
+      });
+
+      it('limite la taille maximale à 5MO pour les photos', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('photos', Buffer.alloc(CINQ_MO + 1, 0), 'test.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le poids maximum d’une photo est de 5MO',
+        });
+      });
+
+      it('limite la taille maximale à 5MO pour la couverture', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.alloc(CINQ_MO + 1, 0), 'test.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le poids maximum de la couverture est de 5MO',
+        });
       });
     });
   });

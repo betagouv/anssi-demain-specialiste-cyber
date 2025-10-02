@@ -1,4 +1,11 @@
-import { Router, urlencoded, Request, Response } from 'express';
+import {
+  NextFunction,
+  Request,
+  RequestHandler,
+  Response,
+  Router,
+  urlencoded,
+} from 'express';
 import * as core from 'express-serve-static-core';
 import z from 'zod';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
@@ -85,6 +92,52 @@ export const schemaJeu = z.strictObject({
 type CorpsRequeteDeJeu = {
   jeu: string;
 };
+
+export const CINQ_MO = 5 * 1024 * 1024;
+
+const valideLesPhotosTeleversees: RequestHandler = async (
+  requete: Request,
+  reponse: Response,
+  suite: NextFunction,
+) => {
+  const libellesErreur: Map<string, string> = new Map([
+    ['photos_LIMIT_FILE_COUNT', 'Le nombre de photos maximum par jeu est de 5'],
+    [
+      'couverture_LIMIT_FILE_COUNT',
+      'Une seule photo de couverture est autorisée',
+    ],
+    [
+      'photos_LIMIT_UNEXPECTED_FILE',
+      'Le nombre de photos maximum par jeu est de 5',
+    ],
+    [
+      'couverture_LIMIT_UNEXPECTED_FILE',
+      'Une seule photo de couverture est autorisée',
+    ],
+    ['photos_LIMIT_FILE_SIZE', 'Le poids maximum d’une photo est de 5MO'],
+    [
+      'couverture_LIMIT_FILE_SIZE',
+      'Le poids maximum de la couverture est de 5MO',
+    ],
+  ]);
+  return multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: CINQ_MO },
+  }).fields([
+    { name: 'photos', maxCount: 4 },
+    { name: 'couverture', maxCount: 1 },
+  ])(requete, reponse, (err) => {
+    if (err && err instanceof multer.MulterError) {
+      return reponse.status(400).json({
+        erreur:
+          libellesErreur.get(`${err.field}_${err.code}`) ||
+          'Une erreur est survenue',
+      });
+    }
+    return suite();
+  });
+};
+
 export const ressourceJeux = ({
   entrepotJeux,
   entrepotUtilisateur,
@@ -98,13 +151,11 @@ export const ressourceJeux = ({
   routeur.post(
     '/',
     urlencoded(),
-    multer({
-      storage: multer.memoryStorage(),
-    }).fields([{ name: 'photos' }, { name: 'couverture' }]),
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
       adaptateurHachage,
     ),
+    valideLesPhotosTeleversees,
     async (
       requete: Request<
         core.ParamsDictionary,
