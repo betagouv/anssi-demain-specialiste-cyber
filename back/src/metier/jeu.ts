@@ -11,6 +11,15 @@ export type Temoignage = {
   details: string;
 };
 
+type FichierImage = {
+  chemin: string;
+};
+
+export type PhotosJeu = {
+  couverture: FichierImage;
+  photos: FichierImage[];
+};
+
 export class Jeu {
   readonly id: string;
   nom: string;
@@ -24,6 +33,7 @@ export class Jeu {
   thematiques: ThematiqueDeJeux[];
   description: string;
   temoignages: Temoignage[];
+  photos: PhotosJeu;
 
   constructor({
     id,
@@ -38,6 +48,7 @@ export class Jeu {
     thematiques,
     description,
     temoignages = [],
+    photos,
   }: {
     id?: string;
     nom: string;
@@ -51,6 +62,7 @@ export class Jeu {
     thematiques: ThematiqueDeJeux[];
     description: string;
     temoignages?: Temoignage[];
+    photos: PhotosJeu;
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -64,5 +76,6 @@ export class Jeu {
     this.thematiques = thematiques;
     this.description = description;
     this.temoignages = temoignages;
+    this.photos = photos;
   }
 }

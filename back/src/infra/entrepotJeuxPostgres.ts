@@ -117,6 +117,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       thematiques: (jeuEnDB.thematiques ?? []) as ThematiqueDeJeux[],
       description: jeuEnDB.description,
       temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
+      photos: { couverture: { chemin: 'un-chemin' }, photos: [] },
     });
   }
 }

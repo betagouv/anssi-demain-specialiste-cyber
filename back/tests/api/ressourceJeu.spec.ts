@@ -46,6 +46,12 @@ describe('La ressource des jeux', () => {
         temoignages: [],
         thematiques: ['menace-cyber', 'orientation'],
         description: 'Une description',
+        photos: {
+          couverture: {
+            chemin: 'un-chemin',
+          },
+          photos: [],
+        },
       });
     });
   });
