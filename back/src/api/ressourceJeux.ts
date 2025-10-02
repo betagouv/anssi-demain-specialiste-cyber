@@ -22,6 +22,64 @@ const verifieNoteEvaluation = (message: string) =>
       error: message,
     });
 
+export const schemaJeu = z.strictObject({
+  nom: chaineNonVide('Le nom est obligatoire'),
+  nomEtablissement: chaineNonVide('Le nom de l‘établissement est obligatoire'),
+  discipline: z.enum(disciplines, {
+    error: 'La discipline est invalide',
+  }),
+  classe: z.enum(classes, {
+    error: 'La classe est invalide',
+  }),
+  sequence: z.enum(sequences, {
+    error: 'La séquence est invalide',
+  }),
+  eleves: z
+    .array(chaineNonVide('Les prénoms fournis sont invalides'))
+    .nonempty('Au moins un élève est requis'),
+  categorie: z.enum(categoriesDeJeux, {
+    error: 'La catégorie est invalide',
+  }),
+  thematiques: z
+    .array(
+      z.enum(thematiquesDeJeux, {
+        error: 'La thématique est invalide',
+      }),
+    )
+    .nonempty('La thématique est invalide'),
+  description: chaineNonVide('La description du jeu est obligatoire').max(
+    8000,
+    'La description ne peut contenir que 8000 caractères maximum',
+  ),
+  temoignages: z
+    .array(
+      z.strictObject({
+        prenom: z.string('Le prénom est obligatoire dans un témoignage'),
+        details: z
+          .string('Les détails sont obligatoires dans un témoignage')
+          .max(
+            8000,
+            'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
+          ),
+      }),
+    )
+    .optional(),
+  evaluationDecouverte: verifieNoteEvaluation(
+    'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+  ),
+  evaluationInteret: verifieNoteEvaluation(
+    'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+  ),
+  evaluationSatisfactionGenerale: verifieNoteEvaluation(
+    'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+  ),
+  precisions: z
+    .string()
+    .trim()
+    .nonempty('Les précisions ne peuvent pas être vides')
+    .optional(),
+});
+
 export const ressourceJeux = ({
   entrepotJeux,
   entrepotUtilisateur,
@@ -31,69 +89,9 @@ export const ressourceJeux = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
 
-  const schema = z.strictObject({
-    nom: chaineNonVide('Le nom est obligatoire'),
-    nomEtablissement: chaineNonVide(
-      'Le nom de l‘établissement est obligatoire',
-    ),
-    discipline: z.enum(disciplines, {
-      error: 'La discipline est invalide',
-    }),
-    classe: z.enum(classes, {
-      error: 'La classe est invalide',
-    }),
-    sequence: z.enum(sequences, {
-      error: 'La séquence est invalide',
-    }),
-    eleves: z
-      .array(chaineNonVide('Les prénoms fournis sont invalides'))
-      .nonempty('Au moins un élève est requis'),
-    categorie: z.enum(categoriesDeJeux, {
-      error: 'La catégorie est invalide',
-    }),
-    thematiques: z
-      .array(
-        z.enum(thematiquesDeJeux, {
-          error: 'La thématique est invalide',
-        }),
-      )
-      .nonempty('La thématique est invalide'),
-    description: chaineNonVide('La description du jeu est obligatoire').max(
-      8000,
-      'La description ne peut contenir que 8000 caractères maximum',
-    ),
-    temoignages: z
-      .array(
-        z.strictObject({
-          prenom: z.string('Le prénom est obligatoire dans un témoignage'),
-          details: z
-            .string('Les détails sont obligatoires dans un témoignage')
-            .max(
-              8000,
-              'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
-            ),
-        }),
-      )
-      .optional(),
-    evaluationDecouverte: verifieNoteEvaluation(
-      'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
-    ),
-    evaluationInteret: verifieNoteEvaluation(
-      'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
-    ),
-    evaluationSatisfactionGenerale: verifieNoteEvaluation(
-      'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
-    ),
-    precisions: z
-      .string()
-      .trim()
-      .nonempty('Les précisions ne peuvent pas être vides')
-      .optional(),
-  });
-
   routeur.post(
     '/',
-    middleware.valideLaCoherenceDuCorps(schema),
+    middleware.valideLaCoherenceDuCorps(schemaJeu),
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
       adaptateurHachage,

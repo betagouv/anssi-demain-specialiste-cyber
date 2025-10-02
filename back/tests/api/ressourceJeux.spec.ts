@@ -17,6 +17,7 @@ import {
 import { jeanneDupont, cybercluedo } from './objetsPretsALEmploi';
 import { Jeu } from '../../src/metier/jeu';
 import { Utilisateur } from '../../src/metier/utilisateur';
+import { uneRequeteDeJeuValide } from './constructeurRequeteDeJeu';
 
 describe('La ressource de mes jeux', () => {
   let serveur: Express;
@@ -30,35 +31,6 @@ describe('La ressource de mes jeux', () => {
       req.utilisateur = jeanneDupont;
       suite();
     });
-
-  const corpsNouveauJeuValide = {
-    nom: 'Cluedo',
-    sequence: 'heure',
-    nomEtablissement: 'Lycée de la mer',
-    discipline: 'mathematiques',
-    classe: 'cp',
-    eleves: ['Gontran'],
-    categorie: 'simulation',
-    thematiques: ['menace-cyber', 'orientation'],
-    description: 'Un texte descriptif du jeu',
-    temoignages: [
-      {
-        prenom: 'Jean',
-        details: 'Un premier témoignage',
-      },
-      {
-        prenom: 'Paul',
-        details: 'Un second témoignage',
-      },
-      {
-        prenom: 'Pierre',
-        details: 'Un troisième et dernier démoignage',
-      },
-    ],
-    evaluationInteret: 1,
-    evaluationSatisfactionGenerale: 2,
-    evaluationDecouverte: 3,
-  };
 
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
@@ -77,7 +49,7 @@ describe('La ressource de mes jeux', () => {
     it("retourne un 201 si l'utilisateur est connecté", async () => {
       const reponse = await request(serveur)
         .post('/api/mes-jeux')
-        .send(corpsNouveauJeuValide);
+        .send(uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(201);
     });
@@ -90,13 +62,15 @@ describe('La ressource de mes jeux', () => {
       );
       const reponse = await request(serveur)
         .post('/api/mes-jeux')
-        .send(corpsNouveauJeuValide);
+        .send(uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(401);
     });
 
     it("ajoute un jeu dans l'entrepot des jeux", async () => {
-      await request(serveur).post('/api/mes-jeux').send(corpsNouveauJeuValide);
+      await request(serveur)
+        .post('/api/mes-jeux')
+        .send(uneRequeteDeJeuValide().construis());
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux).toHaveLength(1);
@@ -105,10 +79,13 @@ describe('La ressource de mes jeux', () => {
     it('peut fournir les informations sur le jeu', async () => {
       await request(serveur)
         .post('/api/mes-jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          temoignages: [{ prenom: 'Michel', details: "C'était trop bien" }],
-        });
+        .send(
+          uneRequeteDeJeuValide()
+            .avecTemoignages([
+              { prenom: 'Michel', details: "C'était trop bien" },
+            ])
+            .construis(),
+        );
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
@@ -127,7 +104,9 @@ describe('La ressource de mes jeux', () => {
     });
 
     it('publie un événement de création de jeu', async () => {
-      await request(serveur).post('/api/mes-jeux').send(corpsNouveauJeuValide);
+      await request(serveur)
+        .post('/api/mes-jeux')
+        .send(uneRequeteDeJeuValide().construis());
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -146,13 +125,16 @@ describe('La ressource de mes jeux', () => {
     it('publie un événement de création de jeu avec l’évaluation du jeu', async () => {
       await request(serveur)
         .post('/api/mes-jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          evaluationDecouverte: 2,
-          evaluationInteret: 3,
-          evaluationSatisfactionGenerale: 1,
-          precisions: 'Des précisions',
-        });
+        .send(
+          uneRequeteDeJeuValide()
+            .avecEvaluations({
+              evaluationDecouverte: 2,
+              evaluationInteret: 3,
+              evaluationSatisfactionGenerale: 1,
+              precisions: 'Des précisions',
+            })
+            .construis(),
+        );
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -163,7 +145,9 @@ describe('La ressource de mes jeux', () => {
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
-      await request(serveur).post('/api/mes-jeux').send(corpsNouveauJeuValide);
+      await request(serveur)
+        .post('/api/mes-jeux')
+        .send(uneRequeteDeJeuValide().construis());
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');
@@ -174,7 +158,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             nom: undefined,
           });
 
@@ -185,7 +169,7 @@ describe('La ressource de mes jeux', () => {
       it("vérifie que le nom n'est pas vide", async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({ ...corpsNouveauJeuValide, nom: '   ' });
+          .send(uneRequeteDeJeuValide().avecUnNom('     ').construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
@@ -197,7 +181,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             nomEtablissement: undefined,
           });
 
@@ -210,7 +194,9 @@ describe('La ressource de mes jeux', () => {
       it("vérifie que le nom n'est pas vide", async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({ ...corpsNouveauJeuValide, nomEtablissement: '   ' });
+          .send(
+            uneRequeteDeJeuValide().avecUnNomEtablissement('    ').construis(),
+          );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -224,7 +210,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             discipline: undefined,
           });
 
@@ -236,7 +222,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             discipline: 'mauvaise-discipline',
           });
 
@@ -250,7 +236,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             classe: undefined,
           });
 
@@ -262,7 +248,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             classe: 'mauvaise-classe',
           });
 
@@ -276,7 +262,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             sequence: undefined,
           });
 
@@ -288,7 +274,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             sequence: '      ',
           });
 
@@ -300,7 +286,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             sequence: 'mauvaise-sequence',
           });
 
@@ -313,10 +299,7 @@ describe('La ressource de mes jeux', () => {
       it('vérifie qu‘au moins un élève est renseigné', async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            eleves: [],
-          });
+          .send(uneRequeteDeJeuValide().sansEleves().construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Au moins un élève est requis');
@@ -325,10 +308,7 @@ describe('La ressource de mes jeux', () => {
       it('vérifie que les prénoms fournis ne soient pas vides', async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            eleves: ['Gontran', ''],
-          });
+          .send(uneRequeteDeJeuValide().ajouteUnEleve('').construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -342,7 +322,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             categorie: undefined,
           });
 
@@ -354,7 +334,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             categorie: 'mauvaise-categorie',
           });
 
@@ -367,10 +347,7 @@ describe('La ressource de mes jeux', () => {
       it("vérifie qu'au moins une thématique est fournie", async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            thematiques: [],
-          });
+          .send(uneRequeteDeJeuValide().sansThematiques().construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La thématique est invalide');
@@ -380,7 +357,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             thematiques: ['orientation', 'mauvaise-thematique'],
           });
 
@@ -394,7 +371,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             description: undefined,
           });
 
@@ -407,7 +384,7 @@ describe('La ressource de mes jeux', () => {
       it("vérifie que le nom n'est pas vide", async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({ ...corpsNouveauJeuValide, description: '   ' });
+          .send(uneRequeteDeJeuValide().avecUneDescription('   ').construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -418,7 +395,11 @@ describe('La ressource de mes jeux', () => {
       it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({ ...corpsNouveauJeuValide, description: 'mots'.repeat(2001) });
+          .send(
+            uneRequeteDeJeuValide()
+              .avecUneDescription('mots'.repeat(2001))
+              .construis(),
+          );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -432,7 +413,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             temoignages: undefined,
           });
 
@@ -442,10 +423,7 @@ describe('La ressource de mes jeux', () => {
       it('accepte les témoignages vides', async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [],
-          });
+          .send(uneRequeteDeJeuValide().sansTemoignages().construis());
 
         expect(reponse.status).toEqual(201);
       });
@@ -454,7 +432,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             temoignages: [
               { nom: 'ça devrait être le prénom', details: 'un détail' },
             ],
@@ -470,7 +448,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             temoignages: [{ prenom: 'Miche' }],
           });
 
@@ -480,13 +458,16 @@ describe('La ressource de mes jeux', () => {
         );
       });
 
-      it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
+      it('vérifie que les détails ne dépassent pas 8000 caractères', async () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [{ prenom: 'Jean', details: 'mots'.repeat(2001) }],
-          });
+          .send(
+            uneRequeteDeJeuValide()
+              .avecTemoignages([
+                { prenom: 'Jean', details: 'mots'.repeat(2001) },
+              ])
+              .construis(),
+          );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -500,7 +481,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             precisions: undefined,
           });
 
@@ -553,7 +534,7 @@ describe('La ressource de mes jeux', () => {
         const reponse = await request(serveur)
           .post('/api/mes-jeux')
           .send({
-            ...corpsNouveauJeuValide,
+            ...uneRequeteDeJeuValide().construis(),
             ...parametresDeTest.evaluation,
           });
 
