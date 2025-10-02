@@ -5,6 +5,7 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
   import { clic } from '../actions.svelte';
+  import Citation from '../Citation.svelte';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -79,17 +80,15 @@
           use:clic={deposeUnJeu}
         ></dsfr-button>
       </div>
-      <div class="rejoindre-communaute">
-        <span>
-          Rejoignez la communauté CyberEnJeux pour poser vos questions ou
-          partager votre expérience. <lab-anssi-lien
-            cible="#"
-            titre="Rejoindre la communauté"
-            apparence="lien-texte"
-            target="_blank"
-          ></lab-anssi-lien>
-        </span>
-      </div>
+      <Citation>
+        Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
+        votre expérience. <lab-anssi-lien
+          cible="#"
+          titre="Rejoindre la communauté"
+          apparence="lien-texte"
+          target="_blank"
+        ></lab-anssi-lien>
+      </Citation>
     </div>
   {/if}
 </dsfr-container>
@@ -143,24 +142,6 @@
       }
       p {
         margin: 0.5rem 0 2rem;
-      }
-    }
-
-    .rejoindre-communaute {
-      font-weight: bold;
-      color: var(--grey-200-850);
-      display: flex;
-      gap: 0.5rem;
-
-      &:before {
-        content: url('/icons/system/question-answer-line.svg');
-        width: 24px;
-        height: 24px;
-      }
-
-      lab-anssi-lien {
-        color: var(--blue-france-sun-113-625);
-        font-weight: normal;
       }
     }
   }
