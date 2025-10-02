@@ -8,15 +8,22 @@
 <script>
   import Accueil from './Accueil.svelte';
   import Onglets from './Onglets.svelte';
+  import Ressources from './Ressources.svelte';
+
   const onglets = [
-    { label: '👩‍🏫 Présentation de CyberEnJeux', href: '#presentation' },
-    { label: '🎲 Vitrine des jeux des élèves', href: '#vitrine-des-jeux' },
-    { label: '📚 Guides et ressources', href: '#guides-et-ressources' },
+    { label: '👩‍🏫 Présentation de CyberEnJeux', fragment: '#presentation' },
+    { label: '🎲 Vitrine des jeux des élèves', fragment: '#vitrine-des-jeux' },
+    { label: '📚 Guides et ressources', fragment: '#guides-et-ressources' },
   ];
+  let ongletActif = $state(0);
 </script>
 
 <dsfr-container>
-  <Onglets {onglets}></Onglets>
+  <Onglets {onglets} bind:ongletActif></Onglets>
 </dsfr-container>
 
-<Accueil></Accueil>
+{#if ongletActif === 0}
+  <Accueil></Accueil>
+{:else if ongletActif === 2}
+  <Ressources></Ressources>
+{/if}
