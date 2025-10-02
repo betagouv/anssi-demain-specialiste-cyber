@@ -18,6 +18,11 @@ $toutes-couleurs: (
     }
   }
 
+  // Les variables de thème
+  --brique-carrousel-bouton-action-texte-couleur: var(--grey-50-1000);
+  --brique-temoignages-titre-couleur: var(--grey-50-1000);
+  --brique-temoignages-icone-couleur: #ce614a;
+
   // Les variables de couleurs du DSFR
   --background-default-grey: var(--grey-1000-50);
   --background-default-grey-hover: var(--grey-1000-50-hover);
