@@ -9,8 +9,8 @@ import {
 } from './fauxObjets';
 import { creeServeur } from '../../src/api/dsc';
 import request from 'supertest';
-import { Jeu } from '../../src/metier/jeu';
 import { jeanneDupont } from './objetsPretsALEmploi';
+import { unJeu } from '../metier/construteurJeu';
 
 describe('La ressource de tous les Jeux', () => {
   let serveur: Express;
@@ -37,19 +37,15 @@ describe('La ressource de tous les Jeux', () => {
 
     it('retourne la liste des jeux', async () => {
       await entrepotJeux.ajoute(
-        new Jeu({
-          id: '1',
-          nom: 'cybercluedo',
-          enseignant: jeanneDupont,
-          sequence: 'heure',
-          classe: 'cp',
-          discipline: 'histoire-et-geographie',
-          nomEtablissement: 'Lycée de la mer',
-          eleves: [],
-          categorie: 'simulation',
-          thematiques: ['menace-cyber', 'orientation'],
-          description: 'Une description',
-        }),
+        unJeu()
+          .avecUnId('1')
+          .avecUnNom('cybercluedo')
+          .avecUneDescription('Une description')
+          .deClasse('cp')
+          .deCategorie('simulation')
+          .avecLesThematiques(['menace-cyber', 'orientation'])
+          .deEnseignant(jeanneDupont)
+          .construis(),
       );
 
       const reponse = await request(serveur).get('/api/jeux');

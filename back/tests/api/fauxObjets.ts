@@ -1,4 +1,4 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
@@ -16,6 +16,11 @@ import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import {
+  AdaptateurTeleversement,
+  PhotosJeuTeleversees,
+} from '../../src/infra/adaptateurTeleversement';
+import { MIMEType } from 'node:util';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -100,6 +105,20 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     }),
   };
 
+export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => ({
+  photosJeu(_requete: Request): PhotosJeuTeleversees {
+    return {
+      couverture: {
+        nom: 'couverture',
+        mimeType: new MIMEType('image/jpeg'),
+        image: Buffer.from('couverture'),
+        chemin: 'chemin',
+      },
+      photos: [],
+    };
+  },
+});
+
 export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => ({
     serveurLab: {
@@ -123,6 +142,7 @@ export const configurationServeurSansMiddleware =
     entrepotJeux: new EntrepotJeuxMemoire(),
     adaptateurEnvironnement: fauxAdaptateurEnvironnement,
     adaptateurJournal: adaptateurJournalMemoire,
+    adaptateurTeleversement: fauxAdaptateurTeleversement(),
   });
 
 const ajouteUnNonceNonAleatoireALaReponse = async (
@@ -135,7 +155,6 @@ const ajouteUnNonceNonAleatoireALaReponse = async (
 };
 
 const middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
-
 export const configurationDeTestDuServeur = (): ConfigurationServeur => ({
   ...configurationServeurSansMiddleware(),
   middleware: {

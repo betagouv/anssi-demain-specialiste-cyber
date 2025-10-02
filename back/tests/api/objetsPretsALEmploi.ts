@@ -1,5 +1,5 @@
-import { Jeu } from '../../src/metier/jeu';
 import { Utilisateur } from '../../src/metier/utilisateur';
+import { unJeu } from '../metier/construteurJeu';
 
 export const jeanneDupont = new Utilisateur({
   email: 'jeanne.dupont@mail.com',
@@ -9,16 +9,14 @@ export const jeanneDupont = new Utilisateur({
   siretEntite: '',
 });
 
-export const cybercluedo = new Jeu({
-  id: '1',
-  nom: 'cybercluedo',
-  enseignant: jeanneDupont,
-  sequence: 'heure',
-  classe: 'cp',
-  discipline: 'histoire-et-geographie',
-  nomEtablissement: 'Lycée de la mer',
-  eleves: [],
-  categorie: 'simulation',
-  thematiques: ['menace-cyber', 'orientation'],
-  description: 'Une description',
-});
+export const cybercluedo = unJeu()
+  .avecUnId('1')
+  .avecUnNom('cybercluedo')
+  .deEnseignant(jeanneDupont)
+  .deClasse('cp')
+  .deCategorie('simulation')
+  .avecLesThematiques(['menace-cyber', 'orientation'])
+  .avecUneDescription('Une description')
+  .pourLaDiscipline('histoire-et-geographie')
+  .dansEtablissement('Lycée de la mer')
+  .construis();
