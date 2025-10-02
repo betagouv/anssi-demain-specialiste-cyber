@@ -1,6 +1,36 @@
 <svelte:options customElement={{ tag: 'dsc-fiche-jeu', shadow: 'none' }} />
 
 <script lang="ts">
+  const items = [
+    {
+      id: 'menu-infos-generales',
+      label: 'Informations générales',
+      href: '#infos-generales',
+      isCollapsible: false,
+      type: 'link',
+    },
+    {
+      id: 'menu-presentation',
+      label: 'Présentation du jeu',
+      href: '#presentation',
+      isCollapsible: false,
+      type: 'link',
+    },
+    {
+      id: 'menu-photos',
+      label: 'Photos',
+      href: '#photos',
+      isCollapsible: false,
+      type: 'link',
+    },
+    {
+      id: 'menu-temoignages',
+      label: 'Témoignages',
+      href: '#temoignages',
+      isCollapsible: false,
+      type: 'link',
+    },
+  ];
 </script>
 
 <div class="hero">
@@ -15,9 +45,18 @@
     </p>
   </div>
   <div class="illustration-jeu">
-    <img src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"/>
+    <img
+      src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
+    />
   </div>
 </div>
+<dsfr-side-menu
+  title=""
+  {items}
+  buttonLabel="Dans cette fiche"
+  buttonId="menu-fiche-jeu"
+  hasTitle={false}
+></dsfr-side-menu>
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
