@@ -152,9 +152,34 @@
     >
     </lab-anssi-carrousel-tuiles>
   </dsfr-container>
+
+  <dsfr-container>
+    <div class="bandeau">
+      <div class="conteneur">
+        <h3>Organisez une séquence CyberEnJeux dans votre établissement</h3>
+        <p>
+          Faites découvrir la cybersécurité autrement ! En déclarant votre
+          séquence, vous profitez d’un accompagnement et valorisez votre
+          engagement pour une éducation au numérique plus ludique et
+          participative.
+        </p>
+        <div class="action">
+          <dsfr-button
+            label="Déclarer une action CyberEnJeux"
+            kind="inverted"
+            target="_blank"
+            href="#"
+            markup="a"
+          ></dsfr-button>
+        </div>
+      </div>
+    </div>
+  </dsfr-container>
 </div>
 
 <style lang="scss">
+  @use '../points-de-rupture' as *;
+
   :root {
     --brique-carrousel-bouton-action-texte-couleur: #161616;
 
@@ -280,6 +305,49 @@
             article {
               max-width: 100%;
             }
+          }
+        }
+      }
+    }
+
+    .bandeau {
+      background-color: #131429;
+      color: #ffffff;
+      padding: 2rem 2rem 3rem 2rem;
+
+      .conteneur {
+        max-width: 996px;
+        margin: 0 auto 1rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin: 0 0 0.5rem;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .action {
+        width: fit-content;
+        margin-top: 2rem;
+      }
+
+      @include a-partir-de(lg) {
+        .conteneur {
+          display: grid;
+          grid-template-columns: 0.55fr 0.45fr;
+          grid-template-rows: auto auto;
+          column-gap: 1.5rem;
+
+          .action {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            align-self: center;
+            justify-self: center;
+            margin: 0;
           }
         }
       }
