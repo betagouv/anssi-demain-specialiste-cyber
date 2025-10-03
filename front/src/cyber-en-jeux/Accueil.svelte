@@ -109,27 +109,55 @@
       ]}
     >
     </lab-anssi-marelle>
+  </dsfr-container>
 
-    <dsfr-container>
-      <hr />
-    </dsfr-container>
+  <dsfr-container>
+    <hr />
+  </dsfr-container>
 
-    <dsfr-container>
-      <Citation>
-        Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
-        votre expérience. <lab-anssi-lien
-          cible="#"
-          titre="Rejoindre la communauté"
-          apparence="lien-texte"
-          target="_blank"
-        ></lab-anssi-lien>
-      </Citation>
-    </dsfr-container>
+  <dsfr-container>
+    <Citation>
+      Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
+      votre expérience. <lab-anssi-lien
+        cible="#"
+        titre="Rejoindre la communauté"
+        apparence="lien-texte"
+        target="_blank"
+      ></lab-anssi-lien>
+    </Citation>
+  </dsfr-container>
+
+  <dsfr-container>
+    <lab-anssi-carrousel-tuiles
+      tuiles={[
+        {
+          titre: 'Pour tous les enseignements',
+          contenu:
+            'CyberEnJeux est un outil pédagogique développé pour le monde éducatif, pouvant être organisé dans tout type de disciplines.',
+          illustration: { lien: '/assets/images/cej/city-hall.svg', alt: '' },
+        },
+        {
+          titre: 'Dès le cycle 3',
+          contenu:
+            'CyberEnJeux peut être organisé à partir de 10 ans et tout au long de la scolarité et au-delà !',
+          illustration: { lien: '/assets/images/cej/backpack.svg', alt: '' },
+        },
+        {
+          titre: "Prêt à l'emploi",
+          contenu:
+            "Vous n'avez pas besoin d'être spécialistes cyber pour organiser une séquence CyberEnJeux et quasiment rien à préparer.",
+          illustration: { lien: '/assets/images/cej/succes.svg', alt: '' },
+        },
+      ]}
+    >
+    </lab-anssi-carrousel-tuiles>
   </dsfr-container>
 </div>
 
 <style lang="scss">
   :root {
+    --brique-carrousel-bouton-action-texte-couleur: #161616;
+
     --brique-marelle-titre-couleur: #161616;
     --brique-marelle-etapes-numero-etape-couleur: #ce614a;
   }
