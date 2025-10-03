@@ -7,6 +7,7 @@ const pages = [
   { route: '/maintenance', protegee: false },
   { route: '/nouveau-jeu', protegee: true },
   { route: '/mes-jeux', protegee: true },
+  { route: '/cyber-en-jeux', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
