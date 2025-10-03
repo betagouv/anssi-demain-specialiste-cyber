@@ -48,23 +48,30 @@
 </script>
 
 <div class="hero">
-  <nav class="ariane" aria-label="Fil d'Ariane">
-    <a href="#">Voir le fil d'Ariane</a>
-  </nav>
-  <div class="cartouche">
-    <dsfr-badge label="Thématique cyber" accent="purple-glycine" type="accent"
-    ></dsfr-badge>
-    <p class="titre-alternatif-xs">CyberCluedo</p>
-    <p class="elaboration">
-      Élaboré par Cindy, Kylian, Kevin et Branda du Lycée Françoise de
-      Tournefeuille (31)
-    </p>
-  </div>
-  <div class="illustration-jeu">
-    <img
-      src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
-    />
-  </div>
+  <dsfr-container>
+    <div class="entete-fiche-jeu">
+      <nav class="ariane" aria-label="Fil d'Ariane">
+        <a href="#">Voir le fil d'Ariane</a>
+      </nav>
+      <div class="cartouche">
+        <dsfr-badge
+          label="Thématique cyber"
+          accent="purple-glycine"
+          type="accent"
+        ></dsfr-badge>
+        <p class="titre-alternatif-xs">CyberCluedo</p>
+        <p class="elaboration">
+          Élaboré par Cindy, Kylian, Kevin et Branda du Lycée Françoise de
+          Tournefeuille (31)
+        </p>
+      </div>
+      <div class="illustration-jeu">
+        <img
+          src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
+        />
+      </div>
+    </div>
+  </dsfr-container>
 </div>
 
 <div class="corps-de-fiche">
@@ -146,9 +153,6 @@
       url('/assets/images/hero-fiche-jeu.svg') no-repeat top right -300px;
     background-size: auto 100%;
 
-    display: flex;
-    flex-direction: column;
-
     @include a-partir-de(md) {
       background-position-x: right -170px;
     }
@@ -156,36 +160,60 @@
       background-position-x: right;
     }
 
-    .cartouche {
-      padding-bottom: 3rem;
-      .titre-alternatif-xs {
-        margin-top: 1.5rem;
-        color: var(--grey-50-1000);
+    .entete-fiche-jeu {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'fil-ariane'
+        'cartouche'
+        'illustration';
 
-        @include a-partir-de(md) {
-          margin-top: 0.25rem;
-        }
+      @include a-partir-de(lg) {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        grid-template-areas:
+          'fil-ariane fil-ariane'
+          'cartouche illustration';
       }
 
-      dsfr-badge {
-        display: none;
-        margin-top: 1.5rem;
-        @include a-partir-de(md) {
-          display: block;
-        }
+      .ariane {
+        grid-area: fil-ariane;
       }
 
-      .elaboration {
-        font-size: 1.25rem;
-        line-height: 2rem;
+      .cartouche {
+        grid-area: cartouche;
+        padding-bottom: 3rem;
+        .titre-alternatif-xs {
+          margin-top: 1.5rem;
+          color: var(--grey-50-1000);
+
+          @include a-partir-de(md) {
+            margin-top: 0.25rem;
+          }
+        }
+
+        dsfr-badge {
+          display: none;
+          margin-top: 1.5rem;
+          @include a-partir-de(md) {
+            display: block;
+          }
+        }
+
+        .elaboration {
+          font-size: 1.25rem;
+          line-height: 2rem;
+        }
       }
     }
 
     .illustration-jeu {
+      grid-area: illustration;
       background: white;
       padding: 0.25rem 0.25rem 0;
       max-width: 36.75rem;
-      align-self: center;
+      justify-self: center;
+      display: flex;
 
       img {
         width: 100%;
@@ -197,8 +225,6 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: 'menu' 'sections';
-    padding-left: 1rem;
-    padding-right: 1rem;
     max-width: 78rem;
     margin: 0 auto;
 
@@ -209,8 +235,7 @@
     }
 
     @include a-partir-de(lg) {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      grid-template-columns: 19.125rem 1fr;
     }
 
     dsfr-side-menu {
@@ -221,6 +246,8 @@
 
     .sections {
       grid-area: sections;
+      padding-top: 2rem;
+
       @include a-partir-de(md) {
         padding-top: 0.75rem;
       }
@@ -228,6 +255,17 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        @include a-partir-de(md) {
+          padding-left: 0;
+        }
+
+        @include a-partir-de(lg) {
+          padding-right: 1.5rem;
+        }
+
         section {
           ul {
             display: flex;
@@ -265,6 +303,9 @@
       lab-anssi-temoignages {
         display: block;
         margin-top: -44px;
+        @include a-partir-de(md) {
+          margin-left: -1.5rem;
+        }
       }
     }
   }
