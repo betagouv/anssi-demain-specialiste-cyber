@@ -1,4 +1,6 @@
 <script lang="ts">
+  import MiseEnAvant from '../MiseEnAvant.svelte';
+
   const toutesLesRessources = [
     {
       titre: 'Télécharger le livret 0 : Utilisation de CyberEnJeux',
@@ -135,21 +137,35 @@
       </p>
     </div>
 
-    <div class="encart-dsc">
-      <lab-anssi-brique-hero
-        titre="DemainSpécialisteCyber"
-        soustitre="DemainSpécialisteCyber est une campagne nationale co-construite par l’ANSSI et son laboratoire d’innovation, le Ministère de l’Education Nationale et de la Jeunesse et le Campus Cyber, en vue de valoriser la cybersécurité et ses métiers auprès des collégien/nes, lycéen/nes mais aussi étudiant/es."
-        illustration={{
-          lien: '/assets/images/cej/hacker-ethique.png',
-          alt: 'Hacker éthique',
-        }}
-        actiongauche={{ titre: 'Télécharger les 6 affiches métiers', lien: '' }}
-        actiondroite={{
-          titre: 'Télécharger le kit de communication',
-          lien: '',
-        }}
-      ></lab-anssi-brique-hero>
-    </div>
+    <MiseEnAvant
+      titre="Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber"
+      illustration={{
+        lien: '/assets/images/cej/hacker-ethique.png',
+        alt: 'Hacker éthique',
+      }}
+      liens={[
+        {
+          lien: '#',
+          libelle: 'Télécharger les 6 affiches métiers',
+          detail: 'ZIP - 2 Mo',
+          telechargement: true,
+        },
+        {
+          lien: '#',
+          libelle: 'Télécharger le kit de communication',
+          detail: 'ZIP - 2 Mo',
+          telechargement: true,
+        },
+      ]}
+    >
+      <p>
+        DemainSpécialisteCyber est une campagne nationale co-construite par
+        l’ANSSI et son laboratoire d’innovation, le Ministère de l’Education
+        Nationale et de la Jeunesse et le Campus Cyber, en vue de valoriser la
+        cybersécurité et ses métiers auprès des collégien/nes, lycéen/nes mais
+        aussi étudiant/es.
+      </p>
+    </MiseEnAvant>
   </div>
 </dsfr-container>
 
@@ -187,10 +203,6 @@
     @include a-partir-de(sm) {
       width: clamp(200px, 100%, 310px);
     }
-  }
-
-  .encart-dsc {
-    background-color: #131429;
   }
 
   .conteneur {
