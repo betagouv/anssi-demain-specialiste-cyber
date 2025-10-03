@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
@@ -18,9 +18,8 @@ import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberM
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import {
   AdaptateurTeleversement,
-  PhotosJeuTeleversees,
+  fabriqueAdaptateurTeleversement,
 } from '../../src/infra/adaptateurTeleversement';
-import { MIMEType } from 'node:util';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -105,19 +104,8 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     }),
   };
 
-export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => ({
-  photosJeu(_requete: Request): PhotosJeuTeleversees {
-    return {
-      couverture: {
-        nom: 'couverture',
-        mimeType: new MIMEType('image/jpeg'),
-        image: Buffer.from('couverture'),
-        chemin: 'chemin',
-      },
-      photos: [],
-    };
-  },
-});
+export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement =>
+  fabriqueAdaptateurTeleversement();
 
 export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => ({
