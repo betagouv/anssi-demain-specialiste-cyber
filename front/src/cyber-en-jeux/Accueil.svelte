@@ -61,9 +61,63 @@
       </div>
     </dsfr-container>
   </div>
+
+  <dsfr-container>
+    <lab-anssi-marelle
+      titre="Déroulé d’une séquence CyberEnJeux"
+      etapesmarelle={[
+        {
+          titre: 'Préparation de la séquence CyberEnjeu',
+          description:
+            'Formez-vous aux notions clés de cybersécurité grâce à des ressources simples et accessibles pour bien lancer votre projet.',
+          illustration: { lien: '/assets/images/cej/preparer.svg', alt: '' },
+          lien: {
+            texte: 'Guides et ressources CyberEnJeux',
+            href: '#ressources',
+          },
+        },
+        {
+          titre: 'Formation des élèves aux enjeux de cybersécurité',
+          description:
+            'Appuyez-vous sur des supports pédagogiques prêts à l’emploi pour sensibiliser vos élèves aux bons réflexes numériques.',
+          illustration: { lien: '/assets/images/cej/former.svg', alt: '' },
+          lien: {
+            texte: 'Guides et ressources CyberEnJeux',
+            href: '#ressources',
+          },
+        },
+        {
+          titre: 'Conception de jeux par les élèves',
+          description:
+            'Aidez-les à concevoir des jeux  sur la cybersécurité en s’inspirant de modèles et de ressources adaptées à leur niveau.',
+          illustration: { lien: '/assets/images/cej/concevoir.svg', alt: '' },
+          lien: {
+            texte: 'Vitrine des jeux des élèves',
+            href: '#vitrine-des-jeux',
+          },
+        },
+        {
+          titre: 'Valorisation de la séquence et des jeux',
+          description:
+            'Accédez à votre espace enseignant et partagez les jeux créés par vos élèves pour mettre en avant leur engagement et enrichir la vitrine des jeux !',
+          illustration: { lien: '/assets/images/cej/valoriser.svg', alt: '' },
+          lien: {
+            texte: 'Espace enseignant',
+            href: '/mes-jeux',
+          },
+        },
+      ]}
+    >
+    </lab-anssi-marelle>
+  </dsfr-container>
 </div>
 
 <style lang="scss">
+  :root {
+    --brique-marelle-titre-couleur: #161616;
+    --brique-marelle-etapes-numero-etape-couleur: #ce614a;
+  }
+
   .accueil {
     display: flex;
     flex-direction: column;
@@ -185,6 +239,11 @@
           }
         }
       }
+    }
+
+    lab-anssi-marelle {
+      display: block;
+      margin-bottom: -3.5rem;
     }
   }
 </style>
