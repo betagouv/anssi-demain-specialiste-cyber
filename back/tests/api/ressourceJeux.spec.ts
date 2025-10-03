@@ -14,7 +14,7 @@ import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
 } from './fauxObjets';
-import { jeanneDupont } from './objetsPretsALEmploi';
+import { jeanneDupont, cybercluedo } from './objetsPretsALEmploi';
 import { Jeu } from '../../src/metier/jeu';
 import { Utilisateur } from '../../src/metier/utilisateur';
 
@@ -582,21 +582,7 @@ describe('La ressource des jeux', () => {
     });
 
     it('retourne la liste des jeux', async () => {
-      await entrepotJeux.ajoute(
-        new Jeu({
-          id: '1',
-          nom: 'cybercluedo',
-          enseignant: jeanneDupont,
-          sequence: 'heure',
-          classe: 'cp',
-          discipline: 'histoire-et-geographie',
-          nomEtablissement: 'Lycée de la mer',
-          eleves: [],
-          categorie: 'simulation',
-          thematiques: ['menace-cyber', 'orientation'],
-          description: 'Une description',
-        }),
-      );
+      await entrepotJeux.ajoute(cybercluedo);
 
       const reponse = await request(serveur).get('/api/jeux');
 
