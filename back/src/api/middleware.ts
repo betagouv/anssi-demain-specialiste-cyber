@@ -152,7 +152,7 @@ export const fabriqueMiddleware = ({
           connectSrc: [
             "'self'",
             'https://stats.beta.gouv.fr',
-            'https://data.education.gouv.fr',
+            'https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/',
           ],
           mediaSrc: [
             "'self'",
