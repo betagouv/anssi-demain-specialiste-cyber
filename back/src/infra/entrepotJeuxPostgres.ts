@@ -11,6 +11,15 @@ import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurHachage } from './adaptateurHachage';
 import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 
+type FichierImage = {
+  chemin: string;
+};
+
+type PhotosJeu = {
+  couverture: FichierImage;
+  photos: FichierImage[];
+};
+
 type JeuEnDB = {
   id: string;
   nom: string;
@@ -24,6 +33,7 @@ type JeuEnDB = {
   thematiques: string[];
   description: string;
   temoignages: string[];
+  photos: PhotosJeu;
 };
 
 type JeuEnDBInsertion = Omit<
@@ -68,6 +78,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       thematiques: JSON.stringify(jeu.thematiques),
       description: jeu.description,
       temoignages: JSON.stringify(jeu.temoignages),
+      photos: jeu.photos,
     } satisfies JeuEnDBInsertion);
   }
 
@@ -117,7 +128,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       thematiques: (jeuEnDB.thematiques ?? []) as ThematiqueDeJeux[],
       description: jeuEnDB.description,
       temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
-      photos: { couverture: { chemin: 'un-chemin' }, photos: [] },
+      photos: jeuEnDB.photos,
     });
   }
 }
