@@ -1,4 +1,6 @@
 import { Express } from 'express';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
@@ -13,10 +15,18 @@ import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
+  fauxAdaptateurTeleversement,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { Jeu } from '../../src/metier/jeu';
+import { ImagesJeu } from '../../src/metier/jeu';
 import { Utilisateur } from '../../src/metier/utilisateur';
+import {
+  CorpsRequeteDeJeu,
+  uneRequeteDeJeuValide,
+} from './constructeurRequeteDeJeu';
+import { MIMEType } from 'node:util';
+import { unJeu } from '../metier/construteurJeu';
+import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
@@ -24,6 +34,8 @@ describe('La ressource des jeux', () => {
   let entrepotJeux: EntrepotJeux;
   let busEvenements: MockBusEvenement;
   let middleware: Middleware;
+  let adaptateurTeleversement: AdaptateurTeleversement;
+
   const ajouteUtilisateurARequeteMock = vi
     .fn()
     .mockImplementation((req, _res, suite) => {
@@ -31,53 +43,36 @@ describe('La ressource des jeux', () => {
       suite();
     });
 
-  const corpsNouveauJeuValide = {
-    nom: 'Cluedo',
-    sequence: 'heure',
-    nomEtablissement: 'Lycée de la mer',
-    discipline: 'mathematiques',
-    classe: 'cp',
-    eleves: ['Gontran'],
-    categorie: 'simulation',
-    thematiques: ['menace-cyber', 'orientation'],
-    description: 'Un texte descriptif du jeu',
-    temoignages: [
-      {
-        prenom: 'Jean',
-        details: 'Un premier témoignage',
-      },
-      {
-        prenom: 'Paul',
-        details: 'Un second témoignage',
-      },
-      {
-        prenom: 'Pierre',
-        details: 'Un troisième et dernier démoignage',
-      },
-    ],
-    evaluationInteret: 1,
-    evaluationSatisfactionGenerale: 2,
-    evaluationDecouverte: 3,
-  };
-
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
     busEvenements = fabriqueBusPourLesTests();
     middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
     middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
+    adaptateurTeleversement = fauxAdaptateurTeleversement();
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
       middleware,
       busEvenements,
       entrepotJeux,
+      adaptateurTeleversement,
     });
   });
 
   describe('sur un POST', () => {
-    it("retourne un 201 si l'utilisateur est connecté", async () => {
-      const reponse = await request(serveur)
+    const executeLaRequete = (
+      serveur: Express,
+      corpsRequeteDeJeu: CorpsRequeteDeJeu | unknown,
+    ) =>
+      request(serveur)
         .post('/api/jeux')
-        .send(corpsNouveauJeuValide);
+        .field('jeu', JSON.stringify(corpsRequeteDeJeu))
+        .attach('couverture', Buffer.from('une-image'), 'test.jpg');
+
+    it("retourne un 201 si l'utilisateur est connecté", async () => {
+      const reponse = await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide().construis(),
+      );
 
       expect(reponse.status).toEqual(201);
     });
@@ -90,26 +85,36 @@ describe('La ressource des jeux', () => {
       );
       const reponse = await request(serveur)
         .post('/api/jeux')
-        .send(corpsNouveauJeuValide);
+        .send(uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(401);
     });
 
     it("ajoute un jeu dans l'entrepot des jeux", async () => {
-      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
+      await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux).toHaveLength(1);
     });
 
     it('peut fournir les informations sur le jeu', async () => {
-      await request(serveur)
-        .post('/api/jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          temoignages: [{ prenom: 'Michel', details: "C'était trop bien" }],
-        });
+      adaptateurTeleversement.imagesJeu = () => ({
+        couverture: {
+          nom: 'image-1',
+          mimeType: new MIMEType('image/jpeg'),
+          image: Buffer.from('une-image'),
+          chemin: '/le-chemin/image.jpeg',
+        },
+        photos: [],
+      });
+      const reponse = await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide()
+          .avecTemoignages([{ prenom: 'Michel', details: "C'était trop bien" }])
+          .construis(),
+      );
 
+      expect(reponse.status).toBe(201);
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].id).toBeDefined();
       expect(mesJeux[0].nom).toEqual('Cluedo');
@@ -124,10 +129,61 @@ describe('La ressource des jeux', () => {
       expect(mesJeux[0].temoignages).toStrictEqual([
         { prenom: 'Michel', details: "C'était trop bien" },
       ]);
+      expect(mesJeux[0].photos).toStrictEqual<ImagesJeu>({
+        couverture: { chemin: '/le-chemin/image.jpeg' },
+        photos: [],
+      });
+    });
+
+    it('ajoute les  photos complémetaires téléversées', async () => {
+      adaptateurTeleversement.imagesJeu = () => ({
+        couverture: {
+          nom: 'test',
+          mimeType: new MIMEType('image/jpeg'),
+          image: Buffer.from('une-image'),
+          chemin: 'chemin-couverture',
+        },
+        photos: [
+          {
+            nom: 'une-image',
+            mimeType: new MIMEType('image/jpeg'),
+            image: Buffer.from('une-image'),
+            chemin: 'chemin-1',
+          },
+          {
+            nom: 'une-image',
+            mimeType: new MIMEType('image/jpeg'),
+            image: Buffer.from('une-image'),
+            chemin: 'chemin-2',
+          },
+        ],
+      });
+
+      await request(serveur)
+        .post('/api/jeux')
+        .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+        .attach('couverture', Buffer.from('une-image'), 'test.jpg')
+        .attach('photos', Buffer.from('une-image'), 'test-1.jpg')
+        .attach('photos', Buffer.from('une-image'), 'test-2.jpg');
+
+      const mesJeux = await entrepotJeux.tous();
+      expect(mesJeux[0].photos).toStrictEqual<ImagesJeu>({
+        couverture: {
+          chemin: 'chemin-couverture',
+        },
+        photos: [
+          {
+            chemin: 'chemin-1',
+          },
+          {
+            chemin: 'chemin-2',
+          },
+        ],
+      });
     });
 
     it('publie un événement de création de jeu', async () => {
-      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
+      await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -144,15 +200,17 @@ describe('La ressource des jeux', () => {
     });
 
     it('publie un événement de création de jeu avec l’évaluation du jeu', async () => {
-      await request(serveur)
-        .post('/api/jeux')
-        .send({
-          ...corpsNouveauJeuValide,
-          evaluationDecouverte: 2,
-          evaluationInteret: 3,
-          evaluationSatisfactionGenerale: 1,
-          precisions: 'Des précisions',
-        });
+      await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide()
+          .avecEvaluations({
+            evaluationDecouverte: 2,
+            evaluationInteret: 3,
+            evaluationSatisfactionGenerale: 1,
+            precisions: 'Des précisions',
+          })
+          .construis(),
+      );
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -163,7 +221,7 @@ describe('La ressource des jeux', () => {
     });
 
     it("associe le jeu à l'utilisateur connecté", async () => {
-      await request(serveur).post('/api/jeux').send(corpsNouveauJeuValide);
+      await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
 
       const mesJeux = await entrepotJeux.tous();
       expect(mesJeux[0].enseignant?.email).toEqual('jeanne.dupont@mail.com');
@@ -171,21 +229,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification du nom', () => {
       it('vérifie que le nom est fourni', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            nom: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          nom: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({ ...corpsNouveauJeuValide, nom: '   ' });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().avecUnNom('     ').construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
@@ -194,12 +251,10 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification du nom de l‘établissement', () => {
       it('vérifie que le nom de l‘établissement est fourni', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            nomEtablissement: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          nomEtablissement: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -208,9 +263,10 @@ describe('La ressource des jeux', () => {
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({ ...corpsNouveauJeuValide, nomEtablissement: '   ' });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().avecUnNomEtablissement('    ').construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -221,24 +277,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la discipline', () => {
       it('vérifie que la discipline est fournie', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            discipline: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          discipline: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La discipline est invalide');
       });
 
       it('vérifie que la discipline fait partie des valeurs attendues', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            discipline: 'mauvaise-discipline',
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          discipline: 'mauvaise-discipline',
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La discipline est invalide');
@@ -247,24 +299,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la classe', () => {
       it('vérifie que la classe est fournie', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            classe: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          classe: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La classe est invalide');
       });
 
       it('vérifie que la classe fait partie des valeurs attendues', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            classe: 'mauvaise-classe',
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          classe: 'mauvaise-classe',
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La classe est invalide');
@@ -273,36 +321,30 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la séquence', () => {
       it('vérifie que la séquence est fournie', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            sequence: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          sequence: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
       });
 
       it("vérifie que la séquence n'est pas vide", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            sequence: '      ',
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          sequence: '      ',
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
       });
 
       it('vérifie que la séquence fait partie des valeurs attendues', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            sequence: 'mauvaise-sequence',
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          sequence: 'mauvaise-sequence',
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La séquence est invalide');
@@ -311,24 +353,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la liste des élèves', () => {
       it('vérifie qu‘au moins un élève est renseigné', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            eleves: [],
-          });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().sansEleves().construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Au moins un élève est requis');
       });
 
       it('vérifie que les prénoms fournis ne soient pas vides', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            eleves: ['Gontran', ''],
-          });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().ajouteUnEleve('').construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -339,24 +377,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la catégorie', () => {
       it('vérifie que la catégorie est fournie', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            categorie: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          categorie: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La catégorie est invalide');
       });
 
       it('vérifie que la catégorie fait partie des valeurs attendues', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            categorie: 'mauvaise-categorie',
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          categorie: 'mauvaise-categorie',
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La catégorie est invalide');
@@ -365,24 +399,20 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification des thématiques', () => {
       it("vérifie qu'au moins une thématique est fournie", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            thematiques: [],
-          });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().sansThematiques().construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La thématique est invalide');
       });
 
       it('vérifie que toutes les thématiques font partie des valeurs attendues', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            thematiques: ['orientation', 'mauvaise-thematique'],
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          thematiques: ['orientation', 'mauvaise-thematique'],
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La thématique est invalide');
@@ -391,12 +421,10 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de la description', () => {
       it('vérifie que la description est fournie', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            description: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          description: undefined,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -405,9 +433,10 @@ describe('La ressource des jeux', () => {
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({ ...corpsNouveauJeuValide, description: '   ' });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().avecUneDescription('   ').construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -416,9 +445,12 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({ ...corpsNouveauJeuValide, description: 'mots'.repeat(2001) });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide()
+            .avecUneDescription('mots'.repeat(2001))
+            .construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -429,36 +461,30 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification des témoignages', () => {
       it('accepte les témoignages non définis', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          temoignages: undefined,
+        });
 
         expect(reponse.status).toEqual(201);
       });
 
       it('accepte les témoignages vides', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [],
-          });
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide().sansTemoignages().construis(),
+        );
 
         expect(reponse.status).toEqual(201);
       });
 
       it("vérifie que le prénom existe dans un témoignage'", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [
-              { nom: 'ça devrait être le prénom', details: 'un détail' },
-            ],
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          temoignages: [
+            { nom: 'ça devrait être le prénom', details: 'un détail' },
+          ],
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -467,12 +493,10 @@ describe('La ressource des jeux', () => {
       });
 
       it("vérifie que les détails existent dans un témoignage'", async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [{ prenom: 'Miche' }],
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          temoignages: [{ prenom: 'Miche' }],
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -480,13 +504,13 @@ describe('La ressource des jeux', () => {
         );
       });
 
-      it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            temoignages: [{ prenom: 'Jean', details: 'mots'.repeat(2001) }],
-          });
+      it('vérifie que les détails ne dépassent pas 8000 caractères', async () => {
+        const reponse = await executeLaRequete(
+          serveur,
+          uneRequeteDeJeuValide()
+            .avecTemoignages([{ prenom: 'Jean', details: 'mots'.repeat(2001) }])
+            .construis(),
+        );
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(
@@ -497,12 +521,10 @@ describe('La ressource des jeux', () => {
 
     describe('concernant la vérification de l’évaluation sur CyberEnjeux', () => {
       it('accepte les précisions sur l‘évaluation CyberEnjeux non définies', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            precisions: undefined,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          precisions: undefined,
+        });
 
         expect(reponse.status).toEqual(201);
       });
@@ -550,15 +572,73 @@ describe('La ressource des jeux', () => {
           erreurAttendue: 'Les précisions ne peuvent pas être vides',
         },
       ])('vérifie que $test', async (parametresDeTest) => {
-        const reponse = await request(serveur)
-          .post('/api/jeux')
-          .send({
-            ...corpsNouveauJeuValide,
-            ...parametresDeTest.evaluation,
-          });
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          ...parametresDeTest.evaluation,
+        });
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual(parametresDeTest.erreurAttendue);
+      });
+    });
+
+    describe('concernant la vérification du téléversement de photos d’un jeu', () => {
+      it('limite le nombre de couverture à 1', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('une-image'), 'test.jpg')
+          .attach('couverture', Buffer.from('une-image'), 'test-2.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Une seule photo de couverture est autorisée',
+        });
+      });
+
+      it('limite le nombre à 5 photos au total', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('une-image'), 'test.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-2.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-3.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-4.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-5.jpg')
+          .attach('photos', Buffer.from('une-image'), 'test-6.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le nombre de photos maximum par jeu est de 5',
+        });
+      });
+
+      it('limite la taille maximale à 5MO pour les photos', async () => {
+        const taille5MO = 5 * 1024 * 1024 + 1;
+
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('photos', Buffer.alloc(taille5MO, 0), 'test.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le poids maximum d’une photo est de 5MO',
+        });
+      });
+
+      it('limite la taille maximale à 5MO pour la couverture', async () => {
+        const taille5MO = 5 * 1024 * 1024 + 1;
+
+        const reponse = await request(serveur)
+          .post('/api/jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.alloc(taille5MO, 0), 'test.jpg');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: 'Le poids maximum de la couverture est de 5MO',
+        });
       });
     });
   });
@@ -583,19 +663,11 @@ describe('La ressource des jeux', () => {
 
     it('retourne la liste des jeux', async () => {
       await entrepotJeux.ajoute(
-        new Jeu({
-          id: '1',
-          nom: 'cybercluedo',
-          enseignant: jeanneDupont,
-          sequence: 'heure',
-          classe: 'cp',
-          discipline: 'histoire-et-geographie',
-          nomEtablissement: 'Lycée de la mer',
-          eleves: [],
-          categorie: 'simulation',
-          thematiques: ['menace-cyber', 'orientation'],
-          description: 'Une description',
-        }),
+        unJeu()
+          .avecUnId('1')
+          .avecUnNom('cybercluedo')
+          .deEnseignant(jeanneDupont)
+          .construis(),
       );
 
       const reponse = await request(serveur).get('/api/jeux');
@@ -613,34 +685,14 @@ describe('La ressource des jeux', () => {
       });
 
       await entrepotJeux.ajoute(
-        new Jeu({
-          id: '1',
-          nom: 'cybercluedo',
-          enseignant: patrickDurand,
-          sequence: 'heure',
-          classe: 'cp',
-          discipline: 'histoire-et-geographie',
-          nomEtablissement: 'Lycée de la mer',
-          eleves: [],
-          categorie: 'simulation',
-          thematiques: ['menace-cyber', 'orientation'],
-          description: 'Une description',
-        }),
+        unJeu().avecUnId('1').deEnseignant(patrickDurand).construis(),
       );
       await entrepotJeux.ajoute(
-        new Jeu({
-          id: '2',
-          nom: 'cyberuno',
-          enseignant: jeanneDupont,
-          sequence: 'heure',
-          classe: 'cp',
-          discipline: 'histoire-et-geographie',
-          nomEtablissement: 'Lycée de la mer',
-          eleves: [],
-          categorie: 'simulation',
-          thematiques: ['menace-cyber', 'orientation'],
-          description: 'Une description',
-        }),
+        unJeu()
+          .avecUnId('2')
+          .avecUnNom('cyberuno')
+          .deEnseignant(jeanneDupont)
+          .construis(),
       );
 
       const reponse = await request(serveur).get('/api/jeux');

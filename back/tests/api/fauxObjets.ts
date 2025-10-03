@@ -16,6 +16,10 @@ import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import {
+  AdaptateurTeleversement,
+  fabriqueAdaptateurTeleversement,
+} from '../../src/infra/adaptateurTeleversement';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -100,6 +104,9 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     }),
   };
 
+export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement =>
+  fabriqueAdaptateurTeleversement();
+
 export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => ({
     serveurLab: {
@@ -123,6 +130,7 @@ export const configurationServeurSansMiddleware =
     entrepotJeux: new EntrepotJeuxMemoire(),
     adaptateurEnvironnement: fauxAdaptateurEnvironnement,
     adaptateurJournal: adaptateurJournalMemoire,
+    adaptateurTeleversement: fauxAdaptateurTeleversement(),
   });
 
 const ajouteUnNonceNonAleatoireALaReponse = async (
@@ -135,7 +143,6 @@ const ajouteUnNonceNonAleatoireALaReponse = async (
 };
 
 const middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
-
 export const configurationDeTestDuServeur = (): ConfigurationServeur => ({
   ...configurationServeurSansMiddleware(),
   middleware: {
