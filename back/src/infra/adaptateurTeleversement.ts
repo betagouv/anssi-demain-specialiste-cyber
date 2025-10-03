@@ -17,14 +17,51 @@ export type AdaptateurTeleversement = {
   photosJeu: (requete: Request) => PhotosJeuTeleversees;
 };
 
-export const fabriqueAdaptateurTeleversement = (): AdaptateurTeleversement => ({
-  photosJeu: (_requete: Request): PhotosJeuTeleversees => ({
-    couverture: {
-      nom: 'couverture',
-      mimeType: new MIMEType('image/jpeg'),
-      image: Buffer.from('couverture'),
-      chemin: 'chemin',
-    },
-    photos: [],
-  }),
-});
+const adaptateurDeTeleversement: AdaptateurTeleversement = {
+  photosJeu: (requete: Request): PhotosJeuTeleversees => {
+    const estUnFichierPhoto = (
+      fichier:
+        | {
+            [fieldname: string]: Express.Multer.File[];
+          }
+        | Express.Multer.File[]
+        | undefined,
+      clef: string,
+    ): fichier is { [fieldname: string]: Express.Multer.File[] } => {
+      return !!fichier && !Array.isArray(fichier) && !!fichier[clef];
+    };
+
+    const lesPhotos = estUnFichierPhoto(requete.files, 'photos')
+      ? requete.files['photos']
+      : [];
+
+    const couverture = estUnFichierPhoto(requete.files, 'couverture')
+      ? requete.files['couverture'][0]
+      : undefined;
+
+    if (!couverture) {
+      throw new Error('La photo de couverture n’est pas fournie.');
+    }
+    const typeMimeCouverture = new MIMEType(couverture.mimetype);
+    return {
+      couverture: {
+        nom: 'couverture',
+        mimeType: typeMimeCouverture,
+        image: couverture.buffer,
+        chemin: `${crypto.randomUUID()}.${typeMimeCouverture.subtype}`,
+      },
+      photos: Array.from(lesPhotos).map((photo) => {
+        const typeMimePhoto = new MIMEType(photo.mimetype);
+        return {
+          nom: photo.filename,
+          mimeType: typeMimePhoto,
+          image: photo.buffer,
+          chemin: `${crypto.randomUUID()}.${typeMimePhoto.subtype}`,
+        };
+      }),
+    };
+  },
+};
+
+export const fabriqueAdaptateurTeleversement = (): AdaptateurTeleversement =>
+  adaptateurDeTeleversement;
