@@ -87,6 +87,10 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     );
   }
 
+  async parId(_id: Jeu['id']): Promise<Jeu | undefined> {
+    throw new Error('Pas encore implémentée');
+  }
+
   private async donneesEnDbVersMetier(jeuEnDB: JeuEnDB): Promise<Jeu> {
     const enseignant = jeuEnDB.id_enseignant
       ? await this.entrepotUtilisateur.parEmailHache(jeuEnDB.id_enseignant)

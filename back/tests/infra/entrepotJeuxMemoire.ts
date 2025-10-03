@@ -12,4 +12,8 @@ export class EntrepotJeuxMemoire
       (jeu) => jeu.enseignant && jeu.enseignant.email === utilisateur.email,
     );
   }
+
+  async parId(id: Jeu['id']): Promise<Jeu | undefined> {
+    return this.entites.find((jeu) => jeu.id === id);
+  }
 }
