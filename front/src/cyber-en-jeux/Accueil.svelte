@@ -175,6 +175,46 @@
       </div>
     </div>
   </dsfr-container>
+
+  <div class="temoignages">
+    <dsfr-container>
+      <lab-anssi-temoignages
+        titre="Les élèves adorent CyberEnJeux !"
+        temoignages={[
+          {
+            citation:
+              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+            auteur: 'Auteur',
+            source: '',
+          },
+          {
+            citation:
+              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+            auteur: 'Auteur',
+            source: '',
+          },
+          {
+            citation:
+              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+            auteur: 'Auteur',
+            source: '',
+          },
+          {
+            citation:
+              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+            auteur: 'Auteur',
+            source: '',
+          },
+          {
+            citation:
+              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+            auteur: 'Auteur',
+            source: '',
+          },
+        ]}
+      ></lab-anssi-temoignages>
+    </dsfr-container>
+  </div>
 </div>
 
 <style lang="scss">
@@ -185,6 +225,8 @@
 
     --brique-marelle-titre-couleur: #161616;
     --brique-marelle-etapes-numero-etape-couleur: #ce614a;
+
+    --brique-temoignages-titre-couleur: #161616;
   }
 
   .accueil {
@@ -358,6 +400,9 @@
       border: 0;
       height: 1px;
       margin: 0;
+    }
+    .temoignages {
+      background-color: #f4f6fe;
     }
 
     lab-anssi-marelle {
