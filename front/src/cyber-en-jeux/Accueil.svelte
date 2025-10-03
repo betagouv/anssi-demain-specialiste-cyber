@@ -109,6 +109,22 @@
       ]}
     >
     </lab-anssi-marelle>
+
+    <dsfr-container>
+      <hr />
+    </dsfr-container>
+
+    <dsfr-container>
+      <Citation>
+        Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
+        votre expérience. <lab-anssi-lien
+          cible="#"
+          titre="Rejoindre la communauté"
+          apparence="lien-texte"
+          target="_blank"
+        ></lab-anssi-lien>
+      </Citation>
+    </dsfr-container>
   </dsfr-container>
 </div>
 
@@ -239,6 +255,13 @@
           }
         }
       }
+    }
+
+    hr {
+      background-color: #dddddd;
+      border: 0;
+      height: 1px;
+      margin: 0;
     }
 
     lab-anssi-marelle {
