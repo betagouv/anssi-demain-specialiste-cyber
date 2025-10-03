@@ -1,7 +1,7 @@
 import { assert, describe, expect, it } from 'vitest';
 import {
   fabriqueAdaptateurTeleversement,
-  ImagesJeuTeleversees,
+  PhotosJeuTeleversees,
 } from '../../src/infra/adaptateurTeleversement';
 import { MIMEType } from 'node:util';
 import { Request } from 'express';
@@ -16,9 +16,9 @@ describe('L’adaptateur de téléversement', () => {
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement().imagesJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement().photosJeu(requete);
 
-    expect(imagesJeu).toStrictEqual<ImagesJeuTeleversees>({
+    expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
         nom: 'couverture',
         mimeType: new MIMEType('image/jpeg'),
@@ -40,7 +40,7 @@ describe('L’adaptateur de téléversement', () => {
     } as unknown as Request;
 
     try {
-      fabriqueAdaptateurTeleversement().imagesJeu(requete);
+      fabriqueAdaptateurTeleversement().photosJeu(requete);
       assert.fail('La couverture est présente !');
     } catch (e: unknown | Error) {
       expect((e as Error).message).toBe(
@@ -70,9 +70,9 @@ describe('L’adaptateur de téléversement', () => {
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement().imagesJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement().photosJeu(requete);
 
-    expect(imagesJeu).toStrictEqual<ImagesJeuTeleversees>({
+    expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
         nom: 'couverture',
         mimeType: new MIMEType('image/jpeg'),
