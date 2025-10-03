@@ -24,9 +24,9 @@ import {
   CorpsRequeteDeJeu,
   uneRequeteDeJeuValide,
 } from './constructeurRequeteDeJeu';
-import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 import { MIMEType } from 'node:util';
 import { unJeu } from '../metier/construteurJeu';
+import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
@@ -34,7 +34,6 @@ describe('La ressource des jeux', () => {
   let entrepotJeux: EntrepotJeux;
   let busEvenements: MockBusEvenement;
   let middleware: Middleware;
-
   let adaptateurTeleversement: AdaptateurTeleversement;
 
   const ajouteUtilisateurARequeteMock = vi
