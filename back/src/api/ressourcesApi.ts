@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
+import { ressourceJeu } from './ressourceJeu';
 import { ressourceJeux } from './ressourceJeux';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
@@ -10,7 +11,11 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
 
   router.use('/profil', ressourceProfil(configurationServeur));
   router.use('/utilisateurs', ressourceUtilisateurs(configurationServeur));
-  router.use('/jeux', ressourceJeux(configurationServeur));
+  router.use(
+    '/jeux',
+    ressourceJeux(configurationServeur),
+    ressourceJeu(configurationServeur),
+  );
   router.use(
     '/ressources-cyber',
     ressourceRessourceCyber(configurationServeur),
