@@ -85,6 +85,18 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     tagManager: '',
   }),
   nodeEnv: () => 'developpement',
+  televersementEnMemoire: (): boolean => true,
+  televersement: function (): {
+    region: string;
+    bucketPhotosJeux: string;
+    urlCellar: string;
+  } {
+    return {
+      region: '',
+      bucketPhotosJeux: '',
+      urlCellar: '',
+    };
+  },
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
