@@ -657,7 +657,7 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(
         validateurPresentationEnSucces.estValide,
       ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
-      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/jeux', {
+      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/mes-jeux', {
         ...donneesJeuAttendues,
         eleves: ['Brice', 'Gontran'],
       });

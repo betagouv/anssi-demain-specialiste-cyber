@@ -22,7 +22,7 @@ const verifieNoteEvaluation = (message: string) =>
       error: message,
     });
 
-export const ressourceJeux = ({
+export const ressourceMesJeux = ({
   entrepotJeux,
   entrepotUtilisateur,
   adaptateurHachage,
