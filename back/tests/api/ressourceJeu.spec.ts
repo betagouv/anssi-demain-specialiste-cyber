@@ -36,13 +36,7 @@ describe('La ressource des jeux', () => {
       expect(reponse.body).toStrictEqual({
         id: '1',
         nom: 'cybercluedo',
-        enseignant: {
-          email: 'jeanne.dupont@mail.com',
-          infolettreAcceptee: true,
-          prenom: '',
-          nom: '',
-          siretEntite: '',
-        },
+        enseignant: 'Jeanne',
         sequence: 'heure',
         classe: 'cp',
         discipline: 'histoire-et-geographie',
