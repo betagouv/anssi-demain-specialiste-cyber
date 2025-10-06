@@ -10,7 +10,7 @@ export const ressourceJeu = ({ entrepotJeux }: ConfigurationServeur) => {
       reponse.sendStatus(404);
       return;
     }
-    reponse.send(jeu);
+    reponse.send({ ...jeu, enseignant: jeu.enseignant?.prenom ?? '' });
   });
 
   return routeur;
