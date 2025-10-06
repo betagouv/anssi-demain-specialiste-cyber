@@ -1,4 +1,4 @@
-const disciplines = [
+export const disciplines = [
   { code: 'francais', libelle: 'Français' },
   { code: 'langues-vivantes', libelle: 'Langues vivantes' },
   { code: 'arts-plastiques', libelle: 'Arts plastiques' },

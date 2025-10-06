@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte.js';
+  import { classes } from '../classes.js';
+  import { disciplines } from '../disciplines.js';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
+  import { sequences } from '../sequences.js';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import NomEtablissementAutoComplete from './NomEtablissementAutoComplete.svelte';
   import type { ReferentielEtablissement } from './ReferentielEtablissement';
@@ -22,6 +25,21 @@
     });
     estPetitEcran = mql.matches;
   });
+
+  const radioSequences = sequences.map((sequence) => ({
+    label: sequence.libelle,
+    id: sequence.code,
+    name: 'sequence',
+    value: sequence.code,
+  }));
+  const optionsDisciplines = disciplines.map((discipline) => ({
+    label: discipline.libelle,
+    value: discipline.code,
+  }));
+  const optionsClasses = classes.map((classe) => ({
+    label: classe.libelle,
+    value: classe.code,
+  }));
 </script>
 
 <NomEtablissementAutoComplete
@@ -34,26 +52,7 @@
   id="sequence"
   legend="Format de la séquence CyberEnJeux"
   inline={!estPetitEcran}
-  radios={[
-    {
-      label: 'Heure de cours',
-      id: 'heure',
-      name: 'sequence',
-      value: 'heure',
-    },
-    {
-      label: 'Demi-journée',
-      id: 'demi-journee',
-      name: 'sequence',
-      value: 'demi-journee',
-    },
-    {
-      label: 'Journée',
-      id: 'journee',
-      name: 'sequence',
-      value: 'journee',
-    },
-  ]}
+  radios={radioSequences}
   value={$jeuEnEditionStore.sequence}
   onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.sequence = e.detail)}
   status={erreurs.sequence ? 'error' : 'default'}
@@ -108,48 +107,7 @@
   value={$jeuEnEditionStore.discipline ?? ''}
   onvaluechanged={(e: CustomEvent) =>
     ($jeuEnEditionStore.discipline = e.detail)}
-  options={[
-    { value: 'francais', label: 'Français' },
-    { value: 'langues-vivantes', label: 'Langues vivantes' },
-    { value: 'arts-plastiques', label: 'Arts plastiques' },
-    { value: 'education-musicale', label: 'Éducation musicale' },
-    { value: 'histoire-des-arts', label: 'Histoire des arts' },
-    {
-      value: 'education-physique-et-sportive',
-      label: 'Éducation physique et sportive',
-    },
-    {
-      value: 'enseignement-moral-et-civique',
-      label: 'Enseignement moral et civique',
-    },
-    {
-      value: 'histoire-et-geographie',
-      label: 'Histoire et géographie',
-    },
-    {
-      value: 'sciences-et-technologie',
-      label: 'Sciences et technologie',
-    },
-    { value: 'mathematiques', label: 'Mathématiques' },
-    { value: 'physique-chimie', label: 'Physique-chimie' },
-    { value: 'svt', label: 'Sciences de la vie et de la Terre' },
-    { value: 'technologie', label: 'Technologie' },
-    {
-      value: 'education-médias-information',
-      label: "Éducation aux médias et à l'information",
-    },
-    {
-      value: 'sciences-economiques-sociales',
-      label: 'Sciences économiques et sociales',
-    },
-    {
-      value: 'sciences-numériques-technologie',
-      label: 'Sciences numériques et technologie',
-    },
-    { value: 'enseignement-scientifique', label: 'Enseignement scientifique' },
-    { value: 'post-bac', label: 'Post Bac' },
-    { value: 'autre', label: 'Autre' },
-  ]}
+  options={optionsDisciplines}
   placeholder="Sélectionner une option"
   placeholderDisabled={true}
   status={erreurs.discipline ? 'error' : 'default'}
@@ -162,27 +120,7 @@
   label="Classe"
   value={$jeuEnEditionStore.classe ?? ''}
   onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.classe = e.detail)}
-  options={[
-    { value: 'maternelle', label: 'Maternelle' },
-    { value: 'cp', label: 'CP' },
-    { value: 'ce1', label: 'CE1' },
-    { value: 'ce2', label: 'CE2' },
-    { value: 'cm1', label: 'CM1' },
-    { value: 'cm2', label: 'CM2' },
-    { value: '6e', label: '6e' },
-    { value: '5e', label: '5e' },
-    { value: '4e', label: '4e' },
-    { value: '3e', label: '3e' },
-    { value: 'seconde', label: 'Seconde' },
-    { value: 'premiere', label: 'Première' },
-    { value: 'terminale', label: 'Terminale' },
-    { value: 'classe-prepa', label: 'Classe prépa' },
-    { value: 'bts', label: 'BTS' },
-    {
-      value: 'superieur-hors-bts-et-prep',
-      label: 'Supérieur (hors BTS et Prepa)',
-    },
-  ]}
+  options={optionsClasses}
   placeholder="Sélectionner une option"
   placeholderDisabled={true}
   status={erreurs.classe ? 'error' : 'default'}
