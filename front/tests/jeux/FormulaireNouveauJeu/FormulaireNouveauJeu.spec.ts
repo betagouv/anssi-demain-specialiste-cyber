@@ -19,12 +19,18 @@ import {
   queryAllByRoleDeep,
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
+import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
+import { get } from 'svelte/store';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
 vi.mock('axios', () => {
   return { default: axiosMock };
 });
+
+vi.stubGlobal("URL", {
+  createObjectURL:()=>"blob:"
+})
 
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
@@ -649,6 +655,9 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
 
       // Etape Photos
+      photosJeuStore.set({})
+      get(photosJeuStore).couverture = new Blob()
+
       await etapeSuivante();
 
       // Etape témoignages
@@ -696,10 +705,11 @@ describe('Le formulaire de dépose de jeu', () => {
       expect(
         validateurPresentationEnSucces.estValide,
       ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
-      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/mes-jeux', {
-        ...donneesJeuAttendues,
-        eleves: ['Brice', 'Gontran'],
-      });
+
+      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith(
+        '/api/mes-jeux',
+        expect.any(FormData),
+      );
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
 
