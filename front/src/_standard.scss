@@ -33,6 +33,10 @@ h2 {
   line-height: 2.25rem;
   margin: 0 0 1.5rem;
 
+  .fonce & {
+    color: var(--white);
+  }
+
   @include a-partir-de(sm) {
     font-size: 2rem;
     line-height: 2.5rem;
@@ -46,6 +50,10 @@ h4 {
   font-size: 1.375rem;
   line-height: 1.75rem;
   margin: 0 0 1.5rem;
+
+  .fonce & {
+    color: var(--white);
+  }
 
   @include a-partir-de(sm) {
     font-size: 1.5rem;
