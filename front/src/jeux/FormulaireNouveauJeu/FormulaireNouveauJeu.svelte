@@ -13,6 +13,7 @@
     PresentationDuJeu,
   } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+  import { photosJeuStore } from '../stores/photosJeu.store';
   import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
@@ -107,10 +108,22 @@
     event.preventDefault();
 
     if (validateurEvaluation.estValide($jeuEnEditionStore)) {
-      await axios.post('/api/mes-jeux', {
-        ...$jeuEnEditionStore,
-        eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
+      const formulaire = new FormData();
+
+      formulaire.append(
+        'jeu',
+        JSON.stringify({
+          ...$jeuEnEditionStore,
+          eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
+        }),
+      );
+      formulaire.append('couverture', $photosJeuStore.couverture!);
+      $photosJeuStore?.photos?.forEach((photo) => {
+        formulaire.append('photos', photo);
       });
+
+      await axios.post('/api/mes-jeux', formulaire);
+
       window.location.href = '/mes-jeux?jeu-ajoute';
     } else {
       erreurs = validateurEvaluation.valide($jeuEnEditionStore);
