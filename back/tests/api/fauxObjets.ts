@@ -19,6 +19,7 @@ import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire'
 import {
   AdaptateurTeleversement,
   fabriqueAdaptateurTeleversement,
+  PhotosJeuTeleversees,
 } from '../../src/infra/adaptateurTeleversement';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
@@ -104,8 +105,15 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     }),
   };
 
-export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement =>
-  fabriqueAdaptateurTeleversement();
+export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
+  const adaptateurTeleversement = fabriqueAdaptateurTeleversement();
+  return {
+    ...adaptateurTeleversement,
+    sauvegarde(_photosJeu: PhotosJeuTeleversees): Promise<void> {
+      return Promise.resolve();
+    },
+  };
+};
 
 export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => ({

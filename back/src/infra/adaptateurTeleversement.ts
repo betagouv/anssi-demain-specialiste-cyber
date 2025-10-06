@@ -15,6 +15,7 @@ export type PhotosJeuTeleversees = {
 
 export type AdaptateurTeleversement = {
   photosJeu: (requete: Request) => PhotosJeuTeleversees;
+  sauvegarde(photosJeu: PhotosJeuTeleversees): Promise<void>;
 };
 
 const adaptateurDeTeleversement: AdaptateurTeleversement = {
@@ -60,6 +61,9 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
         };
       }),
     };
+  },
+  sauvegarde: (_photosJeu: PhotosJeuTeleversees): Promise<void> => {
+    return Promise.resolve();
   },
 };
 
