@@ -87,8 +87,17 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     );
   }
 
-  async parId(_id: Jeu['id']): Promise<Jeu | undefined> {
-    throw new Error('Pas encore implémentée');
+  async parId(id: Jeu['id']): Promise<Jeu | undefined> {
+    try {
+      const jeuEnDB = await this.knex<JeuEnDB>('jeux')
+        .where({
+          id,
+        })
+        .first();
+      return jeuEnDB ? this.donneesEnDbVersMetier(jeuEnDB) : undefined;
+    } catch {
+      return undefined;
+    }
   }
 
   private async donneesEnDbVersMetier(jeuEnDB: JeuEnDB): Promise<Jeu> {
