@@ -1,8 +1,15 @@
 <script lang="ts">
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+  import { thematiques } from '../thematiques';
 
   export let erreurs: ErreursValidationJeuEnEdition;
+
+  const optionsThematiques = thematiques.map((thematique) => ({
+    id: thematique.code,
+    label: thematique.libelle,
+    value: thematique.code,
+  }));
 </script>
 
 <dsfr-input
@@ -56,40 +63,7 @@
 <lab-anssi-multi-select
   id="thematique"
   label="Thématiques"
-  options={[
-    {
-      id: 'comportements-numeriques',
-      value: 'comportements-numeriques',
-      label: 'Comportements numériques',
-    },
-    {
-      id: 'cyberharcelement',
-      value: 'cyberharcelement',
-      label: 'Cyberharcelement',
-    },
-    {
-      id: 'gestion-crise-cyber',
-      value: 'gestion-crise-cyber',
-      label: 'Gestion de crise cyber',
-    },
-    {
-      id: 'lutte-manipulation-information',
-      value: 'lutte-manipulation-information',
-      label: "Lutte contre la manipulation de l'information",
-    },
-    { id: 'menace-cyber', value: 'menace-cyber', label: 'Menace cyber' },
-    { id: 'orientation', value: 'orientation', label: 'Orientation' },
-    {
-      id: 'techniques-securite-numerique',
-      value: 'techniques-securite-numerique',
-      label: 'Techniques de sécurité numérique',
-    },
-    {
-      id: 'valoriser-talents-feminins',
-      value: 'valoriser-talents-feminins',
-      label: 'Valoriser les talents féminins',
-    },
-  ]}
+  options={optionsThematiques}
   placeholder="Sélectionner une ou plusieurs options"
   values={$jeuEnEditionStore.thematiques}
   onvaluechanged={(e: CustomEvent) =>

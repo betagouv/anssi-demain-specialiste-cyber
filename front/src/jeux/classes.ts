@@ -1,4 +1,4 @@
-const classes = [
+export const classes = [
   { code: 'maternelle', libelle: 'Maternelle' },
   { code: 'cp', libelle: 'CP' },
   { code: 'ce1', libelle: 'CE1' },
