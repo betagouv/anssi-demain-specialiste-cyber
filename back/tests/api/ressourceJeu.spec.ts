@@ -19,7 +19,7 @@ describe('La ressource des jeux', () => {
 
   describe('sur un GET', () => {
     it('retourne un 200', async () => {
-      const reponse = await request(serveur).get('/api/mes-jeux/1');
+      const reponse = await request(serveur).get('/api/jeux/1');
 
       expect(reponse.status).toEqual(200);
     });
@@ -31,7 +31,7 @@ describe('La ressource des jeux', () => {
     });
 
     it("renvoie les détails d'un jeu", async () => {
-      const reponse = await request(serveur).get('/api/mes-jeux/1');
+      const reponse = await request(serveur).get('/api/jeux/1');
 
       expect(reponse.body).toStrictEqual({
         id: '1',

@@ -73,7 +73,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
 
   async tous(): Promise<Jeu[]> {
     return Promise.all(
-      (await this.knex('jeux')).map(this.donneesEnDbVersMetier),
+      (await this.knex('jeux')).map((jeu) => this.donneesEnDbVersMetier(jeu)),
     );
   }
 
