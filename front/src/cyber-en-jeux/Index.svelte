@@ -9,6 +9,7 @@
   import Accueil from './Accueil.svelte';
   import Onglets from './Onglets.svelte';
   import Ressources from './Ressources.svelte';
+  import VitrineDesJeux from './VitrineDesJeux.svelte';
 
   const onglets = [
     { label: '👩‍🏫 Présentation de CyberEnJeux', fragment: '#presentation' },
@@ -24,6 +25,8 @@
 
 {#if ongletActif === 0}
   <Accueil></Accueil>
+{:else if ongletActif === 1}
+  <VitrineDesJeux></VitrineDesJeux>
 {:else if ongletActif === 2}
   <Ressources></Ressources>
 {/if}
