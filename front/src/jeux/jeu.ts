@@ -14,6 +14,11 @@ export type Jeu = {
 
 export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
 
+type Photos = {
+  couverture?: Blob;
+  photos?: Blob[];
+};
+
 export type JeuEnEdition = {
   sequence?: string;
   nomEtablissement?: string;
@@ -29,6 +34,7 @@ export type JeuEnEdition = {
   evaluationInteret?: NoteEvaluation;
   evaluationSatisfactionGenerale?: NoteEvaluation;
   precisions?: string;
+  photos?: Photos;
 };
 
 export type ErreursValidationJeuEnEdition = Partial<
