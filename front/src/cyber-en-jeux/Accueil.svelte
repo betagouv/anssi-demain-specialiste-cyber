@@ -19,7 +19,7 @@
     </div>
   </dsfr-container>
 
-  <div class="avantages">
+  <div class="avantages fonce">
     <dsfr-container>
       <div class="conteneur">
         <h2>Grâce à CyberEnJeux, développez</h2>
