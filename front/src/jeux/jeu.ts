@@ -3,21 +3,13 @@ export type Jeu = {
   nom: string;
   eleves: string[];
   nomEtablissement: string;
-  sequence: Sequence;
+  sequence: string;
   enseignant: string;
   classe: string;
   discipline: string;
   description: string;
   temoignages: { prenom: string; details: string }[];
   thematiques: string[];
-};
-
-type Sequence = 'heure' | 'demi-journee' | 'journee';
-
-export const libelleSequence: Record<Sequence, string> = {
-  heure: 'Heure de cours',
-  'demi-journee': 'Demi-journée',
-  journee: 'Journée',
 };
 
 export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;

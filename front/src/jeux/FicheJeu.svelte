@@ -4,8 +4,9 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { libelleClasse } from './classes';
-  import { libelleDiscipline } from './discipline';
-  import { enumerationFrancaise, type Jeu, libelleSequence } from './jeu';
+  import { libelleDiscipline } from './disciplines';
+  import { enumerationFrancaise, type Jeu } from './jeu';
+  import { libelleSequence } from './sequences';
   import { libelleThematique } from './thematiques';
 
   const couleursDeBadge = [
@@ -129,7 +130,7 @@
           <ul>
             <li>
               <span>Format</span>
-              <span>{libelleSequence[jeu.sequence]}</span>
+              <span>{libelleSequence(jeu.sequence)}</span>
             </li>
             <li>
               <span>Établissement</span>
