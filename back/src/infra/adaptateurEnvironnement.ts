@@ -31,6 +31,12 @@ export type AdaptateurEnvironnement = {
   };
   matomo: () => { identifiant: string; tagManager: string } | undefined;
   nodeEnv: () => string | undefined;
+  televersement: () => {
+    region: string;
+    bucketPhotosJeux: string;
+    urlCellar: string;
+  };
+  televersementEnMemoire(): boolean;
 };
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -111,4 +117,30 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     return undefined;
   },
   nodeEnv: () => process.env.NODE_ENV,
+  televersementEnMemoire: (): boolean =>
+    process.env.S3_CELLAR_EN_MEMOIRE === 'true',
+  televersement: (): {
+    urlCellar: string;
+    bucketPhotosJeux: string;
+    region: string;
+  } => {
+    const urlCellar = process.env.S3_URL_CELLAR;
+    const bucketPhotosJeux = process.env.S3_BUCKET_PHOTOS_JEUX;
+    const region = process.env.S3_REGION;
+    if (
+      urlCellar &&
+      bucketPhotosJeux &&
+      region &&
+      !(process.env.S3_CELLAR_EN_MEMOIRE === 'true')
+    ) {
+      return {
+        urlCellar,
+        bucketPhotosJeux,
+        region,
+      };
+    }
+    throw new Error(
+      'L’URL du Cellar doit être définie lorsque DSC est configuré pour Cellar.',
+    );
+  },
 };
