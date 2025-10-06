@@ -53,7 +53,7 @@
         <dsfr-card
           title={jeu.nom}
           description="Description texte SM regular Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus sit amet volutpat consequat mauris nunc congue. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra."
-          href={`/mes-jeux/${jeu.id}`}
+          href={`/jeux/${jeu.id}`}
           src="/assets/images/image-generique.svg"
           hasHeaderBadge={true}
         >
