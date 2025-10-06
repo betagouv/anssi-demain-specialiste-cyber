@@ -136,6 +136,32 @@ describe('La ressource de mes jeux', () => {
       });
     });
 
+    it('sauvegarde les photos du jeu', async () => {
+      let couvertureSauvegardee = false;
+      adaptateurTeleversement.photosJeu = () => ({
+        couverture: {
+          nom: 'image-1',
+          mimeType: new MIMEType('image/jpeg'),
+          image: Buffer.from('une-image'),
+          chemin: '/le-chemin/image.jpeg',
+        },
+        photos: [],
+      });
+      adaptateurTeleversement.sauvegarde = async () => {
+        couvertureSauvegardee = true;
+      };
+
+      const reponse = await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide()
+          .avecTemoignages([{ prenom: 'Michel', details: "C'était trop bien" }])
+          .construis(),
+      );
+
+      expect(reponse.status).toBe(201);
+      expect(couvertureSauvegardee).toBeTruthy();
+    });
+
     it('ajoute les  photos complémetaires téléversées', async () => {
       adaptateurTeleversement.photosJeu = () => ({
         couverture: {

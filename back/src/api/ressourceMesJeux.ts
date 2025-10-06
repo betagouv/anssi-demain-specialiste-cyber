@@ -175,6 +175,7 @@ export const ressourceMesJeux = ({
         }
         const utilisateurConnecte = requete.utilisateur;
         const photosJeu = adaptateurTeleversement.photosJeu(requete);
+        await adaptateurTeleversement.sauvegarde(photosJeu);
 
         const {
           nom,
