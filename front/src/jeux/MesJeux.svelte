@@ -13,7 +13,7 @@
 
   onMount(async () => {
     chargementEnCours = true;
-    const reponse = await axios.get('/api/jeux');
+    const reponse = await axios.get('/api/mes-jeux');
     listeDesJeux = reponse.data;
     chargementEnCours = false;
     jeuAjoute = new URLSearchParams(window.location.search).has('jeu-ajoute');

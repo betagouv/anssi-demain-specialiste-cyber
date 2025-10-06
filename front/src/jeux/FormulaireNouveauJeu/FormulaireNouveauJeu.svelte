@@ -100,7 +100,7 @@
     event.preventDefault();
 
     if (validateurEvaluation.estValide($jeuEnEditionStore)) {
-      await axios.post('/api/jeux', {
+      await axios.post('/api/mes-jeux', {
         ...$jeuEnEditionStore,
         eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
       });
