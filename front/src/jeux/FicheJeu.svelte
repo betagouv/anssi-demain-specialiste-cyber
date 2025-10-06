@@ -1,6 +1,33 @@
 <svelte:options customElement={{ tag: 'dsc-fiche-jeu', shadow: 'none' }} />
 
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { libelleClasse } from './classes';
+  import { libelleDiscipline } from './discipline';
+  import { enumerationFrancaise, type Jeu, libelleSequence } from './jeu';
+  import { libelleThematique } from './thematiques';
+
+  const couleursDeBadge = [
+    'purple-glycine',
+    'green-tilleul-verveine',
+    'green-archipel',
+    'green-emeraude',
+    'pink-tuile',
+    'blue-cumulus',
+    'beige-gris-galet',
+    'blue-ecume',
+    'green-bourgeon',
+    'brown-cafe-creme',
+    'orange-terre-battue',
+    'pink-macaron',
+    'yellow-tournesol',
+    'brown-caramel',
+    'green-menthe',
+    'brown-opera',
+    'yellow-moutarde',
+  ];
+
   const items = [
     {
       id: 'menu-infos-generales',
@@ -31,118 +58,122 @@
       type: 'link',
     },
   ];
-  const temoignages = [
-    {
-      citation:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.',
-      source: 'Détails',
-      auteur: 'Kevin',
-    },
-    {
-      citation:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.',
-      source: 'Détails',
-      auteur: 'Mme A',
-    },
-  ];
+
+  let jeu: Jeu | undefined;
+
+  onMount(async () => {
+    const morceaux = window.location.pathname.split('/');
+    const id = morceaux[morceaux.length - 1];
+    const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
+    jeu = reponse.data;
+    console.log(reponse.data);
+  });
+
+  $: temoignages = jeu
+    ? jeu.temoignages.map((temoignage) => ({
+        citation: temoignage.details,
+        auteur: temoignage.prenom,
+      }))
+    : [];
 </script>
 
-<div class="hero">
-  <dsfr-container>
-    <div class="entete-fiche-jeu">
-      <nav class="ariane" aria-label="Fil d'Ariane">
-        <a href="#">Voir le fil d'Ariane</a>
-      </nav>
-      <div class="cartouche">
-        <dsfr-badge
-          label="Thématique cyber"
-          accent="purple-glycine"
-          type="accent"
-        ></dsfr-badge>
-        <p class="titre-alternatif-xs">CyberCluedo</p>
-        <p class="elaboration">
-          Élaboré par Cindy, Kylian, Kevin et Branda du Lycée Françoise de
-          Tournefeuille (31)
-        </p>
-      </div>
-      <div class="illustration-jeu">
-        <img
-          src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
-        />
-      </div>
-    </div>
-  </dsfr-container>
-</div>
+{#if jeu}
+  <div class="hero">
+    <dsfr-container>
+      <div class="entete-fiche-jeu">
+        <nav class="ariane" aria-label="Fil d'Ariane">
+          <a href="#">Voir le fil d'Ariane</a>
+        </nav>
+        <div class="cartouche">
+          <div class="badges">
+            {#each jeu.thematiques as thematique, index}
+              <dsfr-badge
+                label={libelleThematique(thematique)}
+                accent={couleursDeBadge[index % couleursDeBadge.length]}
+                type="accent"
+              ></dsfr-badge>
+            {/each}
+          </div>
+          <p class="titre-alternatif-xs">{jeu.nom}</p>
+          <p class="elaboration">
+            Élaboré par {enumerationFrancaise(jeu.eleves)}
+          </p>
 
-<div class="corps-de-fiche">
-  <dsfr-side-menu
-    title=""
-    {items}
-    buttonLabel="Dans cette fiche"
-    buttonId="menu-fiche-jeu"
-    hasTitle={false}
-  ></dsfr-side-menu>
-
-  <div class="sections">
-    <div class="contenu">
-      <section id="infos-generales">
-        <h2>Informations générales</h2>
-        <ul>
-          <li>
-            <span>Format</span>
-            <span>Demi journée </span>
-          </li>
-          <li>
-            <span>Établissement</span>
-            <span>Lycée Françoise de Tournefeuille (31)</span>
-          </li>
-          <li>
-            <span>Enseignant&middot;e</span>
-            <span>Delphine</span>
-          </li>
-          <li>
-            <span>Élèves</span>
-            <span>Cindy, Kilian, Kevin et Brenda</span>
-          </li>
-          <li>
-            <span>Discipline</span>
-            <span>Sciences économiques et sociales</span>
-          </li>
-          <li>
-            <span>Classe</span>
-            <span>Seconde</span>
-          </li>
-        </ul>
-      </section>
-
-      <section id="presentation">
-        <h2>Présentation du jeu</h2>
-        <p>
-          Inspirés du célèbre jeu de société, mes élèves ont imaginé Cyber
-          Cluedo, un jeu d’enquête autour d’une cyberattaque fictive. Le but ?
-          Découvrir qui a commis l’attaque, avec quel outil (clé USB piégée,
-          phishing, etc.) et dans quel service (CDI, administration, salle
-          informatique…). Ce projet leur a permis de réfléchir aux menaces
-          numériques tout en mobilisant leur créativité, leur logique et leur
-          esprit d’équipe. Une façon ludique et concrète d’aborder les enjeux de
-          cybersécurité en classe.
-        </p>
-      </section>
-
-      <section id="photos">
-        <h2>Photos</h2>
-        <div class="photos">
-          <img src="/assets/images/image-generique.svg" alt="generique" />
-          <img src="/assets/images/image-generique.svg" alt="generique" />
-          <img src="/assets/images/image-generique.svg" alt="generique" />
+          <p class="etablissement">
+            <lab-anssi-icone taille="sm" nom="map-pin-2-line"></lab-anssi-icone>
+            {jeu.nomEtablissement}
+          </p>
         </div>
-      </section>
-    </div>
-
-    <lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"
-    ></lab-anssi-temoignages>
+        <div class="illustration-jeu">
+          <img
+            src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
+          />
+        </div>
+      </div>
+    </dsfr-container>
   </div>
-</div>
+
+  <div class="corps-de-fiche">
+    <dsfr-side-menu
+      title=""
+      {items}
+      buttonLabel="Dans cette fiche"
+      buttonId="menu-fiche-jeu"
+      hasTitle={false}
+    ></dsfr-side-menu>
+
+    <div class="sections">
+      <div class="contenu">
+        <section id="infos-generales">
+          <h2>Informations générales</h2>
+          <ul>
+            <li>
+              <span>Format</span>
+              <span>{libelleSequence[jeu.sequence]}</span>
+            </li>
+            <li>
+              <span>Établissement</span>
+              <span>{jeu.nomEtablissement}</span>
+            </li>
+            <li>
+              <span>Enseignant&middot;e</span>
+              <span>{jeu.enseignant}</span>
+            </li>
+            <li>
+              <span>Élèves</span>
+              <span>{enumerationFrancaise(jeu.eleves)}</span>
+            </li>
+            <li>
+              <span>Discipline</span>
+              <span>{libelleDiscipline(jeu.discipline)}</span>
+            </li>
+            <li>
+              <span>Classe</span>
+              <span>{libelleClasse(jeu.classe)}</span>
+            </li>
+          </ul>
+        </section>
+
+        <section id="presentation">
+          <h2>Présentation du jeu</h2>
+          <p>{jeu.description}</p>
+        </section>
+
+        <section id="photos">
+          <h2>Photos</h2>
+          <div class="photos">
+            <img src="/assets/images/image-generique.svg" alt="generique" />
+            <img src="/assets/images/image-generique.svg" alt="generique" />
+            <img src="/assets/images/image-generique.svg" alt="generique" />
+          </div>
+        </section>
+      </div>
+
+      <lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"
+      ></lab-anssi-temoignages>
+    </div>
+  </div>
+{/if}
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
@@ -162,6 +193,7 @@
 
     .entete-fiche-jeu {
       display: grid;
+      gap: 1.5rem;
       grid-template-columns: 1fr;
       grid-template-areas:
         'fil-ariane'
@@ -170,7 +202,6 @@
 
       @include a-partir-de(lg) {
         grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
         grid-template-areas:
           'fil-ariane fil-ariane'
           'cartouche illustration';
@@ -182,9 +213,25 @@
 
       .cartouche {
         grid-area: cartouche;
-        padding-bottom: 3rem;
+        padding-bottom: 1.5rem;
+
+        .badges {
+          display: none;
+          @include a-partir-de(md) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0.625rem;
+            align-self: stretch;
+          }
+
+          dsfr-badge {
+            margin: 0;
+          }
+        }
         .titre-alternatif-xs {
           margin-top: 1.5rem;
+          margin-bottom: 0.5rem;
           color: var(--grey-50-1000);
 
           @include a-partir-de(md) {
@@ -200,9 +247,11 @@
           }
         }
 
-        .elaboration {
+        .elaboration,
+        .etablissement {
           font-size: 1.25rem;
           line-height: 2rem;
+          margin-top: 0;
         }
       }
     }
