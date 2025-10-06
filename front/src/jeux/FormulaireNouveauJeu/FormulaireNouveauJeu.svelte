@@ -26,6 +26,7 @@
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
   } from './ReferentielEtablissement';
+  import EtapePhotos from './EtapePhotos.svelte';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
@@ -61,8 +62,11 @@
       case 'presentation':
         etape = 'informations-generales';
         break;
-      case 'temoignages':
+      case 'photos':
         etape = 'presentation';
+        break;
+      case 'temoignages':
+        etape = 'photos';
         break;
       case 'evaluation':
         etape = 'temoignages';
@@ -83,10 +87,13 @@
         break;
       case 'presentation':
         if (validateurPresentation.estValide($jeuEnEditionStore)) {
-          etape = 'temoignages';
+          etape = 'photos';
         } else {
           erreurs = validateurPresentation.valide($jeuEnEditionStore);
         }
+        break;
+      case 'photos':
+        etape = 'temoignages';
         break;
       case 'temoignages':
         etape = 'evaluation';
@@ -125,6 +132,8 @@
         <EtapeInformationsGenerales {erreurs} {referentielEtablissement} />
       {:else if etape === 'presentation'}
         <EtapePresentation {erreurs} />
+      {:else if etape === 'photos'}
+        <EtapePhotos />
       {:else if etape === 'temoignages'}
         <EtapeTemoignages />
       {:else if etape === 'evaluation'}

@@ -87,11 +87,11 @@ describe('Le formulaire de dépose de jeu', () => {
       ).toBeVisible();
     });
     describe("lors de l'étape des informations générales", () => {
-      it("qu'on est à l'étape 1 sur 4", async () => {
+      it("qu'on est à l'étape 1 sur 5", async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);
 
         await waitFor(() =>
-          expect(getByTextDeep('Étape 1 sur 4')).toBeVisible(),
+          expect(getByTextDeep('Étape 1 sur 5')).toBeVisible(),
         );
       });
 
@@ -123,9 +123,9 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
       });
 
-      it("qu'on est à l'étape 2 sur 4", async () => {
+      it("qu'on est à l'étape 2 sur 5", async () => {
         await waitFor(() =>
-          expect(getByTextDeep('Étape 2 sur 4')).toBeVisible(),
+          expect(getByTextDeep('Étape 2 sur 5')).toBeVisible(),
         );
       });
 
@@ -134,6 +134,35 @@ describe('Le formulaire de dépose de jeu', () => {
           expect(
             getByRoleDeep('heading', {
               name: /.*Présentation du jeu.*/,
+            }),
+          ).toBeVisible(),
+        );
+      });
+
+      it("que l'étape suivante est 'Photos'", async () => {
+        await waitFor(() => expect(getByTextDeep('Photos')).toBeVisible());
+      });
+    });
+
+    describe("lors de l'étape des photos", () => {
+      beforeEach(async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+      });
+
+      it("qu'on est à l'étape 3 sur 5", async () => {
+        await waitFor(() =>
+          expect(getByTextDeep('Étape 3 sur 5')).toBeVisible(),
+        );
+      });
+
+      it("qu'on est à l'étape 'Photos'", async () => {
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('heading', {
+              name: /photos/i,
             }),
           ).toBeVisible(),
         );
@@ -152,11 +181,12 @@ describe('Le formulaire de dépose de jeu', () => {
 
         await etapeSuivante();
         await etapeSuivante();
+        await etapeSuivante();
       });
 
-      it("qu'on est à l'étape 3 sur 4", async () => {
+      it("qu'on est à l'étape 4 sur 5", async () => {
         await waitFor(() =>
-          expect(getByTextDeep('Étape 3 sur 4')).toBeVisible(),
+          expect(getByTextDeep('Étape 4 sur 5')).toBeVisible(),
         );
       });
 
@@ -184,11 +214,12 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
+        await etapeSuivante();
       });
 
-      it("qu'on est à l'étape 4 sur 4", async () => {
+      it("qu'on est à l'étape 5 sur 5", async () => {
         await waitFor(() =>
-          expect(getByTextDeep('Étape 4 sur 4')).toBeVisible(),
+          expect(getByTextDeep('Étape 5 sur 5')).toBeVisible(),
         );
       });
 
@@ -348,6 +379,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
         await etapeSuivante();
         await etapeSuivante();
+        await etapeSuivante();
 
         await waitFor(() =>
           expect(getByRoleDeep('textbox', { name: 'Prénom' })).toBeVisible(),
@@ -362,6 +394,7 @@ describe('Le formulaire de dépose de jeu', () => {
       it("d'ajouter un témoignage", async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);
 
+        await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
 
@@ -384,6 +417,7 @@ describe('Le formulaire de dépose de jeu', () => {
       it('de supprimer un témoignage', async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);
 
+        await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
 
@@ -414,6 +448,7 @@ describe('Le formulaire de dépose de jeu', () => {
           proprietesParDefaut,
         );
 
+        await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
@@ -514,6 +549,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await etapeSuivante();
         await etapeSuivante();
+        await etapeSuivante();
         await terminer();
 
         expect(axiosMock.post).not.toHaveBeenCalled();
@@ -610,6 +646,9 @@ describe('Le formulaire de dépose de jeu', () => {
       await user.click(orientation);
 
       await user.type(champDescription, 'Description du jeu');
+      await etapeSuivante();
+
+      // Etape Photos
       await etapeSuivante();
 
       // Etape témoignages

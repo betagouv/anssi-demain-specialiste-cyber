@@ -15,15 +15,20 @@
     presentation: {
       index: 2,
       titre: 'Présentation du jeu',
+      etapeSuivante: 'photos',
+    },
+    photos: {
+      index: 3,
+      titre: 'Photos',
       etapeSuivante: 'temoignages',
     },
     temoignages: {
-      index: 3,
+      index: 4,
       titre: 'Témoignages (facultatif)',
       etapeSuivante: 'evaluation',
     },
     evaluation: {
-      index: 4,
+      index: 5,
       titre: 'Votre avis nous intéresse',
     },
   };
@@ -40,5 +45,5 @@
   title={infosEtapeCourant.titre}
   nextStep={titreEtapeSuivante}
   currentStep={infosEtapeCourant.index}
-  stepCount={4}
+  stepCount={5}
 ></dsfr-stepper>
