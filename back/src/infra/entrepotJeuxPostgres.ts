@@ -114,9 +114,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       discipline: jeuEnDB.discipline as Discipline,
       eleves: jeuEnDB.eleves ?? [],
       categorie: jeuEnDB.categorie as CategorieDeJeux,
-      thematiques: jeuEnDB.thematiques as ThematiqueDeJeux[],
+      thematiques: (jeuEnDB.thematiques ?? []) as ThematiqueDeJeux[],
       description: jeuEnDB.description,
-      temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage),
+      temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
     });
   }
 }
