@@ -37,13 +37,17 @@
       <VitrineFiltres />
 
       <div class="conteneur">
-        {#each $jeuxFiltres.resultat as { id, nom, description, thematiques } (id)}
+        {#each $jeuxFiltres.resultat as { id, nom, description, thematiques, nomEtablissement } (id)}
           <dsfr-card
             title={nom}
             {description}
             href={`/jeux/${id}`}
             src={'/assets/images/image-generique.svg'}
             hasHeaderBadge
+            hasDetailStartIcon
+            detailStartIcon="map-pin-2-line"
+            hasDetailStart
+            detailStart={nomEtablissement}
           >
             <dsfr-badges-group
               slot="headerbadges"
