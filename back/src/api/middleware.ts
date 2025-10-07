@@ -158,7 +158,11 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
           ],
-          styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
+          styleSrc: [
+            "'self'",
+            `'nonce-${reponse.locals.nonce}'`,
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+          ],
         },
       },
     })(requete, reponse, suite);
