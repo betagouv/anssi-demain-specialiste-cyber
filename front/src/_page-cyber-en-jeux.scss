@@ -1,0 +1,101 @@
+@use 'points-de-rupture' as *;
+
+.page-cyber-en-jeux {
+  .entete {
+    .hero {
+      background: var(--background-alt-blue-cumulus);
+      box-shadow: inset 0 4px 4px 0 rgba(0, 0, 18, 0.06);
+      color: var(--text-default-grey);
+      padding: 0;
+
+      .conteneur {
+        padding: 0 0 1.5rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        hgroup {
+          h1 {
+            color: var(--text-title-blue-france);
+            margin: 0 0 0.5rem;
+          }
+
+          p {
+            font-size: 1.25rem;
+            line-height: 2rem;
+            margin: 0;
+          }
+        }
+
+        .actions {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .illustration {
+          background: url('/assets/images/blob.svg') no-repeat center;
+          background-size: calc(100% - 100px) 100%; // Ce calcul affiche l'image de fond correctement suivant la maquette
+          display: block;
+          max-width: 100%;
+          padding: 0 30px;
+          overflow: hidden;
+          position: relative;
+
+          img {
+            display: block;
+            padding: 1.6rem 1.7rem;
+            width: 100%;
+          }
+        }
+
+        @include a-partir-de(sm) {
+          .actions {
+            flex-flow: row nowrap;
+          }
+        }
+
+        @include a-partir-de(md) {
+          display: grid;
+          gap: 0 1.5rem;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto auto;
+
+          hgroup {
+            grid-column: 1;
+            grid-row: 2;
+            margin-bottom: 1.5rem;
+          }
+
+          .actions {
+            flex-direction: column;
+            grid-row: 3;
+            grid-column: 1;
+
+            align-items: flex-start;
+          }
+
+          .illustration {
+            align-self: center;
+            grid-column: 2;
+            grid-row: 2 / span 2;
+
+            img {
+              margin: 0 auto;
+              max-height: 330px;
+              width: auto;
+              max-width: 100%;
+            }
+          }
+        }
+
+        @include a-partir-de(xl) {
+          .actions {
+            flex-flow: row nowrap;
+          }
+        }
+      }
+    }
+  }
+}

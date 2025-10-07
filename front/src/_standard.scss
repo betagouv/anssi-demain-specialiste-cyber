@@ -25,6 +25,21 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  color: var(--text-title-grey);
+  font-size: 2.5rem;
+  line-height: 3rem;
+
+  .fonce & {
+    color: var(--white);
+  }
+
+  @include a-partir-de(sm) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
+
 h2 {
   color: var(--grey-50-1000);
   font-style: normal;
