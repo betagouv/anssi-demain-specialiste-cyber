@@ -17,6 +17,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
   private thematiques: ThematiqueDeJeux[] = [];
   private discipline: Discipline = 'francais';
   private etablissement: string = '';
+  private eleves: string[] = [];
 
   avecUnId(identifiant: string): ConstructeurDeJeu {
     this.identifiant = identifiant;
@@ -63,6 +64,11 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
     return this;
   }
 
+  avecEleves(eleves: string[]) {
+    this.eleves = eleves;
+    return this;
+  }
+
   construis(): Jeu {
     return new Jeu({
       id: this.identifiant,
@@ -72,7 +78,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
       nomEtablissement: this.etablissement,
       classe: this.classe,
       discipline: this.discipline,
-      eleves: [],
+      eleves: this.eleves,
       categorie: this.categorie,
       thematiques: this.thematiques,
       description: this.description,

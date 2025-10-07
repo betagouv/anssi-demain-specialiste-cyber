@@ -45,6 +45,8 @@ describe('La ressource de tous les Jeux', () => {
           .deCategorie('simulation')
           .avecLesThematiques(['menace-cyber', 'orientation'])
           .deEnseignant(jeanneDupont)
+          .avecEleves(["Kevin", "Branda"])
+          .dansEtablissement("Lycée de la mer")
           .construis(),
       );
 
@@ -59,6 +61,7 @@ describe('La ressource de tous les Jeux', () => {
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
           nomEtablissement: 'Lycée de la mer',
+          eleves: ['Kevin', 'Branda'],
         },
       ]);
     });
