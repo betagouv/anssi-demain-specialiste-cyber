@@ -1,5 +1,5 @@
 import z from 'zod';
-import { schemaJeu } from '../../src/api/ressourceJeux';
+import { schemaJeu } from '../../src/api/ressourceMesJeux';
 import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
 import { Constructeur } from '../constructeur';
 
