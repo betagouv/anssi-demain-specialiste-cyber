@@ -5,6 +5,35 @@ block variables
   - var descriptionPage = "L'outil pédagogique innovant pour former vos élèves aux enjeux de la cybersécurité par la création de jeux."
   - var classePage = "page-cyber-en-jeux"
 
+block hero
+  div(class="hero")
+    dsfr-container
+      div(class="conteneur")
+        dsfr-breadcrumb(segments=[
+          { id: 'accueil', label: 'Accueil', href: '/' },
+          { id: 'cyber-en-jeux', label: 'CyberEnJeux', href: '#' }
+        ])
+        hgroup
+          h1 CyberEnJeux
+          p L'outil pédagogique innovant pour former vos élèves aux enjeux de la cybersécurité par la création de jeux.
+        div(class="actions")
+          dsfr-button(
+            label="Accèder aux ressources"
+            kind="primary"
+            markup="a"
+            href="/cyber-en-jeux#ressources"
+            target="_self"
+          )
+          dsfr-button(
+            label="Déclarer une action CyberEnJeux"
+            kind="secondary"
+            markup="a"
+            href="/cyber-en-jeux#ressources"
+            target="_blank"
+          )
+        picture(class="illustration")
+          img(src='/assets/images/boites-de-jeux.png' alt='')
+
 block contenu
   dsc-cyber-en-jeux
 
