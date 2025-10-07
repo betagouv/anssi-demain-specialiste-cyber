@@ -43,7 +43,15 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
 
     return reponse.send(
       tousLesJeux.map((jeu) => {
-        const { id, nom, description, classe, categorie, thematiques } = jeu;
+        const {
+          id,
+          nom,
+          description,
+          classe,
+          categorie,
+          thematiques,
+          nomEtablissement,
+        } = jeu;
         return {
           id,
           nom,
@@ -51,6 +59,7 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
           niveau: classeVersNiveau(classe),
           categorie,
           thematiques,
+          nomEtablissement,
         };
       }),
     );

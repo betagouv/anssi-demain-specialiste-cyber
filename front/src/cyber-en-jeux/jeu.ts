@@ -35,6 +35,7 @@ export type Jeu = {
   niveau: Niveau;
   categorie: Categorie;
   thematiques: Thematique[];
+  nomEtablissement: string;
 };
 
 export type DonneesJeu = {
@@ -44,6 +45,7 @@ export type DonneesJeu = {
   niveau: string;
   categorie: string;
   thematiques: string[];
+  nomEtablissement: string;
 };
 
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
@@ -51,7 +53,8 @@ export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
     ...item,
     niveau: item.niveau as Niveau,
     categorie: item.categorie as Categorie,
-    thematiques: item.thematiques.map((t) => t as Thematique),
+    thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
+    nomEtablissement: item.nomEtablissement,
   }));
 };
 
