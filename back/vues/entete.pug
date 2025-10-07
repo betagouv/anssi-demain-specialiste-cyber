@@ -24,6 +24,7 @@ header(class='entete')
                     li
                         a(href='/cyber-en-jeux') CyberEnJeux
 
-    div(class='hero')
-        block hero
-            lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
+    if hero
+        div(class='hero')
+            block hero
+                lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
