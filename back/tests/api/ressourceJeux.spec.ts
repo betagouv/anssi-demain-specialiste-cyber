@@ -586,7 +586,7 @@ describe('La ressource de mes jeux', () => {
     describe('concernant la vérification du téléversement de photos d’un jeu', () => {
       it('limite le nombre de couverture à 1', async () => {
         const reponse = await request(serveur)
-          .post('/api/jeux')
+          .post('/api/mes-jeux')
           .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
           .attach('couverture', Buffer.from('une-image'), 'test.jpg')
           .attach('couverture', Buffer.from('une-image'), 'test-2.jpg');
@@ -599,7 +599,7 @@ describe('La ressource de mes jeux', () => {
 
       it('limite le nombre à 5 photos au total', async () => {
         const reponse = await request(serveur)
-          .post('/api/jeux')
+          .post('/api/mes-jeux')
           .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
           .attach('couverture', Buffer.from('une-image'), 'test.jpg')
           .attach('photos', Buffer.from('une-image'), 'test-2.jpg')
@@ -616,7 +616,7 @@ describe('La ressource de mes jeux', () => {
 
       it('limite la taille maximale à 5MO pour les photos', async () => {
         const reponse = await request(serveur)
-          .post('/api/jeux')
+          .post('/api/mes-jeux')
           .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
           .attach('photos', Buffer.alloc(CINQ_MO + 1, 0), 'test.jpg');
 
@@ -628,7 +628,7 @@ describe('La ressource de mes jeux', () => {
 
       it('limite la taille maximale à 5MO pour la couverture', async () => {
         const reponse = await request(serveur)
-          .post('/api/jeux')
+          .post('/api/mes-jeux')
           .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
           .attach('couverture', Buffer.alloc(CINQ_MO + 1, 0), 'test.jpg');
 
