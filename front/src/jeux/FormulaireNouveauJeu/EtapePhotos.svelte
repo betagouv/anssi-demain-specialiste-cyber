@@ -58,8 +58,23 @@
   };
 </script>
 
+<div class="information">
+  <dsfr-alert
+    title="Protéger l’identité des élèves."
+    text="Évitez d’inclure des photos où leurs visages sont visibles, sauf si vous avez obtenu leur consentement écrit. Guide sur les données à caractère personnel."
+    type="info"
+    size="md"
+  >
+  </dsfr-alert>
+</div>
+
 <fieldset class="couverture">
   <legend>Photo principale</legend>
+  <p>
+    Celle-ci servira de couverture pour présenter le jeu dans le catalogue.
+    <br />
+    Taille maximale : 5 Mo. Formats supportés : jpg, png.
+  </p>
   <input
     type="file"
     id="couverture"
@@ -68,28 +83,30 @@
     oninput={surAjoutCouverture}
   />
   {#if $photosJeuStore && $photosJeuStore.couverture}
-    <div>
+    <div class="previsualisation-couverture">
       <img
         src={URL.createObjectURL($photosJeuStore.couverture)}
         alt="Photo de couverture"
-        class="previsualisation-couverture"
       />
     </div>
   {/if}
 </fieldset>
 
+<hr />
+
 <fieldset class="photos">
   <legend>Ajouter des photos de l’événement (facultatif)</legend>
+  <p>
+    4 photos maximum. Taille maximale : xx Mo. Formats supportés : jpg, png.
+  </p>
   {#if $photosJeuStore && $photosJeuStore.photos}
-    {#each $photosJeuStore.photos as photo}
-      <div>
-        <img
-          src={URL.createObjectURL(photo)}
-          alt="Photo de l’événement"
-          class="previsualisation-photo"
-        />
-      </div>
-    {/each}
+    <div class="previsualisations-photo">
+      {#each $photosJeuStore.photos as photo}
+        <div class="previsualisation-photo">
+          <img src={URL.createObjectURL(photo)} alt="Photo de l’événement" />
+        </div>
+      {/each}
+    </div>
   {/if}
   <input
     type="file"
@@ -101,23 +118,100 @@
   />
 </fieldset>
 
+<div class="consentement">
+  <dsfr-checkbox
+    id="consentement-photo"
+    name="consentement-photo"
+    status="default"
+    label="J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site."
+  />
+  <p>
+    Si aucun visage n’apparaît sur les images, cette case n’a pas besoin d’être
+    cochée. Vous pouvez passer à l’étape suivante.
+  </p>
+</div>
+
 <style lang="scss">
-  .previsualisation-couverture {
-    display: flex;
-    height: 18.16825rem;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 0;
-    align-self: stretch;
-    aspect-ratio: 4/3;
+  @use '../../points-de-rupture' as *;
+  .information {
+    padding: 1.5rem 0 0.5rem 0;
   }
 
-  .previsualisation-photo {
-    display: flex;
-    height: 13.21925rem;
-    flex-direction: column;
-    align-items: flex-start;
+  .couverture {
+    p {
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+      color: var(--text-mention-grey);
+    }
+  }
+
+  .photos {
+    p {
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+      color: var(--text-mention-grey);
+    }
+  }
+
+  .consentement {
+    p {
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+      color: var(--text-mention-grey);
+      margin: 0;
+      padding-left: 2rem;
+    }
+  }
+
+  hr {
     align-self: stretch;
-    aspect-ratio: 4/3;
+    height: 1px;
+    border: 0;
+    background-color: #dddddd;
+    margin: 0.5rem 0;
+  }
+
+  .previsualisation-couverture {
+    padding-top: 2rem;
+    img {
+      display: flex;
+      height: 18.16825rem;
+      flex-direction: column;
+      align-items: flex-start;
+      flex-shrink: 0;
+      align-self: stretch;
+      aspect-ratio: 4/3;
+    }
+  }
+
+  .previsualisations-photo {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    @include a-partir-de(sm) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    @include a-partir-de(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .previsualisation-photo {
+      img {
+        display: flex;
+        height: 13.21925rem;
+        flex-direction: column;
+        align-items: flex-start;
+        align-self: stretch;
+        aspect-ratio: 4/3;
+      }
+    }
   }
 </style>
