@@ -1,60 +1,174 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Router } from 'express';
-import { Classe } from '../metier/referentiels/classes';
+import z from 'zod';
+import { JeuCree } from '../bus/evenements/jeu/jeuCree';
+import { Jeu } from '../metier/jeu';
+import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
+import { classes } from '../metier/referentiels/classes';
+import { disciplines } from '../metier/referentiels/disciplines';
+import { sequences } from '../metier/referentiels/sequence';
+import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
+import { ConfigurationServeur } from './configurationServeur';
 
-type Niveau =
-  | 'Cycle 1 (PS-GS)'
-  | 'Cycle 2 (CP-CE2)'
-  | 'Cycle 3 (CM1-6e)'
-  | 'Cycle 4 (5e-3e)'
-  | 'Cycle Terminal (2-T)'
-  | 'Post Bac';
+const chaineNonVide = (message: string) =>
+  z.string(message).trim().min(1, message);
 
-const classeVersNiveau = (classe: Classe): Niveau => {
-  switch (classe) {
-    case 'maternelle':
-      return 'Cycle 1 (PS-GS)';
-    case 'cp':
-    case 'ce1':
-    case 'ce2':
-      return 'Cycle 2 (CP-CE2)';
-    case 'cm1':
-    case 'cm2':
-    case '6e':
-      return 'Cycle 3 (CM1-6e)';
-    case '5e':
-    case '4e':
-    case '3e':
-      return 'Cycle 4 (5e-3e)';
-    case 'seconde':
-    case 'premiere':
-    case 'terminale':
-      return 'Cycle Terminal (2-T)';
-    default:
-      return 'Post Bac';
-  }
-};
+const verifieNoteEvaluation = (message: string) =>
+  z
+    .number()
+    .min(1, {
+      error: message,
+    })
+    .max(5, {
+      error: message,
+    });
 
-export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
+export const ressourceJeux = ({
+  entrepotJeux,
+  entrepotUtilisateur,
+  adaptateurHachage,
+  middleware,
+  busEvenements,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.get('/', async (_requete, reponse) => {
-    const tousLesJeux = await entrepotJeux.tous();
+  const schema = z.strictObject({
+    nom: chaineNonVide('Le nom est obligatoire'),
+    nomEtablissement: chaineNonVide(
+      'Le nom de l‘établissement est obligatoire',
+    ),
+    discipline: z.enum(disciplines, {
+      error: 'La discipline est invalide',
+    }),
+    classe: z.enum(classes, {
+      error: 'La classe est invalide',
+    }),
+    sequence: z.enum(sequences, {
+      error: 'La séquence est invalide',
+    }),
+    eleves: z
+      .array(chaineNonVide('Les prénoms fournis sont invalides'))
+      .nonempty('Au moins un élève est requis'),
+    categorie: z.enum(categoriesDeJeux, {
+      error: 'La catégorie est invalide',
+    }),
+    thematiques: z
+      .array(
+        z.enum(thematiquesDeJeux, {
+          error: 'La thématique est invalide',
+        }),
+      )
+      .nonempty('La thématique est invalide'),
+    description: chaineNonVide('La description du jeu est obligatoire').max(
+      8000,
+      'La description ne peut contenir que 8000 caractères maximum',
+    ),
+    temoignages: z
+      .array(
+        z.strictObject({
+          prenom: z.string('Le prénom est obligatoire dans un témoignage'),
+          details: z
+            .string('Les détails sont obligatoires dans un témoignage')
+            .max(
+              8000,
+              'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
+            ),
+        }),
+      )
+      .optional(),
+    evaluationDecouverte: verifieNoteEvaluation(
+      'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+    ),
+    evaluationInteret: verifieNoteEvaluation(
+      'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+    ),
+    evaluationSatisfactionGenerale: verifieNoteEvaluation(
+      'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+    ),
+    precisions: z
+      .string()
+      .trim()
+      .nonempty('Les précisions ne peuvent pas être vides')
+      .optional(),
+  });
 
-    return reponse.send(
-      tousLesJeux.map((jeu) => {
-        const { id, nom, description, classe, categorie, thematiques } = jeu;
-        return {
-          id,
+  routeur.post(
+    '/',
+    middleware.valideLaCoherenceDuCorps(schema),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage,
+    ),
+    async (requete, reponse) => {
+      try {
+        const utilisateurConnecte = requete.utilisateur;
+
+        const {
           nom,
-          description,
-          niveau: classeVersNiveau(classe),
+          sequence,
+          nomEtablissement,
+          classe,
+          discipline,
+          eleves,
           categorie,
           thematiques,
-        };
-      }),
-    );
-  });
+          description,
+          temoignages,
+          evaluationDecouverte,
+          evaluationInteret,
+          evaluationSatisfactionGenerale,
+          precisions,
+        } = requete.body;
+        await entrepotJeux.ajoute(
+          new Jeu({
+            nom,
+            enseignant: utilisateurConnecte,
+            sequence,
+            nomEtablissement,
+            classe,
+            discipline,
+            eleves,
+            categorie,
+            thematiques,
+            description,
+            temoignages,
+          }),
+        );
+        await busEvenements.publie(
+          new JeuCree(
+            utilisateurConnecte.email,
+            nom,
+            sequence,
+            nomEtablissement,
+            classe,
+            discipline,
+            eleves.length,
+            categorie,
+            thematiques,
+            temoignages?.length || 0,
+            evaluationDecouverte,
+            evaluationInteret,
+            evaluationSatisfactionGenerale,
+            precisions,
+          ),
+        );
+        reponse.sendStatus(201);
+      } catch {
+        reponse.sendStatus(401);
+      }
+    },
+  );
+
+  routeur.get(
+    '/',
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage,
+    ),
+    async (requete, reponse) => {
+      const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
+      reponse.send(jeux.map((jeu) => ({ id: jeu.id, nom: jeu.nom })));
+    },
+  );
 
   return routeur;
 };
