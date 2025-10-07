@@ -1,6 +1,7 @@
 block variables
   - var titrePage = ""
   - var descriptionPage = ""
+
 header(class='entete')
     div(class='haut')
         div(class='marque')
@@ -24,7 +25,6 @@ header(class='entete')
                     li
                         a(href='/cyber-en-jeux') CyberEnJeux
 
-    if hero
+    block hero
         div(class='hero')
-            block hero
-                lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
+            lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
