@@ -118,6 +118,7 @@
       grid-template-columns: 100%;
       grid-template-rows: repeat(2, min-content) 1fr auto;
       height: 100vh;
+      overflow-x: hidden;
       overflow-y: auto;
       padding: 1rem 1rem 0;
       position: fixed;
