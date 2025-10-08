@@ -34,6 +34,7 @@ type JeuEnDB = {
   description: string;
   temoignages: string[];
   photos: PhotosJeu;
+  consentement: boolean;
 };
 
 type JeuEnDBInsertion = Omit<
@@ -79,6 +80,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       description: jeu.description,
       temoignages: JSON.stringify(jeu.temoignages),
       photos: jeu.photos,
+      consentement: jeu.consentement,
     } satisfies JeuEnDBInsertion);
   }
 
@@ -127,8 +129,10 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       categorie: jeuEnDB.categorie as CategorieDeJeux,
       thematiques: (jeuEnDB.thematiques ?? []) as ThematiqueDeJeux[],
       description: jeuEnDB.description,
-      temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
+      temoignages:
+        jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
       photos: jeuEnDB.photos,
+      consentement: jeuEnDB.consentement,
     });
   }
 }
