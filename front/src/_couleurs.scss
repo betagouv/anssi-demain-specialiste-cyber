@@ -22,4 +22,70 @@ $toutes-couleurs: (
   --brique-carrousel-bouton-action-texte-couleur: var(--grey-50-1000);
   --brique-temoignages-titre-couleur: var(--grey-50-1000);
   --brique-temoignages-icone-couleur: #ce614a;
+
+  // Les variables de couleurs du DSFR
+  --background-default-grey: var(--grey-1000-50);
+  --background-default-grey-hover: var(--grey-1000-50-hover);
+  --background-default-grey-active: var(--grey-1000-50-active);
+  --background-alt-grey: var(--grey-975-75);
+  --background-alt-grey-hover: var(--grey-975-75-hover);
+  --background-alt-grey-active: var(--grey-975-75-active);
+  --background-contrast-grey: var(--grey-950-100);
+  --background-contrast-grey-hover: var(--grey-950-100-hover);
+  --background-contrast-grey-active: var(--grey-950-100-active);
+  --background-contrast-blue-france: var(--blue-france-950-100);
+  --background-contrast-info: var(--info-950-100);
+  --background-flat-grey: var(--grey-200-850);
+  --background-action-high-blue-france: var(--blue-france-sun-113-625);
+  --background-action-high-blue-france-hover: var(
+    --blue-france-sun-113-625-hover
+  );
+  --background-action-high-blue-france-active: var(
+    --blue-france-sun-113-625-active
+  );
+  --background-action-low-blue-france: var(--blue-france-925-125);
+  --background-action-low-blue-france-hover: var(--blue-france-925-125-hover);
+  --background-action-low-blue-france-active: var(--blue-france-925-125-active);
+  --background-active-blue-france: var(--blue-france-sun-113-625);
+  --background-active-blue-france-hover: var(--blue-france-sun-113-625-hover);
+  --background-active-blue-france-active: var(--blue-france-sun-113-625-active);
+  --background-disabled-grey: var(--grey-925-125);
+  --text-default-grey: var(--grey-200-850);
+  --text-action-high-blue-france: var(--blue-france-sun-113-625);
+  --text-title-grey: var(--grey-50-1000);
+  --text-label-grey: var(--grey-50-1000);
+  --text-mention-grey: var(--grey-425-625);
+  --text-inverted-grey: var(--grey-1000-50);
+  --text-inverted-blue-france: var(--blue-france-975-sun-113);
+  --text-disabled-grey: var(--grey-625-425);
+  --border-default-grey: var(--grey-900-175);
+  --border-active-blue-france: var(--blue-france-sun-113-625);
+  --border-action-high-blue-france: var(--blue-france-sun-113-625);
+  --border-plain-grey: var(--grey-200-850);
+  --border-disabled-grey: var(--grey-925-125);
+  --grey-1000-50: #fff;
+  --grey-1000-50-hover: #f6f6f6;
+  --grey-1000-50-active: #ededed;
+  --grey-975-75: #f6f6f6;
+  --grey-975-75-hover: #dfdfdf;
+  --grey-975-75-active: #cfcfcf;
+  --grey-950-100: #eee;
+  --grey-950-100-hover: #d2d2d2;
+  --grey-950-100-active: #c1c1c1;
+  --grey-200-850: #3a3a3a;
+  --grey-925-125: #e5e5e5;
+  --grey-50-1000: #161616;
+  --grey-425-625: #666;
+  --grey-625-425: #929292;
+  --grey-900-175: #ddd;
+  --blue-france-950-100: #ececfe;
+  --blue-france-sun-113-625: #000091;
+  --blue-france-sun-113-625-hover: #1212ff;
+  --blue-france-sun-113-625-active: #2323ff;
+  --blue-france-925-125: #e3e3fd;
+  --blue-france-925-125-hover: #c1c1fb;
+  --blue-france-925-125-active: #adadf9;
+  --blue-france-975-sun-113: #f5f5fe;
+  --info-950-100: #e8edff;
+  --white: #FFFFFF;
 }
