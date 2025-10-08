@@ -10,15 +10,18 @@
     ErreursValidationJeuEnEdition,
     EvaluationDuJeu,
     InformationsGeneralesDuJeu,
+    PhotosDuJeu,
     PresentationDuJeu,
   } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { photosJeuStore } from '../stores/photosJeu.store';
   import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
+  import { ValidateurPhotosDuJeu } from '../ValidateurPhotosDuJeu.js';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
   import EtapeEvaluation from './EtapeEvaluation.svelte';
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
+  import EtapePhotos from './EtapePhotos.svelte';
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
@@ -27,12 +30,12 @@
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
   } from './ReferentielEtablissement';
-  import EtapePhotos from './EtapePhotos.svelte';
 
   interface Props {
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
     validateurPresentation: Validateur<PresentationDuJeu>;
     validateurEvaluation: Validateur<EvaluationDuJeu>;
+    validateurPhotosDuJeu: Validateur<PhotosDuJeu>;
     referentielEtablissement: ReferentielEtablissement;
   }
 
@@ -40,6 +43,7 @@
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
     validateurPresentation = new ValidateurPresentationDuJeu(),
     validateurEvaluation = new ValidateurEvaluationDuJeu(),
+    validateurPhotosDuJeu = new ValidateurPhotosDuJeu(),
     referentielEtablissement = new AdaptateurAnnuaireEducationNationale(),
   }: Props = $props();
 
@@ -94,7 +98,11 @@
         }
         break;
       case 'photos':
-        etape = 'temoignages';
+        if (validateurPhotosDuJeu.estValide({ photos: $photosJeuStore })) {
+          etape = 'temoignages';
+        } else {
+          erreurs = validateurPhotosDuJeu.valide({ photos: $photosJeuStore });
+        }
         break;
       case 'temoignages':
         etape = 'evaluation';
@@ -146,7 +154,7 @@
       {:else if etape === 'presentation'}
         <EtapePresentation {erreurs} />
       {:else if etape === 'photos'}
-        <EtapePhotos />
+        <EtapePhotos {erreurs} />
       {:else if etape === 'temoignages'}
         <EtapeTemoignages />
       {:else if etape === 'evaluation'}

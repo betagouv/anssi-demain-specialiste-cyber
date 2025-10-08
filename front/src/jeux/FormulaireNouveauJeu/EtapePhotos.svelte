@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { photosJeu, photosJeuStore } from '../stores/photosJeu.store';
+  import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
+  import { photosJeu, photosJeuStore } from '../stores/photosJeu.store';
+
+  let { erreurs }: { erreurs: ErreursValidationJeuEnEdition } = $props();
 
   onMount(async () => {
     $photosJeuStore = {};
@@ -83,6 +86,17 @@
     accept="image/jpeg, image/png, image/jpg"
     oninput={surAjoutCouverture}
   />
+  {#if erreurs.photos}
+    <dsfr-alert
+      hasTitle={false}
+      hasDescription={true}
+      text={erreurs.photos}
+      type="error"
+      size="sm"
+      id="erreurs-couverture"
+      dismissible={false}
+    ></dsfr-alert>
+  {/if}
   {#if $photosJeuStore && $photosJeuStore.couverture}
     <div class="previsualisation-couverture">
       <img
