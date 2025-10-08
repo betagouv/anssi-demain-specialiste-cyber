@@ -67,7 +67,6 @@
     const id = morceaux[morceaux.length - 1];
     const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
     jeu = reponse.data;
-    console.log(reponse.data);
   });
 
   $: temoignages = jeu
