@@ -25,7 +25,7 @@ import {
   uneRequeteDeJeuValide,
 } from './constructeurRequeteDeJeu';
 import { MIMEType } from 'node:util';
-import { unJeu } from '../metier/construteurJeu';
+import { unJeu } from '../metier/constructeurJeu';
 import { CINQ_MO } from '../../src/api/ressourceMesJeux';
 import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 
@@ -112,7 +112,8 @@ describe('La ressource de mes jeux', () => {
         serveur,
         uneRequeteDeJeuValide()
           .avecTemoignages([{ prenom: 'Michel', details: "C'était trop bien" }])
-          .avecConsentement(true).construis(),
+          .avecConsentement(true)
+          .construis(),
       );
 
       expect(reponse.status).toBe(201);
@@ -211,7 +212,10 @@ describe('La ressource de mes jeux', () => {
     });
 
     it('publie un événement de création de jeu', async () => {
-      await executeLaRequete(serveur, uneRequeteDeJeuValide().avecConsentement(true).construis());
+      await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide().avecConsentement(true).construis(),
+      );
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -671,13 +675,11 @@ describe('La ressource de mes jeux', () => {
       it('vérifie que le consentemment est valide', async () => {
         const reponse = await executeLaRequete(serveur, {
           ...uneRequeteDeJeuValide().construis(),
-          consentement: "mauvais-type",
+          consentement: 'mauvais-type',
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le consentement est invalide',
-        );
+        expect(reponse.body.erreur).toEqual('Le consentement est invalide');
       });
     });
   });
@@ -706,12 +708,24 @@ describe('La ressource de mes jeux', () => {
           .avecUnId('1')
           .avecUnNom('cybercluedo')
           .deEnseignant(jeanneDupont)
+          .avecUneCouverture('une-couverture')
+          .avecUnePhoto('photo-1')
+          .avecUnePhoto('photo-2')
           .construis(),
       );
 
       const reponse = await request(serveur).get('/api/mes-jeux');
 
-      expect(reponse.body).toStrictEqual([{ id: '1', nom: 'cybercluedo' }]);
+      expect(reponse.body).toStrictEqual([
+        {
+          id: '1',
+          nom: 'cybercluedo',
+          photos: {
+            couverture: { chemin: 'une-couverture' },
+            photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
+          },
+        },
+      ]);
     });
 
     it("retourne la liste des jeux de l'utilisateur connecté", async () => {
@@ -736,7 +750,18 @@ describe('La ressource de mes jeux', () => {
 
       const reponse = await request(serveur).get('/api/mes-jeux');
 
-      expect(reponse.body).toStrictEqual([{ id: '2', nom: 'cyberuno' }]);
+      expect(reponse.body).toStrictEqual([
+        {
+          id: '2',
+          nom: 'cyberuno',
+          photos: {
+            couverture: {
+              chemin: '',
+            },
+            photos: [],
+          },
+        },
+      ]);
     });
   });
 });

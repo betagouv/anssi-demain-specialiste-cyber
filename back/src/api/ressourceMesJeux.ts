@@ -248,7 +248,9 @@ export const ressourceMesJeux = ({
     ),
     async (requete, reponse) => {
       const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
-      reponse.send(jeux.map((jeu) => ({ id: jeu.id, nom: jeu.nom })));
+      reponse.send(
+        jeux.map((jeu) => ({ id: jeu.id, nom: jeu.nom, photos: jeu.photos })),
+      );
     },
   );
 

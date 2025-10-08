@@ -81,7 +81,7 @@ describe("L'adaptateur environnement", () => {
     expect(() => {
       adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
     }).toThrow(
-      `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide`
+      `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide`,
     );
   });
 
@@ -94,5 +94,17 @@ describe("L'adaptateur environnement", () => {
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     expect(secrets).toHaveLength(1);
+  });
+
+  it("sait construire l'URL des PhotosJeux du cellar", () => {
+    process.env = {
+      S3_URL_CELLAR: 'https://lurl-du-cellar',
+      S3_BUCKET_PHOTOS_JEUX: 'bucket-photos-jeux',
+    };
+    const cellarPhotosJeux = adaptateurEnvironnement.cellarPhotosJeux();
+
+    expect(cellarPhotosJeux).toEqual(
+      'https://bucket-photos-jeux.lurl-du-cellar',
+    );
   });
 });

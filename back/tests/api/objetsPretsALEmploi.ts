@@ -1,5 +1,5 @@
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { unJeu } from '../metier/construteurJeu';
+import { unJeu } from '../metier/constructeurJeu';
 
 export const jeanneDupont = new Utilisateur({
   email: 'jeanne.dupont@mail.com',
@@ -19,4 +19,5 @@ export const cybercluedo = unJeu()
   .avecUneDescription('Une description')
   .pourLaDiscipline('histoire-et-geographie')
   .dansEtablissement('Lycée de la mer')
+  .avecUneCouverture('un-chemin')
   .construis();

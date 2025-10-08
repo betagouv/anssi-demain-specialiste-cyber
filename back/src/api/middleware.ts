@@ -148,6 +148,7 @@ export const fabriqueMiddleware = ({
             'blob:',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
             'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
+            adaptateurEnvironnement.cellarPhotosJeux(),
             'data:',
           ],
           connectSrc: [

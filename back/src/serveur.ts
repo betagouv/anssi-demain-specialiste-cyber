@@ -80,6 +80,7 @@ serviceCoherenceSecretsHachage
 
         moteurDeRendu: moteurDeRenduExpress(),
         entrepotJeux: new EntrepotJeuxPostgres({
+          adaptateurEnvironnement,
           adaptateurHachage,
           entrepotUtilisateur,
         }),

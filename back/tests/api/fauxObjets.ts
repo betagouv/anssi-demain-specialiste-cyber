@@ -97,6 +97,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       urlCellar: '',
     };
   },
+  cellarPhotosJeux: () => 'https://example.com/',
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {

@@ -10,6 +10,7 @@ import { Sequence } from '../metier/referentiels/sequence';
 import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurHachage } from './adaptateurHachage';
 import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 type FichierImage = {
   chemin: string;
@@ -50,16 +51,20 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
   knex: Knex.Knex;
   private adaptateurHachage: AdaptateurHachage;
   private entrepotUtilisateur: EntrepotUtilisateur;
+  private adaptateurEnvironnement: AdaptateurEnvironnement;
 
   constructor({
     adaptateurHachage,
     entrepotUtilisateur,
+    adaptateurEnvironnement,
   }: {
     adaptateurHachage: AdaptateurHachage;
     entrepotUtilisateur: EntrepotUtilisateur;
+    adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     this.adaptateurHachage = adaptateurHachage;
     this.entrepotUtilisateur = entrepotUtilisateur;
+    this.adaptateurEnvironnement = adaptateurEnvironnement;
     this.knex = Knex(config);
   }
 
@@ -113,6 +118,14 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     }
   }
 
+  private prefixeCheminParUrl(image: { chemin: string }) {
+    if (this.adaptateurEnvironnement.televersementEnMemoire()) return image;
+    const url = this.adaptateurEnvironnement.cellarPhotosJeux();
+    return {
+      chemin: new URL(image.chemin, url).toString(),
+    };
+  }
+
   private async donneesEnDbVersMetier(jeuEnDB: JeuEnDB): Promise<Jeu> {
     const enseignant = jeuEnDB.id_enseignant
       ? await this.entrepotUtilisateur.parEmailHache(jeuEnDB.id_enseignant)
@@ -131,7 +144,10 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       description: jeuEnDB.description,
       temoignages:
         jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
-      photos: jeuEnDB.photos,
+      photos: {
+        couverture: this.prefixeCheminParUrl(jeuEnDB.photos.couverture),
+        photos: jeuEnDB.photos.photos.map((p) => this.prefixeCheminParUrl(p)),
+      },
       consentement: jeuEnDB.consentement,
     });
   }

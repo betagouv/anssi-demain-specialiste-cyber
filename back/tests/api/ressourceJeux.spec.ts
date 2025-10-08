@@ -10,7 +10,7 @@ import {
 import { creeServeur } from '../../src/api/dsc';
 import request from 'supertest';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { unJeu } from '../metier/construteurJeu';
+import { unJeu } from '../metier/constructeurJeu';
 
 describe('La ressource de tous les Jeux', () => {
   let serveur: Express;
@@ -45,8 +45,11 @@ describe('La ressource de tous les Jeux', () => {
           .deCategorie('simulation')
           .avecLesThematiques(['menace-cyber', 'orientation'])
           .deEnseignant(jeanneDupont)
-          .avecEleves(["Kevin", "Branda"])
-          .dansEtablissement("Lycée de la mer")
+          .avecEleves(['Kevin', 'Branda'])
+          .dansEtablissement('Lycée de la mer')
+          .avecUneCouverture('une-couverture')
+          .avecUnePhoto('photo-1')
+          .avecUnePhoto('photo-2')
           .construis(),
       );
 
@@ -62,6 +65,12 @@ describe('La ressource de tous les Jeux', () => {
           description: 'Une description',
           nomEtablissement: 'Lycée de la mer',
           eleves: ['Kevin', 'Branda'],
+          photos: {
+            couverture: {
+              chemin: 'une-couverture',
+            },
+            photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
+          },
         },
       ]);
     });
