@@ -34,6 +34,7 @@ export class Jeu {
   description: string;
   temoignages: Temoignage[];
   photos: PhotosJeu;
+  consentement: boolean;
 
   constructor({
     id,
@@ -49,6 +50,7 @@ export class Jeu {
     description,
     temoignages = [],
     photos,
+    consentement = false,
   }: {
     id?: string;
     nom: string;
@@ -63,6 +65,7 @@ export class Jeu {
     description: string;
     temoignages?: Temoignage[];
     photos: PhotosJeu;
+    consentement?: boolean;
   }) {
     this.id = id ?? randomUUID();
     this.nom = nom;
@@ -77,5 +80,6 @@ export class Jeu {
     this.description = description;
     this.temoignages = temoignages;
     this.photos = photos;
+    this.consentement = consentement;
   }
 }

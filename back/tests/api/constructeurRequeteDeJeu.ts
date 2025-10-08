@@ -91,6 +91,11 @@ class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
     return this;
   }
 
+  avecConsentement(consentement: boolean) {
+    this.consentement = consentement;
+    return this;
+  }
+
   construis(): CorpsRequeteDeJeu {
     return {
       nom: this.nom,

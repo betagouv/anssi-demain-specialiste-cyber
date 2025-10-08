@@ -52,6 +52,7 @@ describe('La ressource des jeux', () => {
           },
           photos: [],
         },
+        consentement: false,
       });
     });
   });
