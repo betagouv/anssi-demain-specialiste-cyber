@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
 import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireNouveauJeu/ReferentielEtablissement';
 import {
+  type PhotosDuJeu,
   type EvaluationDuJeu,
   type InformationsGeneralesDuJeu,
   type JeuEnEdition,
@@ -48,6 +49,10 @@ describe('Le formulaire de dépose de jeu', () => {
     estValide: vi.fn().mockReturnValue(true),
     valide: () => ({}),
   };
+  const validateurPhotosDuJeuEnSucces: Validateur<PhotosDuJeu> = {
+    estValide: vi.fn().mockReturnValue(true),
+    valide: () => ({}),
+  };
   const referentielEtablissement: ReferentielEtablissement = {
     trouveParNom: async () => [],
   };
@@ -55,6 +60,7 @@ describe('Le formulaire de dépose de jeu', () => {
     validateurInformationsGenerales: validateurInformationsGeneralesEnSucces,
     validateurPresentation: validateurPresentationEnSucces,
     validateurEvaluation: validateurEvaluationEnSucces,
+    validateurPhotosDuJeu: validateurPhotosDuJeuEnSucces,
     referentielEtablissement,
   };
 
@@ -558,6 +564,26 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(getByTextDeep('La catégorie est obligatoire')).toBeVisible();
         expect(getByTextDeep('La thématique est obligatoire')).toBeVisible();
         expect(getByTextDeep('La description est obligatoire')).toBeVisible();
+      });
+    });
+
+    describe("de l'étape des photos", () => {
+      it("affiche une erreur si il n'y a pas de couverture de selectionnée", async () => {
+        const validateurPhotosDuJeuEnErreur: Validateur<PhotosDuJeu> = {
+          estValide: () => false,
+          valide: () => ({
+            photos: 'La couverture est obligatoire',
+          }),
+        };
+        render(FormulaireNouveauJeu, {
+          ...proprietesParDefaut,
+          validateurPhotosDuJeu: validateurPhotosDuJeuEnErreur,
+        });
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+
+        await waitFor(() => getByTextDeep('La couverture est obligatoire'));
       });
     });
 
