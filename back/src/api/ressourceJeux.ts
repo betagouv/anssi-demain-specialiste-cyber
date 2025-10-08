@@ -40,7 +40,6 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
 
   routeur.get('/', async (_requete, reponse) => {
     const tousLesJeux = await entrepotJeux.tous();
-
     return reponse.send(
       tousLesJeux.map((jeu) => {
         const {
@@ -52,6 +51,7 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
           thematiques,
           nomEtablissement,
           eleves,
+          photos,
         } = jeu;
         return {
           id,
@@ -62,6 +62,7 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
           thematiques,
           nomEtablissement,
           eleves,
+          photos,
         };
       }),
     );

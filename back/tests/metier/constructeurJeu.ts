@@ -18,6 +18,8 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
   private discipline: Discipline = 'francais';
   private etablissement: string = '';
   private eleves: string[] = [];
+  private couverture: { chemin: string } | undefined;
+  private photos: { chemin: string }[] = [];
 
   avecUnId(identifiant: string): ConstructeurDeJeu {
     this.identifiant = identifiant;
@@ -64,6 +66,16 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
     return this;
   }
 
+  avecUneCouverture(chemin: string): ConstructeurDeJeu {
+    this.couverture = { chemin };
+    return this;
+  }
+
+  avecUnePhoto(chemin: string): ConstructeurDeJeu {
+    this.photos.push({ chemin });
+    return this;
+  }
+
   avecEleves(eleves: string[]) {
     this.eleves = eleves;
     return this;
@@ -84,10 +96,8 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
       description: this.description,
       temoignages: [],
       photos: {
-        couverture: {
-          chemin: 'un-chemin',
-        },
-        photos: [],
+        couverture: this.couverture || { chemin: '' },
+        photos: this.photos,
       },
     });
   }

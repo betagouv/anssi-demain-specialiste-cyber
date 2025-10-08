@@ -37,7 +37,15 @@ export type AdaptateurEnvironnement = {
     urlCellar: string;
   };
   televersementEnMemoire(): boolean;
+  cellarPhotosJeux: () => string;
 };
+
+const variablesDeTeleversement = () => ({
+  urlCellar: process.env.S3_URL_CELLAR,
+  bucketPhotosJeux: process.env.S3_BUCKET_PHOTOS_JEUX,
+  region: process.env.S3_REGION,
+  enMemoire: process.env.S3_CELLAR_EN_MEMOIRE === 'true',
+});
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
   maintenance: () => ({
@@ -124,15 +132,9 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     bucketPhotosJeux: string;
     region: string;
   } => {
-    const urlCellar = process.env.S3_URL_CELLAR;
-    const bucketPhotosJeux = process.env.S3_BUCKET_PHOTOS_JEUX;
-    const region = process.env.S3_REGION;
-    if (
-      urlCellar &&
-      bucketPhotosJeux &&
-      region &&
-      !(process.env.S3_CELLAR_EN_MEMOIRE === 'true')
-    ) {
+    const { urlCellar, bucketPhotosJeux, region, enMemoire } =
+      variablesDeTeleversement();
+    if (urlCellar && bucketPhotosJeux && region && !enMemoire) {
       return {
         urlCellar,
         bucketPhotosJeux,
@@ -142,5 +144,12 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     throw new Error(
       'L’URL du Cellar doit être définie lorsque DSC est configuré pour Cellar.',
     );
+  },
+  cellarPhotosJeux: (): string => {
+    const { urlCellar, bucketPhotosJeux, enMemoire } =
+      variablesDeTeleversement();
+    if (enMemoire) return '';
+    const [schema, autorite] = urlCellar!.split('//');
+    return `${schema}//${bucketPhotosJeux}.${autorite}`;
   },
 };
