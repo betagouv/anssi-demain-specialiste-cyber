@@ -7,27 +7,7 @@
   import { libelleDiscipline } from './disciplines';
   import { enumerationFrancaise, type Jeu } from './jeu';
   import { libelleSequence } from './sequences';
-  import { libelleThematique } from './thematiques';
-
-  const couleursDeBadge = [
-    'purple-glycine',
-    'green-tilleul-verveine',
-    'green-archipel',
-    'green-emeraude',
-    'pink-tuile',
-    'blue-cumulus',
-    'beige-gris-galet',
-    'blue-ecume',
-    'green-bourgeon',
-    'brown-cafe-creme',
-    'orange-terre-battue',
-    'pink-macaron',
-    'yellow-tournesol',
-    'brown-caramel',
-    'green-menthe',
-    'brown-opera',
-    'yellow-moutarde',
-  ];
+  import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
 
   const items = [
     {
@@ -85,13 +65,7 @@
           <a href="#">Voir le fil d'Ariane</a>
         </nav>
         <div class="cartouche">
-          <dsfr-badges-group
-            badges={jeu.thematiques.map((thematique, index) => ({
-              label: libelleThematique(thematique),
-              accent: couleursDeBadge[index % couleursDeBadge.length],
-            }))}
-            size="md"
-          ></dsfr-badges-group>
+          <BadgesThematiques thematiques={jeu.thematiques} taille="md" />
           <p class="titre-alternatif-xs">{jeu.nom}</p>
           <p class="elaboration">
             Élaboré par {enumerationFrancaise(jeu.eleves)}

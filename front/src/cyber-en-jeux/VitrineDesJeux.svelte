@@ -5,6 +5,7 @@
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
   import { construisLesJeux, NomsDesThematiques } from './jeu';
   import { enumerationFrancaise } from '../jeux/jeu';
+  import BadgesThematiques from './BadgesThematiques.svelte';
 
   let chargementEnCours = $state(false);
   let erreurChargement = $state(false);
@@ -50,14 +51,9 @@
             hasDetailStart
             detailStart={nomEtablissement}
           >
-            <dsfr-badges-group
-              slot="headerbadges"
-              badges={thematiques.map((thematique) => ({
-                label: NomsDesThematiques[thematique],
-                accent: 'purple-glycine',
-              }))}
-              size="sm"
-            ></dsfr-badges-group>
+            <div slot="headerbadges">
+              <BadgesThematiques {thematiques} taille="sm" />
+            </div>
           </dsfr-card>
         {:else}
           {#if chargementEnCours}
