@@ -40,6 +40,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
         2,
         3,
         1,
+        true,
         'Des précisions',
       ),
     );
@@ -76,6 +77,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
         2,
         3,
         1,
+        true,
         '### Des précisions [URL](coucou)',
       ),
     );
@@ -112,6 +114,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
         2,
         3,
         1,
+        true,
         'précisions',
       ),
     );
@@ -121,7 +124,6 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
       precisions: 'précisions',
     });
   });
-
 
   it('ne notifie pas un évènement de JeuCree si il n’y a pas de précisions', async () => {
     let retourRecu = false;
@@ -151,6 +153,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
         2,
         3,
         1,
+        true,
       ),
     );
 

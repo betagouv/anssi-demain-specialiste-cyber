@@ -45,6 +45,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         2,
         3,
         1,
+        true,
       ),
     );
 
@@ -64,6 +65,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         evaluationDecouverte: 2,
         evaluationInteret: 3,
         evaluationSatisfactionGenerale: 1,
+        consentement: true,
       },
       date: new Date('2025-03-10'),
     });
@@ -101,6 +103,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         2,
         3,
         1,
+        true,
         'Des précisions',
       ),
     );
@@ -121,6 +124,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journa
         evaluationDecouverte: 2,
         evaluationInteret: 3,
         evaluationSatisfactionGenerale: 1,
+        consentement: true,
       },
       date: new Date('2025-03-10'),
     });

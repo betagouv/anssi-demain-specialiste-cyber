@@ -211,7 +211,7 @@ describe('La ressource de mes jeux', () => {
     });
 
     it('publie un événement de création de jeu', async () => {
-      await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
+      await executeLaRequete(serveur, uneRequeteDeJeuValide().avecConsentement(true).construis());
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -225,6 +225,7 @@ describe('La ressource de mes jeux', () => {
       expect(evenement.categorie).toBe('simulation');
       expect(evenement.thematiques).toEqual(['menace-cyber', 'orientation']);
       expect(evenement.nombreTemoignages).toBe(3);
+      expect(evenement.consentement).toBeTruthy();
     });
 
     it('publie un événement de création de jeu avec l’évaluation du jeu', async () => {

@@ -19,6 +19,7 @@ export class JeuCree {
     public readonly evaluationDecouverte: number,
     public readonly evaluationInteret: number,
     public readonly evaluationSatisfactionGenerale: number,
+    public readonly consentement: boolean,
     public readonly precisions?: string,
   ) {}
 }
