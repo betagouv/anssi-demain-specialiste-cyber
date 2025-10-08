@@ -195,26 +195,25 @@ export const ressourceMesJeux = ({
           precisions,
           consentement,
         } = resultat.data;
-        await entrepotJeux.ajoute(
-          new Jeu({
-            nom,
-            enseignant: utilisateurConnecte,
-            sequence,
-            nomEtablissement,
-            classe,
-            discipline,
-            eleves,
-            categorie,
-            thematiques,
-            description,
-            temoignages,
-            photos: {
-              couverture: { chemin: photosJeu.couverture.chemin },
-              photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
-            },
-            consentement,
-          }),
-        );
+        const jeu = new Jeu({
+          nom,
+          enseignant: utilisateurConnecte,
+          sequence,
+          nomEtablissement,
+          classe,
+          discipline,
+          eleves,
+          categorie,
+          thematiques,
+          description,
+          temoignages,
+          photos: {
+            couverture: { chemin: photosJeu.couverture.chemin },
+            photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
+          },
+          consentement,
+        });
+        await entrepotJeux.ajoute(jeu);
         await busEvenements.publie(
           new JeuCree(
             utilisateurConnecte.email,
@@ -230,6 +229,7 @@ export const ressourceMesJeux = ({
             evaluationDecouverte,
             evaluationInteret,
             evaluationSatisfactionGenerale,
+            jeu.consentement,
             precisions,
           ),
         );

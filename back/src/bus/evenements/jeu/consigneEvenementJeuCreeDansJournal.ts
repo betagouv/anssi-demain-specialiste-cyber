@@ -28,6 +28,7 @@ export const consigneEvenementJeuCreeDansJournal = ({
         evaluationInteret: evenement.evaluationInteret,
         evaluationSatisfactionGenerale:
           evenement.evaluationSatisfactionGenerale,
+        consentement: evenement.consentement,
       },
       type: 'JEU_CREE',
       date: FournisseurHorloge.maintenant(),

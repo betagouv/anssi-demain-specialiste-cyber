@@ -37,6 +37,7 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     evaluationInteret: number;
     evaluationSatisfactionGenerale: number;
     precisions?: string;
+    consentement: boolean;
   };
   type: 'JEU_CREE';
 };
