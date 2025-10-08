@@ -87,7 +87,7 @@ export const schemaJeu = z.strictObject({
     .trim()
     .nonempty('Les précisions ne peuvent pas être vides')
     .optional(),
-  consentement: z.boolean("Le consentement est invalide").optional()
+  consentement: z.boolean('Le consentement est invalide').optional(),
 });
 
 type CorpsRequeteDeJeu = {
@@ -193,6 +193,7 @@ export const ressourceMesJeux = ({
           evaluationInteret,
           evaluationSatisfactionGenerale,
           precisions,
+          consentement,
         } = resultat.data;
         await entrepotJeux.ajoute(
           new Jeu({
@@ -211,6 +212,7 @@ export const ressourceMesJeux = ({
               couverture: { chemin: photosJeu.couverture.chemin },
               photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
             },
+            consentement,
           }),
         );
         await busEvenements.publie(

@@ -112,7 +112,7 @@ describe('La ressource de mes jeux', () => {
         serveur,
         uneRequeteDeJeuValide()
           .avecTemoignages([{ prenom: 'Michel', details: "C'était trop bien" }])
-          .construis(),
+          .avecConsentement(true).construis(),
       );
 
       expect(reponse.status).toBe(201);
@@ -134,6 +134,7 @@ describe('La ressource de mes jeux', () => {
         couverture: { chemin: '/le-chemin/image.jpeg' },
         photos: [],
       });
+      expect(mesJeux[0].consentement).toBeTruthy();
     });
 
     it('sauvegarde les photos du jeu', async () => {
