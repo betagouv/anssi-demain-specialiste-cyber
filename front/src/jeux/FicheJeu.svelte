@@ -85,15 +85,13 @@
           <a href="#">Voir le fil d'Ariane</a>
         </nav>
         <div class="cartouche">
-          <div class="badges">
-            {#each jeu.thematiques as thematique, index}
-              <dsfr-badge
-                label={libelleThematique(thematique)}
-                accent={couleursDeBadge[index % couleursDeBadge.length]}
-                type="accent"
-              ></dsfr-badge>
-            {/each}
-          </div>
+          <dsfr-badges-group
+            badges={jeu.thematiques.map((thematique, index) => ({
+              label: libelleThematique(thematique),
+              accent: couleursDeBadge[index % couleursDeBadge.length],
+            }))}
+            size="md"
+          ></dsfr-badges-group>
           <p class="titre-alternatif-xs">{jeu.nom}</p>
           <p class="elaboration">
             Élaboré par {enumerationFrancaise(jeu.eleves)}
@@ -215,8 +213,9 @@
         grid-area: cartouche;
         padding-bottom: 1.5rem;
 
-        .badges {
+        dsfr-badges-group {
           display: none;
+
           @include a-partir-de(md) {
             display: flex;
             flex-wrap: wrap;
