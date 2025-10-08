@@ -12,6 +12,16 @@ export type Jeu = {
   description: string;
   temoignages: { prenom: string; details: string }[];
   thematiques: Thematique[];
+  photos: PhotosJeu;
+};
+
+export type Image = {
+  chemin: string;
+};
+
+export type PhotosJeu = {
+  couverture: Image;
+  photos: Image[];
 };
 
 export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
