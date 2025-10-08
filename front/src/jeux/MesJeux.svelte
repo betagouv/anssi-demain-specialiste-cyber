@@ -6,6 +6,7 @@
   import axios from 'axios';
   import { clic } from '../actions.svelte';
   import Citation from '../Citation.svelte';
+  import CarteJeu from '../cyber-en-jeux/CarteJeu.svelte';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -49,20 +50,15 @@
       ></dsfr-alert>
     {/if}
     <div class="jeux">
-      {#each listeDesJeux as jeu (jeu.id)}
-        <dsfr-card
-          title={jeu.nom}
-          description="Description texte SM regular Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus sit amet volutpat consequat mauris nunc congue. Lobortis scelerisque fermentum dui faucibus in ornare quam viverra."
-          href={`/jeux/${jeu.id}`}
-          src={jeu.photos.couverture.chemin}
-          hasHeaderBadge={true}
-        >
-          <dsfr-badges-group
-            slot="headerbadges"
-            badges={[{ label: 'Thématique cyber', accent: 'purple-glycine' }]}
-            size="sm"
-          ></dsfr-badges-group>
-        </dsfr-card>
+      {#each listeDesJeux as { id, nom, nomEtablissement, eleves, photos } (id)}
+        <CarteJeu
+          {id}
+          {nom}
+          thematiques={[]}
+          {nomEtablissement}
+          eleves={eleves || []}
+          cheminCouverture={photos.couverture.chemin}
+        />
       {/each}
     </div>
   {:else}
