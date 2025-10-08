@@ -45,7 +45,7 @@ describe('La ressource de tous les Jeux', () => {
           classe: 'cp',
           discipline: 'histoire-et-geographie',
           nomEtablissement: 'Lycée de la mer',
-          eleves: ['Kevin', 'Branda'],
+          eleves: [],
           categorie: 'simulation',
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
@@ -63,7 +63,6 @@ describe('La ressource de tous les Jeux', () => {
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
           nomEtablissement: 'Lycée de la mer',
-          eleves: ['Kevin', 'Branda'],
         },
       ]);
     });
