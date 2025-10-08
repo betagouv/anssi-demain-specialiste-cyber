@@ -24,13 +24,17 @@
       isCollapsible: false,
       type: 'link',
     },
-    {
-      id: 'menu-photos',
-      label: 'Photos',
-      href: '#photos',
-      isCollapsible: false,
-      type: 'link',
-    },
+    ...(possedeDesPhotos
+      ? [
+          {
+            id: 'menu-photos',
+            label: 'Photos',
+            href: '#photos',
+            isCollapsible: false,
+            type: 'link',
+          },
+        ]
+      : []),
     {
       id: 'menu-temoignages',
       label: 'Témoignages',
@@ -55,6 +59,8 @@
         auteur: temoignage.prenom,
       }))
     : [];
+
+  $: possedeDesPhotos = jeu ? jeu.photos.photos.length > 0 : false;
 </script>
 
 {#if jeu}
@@ -129,14 +135,16 @@
           <p>{jeu.description}</p>
         </section>
 
-        <section id="photos">
-          <h2>Photos</h2>
-          <div class="photos">
-            <img src="/assets/images/image-generique.svg" alt="generique" />
-            <img src="/assets/images/image-generique.svg" alt="generique" />
-            <img src="/assets/images/image-generique.svg" alt="generique" />
-          </div>
-        </section>
+        {#if possedeDesPhotos}
+          <section id="photos">
+            <h2>Photos</h2>
+            <div class="photos">
+              {#each jeu.photos.photos as photo}
+                <img src={photo.chemin} alt="Illustration du jeu" />
+              {/each}
+            </div>
+          </section>
+        {/if}
       </div>
 
       <lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"
