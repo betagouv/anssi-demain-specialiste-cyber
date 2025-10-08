@@ -62,8 +62,7 @@ describe('La ressource de tous les Jeux', () => {
           categorie: 'simulation',
           thematiques: ['menace-cyber', 'orientation'],
           description: 'Une description',
-          nomEtablissement: 'Lycée de la mer',
-        },
+        }
       ]);
     });
   });
