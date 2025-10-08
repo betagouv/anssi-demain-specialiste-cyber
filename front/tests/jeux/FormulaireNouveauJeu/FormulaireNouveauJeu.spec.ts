@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
+import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
 import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireNouveauJeu/ReferentielEtablissement';
@@ -9,6 +10,7 @@ import {
   type JeuEnEdition,
   type PresentationDuJeu,
 } from '../../../src/jeux/jeu';
+import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
 import { type Validateur } from '../../../src/validateur';
 import {
   findAllByRoleDeep,
@@ -19,8 +21,6 @@ import {
   queryAllByRoleDeep,
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
-import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
-import { get } from 'svelte/store';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
 
@@ -28,9 +28,9 @@ vi.mock('axios', () => {
   return { default: axiosMock };
 });
 
-vi.stubGlobal("URL", {
-  createObjectURL:()=>"blob:"
-})
+vi.stubGlobal('URL', {
+  createObjectURL: () => 'blob:',
+});
 
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
@@ -379,6 +379,22 @@ describe('Le formulaire de dépose de jeu', () => {
         );
       });
     });
+    describe("lors de l'étape de téléversement des photos", () => {
+      it("d'indiquer qu'on a recueilli le consentement des parents d'élèves", async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+
+        await waitFor(() =>
+          expect(
+            getByRoleDeep('checkbox', {
+              name: 'J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site.',
+            }),
+          ).toBeVisible(),
+        );
+      });
+    });
     describe("lors de l'étape des temoignages", () => {
       it('de saisir un témoignage', async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);
@@ -599,6 +615,7 @@ describe('Le formulaire de dépose de jeu', () => {
         evaluationInteret: 3,
         evaluationSatisfactionGenerale: 4,
         precisions: "j'ai bien aimé",
+        consentement: true,
       };
       const { queryAllByRole, getAllByRole } = render(
         FormulaireNouveauJeu,
@@ -655,8 +672,13 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
 
       // Etape Photos
-      photosJeuStore.set({})
-      get(photosJeuStore).couverture = new Blob()
+      photosJeuStore.set({});
+      get(photosJeuStore).couverture = new Blob();
+
+      const caseConsentement = await findByRoleDeep('checkbox', {
+        name: 'J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site.',
+      });
+      await user.click(caseConsentement);
 
       await etapeSuivante();
 
@@ -704,6 +726,10 @@ describe('Le formulaire de dépose de jeu', () => {
       ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
       expect(
         validateurPresentationEnSucces.estValide,
+      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
+
+      expect(
+        validateurEvaluationEnSucces.estValide,
       ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
 
       expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith(

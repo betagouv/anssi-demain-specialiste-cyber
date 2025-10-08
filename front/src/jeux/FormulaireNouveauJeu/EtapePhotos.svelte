@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { photosJeu, photosJeuStore } from '../stores/photosJeu.store';
+  import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
 
   onMount(async () => {
     $photosJeuStore = {};
@@ -124,7 +125,10 @@
     name="consentement-photo"
     status="default"
     label="J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site."
-  />
+    value={$jeuEnEditionStore.consentement}
+    onvaluechanged={(e: CustomEvent) =>
+      ($jeuEnEditionStore.consentement = e.detail)}
+  ></dsfr-checkbox>
   <p>
     Si aucun visage n’apparaît sur les images, cette case n’a pas besoin d’être
     cochée. Vous pouvez passer à l’étape suivante.

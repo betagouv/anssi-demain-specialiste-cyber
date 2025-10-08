@@ -35,6 +35,7 @@ export type JeuEnEdition = {
   evaluationSatisfactionGenerale?: NoteEvaluation;
   precisions?: string;
   photos?: Photos;
+  consentement?: boolean;
 };
 
 export type ErreursValidationJeuEnEdition = Partial<
