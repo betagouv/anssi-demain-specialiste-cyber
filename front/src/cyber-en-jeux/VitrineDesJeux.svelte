@@ -5,7 +5,7 @@
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
   import { construisLesJeux, NomsDesThematiques } from './jeu';
   import { enumerationFrancaise } from '../jeux/jeu';
-  import BadgesThematiques from './BadgesThematiques.svelte';
+  import CarteJeu from './CarteJeu.svelte';
 
   let chargementEnCours = $state(false);
   let erreurChargement = $state(false);
@@ -40,21 +40,14 @@
 
       <div class="conteneur">
         {#each $jeuxFiltres.resultat as { id, nom, thematiques, nomEtablissement, eleves, photos } (id)}
-          <dsfr-card
-            title={nom}
-            description="Élaboré par {enumerationFrancaise(eleves)}"
-            href={`/jeux/${id}`}
-            src={photos.couverture.chemin}
-            hasHeaderBadge
-            hasDetailStartIcon
-            detailStartIcon="map-pin-2-line"
-            hasDetailStart
-            detailStart={nomEtablissement}
-          >
-            <div slot="headerbadges">
-              <BadgesThematiques {thematiques} taille="sm" />
-            </div>
-          </dsfr-card>
+          <CarteJeu
+            {id}
+            {nom}
+            {thematiques}
+            {nomEtablissement}
+            {eleves}
+            cheminCouverture={photos.couverture.chemin}
+          />
         {:else}
           {#if chargementEnCours}
             <p>Chargement...</p>
