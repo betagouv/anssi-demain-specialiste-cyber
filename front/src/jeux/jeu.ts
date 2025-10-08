@@ -1,3 +1,5 @@
+import type { Thematique } from '../cyber-en-jeux/jeu';
+
 export type Jeu = {
   id: string;
   nom: string;
@@ -9,7 +11,7 @@ export type Jeu = {
   discipline: string;
   description: string;
   temoignages: { prenom: string; details: string }[];
-  thematiques: string[];
+  thematiques: Thematique[];
 };
 
 export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
