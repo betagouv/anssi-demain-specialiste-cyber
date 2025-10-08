@@ -87,6 +87,7 @@ export const schemaJeu = z.strictObject({
     .trim()
     .nonempty('Les précisions ne peuvent pas être vides')
     .optional(),
+  consentement: z.boolean("Le consentement est invalide").optional()
 });
 
 type CorpsRequeteDeJeu = {
