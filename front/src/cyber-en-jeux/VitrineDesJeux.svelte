@@ -4,7 +4,6 @@
   import VitrineFiltres from './VitrineFiltres.svelte';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
   import { construisLesJeux, NomsDesThematiques } from './jeu';
-  import { enumerationFrancaise } from '../jeux/jeu';
 
   let chargementEnCours = $state(false);
   let erreurChargement = $state(false);
@@ -38,10 +37,10 @@
       <VitrineFiltres />
 
       <div class="conteneur">
-        {#each $jeuxFiltres.resultat as { id, nom, thematiques, nomEtablissement, eleves } (id)}
+        {#each $jeuxFiltres.resultat as { id, nom, description, thematiques, nomEtablissement } (id)}
           <dsfr-card
             title={nom}
-            description="Élaboré par {enumerationFrancaise(eleves)}"
+            {description}
             href={`/jeux/${id}`}
             src={'/assets/images/image-generique.svg'}
             hasHeaderBadge
