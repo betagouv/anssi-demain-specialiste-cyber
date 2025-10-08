@@ -77,9 +77,7 @@
           </p>
         </div>
         <div class="illustration-jeu">
-          <img
-            src="https://ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png"
-          />
+          <img src={jeu.photos.couverture.chemin} alt="Couverture du jeu" />
         </div>
       </div>
     </dsfr-container>
