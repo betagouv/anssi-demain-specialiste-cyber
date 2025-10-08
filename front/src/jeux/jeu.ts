@@ -60,6 +60,8 @@ export type EvaluationDuJeu = Pick<
   | 'precisions'
 >;
 
+export type PhotosDuJeu = Pick<JeuEnEdition, 'photos'>;
+
 export const enumerationFrancaise = (termes: string[]) => {
   if (termes.length === 0) return '';
   if (termes.length === 1) return termes[0];
