@@ -664,6 +664,20 @@ describe('La ressource de mes jeux', () => {
         });
       });
     });
+
+    describe('concernant la vérification du consentemment', () => {
+      it('vérifie que le consentemment est valide', async () => {
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          consentement: "mauvais-type",
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le consentement est invalide',
+        );
+      });
+    });
   });
 
   describe('sur un GET', () => {

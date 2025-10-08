@@ -37,6 +37,7 @@ class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
   private eleves: string[] = ['Gontran'];
   private thematiques: ThematiqueDeJeux[] = ['menace-cyber', 'orientation'];
   private description: string = 'Un texte descriptif du jeu';
+  private consentement: boolean = false;
 
   avecUnNom(nom: string): ConstructeurRequeteDeJeu {
     this.nom = nom;
@@ -102,6 +103,7 @@ class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
       thematiques: this.thematiques,
       description: this.description,
       temoignages: this.temoignages,
+      consentement: this.consentement,
       ...this.evaluations,
     };
   }
