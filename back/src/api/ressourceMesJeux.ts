@@ -249,7 +249,14 @@ export const ressourceMesJeux = ({
     async (requete, reponse) => {
       const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
       reponse.send(
-        jeux.map((jeu) => ({ id: jeu.id, nom: jeu.nom, photos: jeu.photos })),
+        jeux.map((jeu) => ({
+          id: jeu.id,
+          nom: jeu.nom,
+          thematiques: jeu.thematiques,
+          nomEtablissement: jeu.nomEtablissement,
+          eleves: jeu.eleves,
+          photos: jeu.photos,
+        })),
       );
     },
   );
