@@ -122,22 +122,6 @@
   <p>
     4 photos maximum. Taille maximale : xx Mo. Formats supportés : jpg, png.
   </p>
-  {#if $photosJeuStore && $photosJeuStore.photos}
-    <div class="previsualisations-photo">
-      {#each $photosJeuStore.photos as photo}
-        <div class="previsualisation-photo">
-          <img src={URL.createObjectURL(photo)} alt="Photo de l’événement" />
-        </div>
-        <dsfr-button
-          label="Supprimer"
-          kind="tertiary-no-outline"
-          hasIcon="true"
-          icon="delete-bin-line"
-          use:clic={() => photosJeu.supprimePhoto(photo)}
-        ></dsfr-button>
-      {/each}
-    </div>
-  {/if}
   <input
     type="file"
     id="photo-1"
@@ -146,6 +130,22 @@
     oninput={surAjoutPhoto}
     disabled={$photosJeuStore && $photosJeuStore.photos?.length === 4}
   />
+  {#if $photosJeuStore && $photosJeuStore.photos}
+    <div class="previsualisations-photo">
+      {#each $photosJeuStore.photos as photo}
+        <div class="previsualisation-photo">
+          <img src={URL.createObjectURL(photo)} alt="Photo de l’événement" />
+          <dsfr-button
+            label="Supprimer"
+            kind="tertiary-no-outline"
+            hasIcon="true"
+            icon="delete-bin-line"
+            use:clic={() => photosJeu.supprimePhoto(photo)}
+          ></dsfr-button>
+        </div>
+      {/each}
+    </div>
+  {/if}
 </fieldset>
 
 <div class="consentement">
@@ -244,6 +244,12 @@
         align-items: flex-start;
         align-self: stretch;
         aspect-ratio: 4/3;
+      }
+      dsfr-button {
+        margin-top: 0.75rem;
+        @include a-partir-de(md) {
+          margin-top: 0.625rem;
+        }
       }
     }
   }
