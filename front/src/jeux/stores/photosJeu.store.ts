@@ -36,6 +36,10 @@ export const photosJeu = {
       }),
     });
   },
+  supprimeCouverture() {
+    const photosActuelles = get(photosJeuStore);
+    photosJeuStore.set({ ...photosActuelles, couverture: undefined });
+  },
   supprimePhoto(photo: Blob) {
     const photosActuelles = get(photosJeuStore);
     const photosAConserver = photosActuelles.photos?.filter((p) => p !== photo);
