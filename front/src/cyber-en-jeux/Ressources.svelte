@@ -214,14 +214,6 @@
     @include a-partir-de(sm) {
       grid-template-columns: repeat(2, minmax(200px, 1fr));
     }
-
-    @include a-partir-de(md) {
-      grid-template-columns: repeat(3, minmax(200px, 1fr));
-    }
-
-    @include a-partir-de(lg) {
-      grid-template-columns: repeat(4, minmax(200px, 1fr));
-    }
   }
 
   .ressources-videos .conteneur {
