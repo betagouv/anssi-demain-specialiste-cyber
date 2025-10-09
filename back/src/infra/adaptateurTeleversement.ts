@@ -74,6 +74,8 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
           credentials: fromEnv(),
         }).send(
           new PutObjectCommand({
+            ACL: 'public-read',
+            ContentType: photo.mimeType.type,
             Bucket: adaptateurEnvironnement.televersement().bucketPhotosJeux,
             Body: photo.image,
             Key: photo.chemin,
