@@ -408,7 +408,23 @@ describe('Le formulaire de dépose de jeu', () => {
           ).toBeVisible(),
         );
       });
+
+      it('de supprimer la couverture précédemment téléversée', async () => {
+        render(FormulaireNouveauJeu, proprietesParDefaut);
+        photosJeuStore.set({});
+        get(photosJeuStore).couverture = new Blob();
+        await etapeSuivante();
+        await etapeSuivante();
+
+        const boutonSuppressionCouverture = await findByRoleDeep('button', {
+          name: 'Supprimer',
+        });
+        await user.click(boutonSuppressionCouverture);
+
+        expect(get(photosJeuStore).couverture).toBeUndefined();
+      });
     });
+
     describe("lors de l'étape des temoignages", () => {
       it('de saisir un témoignage', async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);

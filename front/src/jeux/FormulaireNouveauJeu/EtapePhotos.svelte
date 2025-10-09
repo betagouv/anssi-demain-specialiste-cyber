@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { clic } from '../../actions.svelte';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { photosJeu, photosJeuStore } from '../stores/photosJeu.store';
@@ -104,6 +105,13 @@
         alt="Photo de couverture"
       />
     </div>
+    <dsfr-button
+      label="Supprimer"
+      kind="tertiary-no-outline"
+      hasIcon="true"
+      icon="delete-bin-line"
+      use:clic={photosJeu.supprimeCouverture}
+    ></dsfr-button>
   {/if}
 </fieldset>
 
