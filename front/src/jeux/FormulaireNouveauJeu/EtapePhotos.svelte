@@ -128,6 +128,13 @@
         <div class="previsualisation-photo">
           <img src={URL.createObjectURL(photo)} alt="Photo de l’événement" />
         </div>
+        <dsfr-button
+          label="Supprimer"
+          kind="tertiary-no-outline"
+          hasIcon="true"
+          icon="delete-bin-line"
+          use:clic={() => photosJeu.supprimePhoto(photo)}
+        ></dsfr-button>
       {/each}
     </div>
   {/if}
