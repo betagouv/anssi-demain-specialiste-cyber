@@ -16,7 +16,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
   private categorie: CategorieDeJeux = 'autre';
   private thematiques: ThematiqueDeJeux[] = [];
   private discipline: Discipline = 'francais';
-  private etablissement: string = '';
+  private etablissement: string | undefined;
   private eleves: string[] = [];
   private couverture: { chemin: string } | undefined;
   private photos: { chemin: string }[] = [];
@@ -87,6 +87,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
       nom: this.nom,
       ...(this.enseignant && { enseignant: this.enseignant }),
       sequence: 'heure',
+      // @ts-expect-error -- undefined dans les tests!
       nomEtablissement: this.etablissement,
       classe: this.classe,
       discipline: this.discipline,

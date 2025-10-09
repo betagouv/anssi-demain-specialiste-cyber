@@ -720,6 +720,8 @@ describe('La ressource de mes jeux', () => {
         {
           id: '1',
           nom: 'cybercluedo',
+          thematiques: [],
+          eleves: [],
           photos: {
             couverture: { chemin: 'une-couverture' },
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
@@ -745,6 +747,12 @@ describe('La ressource de mes jeux', () => {
           .avecUnId('2')
           .avecUnNom('cyberuno')
           .deEnseignant(jeanneDupont)
+          .avecLesThematiques(['menace-cyber', 'orientation'])
+          .dansEtablissement('Lycée de la mer')
+          .avecEleves(['Kevin', 'Branda'])
+          .avecUneCouverture('une-couverture')
+          .avecUnePhoto('photo-1')
+          .avecUnePhoto('photo-2')
           .construis(),
       );
 
@@ -754,11 +762,12 @@ describe('La ressource de mes jeux', () => {
         {
           id: '2',
           nom: 'cyberuno',
+          thematiques: ['menace-cyber', 'orientation'],
+          nomEtablissement: 'Lycée de la mer',
+          eleves: ['Kevin', 'Branda'],
           photos: {
-            couverture: {
-              chemin: '',
-            },
-            photos: [],
+            couverture: { chemin: 'une-couverture' },
+            photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
         },
       ]);
