@@ -86,6 +86,7 @@
       case 'informations-generales':
         if (validateurInformationsGenerales.estValide($jeuEnEditionStore)) {
           etape = 'presentation';
+          erreurs = {};
         } else {
           erreurs = validateurInformationsGenerales.valide($jeuEnEditionStore);
         }
@@ -93,6 +94,7 @@
       case 'presentation':
         if (validateurPresentation.estValide($jeuEnEditionStore)) {
           etape = 'photos';
+          erreurs = {};
         } else {
           erreurs = validateurPresentation.valide($jeuEnEditionStore);
         }
@@ -100,6 +102,7 @@
       case 'photos':
         if (validateurPhotosDuJeu.estValide({ photos: $photosJeuStore })) {
           etape = 'temoignages';
+          erreurs = {};
         } else {
           erreurs = validateurPhotosDuJeu.valide({ photos: $photosJeuStore });
         }
