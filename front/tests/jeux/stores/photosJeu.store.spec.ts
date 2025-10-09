@@ -73,22 +73,26 @@ describe('L’ajout de photos d’un jeu', () => {
     });
   });
 
-  it('ajoute jusqu‘à 4 photos', () => {
-    const premierePhoto = new Blob();
-    const deuxiemePhoto = new Blob();
-    const troisiemePhoto = new Blob();
-    const quatriemePhoto = new Blob();
+  it('ajoute jusqu‘à 4 photos', async () => {
+    const premierePhoto = new File(['blob1'], 'blob1.jpg');
+    const deuxiemePhoto = new File(['blob2'], 'blob2.jpg');
+    const troisiemePhoto = new File(['blob3'], 'blob3.jpg');
+    const quatriemePhoto = new File(['blob4'], 'blob4.jpg');
     photosJeu.set({ photos: [premierePhoto] });
 
-    const cinquiemePhoto = new Blob();
+    const cinquiemePhoto = new File(['blob5'], 'blob5.jpg');
     photosJeu.ajoutePhoto(deuxiemePhoto);
     photosJeu.ajoutePhoto(troisiemePhoto);
     photosJeu.ajoutePhoto(quatriemePhoto);
     photosJeu.ajoutePhoto(cinquiemePhoto);
 
-    expect(get(photosJeu)).toEqual({
-      photos: [premierePhoto, deuxiemePhoto, troisiemePhoto, quatriemePhoto],
-    });
+    const fichiersEnMemoire = get(photosJeu).photos as File[];
+
+    expect(fichiersEnMemoire.map((f) => f.name)).toStrictEqual(
+      [premierePhoto, deuxiemePhoto, troisiemePhoto, quatriemePhoto].map(
+        (f) => f.name,
+      ),
+    );
   });
 
   it('supprime une photo', () => {
