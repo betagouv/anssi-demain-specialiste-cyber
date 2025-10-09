@@ -393,13 +393,16 @@ describe('Le formulaire de dépose de jeu', () => {
         );
       });
     });
+
     describe("lors de l'étape de téléversement des photos", () => {
-      it("d'indiquer qu'on a recueilli le consentement des parents d'élèves", async () => {
+      beforeEach(async () => {
         render(FormulaireNouveauJeu, proprietesParDefaut);
-
         await etapeSuivante();
         await etapeSuivante();
+        photosJeuStore.set({});
+      });
 
+      it("d'indiquer qu'on a recueilli le consentement des parents d'élèves", async () => {
         await waitFor(() =>
           expect(
             getByRoleDeep('checkbox', {
@@ -410,11 +413,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de supprimer la couverture précédemment téléversée', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
-        photosJeuStore.set({});
-        get(photosJeuStore).couverture = new Blob();
-        await etapeSuivante();
-        await etapeSuivante();
+        photosJeuStore.set({ couverture: new Blob() });
 
         const boutonSuppressionCouverture = await findByRoleDeep('button', {
           name: 'Supprimer',
@@ -422,6 +421,24 @@ describe('Le formulaire de dépose de jeu', () => {
         await user.click(boutonSuppressionCouverture);
 
         expect(get(photosJeuStore).couverture).toBeUndefined();
+      });
+
+      it('de supprimer la couverture précédemment téléversée', async () => {
+        const fichier1 = new File(['fichier1'], 'fichier1.jpg');
+        const fichier2 = new File(['fichier2'], 'fichier2.jpg');
+        photosJeuStore.set({
+          photos: [
+            fichier1,
+            fichier2,
+          ],
+        });
+
+        const boutonsSupprimerPhoto = await findAllByRoleDeep('button', {
+          name: 'Supprimer',
+        });
+        await user.click(boutonsSupprimerPhoto[1]);
+
+        expect(get(photosJeuStore).photos).toEqual([fichier1]);
       });
     });
 
