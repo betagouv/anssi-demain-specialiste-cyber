@@ -7,7 +7,7 @@
   let { erreurs }: { erreurs: ErreursValidationJeuEnEdition } = $props();
 
   onMount(async () => {
-    $photosJeuStore = {};
+    $photosJeuStore ??= {};
   });
 
   async function redimensionnePhoto(
