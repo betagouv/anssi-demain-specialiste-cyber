@@ -79,6 +79,14 @@ describe('Le formulaire de dépose de jeu', () => {
     await user.click(boutonTerminer);
   };
 
+  const formDataVersObjet = (fd: FormData) => {
+    const obj: Record<string, unknown> = {};
+    for (const [key, value] of fd.entries()) {
+      obj[key] = value;
+    }
+    return obj;
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -591,7 +599,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
   describe('lors de la soumission', () => {
     it("envoie le formulaire à l'api des jeux", async () => {
-      const donneesJeuAttendues: JeuEnEdition = {
+      const donneesJeuAttenduesALaValidation: JeuEnEdition = {
         sequence: 'heure',
         nomEtablissement: 'Mon lycée',
         discipline: 'mathematiques',
@@ -616,6 +624,10 @@ describe('Le formulaire de dépose de jeu', () => {
         evaluationSatisfactionGenerale: 4,
         precisions: "j'ai bien aimé",
         consentement: true,
+      };
+      const donneesAttenduesALaSoumission = {
+        ...donneesJeuAttenduesALaValidation,
+        eleves: ['Brice', 'Gontran'],
       };
       const { queryAllByRole, getAllByRole } = render(
         FormulaireNouveauJeu,
@@ -723,18 +735,22 @@ describe('Le formulaire de dépose de jeu', () => {
 
       expect(
         validateurInformationsGeneralesEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
+      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
       expect(
         validateurPresentationEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
+      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
 
       expect(
         validateurEvaluationEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttendues);
+      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
 
       expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith(
         '/api/mes-jeux',
         expect.any(FormData),
+      );
+      const formDataEnvoye = formDataVersObjet(axiosMock.post.mock.calls[0][1]);
+      expect(JSON.parse(formDataEnvoye.jeu as string)).toEqual(
+        donneesAttenduesALaSoumission,
       );
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
