@@ -30,7 +30,7 @@ export const photosJeu = {
       return;
     }
     photosJeuStore.set({
-      photos: [photo, ...((photosActuelles && photosActuelles.photos) || [])],
+      photos: [...((photosActuelles && photosActuelles.photos) || []), photo],
       ...(photosActuelles?.couverture && {
         couverture: photosActuelles.couverture,
       }),
