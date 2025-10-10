@@ -20,6 +20,23 @@ export type PhotosJeu = {
   photos: FichierImage[];
 };
 
+type DonneesConstructionJeu = {
+  id?: string;
+  nom: string;
+  enseignant?: Utilisateur;
+  sequence: Sequence;
+  nomEtablissement: string;
+  classe: Classe;
+  discipline: Discipline;
+  eleves: string[];
+  categorie: CategorieDeJeux;
+  thematiques: ThematiqueDeJeux[];
+  description: string;
+  temoignages?: Temoignage[];
+  photos: PhotosJeu;
+  consentement?: boolean;
+};
+
 export class Jeu {
   readonly id: string;
   nom: string;
@@ -36,50 +53,20 @@ export class Jeu {
   photos: PhotosJeu;
   consentement: boolean;
 
-  constructor({
-    id,
-    nom,
-    enseignant,
-    sequence,
-    nomEtablissement,
-    classe,
-    discipline,
-    eleves,
-    categorie,
-    thematiques,
-    description,
-    temoignages = [],
-    photos,
-    consentement = false,
-  }: {
-    id?: string;
-    nom: string;
-    enseignant?: Utilisateur;
-    sequence: Sequence;
-    nomEtablissement: string;
-    classe: Classe;
-    discipline: Discipline;
-    eleves: string[];
-    categorie: CategorieDeJeux;
-    thematiques: ThematiqueDeJeux[];
-    description: string;
-    temoignages?: Temoignage[];
-    photos: PhotosJeu;
-    consentement?: boolean;
-  }) {
-    this.id = id ?? randomUUID();
-    this.nom = nom;
-    this.enseignant = enseignant;
-    this.sequence = sequence;
-    this.nomEtablissement = nomEtablissement;
-    this.classe = classe;
-    this.discipline = discipline;
-    this.eleves = eleves;
-    this.categorie = categorie;
-    this.thematiques = thematiques;
-    this.description = description;
-    this.temoignages = temoignages;
-    this.photos = photos;
-    this.consentement = consentement;
+  constructor(donnees: DonneesConstructionJeu) {
+    this.id = donnees.id ?? randomUUID();
+    this.nom = donnees.nom;
+    this.enseignant = donnees.enseignant;
+    this.sequence = donnees.sequence;
+    this.nomEtablissement = donnees.nomEtablissement;
+    this.classe = donnees.classe;
+    this.discipline = donnees.discipline;
+    this.eleves = donnees.eleves;
+    this.categorie = donnees.categorie;
+    this.thematiques = donnees.thematiques;
+    this.description = donnees.description;
+    this.temoignages = donnees.temoignages ?? [];
+    this.photos = donnees.photos;
+    this.consentement = donnees.consentement ?? false;
   }
 }
