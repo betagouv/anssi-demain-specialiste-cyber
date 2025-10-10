@@ -78,7 +78,7 @@
   <p>
     Celle-ci servira de couverture pour présenter le jeu dans le catalogue.
     <br />
-    Taille maximale : 5 Mo. Formats supportés : jpg, png.
+    Formats supportés : JPEG, PNG.
   </p>
   <input
     type="file"
@@ -119,9 +119,7 @@
 
 <fieldset class="photos">
   <legend>Ajouter des photos de l’événement (facultatif)</legend>
-  <p>
-    4 photos maximum. Taille maximale : xx Mo. Formats supportés : jpg, png.
-  </p>
+  <p>4 photos maximum. Formats supportés : JPEG, PNG.</p>
   <input
     type="file"
     id="photo-1"
