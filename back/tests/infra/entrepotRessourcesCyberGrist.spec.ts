@@ -251,6 +251,27 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
     expect(ressourcesCyber[0].estCertifiee).toBeTruthy();
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Lien', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist()
+            .avecLien('http://mon-url.com')
+            .construis(),
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist,
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].lienExterne).toEqual('http://mon-url.com');
+  });
 });
 
 type LigneGrist = {
@@ -264,6 +285,7 @@ type LigneGrist = {
   description: string;
   urlIllustration: string;
   labelDSC: boolean;
+  lien: string;
 };
 
 interface ConstructeurDeTest<T> {
@@ -281,6 +303,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _description: string = '';
   _urlIllustration: string = '';
   _labelDSC: boolean = false;
+  _lien: string = '';
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -332,6 +355,11 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     return this;
   }
 
+  avecLien(lien: string) {
+    this._lien = lien;
+    return this;
+  }
+
   construis(): LigneGrist {
     return {
       id: this._idLigne,
@@ -344,6 +372,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
       description: this._description,
       urlIllustration: this._urlIllustration,
       labelDSC: this._labelDSC,
+      lien: this._lien,
     };
   }
 }
@@ -374,7 +403,7 @@ class ConstructeurReponseRessourceCyberGrist
           Label_DSC: l.labelDSC,
           Cycle_si_eleves: l.cycles,
           Porteur: [],
-          Lien: '',
+          Lien: l.lien,
           URL_illustration: l.urlIllustration,
         },
       })),

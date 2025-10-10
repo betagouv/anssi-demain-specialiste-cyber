@@ -17,6 +17,7 @@ export class EntrepotRessourcesCyberStatique
         description: 'Description',
         urlIllustration: 'http://monillu.png',
         estCertifiee: true,
+        lienExterne: ''
       },
     ];
   }
