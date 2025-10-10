@@ -30,12 +30,13 @@
     <CatalogueFiltres />
 
     <div class="conteneur">
-      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration, estCertifiee } (id)}
+      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration, estCertifiee, lienExterne } (id)}
         <dsfr-card
           title={description}
           hasDetailStart
           detailStart={titre}
-          href={`/ressources-cyber/${id}`}
+          href={lienExterne || `/ressources-cyber/${id}`}
+          blank={!!lienExterne}
           src={urlIllustration || '/assets/images/image-generique.svg'}
           hasHeaderBadge
           hasDetailEnd
