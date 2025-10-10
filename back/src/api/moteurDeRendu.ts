@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import { join } from 'path';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import { devDependencies } from '../../../front/package.json';
 
 export interface MoteurDeRendu {
   rends: (reponse: express.Response, vue: string, options?: object) => void;
@@ -34,6 +35,7 @@ export const moteurDeRenduExpress = (
         ...fournisseurDeChemins(),
         nonce: reponse.locals.nonce,
         ...(matomo && { matomo }),
+        versionUIKit: devDependencies['@lab-anssi/ui-kit'].replace('^', ''),
       };
       reponse.render(vue, optionsAvecManifesteEtNonce);
     },
