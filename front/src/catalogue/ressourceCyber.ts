@@ -9,6 +9,7 @@ export type RessourceCyber = {
   besoins: string[];
   urlIllustration: string;
   estCertifiee: boolean;
+  lienExterne: string;
 };
 
 export const lesRessourcesCyberTriees = (data: RessourceCyber[]) => {

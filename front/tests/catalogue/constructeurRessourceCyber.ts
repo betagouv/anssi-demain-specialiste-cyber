@@ -15,6 +15,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _besoins: string[] = [];
   private _urlIllustration: string = 'http://monillu.png';
   private _estCertifiee: boolean = false;
+  private _lien: string = '';
 
   avecPublicsCible(publicsCible: string[]): ConstructeurRessourceCyber {
     this._publicsCible = publicsCible;
@@ -68,6 +69,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       besoins: this._besoins,
       urlIllustration: this._urlIllustration,
       estCertifiee: this._estCertifiee,
+      lienExterne: this._lien
     };
   }
 }
