@@ -2,7 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import { join } from 'path';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { devDependencies } from '../../../front/package.json';
+import path from 'node:path';
 
 export interface MoteurDeRendu {
   rends: (reponse: express.Response, vue: string, options?: object) => void;
@@ -27,6 +27,11 @@ const lisLesCheminsDesFichiersGeneresParLeFront: FournisseurDeChemins = () => {
 export const moteurDeRenduExpress = (
   fournisseurDeChemins: FournisseurDeChemins = lisLesCheminsDesFichiersGeneresParLeFront,
 ): MoteurDeRendu => {
+  const packageJsonFront = JSON.parse(
+    fs.readFileSync(path.resolve('../front/package.json'), 'utf-8'),
+  );
+  const { devDependencies } = packageJsonFront;
+  const versionUIKit = devDependencies['@lab-anssi/ui-kit'].replace('^', '');
   return {
     rends(reponse, vue, options) {
       const matomo = adaptateurEnvironnement.matomo();
@@ -35,7 +40,7 @@ export const moteurDeRenduExpress = (
         ...fournisseurDeChemins(),
         nonce: reponse.locals.nonce,
         ...(matomo && { matomo }),
-        versionUIKit: devDependencies['@lab-anssi/ui-kit'].replace('^', ''),
+        versionUIKit,
       };
       reponse.render(vue, optionsAvecManifesteEtNonce);
     },
