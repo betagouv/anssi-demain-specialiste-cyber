@@ -669,6 +669,20 @@ describe('La ressource de mes jeux', () => {
           erreur: 'Le poids maximum de la couverture est de 5MO',
         });
       });
+
+      it("retourne une erreur lorsque le type de l'image n'est pas supporté", async () => {
+        adaptateurTeleversement.recupereTypeImage = () => undefined;
+
+        const reponse = await request(serveur)
+          .post('/api/mes-jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('ceci est un pdf'), 'test-2.pdf');
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body).toEqual({
+          erreur: "Le fichier n'est pas supporté",
+        });
+      });
     });
 
     describe('concernant la vérification du consentemment', () => {

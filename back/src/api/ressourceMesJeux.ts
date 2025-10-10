@@ -17,6 +17,7 @@ import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { ConfigurationServeur } from './configurationServeur';
 import multer from 'multer';
+import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 
 const chaineNonVide = (message: string) =>
   z.string(message).trim().min(1, message);
@@ -96,47 +97,59 @@ type CorpsRequeteDeJeu = {
 
 export const CINQ_MO = 5 * 1024 * 1024;
 
-const valideLesPhotosTeleversees: RequestHandler = async (
-  requete: Request,
-  reponse: Response,
-  suite: NextFunction,
-) => {
-  const libellesErreur: Map<string, string> = new Map([
-    ['photos_LIMIT_FILE_COUNT', 'Le nombre de photos maximum par jeu est de 5'],
-    [
-      'couverture_LIMIT_FILE_COUNT',
-      'Une seule photo de couverture est autorisée',
-    ],
-    [
-      'photos_LIMIT_UNEXPECTED_FILE',
-      'Le nombre de photos maximum par jeu est de 5',
-    ],
-    [
-      'couverture_LIMIT_UNEXPECTED_FILE',
-      'Une seule photo de couverture est autorisée',
-    ],
-    ['photos_LIMIT_FILE_SIZE', 'Le poids maximum d’une photo est de 5MO'],
-    [
-      'couverture_LIMIT_FILE_SIZE',
-      'Le poids maximum de la couverture est de 5MO',
-    ],
-  ]);
-  return multer({
-    storage: multer.memoryStorage(),
-    limits: { fileSize: CINQ_MO },
-  }).fields([
-    { name: 'photos', maxCount: 4 },
-    { name: 'couverture', maxCount: 1 },
-  ])(requete, reponse, (err) => {
-    if (err && err instanceof multer.MulterError) {
-      return reponse.status(400).json({
-        erreur:
-          libellesErreur.get(`${err.field}_${err.code}`) ||
-          'Une erreur est survenue',
-      });
-    }
-    return suite();
-  });
+const valideLesPhotosTeleversees = (
+  adaptateurTeleversement: AdaptateurTeleversement,
+): RequestHandler => {
+  return async (requete: Request, reponse: Response, suite: NextFunction) => {
+    const libellesErreur: Map<string, string> = new Map([
+      [
+        'photos_LIMIT_FILE_COUNT',
+        'Le nombre de photos maximum par jeu est de 5',
+      ],
+      [
+        'couverture_LIMIT_FILE_COUNT',
+        'Une seule photo de couverture est autorisée',
+      ],
+      [
+        'photos_LIMIT_UNEXPECTED_FILE',
+        'Le nombre de photos maximum par jeu est de 5',
+      ],
+      [
+        'couverture_LIMIT_UNEXPECTED_FILE',
+        'Une seule photo de couverture est autorisée',
+      ],
+      ['photos_LIMIT_FILE_SIZE', 'Le poids maximum d’une photo est de 5MO'],
+      [
+        'couverture_LIMIT_FILE_SIZE',
+        'Le poids maximum de la couverture est de 5MO',
+      ],
+    ]);
+    return multer({
+      storage: multer.memoryStorage(),
+      limits: { fileSize: CINQ_MO },
+    }).fields([
+      { name: 'photos', maxCount: 4 },
+      { name: 'couverture', maxCount: 1 },
+    ])(requete, reponse, (err) => {
+      const mimeTypeDeLImage = adaptateurTeleversement.recupereTypeImage(
+        requete.file?.buffer,
+      );
+      const typesAutorises = ['image/jpeg', 'image/png'];
+      if (!mimeTypeDeLImage || !typesAutorises.includes(mimeTypeDeLImage)) {
+        return reponse.status(400).json({
+          erreur: "Le fichier n'est pas supporté",
+        });
+      }
+      if (err && err instanceof multer.MulterError) {
+        return reponse.status(400).json({
+          erreur:
+            libellesErreur.get(`${err.field}_${err.code}`) ||
+            'Une erreur est survenue',
+        });
+      }
+      return suite();
+    });
+  };
 };
 
 export const ressourceMesJeux = ({
@@ -156,7 +169,7 @@ export const ressourceMesJeux = ({
       entrepotUtilisateur,
       adaptateurHachage,
     ),
-    valideLesPhotosTeleversees,
+    valideLesPhotosTeleversees(adaptateurTeleversement),
     async (
       requete: Request<
         core.ParamsDictionary,

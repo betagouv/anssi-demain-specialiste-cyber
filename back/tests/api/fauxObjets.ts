@@ -125,6 +125,9 @@ export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
     sauvegarde(_photosJeu: PhotosJeuTeleversees): Promise<void> {
       return Promise.resolve();
     },
+    recupereTypeImage: (_buffer: Buffer) => {
+      return 'image/png';
+    },
   };
 };
 
