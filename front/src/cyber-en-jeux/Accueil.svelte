@@ -271,6 +271,8 @@
         }
 
         .articles {
+          color: var(--grey-1000-50);
+
           article {
             margin: 1rem 0;
 

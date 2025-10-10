@@ -31,7 +31,7 @@ h1 {
   line-height: 3rem;
 
   .fonce & {
-    color: var(--white);
+    color: var(--grey-1000-50);
   }
 
   @include a-partir-de(sm) {
@@ -49,7 +49,7 @@ h2 {
   margin: 0 0 1.5rem;
 
   .fonce & {
-    color: var(--white);
+    color: var(--grey-1000-50);
   }
 
   @include a-partir-de(sm) {
@@ -67,7 +67,7 @@ h4 {
   margin: 0 0 1.5rem;
 
   .fonce & {
-    color: var(--white);
+    color: var(--grey-1000-50);
   }
 
   @include a-partir-de(sm) {

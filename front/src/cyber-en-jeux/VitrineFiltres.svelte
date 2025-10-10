@@ -150,7 +150,7 @@
       }
 
       .applique-filtres {
-        background: var(--white);
+        background: var(--grey-1000-50);
         border-top: 1px solid var(--border-default-grey);
         grid-row: -1;
         margin: 0 -1rem;
