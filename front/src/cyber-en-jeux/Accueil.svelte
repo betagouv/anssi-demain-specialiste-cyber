@@ -19,9 +19,9 @@
     </div>
   </dsfr-container>
 
-  <div class="avantages fonce">
+  <div class="avantages">
     <dsfr-container>
-      <div class="conteneur">
+      <div class="conteneur fonce">
         <h2>Grâce à CyberEnJeux, développez</h2>
         <img src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
         <div class="articles">
@@ -224,7 +224,7 @@
     --brique-carrousel-bouton-action-texte-couleur: #161616;
 
     --brique-marelle-titre-couleur: #161616;
-    --brique-marelle-etapes-numero-etape-couleur: #ce614a;
+    --brique-marelle-etapes-numero-etape-couleur: var(--pink-tuile-main-556);
 
     --brique-temoignages-titre-couleur: #161616;
   }
@@ -252,10 +252,10 @@
     }
 
     .avantages {
-      background-color: #a94645;
-      color: #fff;
+      background-color: var(--background-flat-pink-tuile);
 
       .conteneur {
+        color: var(--grey-1000-50);
         margin: 4.5rem 0;
         display: grid;
 
@@ -271,8 +271,6 @@
         }
 
         .articles {
-          color: var(--grey-1000-50);
-
           article {
             margin: 1rem 0;
 
@@ -291,7 +289,7 @@
           }
 
           hr {
-            background-color: #ce614a;
+            background-color: var(--border-default-pink-tuile);
             border: 0;
             display: block;
             height: 1px;
@@ -356,7 +354,7 @@
 
     .bandeau {
       background-color: #131429;
-      color: #ffffff;
+      color: var(--grey-1000-50);
       padding: 2rem 2rem 3rem 2rem;
 
       .conteneur {
@@ -398,13 +396,14 @@
     }
 
     hr {
-      background-color: #dddddd;
+      background-color: var(--border-default-grey);
       border: 0;
       height: 1px;
       margin: 0;
     }
+
     .temoignages {
-      background-color: #f4f6fe;
+      background-color: var(--background-alt-blue-ecume);
     }
 
     lab-anssi-marelle {
