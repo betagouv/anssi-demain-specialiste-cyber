@@ -32,6 +32,7 @@ describe('La ressource des ressources cyber', () => {
         besoins: ['besoin 1', 'besoin 2'],
         description: 'La ressource 1',
         urlIllustration: 'http://monillu.png',
+        estCertifiee: true,
       });
 
       const reponse = await request(serveur).get('/api/ressources-cyber');
@@ -47,6 +48,7 @@ describe('La ressource des ressources cyber', () => {
           besoins: ['besoin 1', 'besoin 2'],
           description: 'La ressource 1',
           urlIllustration: 'http://monillu.png',
+          estCertifiee: true,
         },
       ]);
     });
