@@ -97,4 +97,54 @@ describe('L’adaptateur de téléversement', () => {
     expect(imagesJeu.photos[0].chemin.endsWith('jpeg')).toBeTruthy();
     expect(imagesJeu.photos[1].chemin.endsWith('png')).toBeTruthy();
   });
+
+  describe("renvoie le type de l'image en se basant sur la signature", () => {
+    it.each([
+      {
+        nom: 'PNG',
+        buffer: Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+        attendu: 'image/png',
+      },
+      {
+        nom: 'JPEG (JFIF)',
+        buffer: Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46]),
+        attendu: 'image/jpeg',
+      },
+      {
+        nom: 'JPEG (EXIF)',
+        buffer: Buffer.from([0xff, 0xd8, 0xff, 0xe1, 0x00, 0x16, 0x45, 0x78]),
+        attendu: 'image/jpeg',
+      },
+      {
+        nom: 'JPEG',
+        buffer: Buffer.from([0xff, 0xd8, 0xff, 0xdb, 0x00, 0x10, 0x4a, 0x46]),
+        attendu: 'image/jpeg',
+      },
+    ])('pour une image $nom', ({ buffer, attendu }) => {
+      const mimeType =
+        fabriqueAdaptateurTeleversement().recupereTypeImage(buffer);
+
+      expect(mimeType).toBe(attendu);
+    });
+
+    it('pour un fichier inconnu', () => {
+      const bufferInconnu = Buffer.from([
+        0xff, 0xff, 0xff, 0xff, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01,
+      ]);
+
+      const mimeType =
+        fabriqueAdaptateurTeleversement().recupereTypeImage(bufferInconnu);
+
+      expect(mimeType).toBeUndefined();
+    });
+
+    it('pour un fichier indéfini', () => {
+      const bufferIndefini = undefined;
+
+      const mimeType =
+        fabriqueAdaptateurTeleversement().recupereTypeImage(bufferIndefini);
+
+      expect(mimeType).toBeUndefined();
+    });
+  });
 });

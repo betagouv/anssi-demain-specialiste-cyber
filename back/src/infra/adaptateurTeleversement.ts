@@ -19,6 +19,7 @@ export type PhotosJeuTeleversees = {
 export type AdaptateurTeleversement = {
   photosJeu: (requete: Request) => PhotosJeuTeleversees;
   sauvegarde(photosJeu: PhotosJeuTeleversees): Promise<void>;
+  recupereTypeImage(buffer?: Buffer): 'image/png' | 'image/jpeg' | undefined;
 };
 
 const adaptateurDeTeleversement: AdaptateurTeleversement = {
@@ -100,6 +101,32 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
       throw new Error('Impossible de téléverser les photos');
     }
     return Promise.resolve();
+  },
+  recupereTypeImage: (buffer: Buffer) => {
+    const valideLaSignatureDuFichier = (
+      tableauDOctets: Uint8Array,
+      signaturesValides: Array<number[]>,
+    ): boolean => {
+      return signaturesValides.some((signature) =>
+        signature.every((octet, index) => octet === tableauDOctets[index]),
+      );
+    };
+
+    if (!buffer) return undefined;
+
+    const signaturePNG = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+    const signaturesJPEG = [
+      [0xff, 0xd8, 0xff, 0xe0], // JPEG signature (JFIF)
+      [0xff, 0xd8, 0xff, 0xe1], // JPEG signature (Exif)
+      [0xff, 0xd8, 0xff, 0xdb], // JPEG signature
+    ];
+
+    const tableauDOctets = new Uint8Array(8);
+    buffer.copy(tableauDOctets, 0, 0, 8);
+
+    if (valideLaSignatureDuFichier(buffer, [signaturePNG])) return 'image/png';
+    if (valideLaSignatureDuFichier(buffer, signaturesJPEG)) return 'image/jpeg';
+    return undefined;
   },
 };
 
