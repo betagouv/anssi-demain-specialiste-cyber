@@ -30,7 +30,7 @@
     <CatalogueFiltres />
 
     <div class="conteneur">
-      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration } (id)}
+      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration, estCertifiee } (id)}
         <dsfr-card
           title={description}
           hasDetailStart
@@ -38,12 +38,28 @@
           href={`/ressources-cyber/${id}`}
           src={urlIllustration || '/assets/images/image-generique.svg'}
           hasHeaderBadge
+          hasDetailEnd
         >
           <dsfr-badges-group
             slot="headerbadges"
             badges={[{ label: 'Libellé', accent: 'purple-glycine' }]}
             size="sm"
           ></dsfr-badges-group>
+          {#if estCertifiee}
+            <dsfr-tags-group
+              hasIcon
+              slot="contentend"
+              tags={[
+                {
+                  id: `tag-certifie-${id}`,
+                  label: 'Ressource certifiée',
+                  icon: 'award-fill',
+                },
+              ]}
+              size="sm"
+              groupMarkup="div"
+            ></dsfr-tags-group>
+          {/if}
         </dsfr-card>
       {:else}
         {#if chargementEnCours}

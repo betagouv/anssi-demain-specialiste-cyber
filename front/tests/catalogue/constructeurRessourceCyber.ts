@@ -14,6 +14,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _types: string[] = [];
   private _besoins: string[] = [];
   private _urlIllustration: string = 'http://monillu.png';
+  private _estCertifiee: boolean = false;
 
   avecPublicsCible(publicsCible: string[]): ConstructeurRessourceCyber {
     this._publicsCible = publicsCible;
@@ -50,6 +51,11 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return this;
   }
 
+  estCertifiee(certifiee: boolean) {
+    this._estCertifiee = certifiee;
+    return this;
+  }
+
   construis(): RessourceCyber {
     return {
       id: this._id,
@@ -61,6 +67,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       types: this._types,
       besoins: this._besoins,
       urlIllustration: this._urlIllustration,
+      estCertifiee: this._estCertifiee,
     };
   }
 }
