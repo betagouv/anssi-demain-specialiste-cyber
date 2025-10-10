@@ -26,7 +26,7 @@
       <li>
         <lab-anssi-lien
           titre={libelle}
-          cible={lien}
+          href={lien}
           apparence="lien-texte"
           taille="sm"
           positionIcone="droite"
