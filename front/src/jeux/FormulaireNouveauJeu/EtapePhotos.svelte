@@ -38,7 +38,7 @@
           if (!blob) throw new Error('Failed to create Blob');
           resolve(blob);
         },
-        'image/jpeg',
+        file.type,
         quality,
       );
     });
