@@ -232,6 +232,25 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
       'https/monillu.png',
     );
   });
+
+  it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Label DSC', async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseRessourceCyberGrist
+    > = async () => {
+      return new ConstructeurReponseRessourceCyberGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGrist().avecLabelDSC(true).construis(),
+        )
+        .construis();
+    };
+
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
+      ressourcesCyberGrist,
+    );
+    const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
+
+    expect(ressourcesCyber[0].estCertifiee).toBeTruthy();
+  });
 });
 
 type LigneGrist = {
@@ -244,6 +263,7 @@ type LigneGrist = {
   besoins: string[];
   description: string;
   urlIllustration: string;
+  labelDSC: boolean;
 };
 
 interface ConstructeurDeTest<T> {
@@ -260,6 +280,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   _besoins: string[] = [];
   _description: string = '';
   _urlIllustration: string = '';
+  _labelDSC: boolean = false;
 
   avecId(id: number): ConstructeurLigneGrist {
     this._idLigne = id;
@@ -305,6 +326,12 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
     this._urlIllustration = URLImage;
     return this;
   }
+
+  avecLabelDSC(labelDSC: boolean) {
+    this._labelDSC = labelDSC;
+    return this;
+  }
+
   construis(): LigneGrist {
     return {
       id: this._idLigne,
@@ -316,6 +343,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
       besoins: this._besoins,
       description: this._description,
       urlIllustration: this._urlIllustration,
+      labelDSC: this._labelDSC,
     };
   }
 }
@@ -343,7 +371,7 @@ class ConstructeurReponseRessourceCyberGrist
           Type: l.types,
           Cible: l.cibles,
           Parcours_sur_page: [],
-          Label_DSC: false,
+          Label_DSC: l.labelDSC,
           Cycle_si_eleves: l.cycles,
           Porteur: [],
           Lien: '',

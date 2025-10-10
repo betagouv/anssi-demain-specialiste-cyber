@@ -16,6 +16,7 @@ export class EntrepotRessourcesCyberStatique
         besoins: [],
         description: 'Description',
         urlIllustration: 'http://monillu.png',
+        estCertifiee: true,
       },
     ];
   }
