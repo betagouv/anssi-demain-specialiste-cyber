@@ -9,6 +9,7 @@ export type RessourceCyber = {
   types: Types;
   titre: string;
   estCertifiee: boolean;
+  lienExterne: string;
 };
 
 type Niveaux = string[];
