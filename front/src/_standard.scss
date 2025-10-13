@@ -88,3 +88,9 @@ h4 {
     line-height: 3.5rem;
   }
 }
+
+p {
+  .fonce & {
+    color: var(--grey-1000-50);
+  }
+}

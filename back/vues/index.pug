@@ -2,6 +2,31 @@ extends base
 block variables
   - var titrePage = "Demain Spécialiste Cyber"
   - var descriptionPage = "Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !"
+  - var classePage = "page-accueil"
+
+block hero
+  div(class="hero fonce")
+    dsfr-container
+      div(class="conteneur")
+        hgroup
+          h1 Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+          p Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !
+        div(class="actions")
+          dsfr-button(
+            label="Découvrir CyberEnJeux"
+            kind="primary"
+            markup="a"
+            href="/cyber-en-jeux"
+            target="_self"
+          )
+          dsfr-button(
+            label="Explorer les ressources"
+            kind="secondary"
+            markup="a"
+            href="/catalogue"
+            target="_self"
+          )
+
 
 block contenu
     section(class='intro')
