@@ -66,4 +66,31 @@
       }
     }
   }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    padding: 3.5rem 1rem;
+
+    .carrousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      @include a-partir-de(md) {
+        justify-content: center;
+      }
+
+      dsfr-card {
+        width: 16.25rem;
+        min-width: 16.25rem;
+        scroll-snap-align: center;
+      }
+    }
+
+    dsfr-button {
+      margin: 0 auto;
+    }
+  }
 }
