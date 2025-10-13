@@ -9,7 +9,26 @@
   import { libelleSequence } from './sequences';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
 
-  const items = [
+  let jeu: Jeu | undefined;
+
+  onMount(async () => {
+    const morceaux = window.location.pathname.split('/');
+    const id = morceaux[morceaux.length - 1];
+    const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
+    jeu = reponse.data;
+  });
+
+  $: temoignages = jeu
+    ? jeu.temoignages.map((temoignage) => ({
+        citation: temoignage.details,
+        auteur: temoignage.prenom,
+      }))
+    : [];
+
+  $: possedeDesPhotos = jeu ? jeu.photos.photos.length > 0 : false;
+  $: possedeDesTemoignages = !!jeu?.temoignages.length;
+
+  $: items = [
     {
       id: 'menu-infos-generales',
       label: 'Informations générales',
@@ -35,32 +54,18 @@
           },
         ]
       : []),
-    {
-      id: 'menu-temoignages',
-      label: 'Témoignages',
-      href: '#temoignages',
-      isCollapsible: false,
-      type: 'link',
-    },
+    ...(possedeDesTemoignages
+      ? [
+          {
+            id: 'menu-temoignages',
+            label: 'Témoignages',
+            href: '#temoignages',
+            isCollapsible: false,
+            type: 'link',
+          },
+        ]
+      : []),
   ];
-
-  let jeu: Jeu | undefined;
-
-  onMount(async () => {
-    const morceaux = window.location.pathname.split('/');
-    const id = morceaux[morceaux.length - 1];
-    const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
-    jeu = reponse.data;
-  });
-
-  $: temoignages = jeu
-    ? jeu.temoignages.map((temoignage) => ({
-        citation: temoignage.details,
-        auteur: temoignage.prenom,
-      }))
-    : [];
-
-  $: possedeDesPhotos = jeu ? jeu.photos.photos.length > 0 : false;
 </script>
 
 {#if jeu}
@@ -147,8 +152,13 @@
         {/if}
       </div>
 
-      <lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"
-      ></lab-anssi-temoignages>
+      {#if possedeDesTemoignages}
+        <lab-anssi-temoignages
+          titre="Témoignages"
+          {temoignages}
+          id="temoignages"
+        ></lab-anssi-temoignages>
+      {/if}
     </div>
   </div>
 {/if}
