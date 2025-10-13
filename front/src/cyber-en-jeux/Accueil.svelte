@@ -73,7 +73,7 @@
           illustration: { lien: '/assets/images/cej/preparer.svg', alt: '' },
           lien: {
             texte: 'Guides et ressources CyberEnJeux',
-            href: '#ressources',
+            href: '#guides-et-ressources',
           },
         },
         {
@@ -83,7 +83,7 @@
           illustration: { lien: '/assets/images/cej/former.svg', alt: '' },
           lien: {
             texte: 'Guides et ressources CyberEnJeux',
-            href: '#ressources',
+            href: '#guides-et-ressources',
           },
         },
         {
