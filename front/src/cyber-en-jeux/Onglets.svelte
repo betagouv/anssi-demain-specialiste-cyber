@@ -10,12 +10,21 @@
 
   let { onglets, ongletActif = $bindable() }: Props = $props();
 
-  onMount(() => {
+  const changeLOngletCourant = () => {
     const hash = new URLSearchParams(window.location.hash?.substring(1));
     const ongletDansLUrl = Array.from(hash)[0];
     if (ongletDansLUrl)
       ongletActif =
         onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
+  };
+
+  onMount(() => {
+    changeLOngletCourant();
+  });
+
+  $effect(() => {
+    window.addEventListener('hashchange', changeLOngletCourant);
+    return () => window.removeEventListener('hashchange', changeLOngletCourant);
   });
 
   let open = $state(false);
