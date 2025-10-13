@@ -125,6 +125,9 @@
         'jeu',
         JSON.stringify({
           ...$jeuEnEditionStore,
+          temoignages: $jeuEnEditionStore.temoignages?.filter(
+            (t) => !!t.prenom.trim() || !!t.details.trim(),
+          ),
           eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
         }),
       );
