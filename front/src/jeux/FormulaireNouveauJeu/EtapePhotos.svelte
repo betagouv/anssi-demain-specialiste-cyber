@@ -102,7 +102,7 @@
     <div class="previsualisation-couverture">
       <img
         src={URL.createObjectURL($photosJeuStore.couverture)}
-        alt="Photo de couverture"
+        alt="Couverture"
       />
     </div>
     <dsfr-button
@@ -132,7 +132,7 @@
     <div class="previsualisations-photo">
       {#each $photosJeuStore.photos as photo}
         <div class="previsualisation-photo">
-          <img src={URL.createObjectURL(photo)} alt="Photo de l’événement" />
+          <img src={URL.createObjectURL(photo)} alt="Complémentaires" />
           <dsfr-button
             label="Supprimer"
             kind="tertiary-no-outline"
