@@ -550,6 +550,30 @@ describe('La ressource de mes jeux', () => {
           'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
         );
       });
+
+      it("vérifie que le prenom existe dans un témoignage'", async () => {
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          temoignages: [{ prenom: '', details: 'un détail' }],
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le prénom est obligatoire dans un témoignage',
+        );
+      });
+
+      it("vérifie que les détails existent dans un témoignage'", async () => {
+        const reponse = await executeLaRequete(serveur, {
+          ...uneRequeteDeJeuValide().construis(),
+          temoignages: [{ prenom: 'Michel', details: '' }],
+        });
+
+        expect(reponse.status).toEqual(400);
+        expect(reponse.body.erreur).toEqual(
+          'Les détails sont obligatoires dans un témoignage',
+        );
+      });
     });
 
     describe('concernant la vérification de l’évaluation sur CyberEnjeux', () => {

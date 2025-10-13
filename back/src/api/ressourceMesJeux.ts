@@ -64,13 +64,13 @@ export const schemaJeu = z.strictObject({
   temoignages: z
     .array(
       z.strictObject({
-        prenom: z.string('Le prénom est obligatoire dans un témoignage'),
-        details: z
-          .string('Les détails sont obligatoires dans un témoignage')
-          .max(
-            8000,
-            'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
-          ),
+        prenom: chaineNonVide('Le prénom est obligatoire dans un témoignage'),
+        details: chaineNonVide(
+          'Les détails sont obligatoires dans un témoignage',
+        ).max(
+          8000,
+          'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
+        ),
       }),
     )
     .optional(),
