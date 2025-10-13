@@ -131,15 +131,25 @@ const valideLesPhotosTeleversees = (
       { name: 'photos', maxCount: 4 },
       { name: 'couverture', maxCount: 1 },
     ])(requete, reponse, (err) => {
-      const mimeTypeDeLImage = adaptateurTeleversement.recupereTypeImage(
-        requete.file?.buffer,
-      );
-      const typesAutorises = ['image/jpeg', 'image/png'];
-      if (!mimeTypeDeLImage || !typesAutorises.includes(mimeTypeDeLImage)) {
-        return reponse.status(400).json({
-          erreur: "Le fichier n'est pas supporté",
-        });
+      if (requete.files) {
+        for (const fichiers of Object.values(requete.files)) {
+          for (const fichier of fichiers) {
+            const mimeTypeDeLImage = adaptateurTeleversement.recupereTypeImage(
+              fichier.buffer,
+            );
+            const typesAutorises = ['image/jpeg', 'image/png'];
+            if (
+              !mimeTypeDeLImage ||
+              !typesAutorises.includes(mimeTypeDeLImage)
+            ) {
+              return reponse.status(400).json({
+                erreur: "Le fichier n'est pas supporté",
+              });
+            }
+          }
+        }
       }
+
       if (err && err instanceof multer.MulterError) {
         return reponse.status(400).json({
           erreur:
