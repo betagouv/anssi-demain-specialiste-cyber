@@ -1,59 +1,50 @@
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { type RessourceCyber } from '../metier/ressourceCyber';
+import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import {
   creeRecupereRessourceHttp,
   RecupereRessourceHttp,
 } from './recupereRessourceHttp';
 
-export type ReponseRessourceCyberGrist = {
-  records: {
-    id: number;
-    fields: {
-      A: string;
-      Titre: string;
-      Description: string;
-      Besoins: string[];
-      Thematiques: string[];
-      Type: string[];
-      Cible: string[];
-      Parcours_sur_page: string[];
-      Label_DSC: boolean;
-      Cycle_si_eleves: string[];
-      Porteur: string[];
-      Lien: string;
-      URL_illustration: string;
-    };
-  }[];
+export type RessourceCyberGrist = {
+  id: number;
+  fields: {
+    A: string;
+    Titre: string;
+    Description: string;
+    Besoins: string[];
+    Thematiques: string[];
+    Type: string[];
+    Cible: string[];
+    Parcours_sur_page: string[];
+    Label_DSC: boolean;
+    Cycle_si_eleves: string[];
+    Porteur: string[];
+    Lien: string;
+    URL_illustration: string;
+  };
 };
 
-export class EntrepotRessourcesCyberGrist implements EntrepotRessourcesCyber {
-  private urlDeBase: string;
-  private cleApi: string;
-  private schema: string;
-  private table: string;
-
+export class EntrepotRessourcesCyberGrist
+  extends EntrepotGrist<RessourceCyberGrist>
+  implements EntrepotRessourcesCyber
+{
   constructor(
-    private ressourcesCyberGrist: RecupereRessourceHttp<ReponseRessourceCyberGrist> = creeRecupereRessourceHttp(),
+    ressourcesCyberGrist: RecupereRessourceHttp<
+      ReponseGrist<RessourceCyberGrist>
+    > = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
-    this.urlDeBase = grist.urlDeBase;
-    this.cleApi = grist.cleApi;
-    this.schema = grist.ressourcesCyber().idDocument;
-    this.table = grist.ressourcesCyber().idTable;
+    super(
+      ressourcesCyberGrist,
+      grist.ressourcesCyber().idDocument,
+      grist.ressourcesCyber().idTable,
+    );
   }
 
   async tous(): Promise<RessourceCyber[]> {
-    const url = new URL(
-      `api/docs/${this.schema}/tables/${this.table}/records`,
-      this.urlDeBase,
-    );
-    const reponse = await this.ressourcesCyberGrist(url.toString(), {
-      headers: {
-        authorization: `Bearer ${this.cleApi}`,
-        accept: 'application/json',
-      },
-    });
+    const reponse = await this.appelleGrist();
     return reponse.records.map((record) => ({
       id: record.id,
       titre: record.fields.Titre,

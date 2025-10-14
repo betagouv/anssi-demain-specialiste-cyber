@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   EntrepotRessourcesCyberGrist,
-  ReponseRessourceCyberGrist,
+  RessourceCyberGrist,
 } from '../../src/infra/entrepotRessourcesCyberGrist';
 import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
+import { ReponseGrist } from '../../src/infra/entrepotGrist';
 
 describe("L'entrepôt de ressources cyber Grist ", () => {
   const reponseVide = { records: [] };
@@ -11,7 +12,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   it('sait appeler la bonne ressource', async () => {
     let urlAppelee = '';
     const clientHttp: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async (url: string) => {
       urlAppelee = url;
       return reponseVide;
@@ -30,7 +31,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   it("vérifie l'entête d'authentification", async () => {
     let enteteAuthorisation: string | undefined = undefined;
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async (_url: string, config) => {
       enteteAuthorisation = config?.headers?.['authorization'];
       return reponseVide;
@@ -46,7 +47,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -69,7 +70,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne thématiques', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -98,7 +99,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne publics cible', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -122,7 +123,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne niveau', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -143,7 +144,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne type', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -167,7 +168,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne besoins', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -191,7 +192,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne description', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -212,7 +213,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne URL illustration', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -235,7 +236,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Label DSC', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -254,7 +255,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Lien', async () => {
     const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseRessourceCyberGrist
+      ReponseGrist<RessourceCyberGrist>
     > = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
@@ -378,7 +379,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
 }
 
 class ConstructeurReponseRessourceCyberGrist
-  implements ConstructeurDeTest<ReponseRessourceCyberGrist>
+  implements ConstructeurDeTest<ReponseGrist<RessourceCyberGrist>>
 {
   private _lignes: LigneGrist[] = [];
 
@@ -387,7 +388,7 @@ class ConstructeurReponseRessourceCyberGrist
     return this;
   }
 
-  construis(): ReponseRessourceCyberGrist {
+  construis(): ReponseGrist<RessourceCyberGrist> {
     return {
       records: this._lignes.map((l) => ({
         id: l.id,
