@@ -36,7 +36,7 @@
           hasDetailStart
           detailStart={titre}
           href={lienExterne || `/ressources-cyber/${id}`}
-          blank={!!lienExterne}
+          blank={lienExterne.startsWith('http')}
           src={urlIllustration || '/assets/images/image-generique.svg'}
           hasHeaderBadge
           hasDetailEnd
