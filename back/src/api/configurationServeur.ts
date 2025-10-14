@@ -13,10 +13,12 @@ import { Middleware } from './middleware';
 import { MoteurDeRendu } from './moteurDeRendu';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
+import { EntrepotMetiers } from '../metier/entrepotMetiers';
 
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
   serveurLab: ConfigurationServeurLab;
+  entrepotMetier: EntrepotMetiers;
   entrepotRessourcesCyber: EntrepotRessourcesCyber;
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
