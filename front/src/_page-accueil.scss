@@ -5,7 +5,7 @@
     .hero {
       display: flex;
       flex-direction: column;
-      padding: 6rem 0 18.5rem;
+      padding: 3rem 0 18.5rem;
       background: #131429 url(/assets/images/hero-accueil.svg) no-repeat center
         160px;
       background-size: auto 138%;
@@ -18,7 +18,7 @@
       }
 
       @include a-partir-de(lg) {
-        padding: 6rem 0;
+        padding: 6.375rem 0;
         background: #131429 url(/assets/images/hero-accueil.svg) no-repeat
           top -337px right -80px;
         background-size: auto 230%;
@@ -29,12 +29,12 @@
           max-width: 588px;
         }
 
-        h1 {
+        .titre-alternatif-xs {
           margin: 0;
         }
 
         p {
-          margin-top: 1rem;
+          margin-top: 0.5rem;
           margin-bottom: 2rem;
         }
 
