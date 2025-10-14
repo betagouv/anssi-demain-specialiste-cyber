@@ -29,38 +29,39 @@ block hero
 
 
 block contenu
-  section(class='intro')
-    h2 La cybersécurité, un enjeu d’avenir&nbsp;!
-    p Accédez à un catalogue de ressources pensé pour découvrir et comprendre les enjeux de la cybersécurité, que vous soyez élève, enseignant ou parent.
-    div(class='carrousel')
-      dsfr-card(
-        title="Former vos élèves à la cybersécurité par le jeu"
-        href="#"
-        src="/assets/images/carte-cyber-en-jeux.svg"
-        has-detail-start="true"
-        detail-start="CyberEnJeux"
+  dsfr-container
+    section(class='intro')
+      h2 La cybersécurité, un enjeu d’avenir&nbsp;!
+      p Accédez à un catalogue de ressources pensé pour découvrir et comprendre les enjeux de la cybersécurité, que vous soyez élève, enseignant ou parent.
+      div(class='carrousel')
+        dsfr-card(
+          title="Former vos élèves à la cybersécurité par le jeu"
+          href="#"
+          src="/assets/images/carte-cyber-en-jeux.svg"
+          has-detail-start="true"
+          detail-start="CyberEnJeux"
+        )
+        dsfr-card(
+          title="Appendre la cybersécurité en équipe et en challenge"
+          href="#"
+          src="/assets/images/carte-passe-ton-hack.png"
+          has-detail-start="true"
+          detail-start="Passe ton Hack d'abord"
+        )
+        dsfr-card(
+          title="Sensibiliser aux risques numériques par le jeu"
+          href="#"
+          src="/assets/images/carte-fresque-cybercitoyens.jpg"
+          has-detail-start="true"
+          detail-start="Fresque du cybercitoyen"
+        )
+      dsfr-button(
+          label="Explorer plus de ressources"
+          kind="secondary"
+          markup="a"
+          href="/catalogue"
+          target="_self"
       )
-      dsfr-card(
-        title="Appendre la cybersécurité en équipe et en challenge"
-        href="#"
-        src="/assets/images/carte-passe-ton-hack.png"
-        has-detail-start="true"
-        detail-start="Passe ton Hack d'abord"
-      )
-      dsfr-card(
-        title="Sensibiliser aux risques numériques par le jeu"
-        href="#"
-        src="/assets/images/carte-fresque-cybercitoyens.jpg"
-        has-detail-start="true"
-        detail-start="Fresque du cybercitoyen"
-      )
-    dsfr-button(
-        label="Explorer plus de ressources"
-        kind="secondary"
-        markup="a"
-        href="/catalogue"
-        target="_self"
-    )
 
 block apres-contenu
     include ./selections
