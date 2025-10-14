@@ -22,6 +22,7 @@ type MetierGrist = {
     Salaire_junior_annuel_brut_: number;
     Salaire_senior_annuel_brut_: number;
     lien_video: string;
+    URL_illustration: string;
   };
 };
 
@@ -59,6 +60,7 @@ export class EntrepotMetiersGrist
       },
       metiersProches: enregistrement.fields.Metiers_proches?.slice(1) ?? [],
       liens: {
+        illustration: enregistrement.fields.URL_illustration,
         dataemploi: enregistrement.fields.Fiche_data_emploi,
         metierscope: enregistrement.fields.Fiche_metierscope,
         video: enregistrement.fields.lien_video,

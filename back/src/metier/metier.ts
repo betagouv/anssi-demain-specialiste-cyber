@@ -12,6 +12,7 @@ export type Metier = {
   };
   metiersProches: string[];
   liens: {
+    illustration: string;
     dataemploi: string;
     metierscope: string;
     video: string;
