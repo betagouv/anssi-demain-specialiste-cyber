@@ -5,6 +5,10 @@ type OIDC = {
   clientId: () => string;
   clientSecret: () => string;
 };
+type IdentifiantsDocumentGrist = {
+  idDocument: string;
+  idTable: string;
+};
 export type AdaptateurEnvironnement = {
   chiffrement: () => {
     cleChaCha20Hex: () => string;
@@ -12,10 +16,8 @@ export type AdaptateurEnvironnement = {
   grist: () => {
     urlDeBase: string;
     cleApi: string;
-    ressourcesCyber: () => {
-      idDocument: string;
-      idTable: string;
-    };
+    ressourcesCyber: () => IdentifiantsDocumentGrist;
+    metiers: () => IdentifiantsDocumentGrist;
   };
   estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
@@ -70,6 +72,10 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     ressourcesCyber: () => ({
       idDocument: process.env.GRIST_RESSOURCES_CYBER_ID_DOCUMENT || '',
       idTable: process.env.GRIST_RESSOURCES_CYBER_ID_TABLE || '',
+    }),
+    metiers: () => ({
+      idDocument: process.env.GRIST_METIERS_ID_DOCUMENT || '',
+      idTable: process.env.GRIST_METIERS_ID_TABLE || '',
     }),
   }),
   hachage: () => ({

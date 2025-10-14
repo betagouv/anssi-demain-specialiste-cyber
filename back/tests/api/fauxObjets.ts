@@ -69,6 +69,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     urlDeBase: '',
     cleApi: '',
     ressourcesCyber: () => ({ idDocument: '', idTable: '' }),
+    metiers: () => ({ idDocument: '', idTable: '' }),
   }),
   estEntrepotsStatiques: () => true,
   chiffrement: () => ({

@@ -11,6 +11,22 @@ class ConstructeurMetier implements Constructeur<Metier> {
   construis(): Metier {
     return {
       id: this.id,
+      titre: 'Un titre',
+      description: 'Une description',
+      missionPrincipale: 'La mission',
+      postures: [],
+      formationsCibles: [],
+      preRequis: [],
+      remuneration: {
+        junior: 0,
+        senior: 0,
+      },
+      metiersProches: [],
+      liens: {
+        dataemploi: '',
+        metierscope: '',
+        video: '',
+      },
     };
   }
 }
@@ -27,6 +43,8 @@ describe('La ressource métiers', () => {
     const reponse = await request(serveur).get(`/api/metiers/${metier.id}`);
 
     expect(reponse.status).toBe(200);
+    expect(reponse.body.titre).toBe('Un titre');
+    expect(reponse.body.description).toBe('Une description');
   });
 
   it('renvoie un 404 si le métier n’existe pas', async () => {
