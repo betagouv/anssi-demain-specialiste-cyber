@@ -6,7 +6,7 @@ export class EntrepotMetiersStatique implements EntrepotMetiers {
     return {
       description: '',
       formationsCibles: [],
-      liens: { dataemploi: '', metierscope: '', video: '' },
+      liens: { illustration: '', dataemploi: '', metierscope: '', video: '' },
       metiersProches: [],
       missionPrincipale: '',
       postures: [],

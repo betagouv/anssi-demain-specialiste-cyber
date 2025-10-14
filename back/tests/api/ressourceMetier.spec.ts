@@ -23,6 +23,7 @@ class ConstructeurMetier implements Constructeur<Metier> {
       },
       metiersProches: [],
       liens: {
+        illustration: '',
         dataemploi: '',
         metierscope: '',
         video: '',
