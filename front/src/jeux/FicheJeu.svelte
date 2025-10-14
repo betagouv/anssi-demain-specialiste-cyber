@@ -8,6 +8,7 @@
   import { enumerationFrancaise, type Jeu } from './jeu';
   import { libelleSequence } from './sequences';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
+  import Fiche, { type Menu } from '../Fiche.svelte';
 
   let jeu: Jeu | undefined;
 
@@ -65,7 +66,7 @@
           },
         ]
       : []),
-  ];
+  ] as Menu;
 </script>
 
 {#if jeu}
@@ -94,64 +95,54 @@
     </dsfr-container>
   </div>
 
-  <div class="corps-de-fiche">
-    <dsfr-side-menu
-      title=""
-      {items}
-      buttonLabel="Dans cette fiche"
-      buttonId="menu-fiche-jeu"
-      hasTitle={false}
-    ></dsfr-side-menu>
+  <Fiche menuId="menu-fiche-jeu" menu={items}>
+    <section id="infos-generales">
+      <h2>Informations générales</h2>
+      <ul>
+        <li>
+          <span>Format</span>
+          <span>{libelleSequence(jeu.sequence)}</span>
+        </li>
+        <li>
+          <span>Établissement</span>
+          <span>{jeu.nomEtablissement}</span>
+        </li>
+        <li>
+          <span>Enseignant&middot;e</span>
+          <span>{jeu.enseignant}</span>
+        </li>
+        <li>
+          <span>Élèves</span>
+          <span>{enumerationFrancaise(jeu.eleves)}</span>
+        </li>
+        <li>
+          <span>Discipline</span>
+          <span>{libelleDiscipline(jeu.discipline)}</span>
+        </li>
+        <li>
+          <span>Classe</span>
+          <span>{libelleClasse(jeu.classe)}</span>
+        </li>
+      </ul>
+    </section>
 
-    <div class="sections">
-      <div class="contenu">
-        <section id="infos-generales">
-          <h2>Informations générales</h2>
-          <ul>
-            <li>
-              <span>Format</span>
-              <span>{libelleSequence(jeu.sequence)}</span>
-            </li>
-            <li>
-              <span>Établissement</span>
-              <span>{jeu.nomEtablissement}</span>
-            </li>
-            <li>
-              <span>Enseignant&middot;e</span>
-              <span>{jeu.enseignant}</span>
-            </li>
-            <li>
-              <span>Élèves</span>
-              <span>{enumerationFrancaise(jeu.eleves)}</span>
-            </li>
-            <li>
-              <span>Discipline</span>
-              <span>{libelleDiscipline(jeu.discipline)}</span>
-            </li>
-            <li>
-              <span>Classe</span>
-              <span>{libelleClasse(jeu.classe)}</span>
-            </li>
-          </ul>
-        </section>
+    <section id="presentation">
+      <h2>Présentation du jeu</h2>
+      <p>{jeu.description}</p>
+    </section>
 
-        <section id="presentation">
-          <h2>Présentation du jeu</h2>
-          <p>{jeu.description}</p>
-        </section>
+    {#if possedeDesPhotos}
+      <section id="photos">
+        <h2>Photos</h2>
+        <div class="photos">
+          {#each jeu.photos.photos as photo}
+            <img src={photo.chemin} alt="Illustration du jeu" />
+          {/each}
+        </div>
+      </section>
+    {/if}
 
-        {#if possedeDesPhotos}
-          <section id="photos">
-            <h2>Photos</h2>
-            <div class="photos">
-              {#each jeu.photos.photos as photo}
-                <img src={photo.chemin} alt="Illustration du jeu" />
-              {/each}
-            </div>
-          </section>
-        {/if}
-      </div>
-
+    {#snippet apresContenu()}
       {#if possedeDesTemoignages}
         <lab-anssi-temoignages
           titre="Témoignages"
@@ -159,8 +150,8 @@
           id="temoignages"
         ></lab-anssi-temoignages>
       {/if}
-    </div>
-  </div>
+    {/snippet}
+  </Fiche>
 {/if}
 
 <style lang="scss">
@@ -259,92 +250,46 @@
     }
   }
 
-  .corps-de-fiche {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas: 'menu' 'sections';
-    max-width: 78rem;
-    margin: 0 auto;
+  section {
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      li {
+        span:nth-child(1) {
+          &::after {
+            content: '\00a0:\00a0';
+          }
+        }
+        span:nth-child(2) {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .photos {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+
+      @include a-partir-de(md) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      img {
+        aspect-ratio: 4/3;
+        width: 100%;
+        background-color: var(--blue-france-975-sun-113);
+      }
+    }
+  }
+
+  lab-anssi-temoignages {
+    display: block;
+    margin-top: -44px;
 
     @include a-partir-de(md) {
-      grid-template-columns: 11.75rem 1fr;
-      grid-template-areas: 'menu sections';
-      padding-top: 1.5rem;
-    }
-
-    @include a-partir-de(lg) {
-      grid-template-columns: 19.125rem 1fr;
-    }
-
-    dsfr-side-menu {
-      @include a-partir-de(md) {
-        height: 100%;
-      }
-    }
-
-    .sections {
-      grid-area: sections;
-      padding-top: 2rem;
-
-      @include a-partir-de(md) {
-        padding-top: 0.75rem;
-      }
-      .contenu {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-
-        @include a-partir-de(md) {
-          padding-left: 0;
-        }
-
-        @include a-partir-de(lg) {
-          padding-right: 1.5rem;
-        }
-
-        section {
-          ul {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            li {
-              span:nth-child(1) {
-                &::after {
-                  content: '\00a0:\00a0';
-                }
-              }
-              span:nth-child(2) {
-                font-weight: bold;
-              }
-            }
-          }
-
-          .photos {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: 1fr;
-
-            @include a-partir-de(md) {
-              grid-template-columns: 1fr 1fr;
-            }
-
-            img {
-              aspect-ratio: 4/3;
-              width: 100%;
-              background-color: var(--blue-france-975-sun-113);
-            }
-          }
-        }
-      }
-      lab-anssi-temoignages {
-        display: block;
-        margin-top: -44px;
-        @include a-partir-de(md) {
-          margin-left: -1.5rem;
-        }
-      }
+      margin-left: -1.5rem;
     }
   }
 </style>
