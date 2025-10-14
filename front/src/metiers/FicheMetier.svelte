@@ -26,6 +26,7 @@
     };
     metiersProches: string[];
     liens: {
+      illustration: string;
       dataemploi: string;
       metierscope: string;
       video: string;
@@ -131,8 +132,9 @@
         </div>
         <div class="illustration">
           <img
-            src={metier.image?.chemin ?? '/assets/images/image-generique.svg'}
-            alt="Couverture de la ressource"
+            src={metier.liens.illustration ??
+              '/assets/images/image-generique.svg'}
+            alt="Couverture du métier"
           />
         </div>
       </div>
