@@ -39,7 +39,7 @@ export class EntrepotMetiersGrist
   }
 
   async parIdentifiant(identifiant: number): Promise<Metier | undefined> {
-    const reponse = await this.appelleGrist({ id: [identifiant] });
+    const reponse = await this.appelleGrist({ Id_Metier: [identifiant] });
     if (!reponse.records || reponse.records.length === 0) {
       return undefined;
     }
