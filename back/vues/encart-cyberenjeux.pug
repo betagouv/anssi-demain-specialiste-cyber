@@ -1,22 +1,38 @@
 section(class='cyberenjeux')
-    h3 Découvrez les CyberEnJeux
-    p(class='introduction') Former à la cybersécurité par le jeu&nbsp;!
-    p L’ANSSI, en partenariat avec le ministère de l’Éducation nationale ont créé «&nbsp;CyberEnJeux&nbsp;», 
-        strong un dispositif pédagogique innovant pour former à la cybersécurité par le jeu.
-    p Au-delà de la sensibilisation aux risques numériques et aux bonnes pratiques individuelles, 
-        strong CyberEnJeux vise à acculturer les élèves à plusieurs enjeux importants relatifs à la cybersécurité&nbsp;: 
-        | le cyberespace, les cyberattaques, la cryptographie, la gestion des risques cyber, etc.
-    p Dans le cadre de CyberEnJeux, la création de jeux par les élèves constitue donc un moyen d’apprentissage et non un objectif en soi.
-   
-    div(class='actions')
-        button(type='button') Découvrir CyberEnJeux
-        button(type='button') Explorer les jeux des élèves
-   
-    picture(class='illustration')
-        img(src='/assets/images/boites-de-jeux.png' alt='CyberEnJeux')
+    dsfr-container
+        h1 Découvrez les CyberEnJeux
+        .grille
+            h2 Former à la cybersécurité par le jeu&nbsp;!
+            p L’ANSSI, en partenariat avec le ministère de l’Éducation nationale ont créé «&nbsp;CyberEnJeux&nbsp;», 
+                strong un dispositif pédagogique innovant pour former à la cybersécurité par le jeu.
+                br
+                br
+                | Au-delà de la sensibilisation aux risques numériques et aux bonnes pratiques individuelles, 
+                strong CyberEnJeux vise à acculturer les élèves à plusieurs enjeux importants relatifs à la cybersécurité&nbsp;: 
+                | le cyberespace, les cyberattaques, la cryptographie, la gestion des risques cyber, etc.
+                br
+                br
+                | Dans le cadre de CyberEnJeux, la création de jeux par les élèves constitue donc un moyen d’apprentissage et non un objectif en soi.
+        
+            div(class='actions')
+                dsfr-button(
+                    label="Découvrir CyberEnJeux"
+                    kind="primary"
+                    markup="a"
+                    href="/cyber-en-jeux"
+                    target="_self"
+                )
+                dsfr-button(
+                    label="Explorer les jeux des élèves"
+                    kind="secondary"
+                    markup="a"
+                    href="/cyber-en-jeux#vitrine-des-jeux"
+                    target="_self"
+                )
+        
+            img(src='/assets/images/boites-de-jeux-avec-blob.svg' alt='CyberEnJeux')
 
-    section(class='carrousel temoignages')
-        article
-            h4 Les élèves adorent&nbsp;!
-            img(src='/assets/images/citation.svg' alt='')
-            blockquote Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.
+lab-anssi-temoignages(
+    titre=`Les élèves adorent  !`
+    temoignages='[{ "citation": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim cursus at ullamcorper mauris non. Integer aliquam, scelerisque viverra sed enim interdum. In sem elit vivamus ut pellentesque leo eget lacus odio.", "auteur": "Auteur", "source":"Détail"}, { "citation": "Morbi ac est euismod, feugiat quam eget, tristique ligula. Suspendisse vitae nunc vehicula, interdum turpis vitae, feugiat tortor. Integer a dignissim nulla, id consequat magna. Mauris ornare ipsum nec erat euismod consectetur vel eu massa. Phasellus congue dapibus justo, a elementum purus varius quis. Curabitur euismod, elit ut euismod condimentum, eros magna vulputate ipsum, nec tristique sem leo at odio. Sed sollicitudin semper leo nec egestas. Pellentesque sit amet nisl sodales, ullamcorper nibh vitae, pulvinar metus. Nullam ultricies quis felis vitae lacinia. ", "auteur": "Auteur", "source":"Détail"}, { "citation": "Aliquam ac elementum elit. In lacinia congue velit, ac egestas tortor sagittis vel. Donec non commodo magna. Nunc sit amet metus eu ligula condimentum pretium quis in orci. Vestibulum tempor ex eget euismod dignissim. Praesent vel magna eu urna dictum pharetra in vitae erat. Pellentesque non lacinia lectus. Aliquam in dapibus arcu. Sed feugiat hendrerit arcu, id ultricies turpis. Nam enim leo, sollicitudin gravida eleifend eu, malesuada vitae orci. Quisque dignissim at diam posuere bibendum. Cras a nunc ac enim lobortis commodo. Nullam molestie varius iaculis. Fusce nec arcu erat. Nullam nec mi urna. ", "auteur": "Auteur", "source":"Détail"}]'
+)
