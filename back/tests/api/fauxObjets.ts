@@ -21,6 +21,7 @@ import {
   fabriqueAdaptateurTeleversement,
   PhotosJeuTeleversees,
 } from '../../src/infra/adaptateurTeleversement';
+import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -141,6 +142,7 @@ export const configurationServeurSansMiddleware =
       },
     },
     entrepotRessourcesCyber: new EntrepotRessourcesCyberMemoire(),
+    entrepotMetier: new EntrepotMetiersMemoire(),
     adaptateurOIDC: fauxAdaptateurOIDC,
     adaptateurHachage: fauxAdaptateurHachage,
     adaptateurJWT: fauxAdaptateurJWT,

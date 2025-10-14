@@ -24,6 +24,8 @@ import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCh
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
+import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
+import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -68,6 +70,9 @@ serviceCoherenceSecretsHachage
         adaptateurEnvironnement,
         adaptateurOIDC,
         serveurLab: configurationServeurLabEnvironnement(),
+        entrepotMetier: adaptateurEnvironnement.estEntrepotsStatiques()
+          ? new EntrepotMetiersStatique()
+          : new EntrepotMetiersGrist(),
         entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
           ? new EntrepotRessourcesCyberStatique()
           : new EntrepotRessourcesCyberGrist(),
