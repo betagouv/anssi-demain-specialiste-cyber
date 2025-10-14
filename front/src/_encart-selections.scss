@@ -1,20 +1,39 @@
+@use 'points-de-rupture' as *;
+
 .selections {
   background-color: #a94645;
-  color: #fff;
-  display: flex;
-  flex-flow: column;
-  gap: 1.5rem;
-  padding: 3.5rem 1rem;
+  padding: 3.5rem 0;
 
-  h3 {
-    margin: 0 0 0.5rem;
-  }
+  .cartes {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
 
-  .carte {
-    padding: 2rem;
+    dsfr-card {
+      z-index: 1
+    }
 
-    &:last-child {
-      margin-bottom: 1rem;
+    @include a-partir-de(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include a-partir-de(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include a-partir-de(lg) {
+      &:after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: calc(100% + 8rem);
+        background: url(/assets/images/analyste-cyber.svg) no-repeat bottom 0 right 0;
+        background-size: auto 100%;
+        z-index: 0;
+        bottom: -3.5rem;
+        right: -4.5rem;
+      }
     }
   }
 }
