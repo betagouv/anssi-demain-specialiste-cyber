@@ -72,6 +72,7 @@
   brandLogoTitle="Gouvernement"
   brandService="DemainSpécialisteCyber"
   brandLinkTitle="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
+  brandLinkHref="/"
   hasBrandTagline="true"
   brandTagline="Innovation ANSSI"
   hasBrandOperator="true"
