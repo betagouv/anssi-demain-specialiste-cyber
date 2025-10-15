@@ -1,6 +1,7 @@
 export type Metier = {
   id: number;
   titre: string;
+  fonction: string;
   description: string;
   missionPrincipale: string;
   postures: string[];

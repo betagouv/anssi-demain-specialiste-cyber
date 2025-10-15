@@ -12,6 +12,7 @@ class ConstructeurMetier implements Constructeur<Metier> {
     return {
       id: this.id,
       titre: 'Un titre',
+      fonction: 'Une fonction',
       description: 'Une description',
       missionPrincipale: 'La mission',
       postures: [],
@@ -45,6 +46,7 @@ describe('La ressource métiers', () => {
 
     expect(reponse.status).toBe(200);
     expect(reponse.body.titre).toBe('Un titre');
+    expect(reponse.body.fonction).toBe('Une fonction');
     expect(reponse.body.description).toBe('Une description');
   });
 

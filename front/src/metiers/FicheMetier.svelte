@@ -7,13 +7,13 @@
 
 <script lang="ts">
   import axios from 'axios';
-  import Fiche, { type Menu } from '../Fiche.svelte';
   import { onMount } from 'svelte';
-  import { jeuEnEditionStore } from '../jeux/stores/jeuEnEdition.store';
+  import Fiche, { type Menu } from '../Fiche.svelte';
 
   type Metier = {
     id: string;
     titre: string;
+    fonction: string;
     image: { chemin: string };
     description: string;
     missionPrincipale: string;
@@ -89,15 +89,7 @@
 
   const zeroWidthSpace = '\u200B';
   const titre = $derived.by(() =>
-    metier
-      ? metier.titre.split(':')[0].trim().replace('/', `/${zeroWidthSpace}`)
-      : '',
-  );
-  const sousTitre = $derived.by(() =>
-    metier ? metier.titre.split(':')[1]?.trim() : '',
-  );
-  const sousTitreAvecMajuscule = $derived.by(
-    () => sousTitre[0].toLocaleUpperCase() + sousTitre.slice(1),
+    metier ? metier.titre.trim().replace('/', `/${zeroWidthSpace}`) : '',
   );
   const formations = $derived.by(() =>
     metier ? metier.formationsCibles.join(', ') : '',
@@ -121,7 +113,7 @@
         ></dsfr-breadcrumb>
         <div class="cartouche">
           <h1 class="titre-alternatif-xs">{titre}</h1>
-          <p class="texte-xl">{sousTitreAvecMajuscule}</p>
+          <p class="texte-xl">{metier.fonction}</p>
           <dsfr-button
             markup="a"
             href={metier.liens.dataemploi}
@@ -230,6 +222,9 @@
     .texte-xl {
       font-size: 1.25rem;
       line-height: 2rem;
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
 
     .cartouche {

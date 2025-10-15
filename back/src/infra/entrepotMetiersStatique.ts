@@ -13,6 +13,7 @@ export class EntrepotMetiersStatique implements EntrepotMetiers {
       preRequis: [],
       remuneration: { junior: 0, senior: 0 },
       titre: '',
+      fonction: '',
       id: identifiant,
     };
   }
