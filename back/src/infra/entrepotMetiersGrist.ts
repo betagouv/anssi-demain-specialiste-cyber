@@ -11,6 +11,7 @@ type MetierGrist = {
   id: number;
   fields: {
     Titre_de_la_fiche: string;
+    Fonction_de_la_fiche: string;
     En_quoi_consiste_le_metier_: string;
     Mission_principale: string;
     Metiers_proches: string[];
@@ -48,6 +49,7 @@ export class EntrepotMetiersGrist
     return {
       id: enregistrement.id,
       titre: enregistrement.fields.Titre_de_la_fiche,
+      fonction: enregistrement.fields.Fonction_de_la_fiche,
       description: enregistrement.fields.En_quoi_consiste_le_metier_,
       missionPrincipale: enregistrement.fields.Mission_principale,
       postures: enregistrement.fields.Postures?.slice(1) ?? [],
