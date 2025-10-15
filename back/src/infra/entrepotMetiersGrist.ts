@@ -52,15 +52,18 @@ export class EntrepotMetiersGrist
       fonction: enregistrement.fields.Fonction_de_la_fiche,
       description: enregistrement.fields.En_quoi_consiste_le_metier_,
       missionPrincipale: enregistrement.fields.Mission_principale,
-      postures: enregistrement.fields.Postures?.slice(1) ?? [],
-      formationsCibles: enregistrement.fields.Formation_cible?.slice(1) ?? [],
-      preRequis:
-        enregistrement.fields.Autre_prerequis_possibles?.slice(1) ?? [],
+      postures: this.aseptiseListe(enregistrement.fields.Postures),
+      formationsCibles: this.aseptiseListe(
+        enregistrement.fields.Formation_cible,
+      ),
+      preRequis: this.aseptiseListe(
+        enregistrement.fields.Autre_prerequis_possibles,
+      ),
       remuneration: {
         junior: enregistrement.fields.Salaire_junior_annuel_brut_,
         senior: enregistrement.fields.Salaire_senior_annuel_brut_,
       },
-      metiersProches: enregistrement.fields.Metiers_proches?.slice(1) ?? [],
+      metiersProches: this.aseptiseListe(enregistrement.fields.Metiers_proches),
       liens: {
         illustration: enregistrement.fields.URL_illustration,
         dataemploi: enregistrement.fields.Fiche_data_emploi,
