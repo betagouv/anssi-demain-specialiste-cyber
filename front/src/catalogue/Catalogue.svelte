@@ -2,10 +2,11 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import CarteCatalogue from './CarteCatalogue.svelte';
+  import CatalogueFiltres from './CatalogueFiltres.svelte';
   import { lesRessourcesCyberTriees } from './ressourceCyber';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
-  import CatalogueFiltres from './CatalogueFiltres.svelte';
 
   let chargementEnCours = $state(false);
   let ressourcesNonTrouvees = $state(false);
@@ -30,38 +31,8 @@
     <CatalogueFiltres />
 
     <div class="conteneur">
-      {#each $ressourcesCyberFiltrees.resultat as { id, titre, description, urlIllustration, estCertifiee, lienExterne } (id)}
-        <dsfr-card
-          title={description}
-          hasDetailStart
-          detailStart={titre}
-          href={lienExterne || `/ressources-cyber/${id}`}
-          blank={lienExterne.startsWith('http')}
-          src={urlIllustration || '/assets/images/image-generique.svg'}
-          hasHeaderBadge
-          hasDetailEnd
-        >
-          <dsfr-badges-group
-            slot="headerbadges"
-            badges={[{ label: 'Libellé', accent: 'purple-glycine' }]}
-            size="sm"
-          ></dsfr-badges-group>
-          {#if estCertifiee}
-            <dsfr-tags-group
-              hasIcon
-              slot="contentend"
-              tags={[
-                {
-                  id: `tag-certifie-${id}`,
-                  label: 'Ressource certifiée',
-                  icon: 'award-fill',
-                },
-              ]}
-              size="sm"
-              groupMarkup="div"
-            ></dsfr-tags-group>
-          {/if}
-        </dsfr-card>
+      {#each $ressourcesCyberFiltrees.resultat as ressource (ressource.id)}
+        <CarteCatalogue {ressource} />
       {:else}
         {#if chargementEnCours}
           <p>Chargement...</p>
