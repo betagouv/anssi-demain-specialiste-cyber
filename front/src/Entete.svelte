@@ -6,32 +6,32 @@
   }}
 />
 
+<script lang="ts" module>
+  type MenuItem = {
+    id: string;
+    type?: 'link' | 'menu' | 'mega-menu';
+    active?: boolean;
+    collapsable?: boolean;
+    collapseId?: string;
+    label: string;
+    href?: string;
+    items?: MenuItem[];
+  };
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { profil } from './stores/profil';
+
+  const ajouteMenuSiConnecte = (elementDeMenu: MenuItem) =>
+    $profil ? [elementDeMenu] : [];
 
   let cheminCourant = $state('/');
   onMount(() => {
     cheminCourant = window.location.pathname;
   });
-</script>
 
-<dsfr-header
-  id="entete"
-  brandLogoTitle="Gouvernement"
-  brandService="DemainSpécialisteCyber"
-  brandLinkTitle="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
-  hasBrandTagline="true"
-  brandTagline="Innovation ANSSI"
-  hasBrandOperator="true"
-  brandOperatorAlt="ANSSI"
-  brandOperatorSrc="/assets/images/ANSSI.svg"
-  menuId="menu-principal"
-  menuModalId="menu-principal-modal"
-  hasToolLinks="true"
-  hasNavigation="true"
-  navigationId="navigation-principale"
-  navigationAriaLabel="Menu principal"
-  navigationItems={[
+  const menuNavigation: MenuItem[] = $derived([
     {
       id: 'accueil',
       label: 'Accueil',
@@ -53,8 +53,33 @@
       href: '/cyber-en-jeux',
       active: cheminCourant === '/cyber-en-jeux',
     },
-    { id: 'mes-jeux', label: 'Mes jeux', type: 'link', href: '/mes-jeux' },
-  ]}
+    ...ajouteMenuSiConnecte({
+      id: 'mes-jeux',
+      label: 'Mes jeux',
+      type: 'link',
+      href: '/mes-jeux',
+      active: cheminCourant === '/mes-jeux',
+    }),
+  ]);
+</script>
+
+<dsfr-header
+  id="entete"
+  brandLogoTitle="Gouvernement"
+  brandService="DemainSpécialisteCyber"
+  brandLinkTitle="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
+  hasBrandTagline="true"
+  brandTagline="Innovation ANSSI"
+  hasBrandOperator="true"
+  brandOperatorAlt="ANSSI"
+  brandOperatorSrc="/assets/images/ANSSI.svg"
+  menuId="menu-principal"
+  menuModalId="menu-principal-modal"
+  hasToolLinks="true"
+  hasNavigation="true"
+  navigationId="navigation-principale"
+  navigationAriaLabel="Menu principal"
+  navigationItems={menuNavigation}
 >
   <div slot="toolLinks">
     <dsc-zone-identification></dsc-zone-identification>
