@@ -63,6 +63,8 @@
       active: cheminCourant === '/mes-jeux',
     }),
   ]);
+
+  const afficheMenuNavigation = $derived(cheminCourant !== '/nouveau-jeu');
 </script>
 
 <dsfr-header
@@ -78,7 +80,7 @@
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
   hasToolLinks="true"
-  hasNavigation="true"
+  hasNavigation={afficheMenuNavigation}
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
   navigationItems={menuNavigation}
