@@ -2,29 +2,29 @@ block variables
   - var titrePage = ""
   - var descriptionPage = ""
 
-header(class='entete')
-    div(class='haut')
-        div(class='marque')
-            img(src='/assets/images/marianne.svg' alt='Marianne')
-            img(src='/assets/images/ANSSI.svg' alt='ANSSI')
-        hgroup(class='titre')
-            h1 DemainSpécialisteCyber
-            p Innovation ANSSI
-        nav(class='navigation-principale')
-            button(type='button' aria-label='Menu')
-                img(src='/assets/images/menu-gauffre.svg' alt='Menu')
-            div(class='menu-principal')
-                dsc-zone-identification
-                menu
-                    li
-                        a(href='/') Accueil
-                    li
-                        a(href='/catalogue') Catalogue des ressources
-                    li
-                        a(href='/mes-jeux') Sélection enseignants
-                    li
-                        a(href='/cyber-en-jeux') CyberEnJeux
+header.entete
+    dsfr-header#entete(
+        brand-logo-title="Gouvernement"
+        brand-service="DemainSpécialisteCyber"
+        brand-link-title="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
+        has-brand-tagline=true
+        brand-tagline="Innovation ANSSI"
+        has-brand-operator=true
+        brand-operator-alt="ANSSI"
+        brand-operator-src="/assets/images/ANSSI.svg"
+        menu-id="menu-principal"
+        menu-modal-id="menu-principal-modal"
+        has-navigation=true
+        navigation-id="navigation-principale"
+        navigation-aria-label="Menu principal"
+        navigation-items=[
+            { id: "accueil", label: "Accueil", type: "link", href: "/" },
+            { id: "catalogue", label: "Catalogue de ressources", type: "link", href: "/catalogue" },
+            { id: "cyber-en-jeux", label: "CyberEnJeux", type: "link", href: "/cyber-en-jeux" },
+            { id: "mes-jeux", label: "Mes jeux", type: "link", href: "/mes-jeux" },
+        ]
+    )
 
     block hero
-        div(class='hero')
+        div.hero
             lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
