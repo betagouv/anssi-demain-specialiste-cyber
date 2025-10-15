@@ -44,14 +44,16 @@
       label: 'Catalogue de ressources',
       type: 'link',
       href: '/catalogue',
-      active: cheminCourant === '/catalogue',
+      active:
+        cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
     },
     {
       id: 'cyber-en-jeux',
       label: 'CyberEnJeux',
       type: 'link',
       href: '/cyber-en-jeux',
-      active: cheminCourant === '/cyber-en-jeux',
+      active:
+        cheminCourant === '/cyber-en-jeux' || cheminCourant.startsWith('/jeux'),
     },
     ...ajouteMenuSiConnecte({
       id: 'mes-jeux',
