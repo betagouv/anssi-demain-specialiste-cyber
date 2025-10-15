@@ -8,3 +8,4 @@ export * from './jeux/MesJeux.svelte';
 export * from './jeux/FicheJeu.svelte';
 export * from './cyber-en-jeux/Index.svelte';
 export * from './metiers/FicheMetier.svelte';
+export * from './Entete.svelte';

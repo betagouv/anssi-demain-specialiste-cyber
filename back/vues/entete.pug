@@ -3,28 +3,7 @@ block variables
   - var descriptionPage = ""
 
 header.entete
-    dsfr-header#entete(
-        brand-logo-title="Gouvernement"
-        brand-service="DemainSpécialisteCyber"
-        brand-link-title="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
-        has-brand-tagline=true
-        brand-tagline="Innovation ANSSI"
-        has-brand-operator=true
-        brand-operator-alt="ANSSI"
-        brand-operator-src="/assets/images/ANSSI.svg"
-        menu-id="menu-principal"
-        menu-modal-id="menu-principal-modal"
-        has-navigation=true
-        navigation-id="navigation-principale"
-        navigation-aria-label="Menu principal"
-        navigation-items=[
-            { id: "accueil", label: "Accueil", type: "link", href: "/" },
-            { id: "catalogue", label: "Catalogue de ressources", type: "link", href: "/catalogue" },
-            { id: "cyber-en-jeux", label: "CyberEnJeux", type: "link", href: "/cyber-en-jeux" },
-            { id: "mes-jeux", label: "Mes jeux", type: "link", href: "/mes-jeux" },
-        ]
-    )
-
+    dsc-entete
     block hero
         div.hero
             lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
