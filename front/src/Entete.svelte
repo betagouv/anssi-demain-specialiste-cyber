@@ -27,6 +27,7 @@
   brandOperatorSrc="/assets/images/ANSSI.svg"
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
+  hasToolLinks="true"
   hasNavigation="true"
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
@@ -54,4 +55,8 @@
     },
     { id: 'mes-jeux', label: 'Mes jeux', type: 'link', href: '/mes-jeux' },
   ]}
-></dsfr-header>
+>
+  <div slot="toolLinks">
+    <dsc-zone-identification></dsc-zone-identification>
+  </div>
+</dsfr-header>
