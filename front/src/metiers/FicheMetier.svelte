@@ -87,9 +87,10 @@
     },
   ];
 
+  const zeroWidthSpace = '\u200B';
   const titre = $derived.by(() =>
     metier
-      ? metier.titre.split(':')[0].trim().replace('/', '\u200B/\u200B')
+      ? metier.titre.split(':')[0].trim().replace('/', `/${zeroWidthSpace}`)
       : '',
   );
   const sousTitre = $derived.by(() =>
@@ -274,10 +275,6 @@
         }
       }
     }
-  }
-
-  h2 {
-    margin: 0 0 1.5rem;
   }
 
   p {
