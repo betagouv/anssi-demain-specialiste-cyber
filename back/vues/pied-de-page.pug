@@ -1,5 +1,23 @@
-footer(class='pied-de-page')
-    include ./resume
-    include ./contributeurs
-    lab-anssi-navigation-pied-de-page(conforme=false)
+dsfr-footer#pied(
+    brand-logo-title="Gouvernement"
+    brand-link-href="/"
+    brand-link-title="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
+    has-partners="true"
+    partner-title="Les contributeurs"
+    main-partner-src="/assets/images/contributeurs/MinistereEducation.svg"
+    main-partner-href="https://www.education.gouv.fr"
+    main-partner-alt="Ministère de l'Éducation"
+    has-description="true"
+    content-description="DemainSpécialisteCyber est une campagne nationale co-construite par l’ANSSI et son laboratoire d’innovation et le Ministère de l’Éducation Nationale, en vue de valoriser la cybersécurité et ses métiers."
+    bottom-links=[
+      {label: "À propos", href: "/aPropos"},
+      {label: "Mentions légales", href: "/mentionsLegales"},
+      {label: "Politique de confidentialité", href: "/confidentialite"},
+      {label: "Conditions générales", href: "/cgu"},
+      {label: "Statistiques d’utilisation", href: "/statistiques"},
+      {label: "Sécurité", href: "/securite"},
+      {label: "Accessiblité : non conforme", href: "/accessibilite"},
+    ]
+)
+
 
