@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { CouleurDeBadge } from '../badge.type';
   import { libelleThematique } from '../jeux/thematiques';
   import type { Thematique } from './jeu';
 
@@ -6,25 +7,6 @@
     taille: 'sm' | 'md';
     thematiques: Thematique[];
   };
-
-  type CouleurDeBadge =
-    | 'purple-glycine'
-    | 'green-tilleul-verveine'
-    | 'green-archipel'
-    | 'green-emeraude'
-    | 'pink-tuile'
-    | 'blue-cumulus'
-    | 'beige-gris-galet'
-    | 'blue-ecume'
-    | 'green-bourgeon'
-    | 'brown-cafe-creme'
-    | 'orange-terre-battue'
-    | 'pink-macaron'
-    | 'yellow-tournesol'
-    | 'brown-caramel'
-    | 'green-menthe'
-    | 'brown-opera'
-    | 'yellow-moutarde';
 
   const couleursThematiques: Record<Thematique, CouleurDeBadge> = {
     'comportements-numeriques': 'purple-glycine',
