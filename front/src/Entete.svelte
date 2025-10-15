@@ -7,6 +7,12 @@
 />
 
 <script lang="ts">
+  import { onMount } from 'svelte';
+
+  let cheminCourant = $state('/');
+  onMount(() => {
+    cheminCourant = window.location.pathname;
+  });
 </script>
 
 <dsfr-header
@@ -25,18 +31,26 @@
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
   navigationItems={[
-    { id: 'accueil', label: 'Accueil', type: 'link', href: '/' },
+    {
+      id: 'accueil',
+      label: 'Accueil',
+      type: 'link',
+      href: '/',
+      active: cheminCourant === '/',
+    },
     {
       id: 'catalogue',
       label: 'Catalogue de ressources',
       type: 'link',
       href: '/catalogue',
+      active: cheminCourant === '/catalogue',
     },
     {
       id: 'cyber-en-jeux',
       label: 'CyberEnJeux',
       type: 'link',
       href: '/cyber-en-jeux',
+      active: cheminCourant === '/cyber-en-jeux',
     },
     { id: 'mes-jeux', label: 'Mes jeux', type: 'link', href: '/mes-jeux' },
   ]}
