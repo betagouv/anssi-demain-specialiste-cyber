@@ -6,13 +6,13 @@ import { unConstructeurDeRessourceCyber } from '../constructeurRessourceCyber';
 
 describe('La recherche par type', () => {
   it('peut être modifié avec des types', () => {
-    rechercheParType.set(['Jeux']);
+    rechercheParType.set(['Jeux - challenges']);
 
-    expect(get(rechercheParType)).toEqual(['Jeux']);
+    expect(get(rechercheParType)).toEqual(['Jeux - challenges']);
   });
 
   it('est vide quand on la réinitialise', () => {
-    rechercheParType.set(['Jeux']);
+    rechercheParType.set(['Jeux - challenges']);
 
     rechercheParType.reinitialise();
 
@@ -21,7 +21,7 @@ describe('La recherche par type', () => {
 
   describe('permet de filtrer les ressources Cyber', () => {
     const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
-      .avecTypes(['Jeux'])
+      .avecTypes(['Jeux - challenges'])
       .construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
@@ -31,7 +31,7 @@ describe('La recherche par type', () => {
     });
 
     it('en rejetant une ressource dont le niveau ne correspond pas', () => {
-      rechercheParType.set(['Challenge']);
+      rechercheParType.set(['Formation - Mentorat']);
 
       const resultat = rechercheParType.ok(ressourceCyber);
 
@@ -39,7 +39,7 @@ describe('La recherche par type', () => {
     });
 
     it('en incluant une ressource dont le niveau correspond', () => {
-      rechercheParType.set(['Jeux']);
+      rechercheParType.set(['Jeux - challenges']);
 
       const resultat = rechercheParType.ok(ressourceCyber);
 

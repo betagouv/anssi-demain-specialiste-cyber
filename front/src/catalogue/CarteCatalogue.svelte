@@ -1,10 +1,24 @@
 <script lang="ts">
-  import type { RessourceCyber } from './ressourceCyber';
+  import type { CouleurDeBadge } from '../badge.type';
+  import type { RessourceCyber, TypesRessourceCyber } from './ressourceCyber';
 
   interface Props {
     ressource: RessourceCyber;
   }
   const { ressource }: Props = $props();
+
+  const couleursTypes: Record<TypesRessourceCyber, CouleurDeBadge> = {
+    'Contenus audio / vidéo': 'green-emeraude',
+    'Formation - Mentorat': 'pink-tuile',
+    'Guides - fiches - études': 'blue-cumulus',
+    'Jeux - challenges': 'green-archipel',
+    'Outil technique': 'beige-gris-galet',
+  };
+
+  const badges = ressource.types.map((type) => ({
+    label: type,
+    accent: couleursTypes[type] ?? 'purple-glycine',
+  }));
 </script>
 
 <dsfr-card
@@ -17,11 +31,7 @@
   hasHeaderBadge
   hasDetailEnd
 >
-  <dsfr-badges-group
-    slot="headerbadges"
-    badges={[{ label: 'Libellé', accent: 'purple-glycine' }]}
-    size="sm"
-  ></dsfr-badges-group>
+  <dsfr-badges-group slot="headerbadges" {badges} size="sm"></dsfr-badges-group>
   {#if ressource.estCertifiee}
     <dsfr-tags-group
       hasIcon

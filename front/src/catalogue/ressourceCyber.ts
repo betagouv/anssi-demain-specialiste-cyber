@@ -1,3 +1,10 @@
+export type TypesRessourceCyber =
+  | 'Contenus audio / vidéo'
+  | 'Formation - Mentorat'
+  | 'Guides - fiches - études'
+  | 'Jeux - challenges'
+  | 'Outil technique';
+
 export type RessourceCyber = {
   id: number;
   titre: string;
@@ -5,7 +12,7 @@ export type RessourceCyber = {
   thematiques: string[];
   publicsCible: string[];
   niveaux: string[];
-  types: string[];
+  types: TypesRessourceCyber[];
   besoins: string[];
   urlIllustration: string;
   estCertifiee: boolean;
@@ -40,7 +47,7 @@ export const lesNiveauxDesRessourcesCyber = (
 
 export const lesTypesDesRessourcesCyber = (
   ressourcesCyber: RessourceCyber[],
-): string[] => {
+): TypesRessourceCyber[] => {
   return Array.from(new Set(ressourcesCyber.flatMap((r) => r.types))).sort(
     (n1, n2) => n1.localeCompare(n2),
   );
