@@ -5,6 +5,7 @@ import {
   lesThematiquesCyber,
   lesTypesDesRessourcesCyber,
   type RessourceCyber,
+  type TypesRessourceCyber,
 } from '../ressourceCyber';
 import { rechercheParBesoin } from './rechercheParBesoin.store';
 import { rechercheParNiveau } from './rechercheParNiveau.store';
@@ -19,7 +20,7 @@ export type RessourcesCyberFiltrees = {
   thematiques: string[];
   publicsCible: string[];
   niveaux: string[];
-  types: string[];
+  types: TypesRessourceCyber[];
   besoins: string[];
 };
 

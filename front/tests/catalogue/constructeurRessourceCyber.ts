@@ -1,4 +1,7 @@
-import { type RessourceCyber } from '../../src/catalogue/ressourceCyber';
+import {
+  type TypesRessourceCyber,
+  type RessourceCyber,
+} from '../../src/catalogue/ressourceCyber';
 
 interface Constructeur<T> {
   construis(): T;
@@ -11,7 +14,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   private _titre: string = 'Un titre';
   private _description: string = '';
   private _thematiques: string[] = [];
-  private _types: string[] = [];
+  private _types: TypesRessourceCyber[] = [];
   private _besoins: string[] = [];
   private _urlIllustration: string = 'http://monillu.png';
   private _estCertifiee: boolean = false;
@@ -42,7 +45,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
     return this;
   }
 
-  avecTypes(types: string[]) {
+  avecTypes(types: TypesRessourceCyber[]) {
     this._types = types;
     return this;
   }
@@ -69,7 +72,7 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
       besoins: this._besoins,
       urlIllustration: this._urlIllustration,
       estCertifiee: this._estCertifiee,
-      lienExterne: this._lien
+      lienExterne: this._lien,
     };
   }
 }

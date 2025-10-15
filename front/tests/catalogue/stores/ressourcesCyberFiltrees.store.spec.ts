@@ -30,7 +30,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         ])
         .avecPublicsCible(['Élèves', 'Enseignants'])
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
-        .avecTypes(['Jeux', 'Formation'])
+        .avecTypes(['Jeux - challenges', 'Contenus audio / vidéo'])
         .avecBesoins(['Découvrir les métiers', 'Découvrir la cyber'])
         .construis(),
       unConstructeurDeRessourceCyber()
@@ -39,7 +39,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .avecThematiques(['Comportements numériques', 'Orientation'])
         .avecPublicsCible(['Parents', 'Élèves'])
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
-        .avecTypes(['Formation', 'Challenge'])
+        .avecTypes(['Contenus audio / vidéo', 'Outil technique'])
         .avecBesoins(['Découvrir la cyber'])
         .construis(),
     ]);
@@ -89,7 +89,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
   });
 
   it('effectue le filtre en fonction du type', () => {
-    rechercheParType.set(['Jeux']);
+    rechercheParType.set(['Jeux - challenges']);
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
@@ -101,7 +101,11 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
   it('retourne la liste dédupliquée des types existants', () => {
     const resultat = get(ressourcesCyberFiltrees).types;
 
-    expect(resultat).toEqual(['Challenge', 'Formation', 'Jeux']);
+    expect(resultat).toEqual([
+      'Contenus audio / vidéo',
+      'Jeux - challenges',
+      'Outil technique',
+    ]);
   });
 
   it('effectue le filtre en fonction du besoin', () => {
