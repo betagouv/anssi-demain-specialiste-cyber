@@ -6,18 +6,24 @@ import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/dsc';
 import { uneSelection } from '../metier/constructeurSelection';
 import { EntrepotSelectionEnseignantsMemoire } from '../infra/entrepotSelectionEnseignantsMemoire';
+import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 
 describe('La ressource sélection enseignants', () => {
+  let entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;
   let entrepotSelectionEnseignants: EntrepotSelectionEnseignantsMemoire;
   let configuration: ConfigurationServeur;
   let serveur: Express;
 
   beforeEach(() => {
-    entrepotSelectionEnseignants = new EntrepotSelectionEnseignantsMemoire();
+    entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
+    entrepotSelectionEnseignants = new EntrepotSelectionEnseignantsMemoire(
+      entrepotRessourcesCyber,
+    );
     configuration = configurationDeTestDuServeur();
     serveur = creeServeur({
       ...configuration,
       entrepotSelectionEnseignants,
+      entrepotRessourcesCyber,
     });
   });
 
