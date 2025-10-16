@@ -33,28 +33,12 @@ describe('Les ressources de page', () => {
     },
   );
 
-  describe('concernant la fiche jeu', () => {
-    it('renvoie la page', async () => {
-      let vueRendue = '';
-      const moteurDeRendu: MoteurDeRendu = {
-        rends: (reponse, vue) => {
-          vueRendue = vue;
-          reponse.sendStatus(200);
-        },
-      };
-      const serveur = creeServeur({
-        ...configurationDeTestDuServeur(),
-        moteurDeRendu,
-      });
-
-      const reponse = await request(serveur).get(`/jeux/1234`);
-
-      expect(reponse.status).toBe(200);
-      expect(vueRendue).toEqual('jeux');
-    });
-  });
-
   describe.each([
+    { route: '/catalogue', vue: 'catalogue' },
+    { route: '/maintenance', vue: 'maintenance' },
+    { route: '/jeux/1234', vue: 'jeux' },
+    { route: '/cyber-en-jeux', vue: 'cyber-en-jeux' },
+    { route: '/metiers/1234', vue: 'metiers' },
     { route: '/selection-enseignants', vue: 'selection-enseignants' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
