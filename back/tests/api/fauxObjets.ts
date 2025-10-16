@@ -135,32 +135,37 @@ export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
 };
 
 export const configurationServeurSansMiddleware =
-  (): ConfigurationServeurSansMiddleware => ({
-    serveurLab: {
-      reseau: {
-        trustProxy: '0',
-        maxRequetesParMinute: 1000,
-        ipAutorisees: false,
+  (): ConfigurationServeurSansMiddleware => {
+    const entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
+    return {
+      serveurLab: {
+        reseau: {
+          trustProxy: '0',
+          maxRequetesParMinute: 1000,
+          ipAutorisees: false,
+        },
       },
-    },
-    entrepotRessourcesCyber: new EntrepotRessourcesCyberMemoire(),
-    entrepotMetier: new EntrepotMetiersMemoire(),
-    adaptateurOIDC: fauxAdaptateurOIDC,
-    adaptateurHachage: fauxAdaptateurHachage,
-    adaptateurJWT: fauxAdaptateurJWT,
-    adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
-    entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-    recupereCheminsVersFichiersStatiques: () => [
-      join(__dirname, '../pagesDeTest'),
-    ],
-    moteurDeRendu: fauxMoteurDeRendu,
-    busEvenements: fabriqueBusPourLesTests(),
-    entrepotJeux: new EntrepotJeuxMemoire(),
-    adaptateurEnvironnement: fauxAdaptateurEnvironnement,
-    adaptateurJournal: adaptateurJournalMemoire,
-    adaptateurTeleversement: fauxAdaptateurTeleversement(),
-    entrepotSelectionEnseignants: new EntrepotSelectionEnseignantsMemoire(),
-  });
+      entrepotRessourcesCyber,
+      entrepotMetier: new EntrepotMetiersMemoire(),
+      adaptateurOIDC: fauxAdaptateurOIDC,
+      adaptateurHachage: fauxAdaptateurHachage,
+      adaptateurJWT: fauxAdaptateurJWT,
+      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+      recupereCheminsVersFichiersStatiques: () => [
+        join(__dirname, '../pagesDeTest'),
+      ],
+      moteurDeRendu: fauxMoteurDeRendu,
+      busEvenements: fabriqueBusPourLesTests(),
+      entrepotJeux: new EntrepotJeuxMemoire(),
+      adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+      adaptateurJournal: adaptateurJournalMemoire,
+      adaptateurTeleversement: fauxAdaptateurTeleversement(),
+      entrepotSelectionEnseignants: new EntrepotSelectionEnseignantsMemoire(
+        entrepotRessourcesCyber,
+      ),
+    };
+  };
 
 const ajouteUnNonceNonAleatoireALaReponse = async (
   _requete: RequeteNonTypee,

@@ -10,7 +10,9 @@ export class EntrepotMemoire<T> {
     );
   }
 
-  tous = async () => [...this.entites];
+  async tous() {
+    return [...this.entites];
+  }
 
   taille = async () => this.entites.length;
 }
