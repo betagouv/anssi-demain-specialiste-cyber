@@ -25,7 +25,10 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     ressourceRessourceCyber(configurationServeur),
   );
   router.use('/metiers', ressourceMetier(configurationServeur));
-  router.use('/selection-enseignants', ressourceSelectionEnseignants());
+  router.use(
+    '/selection-enseignants',
+    ressourceSelectionEnseignants(configurationServeur),
+  );
 
   return router;
 };
