@@ -50,7 +50,7 @@
 
     background:
       url('/assets/images/cercles.svg') no-repeat,
-      #131429;
+      var(--bleu-profond-dsc);
     background-size: auto 100%;
     background-position: 25% bottom;
 
