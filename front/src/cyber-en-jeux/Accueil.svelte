@@ -353,7 +353,7 @@
     }
 
     .bandeau {
-      background-color: #131429;
+      background-color: var(--bleu-profond-dsc);
       color: var(--grey-1000-50);
       padding: 2rem 2rem 3rem 2rem;
 

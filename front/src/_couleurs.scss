@@ -12,6 +12,8 @@ $toutes-couleurs: (
 );
 
 :root {
+  --bleu-profond-dsc: #131429;
+
   @each $categorie, $map in $toutes-couleurs {
     @each $nom, $valeur in map.get($map: $toutes-couleurs, $key: $categorie) {
       --#{$categorie}-#{$nom}: #{$valeur};

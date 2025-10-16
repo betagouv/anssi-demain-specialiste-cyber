@@ -111,10 +111,6 @@
 {/each}
 
 <style lang="scss">
-  :host {
-    --bleu-profond-dsc: #131429;
-  }
-
   section {
     padding: 3.5rem 0;
 
