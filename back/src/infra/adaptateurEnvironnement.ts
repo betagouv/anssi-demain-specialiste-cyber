@@ -18,6 +18,7 @@ export type AdaptateurEnvironnement = {
     cleApi: string;
     ressourcesCyber: () => IdentifiantsDocumentGrist;
     metiers: () => IdentifiantsDocumentGrist;
+    selectionEnseignants: () => IdentifiantsDocumentGrist;
   };
   estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
@@ -76,6 +77,10 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     metiers: () => ({
       idDocument: process.env.GRIST_METIERS_ID_DOCUMENT || '',
       idTable: process.env.GRIST_METIERS_ID_TABLE || '',
+    }),
+    selectionEnseignants: () => ({
+      idDocument: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_DOCUMENT || '',
+      idTable: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE || '',
     }),
   }),
   hachage: () => ({
