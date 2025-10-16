@@ -37,7 +37,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     });
   }
 
-  protected aseptiseListe(colonne: string[] | null | undefined): string[] {
+  protected aseptiseListe<T>(colonne: T[] | null | undefined): T[] {
     return colonne?.slice(1) ?? [];
   }
 }
