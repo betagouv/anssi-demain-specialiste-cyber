@@ -6,6 +6,7 @@ import {
   creeRecupereRessourceHttp,
   RecupereRessourceHttp,
 } from './recupereRessourceHttp';
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 
 export type SelectionEnseignantsGrist = {
   id: number;
@@ -23,6 +24,7 @@ export class EntrepotSelectionEnseignantsGrist
   implements EntrepotSelectionEnseignants
 {
   constructor(
+    private entrepotRessourcesCyber: EntrepotRessourcesCyber,
     ressourcesCyberGrist: RecupereRessourceHttp<
       ReponseGrist<SelectionEnseignantsGrist>
     > = creeRecupereRessourceHttp(),
@@ -37,13 +39,21 @@ export class EntrepotSelectionEnseignantsGrist
 
   async tous(): Promise<Selection[]> {
     const reponse = await this.appelleGrist();
+
+    const toutesLesRessourcesCyber = await this.entrepotRessourcesCyber.tous();
+
     return reponse.records.map(
       (record) =>
         new Selection({
           id: record.fields.Id2,
           titre: record.fields.Titre,
           explication: record.fields.Explication,
-          ressources: this.aseptiseListe(record.fields.Ressources2),
+          ressources: this.aseptiseListe(record.fields.Ressources2).map(
+            (idRessource) =>
+              toutesLesRessourcesCyber.find(
+                (ressource) => ressource.id === Number(idRessource),
+              )!,
+          ),
           couleurDeFond: record.fields.Couleur_de_fond,
         }),
     );

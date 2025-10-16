@@ -27,6 +27,7 @@ import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement
 import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotSelectionEnseignantsStatique } from './infra/entrepotSelectionEnseignantsStatique';
+import { EntrepotSelectionEnseignantsGrist } from './infra/entrepotSelectionEnseignantsGrist';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -66,6 +67,10 @@ serviceCoherenceSecretsHachage
       }),
     });
 
+    const entrepotRessourcesCyber = adaptateurEnvironnement.estEntrepotsStatiques()
+      ? new EntrepotRessourcesCyberStatique()
+      : new EntrepotRessourcesCyberGrist();
+
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
@@ -74,9 +79,7 @@ serviceCoherenceSecretsHachage
         entrepotMetier: adaptateurEnvironnement.estEntrepotsStatiques()
           ? new EntrepotMetiersStatique()
           : new EntrepotMetiersGrist(),
-        entrepotRessourcesCyber: adaptateurEnvironnement.estEntrepotsStatiques()
-          ? new EntrepotRessourcesCyberStatique()
-          : new EntrepotRessourcesCyberGrist(),
+        entrepotRessourcesCyber,
         adaptateurJWT,
         adaptateurHachage,
         adaptateurRechercheEntreprise,
@@ -94,7 +97,9 @@ serviceCoherenceSecretsHachage
         adaptateurJournal: fabriqueAdaptateurJournal(),
         adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
         entrepotSelectionEnseignants:
-          new EntrepotSelectionEnseignantsStatique(),
+          adaptateurEnvironnement.estEntrepotsStatiques()
+            ? new EntrepotSelectionEnseignantsStatique()
+            : new EntrepotSelectionEnseignantsGrist(entrepotRessourcesCyber),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,
