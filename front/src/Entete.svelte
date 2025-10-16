@@ -48,6 +48,13 @@
         cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
     },
     {
+      id: 'selection-enseignants',
+      label: 'Sélection enseignants',
+      type: 'link',
+      href: '/selection-enseignants',
+      active: cheminCourant === '/selection-enseignants',
+    },
+    {
       id: 'cyber-en-jeux',
       label: 'CyberEnJeux',
       type: 'link',
