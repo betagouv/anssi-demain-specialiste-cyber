@@ -22,6 +22,7 @@ import {
   PhotosJeuTeleversees,
 } from '../../src/infra/adaptateurTeleversement';
 import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
+import { EntrepotSelectionEnseignantsMemoire } from '../infra/entrepotSelectionEnseignantsMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -158,6 +159,7 @@ export const configurationServeurSansMiddleware =
     adaptateurEnvironnement: fauxAdaptateurEnvironnement,
     adaptateurJournal: adaptateurJournalMemoire,
     adaptateurTeleversement: fauxAdaptateurTeleversement(),
+    entrepotSelectionEnseignants: new EntrepotSelectionEnseignantsMemoire(),
   });
 
 const ajouteUnNonceNonAleatoireALaReponse = async (
