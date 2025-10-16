@@ -51,9 +51,6 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
           new ConstructeurLigneGristSelectionEnseignants()
             .avecColonneId('se-former')
             .avecColonneTitre('Se former')
-            .avecColonneExplication("Les explications d'usage")
-            .avecColonneRessources(['CyberEnJeux', 'SecNumAcademy'])
-            .avecColonneCouleurDeFond('#FFFFFF')
             .construis(),
         )
         .construis();
@@ -91,7 +88,7 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
         .ajouteUneLigne(
           new ConstructeurLigneGristSelectionEnseignants()
             .avecColonneId('se-former')
-            .avecColonneRessources(['13'])
+            .avecColonneRessources([13])
             .construis(),
         )
         .construis();
@@ -102,6 +99,6 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     const ressource = ressourcesCyber[0].ressources[0];
-    expect((ressource as RessourceCyber).titre).toBe('The Osint Project');
+    expect(ressource.titre).toBe('The Osint Project');
   });
 });
