@@ -1,12 +1,13 @@
 import { Constructeur } from '../constructeur';
 import { Selection } from '../../src/metier/selection';
 import { randomUUID } from 'crypto';
+import { RessourceCyber } from '../../src/metier/ressourceCyber';
 
 class ConstructeurDeSelection implements Constructeur<Selection> {
   private id: string = randomUUID();
   private titre: string = 'Titre';
   private explication: string = 'Explication';
-  private ressources: string[] = [];
+  private ressources: RessourceCyber[] = [];
 
   avecUnId(identifiant: string): ConstructeurDeSelection {
     this.id = identifiant;
@@ -20,11 +21,6 @@ class ConstructeurDeSelection implements Constructeur<Selection> {
 
   avecUneExplication(explication: string): ConstructeurDeSelection {
     this.explication = explication;
-    return this;
-  }
-
-  avecUneRessource(idRessource: string): ConstructeurDeSelection {
-    this.ressources.push(idRessource);
     return this;
   }
 

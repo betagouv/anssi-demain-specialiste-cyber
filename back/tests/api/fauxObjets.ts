@@ -162,9 +162,7 @@ export const configurationServeurSansMiddleware =
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       adaptateurJournal: adaptateurJournalMemoire,
       adaptateurTeleversement: fauxAdaptateurTeleversement(),
-      entrepotSelectionEnseignants: new EntrepotSelectionEnseignantsMemoire(
-        entrepotRessourcesCyber,
-      ),
+      entrepotSelectionEnseignants: new EntrepotSelectionEnseignantsMemoire(),
     };
   };
 

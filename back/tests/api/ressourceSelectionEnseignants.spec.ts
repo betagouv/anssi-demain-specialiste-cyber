@@ -17,7 +17,6 @@ describe('La ressource sélection enseignants', () => {
   beforeEach(() => {
     entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
     entrepotSelectionEnseignants = new EntrepotSelectionEnseignantsMemoire(
-      entrepotRessourcesCyber,
     );
     configuration = configurationDeTestDuServeur();
     serveur = creeServeur({

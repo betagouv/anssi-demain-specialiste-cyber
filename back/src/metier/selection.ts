@@ -5,7 +5,7 @@ type DonneesConstructionSelection = {
   id?: string;
   titre: string;
   explication: string;
-  ressources: (string | RessourceCyber)[];
+  ressources: RessourceCyber[];
   couleurDeFond: string | undefined;
 };
 
@@ -13,7 +13,7 @@ export class Selection {
   readonly id: string;
   titre: string;
   explication: string;
-  ressources: (string | RessourceCyber)[] = [];
+  ressources: RessourceCyber[] = [];
   couleurDeFond: string | undefined;
 
   constructor(donnees: DonneesConstructionSelection) {
