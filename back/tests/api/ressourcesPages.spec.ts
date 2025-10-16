@@ -53,4 +53,27 @@ describe('Les ressources de page', () => {
       expect(vueRendue).toEqual('jeux');
     });
   });
+
+  describe.each([
+    { route: '/selection-enseignants', vue: 'selection-enseignants' },
+  ])('concernant la page $route', ({ route, vue }) => {
+    it('renvoie la page', async () => {
+      let vueRendue = '';
+      const moteurDeRendu: MoteurDeRendu = {
+        rends: (reponse, vue) => {
+          vueRendue = vue;
+          reponse.sendStatus(200);
+        },
+      };
+      const serveur = creeServeur({
+        ...configurationDeTestDuServeur(),
+        moteurDeRendu,
+      });
+
+      const reponse = await request(serveur).get(route);
+
+      expect(reponse.status).toBe(200);
+      expect(vueRendue).toEqual(vue);
+    });
+  });
 });
