@@ -49,61 +49,63 @@
       : ''}
   >
     <dsfr-container>
-      <div class:fonce={section.couleurDeFond}>
-        <h2>{section.titre}</h2>
-        <p>
-          {section.description}
-        </p>
-        <h4>Ressources</h4>
-        <div class="ressources">
-          <CarteCatalogue
-            ressource={{
-              id: 1,
-              titre: 'Titre',
-              description:
-                'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-              urlIllustration: '/assets/images/image-generique.svg',
-              besoins: [],
-              niveaux: [],
-              types: [],
-              publicsCible: [],
-              thematiques: [],
-              lienExterne: '#',
-              estCertifiee: false,
-            }}
-          />
-          <CarteCatalogue
-            ressource={{
-              id: 1,
-              titre: 'Titre',
-              description:
-                'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-              urlIllustration: '/assets/images/image-generique.svg',
-              besoins: [],
-              niveaux: [],
-              types: [],
-              publicsCible: [],
-              thematiques: [],
-              lienExterne: '#',
-              estCertifiee: false,
-            }}
-          />
-          <CarteCatalogue
-            ressource={{
-              id: 1,
-              titre: 'Titre',
-              description:
-                'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-              urlIllustration: '/assets/images/image-generique.svg',
-              besoins: [],
-              niveaux: [],
-              types: [],
-              publicsCible: [],
-              thematiques: [],
-              lienExterne: '#',
-              estCertifiee: false,
-            }}
-          />
+      <div class="conteneur" class:fonce={section.couleurDeFond}>
+        <hgroup>
+          <h2>{section.titre}</h2>
+          <p>{section.description}</p>
+        </hgroup>
+        <div>
+          <h4>Ressources</h4>
+          <div class="ressources">
+            <CarteCatalogue
+              ressource={{
+                id: 1,
+                titre: 'Titre',
+                description:
+                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                urlIllustration: '/assets/images/image-generique.svg',
+                besoins: [],
+                niveaux: [],
+                types: [],
+                publicsCible: [],
+                thematiques: [],
+                lienExterne: '#',
+                estCertifiee: false,
+              }}
+            />
+            <CarteCatalogue
+              ressource={{
+                id: 1,
+                titre: 'Titre',
+                description:
+                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                urlIllustration: '/assets/images/image-generique.svg',
+                besoins: [],
+                niveaux: [],
+                types: [],
+                publicsCible: [],
+                thematiques: [],
+                lienExterne: '#',
+                estCertifiee: false,
+              }}
+            />
+            <CarteCatalogue
+              ressource={{
+                id: 1,
+                titre: 'Titre',
+                description:
+                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                urlIllustration: '/assets/images/image-generique.svg',
+                besoins: [],
+                niveaux: [],
+                types: [],
+                publicsCible: [],
+                thematiques: [],
+                lienExterne: '#',
+                estCertifiee: false,
+              }}
+            />
+          </div>
         </div>
       </div>
     </dsfr-container>
@@ -111,6 +113,8 @@
 {/each}
 
 <style lang="scss">
+  @use '../points-de-rupture' as *;
+
   section {
     padding: 3.5rem 0;
 
@@ -130,6 +134,29 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+
+      @include a-partir-de(sm) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include a-partir-de(md) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @include a-partir-de(lg) {
+      .conteneur {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        padding-bottom: 1rem;
+
+        hgroup {
+          flex: 0 0 282px;
+        }
+      }
     }
   }
 </style>
