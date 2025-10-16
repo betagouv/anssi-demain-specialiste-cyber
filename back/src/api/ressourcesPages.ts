@@ -10,6 +10,7 @@ const pages = [
   { route: '/jeux', protegee: false },
   { route: '/cyber-en-jeux', protegee: false },
   { route: '/metiers', protegee: false },
+  { route: '/selection-enseignants', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
