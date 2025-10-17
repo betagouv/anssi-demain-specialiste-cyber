@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import {
-  EntrepotSelectionEnseignantsGrist,
+  EntrepotSelectionsEnseignantsGrist,
   SelectionEnseignantsGrist
-} from '../../src/infra/entrepotSelectionEnseignantsGrist';
+} from '../../src/infra/entrepotSelectionsEnseignantsGrist';
 import {
   ConstructeurLigneGristSelectionEnseignants,
   ConstructeurReponseSelectionEnseignantsGrist
@@ -31,7 +31,7 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
       urlAppelee = url;
       return reponseVide;
     };
-    const entrepotRessourcesCyberGrist = new EntrepotSelectionEnseignantsGrist(
+    const entrepotRessourcesCyberGrist = new EntrepotSelectionsEnseignantsGrist(
       entrepotRessourcesCyber, clientHttp,
     );
 
@@ -55,7 +55,7 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
         )
         .construis();
     };
-    const entrepotRessourcesCyberGrist = new EntrepotSelectionEnseignantsGrist(
+    const entrepotRessourcesCyberGrist = new EntrepotSelectionsEnseignantsGrist(
       entrepotRessourcesCyber, ressourcesCyberGrist,
     );
 
@@ -92,7 +92,7 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
             .construis(),
         )
         .construis();
-    const entrepotRessourcesCyberGrist = new EntrepotSelectionEnseignantsGrist(
+    const entrepotRessourcesCyberGrist = new EntrepotSelectionsEnseignantsGrist(
       entrepotRessourcesCyber, ressourcesCyberGrist,
     );
 

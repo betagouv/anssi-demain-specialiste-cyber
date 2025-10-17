@@ -7,7 +7,7 @@ import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceJeux } from './ressourceJeux';
 import { ressourceMetier } from './ressourceMetier';
-import { ressourceSelectionEnseignants } from './ressourceSelectionEnseignants';
+import { ressourceSelectionsEnseignants } from './ressourceSelectionsEnseignants';
 
 export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
   const router = Router();
@@ -26,8 +26,8 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
   );
   router.use('/metiers', ressourceMetier(configurationServeur));
   router.use(
-    '/selection-enseignants',
-    ressourceSelectionEnseignants(configurationServeur),
+    '/selections-enseignants',
+    ressourceSelectionsEnseignants(configurationServeur),
   );
 
   return router;

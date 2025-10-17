@@ -5,42 +5,42 @@ import request from 'supertest';
 import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/dsc';
 import { uneSelection } from '../metier/constructeurSelection';
-import { EntrepotSelectionEnseignantsMemoire } from '../infra/entrepotSelectionEnseignantsMemoire';
+import { EntrepotSelectionsEnseignantsMemoire } from '../infra/entrepotSelectionsEnseignantsMemoire';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 
 describe('La ressource sélection enseignants', () => {
   let entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;
-  let entrepotSelectionEnseignants: EntrepotSelectionEnseignantsMemoire;
+  let entrepotSelectionsEnseignants: EntrepotSelectionsEnseignantsMemoire;
   let configuration: ConfigurationServeur;
   let serveur: Express;
 
   beforeEach(() => {
     entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
-    entrepotSelectionEnseignants = new EntrepotSelectionEnseignantsMemoire(
+    entrepotSelectionsEnseignants = new EntrepotSelectionsEnseignantsMemoire(
     );
     configuration = configurationDeTestDuServeur();
     serveur = creeServeur({
       ...configuration,
-      entrepotSelectionEnseignants,
+      entrepotSelectionsEnseignants: entrepotSelectionsEnseignants,
       entrepotRessourcesCyber,
     });
   });
 
   describe('sur une demande GET', () => {
     it('renvoie un 200', async () => {
-      const reponse = await request(serveur).get('/api/selection-enseignants');
+      const reponse = await request(serveur).get('/api/selections-enseignants');
       expect(reponse.status).toEqual(200);
     });
 
     it('retourne la liste des sélections', async () => {
-      await entrepotSelectionEnseignants.ajoute(
+      await entrepotSelectionsEnseignants.ajoute(
         uneSelection()
           .avecUnId('former')
           .avecUnTitre('Former')
           .avecUneExplication('Former lorem ipsum')
           .construis(),
       );
-      await entrepotSelectionEnseignants.ajoute(
+      await entrepotSelectionsEnseignants.ajoute(
         uneSelection()
           .avecUnId('se-former')
           .avecUnTitre('Se former')
@@ -48,7 +48,7 @@ describe('La ressource sélection enseignants', () => {
           .construis(),
       );
 
-      const reponse = await request(serveur).get('/api/selection-enseignants');
+      const reponse = await request(serveur).get('/api/selections-enseignants');
 
       expect(reponse.body).toStrictEqual([
         {
