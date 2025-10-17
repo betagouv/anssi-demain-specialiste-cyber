@@ -27,7 +27,7 @@ import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement
 import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotSelectionsEnseignantsStatique } from './infra/entrepotSelectionsEnseignantsStatique';
-import { EntrepotSelectionsEnseignantsGrist } from './infra/entrepotSelectionsEnseignantsGrist';
+import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
 import { Selection } from './metier/selection';
 import { EntrepotSelectionsEleves } from './metier/entrepotSelectionsEleves';
 
@@ -102,7 +102,7 @@ serviceCoherenceSecretsHachage
         entrepotSelectionsEnseignants:
           adaptateurEnvironnement.estEntrepotsStatiques()
             ? new EntrepotSelectionsEnseignantsStatique()
-            : new EntrepotSelectionsEnseignantsGrist(entrepotRessourcesCyber),
+            : new EntrepotSelectionsGrist(entrepotRessourcesCyber),
         entrepotSelectionsEleves: new (class
           implements EntrepotSelectionsEleves
         {

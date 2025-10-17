@@ -1,4 +1,4 @@
-import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
+import { EntrepotSelections } from '../metier/entrepotSelections';
 import { Selection } from '../metier/selection';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
@@ -8,7 +8,7 @@ import {
 } from './recupereRessourceHttp';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 
-export type SelectionEnseignantsGrist = {
+export type SelectionGrist = {
   id: number;
   fields: {
     Id2: string;
@@ -19,14 +19,14 @@ export type SelectionEnseignantsGrist = {
   };
 };
 
-export class EntrepotSelectionsEnseignantsGrist
-  extends EntrepotGrist<SelectionEnseignantsGrist>
-  implements EntrepotSelectionsEnseignants
+export class EntrepotSelectionsGrist
+  extends EntrepotGrist<SelectionGrist>
+  implements EntrepotSelections
 {
   constructor(
     private entrepotRessourcesCyber: EntrepotRessourcesCyber,
     ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<SelectionEnseignantsGrist>
+      ReponseGrist<SelectionGrist>
     > = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();

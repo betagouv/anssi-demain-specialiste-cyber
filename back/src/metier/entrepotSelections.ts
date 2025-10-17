@@ -1,5 +1,5 @@
 import { Selection } from './selection';
 
-export interface EntrepotSelectionsEleves {
+export interface EntrepotSelections {
   tous: () => Promise<Selection[]>;
 }
