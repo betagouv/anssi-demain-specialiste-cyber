@@ -71,15 +71,15 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     urlDeBase: process.env.GRIST_URL_BASE || '',
     cleApi: process.env.GRIST_CLE_API || '',
     ressourcesCyber: () => ({
-      idDocument: process.env.GRIST_RESSOURCES_CYBER_ID_DOCUMENT || '',
+      idDocument: process.env.GRIST_ID_DOCUMENT || '',
       idTable: process.env.GRIST_RESSOURCES_CYBER_ID_TABLE || '',
     }),
     metiers: () => ({
-      idDocument: process.env.GRIST_METIERS_ID_DOCUMENT || '',
+      idDocument: process.env.GRIST_ID_DOCUMENT || '',
       idTable: process.env.GRIST_METIERS_ID_TABLE || '',
     }),
     selectionEnseignants: () => ({
-      idDocument: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_DOCUMENT || '',
+      idDocument: process.env.GRIST_ID_DOCUMENT || '',
       idTable: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE || '',
     }),
   }),
