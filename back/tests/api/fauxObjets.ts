@@ -23,6 +23,7 @@ import {
 } from '../../src/infra/adaptateurTeleversement';
 import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
 import { EntrepotSelectionsEnseignantsMemoire } from '../infra/entrepotSelectionsEnseignantsMemoire';
+import { EntrepotSelectionsElevesMemoire } from '../infra/entrepotSelectionsElevesMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -164,6 +165,7 @@ export const configurationServeurSansMiddleware =
       adaptateurJournal: adaptateurJournalMemoire,
       adaptateurTeleversement: fauxAdaptateurTeleversement(),
       entrepotSelectionsEnseignants: new EntrepotSelectionsEnseignantsMemoire(),
+      entrepotSelectionsEleves: new EntrepotSelectionsElevesMemoire(),
     };
   };
 
