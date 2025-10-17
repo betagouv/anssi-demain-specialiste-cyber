@@ -69,9 +69,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   grist: () => ({
     urlDeBase: '',
     cleApi: '',
-    ressourcesCyber: () => ({ idDocument: '', idTable: '' }),
-    metiers: () => ({ idDocument: '', idTable: '' }),
-    selectionEnseignants: () => ({ idDocument: '', idTable: '' }),
+    idDocument: '',
+    ressourcesCyber: () => ({ idTable: '' }),
+    metiers: () => ({ idTable: '' }),
+    selectionEnseignants: () => ({ idTable: '' }),
   }),
   estEntrepotsStatiques: () => true,
   chiffrement: () => ({

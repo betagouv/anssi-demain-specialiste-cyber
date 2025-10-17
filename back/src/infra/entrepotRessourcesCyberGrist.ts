@@ -38,7 +38,7 @@ export class EntrepotRessourcesCyberGrist
     const grist = adaptateurEnvironnement.grist();
     super(
       ressourcesCyberGrist,
-      grist.ressourcesCyber().idDocument,
+      grist.idDocument,
       grist.ressourcesCyber().idTable,
     );
   }
