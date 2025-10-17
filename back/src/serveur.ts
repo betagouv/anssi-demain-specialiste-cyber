@@ -17,16 +17,13 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
-import { EntrepotRessourcesCyberStatique } from './infra/entrepotRessourcesCyberStatique';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
-import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
-import { EntrepotSelectionsEnseignantsStatique } from './infra/entrepotSelectionsEnseignantsStatique';
 import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
@@ -67,19 +64,14 @@ serviceCoherenceSecretsHachage
       }),
     });
 
-    const entrepotRessourcesCyber =
-      adaptateurEnvironnement.estEntrepotsStatiques()
-        ? new EntrepotRessourcesCyberStatique()
-        : new EntrepotRessourcesCyberGrist();
+    const entrepotRessourcesCyber = new EntrepotRessourcesCyberGrist();
 
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
         adaptateurOIDC,
         serveurLab: configurationServeurLabEnvironnement(),
-        entrepotMetier: adaptateurEnvironnement.estEntrepotsStatiques()
-          ? new EntrepotMetiersStatique()
-          : new EntrepotMetiersGrist(),
+        entrepotMetier: new EntrepotMetiersGrist(),
         entrepotRessourcesCyber,
         adaptateurJWT,
         adaptateurHachage,
@@ -97,13 +89,10 @@ serviceCoherenceSecretsHachage
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
         adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
-        entrepotSelectionsEnseignants:
-          adaptateurEnvironnement.estEntrepotsStatiques()
-            ? new EntrepotSelectionsEnseignantsStatique()
-            : new EntrepotSelectionsGrist(
-                entrepotRessourcesCyber,
-                adaptateurEnvironnement.grist().selectionsEnseignants(),
-              ),
+        entrepotSelectionsEnseignants: new EntrepotSelectionsGrist(
+          entrepotRessourcesCyber,
+          adaptateurEnvironnement.grist().selectionsEnseignants(),
+        ),
         entrepotSelectionsEleves: new EntrepotSelectionsGrist(
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsEleves(),
