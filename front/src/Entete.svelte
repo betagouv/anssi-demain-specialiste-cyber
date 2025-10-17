@@ -55,6 +55,13 @@
       active: cheminCourant === '/selection-enseignants',
     },
     {
+      id: 'selection-eleves',
+      label: 'Sélection élèves',
+      type: 'link',
+      href: '/selection-eleves',
+      active: cheminCourant === '/selection-eleves',
+    },
+    {
       id: 'cyber-en-jeux',
       label: 'CyberEnJeux',
       type: 'link',
