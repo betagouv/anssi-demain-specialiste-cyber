@@ -1,4 +1,5 @@
-extends base
+extends fragments/base
+
 block variables
   - var titrePage = "Demain Spécialiste Cyber"
   - var descriptionPage = "Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !"
@@ -64,7 +65,7 @@ block contenu
       )
 
 block apres-contenu
-    include ./selections
-    include ./encart-cyberenjeux
-    include ./chiffres-cles
-    include ./soutiens
+    include encarts/selections
+    include encarts/encart-cyberenjeux
+    include encarts/chiffres-cles
+    include encarts/soutiens
