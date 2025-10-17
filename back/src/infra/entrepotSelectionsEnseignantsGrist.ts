@@ -14,7 +14,7 @@ export type SelectionEnseignantsGrist = {
     Id2: string;
     Titre: string;
     Explication: string;
-    Ressources2: number[];
+    Ressources: number[];
     Couleur_de_fond: string;
   };
 };
@@ -48,7 +48,7 @@ export class EntrepotSelectionsEnseignantsGrist
           id: record.fields.Id2,
           titre: record.fields.Titre,
           explication: record.fields.Explication,
-          ressources: this.aseptiseListe(record.fields.Ressources2).map(
+          ressources: this.aseptiseListe(record.fields.Ressources).map(
             (idRessource) =>
               toutesLesRessourcesCyber.find(
                 (ressource) => ressource.id === idRessource,

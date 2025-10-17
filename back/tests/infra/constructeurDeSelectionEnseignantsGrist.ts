@@ -25,7 +25,7 @@ export class ConstructeurLigneGristSelectionEnseignants extends ConstructeurLign
   avecColonneRessources(
     idsRessources: number[],
   ): ConstructeurLigneGristSelectionEnseignants {
-    this.avecColonneEtListeDeValeurs('Ressources2', idsRessources);
+    this.avecColonneEtListeDeValeurs('Ressources', idsRessources);
     return this;
   }
 
