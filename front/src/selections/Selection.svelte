@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'dsc-selection-enseignants',
+    tag: 'dsc-selection',
     shadow: 'none',
     props: {
       cible: { type: 'String' },
