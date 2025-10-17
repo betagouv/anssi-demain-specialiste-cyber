@@ -5,19 +5,18 @@ import request from 'supertest';
 import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/dsc';
 import { uneSelection } from '../metier/constructeurSelection';
-import { EntrepotSelectionsEnseignantsMemoire } from '../infra/entrepotSelectionsEnseignantsMemoire';
+import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 
 describe('La ressource sélection enseignants', () => {
   let entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;
-  let entrepotSelectionsEnseignants: EntrepotSelectionsEnseignantsMemoire;
+  let entrepotSelectionsEnseignants: EntrepotSelectionsMemoire;
   let configuration: ConfigurationServeur;
   let serveur: Express;
 
   beforeEach(() => {
     entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
-    entrepotSelectionsEnseignants = new EntrepotSelectionsEnseignantsMemoire(
-    );
+    entrepotSelectionsEnseignants = new EntrepotSelectionsMemoire();
     configuration = configurationDeTestDuServeur();
     serveur = creeServeur({
       ...configuration,
