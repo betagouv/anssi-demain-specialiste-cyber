@@ -75,7 +75,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     selectionsEnseignants: () => ({ idTable: '' }),
     selectionsEleves: () => ({ idTable: '' }),
   }),
-  estEntrepotsStatiques: () => true,
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
   }),

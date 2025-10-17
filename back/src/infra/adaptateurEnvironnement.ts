@@ -21,7 +21,6 @@ export type AdaptateurEnvironnement = {
     selectionsEnseignants: () => TableGrist;
     selectionsEleves(): TableGrist;
   };
-  estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
@@ -65,9 +64,6 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     clientId: () => process.env.OIDC_CLIENT_ID || '',
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
   }),
-  estEntrepotsStatiques(): boolean {
-    return process.env.ENTREPOTS_STATIQUES === 'true';
-  },
   grist: () => ({
     urlDeBase: process.env.GRIST_URL_BASE || '',
     cleApi: process.env.GRIST_CLE_API || '',
