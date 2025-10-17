@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { EntrepotSelections } from '../metier/entrepotSelections';
-import { EntrepotSelectionsEleves } from '../metier/entrepotSelectionsEleves';
 
-export const ressourceSelections = (
-  entrepotSelections: EntrepotSelections | EntrepotSelectionsEleves,
-) => {
+export const ressourceSelections = (entrepotSelections: EntrepotSelections) => {
   const routeur = Router();
 
   routeur.get('/', async (_requete, reponse) => {
