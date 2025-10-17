@@ -1,4 +1,4 @@
-import { EntrepotSelectionEnseignants } from '../metier/entrepotSelectionEnseignants';
+import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
 import { Selection } from '../metier/selection';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
@@ -19,9 +19,9 @@ export type SelectionEnseignantsGrist = {
   };
 };
 
-export class EntrepotSelectionEnseignantsGrist
+export class EntrepotSelectionsEnseignantsGrist
   extends EntrepotGrist<SelectionEnseignantsGrist>
-  implements EntrepotSelectionEnseignants
+  implements EntrepotSelectionsEnseignants
 {
   constructor(
     private entrepotRessourcesCyber: EntrepotRessourcesCyber,

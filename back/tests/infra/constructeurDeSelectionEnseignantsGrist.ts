@@ -1,5 +1,5 @@
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
-import { SelectionEnseignantsGrist } from '../../src/infra/entrepotSelectionEnseignantsGrist';
+import { SelectionEnseignantsGrist } from '../../src/infra/entrepotSelectionsEnseignantsGrist';
 import { ConstructeurLigneGrist, LigneGrist } from './grist';
 
 export type LigneSelectionEnseignant = LigneGrist & SelectionEnseignantsGrist;

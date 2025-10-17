@@ -26,8 +26,8 @@ import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
-import { EntrepotSelectionEnseignantsStatique } from './infra/entrepotSelectionEnseignantsStatique';
-import { EntrepotSelectionEnseignantsGrist } from './infra/entrepotSelectionEnseignantsGrist';
+import { EntrepotSelectionsEnseignantsStatique } from './infra/entrepotSelectionsEnseignantsStatique';
+import { EntrepotSelectionsEnseignantsGrist } from './infra/entrepotSelectionsEnseignantsGrist';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -96,10 +96,10 @@ serviceCoherenceSecretsHachage
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
         adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
-        entrepotSelectionEnseignants:
+        entrepotSelectionsEnseignants:
           adaptateurEnvironnement.estEntrepotsStatiques()
-            ? new EntrepotSelectionEnseignantsStatique()
-            : new EntrepotSelectionEnseignantsGrist(entrepotRessourcesCyber),
+            ? new EntrepotSelectionsEnseignantsStatique()
+            : new EntrepotSelectionsEnseignantsGrist(entrepotRessourcesCyber),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

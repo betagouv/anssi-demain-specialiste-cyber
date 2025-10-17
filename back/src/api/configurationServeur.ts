@@ -14,7 +14,7 @@ import { MoteurDeRendu } from './moteurDeRendu';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
-import { EntrepotSelectionEnseignants } from '../metier/entrepotSelectionEnseignants';
+import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
 
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -33,7 +33,7 @@ export interface ConfigurationServeur {
   entrepotJeux: EntrepotJeux;
   adaptateurJournal: AdaptateurJournal;
   adaptateurTeleversement: AdaptateurTeleversement;
-  entrepotSelectionEnseignants: EntrepotSelectionEnseignants;
+  entrepotSelectionsEnseignants: EntrepotSelectionsEnseignants;
 }
 
 export type ConfigurationServeurSansMiddleware = Omit<
