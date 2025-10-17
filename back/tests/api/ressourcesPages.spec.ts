@@ -40,6 +40,7 @@ describe('Les ressources de page', () => {
     { route: '/cyber-en-jeux', vue: 'cyber-en-jeux' },
     { route: '/metiers/1234', vue: 'metiers' },
     { route: '/selection-enseignants', vue: 'selection-enseignants' },
+    { route: '/selection-eleves', vue: 'selection-eleves' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
