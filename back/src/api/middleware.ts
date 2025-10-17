@@ -42,6 +42,7 @@ export type RequeteNonTypee = Request<
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
   adaptateurJWT,
+  moteurDeRendu
 }: ConfigurationServeurSansMiddleware): Middleware => {
   const ajouteLeNonceALaReponse = async (
     _requete: RequeteNonTypee,
@@ -58,11 +59,11 @@ export const fabriqueMiddleware = ({
     suite: NextFunction,
   ) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
-      const nonce = randomBytes(24).toString('base64');
       reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .render('maintenance', { nonce });
+
+      moteurDeRendu.rends(reponse, "maintenance")
     } else {
       suite();
     }
