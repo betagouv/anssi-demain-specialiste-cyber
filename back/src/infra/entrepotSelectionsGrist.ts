@@ -1,6 +1,6 @@
 import { EntrepotSelections } from '../metier/entrepotSelections';
 import { Selection } from '../metier/selection';
-import { adaptateurEnvironnement } from './adaptateurEnvironnement';
+import { adaptateurEnvironnement, TableGrist } from './adaptateurEnvironnement';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 import {
   creeRecupereRessourceHttp,
@@ -25,16 +25,13 @@ export class EntrepotSelectionsGrist
 {
   constructor(
     private entrepotRessourcesCyber: EntrepotRessourcesCyber,
+    tableGrist: TableGrist,
     ressourcesCyberGrist: RecupereRessourceHttp<
       ReponseGrist<SelectionGrist>
     > = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
-    super(
-      ressourcesCyberGrist,
-      grist.idDocument,
-      grist.selectionsEnseignants().idTable,
-    );
+    super(ressourcesCyberGrist, grist.idDocument, tableGrist.idTable);
   }
 
   async tous(): Promise<Selection[]> {

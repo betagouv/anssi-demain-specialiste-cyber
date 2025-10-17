@@ -5,7 +5,7 @@ type OIDC = {
   clientId: () => string;
   clientSecret: () => string;
 };
-type TableGrist = {
+export type TableGrist = {
   idTable: string;
 };
 export type AdaptateurEnvironnement = {
@@ -19,6 +19,7 @@ export type AdaptateurEnvironnement = {
     ressourcesCyber: () => TableGrist;
     metiers: () => TableGrist;
     selectionsEnseignants: () => TableGrist;
+    selectionsEleves(): TableGrist;
   };
   estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
@@ -79,6 +80,9 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     selectionsEnseignants: () => ({
       idTable: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE || '',
+    }),
+    selectionsEleves: () => ({
+      idTable: process.env.GRIST_SELECTION_ELEVES_ID_TABLE || '',
     }),
   }),
   hachage: () => ({
