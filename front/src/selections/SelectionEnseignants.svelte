@@ -20,80 +20,35 @@
     ressources: RessourceCyber[];
   };
 
-  let sections: SelectionEnseignant[] = [];
+  let selections: SelectionEnseignant[] = [];
 
   onMount(async () => {
     const reponse = await axios.get<SelectionEnseignant[]>(
       '/api/selections-enseignants',
     );
-    sections = reponse.data;
+    selections = reponse.data;
   });
 </script>
 
-{#each sections as section}
+{#each selections as selection}
   <section
-    class={section.id}
-    style:background-color={section.couleurDeFond
-      ? `var(--${section.couleurDeFond})`
+    class={selection.id}
+    style:background-color={selection.couleurDeFond
+      ? `var(--${selection.couleurDeFond})`
       : ''}
   >
     <dsfr-container>
-      <div class="conteneur" class:fonce={section.couleurDeFond}>
+      <div class="conteneur" class:fonce={selection.couleurDeFond}>
         <hgroup>
-          <h2>{section.titre}</h2>
-          <p>{section.explication}</p>
+          <h2>{selection.titre}</h2>
+          <p>{selection.explication}</p>
         </hgroup>
         <div>
           <h4>Ressources</h4>
           <div class="ressources">
-            <CarteCatalogue
-              ressource={{
-                id: 1,
-                titre: 'Titre',
-                description:
-                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                urlIllustration: '/assets/images/image-generique.svg',
-                besoins: [],
-                niveaux: [],
-                types: [],
-                publicsCible: [],
-                thematiques: [],
-                lienExterne: '#',
-                estCertifiee: false,
-              }}
-            />
-            <CarteCatalogue
-              ressource={{
-                id: 1,
-                titre: 'Titre',
-                description:
-                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                urlIllustration: '/assets/images/image-generique.svg',
-                besoins: [],
-                niveaux: [],
-                types: [],
-                publicsCible: [],
-                thematiques: [],
-                lienExterne: '#',
-                estCertifiee: false,
-              }}
-            />
-            <CarteCatalogue
-              ressource={{
-                id: 1,
-                titre: 'Titre',
-                description:
-                  'Titre lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                urlIllustration: '/assets/images/image-generique.svg',
-                besoins: [],
-                niveaux: [],
-                types: [],
-                publicsCible: [],
-                thematiques: [],
-                lienExterne: '#',
-                estCertifiee: false,
-              }}
-            />
+            {#each selection.ressources as ressource}
+              <CarteCatalogue {ressource} />
+            {/each}
           </div>
         </div>
       </div>
