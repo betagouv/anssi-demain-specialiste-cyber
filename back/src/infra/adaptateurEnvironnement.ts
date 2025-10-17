@@ -5,7 +5,7 @@ type OIDC = {
   clientId: () => string;
   clientSecret: () => string;
 };
-type IdentifiantsDocumentGrist = {
+type TableGrist = {
   idTable: string;
 };
 export type AdaptateurEnvironnement = {
@@ -16,9 +16,9 @@ export type AdaptateurEnvironnement = {
     urlDeBase: string;
     cleApi: string;
     idDocument: string;
-    ressourcesCyber: () => IdentifiantsDocumentGrist;
-    metiers: () => IdentifiantsDocumentGrist;
-    selectionEnseignants: () => IdentifiantsDocumentGrist;
+    ressourcesCyber: () => TableGrist;
+    metiers: () => TableGrist;
+    selectionEnseignants: () => TableGrist;
   };
   estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
