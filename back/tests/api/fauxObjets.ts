@@ -72,7 +72,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     idDocument: '',
     ressourcesCyber: () => ({ idTable: '' }),
     metiers: () => ({ idTable: '' }),
-    selectionEnseignants: () => ({ idTable: '' }),
+    selectionsEnseignants: () => ({ idTable: '' }),
   }),
   estEntrepotsStatiques: () => true,
   chiffrement: () => ({

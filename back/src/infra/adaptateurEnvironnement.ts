@@ -18,7 +18,7 @@ export type AdaptateurEnvironnement = {
     idDocument: string;
     ressourcesCyber: () => TableGrist;
     metiers: () => TableGrist;
-    selectionEnseignants: () => TableGrist;
+    selectionsEnseignants: () => TableGrist;
   };
   estEntrepotsStatiques(): boolean;
   oidc: () => OIDC;
@@ -77,7 +77,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     metiers: () => ({
       idTable: process.env.GRIST_METIERS_ID_TABLE || '',
     }),
-    selectionEnseignants: () => ({
+    selectionsEnseignants: () => ({
       idTable: process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE || '',
     }),
   }),
