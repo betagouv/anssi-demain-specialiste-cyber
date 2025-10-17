@@ -2,7 +2,9 @@
   customElement={{
     tag: 'dsc-selection-enseignants',
     shadow: 'none',
-    props: {},
+    props: {
+      cible: { type: 'String' },
+    },
   }}
 />
 
@@ -12,7 +14,9 @@
   import axios from 'axios';
   import type { RessourceCyber } from '../catalogue/ressourceCyber';
 
-  type SelectionEnseignant = {
+  export let cible: 'enseignants' | 'eleves';
+
+  type Selection = {
     id: string;
     titre: string;
     explication: string;
@@ -20,12 +24,10 @@
     ressources: RessourceCyber[];
   };
 
-  let selections: SelectionEnseignant[] = [];
+  let selections: Selection[] = [];
 
   onMount(async () => {
-    const reponse = await axios.get<SelectionEnseignant[]>(
-      '/api/selections-enseignants',
-    );
+    const reponse = await axios.get<Selection[]>(`/api/selections-${cible}`);
     selections = reponse.data;
   });
 </script>
