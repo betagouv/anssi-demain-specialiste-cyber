@@ -8,37 +8,26 @@
 
 <script lang="ts">
   import CarteCatalogue from '../catalogue/CarteCatalogue.svelte';
+  import { onMount } from 'svelte';
+  import axios from 'axios';
+  import type { RessourceCyber } from '../catalogue/ressourceCyber';
 
-  const sections = [
-    {
-      id: 'former',
-      titre: 'Former',
-      description:
-        'Formez vos élèves à la cybersécurité grâce au kit pédagogique CyberEnjeux et à la présentation.',
-      couleurDeFond: undefined,
-    },
-    {
-      id: 'sensibiliser',
-      titre: 'Sensibiliser',
-      description:
-        'Des ressources pour pouvoir parler de la cyber à vos élèves.',
-      couleurDeFond: 'pink-tuile-sun-425-moon-750',
-    },
-    {
-      id: 'orienter',
-      titre: 'Orienter',
-      description:
-        'L’ANSSI répertorie toutes les formations cyber labelisées, n’hésitez pas à en prendre connaissances pour en parler à vos élèves.',
-      couleurDeFond: undefined,
-    },
-    {
-      id: 'se-former',
-      titre: 'Se former',
-      description:
-        'Trouvez des formations sur le numérique et la cybersécurité pour développer vos compétences et renforcer vos connaissances dans un domaine en constante évolution.',
-      couleurDeFond: 'bleu-profond-dsc',
-    },
-  ];
+  type SelectionEnseignant = {
+    id: string;
+    titre: string;
+    explication: string;
+    couleurDeFond: undefined | string;
+    ressources: RessourceCyber[];
+  };
+
+  let sections: SelectionEnseignant[] = [];
+
+  onMount(async () => {
+    const reponse = await axios.get<SelectionEnseignant[]>(
+      '/api/selections-enseignants',
+    );
+    sections = reponse.data;
+  });
 </script>
 
 {#each sections as section}
@@ -52,7 +41,7 @@
       <div class="conteneur" class:fonce={section.couleurDeFond}>
         <hgroup>
           <h2>{section.titre}</h2>
-          <p>{section.description}</p>
+          <p>{section.explication}</p>
         </hgroup>
         <div>
           <h4>Ressources</h4>
