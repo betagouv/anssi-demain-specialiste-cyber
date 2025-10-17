@@ -22,7 +22,6 @@ describe("L'entrepôt de sélections Grist ", () => {
   });
 
   it('sait appeler la bonne ressource', async () => {
-    process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE = 'selection_enseignants';
     let urlAppelee = '';
     const clientHttp: RecupereRessourceHttp<
       ReponseGrist<SelectionGrist>
@@ -32,6 +31,7 @@ describe("L'entrepôt de sélections Grist ", () => {
     };
     const entrepotRessourcesCyberGrist = new EntrepotSelectionsGrist(
       entrepotRessourcesCyber,
+      { idTable: 'selection_enseignants' },
       clientHttp,
     );
 
@@ -57,6 +57,7 @@ describe("L'entrepôt de sélections Grist ", () => {
     };
     const entrepotRessourcesCyberGrist = new EntrepotSelectionsGrist(
       entrepotRessourcesCyber,
+      { idTable: 'selection_enseignants' },
       ressourcesCyberGrist,
     );
 
@@ -95,6 +96,7 @@ describe("L'entrepôt de sélections Grist ", () => {
         .construis();
     const entrepotRessourcesCyberGrist = new EntrepotSelectionsGrist(
       entrepotRessourcesCyber,
+      { idTable: 'selection_enseignants' },
       ressourcesCyberGrist,
     );
 

@@ -28,8 +28,6 @@ import { EntrepotMetiersStatique } from './infra/entrepotMetiersStatique';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotSelectionsEnseignantsStatique } from './infra/entrepotSelectionsEnseignantsStatique';
 import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
-import { Selection } from './metier/selection';
-import { EntrepotSelectionsEleves } from './metier/entrepotSelectionsEleves';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -102,14 +100,14 @@ serviceCoherenceSecretsHachage
         entrepotSelectionsEnseignants:
           adaptateurEnvironnement.estEntrepotsStatiques()
             ? new EntrepotSelectionsEnseignantsStatique()
-            : new EntrepotSelectionsGrist(entrepotRessourcesCyber),
-        entrepotSelectionsEleves: new (class
-          implements EntrepotSelectionsEleves
-        {
-          async tous(): Promise<Selection[]> {
-            return [];
-          }
-        })(),
+            : new EntrepotSelectionsGrist(
+                entrepotRessourcesCyber,
+                adaptateurEnvironnement.grist().selectionsEnseignants(),
+              ),
+        entrepotSelectionsEleves: new EntrepotSelectionsGrist(
+          entrepotRessourcesCyber,
+          adaptateurEnvironnement.grist().selectionsEleves(),
+        ),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,
