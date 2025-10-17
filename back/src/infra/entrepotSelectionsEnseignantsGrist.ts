@@ -33,7 +33,7 @@ export class EntrepotSelectionsEnseignantsGrist
     super(
       ressourcesCyberGrist,
       grist.idDocument,
-      grist.selectionEnseignants().idTable,
+      grist.selectionsEnseignants().idTable,
     );
   }
 
