@@ -19,6 +19,7 @@ import {
   fauxAdaptateurJWT,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
+import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -37,10 +38,16 @@ describe('Le middleware', () => {
     reponse.render = (vue: string) => (vueRendue = vue);
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     adaptateurJWT = { ...fauxAdaptateurJWT };
+    const moteurDeRendu: MoteurDeRendu = {
+      rends: (_reponse, vue) => {
+        vueRendue = vue;
+      },
+    };
     middleware = fabriqueMiddleware({
       ...configurationDeTestDuServeur(),
       adaptateurJWT,
       adaptateurEnvironnement,
+      moteurDeRendu
     });
   });
 
