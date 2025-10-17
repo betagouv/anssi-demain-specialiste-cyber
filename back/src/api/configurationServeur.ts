@@ -16,6 +16,8 @@ import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
 
+import { EntrepotSelectionsEleves } from '../metier/entrepotSelectionsEleves';
+
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
   serveurLab: ConfigurationServeurLab;
@@ -34,6 +36,7 @@ export interface ConfigurationServeur {
   adaptateurJournal: AdaptateurJournal;
   adaptateurTeleversement: AdaptateurTeleversement;
   entrepotSelectionsEnseignants: EntrepotSelectionsEnseignants;
+  entrepotSelectionsEleves: EntrepotSelectionsEleves;
 }
 
 export type ConfigurationServeurSansMiddleware = Omit<
