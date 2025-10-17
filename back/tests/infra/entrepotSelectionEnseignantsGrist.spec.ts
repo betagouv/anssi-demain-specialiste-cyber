@@ -22,7 +22,6 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
   })
 
   it('sait appeler la bonne ressource', async () => {
-    process.env.GRIST_SELECTION_ENSEIGNANTS_ID_DOCUMENT = 'mon_document';
     process.env.GRIST_SELECTION_ENSEIGNANTS_ID_TABLE = 'selection_enseignants';
     let urlAppelee = '';
     const clientHttp: RecupereRessourceHttp<
@@ -38,7 +37,7 @@ describe("L'entrepôt de sélection enseignants Grist ", () => {
     await entrepotRessourcesCyberGrist.tous();
 
     expect(urlAppelee).toEqual(
-      'http://example.com/api/docs/mon_document/tables/selection_enseignants/records',
+      'http://example.com/api/docs/mon_id_document/tables/selection_enseignants/records',
     );
   });
 
