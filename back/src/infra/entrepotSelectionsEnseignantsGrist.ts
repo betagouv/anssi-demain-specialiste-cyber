@@ -32,7 +32,7 @@ export class EntrepotSelectionsEnseignantsGrist
     const grist = adaptateurEnvironnement.grist();
     super(
       ressourcesCyberGrist,
-      grist.selectionEnseignants().idDocument,
+      grist.idDocument,
       grist.selectionEnseignants().idTable,
     );
   }

@@ -37,7 +37,7 @@ export class EntrepotMetiersGrist
     > = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
-    super(metierGrist, grist.metiers().idDocument, grist.metiers().idTable);
+    super(metierGrist, grist.idDocument, grist.metiers().idTable);
   }
 
   async parIdentifiant(identifiant: number): Promise<Metier | undefined> {
