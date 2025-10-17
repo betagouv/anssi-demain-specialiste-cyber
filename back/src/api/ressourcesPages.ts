@@ -4,7 +4,6 @@ import { ressourceCreationCompte } from './ressourceCreationCompte';
 
 const pages = [
   { route: '/catalogue', protegee: false },
-  { route: '/maintenance', protegee: false },
   { route: '/nouveau-jeu', protegee: true },
   { route: '/mes-jeux', protegee: true },
   { route: '/jeux', protegee: false },

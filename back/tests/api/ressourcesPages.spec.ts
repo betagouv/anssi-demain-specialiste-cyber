@@ -35,7 +35,6 @@ describe('Les ressources de page', () => {
 
   describe.each([
     { route: '/catalogue', vue: 'catalogue' },
-    { route: '/maintenance', vue: 'maintenance' },
     { route: '/jeux/1234', vue: 'jeux' },
     { route: '/cyber-en-jeux', vue: 'cyber-en-jeux' },
     { route: '/metiers/1234', vue: 'metiers' },
