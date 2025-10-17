@@ -1,12 +1,12 @@
 doctype html
 html(lang='fr')
     head
-        include ./prologue
+        include fragments/prologue
 
     body(class= classePage)
         dsfr-container
             h1 Le site est en maintenance
-        include ./pied-de-page
+        include fragments/pied-de-page
 
         script(
             src=`https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/${versionUIKit}/lab-anssi-ui-kit.iife.js`

@@ -6,16 +6,16 @@ block variables
 doctype html
 html(lang='fr')
   head
-    include ./prologue
+    include prologue
     script(defer src=`/${dsc}` nonce= nonce)
 
   body(class= classePage)
-    include ./entete
+    include entete
     block avant-contenu
     main
       block contenu
     block apres-contenu
-    include ./pied-de-page
+    include pied-de-page
 
     script(
       src=`https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/${versionUIKit}/lab-anssi-ui-kit.iife.js`
