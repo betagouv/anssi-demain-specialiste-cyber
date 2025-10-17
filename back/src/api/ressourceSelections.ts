@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
+import { EntrepotSelections } from '../metier/entrepotSelections';
 import { EntrepotSelectionsEleves } from '../metier/entrepotSelectionsEleves';
 
 export const ressourceSelections = (
-  entrepotSelections: EntrepotSelectionsEnseignants | EntrepotSelectionsEleves,
+  entrepotSelections: EntrepotSelections | EntrepotSelectionsEleves,
 ) => {
   const routeur = Router();
 

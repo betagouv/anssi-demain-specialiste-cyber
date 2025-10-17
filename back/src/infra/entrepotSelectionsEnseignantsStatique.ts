@@ -1,8 +1,8 @@
-import { EntrepotSelectionsEnseignants } from '../metier/entrepotSelectionsEnseignants';
+import { EntrepotSelections } from '../metier/entrepotSelections';
 import { Selection } from '../metier/selection';
 
 export class EntrepotSelectionsEnseignantsStatique
-  implements EntrepotSelectionsEnseignants
+  implements EntrepotSelections
 {
   async tous(): Promise<Selection[]> {
     return [
