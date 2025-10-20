@@ -1,8 +1,7 @@
 extends fragments/base
 block variables
-  - var titrePage = "Inscription sur DemainSpécialisteCyber"
+  - var titrePage = "Inscription sur Demain\u200bSpécialiste\u200bCyber"
   - var descriptionPage = ""
 
 block contenu
-    p Formulaire de création de compte
     dsc-creation-compte(informationsProfessionnelles= informationsProfessionnelles, token= token)
