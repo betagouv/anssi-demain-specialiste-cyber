@@ -1,17 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { JeuCree } from '../../../src/bus/evenements/jeu/jeuCree';
-import { FournisseurHorloge } from '../../../src/infra/FournisseurHorloge';
 import {
   MessagerieInstantanee,
   RetourEvaluation,
 } from '../../../src/metier/messagerieInstantanee';
 import { notifieEvenementJeuCreeSurMessagerieInstantanee } from '../../../src/bus/evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
-
-export class FournisseurHorlogeDeTest {
-  static initialise(maintenant: Date) {
-    FournisseurHorloge.maintenant = () => maintenant;
-  }
-}
+import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermost", () => {
   it('notifie un évènement de JeuCree', async () => {

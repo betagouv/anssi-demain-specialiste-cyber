@@ -3,14 +3,8 @@ import { consigneEvenementJeuCreeDansJournal } from '../../../src/bus/evenements
 import { JeuCree } from '../../../src/bus/evenements/jeu/jeuCree';
 import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage';
 import { AdaptateurJournal } from '../../../src/infra/adaptateurJournal';
-import { FournisseurHorloge } from '../../../src/infra/FournisseurHorloge';
 import { fauxAdaptateurHachage } from '../../api/fauxObjets';
-
-export class FournisseurHorlogeDeTest {
-  static initialise(maintenant: Date) {
-    FournisseurHorloge.maintenant = () => maintenant;
-  }
-}
+import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un nouveau jeu dans le journal", () => {
   it('consigne un évènement de JeuCree', async () => {

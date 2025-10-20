@@ -4,13 +4,7 @@ import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage';
 import { consigneEvenementCompteCreeDansJournal } from '../../../src/bus/evenements/compteCree/consigneEvenementCompteCreeDansJournal';
 import { CompteCree } from '../../../src/bus/evenements/compteCree/compteCree';
 import { AdaptateurJournal } from '../../../src/infra/adaptateurJournal';
-import { FournisseurHorloge } from '../../../src/infra/FournisseurHorloge';
-
-export class FournisseurHorlogeDeTest {
-  static initialise(maintenant: Date) {
-    FournisseurHorloge.maintenant = () => maintenant;
-  }
-}
+import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
   it('consigne un évènement de NouvelUtilisateurInscrit', async () => {
