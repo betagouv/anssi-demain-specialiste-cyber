@@ -29,15 +29,27 @@
     label: selection.titre,
     cible: `#${selection.id}`,
   }));
+  let indexActif: number;
+
+  const changeSectionActive = () => {
+    indexActif = Math.max(
+      selections.findIndex(
+        (selection) => `#${selection.id}` === window.location.hash,
+      ),
+      0,
+    );
+  };
 
   onMount(async () => {
     const reponse = await axios.get<Selection[]>(`/api/selections-${cible}`);
     selections = reponse.data;
+    window.addEventListener('hashchange', changeSectionActive);
+    changeSectionActive();
   });
 </script>
 
 <dsfr-container>
-  <lab-anssi-ancres {ancres}></lab-anssi-ancres>
+  <lab-anssi-ancres {ancres} {indexActif}></lab-anssi-ancres>
 </dsfr-container>
 
 {#each selections as selection}
