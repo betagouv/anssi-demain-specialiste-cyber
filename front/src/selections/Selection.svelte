@@ -25,6 +25,10 @@
   };
 
   let selections: Selection[] = [];
+  $: ancres = selections.map((selection) => ({
+    label: selection.titre,
+    cible: `#${selection.id}`,
+  }));
 
   onMount(async () => {
     const reponse = await axios.get<Selection[]>(`/api/selections-${cible}`);
@@ -32,8 +36,13 @@
   });
 </script>
 
+<dsfr-container>
+  <lab-anssi-ancres {ancres}></lab-anssi-ancres>
+</dsfr-container>
+
 {#each selections as selection}
   <section
+    id={selection.id}
     class={selection.id}
     style:background-color={selection.couleurDeFond
       ? `var(--${selection.couleurDeFond})`
@@ -60,6 +69,11 @@
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
+
+  lab-anssi-ancres {
+    display: block;
+    margin-top: 2rem;
+  }
 
   section {
     padding: 3.5rem 0;
