@@ -90,4 +90,34 @@ describe('Le système de mise en cache', () => {
 
     expect(resultat).toBe('une valeur_1');
   });
+
+  describe('en cas d’erreur d’exécution de la fonction', () => {
+    it('retourne le cache en cas d’erreur sur un appel suivant', () => {
+      FournisseurHorlogeDeTest.initialise(new Date(Date.parse('2025/01/01')));
+      const cache = new Cache<string>({ ttl: 1440 });
+      let compteur = 0;
+      const laFonction = () => {
+        return `une valeur_${compteur++}`;
+      };
+
+      cache.get('une-clef', laFonction);
+      ilSePasse25Heures();
+      const resultat = cache.get('une-clef', () => {
+        throw new Error('Erreur mais c’est mis en cache');
+      });
+
+      expect(resultat).toBe('une valeur_0');
+    });
+
+    it('remonte l’erreur lors du premier appel', () => {
+      const cache = new Cache<string>({ ttl: 1440 });
+      const laFonction = () => {
+        throw new Error('Une erreur est survenue');
+      };
+
+      expect(() => cache.get('une-clef', laFonction)).toThrowError(
+        'Une erreur est survenue',
+      );
+    });
+  });
 });

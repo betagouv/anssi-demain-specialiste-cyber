@@ -13,7 +13,7 @@ export class Cache<T> {
 
   constructor(private readonly configuration?: { ttl: Minutes }) {}
 
-  get(clefCache: string, fonction: () => T) {
+  get(clefCache: string, fonction: () => T): T {
     if (this.cache.has(clefCache)) {
       const { valeur, dateExpiration } = this.cache.get(clefCache)!;
       if (
@@ -27,16 +27,23 @@ export class Cache<T> {
     return this.metsEnCache(fonction, clefCache);
   }
 
-  private metsEnCache(fonction: () => T, clefCache: string) {
-    const resultat = fonction();
-    this.cache.set(clefCache, {
-      valeur: resultat,
-      ...(this.configuration && {
-        dateExpiration: add(FournisseurHorloge.maintenant(), {
-          minutes: this.configuration.ttl,
+  private metsEnCache(fonction: () => T, clefCache: string): T {
+    try {
+      const resultat = fonction();
+      this.cache.set(clefCache, {
+        valeur: resultat,
+        ...(this.configuration && {
+          dateExpiration: add(FournisseurHorloge.maintenant(), {
+            minutes: this.configuration.ttl,
+          }),
         }),
-      }),
-    });
-    return resultat;
+      });
+      return resultat;
+    } catch (erreur: unknown | Error) {
+      if (this.cache.has(clefCache)) {
+        return this.cache.get(clefCache)!.valeur;
+      }
+      throw erreur;
+    }
   }
 }
