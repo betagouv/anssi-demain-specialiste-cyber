@@ -11,6 +11,7 @@ const pages = [
   { route: '/metiers', protegee: false },
   { route: '/selection-enseignants', protegee: false },
   { route: '/selection-eleves', protegee: false },
+  { route: '/devenir-relai', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {

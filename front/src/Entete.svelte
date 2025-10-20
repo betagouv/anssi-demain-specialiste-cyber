@@ -76,6 +76,13 @@
       href: '/mes-jeux',
       active: cheminCourant === '/mes-jeux',
     }),
+    {
+      id: 'devenir-relai',
+      label: 'Relais',
+      type: 'link',
+      href: '/devenir-relai',
+      active: cheminCourant === '/devenir-relai',
+    },
   ]);
 
   const afficheMenuNavigation = $derived(cheminCourant !== '/nouveau-jeu');
