@@ -68,6 +68,7 @@
     .sections {
       grid-area: sections;
       padding-top: 2rem;
+      padding-bottom: 4.5rem;
 
       @include a-partir-de(md) {
         padding-top: 0.75rem;
