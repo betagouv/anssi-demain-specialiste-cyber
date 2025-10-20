@@ -12,7 +12,7 @@
 
 <dsfr-container>
   <Fiche
-    menuId="menu-fiche-metier"
+    menuId="menu-fiche-relai"
     menu={[
       {
         id: 'menu-qui',
