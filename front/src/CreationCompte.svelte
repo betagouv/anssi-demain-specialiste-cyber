@@ -16,11 +16,12 @@
   const { informationsProfessionnelles, token } = $props();
 
   let infolettreAcceptee = $state(false);
+  let cguAcceptees = $state(false);
 
   let formulaire: HTMLFormElement;
   let enCoursEnvoi = $state(false);
   const valide = async () => {
-    if (formulaire.checkValidity()) {
+    if (cguAcceptees) {
       try {
         enCoursEnvoi = true;
         await axios.post('/api/utilisateurs', {
@@ -36,63 +37,117 @@
 </script>
 
 <section class="creation-compte">
-  <h3>Finalisez votre inscription</h3>
-  <form bind:this={formulaire}>
-    <fieldset>
-      <legend>Votre identité</legend>
-      <p>
-        Prénom&nbsp;: <strong>{informationsProfessionnelles.prenom}</strong>
-      </p>
-      <p>Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong></p>
-    </fieldset>
+  <div class="conteneur-formulaire">
+    <form bind:this={formulaire}>
+      <h3>Finalisez votre inscription</h3>
+      <fieldset>
+        <legend>
+          <lab-anssi-icone taille="md" nom="account-circle-line"
+          ></lab-anssi-icone>
+          Votre identité</legend
+        >
+        <p>
+          Prénom&nbsp;: <strong>{informationsProfessionnelles.prenom}</strong>
+        </p>
+        <p>Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong></p>
+      </fieldset>
 
-    <fieldset>
-      <legend>Votre établissement</legend>
-      <p>
-        Dénomination légale&nbsp;: <strong
-          >{informationsProfessionnelles.organisation.nom}</strong
-        >
-      </p>
-      <p>
-        SIRET&nbsp;: <strong
-          >{informationsProfessionnelles.organisation.siret}</strong
-        >
-      </p>
-      <p>
-        Département&nbsp;: <strong
-          >{informationsProfessionnelles.organisation.departement}</strong
-        >
-      </p>
-    </fieldset>
+      <hr />
 
-    <fieldset>
-      <div>
-        <label>
-          <input type="checkbox" bind:checked={infolettreAcceptee} />
-          <span
-            >J’accepte de recevoir la lettre d’information
-            DemainSpécialisteCyber.</span
+      <fieldset>
+        <legend>
+          <lab-anssi-icone taille="md" nom="building-line"
+          ></lab-anssi-icone>Votre établissement</legend
+        >
+        <p>
+          Dénomination légale&nbsp;: <strong
+            >{informationsProfessionnelles.organisation.nom}</strong
           >
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="checkbox" required />
-          <span
-            >J’accepte les conditions générales d’utilisation
-            DemainSpécialisteCyber.</span
+        </p>
+        <p>
+          SIRET&nbsp;: <strong
+            >{informationsProfessionnelles.organisation.siret}</strong
           >
-        </label>
-      </div>
-    </fieldset>
+        </p>
+        <p>
+          Département de votre organisation&nbsp;: <strong
+            >{informationsProfessionnelles.organisation.departement}</strong
+          >
+        </p>
+      </fieldset>
 
-    <lab-anssi-bouton
-      titre="Créer mon compte"
-      variante="primaire"
-      taille="lg"
-      largeurMaximale
-      use:clic={valide}
-      disabled={!enCoursEnvoi}
-    ></lab-anssi-bouton>
-  </form>
+      <hr />
+
+      <dsfr-checkbox
+        id="lettre-information"
+        name="lettre-information"
+        status="default"
+        label="J’accepte de recevoir la lettre d’information DemainSpécialisteCyber."
+        value={infolettreAcceptee}
+        onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
+      ></dsfr-checkbox>
+      <dsfr-checkbox
+        id="cgu"
+        name="cgu"
+        status="default"
+        label="J’accepte les conditions générales d’utilisation DemainSpécialisteCyber."
+        value={cguAcceptees}
+        onvaluechanged={(e: CustomEvent) => (cguAcceptees = e.detail)}
+      ></dsfr-checkbox>
+
+      <dsfr-button
+        label="Créer mon compte"
+        kind="primary"
+        size="lg"
+        use:clic={valide}
+        disabled={enCoursEnvoi || !cguAcceptees}
+      ></dsfr-button>
+    </form>
+  </div>
 </section>
+
+<style lang="scss">
+  .creation-compte {
+    padding: 3.5rem 1rem;
+
+    .conteneur-formulaire {
+      padding: 3.5rem 1rem;
+      border: 1px solid var(--border-default-grey);
+      h3 {
+        margin: 0;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        fieldset {
+          margin: 0;
+
+          legend {
+            font-size: 1.125rem;
+            font-weight: bold;
+            line-height: 1.5rem;
+            margin-bottom: 1rem;
+
+            lab-anssi-icone {
+              margin-right: 0.5rem;
+            }
+          }
+
+          p {
+            margin-top: 0.25rem;
+            margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.5rem;
+          }
+        }
+
+        dsfr-button {
+          margin-top: 1.5rem;
+        }
+      }
+    }
+  }
+</style>
