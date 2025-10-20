@@ -10,3 +10,4 @@ export * from './cyber-en-jeux/Index.svelte';
 export * from './metiers/FicheMetier.svelte';
 export * from './Entete.svelte';
 export * from './selections/Selection.svelte';
+export * from './relai/FicheRelai.svelte';
