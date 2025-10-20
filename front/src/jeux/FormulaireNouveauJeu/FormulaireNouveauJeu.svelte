@@ -200,10 +200,6 @@
     padding: 56px 16px;
 
     hr {
-      align-self: stretch;
-      height: 1px;
-      border: 0;
-      background-color: #dddddd;
       margin: 2rem 0;
     }
 

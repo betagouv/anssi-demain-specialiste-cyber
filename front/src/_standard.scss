@@ -25,6 +25,14 @@ a {
   text-decoration: none;
 }
 
+hr {
+  align-self: stretch;
+  background-color: var(--border-default-grey);
+  border: 0;
+  margin: 0;
+  height: 1px;
+}
+
 h1 {
   color: var(--text-title-grey);
   font-size: 2rem;
