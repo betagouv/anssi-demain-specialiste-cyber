@@ -34,6 +34,14 @@
   };
 
   let metier: Metier | undefined = $state(undefined);
+  const lienSousTitres = $derived.by(() => {
+    if (!metier || !metier.liens.video) {
+      return '';
+    }
+    const positionDernierPoint = metier.liens.video.lastIndexOf('.');
+    const lienSansExtension = metier.liens.video.slice(0, positionDernierPoint);
+    return `${lienSansExtension}.vtt`;
+  });
 
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');
@@ -188,7 +196,18 @@
     </section>
     <section id="temoignage">
       <h2>Témoignage</h2>
-      <p>{metier.liens.video}</p>
+      <dsfr-content type="video">
+        <video slot="video" controls crossorigin="anonymous">
+          <source src={metier.liens.video} type="video/mp4" />
+          <track
+            default
+            kind="captions"
+            srclang="fr"
+            label="Français"
+            src={lienSousTitres}
+          />
+        </video>
+      </dsfr-content>
     </section>
     <section id="liens-utiles">
       <h2>Liens utiles</h2>
@@ -308,5 +327,15 @@
     font-size: 0.75rem;
     line-height: 1.25rem;
     margin-bottom: 0;
+  }
+
+  video {
+    width: 100%;
+    aspect-ratio: 16/9;
+
+    @include a-partir-de(md) {
+      align-self: flex-start;
+      width: calc(50% - 1rem);
+    }
   }
 </style>
