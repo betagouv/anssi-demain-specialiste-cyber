@@ -67,10 +67,6 @@
   }
 
   hr {
-    align-self: stretch;
-    height: 1px;
-    border: 0;
-    background-color: #dddddd;
     margin: 0.5rem 0;
   }
 

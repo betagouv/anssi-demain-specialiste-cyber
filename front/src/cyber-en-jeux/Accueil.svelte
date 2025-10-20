@@ -290,10 +290,6 @@
 
           hr {
             background-color: var(--border-default-pink-tuile);
-            border: 0;
-            display: block;
-            height: 1px;
-            margin: 0;
           }
         }
 
@@ -393,13 +389,6 @@
           }
         }
       }
-    }
-
-    hr {
-      background-color: var(--border-default-grey);
-      border: 0;
-      height: 1px;
-      margin: 0;
     }
 
     .temoignages {
