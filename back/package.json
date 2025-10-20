@@ -30,6 +30,7 @@
     "cookie-parser": "^1.4.7",
     "cookie-session": "^2.1.1",
     "express": "^4.21.2",
+    "date-fns": "^4.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
