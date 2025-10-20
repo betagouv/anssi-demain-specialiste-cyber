@@ -133,77 +133,75 @@
     </dsfr-container>
   </div>
 
-  <div class="fiche">
-    <Fiche menuId="menu-fiche-metier" {menu}>
-      <section id="description">
-        <h2>Description du métier</h2>
-        <p>{metier.description}</p>
-        <blockquote>
-          <h4>Sa mission principale</h4>
-          <p>{metier.missionPrincipale}</p>
-        </blockquote>
-        <p><strong> Ce qu'on attend&nbsp;: </strong></p>
-        <ul>
-          {#each metier.postures as posture}
-            <li>{posture}</li>
-          {/each}
-        </ul>
-      </section>
-      <section id="formation">
-        <h2>Formation</h2>
-        <ul>
-          <li>
-            {formations}
-          </li>
-          {#if metier.preRequis.length > 0}
-            <li>{metier.preRequis.join(', ')}</li>
-          {/if}
-        </ul>
-      </section>
-      <section id="remuneration">
-        <h2>Rémunération</h2>
-        <ul>
-          <li>
-            Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-              metier.remuneration.junior,
-            )} euros
-          </li>
-          <li>
-            Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-              metier.remuneration.senior,
-            )} euros
-          </li>
-        </ul>
-        <p class="note">
-          Les rémunérations présentées sont strictement indicatives et ne
-          constituent en aucun cas une grille de rémunération préconisée
-        </p>
-      </section>
-      <section id="metiers-proches">
-        <h2>Métiers proches</h2>
-        <ul>
-          {#each metier.metiersProches as metierProche}
-            <li>{metierProche}</li>
-          {/each}
-        </ul>
-      </section>
-      <section id="temoignage">
-        <h2>Témoignage</h2>
-        <p>{metier.liens.video}</p>
-      </section>
-      <section id="liens-utiles">
-        <h2>Liens utiles</h2>
-        <dsfr-button
-          markup="a"
-          label="Fiche métierscope"
-          href={metier.liens.metierscope}
-          target="_blank"
-          size="sm"
-          kind="tertiary-no-outline"
-        ></dsfr-button>
-      </section>
-    </Fiche>
-  </div>
+  <Fiche menuId="menu-fiche-metier" {menu}>
+    <section id="description">
+      <h2>Description du métier</h2>
+      <p>{metier.description}</p>
+      <blockquote>
+        <h4>Sa mission principale</h4>
+        <p>{metier.missionPrincipale}</p>
+      </blockquote>
+      <p><strong> Ce qu'on attend&nbsp;: </strong></p>
+      <ul>
+        {#each metier.postures as posture}
+          <li>{posture}</li>
+        {/each}
+      </ul>
+    </section>
+    <section id="formation">
+      <h2>Formation</h2>
+      <ul>
+        <li>
+          {formations}
+        </li>
+        {#if metier.preRequis.length > 0}
+          <li>{metier.preRequis.join(', ')}</li>
+        {/if}
+      </ul>
+    </section>
+    <section id="remuneration">
+      <h2>Rémunération</h2>
+      <ul>
+        <li>
+          Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
+            metier.remuneration.junior,
+          )} euros
+        </li>
+        <li>
+          Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
+            metier.remuneration.senior,
+          )} euros
+        </li>
+      </ul>
+      <p class="note">
+        Les rémunérations présentées sont strictement indicatives et ne
+        constituent en aucun cas une grille de rémunération préconisée
+      </p>
+    </section>
+    <section id="metiers-proches">
+      <h2>Métiers proches</h2>
+      <ul>
+        {#each metier.metiersProches as metierProche}
+          <li>{metierProche}</li>
+        {/each}
+      </ul>
+    </section>
+    <section id="temoignage">
+      <h2>Témoignage</h2>
+      <p>{metier.liens.video}</p>
+    </section>
+    <section id="liens-utiles">
+      <h2>Liens utiles</h2>
+      <dsfr-button
+        markup="a"
+        label="Fiche métierscope"
+        href={metier.liens.metierscope}
+        target="_blank"
+        size="sm"
+        kind="tertiary-no-outline"
+      ></dsfr-button>
+    </section>
+  </Fiche>
 {/if}
 
 <style lang="scss">
@@ -310,9 +308,5 @@
     font-size: 0.75rem;
     line-height: 1.25rem;
     margin-bottom: 0;
-  }
-
-  .fiche {
-    padding-bottom: 4.5rem;
   }
 </style>
