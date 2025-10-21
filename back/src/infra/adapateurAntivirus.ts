@@ -18,7 +18,7 @@ export type ResultatAnalyseFichier = {
 
 export type AdaptateurAntivirus = {
   analyse: (
-    fichier: Buffer<ArrayBuffer>,
+    fichiers: Buffer<ArrayBuffer>[],
     dependances?: {
       clientHttp: PosteRessourceHttp<ReponseJCOP>;
       adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -28,26 +28,41 @@ export type AdaptateurAntivirus = {
 
 export const adaptateurJCOP: AdaptateurAntivirus = {
   analyse: async (
-    fichier: Buffer<ArrayBuffer>,
+    fichiers: Buffer<ArrayBuffer>[],
     { clientHttp, adaptateurEnvironnement } = {
       clientHttp: creePosteRessourceHttp(),
       adaptateurEnvironnement: adaptateurEnvironnementProd,
     },
   ) => {
-    const formulaire = new FormData();
-    formulaire.append('file', new Blob([fichier]));
+    if (!fichiers.length) {
+      return { estEnErreur: false };
+    }
+
     try {
-      const { is_malware, status } = await clientHttp(
-        adaptateurEnvironnement.antivirus().urlAnalyse,
-        formulaire,
-        {
-          headers: {
-            'X-Auth-Token': adaptateurEnvironnement.antivirus().jetonAnalyse,
+      const formulaire = new FormData();
+      const promesses = fichiers.map(async (fichier) => {
+        formulaire.append('file', new Blob([fichier]));
+        const reponse = await clientHttp(
+          adaptateurEnvironnement.antivirus().urlAnalyse,
+          formulaire,
+          {
+            headers: {
+              'X-Auth-Token': adaptateurEnvironnement.antivirus().jetonAnalyse,
+            },
           },
-        },
-      );
-      return { estInfecte: is_malware, estEnErreur: !status };
-    } catch {
+        );
+        // eslint-disable-next-line no-console
+        console.log('reponse JCOP : ', reponse);
+        return reponse;
+      });
+      const resultat = await Promise.all(promesses);
+      return {
+        estInfecte: resultat.some((r) => r.is_malware),
+        estEnErreur: resultat.some((r) => !r.status),
+      };
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Analyse antivirus en erreur', e);
       return {
         estEnErreur: true,
       };

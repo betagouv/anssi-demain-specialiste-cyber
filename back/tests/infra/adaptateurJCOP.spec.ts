@@ -7,7 +7,11 @@ import { PosteRessourceHttp } from '../../src/infra/clientHttp';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'adaptateur JCOP ", () => {
-  const unFichierNonInfecte = Buffer.from('contenu du fichier');
+  const desFichiersQuelconques = [
+    Buffer.from('contenu du fichier 1'),
+    Buffer.from('contenu du fichier 2'),
+    Buffer.from('contenu du fichier 3'),
+  ];
   const reponseJCOPOK: ReponseJCOP = {
     is_malware: false,
     status: true,
@@ -22,11 +26,27 @@ describe("L'adaptateur JCOP ", () => {
 
   it('sait analyser un fichier non infecté', async () => {
     const { estInfecte } = await adaptateurJCOP.analyse(
-      unFichierNonInfecte,
+      desFichiersQuelconques,
       dependancesParDefaut,
     );
 
     expect(estInfecte).toBeFalsy();
+  });
+
+  it("n'appelle pas JCOP si aucun fichier n'est fourni", async () => {
+    let estAppele = false;
+    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async () => {
+      estAppele = true;
+      return reponseJCOPOK;
+    };
+
+    const { estEnErreur } = await adaptateurJCOP.analyse([], {
+      ...dependancesParDefaut,
+      clientHttp,
+    });
+
+    expect(estAppele).toBeFalsy();
+    expect(estEnErreur).toBeFalsy();
   });
 
   it("sait appeler l'API JCOP avec les bons paramètres", async () => {
@@ -42,7 +62,7 @@ describe("L'adaptateur JCOP ", () => {
       return reponseJCOPOK;
     };
 
-    await adaptateurJCOP.analyse(unFichierNonInfecte, {
+    await adaptateurJCOP.analyse(desFichiersQuelconques, {
       ...dependancesParDefaut,
       clientHttp,
     });
@@ -60,7 +80,7 @@ describe("L'adaptateur JCOP ", () => {
     });
 
     const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
-      unFichierNonInfecte,
+      desFichiersQuelconques,
       {
         ...dependancesParDefaut,
         clientHttp,
@@ -76,10 +96,13 @@ describe("L'adaptateur JCOP ", () => {
       status: true,
     });
 
-    const { estInfecte } = await adaptateurJCOP.analyse(unFichierNonInfecte, {
-      ...dependancesParDefaut,
-      clientHttp,
-    });
+    const { estInfecte } = await adaptateurJCOP.analyse(
+      desFichiersQuelconques,
+      {
+        ...dependancesParDefaut,
+        clientHttp,
+      },
+    );
     expect(estInfecte).toBeTruthy();
   });
 
@@ -89,7 +112,7 @@ describe("L'adaptateur JCOP ", () => {
     };
 
     const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
-      unFichierNonInfecte,
+      desFichiersQuelconques,
       {
         ...dependancesParDefaut,
         clientHttp,
