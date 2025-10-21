@@ -1,7 +1,11 @@
 extends fragments/base
 
+block variables
+  - var titrePage = "Page non trouvée"
+  - var classePage = "page-404"
+
 block contenu
     dsfr-container
-        h2 Page non trouvée
-        p La page que vous recherchez n'existe pas.
-        dsfr-link(href='/', label='Retourner à l\'accueil')
+        .erreur
+            p La page que vous recherchez n'existe pas.
+            dsfr-link(href='/', label='Retourner à l\'accueil')
