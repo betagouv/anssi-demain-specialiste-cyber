@@ -1,0 +1,17 @@
+extends fragments/base
+block variables
+  - var titrePage = ""
+  - var descriptionPage = ""
+  - var sansNavigation = true
+  - var sansZoneIdentification = true
+
+block hero
+
+block contenu
+    dsfr-container
+        h1 Connectez-vous à votre espace enseignant
+        p
+            | Accédez à votre espace DemainSpécialisteCyber pour déposer les jeux
+            | créés par vos élèves lors de séquences CyberEnJeux et valoriser leur créativité.
+        div
+            dsfr-connect(href="/oidc/connexion")
