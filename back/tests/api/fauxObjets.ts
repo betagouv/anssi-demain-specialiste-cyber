@@ -103,6 +103,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     };
   },
   cellarPhotosJeux: () => 'https://example.com/',
+  antivirus: () => ({
+    urlAnalyse: 'https://mon-antivirus.local/',
+    jetonAnalyse: 'monJetonJCOP',
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
