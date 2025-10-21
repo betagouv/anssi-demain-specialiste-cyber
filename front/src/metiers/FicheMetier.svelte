@@ -111,7 +111,11 @@
         <dsfr-breadcrumb
           segments={[
             { id: 'accueil', label: 'Accueil', href: '/' },
-            { id: 'catalogue', label: 'Catalogue de ressources', href: '/' },
+            {
+              id: 'catalogue',
+              label: 'Catalogue de ressources',
+              href: '/catalogue',
+            },
             {
               id: `ressource-${metier.id}`,
               label: `${metier.titre}`,
