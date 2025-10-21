@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { RecupereRessourceHttp } from '../src/infra/recupereRessourceHttp';
+import { RecupereRessourceHttp } from '../src/infra/clientHttp';
 import { EntrepotGrist, ReponseGrist } from '../src/infra/entrepotGrist';
 
 class EntrepotGristGenerique extends EntrepotGrist<{ test: string }> {

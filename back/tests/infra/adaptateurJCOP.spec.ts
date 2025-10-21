@@ -3,7 +3,7 @@ import {
   adaptateurJCOP,
   ReponseJCOP,
 } from '../../src/infra/adapateurAntivirus';
-import { PosteRessourceHttp } from '../../src/infra/recupereRessourceHttp';
+import { PosteRessourceHttp } from '../../src/infra/clientHttp';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'adaptateur JCOP ", () => {

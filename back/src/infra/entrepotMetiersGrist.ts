@@ -1,10 +1,7 @@
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { Metier } from '../metier/metier';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
-import {
-  creeRecupereRessourceHttp,
-  RecupereRessourceHttp,
-} from './recupereRessourceHttp';
+import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 
 type MetierGrist = {

@@ -1,4 +1,4 @@
-import { RecupereRessourceHttp } from './recupereRessourceHttp';
+import { RecupereRessourceHttp } from './clientHttp';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { Cache } from './cache';
 

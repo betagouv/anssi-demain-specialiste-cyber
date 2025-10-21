@@ -3,7 +3,7 @@ import {
   EntrepotRessourcesCyberGrist,
   RessourceCyberGrist,
 } from '../../src/infra/entrepotRessourcesCyberGrist';
-import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
+import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 
 describe("L'entrepôt de ressources cyber Grist ", () => {

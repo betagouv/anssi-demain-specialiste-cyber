@@ -5,12 +5,6 @@ export type RecupereRessourceHttp<T> = (
   config?: { headers?: Record<string, string> },
 ) => Promise<T>;
 
-export type PosteRessourceHttp<T> = (
-  url: string,
-  corps: FormData,
-  config?: { headers?: Record<string, string> },
-) => Promise<T>;
-
 export const creeRecupereRessourceHttp = <T>() => {
   return async (url: string, config?: { headers?: Record<string, string> }) => {
     const response = await axios.get(url, {
@@ -22,6 +16,12 @@ export const creeRecupereRessourceHttp = <T>() => {
     return response.data as T;
   };
 };
+
+export type PosteRessourceHttp<T> = (
+  url: string,
+  corps: FormData,
+  config?: { headers?: Record<string, string> },
+) => Promise<T>;
 
 export const creePosteRessourceHttp = <T>() => {
   return async (
@@ -36,7 +36,9 @@ export const creePosteRessourceHttp = <T>() => {
       },
     });
     if (response.status !== 200) {
-      throw new Error(`JCOP nous a répondu une erreur ${response.status}`);
+      throw new Error(
+        `Le serveur nous a répondu une erreur ${response.status}`,
+      );
     }
     return response.data as T;
   };

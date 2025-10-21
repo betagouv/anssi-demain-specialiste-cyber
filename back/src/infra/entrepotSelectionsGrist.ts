@@ -2,10 +2,7 @@ import { EntrepotSelections } from '../metier/entrepotSelections';
 import { Selection } from '../metier/selection';
 import { adaptateurEnvironnement, TableGrist } from './adaptateurEnvironnement';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
-import {
-  creeRecupereRessourceHttp,
-  RecupereRessourceHttp,
-} from './recupereRessourceHttp';
+import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 
 export type SelectionGrist = {
