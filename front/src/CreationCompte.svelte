@@ -50,6 +50,11 @@
           Prénom&nbsp;: <strong>{informationsProfessionnelles.prenom}</strong>
         </p>
         <p>Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong></p>
+        <p>
+          Mail professionnel&nbsp;: <strong
+            >{informationsProfessionnelles.email}</strong
+          >
+        </p>
       </fieldset>
 
       <hr />
