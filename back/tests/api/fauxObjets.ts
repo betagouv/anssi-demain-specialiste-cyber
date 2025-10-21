@@ -106,6 +106,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   antivirus: () => ({
     urlAnalyse: 'https://mon-antivirus.local/',
     jetonAnalyse: 'monJetonJCOP',
+    analyseActive: true,
   }),
 };
 

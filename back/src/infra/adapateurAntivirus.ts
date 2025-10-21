@@ -34,7 +34,10 @@ export const adaptateurJCOP: AdaptateurAntivirus = {
       adaptateurEnvironnement: adaptateurEnvironnementProd,
     },
   ) => {
-    if (!fichiers.length) {
+    if (
+      !fichiers.length ||
+      !adaptateurEnvironnement.antivirus().analyseActive
+    ) {
       return { estEnErreur: false };
     }
 
@@ -55,10 +58,10 @@ export const adaptateurJCOP: AdaptateurAntivirus = {
         console.log('reponse JCOP : ', reponse);
         return reponse;
       });
-      const resultat = await Promise.all(promesses);
+      const listeDesResultats = await Promise.all(promesses);
       return {
-        estInfecte: resultat.some((r) => r.is_malware),
-        estEnErreur: resultat.some((r) => !r.status),
+        estInfecte: listeDesResultats.some((r) => r.is_malware),
+        estEnErreur: listeDesResultats.some((r) => !r.status),
       };
     } catch (e) {
       // eslint-disable-next-line no-console
