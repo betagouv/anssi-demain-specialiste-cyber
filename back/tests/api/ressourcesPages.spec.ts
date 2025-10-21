@@ -42,6 +42,7 @@ describe('Les ressources de page', () => {
     { route: '/selection-eleves', vue: 'selection-eleves' },
     { route: '/statistiques', vue: 'statistiques' },
     { route: '/accessibilite', vue: 'accessibilite' },
+    { route: '/securite', vue: 'securite' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';

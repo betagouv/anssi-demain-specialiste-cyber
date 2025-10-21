@@ -15,6 +15,7 @@ const pages = [
   { route: '/connexion', protegee: false },
   { route: '/statistiques', protegee: false },
   { route: '/accessibilite', protegee: false },
+  { route: '/securite', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
