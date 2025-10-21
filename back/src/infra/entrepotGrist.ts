@@ -35,7 +35,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
       : cheminDeBase;
     const url = new URL(chemin, this.urlDeBase);
     return this.cache.get(
-      cheminDeBase,
+      chemin,
       async () =>
         await this.ressourcesHTTPGrist(url.toString(), {
           headers: {
