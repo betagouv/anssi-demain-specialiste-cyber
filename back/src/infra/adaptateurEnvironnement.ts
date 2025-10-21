@@ -41,6 +41,10 @@ export type AdaptateurEnvironnement = {
   };
   televersementEnMemoire(): boolean;
   cellarPhotosJeux: () => string;
+  antivirus: () => {
+    urlAnalyse: string;
+    jetonAnalyse: string;
+  };
 };
 
 const variablesDeTeleversement = () => ({
@@ -161,4 +165,8 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     const [schema, autorite] = urlCellar!.split('//');
     return `${schema}//${bucketPhotosJeux}.${autorite}`;
   },
+  antivirus: () => ({
+    urlAnalyse: process.env.URL_JCOP ?? '',
+    jetonAnalyse: process.env.JETON_JCOP ?? '',
+  }),
 };
