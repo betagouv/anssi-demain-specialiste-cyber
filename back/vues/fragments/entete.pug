@@ -3,7 +3,7 @@ block variables
   - var descriptionPage = ""
 
 header.entete
-    dsc-entete
+    dsc-entete(sans-navigation=sansNavigation || false sans-zone-identification=sansZoneIdentification || false)
     block hero
         div.hero
             lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)

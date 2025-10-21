@@ -2,7 +2,13 @@
   customElement={{
     tag: 'dsc-entete',
     shadow: 'none',
-    props: {},
+    props: {
+      sansNavigation: { type: 'Boolean', attribute: 'sans-navigation' },
+      sansZoneIdentification: {
+        type: 'Boolean',
+        attribute: 'sans-zone-identification',
+      },
+    },
   }}
 />
 
@@ -22,6 +28,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { profil } from './stores/profil';
+
+  interface Props {
+    sansNavigation?: boolean;
+    sansZoneIdentification?: boolean;
+  }
+
+  const { sansNavigation = false, sansZoneIdentification = false }: Props =
+    $props();
 
   const ajouteMenuSiConnecte = (elementDeMenu: MenuItem) =>
     $profil ? [elementDeMenu] : [];
@@ -84,8 +98,6 @@
       active: cheminCourant === '/devenir-relai',
     },
   ]);
-
-  const afficheMenuNavigation = $derived(cheminCourant !== '/nouveau-jeu');
 </script>
 
 <dsfr-header
@@ -101,8 +113,8 @@
   brandOperatorSrc="/assets/images/ANSSI.svg"
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
-  hasToolLinks="true"
-  hasNavigation={afficheMenuNavigation}
+  hasToolLinks={!sansZoneIdentification}
+  hasNavigation={!sansNavigation}
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
   navigationItems={menuNavigation}
