@@ -1,63 +1,66 @@
 @use 'points-de-rupture' as *;
 
-.connexion {
-  display: flex;
-  align-items: flex-start;
-  align-self: stretch;
-
-  @include a-partir-de(md) {
-    justify-content: center;
-  }
-}
-
-dsfr-container {
-  @include a-partir-de(lg) {
-    flex: 1 0 0;
-  }
-}
-
-.illustration {
-  display: none;
-  position: relative;
-  background: var(--bleu-profond-dsc);
-
-  @include a-partir-de(lg) {
+.page-connexion {
+  .connexion {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    flex: 1 0 0;
-    height: 630px;
-    &:after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      content: '';
-      background: url(/assets/images/illustration_connexion.svg) center 100% no-repeat;
+    align-items: flex-start;
+    align-self: stretch;
+
+    @include a-partir-de(md) {
+      justify-content: center;
+    }
+
+    .conteneur {
+      padding: 4.5rem 0;
+      max-width: 31rem;
+      margin: 0 auto;
+
+      h1 {
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin: 0 0 2rem 0;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+
+      div {
+        margin-bottom: 1.5rem;
+      }
+
     }
   }
-}
 
-.conteneur {
-  padding: 4.5rem 0;
-  max-width: 31rem;
-  margin: 0 auto;
-
-  h1 {
-    margin-bottom: 1rem;
+  dsfr-container {
+    @include a-partir-de(lg) {
+      flex: 1 0 0;
+    }
   }
 
-  p {
-    margin: 0 0 2rem 0;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
+  .illustration {
+    display: none;
+    position: relative;
+    background: var(--bleu-profond-dsc);
 
-  div {
-    margin-bottom: 1.5rem;
+    @include a-partir-de(lg) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.625rem;
+      flex: 1 0 0;
+      height: 630px;
+      &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        content: '';
+        background: url(/assets/images/illustration_connexion.svg) center 100% no-repeat;
+      }
+    }
   }
 
 }
