@@ -91,6 +91,13 @@
       active: cheminCourant === '/mes-jeux',
     }),
     {
+      id: 'evenements',
+      label: 'Événements',
+      type: 'link',
+      href: '/evenements',
+      active: cheminCourant === '/evenements',
+    },
+    {
       id: 'devenir-relai',
       label: 'Relais',
       type: 'link',
