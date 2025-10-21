@@ -12,6 +12,7 @@ const pages = [
   { route: '/selection-enseignants', protegee: false },
   { route: '/selection-eleves', protegee: false },
   { route: '/devenir-relai', protegee: false },
+  { route: '/connexion', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {

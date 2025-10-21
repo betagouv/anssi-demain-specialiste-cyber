@@ -9,5 +9,5 @@
 {#if $profil}
   <a class="deconnexion" href="/oidc/deconnexion">Se déconnecter</a>
 {:else}
-  <a class="connexion" href="/oidc/connexion">Se connecter</a>
+  <a class="connexion" href="/connexion">Se connecter</a>
 {/if}
