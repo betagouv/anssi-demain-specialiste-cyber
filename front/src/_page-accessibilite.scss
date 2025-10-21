@@ -1,0 +1,22 @@
+.page-accessibilite {
+  .accessibilite {
+    padding: 1rem 0 4rem;
+
+    h2 {
+      margin-top: 2rem;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 2rem;
+    }
+
+    p + ul {
+      margin-top: 0.5rem;
+    }
+
+    address {
+      font-style: normal;
+    }
+  }
+}

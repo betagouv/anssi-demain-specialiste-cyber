@@ -14,6 +14,7 @@ const pages = [
   { route: '/devenir-relai', protegee: false },
   { route: '/connexion', protegee: false },
   { route: '/statistiques', protegee: false },
+  { route: '/accessibilite', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
