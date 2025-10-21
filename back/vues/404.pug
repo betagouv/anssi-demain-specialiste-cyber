@@ -1,5 +1,7 @@
 extends fragments/base
+
 block contenu
-    h2 Page non trouvée
-    p La page que vous recherchez n'existe pas.
-    a(href='/') Retourner à l'accueil
+    dsfr-container
+        h2 Page non trouvée
+        p La page que vous recherchez n'existe pas.
+        dsfr-link(href='/', label='Retourner à l\'accueil')
