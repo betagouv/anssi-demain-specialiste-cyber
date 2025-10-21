@@ -63,4 +63,22 @@ describe('La ressource création de compte', () => {
 
     expect(reponse.status).toBe(400);
   });
+
+  it('renvoie une erreur 400 lorsque le token est invalide', async () => {
+    const adaptateurJWT: AdaptateurJWT = {
+      ...fauxAdaptateurJWT,
+      decode: () => {
+        throw new Error('erreur de test');
+      },
+    };
+    const serveur = creeServeur({
+      ...configurationDeTestDuServeur(),
+      adaptateurJWT,
+    });
+    const reponse = await request(serveur).get(
+      '/creation-compte?token=TOKEN-jeanne',
+    );
+
+    expect(reponse.status).toBe(400);
+  });
 });

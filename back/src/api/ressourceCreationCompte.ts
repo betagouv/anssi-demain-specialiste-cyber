@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { ConfigurationServeur } from "./configurationServeur";
+import { ConfigurationServeur } from './configurationServeur';
 
 export const ressourceCreationCompte = ({
   adaptateurJWT,
@@ -13,26 +13,32 @@ export const ressourceCreationCompte = ({
     const token = requete.query.token;
     if (!token) return reponse.sendStatus(400);
 
-    const informationsProfessionnelles = adaptateurJWT.decode(token as string);
-
-    const organisation =
-      await adaptateurRechercheEntreprise.rechercheOrganisationParSiret(
-        informationsProfessionnelles.siret
+    try {
+      const informationsProfessionnelles = adaptateurJWT.decode(
+        token as string,
       );
 
-    moteurDeRendu.rends(reponse, 'creation-compte', {
-      informationsProfessionnelles: {
-        nom: informationsProfessionnelles.nom,
-        prenom: informationsProfessionnelles.prenom,
-        email: informationsProfessionnelles.email,
-        organisation: {
-          departement: organisation?.departement,
-          nom: organisation?.nom,
-          siret: informationsProfessionnelles.siret,
+      const organisation =
+        await adaptateurRechercheEntreprise.rechercheOrganisationParSiret(
+          informationsProfessionnelles.siret,
+        );
+
+      moteurDeRendu.rends(reponse, 'creation-compte', {
+        informationsProfessionnelles: {
+          nom: informationsProfessionnelles.nom,
+          prenom: informationsProfessionnelles.prenom,
+          email: informationsProfessionnelles.email,
+          organisation: {
+            departement: organisation?.departement,
+            nom: organisation?.nom,
+            siret: informationsProfessionnelles.siret,
+          },
         },
-      },
-      token,
-    });
+        token,
+      });
+    } catch {
+      return reponse.sendStatus(400);
+    }
   });
 
   return routeur;
