@@ -44,6 +44,7 @@ export type AdaptateurEnvironnement = {
   antivirus: () => {
     urlAnalyse: string;
     jetonAnalyse: string;
+    analyseActive: boolean;
   };
 };
 
@@ -168,5 +169,6 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
   antivirus: () => ({
     urlAnalyse: process.env.URL_JCOP ?? '',
     jetonAnalyse: process.env.JETON_JCOP ?? '',
+    analyseActive: process.env.ANALYZE_ACTIVE === 'true',
   }),
 };

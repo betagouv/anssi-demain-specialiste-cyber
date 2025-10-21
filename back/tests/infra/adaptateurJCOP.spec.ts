@@ -49,6 +49,34 @@ describe("L'adaptateur JCOP ", () => {
     expect(estEnErreur).toBeFalsy();
   });
 
+  it("n'appelle pas JCOP si l'analyse est désactivée", async () => {
+    let estAppele = false;
+    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async () => {
+      estAppele = true;
+      return reponseJCOPOK;
+    };
+
+    const adaptateurEnvironnementAnalyseOff = {
+      ...fauxAdaptateurEnvironnement,
+      antivirus: () => ({
+        urlAnalyse: 'pas appele',
+        jetonAnalyse: 'pas appele',
+        analyseActive: false,
+      }),
+    };
+
+    const { estEnErreur } = await adaptateurJCOP.analyse(
+      desFichiersQuelconques,
+      {
+        adaptateurEnvironnement: adaptateurEnvironnementAnalyseOff,
+        clientHttp,
+      },
+    );
+
+    expect(estAppele).toBeFalsy();
+    expect(estEnErreur).toBeFalsy();
+  });
+
   it("sait appeler l'API JCOP avec les bons paramètres", async () => {
     let urlAppelee = '';
     let jetonAuth = '';
@@ -108,7 +136,7 @@ describe("L'adaptateur JCOP ", () => {
 
   it('sait gérer une erreur HTTP de JCOP', async () => {
     const clientHttp: PosteRessourceHttp<ReponseJCOP> = async () => {
-      throw new Error('http erreur');
+      throw new Error('http erreur levée manuellement');
     };
 
     const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
