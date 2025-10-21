@@ -2,10 +2,7 @@ import {
   AdaptateurEnvironnement,
   adaptateurEnvironnement as adaptateurEnvironnementProd,
 } from './adaptateurEnvironnement';
-import {
-  creePosteRessourceHttp,
-  PosteRessourceHttp,
-} from './recupereRessourceHttp';
+import { creePosteRessourceHttp, PosteRessourceHttp } from './clientHttp';
 
 export type ReponseJCOP = {
   status: boolean;

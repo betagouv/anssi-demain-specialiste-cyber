@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RecupereRessourceHttp } from '../../src/infra/recupereRessourceHttp';
+import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import {
   EntrepotSelectionsGrist,
