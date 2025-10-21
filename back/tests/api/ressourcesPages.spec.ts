@@ -43,6 +43,7 @@ describe('Les ressources de page', () => {
     { route: '/statistiques', vue: 'statistiques' },
     { route: '/accessibilite', vue: 'accessibilite' },
     { route: '/securite', vue: 'securite' },
+    { route: '/evenements', vue: 'evenements' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
