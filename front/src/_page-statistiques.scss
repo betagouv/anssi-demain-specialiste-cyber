@@ -1,0 +1,24 @@
+.page-statistiques {
+  .statistiques {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    min-height: 27.5rem;
+    margin: 4rem 0 4.5rem;
+
+    .illustration {
+      margin: 0 auto;
+      width: clamp(200px, 100%, 18rem);
+    }
+
+    h5 {
+      color: var(--text-title-grey);
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
