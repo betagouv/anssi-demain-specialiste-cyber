@@ -52,6 +52,7 @@ export class Jeu {
   temoignages: Temoignage[];
   photos: PhotosJeu;
   consentement: boolean;
+  reactions: Record<string, number> = {};
 
   constructor(donnees: DonneesConstructionJeu) {
     this.id = donnees.id ?? randomUUID();
