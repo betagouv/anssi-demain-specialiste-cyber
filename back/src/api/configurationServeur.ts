@@ -15,6 +15,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotSelections } from '../metier/entrepotSelections';
+import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
 
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -33,6 +34,7 @@ export interface ConfigurationServeur {
   entrepotJeux: EntrepotJeux;
   adaptateurJournal: AdaptateurJournal;
   adaptateurTeleversement: AdaptateurTeleversement;
+  adaptateurAntivirus: AdaptateurAntivirus;
   entrepotSelectionsEnseignants: EntrepotSelections;
   entrepotSelectionsEleves: EntrepotSelections;
 }

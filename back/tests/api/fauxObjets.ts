@@ -23,6 +23,10 @@ import {
 } from '../../src/infra/adaptateurTeleversement';
 import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
 import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
+import {
+  AdaptateurAntivirus,
+  ResultatAnalyseFichier,
+} from '../../src/infra/adapateurAntivirus';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -141,6 +145,14 @@ export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
   };
 };
 
+const fauxAdaptateurAntivirus = (): AdaptateurAntivirus => {
+  return {
+    async analyse(): Promise<ResultatAnalyseFichier> {
+      return { estEnErreur: false, estInfecte: false };
+    },
+  };
+};
+
 export const configurationServeurSansMiddleware =
   (): ConfigurationServeurSansMiddleware => {
     const entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
@@ -168,6 +180,7 @@ export const configurationServeurSansMiddleware =
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       adaptateurJournal: adaptateurJournalMemoire,
       adaptateurTeleversement: fauxAdaptateurTeleversement(),
+      adaptateurAntivirus: fauxAdaptateurAntivirus(),
       entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
       entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
     };
