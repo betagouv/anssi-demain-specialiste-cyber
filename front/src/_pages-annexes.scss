@@ -1,19 +1,26 @@
-.page-confidentialite {
-  dsfr-container {
-    margin-bottom: 3rem;
-  }
-  h2 {
-    margin-top: 2rem;
+.page-a-propos,
+.page-cgu,
+.page-confidentialite,
+.page-mentions-legales,
+.page-securite,
+.page-accessibilite {
+  .conteneur {
+    padding: 2rem 0 3.5rem;
   }
 
-  address {
-    font-style: normal;
+  h2 {
+    margin-top: 2rem;
   }
 
   ul {
     margin-left: 2rem;
     list-style-type: disc;
   }
+
+  address {
+    font-style: normal;
+  }
+
   table {
     border: 1px solid var(--border-contrast-grey);
     border-collapse: collapse;

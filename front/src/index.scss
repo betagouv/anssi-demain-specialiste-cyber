@@ -11,16 +11,12 @@
 @use 'encart-soutiens';
 @use 'encart-intro';
 
+@use 'pages-annexes';
+@use 'page-statistiques';
+
 @use 'page-accueil';
 @use 'page-catalogue';
 @use 'page-cyber-en-jeux';
 @use 'page-connexion';
-@use 'page-statistiques';
-@use 'page-accessibilite';
-@use 'page-securite';
 @use 'page-404';
 @use 'page-evenements';
-@use 'page-mentions-legales';
-@use 'page-confidentialite';
-@use 'page-cgu';
-@use 'page-a-propos';
