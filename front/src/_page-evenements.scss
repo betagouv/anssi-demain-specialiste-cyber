@@ -2,7 +2,18 @@
 
 .page-evenements {
   .evenements {
+    display: flex;
+    flex-direction: column;
     padding: 3rem 0;
+
+    & > dsfr-button {
+      display: none;
+      margin: 0 0 2rem auto;
+
+      @include a-partir-de(md) {
+        display: block;
+      }
+    }
   }
 
   iframe {
