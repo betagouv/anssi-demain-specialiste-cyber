@@ -8,6 +8,7 @@ import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceJeux } from './ressourceJeux';
 import { ressourceMetier } from './ressourceMetier';
 import { ressourceSelections } from './ressourceSelections';
+import { ressourceReactionsJeu } from './ressourceReactionsJeu';
 
 export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
   const router = Router();
@@ -19,6 +20,7 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     '/jeux',
     ressourceJeux(configurationServeur),
     ressourceJeu(configurationServeur),
+    ressourceReactionsJeu(),
   );
   router.use(
     '/ressources-cyber',
