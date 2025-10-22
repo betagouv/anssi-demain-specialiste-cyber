@@ -1,0 +1,47 @@
+extends fragments/base
+block variables
+  - var titrePage = "À propos"
+  - var classePage = "page-a-propos"
+
+block contenu
+    dsfr-container
+        .a-propos
+            p
+                | DemainSpécialisteCyber est la plateforme pour faciliter l'accès des élèves et professeurs aux services et ressources
+                | éducatifs cyber. Elle est conçue par
+                |
+                dsfr-link(href="https://www.ssi.gouv.fr/agence/missions/rapport-dactivite-2020/" label="le laboratoire d'innovation de l'ANSSI" blank)
+                |, en étroite coordination avec le ministère de l’
+                dsfr-link(href="https://www.education.gouv.fr/" label="Education nationale et de la Jeunesse" blank)
+                |
+                | et l'incubateur de services numériques
+                |
+                dsfr-link(href="https://beta.gouv.fr/startups/" label="“BetaGouv”" blank)
+                |
+                | de la direction interministérielle du numérique (DINUM).
+            p Cette solution est&nbsp;:
+            ul
+                li
+                    | développée par une équipe de développeurs et de designers UX/UI
+                    |
+                    dsfr-link(href="https://omnicite.fr/" label="Omnicité" blank)
+                    | &nbsp;;
+                li
+                    | hébergée chez
+                    |
+                    dsfr-link(href="https://www.clever-cloud/" label="Clever Cloud" blank)
+                    | prenant appui sur Cloud Temple qualifié SecNumCloud et certifié ISO 27001 ainsi que HDS&nbsp;;
+                li
+                    | sous licence
+                    |
+                    dsfr-link(href="https://github.com/betagouv/anssi-portail/blob/master/LICENSE" label="Apache-2.0" blank)
+                    | .
+            p
+                dsfr-link(href="https://github.com/betagouv/anssi-demain-specialiste-cyber" label="Le code est accessible en ligne" blank)
+                | .
+            p
+                | Pour toute question ou suggestion concernant les fonctionnalités de DemainSpécialisteCyber ou sa sécurité, contactez
+                | l'équipe à
+                |
+                dsfr-link(href="mailto:contact@demainspecialistecyber.beta.gouv.fr" label="contact@demainspecialistecyber.beta.gouv.fr")
+                | .

@@ -20,6 +20,7 @@ const pages = [
   { route: '/mentions-legales', protegee: false },
   { route: '/confidentialite', protegee: false },
   { route: '/cgu', protegee: false },
+  { route: '/a-propos', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
