@@ -67,6 +67,24 @@ h2 {
   }
 }
 
+h3 {
+  color: var(--grey-50-1000);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0 0 1.5rem;
+
+  .fonce & {
+    color: var(--grey-1000-50);
+  }
+
+  @include a-partir-de(md) {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+}
+
 h4 {
   color: var(--grey-50-1000);
   font-style: normal;
