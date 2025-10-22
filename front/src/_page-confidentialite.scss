@@ -1,0 +1,30 @@
+.page-confidentialite {
+  dsfr-container {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    margin-top: 2rem;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  ul {
+    margin-left: 2rem;
+    list-style-type: disc;
+  }
+  table {
+    border: 1px solid var(--border-contrast-grey);
+    border-collapse: collapse;
+    thead {
+      background-color: var(--background-alt-grey);
+    }
+    td,
+    th {
+      border: 1px solid var(--border-contrast-grey);
+      padding: 0.75rem 1.5rem;
+      text-align: left;
+    }
+  }
+}
