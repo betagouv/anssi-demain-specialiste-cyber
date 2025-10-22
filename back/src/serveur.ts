@@ -25,6 +25,7 @@ import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
+import { adaptateurJCOP } from './infra/adapateurAntivirus';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -89,6 +90,7 @@ serviceCoherenceSecretsHachage
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
         adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
+        adaptateurAntivirus: adaptateurJCOP,
         entrepotSelectionsEnseignants: new EntrepotSelectionsGrist(
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsEnseignants(),

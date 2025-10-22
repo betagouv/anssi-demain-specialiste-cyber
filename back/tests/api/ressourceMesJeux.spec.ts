@@ -28,6 +28,7 @@ import { MIMEType } from 'node:util';
 import { unJeu } from '../metier/constructeurJeu';
 import { CINQ_MO } from '../../src/api/ressourceMesJeux';
 import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
+import { AdaptateurAntivirus } from '../../src/infra/adapateurAntivirus';
 
 describe('La ressource de mes jeux', () => {
   let serveur: Express;
@@ -705,6 +706,80 @@ describe('La ressource de mes jeux', () => {
         expect(reponse.status).toEqual(400);
         expect(reponse.body).toEqual({
           erreur: "Le fichier n'est pas supporté",
+        });
+      });
+    });
+
+    describe('concernant l’analyse antivirus', () => {
+      const televerseUnJeuAvec3Photos = async (
+        adaptateurAntivirus: AdaptateurAntivirus,
+      ) => {
+        serveur = creeServeur({
+          ...configurationDeTestDuServeur(),
+          middleware,
+          busEvenements,
+          entrepotJeux,
+          adaptateurTeleversement,
+          adaptateurAntivirus,
+        });
+
+        return request(serveur)
+          .post('/api/mes-jeux')
+          .field('jeu', JSON.stringify(uneRequeteDeJeuValide().construis()))
+          .attach('couverture', Buffer.from('une-image-1'), 'test.jpg')
+          .attach('photos', Buffer.from('une-image-2'), 'test-2.jpg')
+          .attach('photos', Buffer.from('une-image-3'), 'test-3.jpg');
+      };
+
+      it('effectue l’analyse antivirus', async () => {
+        let antivirusAppele = false;
+        let contenuFichiers: string[] = [];
+        const adaptateurAntivirus: AdaptateurAntivirus = {
+          analyse: async (fichiers) => {
+            contenuFichiers = fichiers.map((f) =>
+              new TextDecoder('utf-8').decode(f),
+            );
+            antivirusAppele = true;
+            return { estEnErreur: false, estInfecte: false };
+          },
+        };
+
+        await televerseUnJeuAvec3Photos(adaptateurAntivirus);
+
+        expect(antivirusAppele).toBeTruthy();
+        expect(contenuFichiers).toStrictEqual([
+          'une-image-1',
+          'une-image-2',
+          'une-image-3',
+        ]);
+      });
+
+      it('retourne une erreur 400 si l’analyse détecte des fichiers infectés', async () => {
+        const adaptateurAntivirus: AdaptateurAntivirus = {
+          analyse: async () => {
+            return { estEnErreur: false, estInfecte: true };
+          },
+        };
+
+        const reponse = await televerseUnJeuAvec3Photos(adaptateurAntivirus);
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body).toStrictEqual({
+          erreur: 'Un des fichiers est infecté',
+        });
+      });
+
+      it('retourne une erreur 400 si l’analyse est en erreur', async () => {
+        const adaptateurAntivirus: AdaptateurAntivirus = {
+          analyse: async () => {
+            return { estEnErreur: true, estInfecte: false };
+          },
+        };
+        const reponse = await televerseUnJeuAvec3Photos(adaptateurAntivirus);
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body).toStrictEqual({
+          erreur: 'Le traitement de vos photos n’a pu aboutir',
         });
       });
     });

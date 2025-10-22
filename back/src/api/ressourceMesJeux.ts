@@ -18,6 +18,7 @@ import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { ConfigurationServeur } from './configurationServeur';
 import multer from 'multer';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
+import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
 
 const chaineNonVide = (message: string) =>
   z.string(message).trim().min(1, message);
@@ -97,6 +98,28 @@ type CorpsRequeteDeJeu = {
 
 export const CINQ_MO = 5 * 1024 * 1024;
 
+const lanceAnalyseAntivirus = (
+  adaptateurAntivirus: AdaptateurAntivirus,
+): RequestHandler => {
+  return async (requete: Request, reponse: Response, suite: NextFunction) => {
+    const lesFichiers = Object.values(requete.files ?? []).flatMap((f) => f);
+    const buffers = lesFichiers?.map((f: Express.Multer.File) =>
+      Buffer.from(f.buffer),
+    );
+    const resultatAnalyseFichier = await adaptateurAntivirus.analyse(buffers);
+    let erreur: string | undefined = undefined;
+    if (resultatAnalyseFichier.estInfecte) {
+      erreur = 'Un des fichiers est infecté';
+    } else if (resultatAnalyseFichier.estEnErreur) {
+      erreur = 'Le traitement de vos photos n’a pu aboutir';
+    }
+    if (erreur) {
+      return reponse.status(400).send({ erreur });
+    }
+    suite();
+  };
+};
+
 const valideLesPhotosTeleversees = (
   adaptateurTeleversement: AdaptateurTeleversement,
 ): RequestHandler => {
@@ -161,7 +184,6 @@ const valideLesPhotosTeleversees = (
     });
   };
 };
-
 export const ressourceMesJeux = ({
   entrepotJeux,
   entrepotUtilisateur,
@@ -169,6 +191,7 @@ export const ressourceMesJeux = ({
   middleware,
   busEvenements,
   adaptateurTeleversement,
+  adaptateurAntivirus,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -180,6 +203,7 @@ export const ressourceMesJeux = ({
       adaptateurHachage,
     ),
     valideLesPhotosTeleversees(adaptateurTeleversement),
+    lanceAnalyseAntivirus(adaptateurAntivirus),
     async (
       requete: Request<
         core.ParamsDictionary,
