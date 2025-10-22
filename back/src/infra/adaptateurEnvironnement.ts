@@ -167,8 +167,8 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     return `${schema}//${bucketPhotosJeux}.${autorite}`;
   },
   antivirus: () => ({
-    urlAnalyse: process.env.URL_JCOP ?? '',
-    jetonAnalyse: process.env.JETON_JCOP ?? '',
-    analyseActive: process.env.ANALYZE_ACTIVE === 'true',
+    urlAnalyse: process.env.JCOP_URL ?? '',
+    jetonAnalyse: process.env.JCOP_JETON ?? '',
+    analyseActive: process.env.ANALYSE_ANTIVIRUS_ACTIVE === 'true',
   }),
 };
