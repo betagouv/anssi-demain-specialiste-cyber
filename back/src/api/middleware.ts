@@ -42,7 +42,7 @@ export type RequeteNonTypee = Request<
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
   adaptateurJWT,
-  moteurDeRendu
+  moteurDeRendu,
 }: ConfigurationServeurSansMiddleware): Middleware => {
   const ajouteLeNonceALaReponse = async (
     _requete: RequeteNonTypee,
@@ -61,9 +61,9 @@ export const fabriqueMiddleware = ({
     if (adaptateurEnvironnement.maintenance().actif()) {
       reponse
         .status(HttpStatusCode.ServiceUnavailable)
-        .set('Content-Type', 'text/html')
+        .set('Content-Type', 'text/html');
 
-      moteurDeRendu.rends(reponse, "maintenance")
+      moteurDeRendu.rends(reponse, 'maintenance');
     } else {
       suite();
     }
@@ -167,6 +167,7 @@ export const fabriqueMiddleware = ({
             `'nonce-${reponse.locals.nonce}'`,
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
+          frameSrc: ['https://umap.incubateur.anct.gouv.fr'],
         },
       },
     })(requete, reponse, suite);
