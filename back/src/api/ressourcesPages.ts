@@ -17,6 +17,7 @@ const pages = [
   { route: '/accessibilite', protegee: false },
   { route: '/securite', protegee: false },
   { route: '/evenements', protegee: false },
+  { route: '/mentions-legales', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {

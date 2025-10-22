@@ -1,0 +1,40 @@
+extends fragments/base
+block variables
+  - var titrePage = "Mentions légales"
+  - var classePage = "page-mentions-legales"
+
+block contenu
+    dsfr-container
+        h2 Éditeur
+        p Le site est édité par l'Agence nationale de la sécurité des systèmes d'information (ANSSI)&nbsp;:
+        address
+            | 51 boulevard de la Tour-Maubourg
+            br
+            | 75700 Paris 07 SP
+            br
+            | France
+            br
+            dsfr-link(href="mailto:lab-inno@ssi.gouv.fr" label="lab-inno@ssi.gouv.fr")
+        p Téléphone&nbsp;:&nbsp;
+            dsfr-link(href="tel:+33171758282" label="01 71 75 82 82")
+        h2 Directeur de publication
+        p Vincent Strubel, directeur général de l'ANSSI.
+        p La conception éditoriale, le suivi et les mises à jour du site internet sont assurés par les services de l'ANSSI en étroite coordination avec le ministère de l’Education nationale.
+        h2 Hébergement
+        p L'hébergement du site est assuré par Clever Cloud, 4&nbsp;rue&nbsp;Voltaire,&nbsp;44000&nbsp;Nantes
+        p Toute correspondance à leur attention doit être adressée à l'adresse suivante&nbsp;:
+            br
+            dsfr-link(href="mailto:support@clever-cloud.com" label="support@clever-cloud.com")
+        p Crédits images, vidéos et contenu pédagogique
+        ul 
+            li Les vidéos de témoignages ont été réalisées par le CampusCyber.
+            li Les affiches sur les métiers de la cybersécurité et le contenu pédagogique ont été élaborées par l’Agence nationale de la sécurité des systèmes d’information et le ministère de l’Education nationale et de la Jeunesse.
+            li La conception graphique et les illustrations ont été réalisés par&nbsp;Opixido.
+            li Le logo de la campagne et la conception du site ont été réalisés par&nbsp;Sphères.
+        h2 Protection des contenus
+        p Sauf mention expresse contraire telle que la mention de la licence ouverte Etalab, tous les contenus protégeables par le droit de la Propriété intellectuelle ne peuvent pas être reproduits ou réutilisés sans l'autorisation expresse de l'ANSSI.
+        h2 Demande d'autorisation
+        p Les demandes d'autorisation de reproduction d'un contenu doivent au préalable être adressées à l'ANSSI, en écrivant à l'adresse suivante&nbsp;:
+            br
+            dsfr-link(href="mailto:lab-inno@ssi.gouv.fr" label="lab-inno@ssi.gouv.fr")
+        p La demande devra préciser le contenu visé ainsi que le contexte d'utilisation prévu (supports concernés, période, destinataires, etc.).
