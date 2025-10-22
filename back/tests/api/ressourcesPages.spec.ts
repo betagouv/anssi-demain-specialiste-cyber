@@ -45,6 +45,7 @@ describe('Les ressources de page', () => {
     { route: '/securite', vue: 'securite' },
     { route: '/evenements', vue: 'evenements' },
     { route: '/mentions-legales', vue: 'mentions-legales' },
+    { route: '/confidentialite', vue: 'confidentialite' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
