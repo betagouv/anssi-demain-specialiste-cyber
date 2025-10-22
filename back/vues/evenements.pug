@@ -3,6 +3,16 @@ extends fragments/base
 block variables
   - var titrePage = "Événements cyber"
   - var descriptionPage = "Visualisez l’ensemble des initiatives éducatives en cybersécurité."
+  - var classePage = "page-evenements"
 
 block contenu
-    p À venir
+    dsfr-container
+        .evenements
+            iframe(
+                width="100%"
+                height="740px"
+                frameborder="0"
+                allowfullscreen
+                allow="geolocation"
+                src="//umap.incubateur.anct.gouv.fr/fr/map/suivi-du-challenge-national-passe-ton-hack-2026_2679?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=false&searchControl=true&tilelayersControl=null&embedControl=true&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true&homeControl=true&locateControl=true#6/46.995/2.208"
+            )
