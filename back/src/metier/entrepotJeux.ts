@@ -6,4 +6,5 @@ export interface EntrepotJeux {
   tous(): Promise<Jeu[]>;
   lesJeuxDe(utilisateur: Utilisateur): Promise<Jeu[]>;
   parId(id: Jeu['id']): Promise<Jeu | undefined>;
+  metsAjour(jeu: Jeu): Promise<void>;
 }

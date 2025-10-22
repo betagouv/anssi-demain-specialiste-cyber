@@ -20,7 +20,7 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     '/jeux',
     ressourceJeux(configurationServeur),
     ressourceJeu(configurationServeur),
-    ressourceReactionsJeu(),
+    ressourceReactionsJeu(configurationServeur),
   );
   router.use(
     '/ressources-cyber',

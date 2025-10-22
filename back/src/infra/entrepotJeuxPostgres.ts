@@ -67,6 +67,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     this.adaptateurEnvironnement = adaptateurEnvironnement;
     this.knex = Knex(config);
   }
+  metsAjour(_jeu: Jeu): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 
   async ajoute(jeu: Jeu): Promise<void> {
     await this.knex('jeux').insert({
