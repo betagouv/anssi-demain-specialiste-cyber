@@ -1,26 +1,43 @@
 import { Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { ressourceCreationCompte } from './ressourceCreationCompte';
+import path from 'path';
 
-const pages = [
+type Page = {
+  route: string;
+  protegee: boolean;
+  chemin?: string;
+};
+
+const pages: Page[] = [
+  // Pages annexes
+  { route: '/a-propos', protegee: false, chemin: 'annexes' },
+  { route: '/accessibilite', protegee: false, chemin: 'annexes' },
+  { route: '/cgu', protegee: false, chemin: 'annexes' },
+  {
+    route: '/confidentialite',
+    protegee: false,
+    chemin: 'annexes',
+  },
+  {
+    route: '/mentions-legales',
+    protegee: false,
+    chemin: 'annexes',
+  },
+  { route: '/securite', protegee: false, chemin: 'annexes' },
+  { route: '/statistiques', protegee: false, chemin: 'annexes' },
+  // Pages principales
   { route: '/catalogue', protegee: false },
-  { route: '/nouveau-jeu', protegee: true },
-  { route: '/mes-jeux', protegee: true },
-  { route: '/jeux', protegee: false },
-  { route: '/cyber-en-jeux', protegee: false },
-  { route: '/metiers', protegee: false },
-  { route: '/selection-enseignants', protegee: false },
-  { route: '/selection-eleves', protegee: false },
-  { route: '/devenir-relai', protegee: false },
   { route: '/connexion', protegee: false },
-  { route: '/statistiques', protegee: false },
-  { route: '/accessibilite', protegee: false },
-  { route: '/securite', protegee: false },
+  { route: '/cyber-en-jeux', protegee: false },
+  { route: '/devenir-relai', protegee: false },
   { route: '/evenements', protegee: false },
-  { route: '/mentions-legales', protegee: false },
-  { route: '/confidentialite', protegee: false },
-  { route: '/cgu', protegee: false },
-  { route: '/a-propos', protegee: false },
+  { route: '/jeux', protegee: false },
+  { route: '/mes-jeux', protegee: true },
+  { route: '/metiers', protegee: false },
+  { route: '/nouveau-jeu', protegee: true },
+  { route: '/selection-eleves', protegee: false },
+  { route: '/selection-enseignants', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
@@ -36,8 +53,11 @@ export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
       router.use(route, configurationServeur.middleware.verifieJWTNavigation),
     );
 
-  pages.forEach(({ route }) => {
-    const vue = route.startsWith('/') ? route.slice(1) : route;
+  pages.forEach(({ route, chemin = '' }) => {
+    const vue = path.join(
+      chemin,
+      route.startsWith('/') ? route.slice(1) : route,
+    );
     router.use(route, (_, reponse) => moteurDeRendu.rends(reponse, vue));
   });
 

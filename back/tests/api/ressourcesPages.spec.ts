@@ -34,20 +34,22 @@ describe('Les ressources de page', () => {
   );
 
   describe.each([
+    // Pages annexes
+    { route: '/a-propos', vue: 'annexes/a-propos' },
+    { route: '/accessibilite', vue: 'annexes/accessibilite' },
+    { route: '/cgu', vue: 'annexes/cgu' },
+    { route: '/confidentialite', vue: 'annexes/confidentialite' },
+    { route: '/mentions-legales', vue: 'annexes/mentions-legales' },
+    { route: '/securite', vue: 'annexes/securite' },
+    { route: '/statistiques', vue: 'annexes/statistiques' },
+    // Pages principales
     { route: '/catalogue', vue: 'catalogue' },
-    { route: '/jeux/1234', vue: 'jeux' },
     { route: '/cyber-en-jeux', vue: 'cyber-en-jeux' },
-    { route: '/metiers/1234', vue: 'metiers' },
-    { route: '/selection-enseignants', vue: 'selection-enseignants' },
-    { route: '/selection-eleves', vue: 'selection-eleves' },
-    { route: '/statistiques', vue: 'statistiques' },
-    { route: '/accessibilite', vue: 'accessibilite' },
-    { route: '/securite', vue: 'securite' },
     { route: '/evenements', vue: 'evenements' },
-    { route: '/mentions-legales', vue: 'mentions-legales' },
-    { route: '/confidentialite', vue: 'confidentialite' },
-    { route: '/cgu', vue: 'cgu' },
-    { route: '/a-propos', vue: 'a-propos' },
+    { route: '/jeux/1234', vue: 'jeux' },
+    { route: '/metiers/1234', vue: 'metiers' },
+    { route: '/selection-eleves', vue: 'selection-eleves' },
+    { route: '/selection-enseignants', vue: 'selection-enseignants' },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
