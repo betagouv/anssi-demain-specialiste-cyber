@@ -2,4 +2,25 @@
   .evenements {
     padding: 3rem 0;
   }
+
+  iframe {
+    margin-bottom: 3.5rem;
+  }
+
+  .declaration-action {
+    background-color: var(--bleu-profond-dsc);
+    padding: 2rem;
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    dsfr-button {
+      margin: 2rem 0 1rem;
+    }
+  }
 }
