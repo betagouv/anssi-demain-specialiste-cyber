@@ -825,6 +825,7 @@ describe('La ressource de mes jeux', () => {
           .avecUneCouverture('une-couverture')
           .avecUnePhoto('photo-1')
           .avecUnePhoto('photo-2')
+          .cache(true)
           .construis(),
       );
 
@@ -840,6 +841,7 @@ describe('La ressource de mes jeux', () => {
             couverture: { chemin: 'une-couverture' },
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
+          estCache: true,
         },
       ]);
     });
@@ -883,6 +885,7 @@ describe('La ressource de mes jeux', () => {
             couverture: { chemin: 'une-couverture' },
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
+          estCache: false,
         },
       ]);
     });
