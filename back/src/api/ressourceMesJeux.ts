@@ -303,6 +303,7 @@ export const ressourceMesJeux = ({
           nomEtablissement: jeu.nomEtablissement,
           eleves: jeu.eleves,
           photos: jeu.photos,
+          estCache: jeu.estCache,
         })),
       );
     },
