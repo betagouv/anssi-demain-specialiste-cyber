@@ -6,6 +6,7 @@
       description: { attribute: 'description', type: 'String' },
       variant: { attribute: 'variant', type: 'String' },
       ariane: { attribute: 'ariane', type: 'Array' },
+      avecFiltres: { attribute: 'avec-filtres', type: 'Boolean' },
     },
   }}
 />
@@ -22,6 +23,7 @@
     description: string;
     variant: 'standard' | 'alternatif';
     ariane: Segment[];
+    avecFiltres?: boolean;
   };
 
   const {
@@ -29,16 +31,25 @@
     description,
     variant = 'standard',
     ariane = [],
+    avecFiltres = false,
   }: Props = $props();
   const fondSombre = $derived(variant === 'standard');
 </script>
 
 <div class={['heros', variant]}>
   <dsfr-container>
-    <div class="conteneur" class:fonce={fondSombre}>
+    <div
+      class="conteneur"
+      class:fonce={fondSombre}
+      class:avec-filtres={avecFiltres}
+    >
       <slot name="breadcrumb">
-        <dsfr-breadcrumb segments={ariane} inverse={fondSombre}
-        ></dsfr-breadcrumb>
+        <dsfr-breadcrumb
+          buttonLabel="Voir le fil d'Ariane"
+          segments={ariane}
+          inverse={fondSombre}
+        >
+        </dsfr-breadcrumb>
       </slot>
       <hgroup>
         <h1 class="titre-alternatif-xs">
@@ -56,6 +67,8 @@
 </div>
 
 <style lang="scss">
+  @use 'points-de-rupture' as *;
+
   .heros {
     &.standard {
       background:
@@ -76,7 +89,13 @@
     }
 
     .conteneur {
-      padding: 1rem 0 1.5rem;
+      padding: 1px 0 1.5rem;
+
+      &.avec-filtres {
+        @include a-partir-de(md) {
+          padding-bottom: 4.5rem;
+        }
+      }
     }
 
     .fonce {

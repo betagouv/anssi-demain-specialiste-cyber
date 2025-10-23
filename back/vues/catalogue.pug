@@ -6,10 +6,13 @@ block variables
   - var ariane = []
   - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
   - ariane[1] = { id: 'catalogue', label: 'Catalogue de ressources', href: '#' }
+  - var herosAvecFiltres = true
 
 block contenu
   dsc-catalogue
+
 block apres-contenu
     include encarts/selections
+
 block apres-contenu
     include encarts/selections
