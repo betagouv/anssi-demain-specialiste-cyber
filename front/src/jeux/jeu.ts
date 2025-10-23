@@ -13,6 +13,7 @@ export type Jeu = {
   temoignages: { prenom: string; details: string }[];
   thematiques: Thematique[];
   photos: PhotosJeu;
+  reactions: Record<string, number>;
 };
 
 export type Image = {
