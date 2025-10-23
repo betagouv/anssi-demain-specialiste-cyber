@@ -5,5 +5,7 @@ block variables
 header.entete
     dsc-entete(sans-navigation=sansNavigation || false sans-zone-identification=sansZoneIdentification || false)
     block hero
-        div.hero
-            lab-anssi-bandeau-titre(titre= titrePage description= descriptionPage)
+        dsc-heros(
+          titre= titrePage
+          description= descriptionPage
+        )
