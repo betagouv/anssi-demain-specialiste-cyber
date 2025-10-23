@@ -34,10 +34,34 @@ describe("La ressource des réactions d'un jeu", () => {
       it('ajoute une réaction au jeu', async () => {
         cybercluedo.reactions['coeur'] = 4;
 
-        await request(serveur).post('/api/jeux/1/reactions');
+        await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'ajout' });
 
         const jeu = await entrepotJeux.parId('1');
         expect(jeu!.reactions['coeur']).toEqual(5);
+      });
+
+      it('retire une réaction au jeu ', async () => {
+        cybercluedo.reactions['coeur'] = 11;
+
+        await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'retrait' });
+
+        const jeu = await entrepotJeux.parId('1');
+        expect(jeu!.reactions['coeur']).toEqual(10);
+      });
+
+      it("ne fais rien si l'action est inconnue", async () => {
+        cybercluedo.reactions['coeur'] = 10;
+
+        await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'inconnue' });
+
+        const jeu = await entrepotJeux.parId('1');
+        expect(jeu!.reactions['coeur']).toEqual(10);
       });
     });
   });
