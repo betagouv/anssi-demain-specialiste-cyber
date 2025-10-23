@@ -2,6 +2,9 @@ extends fragments/base
 block variables
   - var titrePage = "Mes jeux"
   - var descriptionPage = "Partagez et gérez les jeux élaborés par vos élèves lors de séquence CyberEnJeux."
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'mes-jeux', label: 'Mes jeux', href: '#' }
 
 block contenu
     dsc-mes-jeux
