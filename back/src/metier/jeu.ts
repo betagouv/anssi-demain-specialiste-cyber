@@ -76,10 +76,14 @@ export class Jeu {
   }
 
   incrementeReaction(reaction: string) {
+    this.reactions[reaction] ??= 0;
+
     this.reactions[reaction] += 1;
   }
 
   decrementeReaction(reaction: string) {
+    if (this.reactions[reaction] === 0) return;
+
     this.reactions[reaction] -= 1;
   }
 }
