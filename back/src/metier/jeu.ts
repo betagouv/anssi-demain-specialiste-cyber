@@ -38,6 +38,7 @@ type DonneesConstructionJeu = {
   photos: PhotosJeu;
   consentement?: boolean;
   reactions?: Reactions;
+  estCache?: boolean;
 };
 
 export class Jeu {
@@ -56,6 +57,7 @@ export class Jeu {
   photos: PhotosJeu;
   consentement: boolean;
   reactions: Reactions = {};
+  estCache: boolean;
 
   constructor(donnees: DonneesConstructionJeu) {
     this.id = donnees.id ?? randomUUID();
@@ -73,6 +75,7 @@ export class Jeu {
     this.photos = donnees.photos;
     this.consentement = donnees.consentement ?? false;
     this.reactions = donnees.reactions ?? {};
+    this.estCache = donnees.estCache ?? false;
   }
 
   incrementeReaction(reaction: string) {

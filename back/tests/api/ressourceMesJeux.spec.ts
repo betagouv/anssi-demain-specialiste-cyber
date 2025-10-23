@@ -137,6 +137,7 @@ describe('La ressource de mes jeux', () => {
         photos: [],
       });
       expect(mesJeux[0].consentement).toBeTruthy();
+      expect(mesJeux[0].estCache).toBeFalsy();
     });
 
     it('sauvegarde les photos du jeu', async () => {
