@@ -5,12 +5,19 @@ export const ressourceReactionsJeu = (
   configurationServeur: ConfigurationServeur,
 ) => {
   const routeur = Router();
-  routeur.post('/:idJeu/reactions', async (_requete, reponse) => {
+  routeur.post('/:idJeu/reactions', async (requete, reponse) => {
     const jeu = await configurationServeur.entrepotJeux.parId(
-      _requete.params.idJeu,
+      requete.params.idJeu,
     );
 
-    jeu!.reactions['coeur'] = jeu!.reactions['coeur'] + 1;
+    switch (requete.body.action) {
+      case 'ajout':
+        jeu!.incrementeReaction();
+        break;
+      case 'retrait':
+        jeu!.decrementeReaction();
+        break;
+    }
 
     await configurationServeur.entrepotJeux.metsAjour(jeu!);
 

@@ -74,4 +74,12 @@ export class Jeu {
     this.consentement = donnees.consentement ?? false;
     this.reactions = donnees.reactions ?? {};
   }
+
+  incrementeReaction() {
+    this.reactions['coeur'] += 1;
+  }
+
+  decrementeReaction() {
+    this.reactions['coeur'] -= 1;
+  }
 }
