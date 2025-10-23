@@ -75,11 +75,11 @@ export class Jeu {
     this.reactions = donnees.reactions ?? {};
   }
 
-  incrementeReaction() {
-    this.reactions['coeur'] += 1;
+  incrementeReaction(reaction: string) {
+    this.reactions[reaction] += 1;
   }
 
-  decrementeReaction() {
-    this.reactions['coeur'] -= 1;
+  decrementeReaction(reaction: string) {
+    this.reactions[reaction] -= 1;
   }
 }

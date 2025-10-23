@@ -12,10 +12,10 @@ export const ressourceReactionsJeu = (
 
     switch (requete.body.action) {
       case 'ajout':
-        jeu!.incrementeReaction();
+        jeu!.incrementeReaction(requete.body.type);
         break;
       case 'retrait':
-        jeu!.decrementeReaction();
+        jeu!.decrementeReaction(requete.body.type);
         break;
     }
 
