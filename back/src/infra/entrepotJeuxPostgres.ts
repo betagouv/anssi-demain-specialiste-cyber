@@ -37,6 +37,7 @@ type JeuEnDB = {
   photos: PhotosJeu;
   consentement: boolean;
   reactions: Record<string, number>;
+  est_cache: boolean;
 };
 
 type JeuEnDBInsertion = Omit<
@@ -111,6 +112,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       photos: jeu.photos,
       consentement: jeu.consentement,
       reactions: jeu.reactions,
+      est_cache: jeu.estCache,
     } satisfies JeuEnDBInsertion);
   }
 
@@ -175,6 +177,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       },
       consentement: jeuEnDB.consentement,
       reactions: jeuEnDB.reactions,
+      estCache: jeuEnDB.est_cache,
     });
   }
 }
