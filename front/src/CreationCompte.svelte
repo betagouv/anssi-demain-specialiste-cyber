@@ -95,10 +95,16 @@
         id="cgu"
         name="cgu"
         status="default"
-        label="J’accepte les conditions générales d’utilisation DemainSpécialisteCyber."
         value={cguAcceptees}
         onvaluechanged={(e: CustomEvent) => (cguAcceptees = e.detail)}
-      ></dsfr-checkbox>
+      >
+        <span
+          >J’accepte les <dsfr-link
+            href="/cgu"
+            label="conditions générales d’utilisation"
+          /> DemainSpécialisteCyber.
+        </span>
+      </dsfr-checkbox>
 
       <dsfr-button
         label="Créer mon compte"
