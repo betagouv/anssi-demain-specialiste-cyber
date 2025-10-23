@@ -36,6 +36,7 @@ type JeuEnDB = {
   temoignages: string[];
   photos: PhotosJeu;
   consentement: boolean;
+  reactions: Record<string, number>;
 };
 
 type JeuEnDBInsertion = Omit<
@@ -67,8 +68,28 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     this.adaptateurEnvironnement = adaptateurEnvironnement;
     this.knex = Knex(config);
   }
-  metsAjour(_jeu: Jeu): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async metsAjour(jeu: Jeu): Promise<void> {
+    await this.knex('jeux')
+      .where({ id: jeu.id })
+      .update({
+        nom: jeu.nom,
+        sequence: jeu.sequence,
+        id_enseignant: jeu.enseignant
+          ? this.adaptateurHachage.hache(jeu.enseignant.email)
+          : null,
+        nom_etablissement: jeu.nomEtablissement,
+        classe: jeu.classe,
+        discipline: jeu.discipline,
+        eleves: JSON.stringify(jeu.eleves),
+        categorie: jeu.categorie,
+        thematiques: JSON.stringify(jeu.thematiques),
+        description: jeu.description,
+        temoignages: JSON.stringify(jeu.temoignages),
+        photos: jeu.photos,
+        consentement: jeu.consentement,
+        reactions: jeu.reactions,
+      });
   }
 
   async ajoute(jeu: Jeu): Promise<void> {
@@ -89,6 +110,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       temoignages: JSON.stringify(jeu.temoignages),
       photos: jeu.photos,
       consentement: jeu.consentement,
+      reactions: jeu.reactions,
     } satisfies JeuEnDBInsertion);
   }
 
@@ -152,6 +174,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
         photos: jeuEnDB.photos.photos.map((p) => this.prefixeCheminParUrl(p)),
       },
       consentement: jeuEnDB.consentement,
+      reactions: jeuEnDB.reactions,
     });
   }
 }

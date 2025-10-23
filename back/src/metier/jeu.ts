@@ -20,6 +20,8 @@ export type PhotosJeu = {
   photos: FichierImage[];
 };
 
+type Reactions = Record<string, number>;
+
 type DonneesConstructionJeu = {
   id?: string;
   nom: string;
@@ -35,6 +37,7 @@ type DonneesConstructionJeu = {
   temoignages?: Temoignage[];
   photos: PhotosJeu;
   consentement?: boolean;
+  reactions?: Reactions;
 };
 
 export class Jeu {
@@ -52,7 +55,7 @@ export class Jeu {
   temoignages: Temoignage[];
   photos: PhotosJeu;
   consentement: boolean;
-  reactions: Record<string, number> = {};
+  reactions: Reactions = {};
 
   constructor(donnees: DonneesConstructionJeu) {
     this.id = donnees.id ?? randomUUID();
@@ -69,5 +72,6 @@ export class Jeu {
     this.temoignages = donnees.temoignages ?? [];
     this.photos = donnees.photos;
     this.consentement = donnees.consentement ?? false;
+    this.reactions = donnees.reactions ?? {};
   }
 }
