@@ -8,7 +8,7 @@
     id: typeReaction,
     emoji: typeReaction,
     compteur: reactionsDuJeu[typeReaction],
-    actif: false,
+    actif: localStorage.getItem(`reaction_${idJeu}_${typeReaction}`) === "true",
   }));
 
   const ajouteReaction = async (e: CustomEvent) => {
@@ -22,6 +22,7 @@
         reaction.id === e.detail ? reaction.compteur + 1 : reaction.compteur,
       actif: reaction.id === e.detail ? true : reaction.actif,
     }));
+    localStorage.setItem(`reaction_${idJeu}_${e.detail}`, "true")
   };
 
   const supprimeReaction = async (e: CustomEvent) => {
@@ -35,6 +36,7 @@
         reaction.id === e.detail ? reaction.compteur - 1 : reaction.compteur,
       actif: reaction.id === e.detail ? false : reaction.actif,
     }));
+    localStorage.removeItem(`reaction_${idJeu}_${e.detail}`)
   };
 </script>
 
