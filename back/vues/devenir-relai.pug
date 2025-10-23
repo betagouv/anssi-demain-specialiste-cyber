@@ -2,6 +2,9 @@ extends fragments/base
 block variables
   - var titrePage = "Relais DemainSpécialisteCyber"
   - var descriptionPage = ""
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'relai', label: 'Devenir partenaire', href: '#' }
 
 block contenu
     dsc-fiche-relai

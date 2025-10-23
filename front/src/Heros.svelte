@@ -37,7 +37,8 @@
   <dsfr-container>
     <div class="conteneur" class:fonce={fondSombre}>
       <slot name="breadcrumb">
-        <dsfr-breadcrumb segments={ariane}></dsfr-breadcrumb>
+        <dsfr-breadcrumb segments={ariane} inverse={fondSombre}
+        ></dsfr-breadcrumb>
       </slot>
       <hgroup>
         <h1 class="titre-alternatif-xs">

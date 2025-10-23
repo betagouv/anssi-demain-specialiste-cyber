@@ -2,6 +2,9 @@ extends fragments/base
 block variables
   - var titrePage = "Sélection enseignants"
   - var descriptionPage = "Formez, sensibilisez, accompagnez vos élèves… et développez aussi vos propres compétences en cybersécurité."
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'selection-enseignants', label: 'Sélection enseignants', href: '#' }
 
 block contenu
     dsc-selection(cible="enseignants")
