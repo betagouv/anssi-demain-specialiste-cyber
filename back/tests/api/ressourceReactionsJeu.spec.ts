@@ -27,65 +27,76 @@ describe("La ressource des réactions d'un jeu", () => {
       });
 
       it('retourne un 200', async () => {
-        const reponse = await request(serveur).post('/api/jeux/1/reactions');
+        const reponse = await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'ajout', type: '❤️' });
 
         const statut = reponse.status;
         expect(statut).toEqual(200);
       });
 
       it('ajoute une réaction au jeu', async () => {
-        cybercluedo.reactions['coeur'] = 4;
+        cybercluedo.reactions['❤️'] = 4;
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'ajout', type: 'coeur' });
+          .send({ action: 'ajout', type: '❤️' });
 
         const jeu = await entrepotJeux.parId('1');
-        expect(jeu!.reactions['coeur']).toEqual(5);
+        expect(jeu!.reactions['❤️']).toEqual(5);
       });
 
       it('retire une réaction au jeu ', async () => {
-        cybercluedo.reactions['coeur'] = 11;
+        cybercluedo.reactions['❤️'] = 11;
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'retrait', type: 'coeur' });
+          .send({ action: 'retrait', type: '❤️' });
 
         const jeu = await entrepotJeux.parId('1');
-        expect(jeu!.reactions['coeur']).toEqual(10);
+        expect(jeu!.reactions['❤️']).toEqual(10);
       });
 
       it("ne fais rien si l'action est inconnue", async () => {
-        cybercluedo.reactions['coeur'] = 10;
+        cybercluedo.reactions['❤️'] = 10;
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
           .send({ action: 'inconnue' });
 
         const jeu = await entrepotJeux.parId('1');
-        expect(jeu!.reactions['coeur']).toEqual(10);
+        expect(jeu!.reactions['❤️']).toEqual(10);
       });
 
       it('ajoute une réaction feu', async () => {
-        cybercluedo.reactions['feu'] = 9;
+        cybercluedo.reactions['🔥'] = 9;
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'ajout', type: 'feu' });
+          .send({ action: 'ajout', type: '🔥' });
 
         const jeu = await entrepotJeux.parId('1');
-        expect(jeu!.reactions['feu']).toEqual(10);
+        expect(jeu!.reactions['🔥']).toEqual(10);
       });
 
       it('retire une réaction feu', async () => {
-        cybercluedo.reactions['feu'] = 10;
+        cybercluedo.reactions['🔥'] = 10;
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'retrait', type: 'feu' });
+          .send({ action: 'retrait', type: '🔥' });
 
         const jeu = await entrepotJeux.parId('1');
-        expect(jeu!.reactions['feu']).toEqual(9);
+        expect(jeu!.reactions['🔥']).toEqual(9);
+      });
+
+      it('retourne une erreur 400 si le type est inconnu', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'ajout', type: 'loremipsum' });
+
+        const statut = reponse.status;
+        expect(statut).toEqual(400);
       });
     });
 
@@ -93,7 +104,7 @@ describe("La ressource des réactions d'un jeu", () => {
       it('retourne un 404', async () => {
         const reponse = await request(serveur)
           .post('/api/jeux/999/reactions')
-          .send({ action: 'ajout', type: 'coeur' });
+          .send({ action: 'ajout', type: '❤️' });
 
         const statut = reponse.status;
         expect(statut).toEqual(404);
