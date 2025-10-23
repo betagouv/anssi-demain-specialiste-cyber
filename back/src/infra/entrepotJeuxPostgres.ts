@@ -7,10 +7,10 @@ import { CategorieDeJeux } from '../metier/referentiels/categorieDeJeux';
 import { Classe } from '../metier/referentiels/classes';
 import { Discipline } from '../metier/referentiels/disciplines';
 import { Sequence } from '../metier/referentiels/sequence';
-import { Utilisateur } from '../metier/utilisateur';
-import { AdaptateurHachage } from './adaptateurHachage';
 import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
+import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurHachage } from './adaptateurHachage';
 
 type FichierImage = {
   chemin: string;
@@ -118,7 +118,9 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
 
   async tous(): Promise<Jeu[]> {
     return Promise.all(
-      (await this.knex('jeux')).map((jeu) => this.donneesEnDbVersMetier(jeu)),
+      (await this.knex<JeuEnDB>('jeux').where({ est_cache: false })).map(
+        (jeu) => this.donneesEnDbVersMetier(jeu),
+      ),
     );
   }
 

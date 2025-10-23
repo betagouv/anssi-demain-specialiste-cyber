@@ -1,11 +1,11 @@
-import { Jeu } from '../../src/metier/jeu';
-import { Constructeur } from '../constructeur';
 import * as crypto from 'node:crypto';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { Classe } from '../../src/metier/referentiels/classes';
+import { Jeu } from '../../src/metier/jeu';
 import { CategorieDeJeux } from '../../src/metier/referentiels/categorieDeJeux';
-import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
+import { Classe } from '../../src/metier/referentiels/classes';
 import { Discipline } from '../../src/metier/referentiels/disciplines';
+import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { Constructeur } from '../constructeur';
 
 class ConstructeurDeJeu implements Constructeur<Jeu> {
   private identifiant: string = crypto.randomUUID();
@@ -20,6 +20,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
   private eleves: string[] = [];
   private couverture: { chemin: string } | undefined;
   private photos: { chemin: string }[] = [];
+  private estCache: boolean = false;
 
   avecUnId(identifiant: string): ConstructeurDeJeu {
     this.identifiant = identifiant;
@@ -81,6 +82,11 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
     return this;
   }
 
+  cache(estCache: boolean) {
+    this.estCache = estCache;
+    return this;
+  }
+
   construis(): Jeu {
     return new Jeu({
       id: this.identifiant,
@@ -100,6 +106,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
         couverture: this.couverture || { chemin: '' },
         photos: this.photos,
       },
+      estCache: this.estCache,
     });
   }
 }
