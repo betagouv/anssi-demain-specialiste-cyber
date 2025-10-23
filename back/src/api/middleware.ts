@@ -149,6 +149,8 @@ export const fabriqueMiddleware = ({
             'blob:',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
             'https://ressources-cyber.cellar-c2.services.clever-cloud.com',
+            'https://podeduc.apps.education.fr',
+            'https://tube-numerique-educatif.apps.education.fr/',
             adaptateurEnvironnement.cellarPhotosJeux(),
             'data:',
           ],

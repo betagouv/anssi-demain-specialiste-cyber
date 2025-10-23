@@ -1,7 +1,21 @@
 <script lang="ts">
   import MiseEnAvant from '../MiseEnAvant.svelte';
 
-  const toutesLesRessources = [
+  type Ressource = {
+    titre: string;
+    image: string;
+    lien: string;
+    detail: string;
+    duree?: string;
+  };
+
+  const lienSousTitres = (lienVideo: string) => {
+    const positionDernierPoint = lienVideo.lastIndexOf('.');
+    const lienSansExtension = lienVideo.slice(0, positionDernierPoint);
+    return `${lienSansExtension}.vtt`;
+  };
+
+  const toutesLesRessources: Ressource[] = [
     {
       titre: 'Télécharger le livret 0 : Utilisation de CyberEnJeux',
       image: '/assets/images/cej/livret-utilisation.svg',
@@ -43,20 +57,23 @@
       titre: 'Présentation des fiches pédagogiques',
       duree: 'Durée : 46 min',
       detail: 'podeduc.apps.education.fr',
-      lien: 'https://podeduc.apps.education.fr/video/25355-webinaire-cyberenjeux-formation-des-eleves-a-la-cybersecurite-anssi/',
+      image: '/assets/images/fiches_pedagogiques.jpg',
+      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_webinaire_presentation.mp4',
     },
     {
       titre: 'Accompagner les élèves dans la création de jeux',
       duree: 'Durée : 67 min',
       detail: 'podeduc.apps.education.fr',
-      lien: 'https://podeduc.apps.education.fr/video/27840-cyberenjeux-accompagner-la-creation-de-jeux-en-cybersecurite/',
+      image: '/assets/images/accompagner_les_eleves.jpg',
+      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_accompagner_les_eleves.mp4',
     },
     {
       titre:
         "Retour d'expérience CyberEnjeux au lycée H. Matisse de Cugnaux (31)",
       duree: 'Durée : 2 min',
       detail: 'tube-numerique-educatif.apps.education.fr',
-      lien: 'https://tube-numerique-educatif.apps.education.fr/w/b118cd75-7957-4ec0-b527-476e9a9cb2f8',
+      image: '/assets/images/retour_experience.jpg',
+      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_lycee_matisse.mp4',
     },
   ];
   const ressourcesEnseignents = toutesLesRessources.slice(0, 4);
@@ -124,19 +141,22 @@
     </div>
 
     <div class="ressources-videos">
-      <h2>Découvrir CyberEnJeux en vidéos</h2>
+      <hgroup><h2>Découvrir CyberEnJeux en vidéos</h2></hgroup>
       <div class="conteneur">
         {#each ressourcesVideos as ressource}
-          <dsfr-card
-            src="/assets/images/video-generique.svg"
-            title={ressource.titre}
-            hasDetailStart
-            detailStart={ressource.duree}
-            hasDetailEnd
-            detailEnd={ressource.detail}
-            href={ressource.lien}
-            blank
-          ></dsfr-card>
+          <div>
+            <video controls crossorigin="anonymous" poster={ressource.image}>
+              <source src={ressource.lien} type="video/mp4" />
+              <track
+                default
+                kind="captions"
+                srclang="fr"
+                label="Français"
+                src={lienSousTitres(ressource.lien)}
+              />
+            </video>
+            <h6>{ressource.titre}</h6>
+          </div>
         {/each}
       </div>
     </div>
@@ -224,6 +244,22 @@
     grid-template-columns: minmax(200px, 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
+
+    h6 {
+      margin-bottom: 0.5rem;
+    }
+
+    video {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      aspect-ratio: 16/9;
+      margin-bottom: 0.5rem;
+    }
 
     @include a-partir-de(sm) {
       grid-template-columns: repeat(2, minmax(200px, 1fr));
