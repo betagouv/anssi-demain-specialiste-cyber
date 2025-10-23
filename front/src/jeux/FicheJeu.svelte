@@ -1,5 +1,14 @@
 <svelte:options customElement={{ tag: 'dsc-fiche-jeu', shadow: 'none' }} />
 
+<script module lang="ts">
+  type Reaction = {
+    id: string;
+    emoji: string;
+    compteur: number;
+    actif: boolean;
+  };
+</script>
+
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
@@ -11,12 +20,19 @@
   import Fiche, { type Menu } from '../Fiche.svelte';
 
   let jeu: Jeu | undefined;
+  let reactions: Reaction[] = [];
 
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');
     const id = morceaux[morceaux.length - 1];
     const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
     jeu = reponse.data;
+    reactions = ['❤️', '👍', '🔥'].map((typeReaction) => ({
+      id: typeReaction,
+      emoji: typeReaction,
+      compteur: jeu ? jeu.reactions[typeReaction] : 0,
+      actif: false,
+    }));
   });
 
   $: temoignages = jeu
@@ -67,6 +83,32 @@
         ]
       : []),
   ] as Menu;
+
+  const ajouteReaction = async (e: CustomEvent) => {
+    await axios.post(`/api/jeux/${jeu!.id}/reactions`, {
+      type: e.detail,
+      action: 'ajout',
+    });
+    reactions = reactions.map((reaction) => ({
+      ...reaction,
+      compteur:
+        reaction.id === e.detail ? reaction.compteur + 1 : reaction.compteur,
+      actif: reaction.id === e.detail ? true : reaction.actif,
+    }));
+  };
+
+  const supprimeReaction = async (e: CustomEvent) => {
+    await axios.post(`/api/jeux/${jeu!.id}/reactions`, {
+      type: e.detail,
+      action: 'retrait',
+    });
+    reactions = reactions.map((reaction) => ({
+      ...reaction,
+      compteur:
+        reaction.id === e.detail ? reaction.compteur - 1 : reaction.compteur,
+      actif: reaction.id === e.detail ? false : reaction.actif,
+    }));
+  };
 </script>
 
 {#if jeu}
@@ -87,6 +129,15 @@
             <lab-anssi-icone taille="sm" nom="map-pin-2-line"></lab-anssi-icone>
             {jeu.nomEtablissement}
           </p>
+          <lab-anssi-reactions
+            tooltip-texte="Ajouter une réaction"
+            tooltip-id="tooltip-reaction"
+            variant="tertiaire"
+            {reactions}
+            onajouteReaction={ajouteReaction}
+            onsupprimeReaction={supprimeReaction}
+          >
+          </lab-anssi-reactions>
         </div>
         <div class="illustration-jeu">
           <img src={jeu.photos.couverture.chemin} alt="Couverture du jeu" />
