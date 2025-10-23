@@ -23,16 +23,20 @@ export class EntrepotJeuxMemoire
     }
 
     const jeu = new Jeu({ ...entite });
-    jeu.reactions = {...entite.reactions};
+    jeu.reactions = { ...entite.reactions };
     return jeu;
   }
 
   async metsAjour(jeu: Jeu): Promise<void> {
     const entiteAMettreAJour = this.entites.find(
-      (entite) => entite.id === jeu.id
+      (entite) => entite.id === jeu.id,
     );
     if (entiteAMettreAJour) {
       Object.assign(entiteAMettreAJour, jeu);
     }
+  }
+
+  async tous() {
+    return [...this.entites.filter((jeu) => !jeu.estCache)];
   }
 }
