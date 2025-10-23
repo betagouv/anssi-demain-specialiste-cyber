@@ -36,7 +36,7 @@ describe("La ressource des réactions d'un jeu", () => {
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'ajout' });
+          .send({ action: 'ajout', type: 'coeur' });
 
         const jeu = await entrepotJeux.parId('1');
         expect(jeu!.reactions['coeur']).toEqual(5);
@@ -47,7 +47,7 @@ describe("La ressource des réactions d'un jeu", () => {
 
         await request(serveur)
           .post('/api/jeux/1/reactions')
-          .send({ action: 'retrait' });
+          .send({ action: 'retrait', type: 'coeur' });
 
         const jeu = await entrepotJeux.parId('1');
         expect(jeu!.reactions['coeur']).toEqual(10);
@@ -62,6 +62,28 @@ describe("La ressource des réactions d'un jeu", () => {
 
         const jeu = await entrepotJeux.parId('1');
         expect(jeu!.reactions['coeur']).toEqual(10);
+      });
+
+      it('ajoute une réaction feu', async () => {
+        cybercluedo.reactions['feu'] = 9;
+
+        await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'ajout', type: 'feu' });
+
+        const jeu = await entrepotJeux.parId('1');
+        expect(jeu!.reactions['feu']).toEqual(10);
+      });
+
+      it('retire une réaction feu', async () => {
+        cybercluedo.reactions['feu'] = 10;
+
+        await request(serveur)
+          .post('/api/jeux/1/reactions')
+          .send({ action: 'retrait', type: 'feu' });
+
+        const jeu = await entrepotJeux.parId('1');
+        expect(jeu!.reactions['feu']).toEqual(9);
       });
     });
   });
