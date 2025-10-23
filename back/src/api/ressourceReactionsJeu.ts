@@ -1,25 +1,25 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 
-export const ressourceReactionsJeu = (
-  configurationServeur: ConfigurationServeur,
-) => {
+export const ressourceReactionsJeu = ({
+  entrepotJeux,
+}: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post('/:idJeu/reactions', async (requete, reponse) => {
-    const jeu = await configurationServeur.entrepotJeux.parId(
-      requete.params.idJeu,
-    );
+    const jeu = await entrepotJeux.parId(requete.params.idJeu);
+
+    if (!jeu) return reponse.sendStatus(404);
 
     switch (requete.body.action) {
       case 'ajout':
-        jeu!.incrementeReaction(requete.body.type);
+        jeu.incrementeReaction(requete.body.type);
         break;
       case 'retrait':
-        jeu!.decrementeReaction(requete.body.type);
+        jeu.decrementeReaction(requete.body.type);
         break;
     }
 
-    await configurationServeur.entrepotJeux.metsAjour(jeu!);
+    await entrepotJeux.metsAjour(jeu);
 
     reponse.sendStatus(200);
   });

@@ -10,17 +10,19 @@ import { Express } from 'express';
 
 describe("La ressource des réactions d'un jeu", () => {
   describe('sur un POST', () => {
+    let entrepotJeux: EntrepotJeux;
+    let serveur: Express;
+
+    beforeEach(async () => {
+      entrepotJeux = new EntrepotJeuxMemoire();
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur(),
+        entrepotJeux,
+      });
+    });
+
     describe('pour un jeu existant', () => {
-      let entrepotJeux: EntrepotJeux;
-      let serveur: Express;
-
       beforeEach(async () => {
-        entrepotJeux = new EntrepotJeuxMemoire();
-        serveur = creeServeur({
-          ...configurationDeTestDuServeur(),
-          entrepotJeux,
-        });
-
         await entrepotJeux.ajoute(cybercluedo);
       });
 
@@ -84,6 +86,17 @@ describe("La ressource des réactions d'un jeu", () => {
 
         const jeu = await entrepotJeux.parId('1');
         expect(jeu!.reactions['feu']).toEqual(9);
+      });
+    });
+
+    describe('pour un jeu inexistant', () => {
+      it('retourne un 404', async () => {
+        const reponse = await request(serveur)
+          .post('/api/jeux/999/reactions')
+          .send({ action: 'ajout', type: 'coeur' });
+
+        const statut = reponse.status;
+        expect(statut).toEqual(404);
       });
     });
   });
