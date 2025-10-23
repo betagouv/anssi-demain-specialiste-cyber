@@ -4,5 +4,15 @@ block variables
   - var descriptionPage = ""
   - var sansNavigation = true
 
+block hero
+    dsc-heros(titre = titrePage description= descriptionPage)
+        a.retour(
+            href="/mes-jeux"
+            slot="breadcrumb"
+        )
+          lab-anssi-icone(nom="arrow-left-line" taille="sm")
+          |
+          | Quitter
+
 block contenu
     dsc-formulaire-nouveau-jeu
