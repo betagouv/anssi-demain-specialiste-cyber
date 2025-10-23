@@ -54,6 +54,7 @@ describe('La ressource des jeux', () => {
         },
         consentement: false,
         reactions: {},
+        estCache: false,
       });
     });
   });
