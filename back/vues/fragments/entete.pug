@@ -6,8 +6,8 @@ header.entete
     dsc-entete(sans-navigation=sansNavigation || false sans-zone-identification=sansZoneIdentification || false)
     block hero
         dsc-heros(
-          titre= titrePage
-          description= descriptionPage
           ariane= ariane || []
           avec-filtres= herosAvecFiltres
         )
+          h1.inverse(slot="titre") #{titrePage}
+          p.inverse(slot="description") #{descriptionPage}
