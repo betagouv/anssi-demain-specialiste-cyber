@@ -4,35 +4,34 @@ block variables
   - var titrePage = "CyberEnJeux"
   - var descriptionPage = "L'outil pédagogique innovant pour former vos élèves aux enjeux de la cybersécurité par la création de jeux."
   - var classePage = "page-cyber-en-jeux"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'cyber-en-jeux', label: 'CyberEnJeux', href: '#' }
 
 block hero
-  div(class="hero")
-    dsfr-container
-      div(class="conteneur")
-        dsfr-breadcrumb(segments=[
-          { id: 'accueil', label: 'Accueil', href: '/' },
-          { id: 'cyber-en-jeux', label: 'CyberEnJeux', href: '#' }
-        ])
-        hgroup
-          h1.titre-alternatif-xs CyberEnJeux
-          p L'outil pédagogique innovant pour former vos élèves aux enjeux de la cybersécurité par la création de jeux.
-        div(class="actions")
-          dsfr-button(
-            label="Accèder aux ressources"
-            kind="primary"
-            markup="a"
-            href="/cyber-en-jeux#guides-et-ressources"
-            target="_self"
-          )
-          dsfr-button(
-            label="Déclarer une action CyberEnJeux"
-            kind="secondary"
-            markup="a"
-            href="#"
-            target="_blank"
-          )
-        picture(class="illustration")
-          img(src='/assets/images/boites-de-jeux.png' alt='')
+  dsc-heros(
+    variant= "alternatif"
+    ariane= ariane
+  )
+    h1.titre-alternatif-xs(slot="titre") #{titrePage}
+    p(slot="description") #{descriptionPage}
+    div(class="actions")
+      dsfr-button(
+        label="Accèder aux ressources"
+        kind="primary"
+        markup="a"
+        href="/cyber-en-jeux#guides-et-ressources"
+        target="_self"
+      )
+      dsfr-button(
+        label="Déclarer une action CyberEnJeux"
+        kind="secondary"
+        markup="a"
+        href="#"
+        target="_blank"
+      )
+    picture(class="illustration" slot="illustration")
+      img(src='/assets/images/boites-de-jeux-avec-blob.svg' alt='')
 
 block contenu
   dsc-cyber-en-jeux
