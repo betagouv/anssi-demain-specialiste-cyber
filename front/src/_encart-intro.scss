@@ -8,17 +8,11 @@
     margin-bottom: 1rem;
     text-align: center;
 
-    + p{
+    + p {
       text-align: center;
     }
   }
 
-  p {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    margin: 0;
-  }
-  
   .carrousel {
     margin: 3rem 0;
 
@@ -38,7 +32,6 @@
 
       p {
         color: #000091;
-        font-size: 1.125rem;
         font-weight: bold;
         line-height: 1.5rem;
         overflow: hidden;
