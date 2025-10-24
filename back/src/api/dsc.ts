@@ -45,5 +45,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('views', './vues');
   app.use(ressourcesPages(configurationServeur));
 
+  app.use(configurationServeur.adaptateurGestionErreur.controleurErreursIP);
+  configurationServeur.adaptateurGestionErreur.controleurErreurs(app);
+
   return app;
 };

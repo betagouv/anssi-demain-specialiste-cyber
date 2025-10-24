@@ -16,6 +16,7 @@ import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotSelections } from '../metier/entrepotSelections';
 import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
+import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
 
 export interface ConfigurationServeur {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -37,6 +38,7 @@ export interface ConfigurationServeur {
   adaptateurAntivirus: AdaptateurAntivirus;
   entrepotSelectionsEnseignants: EntrepotSelections;
   entrepotSelectionsEleves: EntrepotSelections;
+  adaptateurGestionErreur: AdaptateurGestionErreur;
 }
 
 export type ConfigurationServeurSansMiddleware = Omit<
