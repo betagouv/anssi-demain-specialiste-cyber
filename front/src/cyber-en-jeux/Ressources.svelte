@@ -1,7 +1,15 @@
 <script lang="ts">
   import MiseEnAvant from '../MiseEnAvant.svelte';
 
-  const toutesLesRessources = [
+  type Ressource = {
+    titre: string;
+    image: string;
+    lien: string;
+    detail: string;
+    duree?: string;
+  };
+
+  const toutesLesRessources: Ressource[] = [
     {
       titre: 'Télécharger le livret 0 : Utilisation de CyberEnJeux',
       image: '/assets/images/cej/livret-utilisation.svg',
@@ -43,12 +51,16 @@
       titre: 'Présentation des fiches pédagogiques',
       duree: 'Durée : 46 min',
       detail: 'podeduc.apps.education.fr',
+      image:
+        'https://podeduc.apps.education.fr/media/cache/73/fa/73fa727a9e3056fac518643176a7f6a5.png',
       lien: 'https://podeduc.apps.education.fr/video/25355-webinaire-cyberenjeux-formation-des-eleves-a-la-cybersecurite-anssi/',
     },
     {
       titre: 'Accompagner les élèves dans la création de jeux',
       duree: 'Durée : 67 min',
       detail: 'podeduc.apps.education.fr',
+      image:
+        'https://podeduc.apps.education.fr/media/cache/b6/de/b6dee0f68c07670263e57a6d7c87b1c0.jpg',
       lien: 'https://podeduc.apps.education.fr/video/27840-cyberenjeux-accompagner-la-creation-de-jeux-en-cybersecurite/',
     },
     {
@@ -56,6 +68,8 @@
         "Retour d'expérience CyberEnjeux au lycée H. Matisse de Cugnaux (31)",
       duree: 'Durée : 2 min',
       detail: 'tube-numerique-educatif.apps.education.fr',
+      image:
+        'https://tube-numerique-educatif.apps.education.fr/lazy-static/previews/1c1e2fd1-e219-4740-a0a4-63e2fb30e626.jpg',
       lien: 'https://tube-numerique-educatif.apps.education.fr/w/b118cd75-7957-4ec0-b527-476e9a9cb2f8',
     },
   ];
@@ -128,7 +142,7 @@
       <div class="conteneur">
         {#each ressourcesVideos as ressource}
           <dsfr-card
-            src="/assets/images/video-generique.svg"
+            src={ressource.image ?? '/assets/images/video-generique.svg'}
             title={ressource.titre}
             hasDetailStart
             detailStart={ressource.duree}
