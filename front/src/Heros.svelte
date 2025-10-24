@@ -33,37 +33,13 @@
   <dsfr-container>
     <div class="conteneur" class:avec-filtres={avecFiltres}>
       <slot name="ariane">
-    <div class="conteneur" class:avec-filtres={avecFiltres}>
-      <slot name="ariane">
         <dsfr-breadcrumb
-          inverse={variant === 'standard'}
           inverse={variant === 'standard'}
           buttonLabel="Voir le fil d'Ariane"
           segments={ariane}
         >
         </dsfr-breadcrumb>
       </slot>
-      <div class="principal">
-        {#if $$slots['avant-titre']}
-          <div class="avant-titre">
-            <slot name="avant-titre"></slot>
-          </div>
-        {/if}
-        <hgroup>
-          <slot name="titre"></slot>
-          {#if $$slots.description}
-            <slot name="description"></slot>
-          {/if}
-        </hgroup>
-        {#if $$slots.default}
-          <slot></slot>
-        {/if}
-      </div>
-      {#if $$slots.illustration}
-        <div class="illustration">
-          <slot name="illustration"></slot>
-        </div>
-      {/if}
       <div class="principal">
         {#if $$slots['avant-titre']}
           <div class="avant-titre">
