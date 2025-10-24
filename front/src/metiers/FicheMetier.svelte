@@ -9,6 +9,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Fiche, { type Menu } from '../Fiche.svelte';
+  import Heros from '../Heros.svelte';
 
   type Metier = {
     id: string;
@@ -105,45 +106,40 @@
 </script>
 
 {#if metier}
-  <div class="hero">
-    <dsfr-container>
-      <div class="entete-fiche-jeu">
-        <dsfr-breadcrumb
-          segments={[
-            { id: 'accueil', label: 'Accueil', href: '/' },
-            {
-              id: 'catalogue',
-              label: 'Catalogue de ressources',
-              href: '/catalogue',
-            },
-            {
-              id: `ressource-${metier.id}`,
-              label: `${metier.titre}`,
-              href: '#',
-            },
-          ]}
-        ></dsfr-breadcrumb>
-        <div class="cartouche">
-          <h1 class="titre-alternatif-xs">{titre}</h1>
-          <p class="texte-xl">{metier.fonction}</p>
-          <dsfr-button
-            markup="a"
-            href={metier.liens.dataemploi}
-            label="Lien de redirection"
-            target="_blank"
-          >
-          </dsfr-button>
-        </div>
-        <div class="illustration">
-          <img
-            src={metier.liens.illustration ??
-              '/assets/images/image-generique.svg'}
-            alt="Couverture du métier"
-          />
-        </div>
-      </div>
-    </dsfr-container>
-  </div>
+  <Heros
+    variant="alternatif"
+    ariane={[
+      { id: 'accueil', label: 'Accueil', href: '/' },
+      {
+        id: 'catalogue',
+        label: 'Catalogue de ressources',
+        href: '/catalogue',
+      },
+      {
+        id: `ressource-${metier.id}`,
+        label: `${metier.titre}`,
+        href: '#',
+      },
+    ]}
+  >
+    <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
+    <p class="texte-xl" slot="description">{metier.fonction}</p>
+    <div class="actions">
+      <dsfr-button
+        markup="a"
+        href={metier.liens.dataemploi}
+        label="Lien de redirection"
+        target="_blank"
+      >
+      </dsfr-button>
+    </div>
+    <picture class="illustration" slot="illustration">
+      <img
+        src={metier.liens.illustration ?? '/assets/images/image-generique.svg'}
+        alt="Couverture du métier"
+      />
+    </picture>
+  </Heros>
 
   <Fiche menuId="menu-fiche-metier" {menu}>
     <section id="description">
@@ -230,71 +226,33 @@
 <style lang="scss">
   @use '../points-de-rupture' as *;
 
-  .hero {
-    background:
-      url('/assets/images/cercles-fond-clair.svg') 50% bottom / auto 100%
-        no-repeat,
-      url('/assets/images/hero-fond.svg') repeat,
-      var(--background-alt-blue-cumulus);
-    box-shadow: inset 0 4px 4px 0 rgba(0, 0, 18, 0.06);
-    color: var(--text-default-grey);
-    padding: 0;
-
-    .texte-xl {
-      font-size: 1.25rem;
-      line-height: 2rem;
-      &::first-letter {
-        text-transform: capitalize;
-      }
-    }
-
-    .cartouche {
-      grid-area: cartouche;
-      margin-bottom: 3rem;
-    }
-
-    .illustration {
-      grid-area: illustration;
-      background: white;
-      padding: 0.25rem 0.25rem 0;
-      width: clamp(18rem, 100%, 36.75rem);
-      justify-self: center;
-      display: flex;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    @include a-partir-de(md) {
-      background-position-x: left;
-    }
-
-    @include a-partir-de(lg) {
-      background-position-x: right;
-
-      .entete-fiche-jeu {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas: 'ariane ariane' 'cartouche illustration';
-
-        dsfr-breadcrumb {
-          grid-area: ariane;
-        }
-
-        .illustration {
-          align-self: stretch;
-          justify-self: stretch;
-          margin-top: 0;
-        }
-      }
-    }
+  h1.titre-alternatif-xs {
+    margin-bottom: 0.5rem;
   }
 
   p {
-    margin: 1.5rem 0;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin: 0;
+
+    &:last-of-type {
+      margin: 0 0 1.5rem;
+    }
+  }
+
+  .actions {
+    margin-bottom: 3rem;
+  }
+
+  .illustration {
+    display: flex;
+    align-self: flex-end;
+    justify-self: center;
+    width: clamp(280px, 100%, 36.75rem);
+
+    img {
+      width: 100%;
+    }
   }
 
   ul {
@@ -341,5 +299,9 @@
       align-self: flex-start;
       width: calc(50% - 1rem);
     }
+  }
+
+  .action {
+    margin-bottom: 3rem;
   }
 </style>
