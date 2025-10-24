@@ -7,7 +7,7 @@
   $: reactions = ['❤️', '👍', '🔥'].map((typeReaction) => ({
     id: typeReaction,
     emoji: typeReaction,
-    compteur: reactionsDuJeu[typeReaction],
+    compteur: reactionsDuJeu[typeReaction] ?? 0,
     actif: localStorage.getItem(`reaction_${idJeu}_${typeReaction}`) === "true",
   }));
 
