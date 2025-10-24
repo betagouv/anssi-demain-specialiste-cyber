@@ -246,7 +246,6 @@
       }
 
       p {
-        font-size: 1.125rem;
         margin: 0 auto;
       }
     }
