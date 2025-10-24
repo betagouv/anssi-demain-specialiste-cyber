@@ -18,7 +18,7 @@
   const { titre, liens, illustration, children }: Props = $props();
 </script>
 
-<section class="mise-en-avant fonce">
+<section class="mise-en-avant sombre">
   <h2>{titre}</h2>
   {@render children?.()}
   <ul>
