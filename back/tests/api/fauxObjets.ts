@@ -27,6 +27,7 @@ import {
   AdaptateurAntivirus,
   ResultatAnalyseFichier,
 } from '../../src/infra/adapateurAntivirus';
+import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -112,6 +113,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     jetonAnalyse: 'monJetonJCOP',
     analyseActive: true,
   }),
+  sentry: () => ({ dsn: () => undefined, environnement: () => undefined }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {
@@ -183,6 +185,7 @@ export const configurationServeurSansMiddleware =
       adaptateurAntivirus: fauxAdaptateurAntivirus(),
       entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
       entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
+      adaptateurGestionErreur: fauxAdaptateurGestionErreur,
     };
   };
 

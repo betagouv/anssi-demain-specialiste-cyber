@@ -1,3 +1,4 @@
+import './infra/adaptateurGestionErreurSentry';
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import {
@@ -26,6 +27,7 @@ import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
 import { adaptateurJCOP } from './infra/adapateurAntivirus';
+import { fabriqueAdaptateurGestionErreur } from './infra/adaptateurGestionErreurSentry';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -70,6 +72,7 @@ serviceCoherenceSecretsHachage
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
+        adaptateurGestionErreur: fabriqueAdaptateurGestionErreur(),
         adaptateurOIDC,
         serveurLab: configurationServeurLabEnvironnement(),
         entrepotMetier: new EntrepotMetiersGrist(),
@@ -80,7 +83,6 @@ serviceCoherenceSecretsHachage
         entrepotUtilisateur,
         recupereCheminsVersFichiersStatiques:
           recupereCheminVersFichiersStatiquesParDefaut,
-
         moteurDeRendu: moteurDeRenduExpress(),
         entrepotJeux: new EntrepotJeuxPostgres({
           adaptateurEnvironnement,

@@ -1,4 +1,7 @@
-import { creeServeurLab } from '@lab-anssi/lib';
+// Sentry doit être initialisé avant l’import d’express [voir installation](https://docs.sentry.io/platforms/javascript/guides/express/install/commonjs/)
+// L’initialisation de Sentry prend en compte la présence des variables
+// d’environnement nécessaires à son exécution
+import '../infra/sentry';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
@@ -6,6 +9,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourcesApi } from './ressourcesApi';
 import { ressourcesOidc } from './ressourcesOidc';
 import { ressourcesPages } from './ressourcesPages';
+import { creeServeurLab } from '@lab-anssi/lib';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { serveurLab } = configurationServeur;
@@ -44,6 +48,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('view engine', 'pug');
   app.set('views', './vues');
   app.use(ressourcesPages(configurationServeur));
+
+  configurationServeur.adaptateurGestionErreur.controleurErreurs(app);
 
   return app;
 };
