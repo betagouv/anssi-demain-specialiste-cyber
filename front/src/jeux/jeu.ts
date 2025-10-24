@@ -14,6 +14,7 @@ export type Jeu = {
   thematiques: Thematique[];
   photos: PhotosJeu;
   reactions: Record<string, number>;
+  estCache: boolean;
 };
 
 export type Image = {
