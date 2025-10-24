@@ -8,11 +8,20 @@ describe('le jeu', () => {
     expect(cybercluedo.reactions['feu']).toBe(1);
   });
 
-  it("empêche une réaction d'être négative", () => {
+  it("empêche une réaction d'être négative lorsqu’elle est nulle", () => {
     cybercluedo.reactions['feu'] = 0;
 
     cybercluedo.decrementeReaction('feu');
 
     expect(cybercluedo.reactions['feu']).toBe(0);
   });
+
+  it("empêche une réaction d'être décrémentée lorsqu’elle n’est pas définie", () => {
+    cybercluedo.reactions = {}
+
+    cybercluedo.decrementeReaction('feu');
+
+    expect(cybercluedo.reactions['feu']).toBe(undefined);
+  });
+
 });
