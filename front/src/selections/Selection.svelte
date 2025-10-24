@@ -61,7 +61,7 @@
       : ''}
   >
     <dsfr-container>
-      <div class="conteneur" class:fonce={selection.couleurDeFond}>
+      <div class="conteneur" class:sombre={selection.couleurDeFond}>
         <hgroup>
           <h2>{selection.titre}</h2>
           <p class="fr-text--lg">{selection.explication}</p>

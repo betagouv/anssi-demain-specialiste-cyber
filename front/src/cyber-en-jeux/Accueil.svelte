@@ -22,7 +22,7 @@
 
   <div class="avantages">
     <dsfr-container>
-      <div class="conteneur fonce">
+      <div class="conteneur sombre">
         <h2>Grâce à CyberEnJeux, développez</h2>
         <img src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
         <div class="articles">
