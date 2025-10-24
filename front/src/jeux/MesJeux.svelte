@@ -7,6 +7,7 @@
   import Citation from '../Citation.svelte';
   import CarteJeu from '../cyber-en-jeux/CarteJeu.svelte';
   import type { Jeu } from './jeu';
+  import InvitationARejoindre from '../cyber-en-jeux/InvitationARejoindre.svelte';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -90,15 +91,7 @@
           use:clic={deposeUnJeu}
         ></dsfr-button>
       </div>
-      <Citation>
-        Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager
-        votre expérience. <lab-anssi-lien
-          cible="#"
-          titre="Rejoindre la communauté"
-          apparence="lien-texte"
-          target="_blank"
-        ></lab-anssi-lien>
-      </Citation>
+      <InvitationARejoindre />
     </div>
   {/if}
 </dsfr-container>

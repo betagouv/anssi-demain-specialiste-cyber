@@ -30,11 +30,6 @@
       height: 24px;
     }
 
-    lab-anssi-lien {
-      color: var(--blue-france-sun-113-625);
-      font-weight: normal;
-    }
-
     @include a-partir-de(md) {
       flex-flow: row nowrap;
     }
