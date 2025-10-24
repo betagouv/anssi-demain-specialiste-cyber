@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clic } from '../actions.svelte';
   import { enumerationFrancaise } from '../jeux/jeu';
   import BadgesThematiques from './BadgesThematiques.svelte';
   import type { Thematique } from './jeu';
@@ -11,6 +12,7 @@
     thematiques?: Thematique[];
     cheminCouverture: string;
     estCache: boolean;
+    modifieVisibiliteJeu: () => Promise<void>;
   };
 
   const {
@@ -21,6 +23,7 @@
     thematiques,
     cheminCouverture,
     estCache,
+    modifieVisibiliteJeu,
   }: Props = $props();
 </script>
 
@@ -49,6 +52,11 @@
           left
           label="Masquer de la vitrine des jeux"
           id="toggleExemple"
+          checked={estCache}
+          onvaluechanged={modifieVisibiliteJeu}
+          use:clic={(e: Event) => {
+            e.stopPropagation();
+          }}
         ></dsfr-toggle>
       </dsfr-dropdown>
     </div>
