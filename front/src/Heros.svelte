@@ -2,8 +2,6 @@
   customElement={{
     tag: 'dsc-heros',
     props: {
-      titre: { attribute: 'titre', type: 'String' },
-      description: { attribute: 'description', type: 'String' },
       variant: { attribute: 'variant', type: 'String' },
       ariane: { attribute: 'ariane', type: 'Array' },
       avecFiltres: { attribute: 'avec-filtres', type: 'Boolean' },
@@ -19,49 +17,50 @@
   };
 
   type Props = {
-    titre: string;
-    description: string;
     variant: 'standard' | 'alternatif';
     ariane: Segment[];
     avecFiltres?: boolean;
   };
 
   const {
-    titre = 'Demain\u200bSpécialiste\u200bCyber',
-    description,
     variant = 'standard',
     ariane = [],
     avecFiltres = false,
   }: Props = $props();
-  const fondSombre = $derived(variant === 'standard');
 </script>
 
 <div class={['heros', variant]}>
   <dsfr-container>
-    <div
-      class="conteneur"
-      class:fonce={fondSombre}
-      class:avec-filtres={avecFiltres}
-    >
-      <slot name="breadcrumb">
+    <div class="conteneur" class:avec-filtres={avecFiltres}>
+      <slot name="ariane">
         <dsfr-breadcrumb
+          inverse={variant === 'standard'}
           buttonLabel="Voir le fil d'Ariane"
           segments={ariane}
-          inverse={fondSombre}
         >
         </dsfr-breadcrumb>
       </slot>
-      <hgroup>
-        <h1 class="titre-alternatif-xs">
-          {titre}
-        </h1>
-        {#if description}
-          <p>
-            {description}
-          </p>
+      <div class="principal">
+        {#if $$slots['avant-titre']}
+          <div class="avant-titre">
+            <slot name="avant-titre"></slot>
+          </div>
         {/if}
-      </hgroup>
-      <slot></slot>
+        <hgroup>
+          <slot name="titre"></slot>
+          {#if $$slots.description}
+            <slot name="description"></slot>
+          {/if}
+        </hgroup>
+        {#if $$slots.default}
+          <slot></slot>
+        {/if}
+      </div>
+      {#if $$slots.illustration}
+        <div class="illustration">
+          <slot name="illustration"></slot>
+        </div>
+      {/if}
     </div>
   </dsfr-container>
 </div>
@@ -79,27 +78,79 @@
         ),
         url('/assets/images/cercles-fond-sombre.svg') right 20% no-repeat,
         var(--bleu-profond-dsc);
+
+      .conteneur {
+        padding: 1px 0 1.5rem;
+
+        @include a-partir-de(md) {
+          &.avec-filtres {
+            padding-bottom: 5rem;
+          }
+        }
+      }
     }
 
     &.alternatif {
       background:
         url('/assets/images/cercles-fond-clair.svg') right 20% no-repeat,
-        url('/assets/images/hero-fond.svg') repeat,
+        url('/assets/images/heros-fond-clair.svg') repeat,
         var(--background-alt-blue-cumulus);
-    }
 
-    .conteneur {
-      padding: 1px 0 1.5rem;
+      .conteneur {
+        padding: 1px 0 0;
+      }
 
-      &.avec-filtres {
-        @include a-partir-de(md) {
-          padding-bottom: 4.5rem;
+      hgroup {
+        .description {
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      @include a-partir-de(lg) {
+        .conteneur {
+          display: grid;
+          gap: 0 1.5rem;
+          grid-template-areas:
+            'ariane ariane'
+            'principal illustration';
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto 1fr;
+
+          dsfr-breadcrumb {
+            grid-area: ariane;
+          }
+
+          .principal {
+            align-self: center;
+            grid-area: principal;
+            margin-right: 1.5rem;
+          }
+
+          hgroup {
+            margin-bottom: 1.5rem;
+          }
+
+          .illustration {
+            display: flex;
+            align-self: stretch;
+            grid-area: illustration;
+            justify-self: stretch;
+          }
         }
       }
     }
 
-    .fonce {
-      color: var(--text-inverted-grey);
+    .conteneur {
+      display: flex;
+      flex-direction: column;
+
+      hgroup {
+        p {
+          font-size: 1.25rem;
+          line-height: 2rem;
+          margin: 0;
+        }
+      }
     }
   }
 </style>
