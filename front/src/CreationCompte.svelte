@@ -102,7 +102,7 @@
           >J’accepte les <dsfr-link
             href="/cgu"
             label="conditions générales d’utilisation"
-          /> DemainSpécialisteCyber.
+        ></dsfr-link> DemainSpécialisteCyber.
         </span>
       </dsfr-checkbox>
 
