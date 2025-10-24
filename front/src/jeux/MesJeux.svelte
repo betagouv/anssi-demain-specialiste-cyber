@@ -50,7 +50,7 @@
       ></dsfr-alert>
     {/if}
     <div class="jeux">
-      {#each listeDesJeux as { id, nom, nomEtablissement, eleves, photos } (id)}
+      {#each listeDesJeux as { id, nom, nomEtablissement, eleves, photos, estCache } (id)}
         <CarteJeu
           {id}
           {nom}
@@ -58,6 +58,7 @@
           {nomEtablissement}
           eleves={eleves || []}
           cheminCouverture={photos.couverture.chemin}
+          {estCache}
         />
       {/each}
     </div>
