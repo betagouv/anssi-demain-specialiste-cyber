@@ -58,4 +58,47 @@ describe('La ressource des jeux', () => {
       });
     });
   });
+
+  describe('sur un PATCH', () => {
+    it('retourne un 200', async () => {
+      const reponse = await request(serveur).patch('/api/jeux/1').send({
+        estCache: true,
+      });
+
+      expect(reponse.status).toEqual(200);
+    });
+
+    it("retourne un 404 lorsque le jeu n'éxiste pas", async () => {
+      const reponse = await request(serveur).patch('/api/jeux/1234').send({
+        estCache: true,
+      });
+      expect(reponse.status).toEqual(404);
+    });
+
+    it('modifie les données du jeu', async () => {
+      const reponse = await request(serveur).patch('/api/jeux/1').send({
+        estCache: true,
+      });
+
+      const {
+        decrementeReaction: _d,
+        incrementeReaction: _i,
+        enseignant,
+        ...rest
+      } = cybercluedo;
+      expect(reponse.body).toEqual({
+        ...rest,
+        enseignant: enseignant?.prenom,
+        estCache: true,
+      });
+    });
+
+    it('interdit la modification de champs non modifiables', async () => {
+      const reponse = await request(serveur).patch('/api/jeux/1').send({
+        estCache: true,
+        nomEtablissement: 'Nouveau nom etablissement',
+      });
+      expect(reponse.status).toEqual(400);
+    });
+  });
 });
