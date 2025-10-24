@@ -10,6 +10,7 @@
   import { onMount } from 'svelte';
   import Fiche, { type Menu } from '../Fiche.svelte';
   import Heros from '../Heros.svelte';
+  import Heros from '../Heros.svelte';
 
   type Metier = {
     id: string;
@@ -123,7 +124,7 @@
     ]}
   >
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
-    <p class="texte-xl" slot="description">{metier.fonction}</p>
+    <p slot="description">{metier.fonction}</p>
     <div class="actions">
       <dsfr-button
         markup="a"
@@ -229,7 +230,19 @@
   h1.titre-alternatif-xs {
     margin-bottom: 0.5rem;
   }
+  h1.titre-alternatif-xs {
+    margin-bottom: 0.5rem;
+  }
 
+  p {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin: 0;
+
+    &:last-of-type {
+      margin: 0 0 1.5rem;
+    }
+  }
   p {
     font-size: 1.25rem;
     line-height: 2rem;
@@ -243,13 +256,24 @@
   .actions {
     margin-bottom: 3rem;
   }
+  .actions {
+    margin-bottom: 3rem;
+  }
 
   .illustration {
     display: flex;
     align-self: flex-end;
     justify-self: center;
     width: clamp(280px, 100%, 36.75rem);
+  .illustration {
+    display: flex;
+    align-self: flex-end;
+    justify-self: center;
+    width: clamp(280px, 100%, 36.75rem);
 
+    img {
+      width: 100%;
+    }
     img {
       width: 100%;
     }
@@ -299,6 +323,10 @@
       align-self: flex-start;
       width: calc(50% - 1rem);
     }
+  }
+
+  .action {
+    margin-bottom: 3rem;
   }
 
   .action {
