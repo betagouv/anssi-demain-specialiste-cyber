@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import axios from 'axios';
-  import { onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
   import { enumerationFrancaise, type Jeu } from './jeu';
@@ -10,6 +10,7 @@
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
   import Fiche, { type Menu } from '../Fiche.svelte';
   import Reactions from './Reactions.svelte';
+  import Heros from '../Heros.svelte';
 
   let jeu: Jeu | undefined;
 
@@ -71,31 +72,36 @@
 </script>
 
 {#if jeu}
-  <div class="hero">
-    <dsfr-container>
-      <div class="entete-fiche-jeu">
-        <nav class="ariane" aria-label="Fil d'Ariane">
-          <a href="#">Voir le fil d'Ariane</a>
-        </nav>
-        <div class="cartouche">
-          <BadgesThematiques thematiques={jeu.thematiques} taille="md" />
-          <p class="titre-alternatif-xs">{jeu.nom}</p>
-          <p class="elaboration">
-            Élaboré par {enumerationFrancaise(jeu.eleves)}
-          </p>
-
-          <p class="etablissement">
-            <lab-anssi-icone taille="sm" nom="map-pin-2-line"></lab-anssi-icone>
-            {jeu.nomEtablissement}
-          </p>
-          <Reactions reactionsDuJeu={jeu.reactions} idJeu={jeu.id} ></Reactions>
-        </div>
-        <div class="illustration-jeu">
-          <img src={jeu.photos.couverture.chemin} alt="Couverture du jeu" />
-        </div>
-      </div>
-    </dsfr-container>
-  </div>
+  <Heros
+    variant="alternatif"
+    ariane={[
+      { id: 'accueil', label: 'Accueil', href: '/' },
+      { id: 'cyber-en-jeux', label: 'CyberEnJeux', href: '/cyber-en-jeux' },
+      { id: jeu.id, label: jeu.nom, href: '#' },
+    ]}
+  >
+    <div class="badges" slot="avant-titre">
+      <BadgesThematiques thematiques={jeu.thematiques} taille="md" />
+    </div>
+    <h1 class="titre-alternatif-xs" slot="titre">
+      {jeu.nom}
+    </h1>
+    <svelte:fragment slot="description">
+      <p class="elaboration">
+        Élaboré par {enumerationFrancaise(jeu.eleves)}
+      </p>
+      <p class="etablissement">
+        <lab-anssi-icone taille="sm" nom="map-pin-2-line"></lab-anssi-icone>
+        {jeu.nomEtablissement}
+      </p>
+    </svelte:fragment>
+    <div class="actions">
+      <Reactions reactionsDuJeu={jeu.reactions} idJeu={jeu.id}></Reactions>
+    </div>
+    <picture class="illustration" slot="illustration">
+      <img src={jeu.photos.couverture.chemin} alt="Couverture du jeu" />
+    </picture>
+  </Heros>
 
   <Fiche menuId="menu-fiche-jeu" menu={items}>
     <section id="infos-generales">
@@ -159,96 +165,54 @@
 <style lang="scss">
   @use '../points-de-rupture' as *;
 
-  .hero {
-    padding: 1rem 1rem 0;
-    background: var(--blue-france-975-sun-113)
-      url('/assets/images/hero-fiche-jeu.svg') no-repeat top right -300px;
-    background-size: auto 100%;
+  .badges {
+    display: none;
+  }
 
-    @include a-partir-de(md) {
-      background-position-x: right -170px;
+  h1.titre-alternatif-xs {
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin: 0;
+
+    &:last-of-type {
+      margin: 0 0 1.5rem;
     }
-    @include a-partir-de(lg) {
-      background-position-x: right;
+  }
+
+  .actions {
+    margin-bottom: 3rem;
+  }
+
+  .illustration {
+    background: white;
+    display: flex;
+    align-self: flex-end;
+    justify-self: center;
+    padding: 0.25rem 0.25rem 0;
+    width: clamp(280px, 100%, 36.75rem);
+
+    img {
+      width: 100%;
     }
+  }
 
-    .entete-fiche-jeu {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        'fil-ariane'
-        'cartouche'
-        'illustration';
+  @include a-partir-de(md) {
+    .badges {
+      display: block;
+    }
+  }
 
-      @include a-partir-de(lg) {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-          'fil-ariane fil-ariane'
-          'cartouche illustration';
-      }
-
-      .ariane {
-        grid-area: fil-ariane;
-      }
-
-      .cartouche {
-        grid-area: cartouche;
-        padding-bottom: 1.5rem;
-
-        dsfr-badges-group {
-          display: none;
-
-          @include a-partir-de(md) {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-            gap: 0.625rem;
-            align-self: stretch;
-          }
-
-          dsfr-badge {
-            margin: 0;
-          }
-        }
-        .titre-alternatif-xs {
-          margin-top: 1.5rem;
-          margin-bottom: 0.5rem;
-          color: var(--grey-50-1000);
-
-          @include a-partir-de(md) {
-            margin-top: 0.25rem;
-          }
-        }
-
-        dsfr-badge {
-          display: none;
-          margin-top: 1.5rem;
-          @include a-partir-de(md) {
-            display: block;
-          }
-        }
-
-        .elaboration,
-        .etablissement {
-          font-size: 1.25rem;
-          line-height: 2rem;
-          margin-top: 0;
-        }
-      }
+  @include a-partir-de(lg) {
+    h1.titre-alternatif-xs {
+      margin: 0.25rem 0 0.5rem;
     }
 
-    .illustration-jeu {
-      grid-area: illustration;
-      background: white;
-      padding: 0.25rem 0.25rem 0;
-      max-width: 36.75rem;
-      justify-self: center;
-      display: flex;
-
-      img {
-        width: 100%;
-      }
+    .illustration {
+      margin-top: 0;
     }
   }
 
