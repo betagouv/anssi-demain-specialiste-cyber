@@ -46,6 +46,10 @@ export type AdaptateurEnvironnement = {
     jetonAnalyse: string;
     analyseActive: boolean;
   };
+  sentry: () => {
+    dsn: () => string | undefined;
+    environnement: () => string | undefined;
+  };
 };
 
 const variablesDeTeleversement = () => ({
@@ -170,5 +174,12 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     urlAnalyse: process.env.JCOP_URL ?? '',
     jetonAnalyse: process.env.JCOP_JETON ?? '',
     analyseActive: process.env.ANALYSE_ANTIVIRUS_ACTIVE === 'true',
+  }),
+  sentry: (): {
+    dsn: () => string | undefined;
+    environnement: () => string | undefined;
+  } => ({
+    dsn: () => process.env.SENTRY_DSN,
+    environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
 };
