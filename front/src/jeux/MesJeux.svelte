@@ -1,12 +1,12 @@
 <svelte:options customElement={{ tag: 'dsc-mes-jeux', shadow: 'none' }} />
 
 <script lang="ts">
-  import type { Jeu } from './jeu';
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
   import { clic } from '../actions.svelte';
   import Citation from '../Citation.svelte';
   import CarteJeu from '../cyber-en-jeux/CarteJeu.svelte';
+  import type { Jeu } from './jeu';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -22,6 +22,16 @@
 
   const deposeUnJeu = () => {
     window.location.assign('/nouveau-jeu');
+  };
+
+  const modifieVisibiliteJeu = async (jeu: Jeu) => {
+    const { data: jeuModifie } = await axios.patch<Jeu>(`/api/jeux/${jeu.id}`, {
+      estCache: !jeu.estCache,
+    });
+    const indexJeuModifie = listeDesJeux.findIndex((j) => j.id === jeu.id);
+    if (indexJeuModifie > -1) {
+      listeDesJeux.splice(indexJeuModifie, 1, jeuModifie);
+    }
   };
 </script>
 
@@ -50,15 +60,18 @@
       ></dsfr-alert>
     {/if}
     <div class="jeux">
-      {#each listeDesJeux as { id, nom, nomEtablissement, eleves, photos, estCache } (id)}
+      {#each listeDesJeux as jeu (jeu.id)}
         <CarteJeu
-          {id}
-          {nom}
+          id={jeu.id}
+          nom={jeu.nom}
           thematiques={[]}
-          {nomEtablissement}
-          eleves={eleves || []}
-          cheminCouverture={photos.couverture.chemin}
-          {estCache}
+          nomEtablissement={jeu.nomEtablissement}
+          eleves={jeu.eleves || []}
+          cheminCouverture={jeu.photos.couverture.chemin}
+          estCache={jeu.estCache}
+          modifieVisibiliteJeu={async () => {
+            await modifieVisibiliteJeu(jeu);
+          }}
         />
       {/each}
     </div>
