@@ -85,7 +85,7 @@ export class Jeu {
   }
 
   decrementeReaction(reaction: string) {
-    if (this.reactions[reaction] === 0) return;
+    if (!this.reactions[reaction]) return;
 
     this.reactions[reaction] -= 1;
   }
