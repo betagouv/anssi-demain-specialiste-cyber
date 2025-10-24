@@ -1,6 +1,17 @@
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
-import { defineConfig } from 'vite';
+import { createLogger, defineConfig } from 'vite';
+
+const loggerPersonnalise = createLogger();
+const loggerWarnOnce = loggerPersonnalise.warnOnce;
+
+loggerPersonnalise.warnOnce = (msg, options) => {
+  const regexp =
+    /assets\/.* referenced in \/assets\/.* didn't resolve at build time, it will remain unchanged to be resolved at runtime/;
+  if (msg.match(regexp)) return;
+
+  loggerWarnOnce(msg, options);
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: Vite.UserConfig) => ({
@@ -36,6 +47,7 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
   define: {
     'process.env.NODE_ENV': "'production'",
   },
+  customLogger: loggerPersonnalise,
 }));
 
 const injecteNonceWebcomponents = (code: string) => {
