@@ -52,6 +52,7 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
           nomEtablissement,
           eleves,
           photos,
+          reactions
         } = jeu;
         return {
           id,
@@ -63,6 +64,7 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
           nomEtablissement,
           eleves,
           photos,
+          reactions
         };
       }),
     );

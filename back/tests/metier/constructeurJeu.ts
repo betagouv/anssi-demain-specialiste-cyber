@@ -1,5 +1,5 @@
 import * as crypto from 'node:crypto';
-import { Jeu } from '../../src/metier/jeu';
+import { Jeu, Reactions } from '../../src/metier/jeu';
 import { CategorieDeJeux } from '../../src/metier/referentiels/categorieDeJeux';
 import { Classe } from '../../src/metier/referentiels/classes';
 import { Discipline } from '../../src/metier/referentiels/disciplines';
@@ -21,6 +21,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
   private couverture: { chemin: string } | undefined;
   private photos: { chemin: string }[] = [];
   private estCache: boolean = false;
+  private reactions: Reactions = {};
 
   avecUnId(identifiant: string): ConstructeurDeJeu {
     this.identifiant = identifiant;
@@ -87,6 +88,11 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
     return this;
   }
 
+  avecUneReaction(reaction: string, compte: number) {
+    this.reactions[reaction] = compte;
+    return this;
+  }
+
   construis(): Jeu {
     return new Jeu({
       id: this.identifiant,
@@ -107,6 +113,7 @@ class ConstructeurDeJeu implements Constructeur<Jeu> {
         photos: this.photos,
       },
       estCache: this.estCache,
+      reactions: this.reactions,
     });
   }
 }
