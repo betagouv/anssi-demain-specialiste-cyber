@@ -4,10 +4,9 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { clic } from '../actions.svelte';
-  import Citation from '../Citation.svelte';
   import CarteJeu from '../cyber-en-jeux/CarteJeu.svelte';
-  import type { Jeu } from './jeu';
   import InvitationARejoindre from '../cyber-en-jeux/InvitationARejoindre.svelte';
+  import type { Jeu } from './jeu';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -15,7 +14,7 @@
 
   onMount(async () => {
     chargementEnCours = true;
-    const reponse = await axios.get('/api/mes-jeux');
+    const reponse = await axios.get<Jeu[]>('/api/mes-jeux');
     listeDesJeux = reponse.data;
     chargementEnCours = false;
     jeuAjoute = new URLSearchParams(window.location.search).has('jeu-ajoute');
@@ -73,6 +72,8 @@
           modifieVisibiliteJeu={async () => {
             await modifieVisibiliteJeu(jeu);
           }}
+          reactions={jeu.reactions}
+          estModifiable
         />
       {/each}
     </div>

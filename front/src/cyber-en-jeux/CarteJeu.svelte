@@ -1,9 +1,9 @@
 <script lang="ts">
   import { clic } from '../actions.svelte';
   import { enumerationFrancaise } from '../jeux/jeu';
+  import Reactions from '../jeux/Reactions.svelte';
   import BadgesThematiques from './BadgesThematiques.svelte';
   import type { Thematique } from './jeu';
-  import Reactions from '../jeux/Reactions.svelte';
 
   type Props = {
     id: string;
@@ -13,8 +13,9 @@
     thematiques?: Thematique[];
     cheminCouverture: string;
     estCache: boolean;
-    reactions: Record<string, number>,
+    reactions: Record<string, number>;
     modifieVisibiliteJeu: () => Promise<void>;
+    estModifiable?: boolean;
   };
 
   const {
@@ -27,50 +28,53 @@
     estCache,
     reactions,
     modifieVisibiliteJeu,
+    estModifiable = false,
   }: Props = $props();
 </script>
 
 <div class="lab-anssi-carte-jeux">
-  <div class="lab-anssi-carte-jeux__header">
-    <div class="lab-anssi-carte-jeux__actions">
-      <dsfr-button
-        size="sm"
-        kind="tertiary-no-outline"
-        label="Modifier"
-        hasIcon
-        icon="edit-line"
-        disabled
-      ></dsfr-button>
-      <dsfr-dropdown
-        align="right"
-        collapseId="dropdown-collapse-id"
-        id="dropdown-id"
-        buttonTitle="Choisir une option"
-        buttonKind="tertiary-no-outline"
-        buttonSize="sm"
-        buttonIcon="more-line"
-        buttonIconPlace="only"
-      >
-        <dsfr-toggle
-          left
-          label="Masquer de la vitrine des jeux"
-          id="toggleExemple"
-          checked={estCache}
-          onvaluechanged={modifieVisibiliteJeu}
-          use:clic={(e: Event) => {
-            e.stopPropagation();
-          }}
-        ></dsfr-toggle>
-      </dsfr-dropdown>
-    </div>
+  {#if estModifiable}
+    <div class="lab-anssi-carte-jeux__header">
+      <div class="lab-anssi-carte-jeux__actions">
+        <dsfr-button
+          size="sm"
+          kind="tertiary-no-outline"
+          label="Modifier"
+          hasIcon
+          icon="edit-line"
+          disabled
+        ></dsfr-button>
+        <dsfr-dropdown
+          align="right"
+          collapseId="dropdown-collapse-id"
+          id="dropdown-id"
+          buttonTitle="Choisir une option"
+          buttonKind="tertiary-no-outline"
+          buttonSize="sm"
+          buttonIcon="more-line"
+          buttonIconPlace="only"
+        >
+          <dsfr-toggle
+            left
+            label="Masquer de la vitrine des jeux"
+            id="toggleExemple"
+            checked={estCache}
+            onvaluechanged={modifieVisibiliteJeu}
+            use:clic={(e: Event) => {
+              e.stopPropagation();
+            }}
+          ></dsfr-toggle>
+        </dsfr-dropdown>
+      </div>
 
-    {#if estCache}
-      <p class="lab-anssi-carte-jeux__masque">
-        <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
-        Masqué de la vitrine des jeux
-      </p>
-    {/if}
-  </div>
+      {#if estCache}
+        <p class="lab-anssi-carte-jeux__masque">
+          <lab-anssi-icone nom="eye-off-line"></lab-anssi-icone>
+          Masqué de la vitrine des jeux
+        </p>
+      {/if}
+    </div>
+  {/if}
 
   <dsfr-card
     title={nom}
