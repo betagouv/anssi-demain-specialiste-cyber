@@ -15,7 +15,7 @@ block heros
   )
     h1.titre-alternatif-xs(slot="titre") #{titrePage}
     p.fr-text--lead(slot="description") #{descriptionPage}
-    div(class="actions")
+    .actions
       dsfr-button(
         label="Accèder aux ressources"
         kind="primary"
@@ -30,7 +30,7 @@ block heros
         href="#"
         target="_blank"
       )
-    picture(class="illustration" slot="illustration")
+    picture.illustration(slot="illustration")
       img(src='/assets/images/boites-de-jeux-avec-blob.svg' alt='')
 
 block contenu
