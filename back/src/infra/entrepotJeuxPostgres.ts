@@ -21,7 +21,7 @@ type PhotosJeu = {
   photos: FichierImage[];
 };
 
-type JeuEnDB = {
+type JeuEnDBLecture = {
   id: string;
   nom: string;
   sequence: string;
@@ -40,8 +40,8 @@ type JeuEnDB = {
   est_cache: boolean;
 };
 
-type JeuEnDBInsertion = Omit<
-  JeuEnDB,
+type JeuEnDBEcriture = Omit<
+  JeuEnDBLecture,
   'eleves' | 'thematiques' | 'temoignages'
 > & {
   eleves: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
@@ -82,7 +82,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
 
   async tous(): Promise<Jeu[]> {
     return Promise.all(
-      (await this.knex<JeuEnDB>('jeux').where({ est_cache: false })).map(
+      (await this.knex<JeuEnDBLecture>('jeux').where({ est_cache: false })).map(
         (jeu) => this.donneesEnDbVersMetier(jeu),
       ),
     );
@@ -91,7 +91,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
   async lesJeuxDe(utilisateur: Utilisateur): Promise<Jeu[]> {
     return Promise.all(
       (
-        await this.knex<JeuEnDB>('jeux').where({
+        await this.knex<JeuEnDBLecture>('jeux').where({
           id_enseignant: this.adaptateurHachage.hache(utilisateur.email),
         })
       ).map((jeu) => this.donneesEnDbVersMetier(jeu)),
@@ -100,7 +100,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
 
   async parId(id: Jeu['id']): Promise<Jeu | undefined> {
     try {
-      const jeuEnDB = await this.knex<JeuEnDB>('jeux')
+      const jeuEnDB = await this.knex<JeuEnDBLecture>('jeux')
         .where({
           id,
         })
@@ -119,7 +119,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     };
   }
 
-  private async donneesEnDbVersMetier(jeuEnDB: JeuEnDB): Promise<Jeu> {
+  private async donneesEnDbVersMetier(jeuEnDB: JeuEnDBLecture): Promise<Jeu> {
     const enseignant = jeuEnDB.id_enseignant
       ? await this.entrepotUtilisateur.parEmailHache(jeuEnDB.id_enseignant)
       : undefined;
@@ -147,7 +147,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
     });
   }
 
-  private metierVersdonneesEnDb(jeu: Jeu): JeuEnDBInsertion {
+  private metierVersdonneesEnDb(jeu: Jeu): JeuEnDBEcriture {
     return {
       id: jeu.id,
       nom: jeu.nom,
