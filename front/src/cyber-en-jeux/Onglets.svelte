@@ -43,7 +43,7 @@
   <div class="entete" role="button" tabindex="0" use:clic={surLeClicDeLEntete}>
     <span>Naviguer dans CyberEnJeux</span>
   </div>
-  <div class="onglets" aria-expanded={open}>
+  <div class="fr-text onglets" aria-expanded={open}>
     <ol>
       {#each onglets as onglet, indice (onglet.label)}
         <li class={{ actif: onglets[ongletActif] === onglet }}>
@@ -110,9 +110,7 @@
       background-color: #fff;
       border-bottom: 1px solid #ddd;
       display: none;
-      font-size: 1rem;
       font-weight: bold;
-      line-height: 1.5rem;
       max-height: 0;
       overflow: hidden;
       position: relative;

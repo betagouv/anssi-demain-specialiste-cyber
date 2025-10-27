@@ -197,14 +197,6 @@
     .conteneur {
       display: flex;
       flex-direction: column;
-
-      hgroup {
-        p {
-          font-size: 1.25rem;
-          line-height: 2rem;
-          margin: 0;
-        }
-      }
     }
   }
 </style>

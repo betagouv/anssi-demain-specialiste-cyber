@@ -150,7 +150,7 @@
     <EtapierDeposeJeu etapeCourante={etape} />
     <hr />
     {#if etape !== 'temoignages'}
-      <p class="mention">
+      <p class="fr-text--xs mention">
         Sauf mention contraire, les informations demandées sont obligatoires.
       </p>
     {/if}
@@ -207,8 +207,6 @@
       margin: 0;
       align-self: flex-start;
       color: #666;
-      font-size: 0.75rem;
-      line-height: 1.25rem;
     }
 
     form {

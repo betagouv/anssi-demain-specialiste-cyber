@@ -38,7 +38,7 @@
 
 <dsfr-container>
   {#if chargementEnCours}
-    <p>Chargement...</p>
+    <p class="fr-text">Chargement...</p>
   {/if}
   {#if listeDesJeux.length > 0}
     <div class="zone-action">
@@ -80,7 +80,7 @@
     <div class="pas-de-jeu">
       <div class="encart">
         <h4>Valorisez la créativité de vos élèves</h4>
-        <p>
+        <p class="fr-text">
           Partagez les jeux élaborés par vos élèves lors de séquence
           CyberEnJeux.
         </p>

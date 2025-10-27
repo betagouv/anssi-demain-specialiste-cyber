@@ -35,11 +35,11 @@
         <CarteCatalogue {ressource} />
       {:else}
         {#if chargementEnCours}
-          <p>Chargement...</p>
+          <p class="fr-text">Chargement...</p>
         {:else if ressourcesNonTrouvees}
-          <p>Impossible de récupérer les ressources.</p>
+          <p class="fr-text">Impossible de récupérer les ressources.</p>
         {:else}
-          <p>
+          <p class="fr-text">
             Aucune ressource trouvée correspondant aux critères de recherche.
           </p>
         {/if}

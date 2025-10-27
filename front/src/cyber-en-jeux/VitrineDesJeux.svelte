@@ -29,7 +29,7 @@
   <div class="vitrine-des-jeux">
     <hgroup>
       <h2>Explorez les jeux créés par les élèves</h2>
-      <p class="description">
+      <p class="fr-text--lg description">
         Mettez en avant la créativité de vos élèves en partageant leurs jeux
         depuis votre espace enseignant.
       </p>
@@ -50,11 +50,13 @@
           />
         {:else}
           {#if chargementEnCours}
-            <p>Chargement...</p>
+            <p class="fr-text">Chargement...</p>
           {:else if erreurChargement}
-            <p>Impossible de récupérer les jeux.</p>
+            <p class="fr-text">Impossible de récupérer les jeux.</p>
           {:else}
-            <p>Aucun jeu trouvé correspondant aux critères de recherche.</p>
+            <p class="fr-text">
+              Aucun jeu trouvé correspondant aux critères de recherche.
+            </p>
           {/if}
         {/each}
       </div>

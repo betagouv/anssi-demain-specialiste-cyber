@@ -46,11 +46,13 @@
           ></lab-anssi-icone>
           Votre identité</legend
         >
-        <p>
+        <p class="fr-text">
           Prénom&nbsp;: <strong>{informationsProfessionnelles.prenom}</strong>
         </p>
-        <p>Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong></p>
-        <p>
+        <p class="fr-text">
+          Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong>
+        </p>
+        <p class="fr-text">
           Mail professionnel&nbsp;: <strong
             >{informationsProfessionnelles.email}</strong
           >
@@ -64,17 +66,17 @@
           <lab-anssi-icone taille="md" nom="building-line"
           ></lab-anssi-icone>Votre établissement</legend
         >
-        <p>
+        <p class="fr-text">
           Dénomination légale&nbsp;: <strong
             >{informationsProfessionnelles.organisation.nom}</strong
           >
         </p>
-        <p>
+        <p class="fr-text">
           SIRET&nbsp;: <strong
             >{informationsProfessionnelles.organisation.siret}</strong
           >
         </p>
-        <p>
+        <p class="fr-text">
           Département de votre organisation&nbsp;: <strong
             >{informationsProfessionnelles.organisation.departement}</strong
           >
@@ -163,8 +165,6 @@
           p {
             margin-top: 0.25rem;
             margin-bottom: 0;
-            font-size: 1rem;
-            line-height: 1.5rem;
           }
         }
 

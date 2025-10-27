@@ -9,14 +9,14 @@
 <div class="questions">
   <div class="preambule">
     <h3>Votre avis nous intéresse&nbsp;!</h3>
-    <p>
+    <p class="fr-text">
       Vos réponses nous permettent de mesurer l’impact de CyberEnJeux. Merci
       pour votre contribution&nbsp;!
     </p>
   </div>
 
   <div class="question">
-    <p>
+    <p class="fr-text">
       CyberEnJeux a-t-il permis aux élèves de découvrir les enjeux et les
       métiers de la cybersécurité&nbsp;?
     </p>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="question">
-    <p>
+    <p class="fr-text">
       Les élèves se montrent-ils désormais curieux ou intéressés par un futur
       métier dans la cybersécurité&nbsp;?
     </p>
@@ -64,7 +64,7 @@
   </div>
 
   <div class="question">
-    <p>
+    <p class="fr-text">
       Comment qualifieriez-vous la satisfaction générale des élèves vis-à-vis de
       leur expérience CyberEnJeux&nbsp;?
     </p>
@@ -107,15 +107,6 @@
     flex-direction: column;
     gap: 2rem;
 
-    .preambule {
-      h3 {
-        color: #161616;
-        font-size: 1.5rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 2rem;
-      }
-    }
     .question {
       display: flex;
       flex-direction: column;

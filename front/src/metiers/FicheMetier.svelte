@@ -123,7 +123,7 @@
     ]}
   >
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
-    <p slot="description">{metier.fonction}</p>
+    <p class="fr-text--lead" slot="description">{metier.fonction}</p>
     <div class="actions">
       <dsfr-button
         markup="a"
@@ -181,7 +181,7 @@
           )} euros
         </li>
       </ul>
-      <p class="note">
+      <p class="fr-text--xs note">
         Les rémunérations présentées sont strictement indicatives et ne
         constituent en aucun cas une grille de rémunération préconisée
       </p>
@@ -231,8 +231,6 @@
   }
 
   p {
-    font-size: 1.25rem;
-    line-height: 2rem;
     margin: 0;
 
     &:last-of-type {
@@ -286,8 +284,6 @@
 
   .note {
     color: var(--text-mention-grey);
-    font-size: 0.75rem;
-    line-height: 1.25rem;
     margin-bottom: 0;
   }
 
@@ -301,7 +297,7 @@
     }
   }
 
-  .action {
+  .actions {
     margin-bottom: 3rem;
   }
 </style>

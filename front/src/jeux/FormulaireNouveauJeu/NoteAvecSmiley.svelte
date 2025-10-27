@@ -30,7 +30,7 @@
       <span aria-label="5" role="img">🤩</span>
     </label>
   </div>
-  <div class="descriptions">
+  <div class="fr-text--sm descriptions">
     <span class="premier">{borneMinimale}</span>
     <span class="dernier">{borneMaximale}</span>
   </div>
@@ -113,10 +113,8 @@
       color: #666666;
       display: flex;
       flex-direction: row;
-      font-size: 0.875rem;
       font-style: normal;
       justify-content: space-between;
-      line-height: 1.5rem;
     }
   }
 </style>

@@ -1,7 +1,7 @@
-@use "./points-de-rupture" as * ;
+@use './points-de-rupture' as *;
 
 .chiffres-cles {
-  background-color: #F3F6FE;
+  background-color: #f3f6fe;
   padding: 3.5rem 1rem;
 
   h2 {
@@ -30,14 +30,14 @@
       }
 
       p {
-        color: #3A3A3A;
+        color: #3a3a3a;
         max-width: 24rem;
         margin: 0;
       }
     }
   }
 
-  @include a-partir-de(lg){
+  @include a-partir-de(lg) {
     ul {
       flex-direction: row;
       li {
@@ -46,10 +46,7 @@
     }
   }
 
-
   .source {
     color: #666;
-    font-size: 0.75rem;
-    line-height: 1.25rem;
   }
 }

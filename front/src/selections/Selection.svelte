@@ -64,7 +64,7 @@
       <div class="conteneur" class:fonce={selection.couleurDeFond}>
         <hgroup>
           <h2>{selection.titre}</h2>
-          <p>{selection.explication}</p>
+          <p class="fr-text--lg">{selection.explication}</p>
         </hgroup>
         <div>
           <h4>Ressources</h4>
