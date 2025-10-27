@@ -84,6 +84,7 @@
       scroll-behavior: smooth;
 
       @include a-partir-de(md) {
+        gap: 1.5rem;
         justify-content: center;
       }
 
