@@ -141,86 +141,88 @@
     </picture>
   </Heros>
 
-  <Fiche menuId="menu-fiche-metier" {menu}>
-    <section id="description">
-      <h2>Description du métier</h2>
-      <p>{metier.description}</p>
-      <blockquote>
-        <h4>Sa mission principale</h4>
-        <p>{metier.missionPrincipale}</p>
-      </blockquote>
-      <p><strong> Ce qu'on attend&nbsp;: </strong></p>
-      <ul>
-        {#each metier.postures as posture}
-          <li>{posture}</li>
-        {/each}
-      </ul>
-    </section>
-    <section id="formation">
-      <h2>Formation</h2>
-      <ul>
-        <li>
-          {formations}
-        </li>
-        {#if metier.preRequis.length > 0}
-          <li>{metier.preRequis.join(', ')}</li>
-        {/if}
-      </ul>
-    </section>
-    <section id="remuneration">
-      <h2>Rémunération</h2>
-      <ul>
-        <li>
-          Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-            metier.remuneration.junior,
-          )} euros
-        </li>
-        <li>
-          Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-            metier.remuneration.senior,
-          )} euros
-        </li>
-      </ul>
-      <p class="fr-text--xs note">
-        Les rémunérations présentées sont strictement indicatives et ne
-        constituent en aucun cas une grille de rémunération préconisée
-      </p>
-    </section>
-    <section id="metiers-proches">
-      <h2>Métiers proches</h2>
-      <ul>
-        {#each metier.metiersProches as metierProche}
-          <li>{metierProche}</li>
-        {/each}
-      </ul>
-    </section>
-    <section id="temoignage">
-      <h2>Témoignage</h2>
-      <dsfr-content type="video">
-        <video slot="video" controls crossorigin="anonymous">
-          <source src={metier.liens.video} type="video/mp4" />
-          <track
-            default
-            kind="captions"
-            srclang="fr"
-            label="Français"
-            src={lienSousTitres}
-          />
-        </video>
-      </dsfr-content>
-    </section>
-    <section id="liens-utiles">
-      <h2>Liens utiles</h2>
-      <dsfr-button
-        markup="a"
-        label="Fiche métierscope"
-        href={metier.liens.metierscope}
-        target="_blank"
-        size="sm"
-        kind="tertiary-no-outline"
-      ></dsfr-button>
-    </section>
-  </Fiche>
+  <dsfr-container>
+    <Fiche menuId="menu-fiche-metier" {menu}>
+      <section id="description">
+        <h2>Description du métier</h2>
+        <p>{metier.description}</p>
+        <blockquote>
+          <h4>Sa mission principale</h4>
+          <p>{metier.missionPrincipale}</p>
+        </blockquote>
+        <p><strong> Ce qu'on attend&nbsp;: </strong></p>
+        <ul>
+          {#each metier.postures as posture}
+            <li>{posture}</li>
+          {/each}
+        </ul>
+      </section>
+      <section id="formation">
+        <h2>Formation</h2>
+        <ul>
+          <li>
+            {formations}
+          </li>
+          {#if metier.preRequis.length > 0}
+            <li>{metier.preRequis.join(', ')}</li>
+          {/if}
+        </ul>
+      </section>
+      <section id="remuneration">
+        <h2>Rémunération</h2>
+        <ul>
+          <li>
+            Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
+              metier.remuneration.junior,
+            )} euros
+          </li>
+          <li>
+            Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
+              metier.remuneration.senior,
+            )} euros
+          </li>
+        </ul>
+        <p class="fr-text--xs note">
+          Les rémunérations présentées sont strictement indicatives et ne
+          constituent en aucun cas une grille de rémunération préconisée
+        </p>
+      </section>
+      <section id="metiers-proches">
+        <h2>Métiers proches</h2>
+        <ul>
+          {#each metier.metiersProches as metierProche}
+            <li>{metierProche}</li>
+          {/each}
+        </ul>
+      </section>
+      <section id="temoignage">
+        <h2>Témoignage</h2>
+        <dsfr-content type="video">
+          <video slot="video" controls crossorigin="anonymous">
+            <source src={metier.liens.video} type="video/mp4" />
+            <track
+              default
+              kind="captions"
+              srclang="fr"
+              label="Français"
+              src={lienSousTitres}
+            />
+          </video>
+        </dsfr-content>
+      </section>
+      <section id="liens-utiles">
+        <h2>Liens utiles</h2>
+        <dsfr-button
+          markup="a"
+          label="Fiche métierscope"
+          href={metier.liens.metierscope}
+          target="_blank"
+          size="sm"
+          kind="tertiary-no-outline"
+        ></dsfr-button>
+      </section>
+    </Fiche>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">

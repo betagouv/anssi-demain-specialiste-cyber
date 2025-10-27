@@ -103,63 +103,65 @@
     </picture>
   </Heros>
 
-  <Fiche menuId="menu-fiche-jeu" menu={items}>
-    <section id="infos-generales">
-      <h2>Informations générales</h2>
-      <ul>
-        <li>
-          <span>Format</span>
-          <span>{libelleSequence(jeu.sequence)}</span>
-        </li>
-        <li>
-          <span>Établissement</span>
-          <span>{jeu.nomEtablissement}</span>
-        </li>
-        <li>
-          <span>Enseignant&middot;e</span>
-          <span>{jeu.enseignant}</span>
-        </li>
-        <li>
-          <span>Élèves</span>
-          <span>{enumerationFrancaise(jeu.eleves)}</span>
-        </li>
-        <li>
-          <span>Discipline</span>
-          <span>{libelleDiscipline(jeu.discipline)}</span>
-        </li>
-        <li>
-          <span>Classe</span>
-          <span>{libelleClasse(jeu.classe)}</span>
-        </li>
-      </ul>
-    </section>
-
-    <section id="presentation">
-      <h2>Présentation du jeu</h2>
-      <p class="fr-text">{jeu.description}</p>
-    </section>
-
-    {#if possedeDesPhotos}
-      <section id="photos">
-        <h2>Photos</h2>
-        <div class="photos">
-          {#each jeu.photos.photos as photo}
-            <img src={photo.chemin} alt="Illustration du jeu" />
-          {/each}
-        </div>
+  <dsfr-container>
+    <Fiche menuId="menu-fiche-jeu" menu={items}>
+      <section id="infos-generales">
+        <h2>Informations générales</h2>
+        <ul>
+          <li>
+            <span>Format</span>
+            <span>{libelleSequence(jeu.sequence)}</span>
+          </li>
+          <li>
+            <span>Établissement</span>
+            <span>{jeu.nomEtablissement}</span>
+          </li>
+          <li>
+            <span>Enseignant&middot;e</span>
+            <span>{jeu.enseignant}</span>
+          </li>
+          <li>
+            <span>Élèves</span>
+            <span>{enumerationFrancaise(jeu.eleves)}</span>
+          </li>
+          <li>
+            <span>Discipline</span>
+            <span>{libelleDiscipline(jeu.discipline)}</span>
+          </li>
+          <li>
+            <span>Classe</span>
+            <span>{libelleClasse(jeu.classe)}</span>
+          </li>
+        </ul>
       </section>
-    {/if}
 
-    {#snippet apresContenu()}
-      {#if possedeDesTemoignages}
-        <lab-anssi-temoignages
-          titre="Témoignages"
-          {temoignages}
-          id="temoignages"
-        ></lab-anssi-temoignages>
+      <section id="presentation">
+        <h2>Présentation du jeu</h2>
+        <p class="fr-text">{jeu.description}</p>
+      </section>
+
+      {#if possedeDesPhotos}
+        <section id="photos">
+          <h2>Photos</h2>
+          <div class="photos">
+            {#each jeu.photos.photos as photo}
+              <img src={photo.chemin} alt="Illustration du jeu" />
+            {/each}
+          </div>
+        </section>
       {/if}
-    {/snippet}
-  </Fiche>
+
+      {#snippet apresContenu()}
+        {#if possedeDesTemoignages}
+          <lab-anssi-temoignages
+            titre="Témoignages"
+            {temoignages}
+            id="temoignages"
+          ></lab-anssi-temoignages>
+        {/if}
+      {/snippet}
+    </Fiche>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
