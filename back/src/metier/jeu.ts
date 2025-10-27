@@ -20,7 +20,7 @@ export type PhotosJeu = {
   photos: FichierImage[];
 };
 
-type Reactions = Record<string, number>;
+export type Reactions = Record<string, number>;
 
 type DonneesConstructionJeu = {
   id?: string;

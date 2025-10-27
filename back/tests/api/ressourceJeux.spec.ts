@@ -50,6 +50,7 @@ describe('La ressource de tous les Jeux', () => {
           .avecUneCouverture('une-couverture')
           .avecUnePhoto('photo-1')
           .avecUnePhoto('photo-2')
+          .avecUneReaction('🔥', 3)
           .construis(),
       );
 
@@ -71,6 +72,7 @@ describe('La ressource de tous les Jeux', () => {
             },
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
+          reactions: { '🔥': 3 },
         },
       ]);
     });
@@ -129,6 +131,7 @@ describe('La ressource de tous les Jeux', () => {
             },
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
+          reactions: {},
         },
       ]);
     });
