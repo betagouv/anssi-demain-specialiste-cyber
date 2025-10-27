@@ -304,6 +304,7 @@ export const ressourceMesJeux = ({
           eleves: jeu.eleves,
           photos: jeu.photos,
           estCache: jeu.estCache,
+          reactions: jeu.reactions,
         })),
       );
     },
