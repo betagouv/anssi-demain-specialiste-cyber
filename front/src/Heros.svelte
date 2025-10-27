@@ -111,12 +111,6 @@
         padding: 1px 0 0;
       }
 
-      hgroup {
-        .description {
-          margin-bottom: 1.5rem;
-        }
-      }
-
       @include a-partir-de(lg) {
         .conteneur {
           display: grid;
@@ -152,12 +146,6 @@
 
       .conteneur {
         padding: 1px 0 0;
-      }
-
-      hgroup {
-        .description {
-          margin-bottom: 1.5rem;
-        }
       }
 
       @include a-partir-de(lg) {
