@@ -9,6 +9,14 @@ export const jeanneDupont = new Utilisateur({
   siretEntite: '',
 });
 
+export const hectorDurant = new Utilisateur({
+  email: 'hector.durant@mail.com',
+  prenom: 'Hector',
+  nom: 'Durant',
+  siretEntite: '13000766900018',
+  infolettreAcceptee: true,
+});
+
 export const cybercluedo = unJeu()
   .avecUnId('1')
   .avecUnNom('cybercluedo')

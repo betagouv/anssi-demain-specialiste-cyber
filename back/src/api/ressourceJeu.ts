@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import z from 'zod';
 import { Jeu } from '../metier/jeu';
+import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 
 type ReponseJeu = Omit<
@@ -15,7 +16,9 @@ const schemaModificationJeu = z.strictObject({
 });
 
 export const ressourceJeu = ({
+  adaptateurHachage,
   entrepotJeux,
+  entrepotUtilisateur,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -31,12 +34,21 @@ export const ressourceJeu = ({
   routeur.patch(
     '/:id',
     middleware.valideLaCoherenceDuCorps(schemaModificationJeu),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage,
+    ),
     async (requete, reponse) => {
+      const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
       const jeu = await entrepotJeux.parId(
         (requete.params as Record<string, string>).id,
       );
       if (!jeu) {
         return reponse.sendStatus(404);
+      }
+
+      if (!utilisateur || jeu.enseignant?.email !== utilisateur.email) {
+        return reponse.sendStatus(403);
       }
       if (requete.body.estCache !== undefined) {
         jeu.estCache = requete.body.estCache;

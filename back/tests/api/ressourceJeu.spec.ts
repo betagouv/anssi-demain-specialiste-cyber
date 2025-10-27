@@ -1,20 +1,38 @@
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { cybercluedo } from './objetsPretsALEmploi';
+import {
+  configurationDeTestDuServeur,
+  configurationServeurSansMiddleware,
+} from './fauxObjets';
+import { cybercluedo, hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
   let entrepotJeux: EntrepotJeux;
 
+  let middleware: Middleware;
+  const ajouteUtilisateurARequeteMock = vi
+    .fn()
+    .mockImplementation((req, _res, suite) => {
+      req.utilisateur = jeanneDupont;
+      suite();
+    });
+
   beforeEach(async () => {
     entrepotJeux = new EntrepotJeuxMemoire();
     await entrepotJeux.ajoute(cybercluedo);
-    serveur = creeServeur({ ...configurationDeTestDuServeur(), entrepotJeux });
+    middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
+    middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur(),
+      middleware,
+      entrepotJeux,
+    });
   });
 
   describe('sur un GET', () => {
@@ -99,6 +117,32 @@ describe('La ressource des jeux', () => {
         nomEtablissement: 'Nouveau nom etablissement',
       });
       expect(reponse.status).toEqual(400);
+    });
+
+    it("interdit la modification d'un jeu qui ne nous appartient pas", async () => {
+      ajouteUtilisateurARequeteMock.mockImplementationOnce(
+        (req, _res, suite) => {
+          req.utilisateur = hectorDurant;
+          suite();
+        },
+      );
+      const reponse = await request(serveur).patch('/api/jeux/1').send({
+        estCache: true,
+      });
+      expect(reponse.status).toEqual(403);
+    });
+
+    it("interdit la modification d'un jeu si l'utilisateur est inconnu", async () => {
+      ajouteUtilisateurARequeteMock.mockImplementationOnce(
+        (req, _res, suite) => {
+          req.utilisateur = undefined;
+          suite();
+        },
+      );
+      const reponse = await request(serveur).patch('/api/jeux/1').send({
+        estCache: true,
+      });
+      expect(reponse.status).toEqual(403);
     });
   });
 });
