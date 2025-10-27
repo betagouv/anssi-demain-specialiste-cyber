@@ -42,6 +42,7 @@
     class="affiche-filtres"
     label="Voir les filtres"
     kind="secondary"
+    centered
     use:clic={afficheLesFiltres}
   >
   </dsfr-button>
@@ -65,6 +66,7 @@
         kind="tertiary"
         hasIcon="true"
         icon="close-circle-line"
+        centered
         use:clic={reinitialiseLesFiltres}
       ></dsfr-button>
     </div>
