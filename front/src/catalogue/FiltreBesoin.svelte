@@ -28,7 +28,7 @@
 </script>
 
 <fieldset>
-  <legend>Besoin</legend>
+  <legend class="fr-text">Besoin</legend>
   <lab-anssi-filtres
     class="filtres-besoins"
     {filtres}
@@ -48,8 +48,6 @@
     width: clamp(200px, 100%, 1200px);
 
     legend {
-      font-size: 1rem;
-      line-height: 1.5rem;
       margin-bottom: 0.5rem;
     }
 

@@ -31,16 +31,18 @@
     ]}
   >
     <section>
-      Devenez relai de Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber en
-      associant la marque
-      "Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber" à vos actions en
-      faveur de la formation des jeunes à la cybersécurité et la découverte de
-      ses métiers.
+      <p class="fr-text">
+        Devenez relai de Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+        en associant la marque
+        "Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber" à vos actions
+        en faveur de la formation des jeunes à la cybersécurité et la découverte
+        de ses métiers.
+      </p>
     </section>
 
     <section id="qui">
       <h2>Qui peut devenir un relai&nbsp;?</h2>
-      <p>
+      <p class="fr-text">
         Vous représentez un établissement d'enseignement primaire, secondaire,
         supérieure ou de formation continue œuvrant en faveur de la formation
         des jeunes et des adultes à la cybersécurité. <br /> <br />
@@ -56,7 +58,7 @@
         Conditions d'utilisation de la marque
         Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
       </h2>
-      <p>
+      <p class="fr-text">
         En tant que relai, vous pouvez utiliser le bloc marque
         Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber sur toutes vos
         productions.
@@ -66,7 +68,7 @@
         Propositions de formulations&nbsp;
         <br />
       </p>
-      <ul>
+      <ul class="fr-text">
         <li>Relai Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber</li>
         <li>
           L'université x est relai de

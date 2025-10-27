@@ -33,7 +33,7 @@
           icone={telechargement ? 'download-line' : undefined}
         ></lab-anssi-lien>
         {#if detail}
-          <div class="detail">{detail}</div>
+          <div class="fr-text--xs detail">{detail}</div>
         {/if}
       </li>
     {/each}
@@ -62,8 +62,6 @@
     padding: 3rem 1rem;
 
     h2 {
-      font-size: 1.75rem;
-      line-height: 2.25rem;
       margin: 0 0 1rem;
     }
 
@@ -83,8 +81,6 @@
       li {
         .detail {
           margin-top: 0.25rem;
-          font-size: 0.75rem;
-          line-height: 1.25rem;
         }
       }
     }

@@ -87,10 +87,10 @@
       {jeu.nom}
     </h1>
     <svelte:fragment slot="description">
-      <p class="elaboration">
+      <p class="fr-text--lead elaboration">
         Élaboré par {enumerationFrancaise(jeu.eleves)}
       </p>
-      <p class="etablissement">
+      <p class="fr-text--lead etablissement">
         <lab-anssi-icone taille="sm" nom="map-pin-2-line"></lab-anssi-icone>
         {jeu.nomEtablissement}
       </p>
@@ -136,7 +136,7 @@
 
     <section id="presentation">
       <h2>Présentation du jeu</h2>
-      <p>{jeu.description}</p>
+      <p class="fr-text">{jeu.description}</p>
     </section>
 
     {#if possedeDesPhotos}
@@ -174,8 +174,6 @@
   }
 
   p {
-    font-size: 1.25rem;
-    line-height: 2rem;
     margin: 0;
 
     &:last-of-type {

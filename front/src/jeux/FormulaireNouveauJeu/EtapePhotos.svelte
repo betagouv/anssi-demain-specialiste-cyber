@@ -73,9 +73,9 @@
   </dsfr-alert>
 </div>
 
-<fieldset class="couverture">
+<fieldset class="fr-text--xs couverture">
   <legend>Photo principale</legend>
-  <p>
+  <p class="fr-text--xs">
     Celle-ci servira de couverture pour présenter le jeu dans le catalogue.
     <br />
     Formats supportés : JPEG, PNG.
@@ -117,7 +117,7 @@
 
 <hr />
 
-<fieldset class="photos">
+<fieldset class="fr-text--xs photos">
   <legend>Ajouter des photos de l’événement (facultatif)</legend>
   <p>4 photos maximum. Formats supportés : JPEG, PNG.</p>
   <input
@@ -146,7 +146,7 @@
   {/if}
 </fieldset>
 
-<div class="consentement">
+<div class="fr-text--xs consentement">
   <dsfr-checkbox
     id="consentement-photo"
     name="consentement-photo"
@@ -170,30 +170,18 @@
 
   .couverture {
     p {
-      font-size: 0.75rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.25rem;
       color: var(--text-mention-grey);
     }
   }
 
   .photos {
     p {
-      font-size: 0.75rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.25rem;
       color: var(--text-mention-grey);
     }
   }
 
   .consentement {
     p {
-      font-size: 0.75rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.25rem;
       color: var(--text-mention-grey);
       margin: 0;
       padding-left: 2rem;

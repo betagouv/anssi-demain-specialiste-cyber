@@ -69,7 +69,7 @@
     <div class="ressources-enseignants">
       <hgroup>
         <h2>Ressources enseignants</h2>
-        <p class="description">
+        <p class="fr-text--lg description">
           Des ressources pour découvrir CyberEnJeux et guider vos élèves pas à
           pas dans la création de leurs propres jeux.
         </p>
@@ -93,7 +93,7 @@
     <div class="ressources-eleves">
       <hgroup>
         <h2>Ressources élèves</h2>
-        <p class="description">
+        <p class="fr-text--lg description">
           Un guide pour aider les élèves à créer leur jeu en autonomie,
           accompagné de 13 cartes Objectifs Cyber pour orienter le choix des
           thèmes.
@@ -143,7 +143,7 @@
 
     <div class="ressources-3d">
       <h2>Ressources 3D</h2>
-      <p class="description">
+      <p class="fr-text--lg description">
         Si votre établissement dispose d’une imprimante 3D vous pouvez
         télécharger et imprimer des accessoires en 3D gratuitement (dés, pions,
         jetons…) pour animer vos séquences CyberEnJeux. Rendez-vous sur :
@@ -172,7 +172,7 @@
         },
       ]}
     >
-      <p>
+      <p class="fr-text--lg">
         DemainSpécialisteCyber est une campagne nationale co-construite par
         l’ANSSI et son laboratoire d’innovation, le Ministère de l’Education
         Nationale et de la Jeunesse et le Campus Cyber, en vue de valoriser la

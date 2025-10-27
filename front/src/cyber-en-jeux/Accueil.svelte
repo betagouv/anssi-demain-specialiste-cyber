@@ -10,7 +10,7 @@
         Déjà testé et approuvé par plus de 800 enseignants auprès de 70 000
         élèves
       </h2>
-      <p>
+      <p class="fr-text--lg">
         Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec
         le ministère de l’Education nationale et l’association Open Serious
         Game, CyberEnJeux est un dispositif pédagogique innovant permettant de
@@ -28,7 +28,7 @@
         <div class="articles">
           <article>
             <h6>Les postures collaboratives entre vos élèves</h6>
-            <p>
+            <p class="fr-text">
               Développer des compétences transverses, telles que la capacité à
               s’organiser en groupe et à collaborer.
             </p>
@@ -36,7 +36,7 @@
           <hr />
           <article>
             <h6>Leur autonomie</h6>
-            <p>
+            <p class="fr-text">
               Développer des compétences transverses, telles que l’autonomie, la
               capacité à s’organiser individuellement.
             </p>
@@ -44,7 +44,7 @@
           <hr />
           <article>
             <h6>L'apprentissage par le "faire"</h6>
-            <p>
+            <p class="fr-text">
               Valoriser leur travail par la production d’un objet tangible,
               voire stimuler des élèves en difficultés scolaires.
             </p>
@@ -52,7 +52,7 @@
           <hr />
           <article>
             <h6>L’engagement dans vos disciplines</h6>
-            <p>
+            <p class="fr-text">
               CyberEnJeux s’adapte à toutes les disciplines et permet aux élèves
               de mobiliser concrètement leurs apprentissages, tout en renforçant
               leur motivation.
@@ -150,7 +150,7 @@
     <div class="bandeau">
       <div class="conteneur">
         <h3>Organisez une séquence CyberEnJeux dans votre établissement</h3>
-        <p>
+        <p class="fr-text">
           Faites découvrir la cybersécurité autrement ! En déclarant votre
           séquence, vous profitez d’un accompagnement et valorisez votre
           engagement pour une éducation au numérique plus ludique et
@@ -232,14 +232,7 @@
       text-align: center;
       width: clamp(200px, 100%, 736px);
 
-      h2 {
-        font-size: 1.75rem;
-        line-height: 2.25rem;
-        margin: 0 0 1.5rem;
-      }
-
       p {
-        font-size: 1.125rem;
         margin: 0 auto;
       }
     }
@@ -253,8 +246,6 @@
         display: grid;
 
         h2 {
-          font-size: 1.75rem;
-          line-height: 2.25rem;
           margin: 0 0 3.5rem;
         }
 
@@ -268,15 +259,10 @@
             margin: 1rem 0;
 
             h6 {
-              font-size: 1.125rem;
-              font-weight: bold;
-              line-height: 1.5rem;
               margin: 0 0 0.5rem;
             }
 
             p {
-              font-size: 1rem;
-              line-height: 1.5rem;
               margin: 0;
             }
           }
@@ -352,8 +338,6 @@
       }
 
       h3 {
-        font-size: 1.5rem;
-        line-height: 2rem;
         margin: 0 0 0.5rem;
       }
 

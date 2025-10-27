@@ -91,9 +91,6 @@
   @use '../points-de-rupture' as *;
 
   h4 {
-    font-size: 1.375rem;
-    font-weight: bold;
-    line-height: 1.75rem;
     margin: 0 0 0.5rem;
   }
 

@@ -4,7 +4,7 @@
 </script>
 
 <fieldset>
-  <legend>Thématique</legend>
+  <legend class="fr-text">Thématique</legend>
   <dsfr-select
     id="thematiques"
     value={$rechercheParThematique}
@@ -22,10 +22,5 @@
 <style lang="scss">
   fieldset {
     margin: 0 0 1rem;
-
-    legend {
-      font-size: 1rem;
-      line-height: 1.5rem;
-    }
   }
 </style>

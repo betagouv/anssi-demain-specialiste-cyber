@@ -21,14 +21,11 @@
 
       p {
         margin: 0 0 2rem 0;
-        font-size: 1.125rem;
-        line-height: 1.75rem;
       }
 
       div {
         margin-bottom: 1.5rem;
       }
-
     }
   }
 
@@ -58,9 +55,9 @@
         left: 0;
         bottom: 0;
         content: '';
-        background: url(/assets/images/illustration_connexion.svg) center 100% no-repeat;
+        background: url(/assets/images/illustration_connexion.svg) center 100%
+          no-repeat;
       }
     }
   }
-
 }
