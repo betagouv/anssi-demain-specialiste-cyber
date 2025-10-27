@@ -39,13 +39,14 @@
       <VitrineFiltres />
 
       <div class="conteneur">
-        {#each $jeuxFiltres.resultat as { id, nom, thematiques, nomEtablissement, eleves, photos } (id)}
+        {#each $jeuxFiltres.resultat as { id, nom, thematiques, nomEtablissement, eleves, photos, reactions } (id)}
           <CarteJeu
             {id}
             {nom}
             {thematiques}
             {nomEtablissement}
             {eleves}
+            {reactions}
             cheminCouverture={photos.couverture.chemin}
           />
         {:else}

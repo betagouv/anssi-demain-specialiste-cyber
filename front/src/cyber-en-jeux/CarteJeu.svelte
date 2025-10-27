@@ -3,6 +3,7 @@
   import { enumerationFrancaise } from '../jeux/jeu';
   import BadgesThematiques from './BadgesThematiques.svelte';
   import type { Thematique } from './jeu';
+  import Reactions from '../jeux/Reactions.svelte';
 
   type Props = {
     id: string;
@@ -12,6 +13,7 @@
     thematiques?: Thematique[];
     cheminCouverture: string;
     estCache: boolean;
+    reactions: Record<string, number>,
     modifieVisibiliteJeu: () => Promise<void>;
   };
 
@@ -23,6 +25,7 @@
     thematiques,
     cheminCouverture,
     estCache,
+    reactions,
     modifieVisibiliteJeu,
   }: Props = $props();
 </script>
@@ -86,6 +89,13 @@
       </div>
     {/if}
   </dsfr-card>
+  <div class="lab-anssi-carte-jeux__reactions">
+    <Reactions
+      idJeu={id}
+      reactionsDuJeu={reactions}
+      variant="tertiaire-sans-bordure"
+    />
+  </div>
 </div>
 
 <style lang="scss">

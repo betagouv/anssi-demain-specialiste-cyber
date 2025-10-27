@@ -3,6 +3,7 @@
 
   export let idJeu: string;
   export let reactionsDuJeu: Record<string, number>;
+  export let variant: string = "tertiaire";
 
   $: reactions = ['❤️', '👍', '🔥'].map((typeReaction) => ({
     id: typeReaction,
@@ -43,7 +44,7 @@
 <lab-anssi-reactions
   tooltip-texte="Ajouter une réaction"
   tooltip-id="tooltip-reaction"
-  variant="tertiaire"
+  {variant}
   {reactions}
   onajouteReaction={ajouteReaction}
   onsupprimeReaction={supprimeReaction}
