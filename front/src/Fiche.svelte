@@ -78,8 +78,6 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
 
         @include a-partir-de(md) {
           padding-left: 0;
