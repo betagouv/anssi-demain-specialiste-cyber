@@ -842,6 +842,7 @@ describe('La ressource de mes jeux', () => {
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
           estCache: true,
+          reactions: {},
         },
       ]);
     });
@@ -869,6 +870,7 @@ describe('La ressource de mes jeux', () => {
           .avecUneCouverture('une-couverture')
           .avecUnePhoto('photo-1')
           .avecUnePhoto('photo-2')
+          .avecUneReaction('feu', 4)
           .construis(),
       );
 
@@ -886,6 +888,7 @@ describe('La ressource de mes jeux', () => {
             photos: [{ chemin: 'photo-1' }, { chemin: 'photo-2' }],
           },
           estCache: false,
+          reactions: { feu: 4 },
         },
       ]);
     });
