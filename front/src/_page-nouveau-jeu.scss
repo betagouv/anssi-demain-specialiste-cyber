@@ -1,14 +1,18 @@
 .entete {
   dsc-heros {
-    a.retour {
-      padding: 0.25rem 0;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-      color: var(--text-inverted-grey);
-      border-bottom: 1px solid var(--text-inverted-grey);
+    div.retour {
+      margin: 1rem 0 0.75rem;
 
-      &:hover {
-        border-bottom-width: 2px;
+      a {
+        padding: 0.25rem 0;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: var(--text-inverted-grey);
+        border-bottom: 1px solid var(--text-inverted-grey);
+
+        &:hover {
+          border-bottom-width: 2px;
+        }
       }
     }
   }
