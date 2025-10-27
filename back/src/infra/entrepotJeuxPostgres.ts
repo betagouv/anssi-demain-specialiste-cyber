@@ -73,47 +73,11 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
   async metsAjour(jeu: Jeu): Promise<void> {
     await this.knex('jeux')
       .where({ id: jeu.id })
-      .update({
-        nom: jeu.nom,
-        sequence: jeu.sequence,
-        id_enseignant: jeu.enseignant
-          ? this.adaptateurHachage.hache(jeu.enseignant.email)
-          : null,
-        nom_etablissement: jeu.nomEtablissement,
-        classe: jeu.classe,
-        discipline: jeu.discipline,
-        eleves: JSON.stringify(jeu.eleves),
-        categorie: jeu.categorie,
-        thematiques: JSON.stringify(jeu.thematiques),
-        description: jeu.description,
-        temoignages: JSON.stringify(jeu.temoignages),
-        photos: jeu.photos,
-        consentement: jeu.consentement,
-        reactions: jeu.reactions,
-      });
+      .update(this.metierVersdonneesEnDb(jeu));
   }
 
   async ajoute(jeu: Jeu): Promise<void> {
-    await this.knex('jeux').insert({
-      id: jeu.id,
-      nom: jeu.nom,
-      sequence: jeu.sequence,
-      id_enseignant: jeu.enseignant
-        ? this.adaptateurHachage.hache(jeu.enseignant.email)
-        : null,
-      nom_etablissement: jeu.nomEtablissement,
-      classe: jeu.classe,
-      discipline: jeu.discipline,
-      eleves: JSON.stringify(jeu.eleves),
-      categorie: jeu.categorie,
-      thematiques: JSON.stringify(jeu.thematiques),
-      description: jeu.description,
-      temoignages: JSON.stringify(jeu.temoignages),
-      photos: jeu.photos,
-      consentement: jeu.consentement,
-      reactions: jeu.reactions,
-      est_cache: jeu.estCache,
-    } satisfies JeuEnDBInsertion);
+    await this.knex('jeux').insert(this.metierVersdonneesEnDb(jeu));
   }
 
   async tous(): Promise<Jeu[]> {
@@ -181,5 +145,28 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       reactions: jeuEnDB.reactions,
       estCache: jeuEnDB.est_cache,
     });
+  }
+
+  private metierVersdonneesEnDb(jeu: Jeu): JeuEnDBInsertion {
+    return {
+      id: jeu.id,
+      nom: jeu.nom,
+      sequence: jeu.sequence,
+      id_enseignant: jeu.enseignant
+        ? this.adaptateurHachage.hache(jeu.enseignant.email)
+        : null,
+      nom_etablissement: jeu.nomEtablissement,
+      classe: jeu.classe,
+      discipline: jeu.discipline,
+      eleves: JSON.stringify(jeu.eleves),
+      categorie: jeu.categorie,
+      thematiques: JSON.stringify(jeu.thematiques),
+      description: jeu.description,
+      temoignages: JSON.stringify(jeu.temoignages),
+      photos: jeu.photos,
+      consentement: jeu.consentement,
+      reactions: jeu.reactions,
+      est_cache: jeu.estCache,
+    };
   }
 }
