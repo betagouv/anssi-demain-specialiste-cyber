@@ -148,7 +148,7 @@
 
   <dsfr-container>
     <div class="bandeau">
-      <div class="conteneur">
+      <div class="conteneur sombre">
         <h3>Organisez une séquence CyberEnJeux dans votre établissement</h3>
         <p class="fr-text">
           Faites découvrir la cybersécurité autrement ! En déclarant votre
