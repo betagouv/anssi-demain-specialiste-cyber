@@ -114,6 +114,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     analyseActive: true,
   }),
   sentry: () => ({ dsn: () => undefined, environnement: () => undefined }),
+  listeEmailsAutorises: () => ['mail.com'],
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {

@@ -50,6 +50,7 @@ export type AdaptateurEnvironnement = {
     dsn: () => string | undefined;
     environnement: () => string | undefined;
   };
+  listeEmailsAutorises: () => string[];
 };
 
 const variablesDeTeleversement = () => ({
@@ -182,4 +183,8 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     dsn: () => process.env.SENTRY_DSN,
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
+  listeEmailsAutorises: () =>
+    process.env.LISTE_EMAIL_AUTORISES?.split(',').map((email) =>
+      email.trim(),
+    ) ?? [],
 };
