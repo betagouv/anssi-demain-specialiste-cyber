@@ -92,7 +92,6 @@
     grid-template-rows: auto;
     margin-bottom: 0.5rem;
     position: relative;
-    width: 100%;
 
     .affiche-filtres {
       width: max-content;
@@ -114,7 +113,7 @@
       left: 0;
       right: 0;
       width: 100%;
-      z-index: 5;
+      z-index: calc(var(--ground) + 751);
 
       .filtres-entete,
       .filtres-contenu,
@@ -182,11 +181,8 @@
   @include a-partir-de(lg) {
     .filtres {
       gap: 0 1rem;
-      grid-column: 1 / span 4;
       grid-row: 1;
-      grid-template-columns: repeat(4, minmax(200px, 1fr));
       grid-template-rows: repeat(2, min-content) 1fr;
-      width: 100%;
 
       :global .recherche-textuelle {
         grid-column: 1;
