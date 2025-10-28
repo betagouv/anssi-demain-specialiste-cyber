@@ -2,6 +2,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
+import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/dsc';
 import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { Utilisateur } from '../../../src/metier/utilisateur';
@@ -12,7 +13,6 @@ import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
 } from '../fauxObjets';
-import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -23,7 +23,7 @@ describe('La ressource apres authentification OIDC', () => {
 
     beforeEach(() => {
       adaptateurOIDC = { ...fauxAdaptateurOIDC };
-      adaptateurJWT = fauxAdaptateurJWT;
+      adaptateurJWT = { ...fauxAdaptateurJWT };
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       const configurationServeur: ConfigurationServeur = {
         ...configurationDeTestDuServeur(),
@@ -42,7 +42,7 @@ describe('La ressource apres authentification OIDC', () => {
     describe("si l'utilisateur est connu", () => {
       beforeEach(async () => {
         const jeanneDupont = new Utilisateur({
-          email: 'jeanne.dupont',
+          email: 'jeanne.dupont@mail.com',
           infolettreAcceptee: true,
           prenom: '',
           nom: '',
@@ -53,7 +53,7 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
           prenom: 'Jeanne',
           nom: 'Dupont',
-          email: 'jeanne.dupont',
+          email: 'jeanne.dupont@mail.com',
           siret: '1234',
         });
       });
@@ -69,13 +69,13 @@ describe('La ressource apres authentification OIDC', () => {
           return { idToken: 'xx', accessToken: 'y' };
         };
         adaptateurOIDC.recupereInformationsUtilisateur = async (
-          accessToken
+          accessToken,
         ) => {
           if (accessToken === 'y') {
             return {
               prenom: 'Jeanne',
               nom: 'Dupont',
-              email: 'jeanne.dupont',
+              email: 'jeanne.dupont@mail.com',
               siret: '1234',
             };
           }
@@ -88,7 +88,7 @@ describe('La ressource apres authentification OIDC', () => {
         expect(session).toBeDefined();
         expect(session.prenom).toBe('Jeanne');
         expect(session.nom).toBe('Dupont');
-        expect(session.email).toBe('jeanne.dupont');
+        expect(session.email).toBe('jeanne.dupont@mail.com');
         expect(session.siret).toBe('1234');
       });
 
@@ -99,7 +99,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
-        expect(session.token).toBe('tokenJWT-jeanne.dupont');
+        expect(session.token).toBe('tokenJWT-jeanne.dupont@mail.com');
       });
 
       it('ajoute un tokenId AgentConnect à la session', async () => {
@@ -117,7 +117,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         expect(reponse.headers['content-type']).toEqual(
-          'text/html; charset=utf-8'
+          'text/html; charset=utf-8',
         );
         expect(reponse.text).toMatchSnapshot();
       });
@@ -139,13 +139,35 @@ describe('La ressource apres authentification OIDC', () => {
       expect(reponse.status).toBe(401);
     });
 
-    describe("si l'utilisateur est inconnu", () => {
+    it("redirige vers la page /non-autorise si l'email de l'utilisateur n'est pas autorisé", async () => {
+      adaptateurOIDC.recupereInformationsUtilisateur = async () => ({
+        prenom: 'Jeanne',
+        nom: 'Dupont',
+        email: 'jeanne.dupont@argriculture.gouv.fr',
+        siret: '1234',
+      });
+
+      const reponse = await requeteGet();
+
+      expect(reponse.status).toBe(403);
+    });
+
+    describe("si l'utilisateur est inconnu mais autorisé", () => {
       it('ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte', async () => {
+        adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
+          prenom: 'Jeanne',
+          nom: 'Dupont',
+          email: 'jeanne.dupont@mail.com',
+          siret: '1234',
+        });
+        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) =>
+          `tokenJWT-${donnees.email}`;
+
         const reponse = await requeteGet();
 
         expect(reponse.status).toBe(302);
         expect(reponse.headers.location).toBe(
-          '/creation-compte?token=tokenJWT-'
+          '/creation-compte?token=tokenJWT-jeanne.dupont@mail.com',
         );
       });
     });
