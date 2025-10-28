@@ -149,7 +149,8 @@ describe('La ressource apres authentification OIDC', () => {
 
       const reponse = await requeteGet();
 
-      expect(reponse.status).toBe(403);
+      expect(reponse.status).toBe(302);
+      expect(reponse.headers.location).toBe('/non-autorise');
     });
 
     describe("si l'utilisateur est inconnu mais autorisé", () => {

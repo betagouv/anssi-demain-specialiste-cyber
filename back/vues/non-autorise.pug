@@ -1,0 +1,13 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Non autorisé"
+  - var classePage = "non-autorise"
+  - var sansNavigation = true
+  - var sansZoneIdentification = true
+
+block contenu
+    dsfr-container
+        .erreur
+            p Vous n'êtes pas autorisé&middot;e à vous connecter avec votre mail actuel
+            dsfr-link(href='/', label='Retourner à l\'accueil')
