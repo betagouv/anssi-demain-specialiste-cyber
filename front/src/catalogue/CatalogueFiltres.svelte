@@ -67,6 +67,12 @@
         hasIcon="true"
         icon="close-circle-line"
         centered
+        disabled={!$rechercheTextuelle &&
+          $rechercheParBesoin === '' &&
+          $rechercheParNiveau.length === 0 &&
+          $rechercheParPublicCible.length === 0 &&
+          $rechercheParThematique === '' &&
+          $rechercheParType.length === 0}
         use:clic={reinitialiseLesFiltres}
       ></dsfr-button>
     </div>
