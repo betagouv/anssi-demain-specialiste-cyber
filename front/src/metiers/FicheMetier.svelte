@@ -124,15 +124,6 @@
   >
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
     <p class="fr-text--lead" slot="description">{metier.fonction}</p>
-    <div class="actions">
-      <dsfr-button
-        markup="a"
-        href={metier.liens.dataemploi}
-        label="Lien de redirection"
-        target="_blank"
-      >
-      </dsfr-button>
-    </div>
     <picture class="illustration" slot="illustration">
       <img
         src={metier.liens.illustration ?? '/assets/images/image-generique.svg'}
@@ -238,10 +229,6 @@
     &:last-of-type {
       margin: 0 0 1.5rem;
     }
-  }
-
-  .actions {
-    margin-bottom: 3rem;
   }
 
   .illustration {
