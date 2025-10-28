@@ -9,5 +9,12 @@
 {#if $profil}
   <a class="deconnexion" href="/oidc/deconnexion">Se déconnecter</a>
 {:else}
-  <a class="connexion" href="/connexion">Se connecter</a>
+  <dsfr-link
+    class="connexion"
+    href="/connexion"
+    label="Mon espace enseignant"
+    hasIcon
+    icon="account-circle-fill"
+  >
+  </dsfr-link>
 {/if}
