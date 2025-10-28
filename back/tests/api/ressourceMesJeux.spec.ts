@@ -462,9 +462,7 @@ describe('La ressource de mes jeux', () => {
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'La description du jeu est obligatoire',
-        );
+        expect(reponse.body.erreur).toEqual('La description est obligatoire');
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
@@ -474,9 +472,7 @@ describe('La ressource de mes jeux', () => {
         );
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'La description du jeu est obligatoire',
-        );
+        expect(reponse.body.erreur).toEqual('La description est obligatoire');
       });
 
       it('vérifie que la description ne dépasse pas 8000 caractères', async () => {

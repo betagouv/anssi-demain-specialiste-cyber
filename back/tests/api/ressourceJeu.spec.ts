@@ -202,7 +202,7 @@ describe('La ressource des jeux', () => {
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(
-          "Le nom de l'établissement est obligatoire",
+          'Le nom de l‘établissement est obligatoire',
         );
       });
 
@@ -308,7 +308,7 @@ describe('La ressource des jeux', () => {
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(
-          'Les détails ne peuvent excéder 8000 caractères',
+          'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
         );
       });
     });
