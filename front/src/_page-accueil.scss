@@ -99,8 +99,11 @@
       scroll-behavior: smooth;
 
       @include a-partir-de(md) {
-        gap: 1.5rem;
         justify-content: center;
+      }
+
+      @include a-partir-de(lg) {
+        gap: 1.5rem;
       }
 
       dsfr-card {
