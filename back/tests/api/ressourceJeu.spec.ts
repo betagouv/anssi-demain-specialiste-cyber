@@ -86,14 +86,14 @@ describe('La ressource des jeux', () => {
       expect(reponse.status).toEqual(200);
     });
 
-    it("retourne un 404 lorsque le jeu n'éxiste pas", async () => {
+    it("retourne un 404 lorsque le jeu n'existe pas", async () => {
       const reponse = await request(serveur).patch('/api/jeux/1234').send({
         estCache: true,
       });
       expect(reponse.status).toEqual(404);
     });
 
-    it('modifie les données du jeu', async () => {
+    it('modifie la visibilité du jeu', async () => {
       const reponse = await request(serveur).patch('/api/jeux/1').send({
         estCache: true,
       });
@@ -109,6 +109,9 @@ describe('La ressource des jeux', () => {
         enseignant: enseignant?.prenom,
         estCache: true,
       });
+
+      const jeuModifie = await entrepotJeux.parId('1');
+      expect(jeuModifie!.estCache).toBe(true);
     });
 
     it('interdit la modification de champs non modifiables', async () => {
