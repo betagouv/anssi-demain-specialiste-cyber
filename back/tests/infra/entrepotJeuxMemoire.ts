@@ -28,11 +28,10 @@ export class EntrepotJeuxMemoire
   }
 
   async metsAjour(jeu: Jeu): Promise<void> {
-    const entiteAMettreAJour = this.entites.find(
-      (entite) => entite.id === jeu.id,
-    );
-    if (entiteAMettreAJour) {
-      Object.assign(entiteAMettreAJour, jeu);
+    const index = this.entites.findIndex((entite) => entite.id === jeu.id);
+    if (index !== -1) {
+      this.entites.splice(index, 1);
+      await this.ajoute(jeu);
     }
   }
 
