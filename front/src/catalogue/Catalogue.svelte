@@ -86,10 +86,12 @@
 
   @include a-partir-de(lg) {
     .catalogue {
+      gap: 1.5rem;
       grid-template-columns: repeat(4, minmax(200px, 1fr));
       margin-top: calc(9.5rem - 6px);
 
       .conteneur {
+        gap: 1.5rem;
         grid-column: 2 / span 3;
         grid-row: 1;
       }

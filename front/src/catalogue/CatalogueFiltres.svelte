@@ -211,7 +211,7 @@
 
   @include a-partir-de(lg) {
     .filtres {
-      gap: 0 1rem;
+      gap: 0 1.5rem;
       grid-column: 1 / span 4;
       grid-row: 1;
       grid-template-columns: repeat(4, minmax(200px, 1fr));
