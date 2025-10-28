@@ -1,9 +1,9 @@
 import z from 'zod';
-import { schemaJeu } from '../../src/api/ressourceMesJeux';
 import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
 import { Constructeur } from '../constructeur';
+import { schemaCreationJeu } from '../../src/api/schemasJeu';
 
-export type CorpsRequeteDeJeu = z.infer<typeof schemaJeu>;
+export type CorpsRequeteDeJeu = z.infer<typeof schemaCreationJeu>;
 
 class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
   private nom: string = 'Cluedo';

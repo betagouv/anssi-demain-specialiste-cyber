@@ -427,10 +427,7 @@ describe('Le formulaire de dépose de jeu', () => {
         const fichier1 = new File(['fichier1'], 'fichier1.jpg');
         const fichier2 = new File(['fichier2'], 'fichier2.jpg');
         photosJeuStore.set({
-          photos: [
-            fichier1,
-            fichier2,
-          ],
+          photos: [fichier1, fichier2],
         });
 
         const boutonsSupprimerPhoto = await findAllByRoleDeep('button', {
@@ -548,7 +545,7 @@ describe('Le formulaire de dépose de jeu', () => {
           {
             estValide: () => false,
             valide: () => ({
-              nomEtablissement: "Le nom de l'établissement est obligatoire",
+              nomEtablissement: 'Le nom de l‘établissement est obligatoire',
               sequence: 'La séquence est obligatoire',
               discipline: 'La discipline est obligatoire',
               classe: 'La classe est obligatoire',
@@ -564,7 +561,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
         expect(axiosMock.post).not.toHaveBeenCalled();
         await waitFor(() =>
-          getByTextDeep("Le nom de l'établissement est obligatoire"),
+          getByTextDeep('Le nom de l‘établissement est obligatoire'),
         );
         expect(getByTextDeep('La séquence est obligatoire')).toBeVisible();
         expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
