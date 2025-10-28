@@ -24,7 +24,7 @@ const ressourceApresAuthentificationOIDC = ({
       const { email } = informationsUtilisateur;
 
       if (!estAutorise(email, adaptateurEnvironnement.listeEmailsAutorises())) {
-        return reponse.sendStatus(403);
+        return reponse.redirect(`/non-autorise`);
       }
 
       if (!(await entrepotUtilisateur.existe(adaptateurHachage.hache(email)))) {

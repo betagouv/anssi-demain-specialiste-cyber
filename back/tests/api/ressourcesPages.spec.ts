@@ -48,6 +48,7 @@ describe('Les ressources de page', () => {
     { route: '/evenements', vue: 'evenements' },
     { route: '/jeux/1234', vue: 'jeux' },
     { route: '/metiers/1234', vue: 'metiers' },
+    { route: '/non-autorise', vue: 'non-autorise' },
     { route: '/selection-eleves', vue: 'selection-eleves' },
     { route: '/selection-enseignants', vue: 'selection-enseignants' },
   ])('concernant la page $route', ({ route, vue }) => {
