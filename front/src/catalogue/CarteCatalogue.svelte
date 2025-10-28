@@ -30,6 +30,7 @@
   src={ressource.urlIllustration || '/assets/images/image-generique.svg'}
   hasHeaderBadge
   hasDetailEnd
+  size="sm"
 >
   <dsfr-badges-group slot="headerbadges" {badges} size="sm"></dsfr-badges-group>
   {#if ressource.estCertifiee}
