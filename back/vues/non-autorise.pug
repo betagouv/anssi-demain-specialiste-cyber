@@ -1,13 +1,25 @@
 extends fragments/base
 
 block variables
-  - var titrePage = "Non autorisé"
+  - var titrePage = "Inscription sur Demain\u200bSpécialiste\u200bCyber"
   - var classePage = "non-autorise"
   - var sansNavigation = true
   - var sansZoneIdentification = true
 
 block contenu
     dsfr-container
-        .erreur
-            p Vous n'êtes pas autorisé&middot;e à vous connecter avec votre mail actuel
-            dsfr-link(href='/', label='Retourner à l\'accueil')
+      .conteneur
+        .encadre
+          .erreur
+            dsfr-alert(
+              hasTitle="false"
+              hasDescription="true"
+              text="Oups ! Vous ne pouvez pas vous créer de compte sur Demain\u200bSpécialiste\u200bCyber."
+              type="error"
+              icon="error"
+            )
+            p
+              | L’adresse e-mail saisie ne semble pas être associée à un établissement autorisé à se connecter à Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber.
+              | N'hésitez pas à nous contacter pour obtenir de l’aide.
+            .contact
+              dsfr-link(href='mailto:contact@demainspecialistecyber.beta.gouv.fr', label='contact@demainspecialistecyber.beta.gouv.fr')

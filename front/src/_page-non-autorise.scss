@@ -1,0 +1,35 @@
+.non-autorise {
+  .conteneur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.5rem 0;
+    min-height: 37.5rem;
+
+    .encadre {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 36.75rem;
+      padding: 3.5rem 1rem;
+      border: 1px solid var(--border-default-grey);
+
+      .erreur {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 24rem;
+        gap: 1.5rem;
+
+        .contact {
+          width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
