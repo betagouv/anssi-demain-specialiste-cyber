@@ -193,5 +193,124 @@ describe('La ressource des jeux', () => {
         },
       ]);
     });
+
+    describe('concernant les propriétés fournies', () => {
+      it("vérifie que le nom d'établissement est non vide", async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          nomEtablissement: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual(
+          "Le nom de l'établissement est obligatoire",
+        );
+      });
+
+      it('vérifie que le nom du jeu est non vide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          nom: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
+      });
+
+      it('vérifie que la discipline est valide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          discipline: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('La discipline est invalide');
+      });
+
+      it('vérifie que la classe est valide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          classe: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('La classe est invalide');
+      });
+
+      it('vérifie que la séquence est valide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          sequence: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('La séquence est invalide');
+      });
+
+      it('vérifie que la catégorie est valide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          categorie: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('La catégorie est invalide');
+      });
+
+      it('vérifie que la description est non vide', async () => {
+        const reponse = await request(serveur).patch('/api/jeux/1').send({
+          description: '',
+        });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual('La description est obligatoire');
+      });
+
+      it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
+        const reponse = await request(serveur)
+          .patch('/api/jeux/1')
+          .send({
+            description: 'a'.repeat(8001),
+          });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual(
+          'La description ne peut contenir que 8000 caractères maximum',
+        );
+      });
+
+      it("vérifie que le prénom des témoignages n'est pas vide", async () => {
+        const reponse = await request(serveur)
+          .patch('/api/jeux/1')
+          .send({
+            temoignages: [{ prenom: '', details: 'Détails' }],
+          });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual(
+          'Le prénom est obligatoire dans un témoignage',
+        );
+      });
+
+      it('vérifie que les détails des témoignages ne sont pas vides', async () => {
+        const reponse = await request(serveur)
+          .patch('/api/jeux/1')
+          .send({
+            temoignages: [{ prenom: 'Martin', details: '' }],
+          });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual(
+          'Les détails sont obligatoires dans un témoignage',
+        );
+      });
+
+      it('vérifie que les détails des témoignages ne dépassent pas 8000 caractères', async () => {
+        const reponse = await request(serveur)
+          .patch('/api/jeux/1')
+          .send({
+            temoignages: [{ prenom: 'Martin', details: 'a'.repeat(8001) }],
+          });
+
+        expect(reponse.status).toBe(400);
+        expect(reponse.body.erreur).toEqual(
+          'Les détails ne peuvent excéder 8000 caractères',
+        );
+      });
+    });
   });
 });
