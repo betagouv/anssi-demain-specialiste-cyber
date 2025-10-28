@@ -114,14 +114,6 @@ describe('La ressource des jeux', () => {
       expect(jeuModifie!.estCache).toBe(true);
     });
 
-    it('interdit la modification de champs non modifiables', async () => {
-      const reponse = await request(serveur).patch('/api/jeux/1').send({
-        estCache: true,
-        nomEtablissement: 'Nouveau nom etablissement',
-      });
-      expect(reponse.status).toEqual(400);
-    });
-
     it("interdit la modification d'un jeu qui ne nous appartient pas", async () => {
       ajouteUtilisateurARequeteMock.mockImplementationOnce(
         (req, _res, suite) => {
@@ -146,6 +138,60 @@ describe('La ressource des jeux', () => {
         estCache: true,
       });
       expect(reponse.status).toEqual(403);
+    });
+
+    it('ne modifie rien si le corps est vide', async () => {
+      const reponse = await request(serveur).patch('/api/jeux/1').send({});
+
+      expect(reponse.status).toBe(200);
+      const jeuModifie = await entrepotJeux.parId('1');
+      expect(jeuModifie).toStrictEqual(cybercluedo);
+    });
+
+    it('modifie un jeu', async () => {
+      const reponse = await request(serveur)
+        .patch('/api/jeux/1')
+        .send({
+          nomEtablissement: 'Nouveau nom etablissement',
+          sequence: 'demi-journee',
+          eleves: ['Martin', 'Sophie'],
+          discipline: 'francais',
+          classe: 'cm2',
+          nom: 'Nouveau nom du jeu',
+          categorie: 'jeu-plateau',
+          thematiques: ['cyberharcelement', 'gestion-crise-cyber'],
+          description: 'Nouvelle description',
+          consentement: true,
+          temoignages: [
+            {
+              prenom: 'Joséphine',
+              details: "C'était super !",
+            },
+          ],
+        });
+
+      expect(reponse.status).toBe(200);
+
+      const jeuModifie = (await entrepotJeux.parId('1'))!;
+      expect(jeuModifie.nomEtablissement).toBe('Nouveau nom etablissement');
+      expect(jeuModifie.sequence).toBe('demi-journee');
+      expect(jeuModifie.eleves).toEqual(['Martin', 'Sophie']);
+      expect(jeuModifie.discipline).toBe('francais');
+      expect(jeuModifie.classe).toBe('cm2');
+      expect(jeuModifie.nom).toBe('Nouveau nom du jeu');
+      expect(jeuModifie.categorie).toBe('jeu-plateau');
+      expect(jeuModifie.thematiques).toEqual([
+        'cyberharcelement',
+        'gestion-crise-cyber',
+      ]);
+      expect(jeuModifie.description).toBe('Nouvelle description');
+      expect(jeuModifie.consentement).toBe(true);
+      expect(jeuModifie.temoignages).toEqual([
+        {
+          prenom: 'Joséphine',
+          details: "C'était super !",
+        },
+      ]);
     });
   });
 });
