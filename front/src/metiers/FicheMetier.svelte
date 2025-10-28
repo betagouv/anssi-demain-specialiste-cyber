@@ -203,14 +203,12 @@
       </section>
       <section id="liens-utiles">
         <h2>Liens utiles</h2>
-        <dsfr-button
-          markup="a"
+        <dsfr-link
           label="Fiche métierscope"
           href={metier.liens.metierscope}
-          target="_blank"
-          size="sm"
-          kind="tertiary-no-outline"
-        ></dsfr-button>
+          blank
+          size="md"
+        ></dsfr-link>
       </section>
     </Fiche>
   </dsfr-container>
