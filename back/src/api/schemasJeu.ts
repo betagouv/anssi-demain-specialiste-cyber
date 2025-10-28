@@ -61,7 +61,7 @@ const temoignages = z
   .optional();
 const consentement = z.boolean('Le consentement est invalide').optional();
 
-export const schemaCreationJeu = z.strictObject({
+const schemaCommun = z.strictObject({
   nom,
   nomEtablissement,
   discipline,
@@ -73,6 +73,10 @@ export const schemaCreationJeu = z.strictObject({
   eleves,
   temoignages,
   consentement,
+});
+
+export const schemaCreationJeu = z.strictObject({
+  ...schemaCommun.shape,
   evaluationDecouverte: verifieNoteEvaluation(
     'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
   ),
@@ -89,17 +93,9 @@ export const schemaCreationJeu = z.strictObject({
     .optional(),
 });
 
-export const schemaModificationJeu = z.strictObject({
-  nom: nom.optional(),
-  nomEtablissement: nomEtablissement.optional(),
-  discipline: discipline.optional(),
-  sequence: sequence.optional(),
-  classe: classe.optional(),
-  categorie: categorie.optional(),
-  thematiques: thematiques.optional(),
-  description: description.optional(),
-  eleves: eleves.optional(),
-  temoignages,
-  consentement,
-  estCache: z.boolean().optional(),
-});
+export const schemaModificationJeu = z
+  .strictObject({
+    ...schemaCommun.shape,
+    estCache: z.boolean(),
+  })
+  .partial();
