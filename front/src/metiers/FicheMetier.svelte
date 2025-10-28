@@ -159,7 +159,7 @@
           {/if}
         </ul>
       </section>
-      <section id="remuneration">
+      <section id="remuneration" class="remuneration">
         <h2>Rémunération</h2>
         <ul>
           <li>
@@ -288,5 +288,11 @@
 
   .actions {
     margin-bottom: 3rem;
+  }
+
+  .remuneration {
+    ul {
+      margin-block-end: 1.5rem;
+    }
   }
 </style>
