@@ -7,6 +7,7 @@ const ressourceApresAuthentificationOIDC = ({
   adaptateurJWT,
   entrepotUtilisateur,
   adaptateurHachage,
+  adaptateurEnvironnement,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (requete, reponse) => {
@@ -21,6 +22,10 @@ const ressourceApresAuthentificationOIDC = ({
       const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
+
+      if (!estAutorise(email, adaptateurEnvironnement.listeEmailsAutorises())) {
+        return reponse.sendStatus(403);
+      }
 
       if (!(await entrepotUtilisateur.existe(adaptateurHachage.hache(email)))) {
         const token = adaptateurJWT.genereToken(informationsUtilisateur);
@@ -39,6 +44,12 @@ const ressourceApresAuthentificationOIDC = ({
     }
   });
   return routeur;
+};
+
+const estAutorise = (email: string, listeEmailAutorises: string[]): boolean => {
+  const positionDernierArobase = email.lastIndexOf('@');
+  if (positionDernierArobase < 0) return false;
+  return listeEmailAutorises.includes(email.slice(positionDernierArobase + 1));
 };
 
 export { ressourceApresAuthentificationOIDC };
