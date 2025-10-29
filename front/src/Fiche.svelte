@@ -61,6 +61,7 @@
 
     dsfr-side-menu {
       @include a-partir-de(md) {
+        --component-padding: 1.5rem 0;
         height: 100%;
       }
     }
