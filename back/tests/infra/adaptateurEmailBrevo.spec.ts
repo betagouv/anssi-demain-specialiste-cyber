@@ -53,4 +53,45 @@ describe("L'adaptateur d'email brevo", () => {
       },
     });
   });
+
+  it('sait envoyer un email de bienvenue', async () => {
+    let urlAppelee = '';
+    let coprsEnvoye = {};
+    let configEnvoyee = undefined;
+    const posteur: PosteRessourceHttp<ReponseBrevo> = async (
+      url,
+      corps,
+      config,
+    ) => {
+      urlAppelee = url;
+      coprsEnvoye = corps;
+      configEnvoyee = config;
+      return {
+        status: 'ok',
+      };
+    };
+    const adaptateur = new AdaptateurEmailBrevo(
+      fauxAdaptateurEnvironnement,
+      posteur,
+    );
+
+    await adaptateur.envoieEmailBienvenue({
+      email: 'mon.email@mail.com',
+      prenom: 'Homer',
+    });
+
+    expect(urlAppelee).toEqual('https://mon-expediteur-de-mail/smtp/email');
+    expect(coprsEnvoye).toStrictEqual({
+      to: [{ email: 'mon.email@mail.com' }],
+      templateId: 7,
+      PRENOM: 'Homer',
+    });
+    expect(configEnvoyee).toStrictEqual({
+      headers: {
+        'api-key': 'cle-api-expediteur-de-mail',
+        accept: 'application/json',
+        'content-type': 'application/json',
+      },
+    });
+  });
 });
