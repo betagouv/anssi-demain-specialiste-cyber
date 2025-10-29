@@ -1,8 +1,8 @@
 import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
-import NomEtablissementAutoComplete from '../../../src/jeux/FormulaireNouveauJeu/NomEtablissementAutoComplete.svelte';
-import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireNouveauJeu/ReferentielEtablissement';
+import NomEtablissementAutoComplete from '../../../src/jeux/FormulaireJeu/NomEtablissementAutoComplete.svelte';
+import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireJeu/ReferentielEtablissement';
 import { findByRoleDeep } from '../../shadow-dom-utilitaires';
 
 describe("Le champ de saisie du nom de l'établissement", () => {

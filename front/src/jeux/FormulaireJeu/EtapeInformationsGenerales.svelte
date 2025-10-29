@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { clic } from '../../actions.svelte.js';
-  import { classes } from '../classes.js';
-  import { disciplines } from '../disciplines.js';
+  import { clic } from '../../actions.svelte';
+  import { classes } from '../classes';
+  import { disciplines } from '../disciplines';
   import type { ErreursValidationJeuEnEdition } from '../jeu';
-  import { sequences } from '../sequences.js';
+  import { sequences } from '../sequences';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import NomEtablissementAutoComplete from './NomEtablissementAutoComplete.svelte';
   import type { ReferentielEtablissement } from './ReferentielEtablissement';
