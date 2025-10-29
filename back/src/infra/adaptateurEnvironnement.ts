@@ -184,7 +184,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
   listeEmailsAutorises: () =>
-    process.env.LISTE_EMAIL_AUTORISES?.split(',').map((email) =>
+    process.env.LISTE_EMAILS_AUTORISES?.split(',').map((email) =>
       email.trim(),
     ) ?? [],
 };
