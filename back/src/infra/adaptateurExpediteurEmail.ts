@@ -7,10 +7,17 @@ export type ReponseBrevo = {
 };
 
 export class AdaptateurEmailBrevo implements ExpediteurEmail {
+  private readonly headers;
   constructor(
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly posteurtHttp: PosteRessourceHttp<ReponseBrevo>,
-  ) {}
+  ) {
+    this.headers = {
+      'api-key': this.adaptateurEnvironnement.expediteurEmail().cleAPI(),
+      accept: 'application/json',
+      'content-type': 'application/json',
+    };
+  }
   async creeContact({
     email,
     prenom,
@@ -34,11 +41,7 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
         },
       },
       {
-        headers: {
-          'api-key': this.adaptateurEnvironnement.expediteurEmail().cleAPI(),
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
+        headers: this.headers,
       },
     );
   }
@@ -62,11 +65,7 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
         PRENOM: prenom,
       },
       {
-        headers: {
-          'api-key': this.adaptateurEnvironnement.expediteurEmail().cleAPI(),
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
+        headers: this.headers,
       },
     );
   }
