@@ -54,6 +54,7 @@ export type AdaptateurEnvironnement = {
   expediteurEmail: () => {
     urlDeBase: () => string;
     cleAPI: () => string;
+    idTemplateEmailBienvenue: () => string;
   };
 };
 
@@ -194,5 +195,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
   expediteurEmail: () => ({
     urlDeBase: () => process.env.BREVO_API_URL_BASE ?? '',
     cleAPI: () => process.env.BREVO_CLE_API ?? '',
+    idTemplateEmailBienvenue: () =>
+      process.env.BREVO_ID_TEMPLATE_BIENVENUE ?? '',
   }),
 };

@@ -118,6 +118,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   expediteurEmail: () => ({
     urlDeBase: () => 'https://mon-expediteur-de-mail/',
     cleAPI: () => 'cle-api-expediteur-de-mail',
+    idTemplateEmailBienvenue: () => '7',
   }),
 };
 
