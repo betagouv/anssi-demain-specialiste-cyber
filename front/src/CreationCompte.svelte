@@ -123,10 +123,7 @@
 <style lang="scss">
   @use './points-de-rupture' as *;
   .creation-compte {
-    display: flex;
     padding: 3.5rem 1rem;
-    flex-direction: column;
-    align-items: center;
 
     .conteneur-formulaire {
       display: flex;
@@ -134,6 +131,7 @@
       padding: 3.5rem 1rem;
       justify-content: center;
       border: 1px solid var(--border-default-grey);
+      margin-inline: auto;
 
       @include a-partir-de(sm) {
         padding: 3.5rem 6.375rem;
