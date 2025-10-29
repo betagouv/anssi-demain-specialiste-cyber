@@ -115,6 +115,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   sentry: () => ({ dsn: () => undefined, environnement: () => undefined }),
   listeEmailsAutorises: () => ['mail.com'],
+  expediteurEmail: () => ({
+    urlDeBase: () => 'https://mon-expediteur-de-mail/',
+    cleAPI: () => 'cle-api-expediteur-de-mail',
+  }),
 };
 
 export type ConfigurationServeurDeTest = ConfigurationServeur & {

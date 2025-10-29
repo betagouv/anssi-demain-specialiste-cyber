@@ -51,6 +51,10 @@ export type AdaptateurEnvironnement = {
     environnement: () => string | undefined;
   };
   listeEmailsAutorises: () => string[];
+  expediteurEmail: () => {
+    urlDeBase: () => string;
+    cleAPI: () => string;
+  };
 };
 
 const variablesDeTeleversement = () => ({
@@ -187,4 +191,8 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     process.env.LISTE_EMAILS_AUTORISES?.split(',').map((email) =>
       email.trim(),
     ) ?? [],
+  expediteurEmail: () => ({
+    urlDeBase: () => process.env.BREVO_API_URL_BASE ?? '',
+    cleAPI: () => process.env.BREVO_CLE_API ?? '',
+  }),
 };
