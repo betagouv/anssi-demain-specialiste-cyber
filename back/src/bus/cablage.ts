@@ -7,27 +7,33 @@ import { consigneEvenementJeuCreeDansJournal } from './evenements/jeu/consigneEv
 import { JeuCree } from './evenements/jeu/jeuCree';
 import { notifieEvenementJeuCreeSurMessagerieInstantanee } from './evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
+import { creeContactDansExpediteurEmail } from './evenements/compteCree/creeContactDansExpediteurEmail';
+import { ExpediteurEmail } from '../metier/expediteurEmail';
 
 type Cablage = {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHachage: AdaptateurHachage;
   busEvenements: BusEvenements;
   messagerieInstantanee: MessagerieInstantanee;
+  expediteurEmail: ExpediteurEmail;
 };
 
 export const cableTousLesAbonnes = ({
   busEvenements,
   adaptateurJournal,
   adaptateurHachage,
+  expediteurEmail,
   messagerieInstantanee,
 }: Cablage) => {
-  busEvenements.abonne(
-    CompteCree,
+  busEvenements.abonnePlusieurs(CompteCree, [
     consigneEvenementCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHachage,
     }),
-  );
+    creeContactDansExpediteurEmail({
+      expediteurEmail,
+    }),
+  ]);
 
   busEvenements.abonne(
     JeuCree,
