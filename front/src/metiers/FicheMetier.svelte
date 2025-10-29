@@ -210,6 +210,13 @@
           size="md"
         ></dsfr-link>
       </section>
+      <dsfr-link
+        label="Haut de page"
+        href="#"
+        size="md"
+        has-icon
+        icon="arrow-up-fill"
+      ></dsfr-link>
     </Fiche>
   </dsfr-container>
 {/if}
