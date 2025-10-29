@@ -6,7 +6,7 @@ import { encodeSession } from './cookie';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('Les ressources de page', () => {
-  describe.each(['nouveau-jeu', 'mes-jeux'])(
+  describe.each(['nouveau-jeu', 'mes-jeux', 'modification-jeu'])(
     `concernant la page protégée /%s`,
     (nomPage) => {
       it('renvoie la page pour un utilisateur connecté', async () => {
