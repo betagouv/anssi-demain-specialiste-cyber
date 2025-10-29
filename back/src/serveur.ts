@@ -1,4 +1,3 @@
-import './infra/adaptateurGestionErreurSentry';
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import {
@@ -11,23 +10,25 @@ import { moteurDeRenduExpress } from './api/moteurDeRendu';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
+import { adaptateurJCOP } from './infra/adapateurAntivirus';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
+import { fabriqueExpediteurEmail } from './infra/adaptateurExpediteurEmail';
+import './infra/adaptateurGestionErreurSentry';
+import { fabriqueAdaptateurGestionErreur } from './infra/adaptateurGestionErreurSentry';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
+import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
+import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
+import { messagerieMattermost } from './infra/messagerieMattermost';
 import { recupereCheminVersFichiersStatiquesParDefaut } from './infra/recupereCheminVersFichiersStatiques';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
-import { messagerieMattermost } from './infra/messagerieMattermost';
-import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
-import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
-import { EntrepotSelectionsGrist } from './infra/entrepotSelectionsGrist';
-import { adaptateurJCOP } from './infra/adapateurAntivirus';
-import { fabriqueAdaptateurGestionErreur } from './infra/adaptateurGestionErreurSentry';
 
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
@@ -41,6 +42,7 @@ cableTousLesAbonnes({
   adaptateurHachage,
   adaptateurJournal: fabriqueAdaptateurJournal(),
   messagerieInstantanee: messagerieMattermost(),
+  expediteurEmail: fabriqueExpediteurEmail({ adaptateurEnvironnement }),
 });
 
 const serviceCoherenceSecretsHachage =
