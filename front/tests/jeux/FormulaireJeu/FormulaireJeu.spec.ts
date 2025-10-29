@@ -894,6 +894,13 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       describe("sur l'enregistrement", () => {
+        async function engistreModification() {
+          const boutonEnregistrer = await findByRoleDeep('button', {
+            name: 'Enregistrer les modifications',
+          });
+          await user.click(boutonEnregistrer);
+        }
+
         it("envoie le formulaire à l'api des jeux", async () => {
           jeuEnEditionStore.set({
             id: '1234',
@@ -908,10 +915,8 @@ describe('Le formulaire de dépose de jeu', () => {
             description: 'Description du jeu',
             temoignages: [{ prenom: 'Michel', details: "C'était super" }],
           } as JeuEnEdition);
-          const boutonEnregistrer = await findByRoleDeep('button', {
-            name: 'Enregistrer les modifications',
-          });
-          await user.click(boutonEnregistrer);
+
+          await engistreModification();
 
           expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
             '/api/jeux/1234',
@@ -938,14 +943,52 @@ describe('Le formulaire de dépose de jeu', () => {
             photos: 'photos',
           };
           jeuEnEditionStore.set(jeu as JeuEnEdition);
-          const boutonEnregistrer = await findByRoleDeep('button', {
-            name: 'Enregistrer les modifications',
-          });
-          await user.click(boutonEnregistrer);
+
+          await engistreModification();
 
           expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
             '/api/jeux/1234',
             {},
+          );
+        });
+
+        it('supprime les élèves non renseignés', async () => {
+          jeuEnEditionStore.set({
+            id: '1234',
+            eleves: ['', 'Michel'],
+          } as JeuEnEdition);
+
+          await engistreModification();
+
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
+            '/api/jeux/1234',
+            { eleves: ['Michel'] },
+          );
+        });
+
+        it('supprime les témoignages non renseignés', async () => {
+          jeuEnEditionStore.set({
+            id: '1234',
+            temoignages: [
+              { prenom: '', details: '' },
+              { prenom: 'Marc', details: '' },
+              { prenom: '', details: 'Super' },
+              { prenom: 'Michel', details: 'Génial' },
+            ],
+          } as JeuEnEdition);
+
+          await engistreModification();
+
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
+            '/api/jeux/1234',
+            {
+              eleves: undefined,
+              temoignages: [
+                { prenom: 'Marc', details: '' },
+                { prenom: '', details: 'Super' },
+                { prenom: 'Michel', details: 'Génial' },
+              ],
+            },
           );
         });
       });
