@@ -15,6 +15,7 @@ describe("L'abonnement qui crée un contact", () => {
       }) => {
         contactCree = { ...donneesRecu };
       },
+      envoieEmailBienvenue: async function (): Promise<void> {},
     };
 
     creeContactDansExpediteurEmail({ expediteurEmail })(

@@ -10,4 +10,12 @@ export interface ExpediteurEmail {
     nom: string;
     infolettreAcceptee: boolean;
   }) => Promise<void>;
+
+  envoieEmailBienvenue: ({
+    email,
+    prenom,
+  }: {
+    email: string;
+    prenom: string;
+  }) => Promise<void>;
 }

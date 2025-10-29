@@ -42,6 +42,34 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
       },
     );
   }
+
+  async envoieEmailBienvenue({
+    email,
+    prenom,
+  }: {
+    email: string;
+    prenom: string;
+  }) {
+    await this.posteurtHttp(
+      `${this.adaptateurEnvironnement.expediteurEmail().urlDeBase()}smtp/email`,
+      {
+        to: [{ email }],
+        templateId: Number(
+          this.adaptateurEnvironnement
+            .expediteurEmail()
+            .idTemplateEmailBienvenue(),
+        ),
+        PRENOM: prenom,
+      },
+      {
+        headers: {
+          'api-key': this.adaptateurEnvironnement.expediteurEmail().cleAPI(),
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+      },
+    );
+  }
 }
 
 export class AdaptateurEmailConsole implements ExpediteurEmail {
@@ -60,6 +88,19 @@ export class AdaptateurEmailConsole implements ExpediteurEmail {
     // eslint-disable-next-line no-console
     console.log(
       `On crée le compte pour l'utilisateur ${email} avec prénom ${prenom} et nom ${nom} avec l'infolettre ${infolettreAcceptee}`,
+    );
+  }
+
+  async envoieEmailBienvenue({
+    email,
+    prenom,
+  }: {
+    email: string;
+    prenom: string;
+  }) {
+    // eslint-disable-next-line no-console
+    console.log(
+      `Envoie d'email de bienvenue pour l'utilisateur ${email} avec prénom ${prenom}`,
     );
   }
 }
