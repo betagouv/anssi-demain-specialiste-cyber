@@ -1,10 +1,8 @@
-<svelte:options
-  customElement={{ tag: 'dsc-formulaire-nouveau-jeu', shadow: 'none' }}
-/>
+<svelte:options customElement={{ tag: 'dsc-formulaire-jeu', shadow: 'none' }} />
 
 <script lang="ts">
   import axios from 'axios';
-  import { clic } from '../../actions.svelte.js';
+  import { clic } from '../../actions.svelte';
   import type { Validateur } from '../../validateur';
   import type {
     ErreursValidationJeuEnEdition,
@@ -17,7 +15,7 @@
   import { photosJeuStore } from '../stores/photosJeu.store';
   import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
-  import { ValidateurPhotosDuJeu } from '../ValidateurPhotosDuJeu.js';
+  import { ValidateurPhotosDuJeu } from '../ValidateurPhotosDuJeu';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
   import EtapeEvaluation from './EtapeEvaluation.svelte';
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';

@@ -2,8 +2,8 @@ import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import FormulaireNouveauJeu from '../../../src/jeux/FormulaireNouveauJeu/FormulaireNouveauJeu.svelte';
-import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireNouveauJeu/ReferentielEtablissement';
+import FormulaireJeu from '../../../src/jeux/FormulaireJeu/FormulaireJeu.svelte';
+import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireJeu/ReferentielEtablissement';
 import {
   type PhotosDuJeu,
   type EvaluationDuJeu,
@@ -98,7 +98,7 @@ describe('Le formulaire de dépose de jeu', () => {
   });
   describe('indique', () => {
     it('que tous les champs sont obligatoire sauf mention contraire', async () => {
-      const { getByText } = render(FormulaireNouveauJeu, proprietesParDefaut);
+      const { getByText } = render(FormulaireJeu, proprietesParDefaut);
 
       expect(
         getByText(
@@ -108,7 +108,7 @@ describe('Le formulaire de dépose de jeu', () => {
     });
     describe("lors de l'étape des informations générales", () => {
       it("qu'on est à l'étape 1 sur 5", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(getByTextDeep('Étape 1 sur 5')).toBeVisible(),
@@ -116,7 +116,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("qu'on est à l'étape 'Informations Générales'", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(
@@ -128,7 +128,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("que l'étape suivante est 'Présentation du jeu'", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(getByTextDeep('Présentation du jeu')).toBeVisible(),
@@ -138,7 +138,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape de présentation du jeu", () => {
       beforeEach(async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
       });
@@ -166,7 +166,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape des photos", () => {
       beforeEach(async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -197,7 +197,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape des témoignages", () => {
       beforeEach(async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -229,7 +229,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape de l'évaluation", () => {
       beforeEach(async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -257,7 +257,7 @@ describe('Le formulaire de dépose de jeu', () => {
   describe('propose', () => {
     describe("lors de l'étape des informations générales", () => {
       it('de selectionner une séquence', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() => expect(getAllByRoleDeep('radio')).toHaveLength(3));
         expect(
@@ -268,7 +268,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("de saisir un nom d'établissement", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(
@@ -278,7 +278,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner une discipline', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(
@@ -288,7 +288,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner une classe', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(getByRoleDeep('combobox', { name: 'Classe' })).toBeVisible(),
@@ -296,7 +296,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de saisir 4 prénoms', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(
@@ -306,7 +306,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('d‘ajouter un prénom d‘élève', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() =>
           expect(
@@ -316,7 +316,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de saisir plus que 4 élèves', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
         const boutonAjouterEleve = await findByRoleDeep('button', {
           name: 'Ajouter un élève',
         });
@@ -334,7 +334,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape de présentation", () => {
       it('de saisir le nom du jeu', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
@@ -346,7 +346,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner la catégorie du jeu', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
@@ -358,7 +358,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de selectionner la thématique du jeu', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
@@ -367,7 +367,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de saisir la description du jeu', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
 
@@ -381,7 +381,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("de revenir à l'étape précédente", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapePrecedente();
@@ -396,7 +396,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape de téléversement des photos", () => {
       beforeEach(async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
         await etapeSuivante();
         await etapeSuivante();
         photosJeuStore.set({});
@@ -441,7 +441,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape des temoignages", () => {
       it('de saisir un témoignage', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -458,7 +458,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("d'ajouter un témoignage", async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -481,7 +481,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it('de supprimer un témoignage', async () => {
-        render(FormulaireNouveauJeu, proprietesParDefaut);
+        render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -510,7 +510,7 @@ describe('Le formulaire de dépose de jeu', () => {
     describe("lors de l'étape de l'évaluation", () => {
       it("d'évaluer la découverte des métiers de la cyber par les élèves", async () => {
         const { getAllByRole, getByText } = render(
-          FormulaireNouveauJeu,
+          FormulaireJeu,
           proprietesParDefaut,
         );
 
@@ -552,7 +552,7 @@ describe('Le formulaire de dépose de jeu', () => {
               eleves: 'Au moins un élève est requis',
             }),
           };
-        render(FormulaireNouveauJeu, {
+        render(FormulaireJeu, {
           ...proprietesParDefaut,
           validateurInformationsGenerales:
             validateurInformationsGeneralesEnErreur,
@@ -581,7 +581,7 @@ describe('Le formulaire de dépose de jeu', () => {
             description: 'La description est obligatoire',
           }),
         };
-        render(FormulaireNouveauJeu, {
+        render(FormulaireJeu, {
           ...proprietesParDefaut,
           validateurPresentation: validateurPresentationEnErreur,
         });
@@ -605,7 +605,7 @@ describe('Le formulaire de dépose de jeu', () => {
             photos: 'La couverture est obligatoire',
           }),
         };
-        render(FormulaireNouveauJeu, {
+        render(FormulaireJeu, {
           ...proprietesParDefaut,
           validateurPhotosDuJeu: validateurPhotosDuJeuEnErreur,
         });
@@ -628,7 +628,7 @@ describe('Le formulaire de dépose de jeu', () => {
               'Le score de satisfaction est obligatoire',
           }),
         };
-        render(FormulaireNouveauJeu, {
+        render(FormulaireJeu, {
           ...proprietesParDefaut,
           validateurEvaluation: validateurEvaluationEnErreur,
         });
@@ -686,7 +686,7 @@ describe('Le formulaire de dépose de jeu', () => {
         eleves: ['Brice', 'Gontran'],
       };
       const { queryAllByRole, getAllByRole } = render(
-        FormulaireNouveauJeu,
+        FormulaireJeu,
         proprietesParDefaut,
       );
       // Etape informations générales
@@ -812,7 +812,7 @@ describe('Le formulaire de dépose de jeu', () => {
     });
 
     it("n'envoie pas le formulaire si il y a un souci de validation", async () => {
-      render(FormulaireNouveauJeu, {
+      render(FormulaireJeu, {
         ...proprietesParDefaut,
         validateurPresentation: {
           ...validateurPresentationEnSucces,
