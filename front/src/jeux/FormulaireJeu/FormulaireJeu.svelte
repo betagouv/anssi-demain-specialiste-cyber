@@ -1,4 +1,12 @@
-<svelte:options customElement={{ tag: 'dsc-formulaire-jeu', shadow: 'none' }} />
+<svelte:options
+  customElement={{
+    tag: 'dsc-formulaire-jeu',
+    shadow: 'none',
+    props: {
+      mode: { type: 'String' },
+    },
+  }}
+/>
 
 <script lang="ts">
   import axios from 'axios';
@@ -8,6 +16,8 @@
     ErreursValidationJeuEnEdition,
     EvaluationDuJeu,
     InformationsGeneralesDuJeu,
+    Jeu,
+    JeuEnEdition,
     PhotosDuJeu,
     PresentationDuJeu,
   } from '../jeu';
@@ -23,13 +33,19 @@
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
-  import type { EtapeDeposeJeu } from './FormulaireDeJeu.type';
+  import type {
+    EtapeDeposeJeu,
+    EtapeModificationJeu,
+  } from './FormulaireDeJeu.type.js';
   import {
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
-  } from './ReferentielEtablissement';
+  } from './ReferentielEtablissement.js';
+  import { onMount, tick } from 'svelte';
+  import EtapierModifieJeu from './EtapierModifieJeu.svelte';
 
   interface Props {
+    mode: 'creation' | 'modification';
     validateurInformationsGenerales: Validateur<InformationsGeneralesDuJeu>;
     validateurPresentation: Validateur<PresentationDuJeu>;
     validateurEvaluation: Validateur<EvaluationDuJeu>;
@@ -38,6 +54,7 @@
   }
 
   const {
+    mode,
     validateurInformationsGenerales = new ValidateurInformationsGeneralesDuJeu(),
     validateurPresentation = new ValidateurPresentationDuJeu(),
     validateurEvaluation = new ValidateurEvaluationDuJeu(),
@@ -45,7 +62,9 @@
     referentielEtablissement = new AdaptateurAnnuaireEducationNationale(),
   }: Props = $props();
 
-  let etape = $state<EtapeDeposeJeu>('informations-generales');
+  let etape = $state<EtapeDeposeJeu | EtapeModificationJeu>(
+    'informations-generales',
+  );
 
   $jeuEnEditionStore = {
     eleves: ['', '', '', ''],
@@ -69,7 +88,7 @@
         etape = 'presentation';
         break;
       case 'temoignages':
-        etape = 'photos';
+        etape = mode === 'modification' ? 'presentation' : 'photos';
         break;
       case 'evaluation':
         etape = 'temoignages';
@@ -91,7 +110,7 @@
         break;
       case 'presentation':
         if (validateurPresentation.estValide($jeuEnEditionStore)) {
-          etape = 'photos';
+          etape = mode === 'modification' ? 'temoignages' : 'photos';
           erreurs = {};
         } else {
           erreurs = validateurPresentation.valide($jeuEnEditionStore);
@@ -141,11 +160,24 @@
       erreurs = validateurEvaluation.valide($jeuEnEditionStore);
     }
   };
+
+  onMount(async () => {
+    if (mode === 'modification') {
+      const morceaux = window.location.pathname.split('/');
+      const id = morceaux[morceaux.length - 1];
+      const reponse = await axios.get<JeuEnEdition>(`/api/jeux/${id}`);
+      $jeuEnEditionStore = reponse.data;
+    }
+  });
 </script>
 
 <dsfr-container>
   <div class="formulaire-jeu">
-    <EtapierDeposeJeu etapeCourante={etape} />
+    {#if mode === 'creation'}
+      <EtapierDeposeJeu etapeCourante={etape} />
+    {:else}
+      <EtapierModifieJeu etapeCourante={etape as EtapeModificationJeu} />
+    {/if}
     <hr />
     {#if etape !== 'temoignages'}
       <p class="fr-text--xs mention">
@@ -175,6 +207,9 @@
         {/if}
         {#if etape === 'evaluation'}
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+          ></dsfr-button>
+        {:else if mode === 'modification' && etape === 'temoignages'}
+          <dsfr-button label="Enregistrer les modifications" kind="primary"
           ></dsfr-button>
         {:else}
           <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}

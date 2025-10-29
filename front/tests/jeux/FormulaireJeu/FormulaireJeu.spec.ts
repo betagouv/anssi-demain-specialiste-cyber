@@ -57,6 +57,7 @@ describe('Le formulaire de dépose de jeu', () => {
     trouveParNom: async () => [],
   };
   const proprietesParDefaut = {
+    mode: 'creation',
     validateurInformationsGenerales: validateurInformationsGeneralesEnSucces,
     validateurPresentation: validateurPresentationEnSucces,
     validateurEvaluation: validateurEvaluationEnSucces,
@@ -96,6 +97,7 @@ describe('Le formulaire de dépose de jeu', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+
   describe('indique', () => {
     it('que tous les champs sont obligatoire sauf mention contraire', async () => {
       const { getByText } = render(FormulaireJeu, proprietesParDefaut);
@@ -254,6 +256,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
     });
   });
+
   describe('propose', () => {
     describe("lors de l'étape des informations générales", () => {
       it('de selectionner une séquence', async () => {
@@ -825,6 +828,69 @@ describe('Le formulaire de dépose de jeu', () => {
       await waitFor(() =>
         expect(queryByRoleDeep('button', { name: 'Terminer' })).toBeNull(),
       );
+    });
+  });
+
+  describe('en mode modification', () => {
+    beforeEach(() => {
+      render(FormulaireJeu, {
+        ...proprietesParDefaut,
+        mode: 'modification',
+      });
+    });
+
+    it("saute l'étape des photos en avançant", async () => {
+      await etapeSuivante();
+      await etapeSuivante();
+
+      await waitFor(() =>
+        expect(
+          getByRoleDeep('heading', {
+            name: /.*Témoignages \(facultatif\).*/,
+          }),
+        ).toBeVisible(),
+      );
+    });
+
+    it("saute l'étape des photos en reculant", async () => {
+      await etapeSuivante();
+      await etapeSuivante();
+      await etapePrecedente();
+
+      await waitFor(() =>
+        expect(getByTextDeep('Présentation du jeu')).toBeVisible(),
+      );
+    });
+
+    it("on n'a que 3 étapes", async () => {
+      await waitFor(() => expect(getByTextDeep('Étape 1 sur 3')).toBeVisible());
+    });
+
+    describe('sur la dernière étape (témoignages)', () => {
+      beforeEach(async () => {
+        await etapeSuivante();
+        await etapeSuivante();
+      });
+
+      it('affiche le bouton "Enregistrer les modifications"', async () => {
+        await waitFor(() =>
+          expect(
+            queryByRoleDeep('button', {
+              name: 'Enregistrer les modifications',
+            }),
+          ).toBeVisible(),
+        );
+      });
+
+      it('n\'affiche pas le bouton "Suivant"', async () => {
+        await waitFor(() =>
+          expect(
+            queryByRoleDeep('button', {
+              name: 'Suivant',
+            }),
+          ).toBeNull(),
+        );
+      });
     });
   });
 });
