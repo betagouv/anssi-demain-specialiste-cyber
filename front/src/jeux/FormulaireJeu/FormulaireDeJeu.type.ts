@@ -4,3 +4,8 @@ export type EtapeDeposeJeu =
   | 'photos'
   | 'temoignages'
   | 'evaluation';
+
+export type EtapeModificationJeu =
+  | 'informations-generales'
+  | 'presentation'
+  | 'temoignages';
