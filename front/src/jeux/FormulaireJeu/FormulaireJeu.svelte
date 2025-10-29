@@ -161,6 +161,11 @@
     }
   };
 
+  const enregistreModifications = ()=>{
+    const {id, enseignant, reactions, photos, ...reste} = $jeuEnEditionStore as Partial<Jeu>;
+    axios.patch(`/api/jeux/${id}`, reste)
+  }
+
   onMount(async () => {
     if (mode === 'modification') {
       const morceaux = window.location.pathname.split('/');
@@ -209,7 +214,7 @@
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
           ></dsfr-button>
         {:else if mode === 'modification' && etape === 'temoignages'}
-          <dsfr-button label="Enregistrer les modifications" kind="primary"
+          <dsfr-button label="Enregistrer les modifications" kind="primary" use:clic={enregistreModifications}
           ></dsfr-button>
         {:else}
           <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
