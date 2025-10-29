@@ -19,14 +19,14 @@ export const creeRecupereRessourceHttp = <T>() => {
 
 export type PosteRessourceHttp<T> = (
   url: string,
-  corps: FormData,
+  corps: FormData | Record<string, unknown>,
   config?: { headers?: Record<string, string> },
 ) => Promise<T>;
 
 export const creePosteRessourceHttp = <T>() => {
   return async (
     url: string,
-    corps: FormData,
+    corps: FormData | Record<string, unknown>,
     config?: { headers?: Record<string, string> },
   ) => {
     const response = await axios.post(url, corps, {
