@@ -111,7 +111,6 @@
       <dsfr-button
         label="Créer mon compte"
         kind="primary"
-        size="lg"
         use:clic={valide}
         disabled={enCoursEnvoi || !cguAcceptees}
         centered
