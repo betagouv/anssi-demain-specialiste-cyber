@@ -132,6 +132,16 @@
     }
   };
 
+  const elevesRenseignes = $derived(
+    $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
+  );
+
+  const temoignagesRenseignes = $derived(
+    $jeuEnEditionStore.temoignages?.filter(
+      (t) => !!t.prenom.trim() || !!t.details.trim(),
+    ),
+  );
+
   const soumets = async (event: Event) => {
     event.preventDefault();
 
@@ -142,10 +152,8 @@
         'jeu',
         JSON.stringify({
           ...$jeuEnEditionStore,
-          temoignages: $jeuEnEditionStore.temoignages?.filter(
-            (t) => !!t.prenom.trim() || !!t.details.trim(),
-          ),
-          eleves: $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
+          temoignages: temoignagesRenseignes,
+          eleves: elevesRenseignes,
         }),
       );
       formulaire.append('couverture', $photosJeuStore.couverture!);
@@ -161,10 +169,15 @@
     }
   };
 
-  const enregistreModifications = ()=>{
-    const {id, enseignant, reactions, photos, ...reste} = $jeuEnEditionStore as Partial<Jeu>;
-    axios.patch(`/api/jeux/${id}`, reste)
-  }
+  const enregistreModifications = () => {
+    const { id, enseignant, reactions, photos, ...reste } =
+      $jeuEnEditionStore as Partial<Jeu>;
+    axios.patch(`/api/jeux/${id}`, {
+      ...reste,
+      eleves: elevesRenseignes,
+      temoignages: temoignagesRenseignes,
+    });
+  };
 
   onMount(async () => {
     if (mode === 'modification') {
@@ -214,7 +227,10 @@
           <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
           ></dsfr-button>
         {:else if mode === 'modification' && etape === 'temoignages'}
-          <dsfr-button label="Enregistrer les modifications" kind="primary" use:clic={enregistreModifications}
+          <dsfr-button
+            label="Enregistrer les modifications"
+            kind="primary"
+            use:clic={enregistreModifications}
           ></dsfr-button>
         {:else}
           <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
