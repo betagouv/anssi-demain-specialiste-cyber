@@ -1,0 +1,20 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Modifier un jeu"
+  - var descriptionPage = ""
+  - var sansNavigation = true
+
+block heros
+  dsc-heros
+    .retour(slot="ariane")
+      a(
+          href="/mes-jeux"
+      )
+        lab-anssi-icone(nom="arrow-left-line" taille="sm")
+        |
+        | Quitter
+    h1.titre-alternatif-xs.inverse(slot="titre") #{titrePage}
+
+block contenu
+    dsc-formulaire-nouveau-jeu

@@ -35,6 +35,7 @@ const pages: Page[] = [
   { route: '/jeux', protegee: false },
   { route: '/mes-jeux', protegee: true },
   { route: '/metiers', protegee: false },
+  { route: '/modification-jeu', protegee: true },
   { route: '/non-autorise', protegee: false },
   { route: '/nouveau-jeu', protegee: true },
   { route: '/selection-eleves', protegee: false },
