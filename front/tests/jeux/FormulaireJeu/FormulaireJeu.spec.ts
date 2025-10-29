@@ -5,10 +5,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import FormulaireJeu from '../../../src/jeux/FormulaireJeu/FormulaireJeu.svelte';
 import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireJeu/ReferentielEtablissement';
 import {
-  type PhotosDuJeu,
   type EvaluationDuJeu,
   type InformationsGeneralesDuJeu,
   type JeuEnEdition,
+  type PhotosDuJeu,
   type PresentationDuJeu,
 } from '../../../src/jeux/jeu';
 import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
@@ -22,8 +22,9 @@ import {
   queryAllByRoleDeep,
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
+import { jeuEnEditionStore } from '../../../src/jeux/stores/jeuEnEdition.store';
 
-const axiosMock = vi.hoisted(() => ({ post: vi.fn() }));
+const axiosMock = vi.hoisted(() => ({ post: vi.fn(), patch: vi.fn() }));
 
 vi.mock('axios', () => {
   return { default: axiosMock };
@@ -890,6 +891,63 @@ describe('Le formulaire de dépose de jeu', () => {
             }),
           ).toBeNull(),
         );
+      });
+
+      describe("sur l'enregistrement", () => {
+        it("envoie le formulaire à l'api des jeux", async () => {
+          jeuEnEditionStore.set({
+            id: '1234',
+            sequence: 'heure',
+            nomEtablissement: 'Mon lycée',
+            discipline: 'mathematiques',
+            classe: 'seconde',
+            eleves: ['Brice', 'Gontran'],
+            nom: 'TEST',
+            categorie: 'simulation',
+            thematiques: ['menace-cyber', 'orientation'],
+            description: 'Description du jeu',
+            temoignages: [{ prenom: 'Michel', details: "C'était super" }],
+          } as JeuEnEdition);
+          const boutonEnregistrer = await findByRoleDeep('button', {
+            name: 'Enregistrer les modifications',
+          });
+          await user.click(boutonEnregistrer);
+
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
+            '/api/jeux/1234',
+            {
+              sequence: 'heure',
+              nomEtablissement: 'Mon lycée',
+              discipline: 'mathematiques',
+              classe: 'seconde',
+              eleves: ['Brice', 'Gontran'],
+              nom: 'TEST',
+              categorie: 'simulation',
+              thematiques: ['menace-cyber', 'orientation'],
+              description: 'Description du jeu',
+              temoignages: [{ prenom: 'Michel', details: "C'était super" }],
+            },
+          );
+        });
+
+        it("n'envoie pas les propriétés non modifiables", async () => {
+          const jeu = {
+            id: '1234',
+            reactions: {},
+            enseignant: 'Jeanne',
+            photos: 'photos',
+          };
+          jeuEnEditionStore.set(jeu as JeuEnEdition);
+          const boutonEnregistrer = await findByRoleDeep('button', {
+            name: 'Enregistrer les modifications',
+          });
+          await user.click(boutonEnregistrer);
+
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
+            '/api/jeux/1234',
+            {},
+          );
+        });
       });
     });
   });
