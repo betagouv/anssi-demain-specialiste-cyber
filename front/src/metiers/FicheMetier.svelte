@@ -122,6 +122,12 @@
       },
     ]}
   >
+    <dsfr-badge
+      label="Métiers • Formation"
+      type="accent"
+      accent="purple-glycine"
+      slot="avant-titre"
+    ></dsfr-badge>
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
     <p class="fr-text--lead" slot="description">{metier.fonction}</p>
     <picture class="illustration" slot="illustration">
