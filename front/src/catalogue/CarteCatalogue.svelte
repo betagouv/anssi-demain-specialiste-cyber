@@ -7,6 +7,10 @@
   }
   const { ressource }: Props = $props();
 
+  const illustrationPetite = $derived(
+    `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite${ressource.urlIllustration.slice(ressource.urlIllustration.lastIndexOf('.'))}`,
+  );
+
   const couleursTypes: Record<TypesRessourceCyber, CouleurDeBadge> = {
     'Contenus audio / vidéo': 'green-emeraude',
     'Formation - Mentorat': 'pink-tuile',
@@ -27,7 +31,7 @@
   detailStart={ressource.titre}
   href={ressource.lienExterne || `/ressources-cyber/${ressource.id}`}
   blank={ressource.lienExterne.startsWith('http')}
-  src={ressource.urlIllustration || '/assets/images/image-generique.svg'}
+  src={illustrationPetite || '/assets/images/image-generique.svg'}
   hasHeaderBadge
   hasDetailEnd
   size="sm"
