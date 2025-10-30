@@ -138,7 +138,7 @@
 
   const temoignagesRenseignes = $derived(
     $jeuEnEditionStore.temoignages?.filter(
-      (t) => !!t.prenom.trim() || !!t.details.trim(),
+      (t) => !!t.prenom.trim() && !!t.details.trim(),
     ),
   );
 
