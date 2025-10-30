@@ -1,3 +1,5 @@
+import type { PhotosJeu } from '../jeux/jeu';
+
 export enum NomsDesThematiques {
   'comportements-numeriques' = 'Comportements numériques',
   cyberharcelement = 'Cyberharcèlement',
@@ -38,6 +40,7 @@ export type Jeu = {
   nomEtablissement: string;
   eleves: string[];
   reactions: Record<string, number>;
+  photos: PhotosJeu;
 };
 
 export type DonneesJeu = {
@@ -50,6 +53,7 @@ export type DonneesJeu = {
   nomEtablissement: string;
   eleves: string[];
   reactions: Record<string, number>;
+  photos: PhotosJeu;
 };
 
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {

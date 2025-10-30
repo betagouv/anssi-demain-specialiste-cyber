@@ -5,7 +5,7 @@
   }}
 />
 
-<script>
+<script lang="ts">
   import Accueil from './Accueil.svelte';
   import Onglets from './Onglets.svelte';
   import Ressources from './Ressources.svelte';

@@ -11,6 +11,7 @@ describe('La construction d’un jeu', () => {
     nomEtablissement: 'Collège',
     eleves: ['Michel'],
     reactions: {},
+    photos: { couverture: { chemin: '' }, photos: [] },
   };
 
   it('retourne la liste triée des jeux', () => {
