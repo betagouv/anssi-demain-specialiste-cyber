@@ -298,10 +298,6 @@
     }
   }
 
-  .actions {
-    margin-bottom: 3rem;
-  }
-
   .remuneration {
     ul {
       margin-block-end: 1.5rem;
