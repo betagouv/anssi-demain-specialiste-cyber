@@ -18,6 +18,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     rechercheParType.reinitialise();
     rechercheParPublicCible.reinitialise();
     rechercheParThematique.reinitialise();
+    rechercheTextuelle.set('');
 
     ressourcesCyberStore.initialise([
       unConstructeurDeRessourceCyber()
@@ -32,6 +33,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
         .avecTypes(['Jeux - challenges', 'Contenus audio / vidéo'])
         .avecBesoins(['Découvrir les métiers', 'Découvrir la cyber'])
+        .estCertifiee(false)
         .construis(),
       unConstructeurDeRessourceCyber()
         .avecTitre('Comportements numériques')
@@ -41,6 +43,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
         .avecNiveaux(['Cycle 1', 'Cycle 3'])
         .avecTypes(['Contenus audio / vidéo', 'Outil technique'])
         .avecBesoins(['Découvrir la cyber'])
+        .estCertifiee(true)
         .construis(),
     ]);
   });
@@ -162,6 +165,17 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
       expect(resultat).toHaveLength(1);
       expect(resultat[0].description).toBe('Découvrir la cyber en famille');
+    });
+  });
+
+  describe('tri les ressources', () => {
+    it('les ressources certifiées sont en premier', () => {
+      const { resultat } = get(ressourcesCyberFiltrees);
+
+      expect(resultat).toStrictEqual<RessourceCyber[]>([
+        get(ressourcesCyberStore)[1],
+        get(ressourcesCyberStore)[0],
+      ]);
     });
   });
 });
