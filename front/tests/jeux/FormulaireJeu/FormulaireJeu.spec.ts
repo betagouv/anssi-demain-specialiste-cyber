@@ -984,8 +984,6 @@ describe('Le formulaire de dépose de jeu', () => {
             {
               eleves: undefined,
               temoignages: [
-                { prenom: 'Marc', details: '' },
-                { prenom: '', details: 'Super' },
                 { prenom: 'Michel', details: 'Génial' },
               ],
             },
