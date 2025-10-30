@@ -59,6 +59,11 @@
         kind="tertiary"
         hasIcon="true"
         icon="close-circle-line"
+        centered
+        disabled={!$rechercheTextuelle &&
+          $rechercheParThematique === '' &&
+          $rechercheParCategorie.length === 0 &&
+          $rechercheParNiveau.length === 0}
         use:clic={reinitialiseLesFiltres}
       ></dsfr-button>
     </div>
