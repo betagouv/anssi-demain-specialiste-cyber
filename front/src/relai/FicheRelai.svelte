@@ -6,6 +6,7 @@
 />
 
 <script lang="ts">
+  import { TITRE_DSC_SECABLE } from '../constantes';
   import Fiche from '../Fiche.svelte';
   const zeroWidthSpace = '\u200b';
 </script>
@@ -32,11 +33,9 @@
   >
     <section>
       <p class="fr-text">
-        Devenez relai de Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
-        en associant la marque
-        "Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber" à vos actions
-        en faveur de la formation des jeunes à la cybersécurité et la découverte
-        de ses métiers.
+        Devenez relai de {TITRE_DSC_SECABLE}
+        en associant la marque {TITRE_DSC_SECABLE} à vos actions en faveur de la
+        formation des jeunes à la cybersécurité et la découverte de ses métiers.
       </p>
     </section>
 
@@ -55,13 +54,11 @@
 
     <section id="conditions">
       <h2>
-        Conditions d'utilisation de la marque
-        Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+        Conditions d'utilisation de la marque {TITRE_DSC_SECABLE}
       </h2>
       <p class="fr-text">
-        En tant que relai, vous pouvez utiliser le bloc marque
-        Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber sur toutes vos
-        productions.
+        En tant que relai, vous pouvez utiliser le bloc marque {TITRE_DSC_SECABLE}
+        sur toutes vos productions.
         <br /> <br />
         Vous pouvez communiquer sur vos actions en tant que "relai".
         <br /> <br />
@@ -69,15 +66,13 @@
         <br />
       </p>
       <ul class="fr-text">
-        <li>Relai Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber</li>
+        <li>Relai {TITRE_DSC_SECABLE}</li>
         <li>
-          L'université x est relai de
-          Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+          L'université x est relai de {TITRE_DSC_SECABLE}
         </li>
         <li>
-          L'université x soutient
-          Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber&nbsp;: la
-          plateforme pour découvrir la cybersécurité et ses métiers.
+          L'université x soutient {TITRE_DSC_SECABLE}&nbsp;: la plateforme pour
+          découvrir la cybersécurité et ses métiers.
         </li>
       </ul>
     </section>

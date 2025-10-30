@@ -12,6 +12,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from './actions.svelte';
+  import { TITRE_DSC_SECABLE } from './constantes';
 
   const { informationsProfessionnelles, token } = $props();
 
@@ -89,7 +90,7 @@
         id="lettre-information"
         name="lettre-information"
         status="default"
-        label="J’accepte de recevoir la lettre d’information DemainSpécialisteCyber."
+        label="J’accepte de recevoir la lettre d’information {TITRE_DSC_SECABLE}."
         value={infolettreAcceptee}
         onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
       ></dsfr-checkbox>
@@ -104,7 +105,8 @@
           >J’accepte les <dsfr-link
             href="/cgu"
             label="conditions générales d’utilisation"
-          ></dsfr-link> DemainSpécialisteCyber.
+          ></dsfr-link>
+          {TITRE_DSC_SECABLE}.
         </span>
       </dsfr-checkbox>
 
