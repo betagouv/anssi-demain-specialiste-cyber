@@ -42,7 +42,8 @@
           label="Modifier"
           hasIcon
           icon="edit-line"
-          disabled
+          markup="a"
+          href={`/modification-jeu/${id}`}
         ></dsfr-button>
         <dsfr-dropdown
           align="right"
