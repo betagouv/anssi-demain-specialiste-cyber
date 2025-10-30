@@ -13,11 +13,11 @@ block contenu
                 | Cette déclaration d’accessibilité s’applique à
                 |
                 strong
-                    dsfr-link(href="/" label="DemainSpécialisteCyber")
+                    dsfr-link(href="/" label=`${titreDSC}`)
                 | .
             h2 État de conformité
             p
-                strong DemainSpécialisteCyber
+                strong #{titreDSC}
                 |  est
                 |
                 strong non conforme
@@ -28,7 +28,7 @@ block contenu
             h2 Amélioration et contact
             p
                 | Si vous n’arrivez pas à accéder à un contenu ou à un service, vous pouvez contacter le responsable de
-                | DemainSpécialisteCyber pour être orienté vers une alternative accessible ou obtenir le contenu sous
+                | #{titreDSC} pour être orienté vers une alternative accessible ou obtenir le contenu sous
                 | une autre forme.
             ul
                 li
