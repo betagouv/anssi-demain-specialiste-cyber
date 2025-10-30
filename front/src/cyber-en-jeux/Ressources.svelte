@@ -103,6 +103,7 @@
             download
             lang="fr"
             assess
+            size="sm"
           ></dsfr-card>
         {/each}
       </div>
@@ -128,6 +129,7 @@
             download
             lang="fr"
             assess
+            size="sm"
           ></dsfr-card>
         {/each}
       </div>
