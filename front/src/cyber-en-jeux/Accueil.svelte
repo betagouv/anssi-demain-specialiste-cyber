@@ -1,6 +1,39 @@
-<script>
+<script lang="ts">
   import Citation from '../Citation.svelte';
   import InvitationARejoindre from './InvitationARejoindre.svelte';
+
+  const temoignages = [
+    {
+      citation:
+        'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+      auteur: 'Auteur',
+      source: '',
+    },
+    {
+      citation:
+        'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+      auteur: 'Auteur',
+      source: '',
+    },
+    {
+      citation:
+        'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+      auteur: 'Auteur',
+      source: '',
+    },
+    {
+      citation:
+        'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+      auteur: 'Auteur',
+      source: '',
+    },
+    {
+      citation:
+        'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
+      auteur: 'Auteur',
+      source: '',
+    },
+  ];
 </script>
 
 <div class="accueil">
@@ -169,45 +202,16 @@
     </div>
   </dsfr-container>
 
-  <div class="temoignages">
-    <dsfr-container>
-      <lab-anssi-temoignages
-        titre="Les élèves adorent CyberEnJeux !"
-        temoignages={[
-          {
-            citation:
-              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
-            auteur: 'Auteur',
-            source: '',
-          },
-          {
-            citation:
-              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
-            auteur: 'Auteur',
-            source: '',
-          },
-          {
-            citation:
-              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
-            auteur: 'Auteur',
-            source: '',
-          },
-          {
-            citation:
-              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
-            auteur: 'Auteur',
-            source: '',
-          },
-          {
-            citation:
-              'CyberEnJeux est un excellent moyen de sensibiliser les élèves aux enjeux de la cybersécurité tout en développant leurs compétences numériques et créatives.',
-            auteur: 'Auteur',
-            source: '',
-          },
-        ]}
-      ></lab-anssi-temoignages>
-    </dsfr-container>
-  </div>
+  {#if temoignages.length > 0}
+    <div class="temoignages">
+      <dsfr-container>
+        <lab-anssi-temoignages
+          titre="Les élèves adorent CyberEnJeux !"
+          {temoignages}
+        ></lab-anssi-temoignages>
+      </dsfr-container>
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
