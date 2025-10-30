@@ -1,4 +1,4 @@
-import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
 import { createLogger, defineConfig } from 'vite';
 
@@ -15,13 +15,7 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: Vite.UserConfig) => ({
-  plugins: [
-    svelte({
-      compilerOptions: { customElement: true },
-      preprocess: vitePreprocess(),
-    }),
-    injecteNonce(),
-  ],
+  plugins: [svelte(), injecteNonce()],
   build: {
     manifest: true,
     cssCodeSplit: false,
