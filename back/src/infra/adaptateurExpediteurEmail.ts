@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { ExpediteurEmail } from '../metier/expediteurEmail';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { creePosteRessourceHttp, PosteRessourceHttp } from './clientHttp';
@@ -29,21 +30,30 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
     nom: string;
     infolettreAcceptee: boolean;
   }) {
-    await this.posteurtHttp(
-      `${this.adaptateurEnvironnement.expediteurEmail().urlDeBase()}contacts`,
-      {
-        updateEnabled: true,
-        email,
-        emailBlacklisted: !infolettreAcceptee,
-        attributes: {
-          PRENOM: prenom,
-          NOM: nom,
+    try {
+      await this.posteurtHttp(
+        `${this.adaptateurEnvironnement.expediteurEmail().urlDeBase()}contacts`,
+        {
+          updateEnabled: true,
+          email,
+          emailBlacklisted: !infolettreAcceptee,
+          attributes: {
+            PRENOM: prenom,
+            NOM: nom,
+          },
         },
-      },
-      {
-        headers: this.headers,
-      },
-    );
+        {
+          headers: this.headers,
+        },
+      );
+    } catch (e) {
+      if (
+        !isAxiosError(e) ||
+        e.response?.data.message !== 'Contact already exist'
+      ) {
+        throw e;
+      }
+    }
   }
 
   async envoieEmailBienvenue({

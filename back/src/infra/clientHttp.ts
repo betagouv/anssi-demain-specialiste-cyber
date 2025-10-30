@@ -35,11 +35,6 @@ export const creePosteRessourceHttp = <T>() => {
         ...config?.headers,
       },
     });
-    if (response.status !== 200) {
-      throw new Error(
-        `Le serveur nous a répondu une erreur ${response.status}`,
-      );
-    }
     return response.data as T;
   };
 };
