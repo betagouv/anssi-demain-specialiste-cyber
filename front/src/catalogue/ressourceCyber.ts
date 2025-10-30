@@ -1,3 +1,5 @@
+import type { CouleurDeBadge } from '../badge.type';
+
 export type TypesRessourceCyber =
   | 'Contenus audio / vidéo'
   | 'Formation - Mentorat'
@@ -50,5 +52,22 @@ export const lesTypesDesRessourcesCyber = (
 ): TypesRessourceCyber[] => {
   return Array.from(new Set(ressourcesCyber.flatMap((r) => r.types))).sort(
     (n1, n2) => n1.localeCompare(n2),
+  );
+};
+
+export const laCouleurDuBadgeSelonTypeRessourceCyber = (
+  typeRessourceCyber?: TypesRessourceCyber,
+): string => {
+  const couleursTypes: Record<TypesRessourceCyber, CouleurDeBadge> = {
+    'Contenus audio / vidéo': 'green-emeraude',
+    'Formation - Mentorat': 'pink-tuile',
+    'Guides - fiches - études': 'blue-cumulus',
+    'Jeux - challenges': 'green-archipel',
+    'Outil technique': 'beige-gris-galet',
+  };
+
+  return (
+    (typeRessourceCyber && couleursTypes[typeRessourceCyber]) ??
+    'purple-glycine'
   );
 };

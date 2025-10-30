@@ -10,6 +10,7 @@
   import { onMount } from 'svelte';
   import Fiche, { type Menu } from '../Fiche.svelte';
   import Heros from '../Heros.svelte';
+  import { laCouleurDuBadgeSelonTypeRessourceCyber } from '../catalogue/ressourceCyber';
 
   type Metier = {
     id: string;
@@ -125,7 +126,7 @@
     <dsfr-badge
       label="Métiers • Formation"
       type="accent"
-      accent="purple-glycine"
+      accent={laCouleurDuBadgeSelonTypeRessourceCyber()}
       slot="avant-titre"
     ></dsfr-badge>
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
