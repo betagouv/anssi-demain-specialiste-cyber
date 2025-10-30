@@ -11,7 +11,7 @@
     "lint:fix": "npx eslint . --fix",
     "pretest": "npm-run-all --parallel lint",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json"
+    "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json && svelte-check"
   },
   "devDependencies": {
     "@lab-anssi/ui-kit": "^1.33.7",
