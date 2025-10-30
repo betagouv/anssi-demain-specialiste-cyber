@@ -1,6 +1,8 @@
 <script lang="ts">
-  import type { CouleurDeBadge } from '../badge.type';
-  import type { RessourceCyber, TypesRessourceCyber } from './ressourceCyber';
+  import {
+    laCouleurDuBadgeSelonTypeRessourceCyber,
+    type RessourceCyber,
+  } from './ressourceCyber';
 
   interface Props {
     ressource: RessourceCyber;
@@ -11,17 +13,9 @@
     `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite${ressource.urlIllustration.slice(ressource.urlIllustration.lastIndexOf('.'))}`,
   );
 
-  const couleursTypes: Record<TypesRessourceCyber, CouleurDeBadge> = {
-    'Contenus audio / vidéo': 'green-emeraude',
-    'Formation - Mentorat': 'pink-tuile',
-    'Guides - fiches - études': 'blue-cumulus',
-    'Jeux - challenges': 'green-archipel',
-    'Outil technique': 'beige-gris-galet',
-  };
-
   const badges = ressource.types.map((type) => ({
     label: type,
-    accent: couleursTypes[type] ?? 'purple-glycine',
+    accent: laCouleurDuBadgeSelonTypeRessourceCyber(type),
   }));
 </script>
 
