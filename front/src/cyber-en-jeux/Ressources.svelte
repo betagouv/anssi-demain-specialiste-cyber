@@ -138,6 +138,8 @@
     <div class="telecharger-les-ressources">
       <dsfr-button
         markup="a"
+        has-icon
+        icon="download-line"
         label="Télécharger toutes les ressources"
         href="https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnJeux_toutes_ressources.zip"
       ></dsfr-button>
