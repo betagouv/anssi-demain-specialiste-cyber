@@ -169,14 +169,15 @@
     }
   };
 
-  const enregistreModifications = () => {
+  const enregistreModifications = async () => {
     const { id, enseignant, reactions, photos, ...reste } =
       $jeuEnEditionStore as Partial<Jeu>;
-    axios.patch(`/api/jeux/${id}`, {
+    await axios.patch(`/api/jeux/${id}`, {
       ...reste,
       eleves: elevesRenseignes,
       temoignages: temoignagesRenseignes,
     });
+    window.location.href = '/mes-jeux?jeu-modifie';
   };
 
   onMount(async () => {

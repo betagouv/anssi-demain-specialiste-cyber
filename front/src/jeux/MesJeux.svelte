@@ -10,7 +10,16 @@
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
-  let jeuAjoute = $state(false);
+  let messageDeRetour = $state('');
+
+  const metAJourMessageAlerte = () => {
+    const parametresURL = new URLSearchParams(window.location.search);
+    if (parametresURL.has('jeu-ajoute')) {
+      messageDeRetour = 'Le jeu a bien été ajouté.';
+    } else if (parametresURL.has('jeu-modifie')) {
+      messageDeRetour = 'Les informations ont été mises à jour avec succès.';
+    }
+  };
 
   onMount(async () => {
     chargementEnCours = true;
@@ -19,7 +28,7 @@
       jeu1.nom.localeCompare(jeu2.nom),
     );
     chargementEnCours = false;
-    jeuAjoute = new URLSearchParams(window.location.search).has('jeu-ajoute');
+    metAJourMessageAlerte();
   });
 
   const deposeUnJeu = () => {
@@ -51,10 +60,10 @@
         use:clic={deposeUnJeu}
       ></dsfr-button>
     </div>
-    {#if jeuAjoute}
+    {#if messageDeRetour}
       <dsfr-alert
         hasTitle={false}
-        text="Le jeu a bien été ajouté."
+        text={messageDeRetour}
         type="success"
         size="sm"
         dismissible
