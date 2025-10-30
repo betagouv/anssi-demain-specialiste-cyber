@@ -28,6 +28,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { profil } from './stores/profil';
+  import { TITRE_DSC_SECABLE } from './constantes';
 
   interface Props {
     sansNavigation?: boolean;
@@ -110,8 +111,8 @@
 <dsfr-header
   id="entete"
   brandLogoTitle="Gouvernement"
-  brandService="DemainSpécialisteCyber"
-  brandLinkTitle="Retour à l'accueil du site - DemainSpécialisteCyber - République Française"
+  brandService={TITRE_DSC_SECABLE}
+  brandLinkTitle="Retour à l'accueil du site - {TITRE_DSC_SECABLE} - République Française"
   brandLinkHref="/"
   hasBrandTagline="true"
   brandTagline="Innovation ANSSI"

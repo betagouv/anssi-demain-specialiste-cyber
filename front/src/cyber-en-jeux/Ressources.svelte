@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { TITRE_DSC_SECABLE } from '../constantes';
   import MiseEnAvant from '../MiseEnAvant.svelte';
 
   type Ressource = {
@@ -172,7 +173,7 @@
     </div>
 
     <MiseEnAvant
-      titre="Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber"
+      titre={TITRE_DSC_SECABLE}
       illustration={{
         lien: '/assets/images/cej/hacker-ethique.png',
         alt: 'Hacker éthique',
@@ -193,11 +194,10 @@
       ]}
     >
       <p class="fr-text--lg">
-        DemainSpécialisteCyber est une campagne nationale co-construite par
-        l’ANSSI et son laboratoire d’innovation, le Ministère de l’Education
-        Nationale et de la Jeunesse et le Campus Cyber, en vue de valoriser la
-        cybersécurité et ses métiers auprès des collégien/nes, lycéen/nes mais
-        aussi étudiant/es.
+        {TITRE_DSC_SECABLE} est une campagne nationale co-construite par l’ANSSI
+        et son laboratoire d’innovation, le Ministère de l’Education Nationale et
+        de la Jeunesse et le Campus Cyber, en vue de valoriser la cybersécurité et
+        ses métiers auprès des collégien/nes, lycéen/nes mais aussi étudiant/es.
       </p>
     </MiseEnAvant>
   </div>
