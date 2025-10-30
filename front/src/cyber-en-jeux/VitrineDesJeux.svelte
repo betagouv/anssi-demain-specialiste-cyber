@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { jeuxStore } from './stores/jeux.store';
   import VitrineFiltres from './VitrineFiltres.svelte';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
-  import { construisLesJeux, NomsDesThematiques } from './jeu';
-  import { enumerationFrancaise } from '../jeux/jeu';
+  import { construisLesJeux } from './jeu';
   import CarteJeu from './CarteJeu.svelte';
 
   let chargementEnCours = $state(false);
@@ -48,6 +47,8 @@
             {eleves}
             {reactions}
             cheminCouverture={photos.couverture.chemin}
+            estCache={false}
+            modifieVisibiliteJeu={async () => {}}
           />
         {:else}
           {#if chargementEnCours}
