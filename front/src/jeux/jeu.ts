@@ -15,6 +15,7 @@ export type Jeu = {
   photos: PhotosJeu;
   reactions: Record<string, number>;
   estCache: boolean;
+  estProprietaire: boolean;
 };
 
 export type Image = {

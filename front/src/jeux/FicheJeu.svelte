@@ -3,14 +3,14 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
+  import Fiche, { type Menu } from '../Fiche.svelte';
+  import Heros from '../Heros.svelte';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
   import { enumerationFrancaise, type Jeu } from './jeu';
-  import { libelleSequence } from './sequences';
-  import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
-  import Fiche, { type Menu } from '../Fiche.svelte';
   import Reactions from './Reactions.svelte';
-  import Heros from '../Heros.svelte';
+  import { libelleSequence } from './sequences';
 
   let jeu: Jeu | undefined;
 
@@ -105,6 +105,18 @@
 
   <dsfr-container>
     <Fiche menuId="menu-fiche-jeu" menu={items}>
+      {#if jeu.estProprietaire}
+        <div class="actions-entete">
+          <dsfr-button
+            label="Modifier"
+            hasIcon
+            icon="edit-line"
+            markup="a"
+            href={`/modification-jeu/${jeu.id}`}
+            kind="tertiary"
+          ></dsfr-button>
+        </div>
+      {/if}
       <section id="infos-generales">
         <h2>Informations générales</h2>
         <ul>
