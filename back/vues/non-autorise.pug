@@ -1,7 +1,7 @@
 extends fragments/base
 
 block variables
-  - var titrePage = "Inscription sur Demain\u200bSpécialiste\u200bCyber"
+  - var titrePage = `Inscription sur ${titreDSC}`
   - var classePage = "non-autorise"
   - var sansNavigation = true
   - var sansZoneIdentification = true
@@ -14,12 +14,12 @@ block contenu
             dsfr-alert(
               hasTitle="false"
               hasDescription="true"
-              text="Oups ! Vous ne pouvez pas vous créer de compte sur Demain\u200bSpécialiste\u200bCyber."
+              text=`Oups ! Vous ne pouvez pas vous créer de compte sur ${titreDSC}.`
               type="error"
               icon="error"
             )
             p
-              | L’adresse e-mail saisie ne semble pas être associée à un établissement autorisé à se connecter à Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber.
+              | L’adresse e-mail saisie ne semble pas être associée à un établissement autorisé à se connecter à #{titreDSC}.
               | N'hésitez pas à nous contacter pour obtenir de l’aide.
             .contact
               dsfr-link(href='mailto:contact@demainspecialistecyber.beta.gouv.fr', label='contact@demainspecialistecyber.beta.gouv.fr')

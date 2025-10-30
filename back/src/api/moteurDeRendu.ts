@@ -4,6 +4,8 @@ import { join } from 'path';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import path from 'node:path';
 
+const TITRE_DSC_SECABLE = 'Demain\u200bSpécialiste\u200bCyber';
+
 export interface MoteurDeRendu {
   rends: (reponse: express.Response, vue: string, options?: object) => void;
 }
@@ -35,14 +37,20 @@ export const moteurDeRenduExpress = (
   return {
     rends(reponse, vue, options) {
       const matomo = adaptateurEnvironnement.matomo();
+      const constantesPUG = {
+        titreDSC: TITRE_DSC_SECABLE,
+        versionUIKit,
+      };
       const optionsAvecManifesteEtNonce = {
         ...options,
         ...fournisseurDeChemins(),
         nonce: reponse.locals.nonce,
-        ...(matomo && { matomo }),
-        versionUIKit,
       };
-      reponse.render(vue, optionsAvecManifesteEtNonce);
+      reponse.render(vue, {
+        ...optionsAvecManifesteEtNonce,
+        ...constantesPUG,
+        ...(matomo && { matomo }),
+      });
     },
   };
 };
