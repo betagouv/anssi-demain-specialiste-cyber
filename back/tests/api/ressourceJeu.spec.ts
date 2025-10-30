@@ -73,7 +73,21 @@ describe('La ressource des jeux', () => {
         consentement: false,
         reactions: {},
         estCache: false,
+        estProprietaire: true,
       });
+    });
+
+    it("vérifie qu'un jeu n'appartient à l'utilisateur connecté si c'est le cas", async () => {
+      ajouteUtilisateurARequeteMock.mockImplementationOnce(
+        (req, _res, suite) => {
+          req.utilisateur = hectorDurant;
+          suite();
+        },
+      );
+
+      const reponse = await request(serveur).get('/api/jeux/1');
+
+      expect(reponse.body.estProprietaire).toBeFalsy();
     });
   });
 
@@ -108,6 +122,7 @@ describe('La ressource des jeux', () => {
         ...rest,
         enseignant: enseignant?.prenom,
         estCache: true,
+        estProprietaire: true,
       });
 
       const jeuModifie = await entrepotJeux.parId('1');
