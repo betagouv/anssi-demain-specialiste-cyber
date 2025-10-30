@@ -42,15 +42,19 @@ export const ressourcesCyberFiltrees = derived(
     rechercheTextuelle,
   ],
   ([$store]): RessourcesCyberFiltrees => {
-    const resultat = $store.filter(
-      (ressourceCyber: RessourceCyber) =>
-        rechercheParThematique.ok(ressourceCyber) &&
-        rechercheParPublicCible.ok(ressourceCyber) &&
-        rechercheParNiveau.ok(ressourceCyber) &&
-        rechercheParType.ok(ressourceCyber) &&
-        rechercheParBesoin.ok(ressourceCyber) &&
-        rechercheTextuelle.ok(ressourceCyber),
-    );
+    const resultat = $store
+      .filter(
+        (ressourceCyber: RessourceCyber) =>
+          rechercheParThematique.ok(ressourceCyber) &&
+          rechercheParPublicCible.ok(ressourceCyber) &&
+          rechercheParNiveau.ok(ressourceCyber) &&
+          rechercheParType.ok(ressourceCyber) &&
+          rechercheParBesoin.ok(ressourceCyber) &&
+          rechercheTextuelle.ok(ressourceCyber),
+      )
+      .sort((a, b) =>
+        a.estCertifiee === b.estCertifiee ? 0 : a.estCertifiee ? -1 : 1,
+      );
 
     const thematiques = lesThematiquesCyber($store);
     const publicsCible = lesPublicsCibleDesRessourcesCyber($store);
