@@ -195,6 +195,11 @@
     }
   }
 
+  .actions-entete {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .actions {
     margin-bottom: 3rem;
   }
