@@ -53,12 +53,14 @@ export type DonneesJeu = {
 };
 
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
-  return data.map((item) => ({
-    ...item,
-    niveau: item.niveau as Niveau,
-    categorie: item.categorie as Categorie,
-    thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
-  }));
+  return data
+    .map((item) => ({
+      ...item,
+      niveau: item.niveau as Niveau,
+      categorie: item.categorie as Categorie,
+      thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
+    }))
+    .sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
 };
 
 export const lesThematiques = (jeu: Jeu[]): Thematique[] => {
