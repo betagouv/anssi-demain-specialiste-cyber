@@ -15,7 +15,9 @@
   onMount(async () => {
     chargementEnCours = true;
     const reponse = await axios.get<Jeu[]>('/api/mes-jeux');
-    listeDesJeux = reponse.data;
+    listeDesJeux = reponse.data.sort((jeu1, jeu2) =>
+      jeu1.nom.localeCompare(jeu2.nom),
+    );
     chargementEnCours = false;
     jeuAjoute = new URLSearchParams(window.location.search).has('jeu-ajoute');
   });
