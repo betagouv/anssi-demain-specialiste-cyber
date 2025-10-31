@@ -77,6 +77,10 @@
       </div>
     </dsfr-container>
   </section>
+{:else}
+  <section class="section-vide"></section>
+  <section class="section-vide"></section>
+  <section class="section-vide"></section>
 {/each}
 
 <style lang="scss">
