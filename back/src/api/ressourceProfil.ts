@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
 
-import { ConfigurationServeur } from "./configurationServeur";
+import { ConfigurationServeur } from './configurationServeur';
 
 export const ressourceProfil = ({ adaptateurJWT }: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.get('/', async (requete: Request, reponse: Response) => {
+  routeur.get('/', (requete: Request, reponse: Response) => {
     try {
       adaptateurJWT.decode(requete.session?.token);
     } catch {

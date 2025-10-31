@@ -1,30 +1,34 @@
 import { Router } from 'express';
 
-import { ConfigurationServeur } from "../configurationServeur";
+import { ConfigurationServeur } from '../configurationServeur';
+import { filetRouteAsynchrone } from '../middleware';
 
 export const ressourceDeconnexionOIDC = (
-  configurationServeur: ConfigurationServeur
+  configurationServeur: ConfigurationServeur,
 ) => {
   const routes = Router();
 
-  routes.get('/', async (requete, reponse) => {
-    const { url, state } =
-      await configurationServeur.adaptateurOIDC.genereDemandeDeconnexion(
-        requete.session!.AgentConnectIdToken
+  routes.get(
+    '/',
+    filetRouteAsynchrone(async (requete, reponse) => {
+      const { url, state } =
+        await configurationServeur.adaptateurOIDC.genereDemandeDeconnexion(
+          requete.session!.AgentConnectIdToken,
+        );
+
+      reponse.cookie(
+        'AgentConnectInfo',
+        { state },
+        {
+          maxAge: 30_000,
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true,
+        },
       );
 
-    reponse.cookie(
-      'AgentConnectInfo',
-      { state },
-      {
-        maxAge: 30_000,
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-      }
-    );
-
-    reponse.redirect(url);
-  });
+      reponse.redirect(url);
+    }),
+  );
   return routes;
 };
