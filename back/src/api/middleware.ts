@@ -28,6 +28,7 @@ export type Middleware = {
   ajouteUtilisateurARequete(
     entrepotUtilisateur: EntrepotUtilisateur,
     adaptateurHachage: AdaptateurHachage,
+    mode?: 'strict' | 'souple',
   ): FonctionMiddleware<unknown>;
 };
 
@@ -104,6 +105,7 @@ export const fabriqueMiddleware = ({
     (
       entrepotUtilisateur: EntrepotUtilisateur,
       adaptateurHachage: AdaptateurHachage,
+      mode: 'strict' | 'souple' = 'strict',
     ) =>
     async (
       requete: RequeteNonTypee & { utilisateur?: Utilisateur | undefined },
@@ -114,7 +116,11 @@ export const fabriqueMiddleware = ({
       try {
         email = adaptateurJWT.decode(requete.session?.token)?.email;
       } catch {
-        reponse.sendStatus(401);
+        if (mode === 'souple') {
+          suite();
+        } else {
+          reponse.sendStatus(401);
+        }
         return;
       }
       try {
