@@ -1,8 +1,9 @@
-import { MIMEType } from 'node:util';
-import { Request } from 'express';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
+import { Request } from 'express';
+import { MIMEType } from 'node:util';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 
 type FichierImage = {
   nom: string;
@@ -22,8 +23,11 @@ export type AdaptateurTeleversement = {
   recupereTypeImage(buffer?: Buffer): 'image/png' | 'image/jpeg' | undefined;
 };
 
-const adaptateurDeTeleversement: AdaptateurTeleversement = {
-  photosJeu: (requete: Request): PhotosJeuTeleversees => {
+export class AdaptateurDeTeleversementCellar
+  implements AdaptateurTeleversement
+{
+  constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
+  photosJeu(requete: Request): PhotosJeuTeleversees {
     const estUnFichierPhoto = (
       fichier:
         | {
@@ -65,8 +69,8 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
         };
       }),
     };
-  },
-  sauvegarde: async (photosJeu: PhotosJeuTeleversees): Promise<void> => {
+  }
+  async sauvegarde(photosJeu: PhotosJeuTeleversees): Promise<void> {
     const televerseLaPhoto = (photo: FichierImage) => {
       try {
         return new S3Client({
@@ -83,11 +87,9 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
           }),
         );
       } catch (error: unknown | Error) {
-        // eslint-disable-next-line no-console
-        console.error(
-          'Impossible de téléverser la photo ’%s’. Détails :%s',
-          photo.nom,
-          error,
+        this.consignateurErreur.erreur(
+          error as Error,
+          `Impossible de téléverser la photo ${photo.nom}.`,
         );
       }
     };
@@ -101,8 +103,8 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
       throw new Error('Impossible de téléverser les photos');
     }
     return Promise.resolve();
-  },
-  recupereTypeImage: (buffer: Buffer) => {
+  }
+  recupereTypeImage(buffer: Buffer) {
     const valideLaSignatureDuFichier = (
       tableauDOctets: Uint8Array,
       signaturesValides: Array<number[]>,
@@ -127,28 +129,34 @@ const adaptateurDeTeleversement: AdaptateurTeleversement = {
     if (valideLaSignatureDuFichier(buffer, [signaturePNG])) return 'image/png';
     if (valideLaSignatureDuFichier(buffer, signaturesJPEG)) return 'image/jpeg';
     return undefined;
-  },
-};
-
-export const fabriqueAdaptateurTeleversement = (): AdaptateurTeleversement => {
-  if (adaptateurEnvironnement.televersementEnMemoire()) {
-    return {
-      ...adaptateurDeTeleversement,
-      async sauvegarde(photosJeu: PhotosJeuTeleversees): Promise<void> {
-        const lesPhotos = photosJeu.photos.map((p) => ({
-          nom: p.nom,
-          chemin: p.chemin,
-          typeMIME: p.mimeType,
-        }));
-        lesPhotos.push({
-          nom: photosJeu.couverture.nom,
-          chemin: photosJeu.couverture.chemin,
-          typeMIME: photosJeu.couverture.mimeType,
-        });
-        // eslint-disable-next-line no-console
-        console.log('Sauvegarde des images de jeu', JSON.stringify(lesPhotos));
-      },
-    };
   }
-  return adaptateurDeTeleversement;
+}
+
+export class AdaptateurDeTeleversementMemoire extends AdaptateurDeTeleversementCellar {
+  async sauvegarde(photosJeu: PhotosJeuTeleversees): Promise<void> {
+    const lesPhotos = photosJeu.photos.map((p) => ({
+      nom: p.nom,
+      chemin: p.chemin,
+      typeMIME: p.mimeType,
+    }));
+    lesPhotos.push({
+      nom: photosJeu.couverture.nom,
+      chemin: photosJeu.couverture.chemin,
+      typeMIME: photosJeu.couverture.mimeType,
+    });
+    // eslint-disable-next-line no-console
+    console.log('Sauvegarde des images de jeu', JSON.stringify(lesPhotos));
+  }
+  recupereTypeImage(_buffer: Buffer): 'image/png' {
+    return 'image/png';
+  }
+}
+
+export const fabriqueAdaptateurTeleversement = (
+  adaptateurGestionErreur: AdaptateurGestionErreur,
+): AdaptateurTeleversement => {
+  if (adaptateurEnvironnement.televersementEnMemoire()) {
+    return new AdaptateurDeTeleversementMemoire(adaptateurGestionErreur);
+  }
+  return new AdaptateurDeTeleversementCellar(adaptateurGestionErreur);
 };

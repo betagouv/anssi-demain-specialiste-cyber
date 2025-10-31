@@ -96,7 +96,9 @@ serviceCoherenceSecretsHachage
         }),
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
-        adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
+        adaptateurTeleversement: fabriqueAdaptateurTeleversement(
+          adaptateurGestionErreur,
+        ),
         adaptateurAntivirus: new AdaptateurJCOP(
           adaptateurGestionErreur,
           adaptateurEnvironnement,
