@@ -6,67 +6,121 @@ block variables
   - var classePage = "page-accueil"
 
 block heros
-  .heros.sombre
-    dsfr-container
-      .conteneur
-        hgroup
-          h1.titre-alternatif-xs #{titreDSC}
-          p.fr-text--lg Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !
-        .actions
-          dsfr-button(
-            label="Découvrir CyberEnJeux"
-            kind="inverted-primary"
-            markup="a"
-            href="/cyber-en-jeux"
-            target="_self"
-          )
-          dsfr-button(
-            label="Explorer les ressources"
-            kind="inverted-secondary"
-            markup="a"
-            href="/catalogue"
-            target="_self"
-          )
+    .heros.sombre
+        dsfr-container
+            .conteneur
+                hgroup
+                    h1.titre-alternatif-xs #{titreDSC}
+                    p.fr-text--lg Promouvoir la formation des élèves à la cybersécurité et la découverte de ses métiers !
+                .actions
+                    dsfr-button(
+                        label="Découvrir CyberEnJeux"
+                        kind="inverted-primary"
+                        markup="a"
+                        href="/cyber-en-jeux"
+                        target="_self"
+                    )
+                    dsfr-button(
+                        label="Explorer les ressources"
+                        kind="inverted-secondary"
+                        markup="a"
+                        href="/catalogue"
+                        target="_self"
+                    )
 
 
 block contenu
-  dsfr-container
-    section.intro
-      hgroup
-        h2 La cybersécurité, un enjeu d’avenir&nbsp;!
-        p.fr-text--lg Accédez à un catalogue de ressources pensé pour découvrir et comprendre les enjeux de la cybersécurité, que vous soyez élève, enseignant ou parent.
-      .carrousel
-        dsfr-card(
-          title="Former vos élèves à la cybersécurité par le jeu"
-          href="#"
-          src="/assets/images/carte-cyber-en-jeux.svg"
-          has-detail-start="true"
-          detail-start="CyberEnJeux"
-          size="sm"
-        )
-        dsfr-card(
-          title="Appendre la cybersécurité en équipe et en challenge"
-          href="#"
-          src="/assets/images/carte-passe-ton-hack.png"
-          has-detail-start="true"
-          detail-start="Passe ton Hack d'abord"
-          size="sm"
-        )
-        dsfr-card(
-          title="Sensibiliser aux risques numériques par le jeu"
-          href="#"
-          src="/assets/images/carte-fresque-cybercitoyens.jpg"
-          has-detail-start="true"
-          detail-start="Fresque du cybercitoyen"
-          size="sm"
-        )
-      dsfr-button(
-          label="Explorer plus de ressources"
-          kind="secondary"
-          markup="a"
-          href="/catalogue"
-          target="_self"
-      )
+    dsfr-container
+        section.intro
+            hgroup
+                h2 La cybersécurité, un enjeu d’avenir&nbsp;!
+                p.fr-text--lg Accédez à un catalogue de ressources pensé pour découvrir et comprendre les enjeux de la cybersécurité, que vous soyez élève, enseignant ou parent.
+            .carrousel
+                dsc-carte-catalogue(ressource={
+                  "id": 1,
+                  "titre": "CyberEnJeux",
+                  "thematiques": [
+                    "Techniques de sécurité numérique",
+                    "Comportements numériques",
+                    "Valoriser les talents féminins"
+                  ],
+                  "publicsCible": [
+                    "Personnel éducatif",
+                    "Elèves"
+                  ],
+                  "niveaux": [
+                    "Cycle 3 (CM1-6e)",
+                    "Cycle 4 (5e-3e)",
+                    "Cycle terminal (2-T)"
+                  ],
+                  "types": [
+                    "Jeux - challenges"
+                  ],
+                  "besoins": [
+                    "Découvrir la cyber",
+                    "Se protéger des risques"
+                  ],
+                  "description": "Former à la cybersécurité par le jeu",
+                  "urlIllustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux.png",
+                  "estCertifiee": true,
+                  "lienExterne": "/cyber-en-jeux"
+                })
+                dsc-carte-catalogue(ressource={
+                  "id": 3,
+                  "titre": "Passe ton Hack D'Abord",
+                  "thematiques": [
+                    "Techniques de sécurité numérique"
+                  ],
+                  "publicsCible": [
+                    "Elèves"
+                  ],
+                  "niveaux": [
+                    "Cycle terminal (2-T)",
+                    "Post Bac"
+                  ],
+                  "types": [
+                    "Jeux - challenges"
+                  ],
+                  "besoins": [
+                    "Découvrir la cyber"
+                  ],
+                  "description": "Appendre la cybersécurité en équipe et en challenge",
+                  "urlIllustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png",
+                  "estCertifiee": true,
+                  "lienExterne": "https://eduscol.education.fr/3679/education-et-cybersecurite"
+                })
+                dsc-carte-catalogue(ressource={
+                  "id": 7,
+                  "titre": "Fresque du cybercitoyen",
+                  "thematiques": [
+                    "Comportements numériques"
+                  ],
+                  "publicsCible": [
+                    "Elèves"
+                  ],
+                  "niveaux": [
+                    "Cycle 3 (CM1-6e)"
+                  ],
+                  "types": [
+                    "Jeux - challenges"
+                  ],
+                  "besoins": [
+                    "Se protéger des risques",
+                    "Découvrir les métiers"
+                  ],
+                  "description": "Un jeu de carte pour prendre conscience des risques",
+                  "urlIllustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Fresque_des_cybercitoyens.png",
+                  "estCertifiee": true,
+                  "lienExterne": "https://fresquedescybercitoyens.fr/"
+                })
+
+            dsfr-button(
+                label="Explorer plus de ressources"
+                kind="secondary"
+                markup="a"
+                href="/catalogue"
+                target="_self"
+            )
 
 block apres-contenu
     include encarts/selections

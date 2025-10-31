@@ -57,3 +57,9 @@
     ></dsfr-tags-group>
   {/if}
 </dsfr-card>
+
+<style lang="scss">
+  dsfr-card {
+    height: 100%;
+  }
+</style>
