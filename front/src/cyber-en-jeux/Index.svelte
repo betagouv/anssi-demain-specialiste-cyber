@@ -12,9 +12,21 @@
   import VitrineDesJeux from './VitrineDesJeux.svelte';
 
   const onglets = [
-    { label: '👩‍🏫 Présentation de CyberEnJeux', fragment: '#presentation' },
-    { label: '🎲 Vitrine des jeux des élèves', fragment: '#vitrine-des-jeux' },
-    { label: '📚 Guides et ressources', fragment: '#guides-et-ressources' },
+    {
+      emoji: '👩‍🏫',
+      label: 'Présentation de CyberEnJeux',
+      fragment: '#presentation',
+    },
+    {
+      emoji: '🎲',
+      label: 'Vitrine des jeux des élèves',
+      fragment: '#vitrine-des-jeux',
+    },
+    {
+      emoji: '📚',
+      label: 'Guides et ressources',
+      fragment: '#guides-et-ressources',
+    },
   ];
   let ongletActif = $state(0);
 </script>

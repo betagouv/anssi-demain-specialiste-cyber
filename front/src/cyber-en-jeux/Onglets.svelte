@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { clic } from '../actions.svelte';
 
-  type Onglet = { label: string; fragment: string };
+  type Onglet = { emoji?: string; label: string; fragment: string };
   type Props = {
     onglets: Onglet[];
     ongletActif: number;
@@ -56,7 +56,10 @@
             href={onglet.fragment}
             use:clic={() => surLeClicDUnOnglet(onglet, indice)}
           >
-            {onglet.label}
+            {#if onglet.emoji}
+              <span aria-hidden="true">{onglet.emoji}</span>
+            {/if}
+            <span>{onglet.label}</span>
           </a>
         </li>
       {/each}
