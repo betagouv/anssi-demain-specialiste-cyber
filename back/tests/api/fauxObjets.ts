@@ -8,26 +8,25 @@ import {
 import { fabriqueMiddleware, RequeteNonTypee } from '../../src/api/middleware';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
-import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
-import {
-  AdaptateurTeleversement,
-  fabriqueAdaptateurTeleversement,
-  PhotosJeuTeleversees,
-} from '../../src/infra/adaptateurTeleversement';
-import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
-import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
 import {
   AdaptateurAntivirus,
   ResultatAnalyseFichier,
 } from '../../src/infra/adapateurAntivirus';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import {
+  AdaptateurDeTeleversementMemoire,
+  AdaptateurTeleversement,
+} from '../../src/infra/adaptateurTeleversement';
 import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
+import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
+import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
+import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
+import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
+import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -141,16 +140,11 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
   };
 
 export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
-  const adaptateurTeleversement = fabriqueAdaptateurTeleversement();
-  return {
-    ...adaptateurTeleversement,
-    sauvegarde(_photosJeu: PhotosJeuTeleversees): Promise<void> {
+  return new (class extends AdaptateurDeTeleversementMemoire {
+    sauvegarde() {
       return Promise.resolve();
-    },
-    recupereTypeImage: (_buffer: Buffer) => {
-      return 'image/png';
-    },
-  };
+    }
+  })(fauxAdaptateurGestionErreur);
 };
 
 const fauxAdaptateurAntivirus = (): AdaptateurAntivirus => {

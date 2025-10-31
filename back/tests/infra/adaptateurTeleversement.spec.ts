@@ -1,10 +1,11 @@
+import { Request } from 'express';
+import { MIMEType } from 'node:util';
 import { assert, describe, expect, it } from 'vitest';
 import {
   fabriqueAdaptateurTeleversement,
   PhotosJeuTeleversees,
 } from '../../src/infra/adaptateurTeleversement';
-import { MIMEType } from 'node:util';
-import { Request } from 'express';
+import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 
 describe('L’adaptateur de téléversement', () => {
   it('détermine la photo de couverture', () => {
@@ -16,7 +17,9 @@ describe('L’adaptateur de téléversement', () => {
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement().photosJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement(
+      fauxAdaptateurGestionErreur,
+    ).photosJeu(requete);
 
     expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
@@ -40,7 +43,9 @@ describe('L’adaptateur de téléversement', () => {
     } as unknown as Request;
 
     try {
-      fabriqueAdaptateurTeleversement().photosJeu(requete);
+      fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).photosJeu(
+        requete,
+      );
       assert.fail('La couverture est présente !');
     } catch (e: unknown | Error) {
       expect((e as Error).message).toBe(
@@ -70,7 +75,9 @@ describe('L’adaptateur de téléversement', () => {
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement().photosJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement(
+      fauxAdaptateurGestionErreur,
+    ).photosJeu(requete);
 
     expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
@@ -121,8 +128,9 @@ describe('L’adaptateur de téléversement', () => {
         attendu: 'image/jpeg',
       },
     ])('pour une image $nom', ({ buffer, attendu }) => {
-      const mimeType =
-        fabriqueAdaptateurTeleversement().recupereTypeImage(buffer);
+      const mimeType = fabriqueAdaptateurTeleversement(
+        fauxAdaptateurGestionErreur,
+      ).recupereTypeImage(buffer);
 
       expect(mimeType).toBe(attendu);
     });
@@ -132,8 +140,9 @@ describe('L’adaptateur de téléversement', () => {
         0xff, 0xff, 0xff, 0xff, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01,
       ]);
 
-      const mimeType =
-        fabriqueAdaptateurTeleversement().recupereTypeImage(bufferInconnu);
+      const mimeType = fabriqueAdaptateurTeleversement(
+        fauxAdaptateurGestionErreur,
+      ).recupereTypeImage(bufferInconnu);
 
       expect(mimeType).toBeUndefined();
     });
@@ -141,8 +150,9 @@ describe('L’adaptateur de téléversement', () => {
     it('pour un fichier indéfini', () => {
       const bufferIndefini = undefined;
 
-      const mimeType =
-        fabriqueAdaptateurTeleversement().recupereTypeImage(bufferIndefini);
+      const mimeType = fabriqueAdaptateurTeleversement(
+        fauxAdaptateurGestionErreur,
+      ).recupereTypeImage(bufferIndefini);
 
       expect(mimeType).toBeUndefined();
     });
