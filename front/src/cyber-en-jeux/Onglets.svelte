@@ -40,9 +40,14 @@
 </script>
 
 <div class={['menu-onglets', { open }]}>
-  <div class="entete" role="button" tabindex="0" use:clic={surLeClicDeLEntete}>
+  <button
+    class="entete"
+    type="button"
+    tabindex="0"
+    use:clic={surLeClicDeLEntete}
+  >
     <span>Naviguer dans CyberEnJeux</span>
-  </div>
+  </button>
   <div class="fr-text onglets" aria-expanded={open}>
     <ol>
       {#each onglets as onglet, indice (onglet.label)}
@@ -63,19 +68,28 @@
   @use '../points-de-rupture' as *;
 
   .menu-onglets {
+    background-color: var(--background-default-grey);
     box-sizing: border-box;
-    margin: 0 -1.5rem;
-    position: relative;
-    width: calc(100% + 3rem);
+    margin-inline: -1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
 
     .entete {
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      color: #000091;
+      appearance: none;
+      background-color: var(--background-default-grey);
+      border-block: 1px solid var(--border-default-grey);
+      border-inline-width: 0;
+      color: var(--text-action-high-blue-france);
+      cursor: pointer;
       display: flex;
+      align-items: center;
       height: 3rem;
+      font: inherit;
+      font-weight: 500;
       gap: 0.5rem;
       padding: 0.75rem 1rem;
+      text-align: left;
+      width: 100%;
 
       span {
         flex: 1;
@@ -86,19 +100,24 @@
         display: none;
       }
 
+      &::before,
+      &::after {
+        --icon-size: 1rem;
+
+        background-color: currentColor;
+        content: '';
+        flex: 0 0 auto;
+        height: var(--icon-size);
+        width: var(--icon-size);
+        mask-size: 100% 100%;
+      }
+
       &::before {
-        background-color: #000091;
-        content: ' ';
-        flex: 0 0 16px;
         -webkit-mask-image: url('/icons/system/menu-2-fill.svg');
         mask-image: url('/icons/system/menu-2-fill.svg');
-        margin-top: 2px;
       }
 
       &::after {
-        background-color: #000091;
-        content: ' ';
-        flex: 0 0 24px;
         -webkit-mask-image: url('/icons/arrows/arrow-down-s-line.svg');
         mask-image: url('/icons/arrows/arrow-down-s-line.svg');
         transform: rotate(0deg);
@@ -107,22 +126,19 @@
     }
 
     .onglets {
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border-default-grey);
       display: none;
-      font-weight: bold;
       max-height: 0;
-      overflow: hidden;
-      position: relative;
       transition:
         display,
         max-height 0.2s ease;
       transition-behavior: allow-discrete;
+      padding-top: 1rem;
     }
 
     &.open {
       .entete {
-        background-color: #e3e3fd;
+        background-color: var(--background-open-blue-france);
 
         &::after {
           transform: rotate(-180deg);
@@ -132,7 +148,6 @@
       .onglets {
         display: block;
         max-height: initial;
-        position: relative;
       }
     }
 
@@ -142,24 +157,34 @@
       padding: 0;
 
       li {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: stretch;
-        margin: 0 1rem;
+        padding-inline: 1rem;
 
         a {
-          flex: 1;
+          color: var(--text-action-high-grey);
+          display: block;
+          font-weight: bold;
           padding: 0.75rem 0.5rem;
+          position: relative;
+
+          &::before {
+            background-color: transparent;
+            inset: 0.75rem 0;
+            content: '';
+            position: absolute;
+            width: 2px;
+          }
         }
 
-        + li > a {
-          border-top: 1px solid #ddd;
+        &:not(:first-child) a {
+          border-top: 1px solid var(--border-default-grey);
         }
 
         &.actif a {
-          background: linear-gradient(#000091, #000091) 0 50% / 2px 24px
-            no-repeat;
-          color: #000091;
+          color: var(--text-active-blue-france);
+
+          &::before {
+            background-color: var(--border-active-blue-france);
+          }
         }
       }
     }
@@ -179,6 +204,8 @@
         font-size: 0.875rem;
         font-weight: normal;
         max-height: initial;
+        padding-top: 0;
+        border-bottom-width: 0;
       }
 
       ol {
@@ -187,22 +214,44 @@
         flex-flow: row nowrap;
 
         li {
-          margin: 0;
+          padding-inline: 0;
 
           a {
-            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-default-grey);
+            font-weight: normal;
+            padding-inline: 0.75rem;
             white-space: nowrap;
-          }
 
-          &.actif {
-            a {
-              background: linear-gradient(#000091, #000091) 0 100% / 100% 2px
-                no-repeat;
+            &:hover {
+              background-color: var(--background-default-grey-hover);
+              border-bottom-color: var(--border-constrat-grey, #929292);
+            }
+
+            &:focus {
+              outline-style: none;
+            }
+
+            &:focus-visible {
+              outline-offset: 2px;
+              outline-width: 2px;
+              outline-color: #0a76f6;
+              outline-style: solid;
             }
           }
 
-          + li a {
-            border-top: 0;
+          &:not(:first-child) a {
+            border-top-width: 0;
+          }
+
+          &.actif a {
+            border-bottom-color: currentColor;
+
+            &::before {
+              bottom: 0;
+              top: initial;
+              height: 1px;
+              width: 100%;
+            }
           }
         }
       }
