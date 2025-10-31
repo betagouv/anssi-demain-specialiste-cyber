@@ -13,8 +13,36 @@ body {
 }
 
 .carte {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    color: #000;
-    padding: 2rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #000;
+  padding: 2rem;
+}
+
+/* règle les problèmatiques de décalage de contenu avant le chargement complet (CLS)*/
+
+dsc-entete {
+  min-height: 162px;
+  display: block;
+}
+
+.page-accueil {
+  .entete {
+    .heros {
+      .conteneur {
+        .actions {
+          min-height: 40px;
+        }
+      }
+    }
+  }
+
+  .intro {
+    .carrousel {
+      min-height: 410px;
+    }
+    dsfr-button {
+      min-height: 40px;
+    }
+  }
 }
