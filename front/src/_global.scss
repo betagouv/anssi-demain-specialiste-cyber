@@ -26,6 +26,16 @@ dsc-entete {
   display: block;
 }
 
+header {
+  &.entete {
+    dsc-heros {
+      display: block;
+      min-height: 145px;
+    }
+  }
+}
+
+
 .page-accueil {
   .entete {
     .heros {
@@ -41,8 +51,21 @@ dsc-entete {
     .carrousel {
       min-height: 410px;
     }
+
     dsfr-button {
       min-height: 40px;
     }
+  }
+}
+
+.page-catalogue {
+  .entete {
+    dsc-heros {
+      min-height: 245px;
+    }
+  }
+  dsc-catalogue {
+    display: block;
+    min-height: 968px;
   }
 }
