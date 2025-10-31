@@ -14,8 +14,8 @@ import { cybercluedo, hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 describe('La ressource des jeux', () => {
   let serveur: Express;
   let entrepotJeux: EntrepotJeux;
-
   let middleware: Middleware;
+
   const ajouteUtilisateurARequeteMock = vi
     .fn()
     .mockImplementation((req, _res, suite) => {
@@ -88,6 +88,25 @@ describe('La ressource des jeux', () => {
       const reponse = await request(serveur).get('/api/jeux/1');
 
       expect(reponse.body.estProprietaire).toBeFalsy();
+    });
+
+    it("utilise un mode souple pour ajouter l'utilisateur à la requête", async () => {
+      let modeUtilise: 'souple' | 'strict' | undefined;
+      middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
+      middleware.ajouteUtilisateurARequete =
+        (_, __, mode?) => async (_, __, suite) => {
+          modeUtilise = mode;
+          suite();
+        };
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur(),
+        middleware,
+        entrepotJeux,
+      });
+
+      await request(serveur).get('/api/jeux/1');
+
+      expect(modeUtilise).toBe('souple');
     });
   });
 

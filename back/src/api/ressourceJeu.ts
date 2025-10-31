@@ -25,6 +25,7 @@ export const ressourceJeu = ({
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
       adaptateurHachage,
+      'souple',
     ),
     async (requete, reponse) => {
       const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
