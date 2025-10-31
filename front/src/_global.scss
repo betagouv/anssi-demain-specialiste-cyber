@@ -64,8 +64,20 @@ header {
       min-height: 245px;
     }
   }
+
   dsc-catalogue {
     display: block;
     min-height: 968px;
+  }
+}
+
+dsc-selection {
+  lab-anssi-ancres {
+    display: block;
+    min-height: 46px;
+  }
+
+  section.section-vide {
+    min-height: 400px;
   }
 }
