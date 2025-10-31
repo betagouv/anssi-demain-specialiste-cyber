@@ -1,7 +1,5 @@
-import {
-  AdaptateurEnvironnement,
-  adaptateurEnvironnement as adaptateurEnvironnementProd,
-} from './adaptateurEnvironnement';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 import { creePosteRessourceHttp, PosteRessourceHttp } from './clientHttp';
 
 export type ReponseJCOP = {
@@ -17,26 +15,24 @@ export type ResultatAnalyseFichier = {
 };
 
 export type AdaptateurAntivirus = {
-  analyse: (
-    fichiers: Buffer<ArrayBuffer>[],
-    dependances?: {
-      clientHttp: PosteRessourceHttp<ReponseJCOP>;
-      adaptateurEnvironnement: AdaptateurEnvironnement;
-    },
-  ) => Promise<ResultatAnalyseFichier>;
+  analyse: (fichiers: Buffer<ArrayBuffer>[]) => Promise<ResultatAnalyseFichier>;
 };
+export class AdaptateurJCOP implements AdaptateurAntivirus {
+  private readonly headers: Record<string, string>;
+  constructor(
+    private readonly consignateurErreur: AdaptateurGestionErreur,
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
+    private readonly clientHttp: PosteRessourceHttp<ReponseJCOP> = creePosteRessourceHttp(),
+  ) {
+    this.headers = {
+      'X-Auth-Token': this.adaptateurEnvironnement.antivirus().jetonAnalyse,
+    };
+  }
 
-export const adaptateurJCOP: AdaptateurAntivirus = {
-  analyse: async (
-    fichiers: Buffer<ArrayBuffer>[],
-    { clientHttp, adaptateurEnvironnement } = {
-      clientHttp: creePosteRessourceHttp(),
-      adaptateurEnvironnement: adaptateurEnvironnementProd,
-    },
-  ) => {
+  async analyse(fichiers: Buffer<ArrayBuffer>[]) {
     if (
       !fichiers.length ||
-      !adaptateurEnvironnement.antivirus().analyseActive
+      !this.adaptateurEnvironnement.antivirus().analyseActive
     ) {
       return { estEnErreur: false };
     }
@@ -45,13 +41,11 @@ export const adaptateurJCOP: AdaptateurAntivirus = {
       const formulaire = new FormData();
       const promesses = fichiers.map(async (fichier) => {
         formulaire.append('file', new Blob([fichier]));
-        const reponse = await clientHttp(
-          adaptateurEnvironnement.antivirus().urlAnalyse,
+        const reponse = await this.clientHttp(
+          this.adaptateurEnvironnement.antivirus().urlAnalyse,
           formulaire,
           {
-            headers: {
-              'X-Auth-Token': adaptateurEnvironnement.antivirus().jetonAnalyse,
-            },
+            headers: this.headers,
           },
         );
         // eslint-disable-next-line no-console
@@ -63,12 +57,11 @@ export const adaptateurJCOP: AdaptateurAntivirus = {
         estInfecte: listeDesResultats.some((r) => r.is_malware),
         estEnErreur: listeDesResultats.some((r) => !r.status),
       };
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error('Analyse antivirus en erreur', e);
+    } catch (e: unknown | Error) {
+      this.consignateurErreur.erreur(e as Error, 'Analyse antivirus en erreur');
       return {
         estEnErreur: true,
       };
     }
-  },
-};
+  }
+}
