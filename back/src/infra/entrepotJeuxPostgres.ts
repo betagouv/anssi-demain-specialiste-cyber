@@ -99,16 +99,12 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
   }
 
   async parId(id: Jeu['id']): Promise<Jeu | undefined> {
-    try {
-      const jeuEnDB = await this.knex<JeuEnDBLecture>('jeux')
-        .where({
-          id,
-        })
-        .first();
-      return jeuEnDB ? this.donneesEnDbVersMetier(jeuEnDB) : undefined;
-    } catch {
-      return undefined;
-    }
+    const jeuEnDB = await this.knex<JeuEnDBLecture>('jeux')
+      .where({
+        id,
+      })
+      .first();
+    return jeuEnDB ? this.donneesEnDbVersMetier(jeuEnDB) : undefined;
   }
 
   private prefixeCheminParUrl(image: { chemin: string }) {

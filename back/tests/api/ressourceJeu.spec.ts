@@ -9,7 +9,7 @@ import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
 } from './fauxObjets';
-import { cybercluedo, hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
+import { cyberuno, hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource des jeux', () => {
   let serveur: Express;
@@ -25,7 +25,7 @@ describe('La ressource des jeux', () => {
 
   beforeEach(async () => {
     entrepotJeux = new EntrepotJeuxMemoire();
-    await entrepotJeux.ajoute(cybercluedo);
+    await entrepotJeux.ajoute(cyberuno);
     middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
     middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
     serveur = creeServeur({
@@ -36,37 +36,48 @@ describe('La ressource des jeux', () => {
   });
 
   describe('sur un GET', () => {
+    const recupereCyberUno = async () =>
+      request(serveur).get('/api/jeux/' + cyberuno.id);
+
     it('retourne un 200', async () => {
-      const reponse = await request(serveur).get('/api/jeux/1');
+      const reponse = await recupereCyberUno();
 
       expect(reponse.status).toEqual(200);
     });
 
-    it("retourne un 404 lorsque le jeu n'éxiste pas", async () => {
+    it("retourne un 400 lorsque l'identifiant du jeu n'est pas un UUID", async () => {
       const reponse = await request(serveur).get('/api/jeux/1234');
+
+      expect(reponse.status).toEqual(400);
+    });
+
+    it("retourne un 404 lorsque le jeu n'existe pas", async () => {
+      const reponse = await request(serveur).get(
+        '/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b',
+      );
 
       expect(reponse.status).toEqual(404);
     });
 
     it("renvoie les détails d'un jeu", async () => {
-      const reponse = await request(serveur).get('/api/jeux/1');
+      const reponse = await recupereCyberUno();
 
       expect(reponse.body).toStrictEqual({
-        id: '1',
-        nom: 'cybercluedo',
+        id: '4050fff7-0bd6-46d8-ad5f-2c5118eb4c53',
+        nom: 'cyberuno',
         enseignant: 'Jeanne',
         sequence: 'heure',
-        classe: 'cp',
-        discipline: 'histoire-et-geographie',
-        nomEtablissement: 'Lycée de la mer',
+        classe: 'ce1',
+        discipline: 'autre',
+        nomEtablissement: 'Lycée de la montagne',
         eleves: [],
-        categorie: 'simulation',
+        categorie: 'autre',
         temoignages: [],
-        thematiques: ['menace-cyber', 'orientation'],
-        description: 'Une description',
+        thematiques: ['comportements-numeriques', 'cyberharcelement'],
+        description: 'Une description du cyber uno',
         photos: {
           couverture: {
-            chemin: 'un-chemin',
+            chemin: 'un-deuxieme-chemin',
           },
           photos: [],
         },
@@ -85,7 +96,7 @@ describe('La ressource des jeux', () => {
         },
       );
 
-      const reponse = await request(serveur).get('/api/jeux/1');
+      const reponse = await recupereCyberUno();
 
       expect(reponse.body.estProprietaire).toBeFalsy();
     });
@@ -104,30 +115,44 @@ describe('La ressource des jeux', () => {
         entrepotJeux,
       });
 
-      await request(serveur).get('/api/jeux/1');
+      await recupereCyberUno();
 
       expect(modeUtilise).toBe('souple');
     });
   });
 
   describe('sur un PATCH', () => {
+    const modifieCyberUno = async (corps: Record<string, unknown>) =>
+      request(serveur)
+        .patch('/api/jeux/' + cyberuno.id)
+        .send(corps);
     it('retourne un 200', async () => {
-      const reponse = await request(serveur).patch('/api/jeux/1').send({
+      const reponse = await modifieCyberUno({
         estCache: true,
       });
 
       expect(reponse.status).toEqual(200);
     });
 
-    it("retourne un 404 lorsque le jeu n'existe pas", async () => {
+    it("retourne un 400 lorsque l'identifiant du jeu n'est pas un UUID", async () => {
       const reponse = await request(serveur).patch('/api/jeux/1234').send({
         estCache: true,
       });
+
+      expect(reponse.status).toEqual(400);
+    });
+
+    it("retourne un 404 lorsque le jeu n'existe pas", async () => {
+      const reponse = await request(serveur)
+        .patch('/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b')
+        .send({
+          estCache: true,
+        });
       expect(reponse.status).toEqual(404);
     });
 
     it('modifie la visibilité du jeu', async () => {
-      const reponse = await request(serveur).patch('/api/jeux/1').send({
+      const reponse = await modifieCyberUno({
         estCache: true,
       });
 
@@ -136,7 +161,7 @@ describe('La ressource des jeux', () => {
         incrementeReaction: _i,
         enseignant,
         ...rest
-      } = cybercluedo;
+      } = cyberuno;
       expect(reponse.body).toEqual({
         ...rest,
         enseignant: enseignant?.prenom,
@@ -144,7 +169,7 @@ describe('La ressource des jeux', () => {
         estProprietaire: true,
       });
 
-      const jeuModifie = await entrepotJeux.parId('1');
+      const jeuModifie = await entrepotJeux.parId(cyberuno.id);
       expect(jeuModifie!.estCache).toBe(true);
     });
 
@@ -155,7 +180,7 @@ describe('La ressource des jeux', () => {
           suite();
         },
       );
-      const reponse = await request(serveur).patch('/api/jeux/1').send({
+      const reponse = await modifieCyberUno({
         estCache: true,
       });
       expect(reponse.status).toEqual(403);
@@ -168,45 +193,43 @@ describe('La ressource des jeux', () => {
           suite();
         },
       );
-      const reponse = await request(serveur).patch('/api/jeux/1').send({
+      const reponse = await modifieCyberUno({
         estCache: true,
       });
       expect(reponse.status).toEqual(403);
     });
 
     it('ne modifie rien si le corps est vide', async () => {
-      const reponse = await request(serveur).patch('/api/jeux/1').send({});
+      const reponse = await modifieCyberUno({});
 
       expect(reponse.status).toBe(200);
-      const jeuModifie = await entrepotJeux.parId('1');
-      expect(jeuModifie).toStrictEqual(cybercluedo);
+      const jeuModifie = await entrepotJeux.parId(cyberuno.id);
+      expect(jeuModifie).toStrictEqual(cyberuno);
     });
 
     it('modifie un jeu', async () => {
-      const reponse = await request(serveur)
-        .patch('/api/jeux/1')
-        .send({
-          nomEtablissement: 'Nouveau nom etablissement',
-          sequence: 'demi-journee',
-          eleves: ['Martin', 'Sophie'],
-          discipline: 'francais',
-          classe: 'cm2',
-          nom: 'Nouveau nom du jeu',
-          categorie: 'jeu-plateau',
-          thematiques: ['cyberharcelement', 'gestion-crise-cyber'],
-          description: 'Nouvelle description',
-          consentement: true,
-          temoignages: [
-            {
-              prenom: 'Joséphine',
-              details: "C'était super !",
-            },
-          ],
-        });
+      const reponse = await modifieCyberUno({
+        nomEtablissement: 'Nouveau nom etablissement',
+        sequence: 'demi-journee',
+        eleves: ['Martin', 'Sophie'],
+        discipline: 'francais',
+        classe: 'cm2',
+        nom: 'Nouveau nom du jeu',
+        categorie: 'jeu-plateau',
+        thematiques: ['cyberharcelement', 'gestion-crise-cyber'],
+        description: 'Nouvelle description',
+        consentement: true,
+        temoignages: [
+          {
+            prenom: 'Joséphine',
+            details: "C'était super !",
+          },
+        ],
+      });
 
       expect(reponse.status).toBe(200);
 
-      const jeuModifie = (await entrepotJeux.parId('1'))!;
+      const jeuModifie = (await entrepotJeux.parId(cyberuno.id))!;
       expect(jeuModifie.nomEtablissement).toBe('Nouveau nom etablissement');
       expect(jeuModifie.sequence).toBe('demi-journee');
       expect(jeuModifie.eleves).toEqual(['Martin', 'Sophie']);
@@ -230,7 +253,7 @@ describe('La ressource des jeux', () => {
 
     describe('concernant les propriétés fournies', () => {
       it("vérifie que le nom d'établissement est non vide", async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           nomEtablissement: '',
         });
 
@@ -241,7 +264,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que le nom du jeu est non vide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           nom: '',
         });
 
@@ -250,7 +273,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la discipline est valide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           discipline: '',
         });
 
@@ -259,7 +282,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la classe est valide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           classe: '',
         });
 
@@ -268,7 +291,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la séquence est valide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           sequence: '',
         });
 
@@ -277,7 +300,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la catégorie est valide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           categorie: '',
         });
 
@@ -286,7 +309,7 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la description est non vide', async () => {
-        const reponse = await request(serveur).patch('/api/jeux/1').send({
+        const reponse = await modifieCyberUno({
           description: '',
         });
 
@@ -295,11 +318,9 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
-        const reponse = await request(serveur)
-          .patch('/api/jeux/1')
-          .send({
-            description: 'a'.repeat(8001),
-          });
+        const reponse = await modifieCyberUno({
+          description: 'a'.repeat(8001),
+        });
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(
@@ -308,11 +329,9 @@ describe('La ressource des jeux', () => {
       });
 
       it("vérifie que le prénom des témoignages n'est pas vide", async () => {
-        const reponse = await request(serveur)
-          .patch('/api/jeux/1')
-          .send({
-            temoignages: [{ prenom: '', details: 'Détails' }],
-          });
+        const reponse = await modifieCyberUno({
+          temoignages: [{ prenom: '', details: 'Détails' }],
+        });
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(
@@ -321,11 +340,9 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que les détails des témoignages ne sont pas vides', async () => {
-        const reponse = await request(serveur)
-          .patch('/api/jeux/1')
-          .send({
-            temoignages: [{ prenom: 'Martin', details: '' }],
-          });
+        const reponse = await modifieCyberUno({
+          temoignages: [{ prenom: 'Martin', details: '' }],
+        });
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(
@@ -334,11 +351,9 @@ describe('La ressource des jeux', () => {
       });
 
       it('vérifie que les détails des témoignages ne dépassent pas 8000 caractères', async () => {
-        const reponse = await request(serveur)
-          .patch('/api/jeux/1')
-          .send({
-            temoignages: [{ prenom: 'Martin', details: 'a'.repeat(8001) }],
-          });
+        const reponse = await modifieCyberUno({
+          temoignages: [{ prenom: 'Martin', details: 'a'.repeat(8001) }],
+        });
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toEqual(

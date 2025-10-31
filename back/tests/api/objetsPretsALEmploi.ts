@@ -29,3 +29,16 @@ export const cybercluedo = unJeu()
   .dansEtablissement('Lycée de la mer')
   .avecUneCouverture('un-chemin')
   .construis();
+
+export const cyberuno = unJeu()
+  .avecUnId('4050fff7-0bd6-46d8-ad5f-2c5118eb4c53')
+  .avecUnNom('cyberuno')
+  .deEnseignant(jeanneDupont)
+  .deClasse('ce1')
+  .deCategorie('autre')
+  .avecLesThematiques(['comportements-numeriques', 'cyberharcelement'])
+  .avecUneDescription('Une description du cyber uno')
+  .pourLaDiscipline('autre')
+  .dansEtablissement('Lycée de la montagne')
+  .avecUneCouverture('un-deuxieme-chemin')
+  .construis();
