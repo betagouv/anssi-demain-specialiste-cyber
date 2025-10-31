@@ -12,18 +12,20 @@
 
 <div class="accueil">
   <dsfr-container>
-    <div class="approuve">
-      <h2>
-        Déjà testé et approuvé par plus de 800 enseignants auprès de 70 000
-        élèves
-      </h2>
-      <p class="fr-text--lg">
-        Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec
-        le ministère de l’Education nationale et l’association Open Serious
-        Game, CyberEnJeux est un dispositif pédagogique innovant permettant de
-        former des élèves à la cybersécurité dans le cadre de leurs
-        enseignements… par la création de jeux par les élèves eux-mêmes.
-      </p>
+    <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+      <div class="approuve fr-col-12 fr-col-lg-10 fr-col-xl-8">
+        <h2>
+          Déjà testé et approuvé par plus de 800 enseignants auprès de 70 000
+          élèves
+        </h2>
+        <p class="fr-text--lg">
+          Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit
+          avec le ministère de l’Education nationale et l’association Open
+          Serious Game, CyberEnJeux est un dispositif pédagogique innovant
+          permettant de former des élèves à la cybersécurité dans le cadre de
+          leurs enseignements… par la création de jeux par les élèves eux-mêmes.
+        </p>
+      </div>
     </div>
   </dsfr-container>
 
@@ -208,7 +210,6 @@
     .approuve {
       margin: 4.5rem auto;
       text-align: center;
-      width: clamp(200px, 100%, 736px);
 
       p {
         margin: 0 auto;
