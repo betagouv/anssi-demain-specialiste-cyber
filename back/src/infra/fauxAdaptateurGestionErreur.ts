@@ -16,4 +16,8 @@ export const fauxAdaptateurGestionErreur: AdaptateurGestionErreur = {
       },
     );
   },
+  erreur(erreur, message) {
+    // eslint-disable-next-line no-console
+    console.error(message, erreur);
+  },
 };
