@@ -5,7 +5,6 @@ const config = adaptateurEnvironnement.sentry();
 
 if (config.dsn() && config.environnement()) {
   Sentry.init({
-    debug: true,
     dsn: config.dsn(),
     environment: config.environnement(),
     integrations: [Sentry.expressIntegration(), Sentry.postgresIntegration()],
