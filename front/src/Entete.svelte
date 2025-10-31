@@ -122,12 +122,12 @@
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
   hasToolLinks={!sansZoneIdentification}
+  duplicateToolLinks={true}
   hasNavigation={!sansNavigation}
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
   navigationItems={menuNavigation}
 >
-  <div slot="toolLinks">
-    <dsc-zone-identification></dsc-zone-identification>
-  </div>
+  <dsc-zone-identification slot="toolLinks"></dsc-zone-identification>
+  <dsc-zone-identification slot="modalToolLinks"></dsc-zone-identification>
 </dsfr-header>
