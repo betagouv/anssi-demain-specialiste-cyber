@@ -1,9 +1,10 @@
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
+import z from 'zod';
 import { Jeu } from '../metier/jeu';
 import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
-import { schemaModificationJeu } from './schemasJeu';
 import { filetRouteAsynchrone } from './middleware';
+import { schemaModificationJeu } from './schemasJeu';
 
 type ReponseJeu = Omit<
   Jeu,
@@ -11,6 +12,16 @@ type ReponseJeu = Omit<
 > & {
   enseignant: string;
   estProprietaire: boolean;
+};
+
+const validateurJeuId: RequestHandler = (requete, reponse, suite) => {
+  const schema = z.uuid();
+  const resultat = schema.safeParse(requete.params.id);
+  if (!resultat.success) {
+    reponse.status(400).json({ erreur: 'Id invalide' });
+  } else {
+    suite();
+  }
 };
 
 export const ressourceJeu = ({
@@ -23,6 +34,7 @@ export const ressourceJeu = ({
 
   routeur.get(
     '/:id',
+    validateurJeuId,
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
       adaptateurHachage,
@@ -42,6 +54,7 @@ export const ressourceJeu = ({
 
   routeur.patch(
     '/:id',
+    validateurJeuId,
     middleware.valideLaCoherenceDuCorps(schemaModificationJeu),
     middleware.ajouteUtilisateurARequete(
       entrepotUtilisateur,
