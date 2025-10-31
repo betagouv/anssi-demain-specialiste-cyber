@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
-  adaptateurJCOP,
+  AdaptateurJCOP,
   ReponseJCOP,
 } from '../../src/infra/adapateurAntivirus';
 import { PosteRessourceHttp } from '../../src/infra/clientHttp';
+import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'adaptateur JCOP ", () => {
@@ -19,16 +20,14 @@ describe("L'adaptateur JCOP ", () => {
   const fauxClientHttp: PosteRessourceHttp<ReponseJCOP> = async () => {
     return reponseJCOPOK;
   };
-  const dependancesParDefaut = {
-    clientHttp: fauxClientHttp,
-    adaptateurEnvironnement: fauxAdaptateurEnvironnement,
-  };
 
   it('sait analyser un fichier non infecté', async () => {
-    const { estInfecte } = await adaptateurJCOP.analyse(
-      desFichiersQuelconques,
-      dependancesParDefaut,
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
+      fauxClientHttp,
     );
+    const { estInfecte } = await adaptateurJCOP.analyse(desFichiersQuelconques);
 
     expect(estInfecte).toBeFalsy();
   });
@@ -40,10 +39,13 @@ describe("L'adaptateur JCOP ", () => {
       return reponseJCOPOK;
     };
 
-    const { estEnErreur } = await adaptateurJCOP.analyse([], {
-      ...dependancesParDefaut,
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
       clientHttp,
-    });
+    );
+
+    const { estEnErreur } = await adaptateurJCOP.analyse([]);
 
     expect(estAppele).toBeFalsy();
     expect(estEnErreur).toBeFalsy();
@@ -65,12 +67,14 @@ describe("L'adaptateur JCOP ", () => {
       }),
     };
 
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      adaptateurEnvironnementAnalyseOff,
+      clientHttp,
+    );
+
     const { estEnErreur } = await adaptateurJCOP.analyse(
       desFichiersQuelconques,
-      {
-        adaptateurEnvironnement: adaptateurEnvironnementAnalyseOff,
-        clientHttp,
-      },
     );
 
     expect(estAppele).toBeFalsy();
@@ -90,10 +94,13 @@ describe("L'adaptateur JCOP ", () => {
       return reponseJCOPOK;
     };
 
-    await adaptateurJCOP.analyse(desFichiersQuelconques, {
-      ...dependancesParDefaut,
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
       clientHttp,
-    });
+    );
+
+    await adaptateurJCOP.analyse(desFichiersQuelconques);
 
     expect(urlAppelee).toEqual('https://mon-antivirus.local/');
     expect(jetonAuth).toEqual('monJetonJCOP');
@@ -107,12 +114,14 @@ describe("L'adaptateur JCOP ", () => {
       status: false,
     });
 
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
+      clientHttp,
+    );
+
     const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
       desFichiersQuelconques,
-      {
-        ...dependancesParDefaut,
-        clientHttp,
-      },
     );
     expect(estInfecte).toBeFalsy();
     expect(estEnErreur).toBeTruthy();
@@ -124,13 +133,13 @@ describe("L'adaptateur JCOP ", () => {
       status: true,
     });
 
-    const { estInfecte } = await adaptateurJCOP.analyse(
-      desFichiersQuelconques,
-      {
-        ...dependancesParDefaut,
-        clientHttp,
-      },
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
+      clientHttp,
     );
+
+    const { estInfecte } = await adaptateurJCOP.analyse(desFichiersQuelconques);
     expect(estInfecte).toBeTruthy();
   });
 
@@ -139,12 +148,14 @@ describe("L'adaptateur JCOP ", () => {
       throw new Error('http erreur levée manuellement');
     };
 
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
+      clientHttp,
+    );
+
     const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
       desFichiersQuelconques,
-      {
-        ...dependancesParDefaut,
-        clientHttp,
-      },
     );
     expect(estInfecte).toBeUndefined();
     expect(estEnErreur).toBeTruthy();

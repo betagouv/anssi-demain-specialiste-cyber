@@ -10,7 +10,7 @@ import { moteurDeRenduExpress } from './api/moteurDeRendu';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
-import { adaptateurJCOP } from './infra/adapateurAntivirus';
+import { AdaptateurJCOP } from './infra/adapateurAntivirus';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { fabriqueExpediteurEmail } from './infra/adaptateurExpediteurEmail';
@@ -97,7 +97,10 @@ serviceCoherenceSecretsHachage
         busEvenements,
         adaptateurJournal: fabriqueAdaptateurJournal(),
         adaptateurTeleversement: fabriqueAdaptateurTeleversement(),
-        adaptateurAntivirus: adaptateurJCOP,
+        adaptateurAntivirus: new AdaptateurJCOP(
+          adaptateurGestionErreur,
+          adaptateurEnvironnement,
+        ),
         entrepotSelectionsEnseignants: new EntrepotSelectionsGrist(
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsEnseignants(),
