@@ -1,3 +1,13 @@
+<svelte:options
+  customElement={{
+    tag: 'dsc-carte-catalogue',
+    shadow: 'none',
+    props: {
+      ressource: { type: 'Object' },
+    },
+  }}
+/>
+
 <script lang="ts">
   import {
     laCouleurDuBadgeSelonTypeRessourceCyber,
