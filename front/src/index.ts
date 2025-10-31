@@ -12,3 +12,4 @@ export * from './Entete.svelte';
 export * from './selections/Selection.svelte';
 export * from './relai/FicheRelai.svelte';
 export * from './Heros.svelte';
+export * from "./catalogue/CarteCatalogue.svelte"
