@@ -46,6 +46,11 @@ export const moteurDeRenduExpress = (
         ...fournisseurDeChemins(),
         nonce: reponse.locals.nonce,
       };
+      // eslint-disable-next-line no-console
+      console.log(
+        '[DEBUG] Nonce original: ',
+        optionsAvecManifesteEtNonce.nonce,
+      );
       reponse.render(vue, {
         ...optionsAvecManifesteEtNonce,
         ...constantesPUG,

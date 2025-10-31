@@ -10,6 +10,7 @@ import { ressourcesApi } from './ressourcesApi';
 import { ressourcesOidc } from './ressourcesOidc';
 import { ressourcesPages } from './ressourcesPages';
 import { creeServeurLab } from '@lab-anssi/lib';
+import { ressourcesProxyUmap } from './ressourceProxyUmap';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { serveurLab } = configurationServeur;
@@ -17,6 +18,8 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.ajouteLeNonceALaReponse);
   app.use(configurationServeur.middleware.positionneLesCsp);
+
+  app.use(ressourcesProxyUmap());
 
   app.use(json());
   app.use(

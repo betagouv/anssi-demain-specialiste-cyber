@@ -177,7 +177,7 @@ export const fabriqueMiddleware = ({
             `'nonce-${reponse.locals.nonce}'`,
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
-          frameSrc: ['https://umap.incubateur.anct.gouv.fr'],
+          frameSrc: ["'self'" /*'https://umap.incubateur.anct.gouv.fr'*/],
         },
       },
     })(requete, reponse, suite);
