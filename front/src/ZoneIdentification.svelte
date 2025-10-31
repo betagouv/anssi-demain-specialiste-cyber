@@ -7,7 +7,17 @@
 </script>
 
 {#if $profil}
-  <a class="deconnexion" href="/oidc/deconnexion">Se déconnecter</a>
+  <dsfr-button
+    class="deconnexion"
+    href="/oidc/deconnexion"
+    label="Se déconnecter"
+    hasIcon
+    icon="logout-box-r-line"
+    kind="tertiary-no-outline"
+    markup="a"
+    size="sm"
+  >
+  </dsfr-button>
 {:else}
   <dsfr-button
     class="connexion"
