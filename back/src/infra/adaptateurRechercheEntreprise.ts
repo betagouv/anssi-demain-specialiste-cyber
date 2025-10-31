@@ -1,8 +1,9 @@
 import axios, { AxiosError } from 'axios';
+import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisationParSiret(
-    siret: string
+    siret: string,
   ): Promise<ResultatRechercheEntreprise | undefined>;
 }
 
@@ -24,7 +25,7 @@ const extraisDepartement = (commune: string | undefined) => {
 
 const extraisInfosEtablissement = (
   terme: string,
-  resultat: ResultatSirene
+  resultat: ResultatSirene,
 ): ResultatRechercheEntreprise => {
   let nom = resultat.nom_complet;
   const { departement, siret } = resultat.siege;
@@ -45,7 +46,7 @@ const extraisInfosEtablissement = (
       nom = resultat.matching_etablissements[0].liste_enseignes[0];
     }
     departementRetour = extraisDepartement(
-      resultat.matching_etablissements[0].commune
+      resultat.matching_etablissements[0].commune,
     );
     siretRetour = resultat.matching_etablissements[0].siret;
   }
@@ -72,9 +73,13 @@ type ResultatSirene = {
   }[];
 };
 
-export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+export class AdaptateurRechercheEntrepriseApiGouv
+  implements AdaptateurRechercheEntreprise
+{
+  constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
+
   async rechercheOrganisationParSiret(
-    siret: string
+    siret: string,
   ): Promise<ResultatRechercheEntreprise | undefined> {
     try {
       const reponse = await axios.get(
@@ -88,7 +93,7 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
             est_entrepreneur_individuel: false,
             mtm_campaign: 'demain-specialiste-cyber',
           },
-        }
+        },
       );
 
       const organisations = reponse.data.results
@@ -96,19 +101,17 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
         .map((r: ResultatSirene) => extraisInfosEtablissement(siret, r));
 
       return organisations.length === 0 ? undefined : organisations[0];
-    } catch (e) {
+    } catch (e: unknown | Error) {
       if (e instanceof AxiosError) {
-        // eslint-disable-next-line no-console
-        console.error(e, {
-          'Erreur renvoyee par API recherche-entreprise': e.response?.data,
-          'Statut HTTP': e.response?.status,
-        });
+        this.consignateurErreur.erreur(
+          e,
+          `Erreur renvoyée par API recherche-entreprise : ${e.cause}`,
+        );
       } else {
-        // eslint-disable-next-line no-console
-        console.error(e);
+        this.consignateurErreur.erreur(e as Error);
       }
 
       return undefined;
     }
-  },
-};
+  }
+}

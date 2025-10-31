@@ -18,7 +18,7 @@ import './infra/adaptateurGestionErreurSentry';
 import { fabriqueAdaptateurGestionErreur } from './infra/adaptateurGestionErreurSentry';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
-import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { AdaptateurRechercheEntrepriseApiGouv } from './infra/adaptateurRechercheEntreprise';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
@@ -70,18 +70,21 @@ serviceCoherenceSecretsHachage
     });
 
     const entrepotRessourcesCyber = new EntrepotRessourcesCyberGrist();
+    const adaptateurGestionErreur = fabriqueAdaptateurGestionErreur();
 
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
-        adaptateurGestionErreur: fabriqueAdaptateurGestionErreur(),
+        adaptateurGestionErreur,
         adaptateurOIDC,
         serveurLab: configurationServeurLabEnvironnement(),
         entrepotMetier: new EntrepotMetiersGrist(),
         entrepotRessourcesCyber,
         adaptateurJWT,
         adaptateurHachage,
-        adaptateurRechercheEntreprise,
+        adaptateurRechercheEntreprise: new AdaptateurRechercheEntrepriseApiGouv(
+          adaptateurGestionErreur,
+        ),
         entrepotUtilisateur,
         recupereCheminsVersFichiersStatiques:
           recupereCheminVersFichiersStatiquesParDefaut,
