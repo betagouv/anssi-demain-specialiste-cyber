@@ -144,10 +144,9 @@
       <section id="description">
         <h2>Description du métier</h2>
         <p>{metier.description}</p>
-        <blockquote>
-          <h4>Sa mission principale</h4>
-          <p>{metier.missionPrincipale}</p>
-        </blockquote>
+        <dsfr-highlight text={metier.missionPrincipale} accent="pink-tuile">
+          <h4 slot="title" class="titre-highlight">Sa mission principale</h4>
+        </dsfr-highlight>
         <p><strong> Ce qu'on attend&nbsp;: </strong></p>
         <ul>
           {#each metier.postures as posture}
@@ -259,27 +258,16 @@
     margin-left: 1.5rem;
   }
 
-  blockquote {
-    border-left: 4px solid var(--pink-tuile-main-556);
-    margin-left: 0;
-    padding-left: 1.25rem;
+  dsfr-highlight {
+    margin-top: 1.5rem;
+  }
 
-    h4 {
-      display: none;
-    }
+  .titre-highlight {
+    display: none;
 
     @include a-partir-de(md) {
-      margin-left: 2rem;
-      padding-left: 2.25rem;
-
-      h4 {
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-
-      p {
-        margin: 0;
-      }
+      display: block;
+      margin-bottom: 0.5rem;
     }
   }
 
