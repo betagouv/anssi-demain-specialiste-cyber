@@ -1,0 +1,66 @@
+@use '_points-de-rupture' as *;
+
+$breakpoints: (xs, sm, md, lg, xl) !default;
+$columns: 12;
+$prefix: 'fr';
+
+/// Préfixage d'un élément css, généralement un nom de classe
+///
+/// @param {String} $name - nom de l'élément
+/// @param {String} $notation - notation du sélecteur, par défaut un point pour les classes
+///
+@function ns($name, $notation: '.') {
+  $class-name: $notation + $prefix + '-' + $name;
+
+  @return $class-name;
+}
+
+/// Définit la largeur de colonne
+///
+/// @param {Number} $size - Proportion de la taille de colonne
+/// @param {Number} $columns [$grid-columns] - Nombre de colonne dans la grille (Par défaut `$grid-columns` = 12)
+/// @require {variable} $grid-columns
+///
+@mixin grid-col($size, $columns: 12) {
+  $percent: #{100% * $size};
+  $calc: 'calc(#{$percent} / #{$columns})';
+  flex: 0 0 #{$calc};
+  width: #{$calc};
+  max-width: #{$calc};
+}
+
+/// Génère automatiquement les classes CSS pour les colonnes de grille avec un modificateur spécifique
+///
+/// @param {String} $mod - Le modificateur à ajouter au nom de la classe (ex: 'sm', 'md', 'lg')
+/// @requires {Function} ns - Fonction pour ajouter le namespace aux classes
+/// @requires {Mixin} grid-col - Mixin pour appliquer les styles de colonne
+/// @requires {Variable} $columns - Variable globale définissant le nombre total de colonnes
+///
+@mixin generate-grid-cols($mod) {
+  @for $i from 1 through $columns {
+    $append: '#{$mod}-#{$i}';
+
+    #{ns('col' + $append)} {
+      @include grid-col($i, $columns);
+    }
+  }
+}
+
+.fr-col {
+  flex: 1;
+}
+
+@each $breakpoint in $breakpoints {
+  $mod: '-#{$breakpoint}';
+
+  @if $breakpoint == xs {
+    $breakpoint: first;
+    $mod: '';
+
+    @include generate-grid-cols($mod);
+  } @else {
+    @include a-partir-de($breakpoint) {
+      @include generate-grid-cols($mod);
+    }
+  }
+}
