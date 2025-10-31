@@ -47,7 +47,7 @@ describe('Le middleware', () => {
       ...configurationDeTestDuServeur(),
       adaptateurJWT,
       adaptateurEnvironnement,
-      moteurDeRendu
+      moteurDeRendu,
     });
   });
 
@@ -119,7 +119,7 @@ describe('Le middleware', () => {
     let entrepotUtilisateur: EntrepotUtilisateur;
 
     beforeEach(() => {
-      adaptateurHachage = fauxAdaptateurHachage;
+      adaptateurHachage = { ...fauxAdaptateurHachage };
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     });
 
@@ -197,21 +197,58 @@ describe('Le middleware', () => {
       expect(suiteAppelee).toBeFalsy();
     });
 
-    it('renvoie une erreur 401 si le jeton est invalide', async () => {
-      adaptateurJWT.decode = () => {
-        throw new Error('Token invalide');
-      };
-      let suiteAppelee = false;
+    describe('en mode strict', () => {
+      it('renvoie une erreur 401 si le jeton est invalide', async () => {
+        adaptateurJWT.decode = () => {
+          throw new Error('Token invalide');
+        };
+        let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {
-        suiteAppelee = true;
+        await middleware.ajouteUtilisateurARequete(
+          entrepotUtilisateur,
+          adaptateurHachage,
+        )(requete, reponse, () => {
+          suiteAppelee = true;
+        });
+
+        expect(reponse.statusCode).toEqual(401);
+        expect(suiteAppelee).toBeFalsy();
+      });
+    });
+
+    describe('en mode souple', () => {
+      it('appelle la suite si le jeton est absent', async () => {
+        adaptateurJWT.decode = () => {
+          throw new Error('Token invalide');
+        };
+        let suiteAppelee = false;
+
+        await middleware.ajouteUtilisateurARequete(
+          entrepotUtilisateur,
+          adaptateurHachage,
+          'souple',
+        )(requete, reponse, () => {
+          suiteAppelee = true;
+        });
+
+        expect(suiteAppelee).toBeTruthy();
+        expect(requete.utilisateur).toBeUndefined();
       });
 
-      expect(reponse.statusCode).toEqual(401);
-      expect(suiteAppelee).toBeFalsy();
+      it("ajoute l'utilisateur s'il est trouvé", async () => {
+        adaptateurJWT.decode = () => ({
+          email: 'jeanne.dupont@mail.com',
+        });
+        await entrepotUtilisateur.ajoute(jeanneDupont);
+
+        await middleware.ajouteUtilisateurARequete(
+          entrepotUtilisateur,
+          adaptateurHachage,
+          "souple"
+        )(requete, reponse, () => {});
+
+        expect(requete.utilisateur).toStrictEqual(jeanneDupont);
+      });
     });
   });
 
