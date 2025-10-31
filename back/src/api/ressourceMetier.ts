@@ -1,12 +1,13 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { filetRouteAsynchrone } from './middleware';
 
 export const ressourceMetier = ({ entrepotMetier }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/:id',
-    async (requete: Request<{ id: string }>, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const metier = await entrepotMetier.parIdentifiant(
         Number(requete.params.id),
       );
@@ -14,7 +15,7 @@ export const ressourceMetier = ({ entrepotMetier }: ConfigurationServeur) => {
         return reponse.sendStatus(404);
       }
       return reponse.send(metier);
-    },
+    }),
   );
 
   return routeur;

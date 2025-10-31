@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
 import z from 'zod';
+import { ConfigurationServeur } from './configurationServeur';
+import { filetRouteAsynchrone } from './middleware';
 
 export const ressourceReactionsJeu = ({
   entrepotJeux,
@@ -15,7 +16,7 @@ export const ressourceReactionsJeu = ({
   routeur.post(
     '/:idJeu/reactions',
     middleware.valideLaCoherenceDuCorps(schema),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       const jeu = await entrepotJeux.parId(
         (requete.params as Record<string, string>).idJeu,
       );
@@ -34,7 +35,7 @@ export const ressourceReactionsJeu = ({
       await entrepotJeux.metsAjour(jeu);
 
       reponse.sendStatus(200);
-    },
+    }),
   );
 
   return routeur;

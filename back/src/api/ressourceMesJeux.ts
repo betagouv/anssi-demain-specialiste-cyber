@@ -14,6 +14,7 @@ import multer from 'multer';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
 import { schemaCreationJeu } from './schemasJeu';
+import { filetRouteAsynchrone } from './middleware';
 
 type CorpsRequeteDeJeu = {
   jeu: string;
@@ -127,87 +128,89 @@ export const ressourceMesJeux = ({
     ),
     valideLesPhotosTeleversees(adaptateurTeleversement),
     lanceAnalyseAntivirus(adaptateurAntivirus),
-    async (
-      requete: Request<
-        core.ParamsDictionary,
-        Jeu | { erreur: string },
-        CorpsRequeteDeJeu,
-        qs.ParsedQs
-      >,
-      reponse: Response,
-    ) => {
-      try {
-        const corpsRequeteJeu = JSON.parse(requete.body.jeu);
-        const resultat = schemaCreationJeu.safeParse(corpsRequeteJeu);
-        if (!resultat.success) {
-          return reponse
-            .status(400)
-            .json({ erreur: resultat.error.issues[0].message });
-        }
-        const utilisateurConnecte = requete.utilisateur;
-        const photosJeu = adaptateurTeleversement.photosJeu(requete);
-        await adaptateurTeleversement.sauvegarde(photosJeu);
+    filetRouteAsynchrone(
+      async (
+        requete: Request<
+          core.ParamsDictionary,
+          Jeu | { erreur: string },
+          CorpsRequeteDeJeu,
+          qs.ParsedQs
+        >,
+        reponse: Response,
+      ) => {
+        try {
+          const corpsRequeteJeu = JSON.parse(requete.body.jeu);
+          const resultat = schemaCreationJeu.safeParse(corpsRequeteJeu);
+          if (!resultat.success) {
+            return reponse
+              .status(400)
+              .json({ erreur: resultat.error.issues[0].message });
+          }
+          const utilisateurConnecte = requete.utilisateur;
+          const photosJeu = adaptateurTeleversement.photosJeu(requete);
+          await adaptateurTeleversement.sauvegarde(photosJeu);
 
-        const {
-          nom,
-          sequence,
-          nomEtablissement,
-          classe,
-          discipline,
-          eleves,
-          categorie,
-          thematiques,
-          description,
-          temoignages,
-          evaluationDecouverte,
-          evaluationInteret,
-          evaluationSatisfactionGenerale,
-          precisions,
-          consentement,
-        } = resultat.data;
-        const jeu = new Jeu({
-          nom,
-          enseignant: utilisateurConnecte,
-          sequence,
-          nomEtablissement,
-          classe,
-          discipline,
-          eleves,
-          categorie,
-          thematiques,
-          description,
-          temoignages,
-          photos: {
-            couverture: { chemin: photosJeu.couverture.chemin },
-            photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
-          },
-          consentement,
-        });
-        await entrepotJeux.ajoute(jeu);
-        await busEvenements.publie(
-          new JeuCree(
-            utilisateurConnecte.email,
+          const {
             nom,
             sequence,
             nomEtablissement,
             classe,
             discipline,
-            eleves.length,
+            eleves,
             categorie,
             thematiques,
-            temoignages?.length || 0,
+            description,
+            temoignages,
             evaluationDecouverte,
             evaluationInteret,
             evaluationSatisfactionGenerale,
-            jeu.consentement,
             precisions,
-          ),
-        );
-        reponse.sendStatus(201);
-      } catch {
-        reponse.sendStatus(401);
-      }
-    },
+            consentement,
+          } = resultat.data;
+          const jeu = new Jeu({
+            nom,
+            enseignant: utilisateurConnecte,
+            sequence,
+            nomEtablissement,
+            classe,
+            discipline,
+            eleves,
+            categorie,
+            thematiques,
+            description,
+            temoignages,
+            photos: {
+              couverture: { chemin: photosJeu.couverture.chemin },
+              photos: photosJeu.photos.map((p) => ({ chemin: p.chemin })),
+            },
+            consentement,
+          });
+          await entrepotJeux.ajoute(jeu);
+          await busEvenements.publie(
+            new JeuCree(
+              utilisateurConnecte.email,
+              nom,
+              sequence,
+              nomEtablissement,
+              classe,
+              discipline,
+              eleves.length,
+              categorie,
+              thematiques,
+              temoignages?.length || 0,
+              evaluationDecouverte,
+              evaluationInteret,
+              evaluationSatisfactionGenerale,
+              jeu.consentement,
+              precisions,
+            ),
+          );
+          reponse.sendStatus(201);
+        } catch {
+          reponse.sendStatus(401);
+        }
+      },
+    ),
   );
 
   routeur.get(
@@ -216,7 +219,7 @@ export const ressourceMesJeux = ({
       entrepotUtilisateur,
       adaptateurHachage,
     ),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
       reponse.send(
         jeux.map((jeu) => ({
@@ -230,7 +233,7 @@ export const ressourceMesJeux = ({
           reactions: jeu.reactions,
         })),
       );
-    },
+    }),
   );
 
   return routeur;

@@ -3,6 +3,7 @@ import { Jeu } from '../metier/jeu';
 import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 import { schemaModificationJeu } from './schemasJeu';
+import { filetRouteAsynchrone } from './middleware';
 
 type ReponseJeu = Omit<
   Jeu,
@@ -26,7 +27,7 @@ export const ressourceJeu = ({
       entrepotUtilisateur,
       adaptateurHachage,
     ),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
       const jeu = await entrepotJeux.parId(
         (requete.params as Record<string, string>).id,
@@ -35,7 +36,7 @@ export const ressourceJeu = ({
         return reponse.sendStatus(404);
       }
       reponse.send(enReponseJeu(jeu, utilisateur));
-    },
+    }),
   );
 
   routeur.patch(
@@ -45,7 +46,7 @@ export const ressourceJeu = ({
       entrepotUtilisateur,
       adaptateurHachage,
     ),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
       const jeu = await entrepotJeux.parId(
         (requete.params as Record<string, string>).id,
@@ -74,7 +75,7 @@ export const ressourceJeu = ({
 
       await entrepotJeux.metsAjour(jeu);
       reponse.status(200).send(enReponseJeu(jeu, utilisateur));
-    },
+    }),
   );
 
   return routeur;

@@ -1,6 +1,7 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Router } from 'express';
 import { Classe } from '../metier/referentiels/classes';
+import { filetRouteAsynchrone } from './middleware';
 
 type Niveau =
   | 'Cycle 1 (PS-GS)'
@@ -38,37 +39,40 @@ const classeVersNiveau = (classe: Classe): Niveau => {
 export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.get('/', async (_requete, reponse) => {
-    const tousLesJeux = await entrepotJeux.tous();
-    return reponse.send(
-      tousLesJeux.map((jeu) => {
-        const {
-          id,
-          nom,
-          description,
-          classe,
-          categorie,
-          thematiques,
-          nomEtablissement,
-          eleves,
-          photos,
-          reactions
-        } = jeu;
-        return {
-          id,
-          nom,
-          description,
-          niveau: classeVersNiveau(classe),
-          categorie,
-          thematiques,
-          nomEtablissement,
-          eleves,
-          photos,
-          reactions
-        };
-      }),
-    );
-  });
+  routeur.get(
+    '/',
+    filetRouteAsynchrone(async (_requete, reponse) => {
+      const tousLesJeux = await entrepotJeux.tous();
+      return reponse.send(
+        tousLesJeux.map((jeu) => {
+          const {
+            id,
+            nom,
+            description,
+            classe,
+            categorie,
+            thematiques,
+            nomEtablissement,
+            eleves,
+            photos,
+            reactions,
+          } = jeu;
+          return {
+            id,
+            nom,
+            description,
+            niveau: classeVersNiveau(classe),
+            categorie,
+            thematiques,
+            nomEtablissement,
+            eleves,
+            photos,
+            reactions,
+          };
+        }),
+      );
+    }),
+  );
 
   return routeur;
 };
