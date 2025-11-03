@@ -16,8 +16,16 @@
     }
   }
 
-  iframe {
+  .umap {
+    display: flex;
+    justify-content: center;
     margin-bottom: 3.5rem;
+
+    img {
+      aspect-ratio: 1200 / 1107;
+      max-width: 100%;
+    }
+
   }
 
   .declaration-action {
