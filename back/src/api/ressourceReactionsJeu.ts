@@ -1,7 +1,9 @@
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
 import z from 'zod';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+
+
 
 export const ressourceReactionsJeu = ({
   entrepotJeux,
@@ -13,9 +15,20 @@ export const ressourceReactionsJeu = ({
     type: z.enum(['❤️', '🔥', '👍']),
   });
 
+  const validateurJeuId: RequestHandler = (requete, reponse, suite) => {
+    const schema = z.uuid();
+    const resultat = schema.safeParse(requete.params.idJeu);
+    if (!resultat.success) {
+      reponse.status(400).json({ erreur: 'Id invalide' });
+    } else {
+      suite();
+    }
+  };
+
   routeur.post(
     '/:idJeu/reactions',
     middleware.valideLaCoherenceDuCorps(schema),
+    validateurJeuId,
     filetRouteAsynchrone(async (requete, reponse) => {
       const jeu = await entrepotJeux.parId(
         (requete.params as Record<string, string>).idJeu,
