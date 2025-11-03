@@ -2,6 +2,6 @@
 
 exports[`La ressource apres authentification OIDC > quand on fait un GET sur /oidc/apres-authentification > si l'utilisateur est connu > sert la page apres-authentification 1`] = `
 "<!DOCTYPE html><html><head><script nonce="ceciEstUnNonceUtiliséLorsDesTests">document.addEventListener('DOMContentLoaded', () => {
-  window.location = '/catalogue';
+  window.location = '/mes-jeux';
 });</script></head></html>"
 `;
