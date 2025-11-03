@@ -4,18 +4,17 @@
 
 <Citation>
   Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager votre
-  expérience. <lab-anssi-lien
-    cible="#"
-    titre="Rejoindre la communauté"
-    apparence="lien-texte"
-    target="_blank"
-    href="https://partage01.magistere.apps.education.fr/course/view.php?id=891"
-  ></lab-anssi-lien>
+  expérience. <span class="lien-communaute">
+    <dsfr-link
+      label="Rejoindre la communauté"
+      target="_blank"
+      href="https://partage01.magistere.apps.education.fr/course/view.php?id=891"
+    ></dsfr-link>
+  </span>
 </Citation>
 
 <style lang="scss">
-  lab-anssi-lien {
-    color: var(--blue-france-sun-113-625);
+  .lien-communaute {
     font-weight: normal;
   }
 </style>
