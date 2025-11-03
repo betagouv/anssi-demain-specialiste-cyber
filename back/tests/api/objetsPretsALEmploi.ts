@@ -18,7 +18,7 @@ export const hectorDurant = new Utilisateur({
 });
 
 export const cybercluedo = unJeu()
-  .avecUnId('1')
+  .avecUnId('4050fff7-0bd6-46d8-ad5f-2c5118eb4c53')
   .avecUnNom('cybercluedo')
   .deEnseignant(jeanneDupont)
   .deClasse('cp')
