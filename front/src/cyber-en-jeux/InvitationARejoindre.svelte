@@ -9,6 +9,7 @@
     titre="Rejoindre la communauté"
     apparence="lien-texte"
     target="_blank"
+    href="https://partage01.magistere.apps.education.fr/course/view.php?id=891"
   ></lab-anssi-lien>
 </Citation>
 
