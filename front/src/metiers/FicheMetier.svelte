@@ -166,7 +166,7 @@
         </ul>
       </section>
       <section id="remuneration" class="remuneration">
-        <h2>Rémunération</h2>
+        <h2>Rémunération brute</h2>
         <ul>
           <li>
             Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
