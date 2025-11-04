@@ -58,14 +58,14 @@
       titre: 'Présentation des fiches pédagogiques',
       duree: 'Durée : 46 min',
       detail: 'podeduc.apps.education.fr',
-      image: '/assets/images/fiches_pedagogiques.jpg',
+      image: '/assets/images/fiches_pedagogiques.avif',
       lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_webinaire_presentation.mp4',
     },
     {
       titre: 'Accompagner les élèves dans la création de jeux',
       duree: 'Durée : 67 min',
       detail: 'podeduc.apps.education.fr',
-      image: '/assets/images/accompagner_les_eleves.jpg',
+      image: '/assets/images/accompagner_les_eleves.avif',
       lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_accompagner_les_eleves.mp4',
     },
     {
@@ -73,7 +73,7 @@
         "Retour d'expérience CyberEnjeux au lycée H. Matisse de Cugnaux (31)",
       duree: 'Durée : 2 min',
       detail: 'tube-numerique-educatif.apps.education.fr',
-      image: '/assets/images/retour_experience.jpg',
+      image: '/assets/images/retour_experience.avif',
       lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_lycee_matisse.mp4',
     },
   ];

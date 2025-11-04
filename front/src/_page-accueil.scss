@@ -6,20 +6,20 @@
       display: flex;
       flex-direction: column;
       padding: 3rem 0 18.5rem;
-      background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.svg)
+      background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.avif)
         no-repeat center 160px;
       background-size: auto 138%;
       position: relative;
 
       @include a-partir-de(md) {
-        background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.svg)
+        background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.avif)
           no-repeat center -20px;
         background-size: auto 180%;
       }
 
       @include a-partir-de(lg) {
         padding: 6.375rem 0;
-        background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.svg)
+        background: var(--bleu-profond-dsc) url(/assets/images/hero-accueil.avif)
           no-repeat top -337px right -80px;
         background-size: auto 230%;
       }
