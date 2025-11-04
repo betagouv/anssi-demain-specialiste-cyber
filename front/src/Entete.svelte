@@ -118,7 +118,7 @@
   brandTagline="Innovation ANSSI"
   hasBrandOperator="true"
   brandOperatorAlt="ANSSI"
-  brandOperatorSrc="/assets/images/ANSSI.svg"
+  brandOperatorSrc="/assets/images/ANSSI.avif"
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
   hasToolLinks={!sansZoneIdentification}

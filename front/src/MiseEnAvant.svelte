@@ -49,7 +49,7 @@
     color: #ffffff;
 
     background:
-      url('/assets/images/cercles.svg') no-repeat,
+      url('/assets/images/cercles.avif') no-repeat,
       var(--bleu-profond-dsc);
     background-size: auto 100%;
     background-position: 25% bottom;

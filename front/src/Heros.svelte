@@ -76,7 +76,7 @@
           var(--bleu-profond-dsc) 69.49%,
           rgb(from var(--bleu-profond-dsc) r g b / 0) 100%
         ),
-        url('/assets/images/cercles-fond-sombre.svg') right 20% no-repeat,
+        url('/assets/images/cercles-fond-sombre.avif') right 20% no-repeat,
         var(--bleu-profond-dsc);
 
       .conteneur {
@@ -102,7 +102,7 @@
 
     &.alternatif {
       background:
-        url('/assets/images/cercles-fond-clair.svg') right 20% no-repeat,
+        url('/assets/images/cercles-fond-clair.avif') right 20% no-repeat,
         url('/assets/images/heros-fond-clair.svg') repeat,
         url('/assets/images/heros-fond-clair.svg') repeat,
         var(--background-alt-blue-cumulus);
