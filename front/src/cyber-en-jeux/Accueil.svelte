@@ -238,7 +238,7 @@
     .approuve {
       margin: 4.5rem auto;
       text-align: center;
-      width: clamp(200px, 100%, 736px);
+      width: clamp(200px, 100%, 792px);
 
       p {
         margin: 0 auto;
