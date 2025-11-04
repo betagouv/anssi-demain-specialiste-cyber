@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Citation from '../Citation.svelte';
   import InvitationARejoindre from './InvitationARejoindre.svelte';
 
   type Temoignage = {
@@ -94,40 +93,42 @@
     <dsfr-container>
       <div class="conteneur sombre">
         <h2>Grâce à CyberEnJeux, développez</h2>
-        <img src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
-        <div class="articles">
-          <article>
-            <h6>Les postures collaboratives entre vos élèves</h6>
-            <p class="fr-text">
-              Développer des compétences transverses, telles que la capacité à
-              s’organiser en groupe et à collaborer.
-            </p>
-          </article>
-          <hr />
-          <article>
-            <h6>Leur autonomie</h6>
-            <p class="fr-text">
-              Développer des compétences transverses, telles que l’autonomie, la
-              capacité à s’organiser individuellement.
-            </p>
-          </article>
-          <hr />
-          <article>
-            <h6>L'apprentissage par le "faire"</h6>
-            <p class="fr-text">
-              Valoriser leur travail par la production d’un objet tangible,
-              voire stimuler des élèves en difficultés scolaires.
-            </p>
-          </article>
-          <hr />
-          <article>
-            <h6>L’engagement dans vos disciplines</h6>
-            <p class="fr-text">
-              CyberEnJeux s’adapte à toutes les disciplines et permet aux élèves
-              de mobiliser concrètement leurs apprentissages, tout en renforçant
-              leur motivation.
-            </p>
-          </article>
+        <div class="corps">
+          <img src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
+          <div class="articles">
+            <article>
+              <h6>Les postures collaboratives entre vos élèves</h6>
+              <p class="fr-text">
+                Développer des compétences transverses, telles que la capacité à
+                s’organiser en groupe et à collaborer.
+              </p>
+            </article>
+            <hr />
+            <article>
+              <h6>Leur autonomie</h6>
+              <p class="fr-text">
+                Développer des compétences transverses, telles que l’autonomie,
+                la capacité à s’organiser individuellement.
+              </p>
+            </article>
+            <hr />
+            <article>
+              <h6>L'apprentissage par le "faire"</h6>
+              <p class="fr-text">
+                Valoriser leur travail par la production d’un objet tangible,
+                voire stimuler des élèves en difficultés scolaires.
+              </p>
+            </article>
+            <hr />
+            <article>
+              <h6>L’engagement dans vos disciplines</h6>
+              <p class="fr-text">
+                CyberEnJeux s’adapte à toutes les disciplines et permet aux
+                élèves de mobiliser concrètement leurs apprentissages, tout en
+                renforçant leur motivation.
+              </p>
+            </article>
+          </div>
         </div>
       </div>
     </dsfr-container>
@@ -256,78 +257,41 @@
           margin: 0 0 3.5rem;
         }
 
-        img {
-          margin: 0 auto 3rem;
-          max-width: clamp(200px, 100%, 360px);
-        }
-
-        .articles {
-          article {
-            margin: 1rem 0;
-
-            h6 {
-              margin: 0 0 0.5rem;
-            }
-
-            p {
-              margin: 0;
-            }
-          }
-
-          hr {
-            background-color: var(--border-default-pink-tuile);
-          }
-        }
-
-        @include a-partir-de(md) {
-          display: block;
-
+        .corps {
+          display: flex;
+          flex-direction: column;
           img {
-            float: right;
-            margin-top: calc(6rem - 7.5%);
-            shape-outside: ellipse(36% 38% at 50% 50%) padding-box;
-            max-width: 48%;
+            align-self: center;
+            width: 100%;
           }
 
           .articles {
-            display: inline;
-
             article {
-              max-width: 75%;
+              margin: 1rem 0;
+
+              h6 {
+                margin: 0 0 0.5rem;
+              }
+
+              p {
+                margin: 0;
+              }
+            }
+
+            hr {
+              background-color: var(--border-default-pink-tuile);
             }
           }
-        }
 
-        @include a-partir-de(lg) {
-          .articles {
-            article {
-              max-width: 60%;
+          @include a-partir-de(md) {
+            flex-direction: row-reverse;
+
+            img {
+              width: 50%;
             }
-          }
-        }
 
-        @include a-partir-de(xl) {
-          justify-self: center;
-          display: grid;
-          grid-template-columns: 568px 430px;
-          grid-template-rows: 1fr;
-          gap: 0 2rem;
-          margin: 4.5rem 0;
-          max-width: 1200px;
-
-          img {
-            grid-column: 2;
-            grid-row: 2;
-            margin: 0;
-            max-width: 100%;
-          }
-
-          .articles {
-            grid-column: 1;
-            grid-row: 2;
-
-            article {
-              max-width: 100%;
+            .articles {
+              padding-right: 2rem;
             }
           }
         }
