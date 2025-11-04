@@ -20,7 +20,7 @@
   const { ressource }: Props = $props();
 
   const illustrationPetite = $derived(
-    `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite${ressource.urlIllustration.slice(ressource.urlIllustration.lastIndexOf('.'))}`,
+    `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite.avif`,
   );
 
   const badges = ressource.types.map((type) => ({
