@@ -1,6 +1,7 @@
 extends fragments/base
 block variables
   - var titrePage = "Sélection enseignants"
+  - var classePage = "selection-enseignants"
   - var descriptionPage = "Formez, sensibilisez, accompagnez vos élèves… et développez aussi vos propres compétences en cybersécurité."
   - var ariane = []
   - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
@@ -8,3 +9,23 @@ block variables
 
 block contenu
     dsc-selection(cible="enseignants")
+    dsfr-container
+      .conteneur
+        .description
+          h2 Découvrez Cyber&ZeroWidthSpace;Enjeux Pro
+          p 
+            | Dispositif innovant créé par le laboratoire d’innovation de l’Agence nationale de la sécurité des systèmes d’information (ANSSI),
+            | CyberEnJeux Pro permet de sensibiliser vos agents ou salariés aux risques de cyberattaques et aux bonnes pratiques
+            | à l’occasion de sessions de création de jeux sérieux sur la cybersécurité !
+          .actions
+            dsfr-button(
+              kind="secondary"
+              label="Accéder aux ressources"
+              markup="a"
+              href="https://messervices.cyber.gouv.fr/ressources/cyber-enjeux-pro.html"
+              target="_blank"
+            )
+        img(
+          src="/assets/images/cyberEnjeuxPro.avif"
+          alt="CyberEnjeux pro"
+        )
