@@ -268,6 +268,10 @@
     @include a-partir-de(sm) {
       grid-template-columns: repeat(2, minmax(200px, 1fr));
     }
+
+    @include a-partir-de(lg) {
+      gap: 1.5rem;
+    }
   }
 
   .ressources-videos .conteneur {
