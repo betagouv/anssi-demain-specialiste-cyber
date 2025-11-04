@@ -25,50 +25,5 @@
       aspect-ratio: 1200 / 1107;
       max-width: 100%;
     }
-
-  }
-
-  .declaration-action {
-    background-color: var(--bleu-profond-dsc);
-    margin-bottom: 1.5rem;
-    padding: 2rem;
-
-    .conteneur {
-      display: grid;
-      grid-template-areas: 'titre' 'texte' 'bouton';
-      max-width: 62.3rem;
-
-      @include a-partir-de(md) {
-        grid-template-areas: 'titre bouton' 'texte bouton';
-        grid-template-columns: 6fr 4fr;
-        gap: 1.5rem;
-      }
-
-      @include a-partir-de(xl) {
-        margin: 0 auto;
-        padding-bottom: 1rem;
-      }
-
-      h3 {
-        grid-area: titre;
-        margin-bottom: 0.5rem;
-      }
-
-      p {
-        grid-area: texte;
-        margin: 0;
-      }
-
-      dsfr-button {
-        grid-area: bouton;
-        margin: 2rem 0 1rem;
-        justify-self: start;
-
-        @include a-partir-de(md) {
-          justify-self: center;
-          align-self: center;
-        }
-      }
-    }
   }
 }
