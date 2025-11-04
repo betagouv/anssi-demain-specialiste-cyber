@@ -7,7 +7,50 @@
     auteur: string;
     source: string;
   };
+
   const temoignages: Temoignage[] = [];
+  const etapesMarelle = [
+    {
+      titre: 'Préparation de la séquence CyberEnjeu',
+      description:
+        '<strong>Formez-vous</strong> aux notions clés de cybersécurité grâce à des <strong>ressources simples et accessibles</strong> pour bien lancer votre projet.',
+      illustration: { lien: '/assets/images/cej/preparer.svg', alt: '' },
+      lien: {
+        texte: 'Guides et ressources CyberEnJeux',
+        href: '#guides-et-ressources',
+      },
+    },
+    {
+      titre: 'Formation des élèves aux enjeux de cybersécurité',
+      description:
+        'Appuyez-vous sur des <strong>supports pédagogiques prêts à l’emploi</strong> pour sensibiliser vos élèves aux bons réflexes numériques.',
+      illustration: { lien: '/assets/images/cej/former.svg', alt: '' },
+      lien: {
+        texte: 'Guides et ressources CyberEnJeux',
+        href: '#guides-et-ressources',
+      },
+    },
+    {
+      titre: 'Conception de jeux par les élèves',
+      description:
+        'Aidez-les à <strong>concevoir des jeux  sur la cybersécurité</strong> en s’inspirant de modèles et de ressources adaptées à leur niveau.',
+      illustration: { lien: '/assets/images/cej/concevoir.svg', alt: '' },
+      lien: {
+        texte: 'Vitrine des jeux des élèves',
+        href: '#vitrine-des-jeux',
+      },
+    },
+    {
+      titre: 'Valorisation de la séquence et des jeux',
+      description:
+        'Accédez à votre espace enseignant et <strong>partagez les jeux créés par vos élèves</strong> pour mettre en avant leur engagement et enrichir la vitrine des jeux !',
+      illustration: { lien: '/assets/images/cej/valoriser.svg', alt: '' },
+      lien: {
+        texte: 'Espace enseignant',
+        href: '/mes-jeux',
+      },
+    },
+  ];
 </script>
 
 <div class="accueil">
@@ -71,51 +114,23 @@
   </div>
 
   <dsfr-container>
-    <lab-anssi-marelle
-      titre="Déroulé d’une séquence CyberEnJeux"
-      etapesmarelle={[
-        {
-          titre: 'Préparation de la séquence CyberEnjeu',
-          description:
-            'Formez-vous aux notions clés de cybersécurité grâce à des ressources simples et accessibles pour bien lancer votre projet.',
-          illustration: { lien: '/assets/images/cej/preparer.svg', alt: '' },
-          lien: {
-            texte: 'Guides et ressources CyberEnJeux',
-            href: '#guides-et-ressources',
-          },
-        },
-        {
-          titre: 'Formation des élèves aux enjeux de cybersécurité',
-          description:
-            'Appuyez-vous sur des supports pédagogiques prêts à l’emploi pour sensibiliser vos élèves aux bons réflexes numériques.',
-          illustration: { lien: '/assets/images/cej/former.svg', alt: '' },
-          lien: {
-            texte: 'Guides et ressources CyberEnJeux',
-            href: '#guides-et-ressources',
-          },
-        },
-        {
-          titre: 'Conception de jeux par les élèves',
-          description:
-            'Aidez-les à concevoir des jeux  sur la cybersécurité en s’inspirant de modèles et de ressources adaptées à leur niveau.',
-          illustration: { lien: '/assets/images/cej/concevoir.svg', alt: '' },
-          lien: {
-            texte: 'Vitrine des jeux des élèves',
-            href: '#vitrine-des-jeux',
-          },
-        },
-        {
-          titre: 'Valorisation de la séquence et des jeux',
-          description:
-            'Accédez à votre espace enseignant et partagez les jeux créés par vos élèves pour mettre en avant leur engagement et enrichir la vitrine des jeux !',
-          illustration: { lien: '/assets/images/cej/valoriser.svg', alt: '' },
-          lien: {
-            texte: 'Espace enseignant',
-            href: '/mes-jeux',
-          },
-        },
-      ]}
-    >
+    <lab-anssi-marelle titre="Déroulé d’une séquence CyberEnJeux">
+      {#each etapesMarelle as etape, index}
+        <lab-anssi-marelle-etape
+          {index}
+          etapeMarelle={etape}
+          pair={(index + 1) % 2 === 0}
+        >
+          <p slot="etape-description" class="etape-description">
+            {@html etape.description}
+          </p>
+          <span slot="etape-lien" class="etape-lien-conteneur">
+            <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
+            <dsfr-link label={etape.lien.texte} href={etape.lien.href}
+            ></dsfr-link>
+          </span>
+        </lab-anssi-marelle-etape>
+      {/each}
     </lab-anssi-marelle>
   </dsfr-container>
 
@@ -193,11 +208,11 @@
 
   :root {
     --brique-carrousel-bouton-action-texte-couleur: #161616;
-
     --brique-marelle-titre-couleur: #161616;
-    --brique-marelle-etapes-numero-etape-couleur: var(--pink-tuile-main-556);
-
-    --brique-temoignages-titre-couleur: #161616;
+    --brique-marelle-etapes-numero-etape-couleur: var(
+      --background-flat-pink-tuile
+    );
+    --brique-temoignages-titre-couleur: #070707;
   }
 
   .accueil {
@@ -353,6 +368,16 @@
     lab-anssi-marelle {
       display: block;
       margin-bottom: -3.5rem;
+    }
+
+    .etape-description {
+      color: var(--text-default-grey);
+    }
+
+    .etape-lien-conteneur {
+      color: var(--text-action-high-blue-france);
+      display: inline-flex;
+      gap: 0.25rem;
     }
   }
 </style>
