@@ -51,6 +51,26 @@
       },
     },
   ];
+  const tuiles = [
+    {
+      titre: 'Pour tous les enseignements',
+      contenu:
+        'CyberEnJeux est un outil pédagogique développé pour le monde éducatif, pouvant être organisé dans tout type de disciplines.',
+      illustration: { lien: '/assets/images/cej/city-hall.svg', alt: '' },
+    },
+    {
+      titre: 'Dès le cycle 3',
+      contenu:
+        'CyberEnJeux peut être organisé à partir de 10 ans et tout au long de la scolarité et au-delà !',
+      illustration: { lien: '/assets/images/cej/backpack.svg', alt: '' },
+    },
+    {
+      titre: "Prêt à l'emploi",
+      contenu:
+        "Vous n'avez pas besoin d'être spécialistes cyber pour organiser une séquence CyberEnJeux et quasiment rien à préparer.",
+      illustration: { lien: '/assets/images/cej/succes.svg', alt: '' },
+    },
+  ];
 </script>
 
 <div class="accueil">
@@ -143,28 +163,22 @@
   </dsfr-container>
 
   <dsfr-container>
-    <lab-anssi-carrousel-tuiles
-      tuiles={[
-        {
-          titre: 'Pour tous les enseignements',
-          contenu:
-            'CyberEnJeux est un outil pédagogique développé pour le monde éducatif, pouvant être organisé dans tout type de disciplines.',
-          illustration: { lien: '/assets/images/cej/city-hall.svg', alt: '' },
-        },
-        {
-          titre: 'Dès le cycle 3',
-          contenu:
-            'CyberEnJeux peut être organisé à partir de 10 ans et tout au long de la scolarité et au-delà !',
-          illustration: { lien: '/assets/images/cej/backpack.svg', alt: '' },
-        },
-        {
-          titre: "Prêt à l'emploi",
-          contenu:
-            "Vous n'avez pas besoin d'être spécialistes cyber pour organiser une séquence CyberEnJeux et quasiment rien à préparer.",
-          illustration: { lien: '/assets/images/cej/succes.svg', alt: '' },
-        },
-      ]}
-    >
+    <lab-anssi-carrousel-tuiles>
+      {#each tuiles as tuile, index (index)}
+        <dsfr-tile
+          title={tuile.titre}
+          has-description
+          description={tuile.contenu}
+          action-markup="false"
+          no-link
+        >
+          <img
+            src={tuile.illustration.lien}
+            alt={tuile.illustration.alt}
+            slot="pictogram"
+          />
+        </dsfr-tile>
+      {/each}
     </lab-anssi-carrousel-tuiles>
   </dsfr-container>
 
@@ -378,6 +392,30 @@
       color: var(--text-action-high-blue-france);
       display: inline-flex;
       gap: 0.25rem;
+    }
+
+    dsfr-tile {
+      min-width: 212px;
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      width: calc(100vw - 60px);
+      max-width: 384px;
+
+      &:first-of-type {
+        margin-left: var(--espacement);
+
+        @include a-partir-de(lg) {
+          margin-left: 0;
+        }
+      }
+
+      &:last-of-type {
+        margin-right: var(--espacement);
+
+        @include a-partir-de(lg) {
+          margin-right: 0;
+        }
+      }
     }
   }
 </style>
