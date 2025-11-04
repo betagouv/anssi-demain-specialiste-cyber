@@ -1,5 +1,6 @@
 <script lang="ts">
   import InvitationARejoindre from './InvitationARejoindre.svelte';
+  import EncartDeclarerUneAction from './EncartDeclarerUneAction.svelte';
 
   type Temoignage = {
     citation: string;
@@ -184,26 +185,7 @@
   </dsfr-container>
 
   <dsfr-container>
-    <div class="bandeau">
-      <div class="conteneur sombre">
-        <h3>Organisez une séquence CyberEnJeux dans votre établissement</h3>
-        <p class="fr-text">
-          Faites découvrir la cybersécurité autrement ! En déclarant votre
-          séquence, vous profitez d’un accompagnement et valorisez votre
-          engagement pour une éducation au numérique plus ludique et
-          participative.
-        </p>
-        <div class="action">
-          <dsfr-button
-            label="Déclarer une action CyberEnJeux"
-            kind="inverted-secondary"
-            target="_blank"
-            href="#"
-            markup="a"
-          ></dsfr-button>
-        </div>
-      </div>
-    </div>
+    <EncartDeclarerUneAction />
   </dsfr-container>
 
   {#if temoignages.length > 0}
@@ -293,47 +275,6 @@
             .articles {
               padding-right: 2rem;
             }
-          }
-        }
-      }
-    }
-
-    .bandeau {
-      background-color: var(--bleu-profond-dsc);
-      color: var(--grey-1000-50);
-      padding: 2rem 2rem 3rem 2rem;
-
-      .conteneur {
-        max-width: 996px;
-        margin: 0 auto 1rem;
-      }
-
-      h3 {
-        margin: 0 0 0.5rem;
-      }
-
-      p {
-        margin: 0;
-      }
-
-      .action {
-        width: fit-content;
-        margin-top: 2rem;
-      }
-
-      @include a-partir-de(lg) {
-        .conteneur {
-          display: grid;
-          grid-template-columns: 0.55fr 0.45fr;
-          grid-template-rows: auto auto;
-          column-gap: 1.5rem;
-
-          .action {
-            grid-column: 2;
-            grid-row: 1 / span 2;
-            align-self: center;
-            justify-self: center;
-            margin: 0;
           }
         }
       }
