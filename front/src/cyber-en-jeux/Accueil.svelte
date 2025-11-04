@@ -196,7 +196,7 @@
         <div class="action">
           <dsfr-button
             label="Déclarer une action CyberEnJeux"
-            kind="inverted"
+            kind="inverted-secondary"
             target="_blank"
             href="#"
             markup="a"
