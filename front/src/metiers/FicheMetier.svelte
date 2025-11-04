@@ -215,6 +215,12 @@
           blank
           size="md"
         ></dsfr-link>
+        <dsfr-link
+          label="Panorama des métiers de la cybersécurité"
+          href="https://cyber.gouv.fr/sites/default/files/2021/10/anssi-panorama_metiers_cybersecurite-2020.pdf"
+          blank
+          size="md"
+        ></dsfr-link>
       </section>
       <dsfr-link
         label="Haut de page"
@@ -289,6 +295,12 @@
   .remuneration {
     ul {
       margin-block-end: 1.5rem;
+    }
+  }
+
+  #liens-utiles {
+    dsfr-link {
+      display: block;
     }
   }
 </style>
