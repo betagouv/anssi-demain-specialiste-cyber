@@ -18,7 +18,7 @@
         élèves
       </h2>
       <p class="fr-text--lg">
-        Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec
+        Imaginé par le laboratoire d’innovation de l’ANSSI et co-construit avec
         le ministère de l’Education nationale et l’association Open Serious
         Game, CyberEnJeux est un dispositif pédagogique innovant permettant de
         former des élèves à la cybersécurité dans le cadre de leurs
