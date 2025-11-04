@@ -100,10 +100,11 @@
             href={ressource.lien}
             hasDetailEnd
             detailEnd={ressource.detail}
-            download
             lang="fr"
-            assess
             size="sm"
+            horizontal
+            horizontal-proportion="tier"
+            hasDownloadIcon
           ></dsfr-card>
         {/each}
       </div>
@@ -126,10 +127,11 @@
             href={ressource.lien}
             hasDetailEnd
             detailEnd={ressource.detail}
-            download
             lang="fr"
-            assess
             size="sm"
+            horizontal
+            horizontal-proportion="tier"
+            hasDownloadIcon
           ></dsfr-card>
         {/each}
       </div>
