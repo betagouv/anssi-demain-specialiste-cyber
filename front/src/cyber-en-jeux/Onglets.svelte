@@ -13,9 +13,17 @@
   const changeLOngletCourant = () => {
     const hash = new URLSearchParams(window.location.hash?.substring(1));
     const ongletDansLUrl = Array.from(hash)[0];
-    if (ongletDansLUrl)
+    if (ongletDansLUrl) {
       ongletActif =
         onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
+
+      const section = document.querySelector('.menu-onglets');
+      section?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest',
+      });
+    }
   };
 
   onMount(() => {
