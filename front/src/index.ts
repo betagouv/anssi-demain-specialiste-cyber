@@ -6,7 +6,7 @@ export * from './CreationCompte.svelte';
 export * from './jeux/FormulaireJeu/FormulaireJeu.svelte';
 export * from './jeux/MesJeux.svelte';
 export * from './jeux/FicheJeu.svelte';
-export * from './cyber-en-jeux/Index.svelte';
+export * from './cyber-en-jeux/CyberEnjeux.svelte';
 export * from './metiers/FicheMetier.svelte';
 export * from './Entete.svelte';
 export * from './selections/Selection.svelte';
