@@ -9,6 +9,17 @@ import {
   queryAllByRole,
   queryAllByText,
 } from '@testing-library/dom';
+import type { BoundFunction } from '@testing-library/dom/types/get-queries-for-element';
+import type {
+  FindAllByRole,
+  FindAllByText,
+  FindByRole,
+  FindByText,
+  GetByRole,
+  GetByText,
+  QueryByRole,
+  QueryByText,
+} from '@testing-library/svelte';
 
 const _queryAllByRoleDeep: AllByRole = function (container, ...rest) {
   const result = queryAllByRole(container, ...rest); // replace here with different queryAll* variants.
@@ -66,16 +77,36 @@ const [
   (_, role) => `Unable to find an element with the role ${role}`,
 );
 
-export const queryAllByRoleDeep = _queryAllByRoleDeep.bind(null, document.body);
-export const queryByRoleDeep = _queryByRoleDeep.bind(null, document.body);
-export const getAllByRoleDeep = _getAllByRoleDeep.bind(null, document.body);
-export const getByRoleDeep = _getByRoleDeep.bind(null, document.body);
-export const findAllByRoleDeep = _findAllByRoleDeep.bind(null, document.body);
-export const findByRoleDeep = _findByRoleDeep.bind(null, document.body);
+export const queryAllByRoleDeep: BoundFunction<AllByRole> =
+  _queryAllByRoleDeep.bind(null, document.body);
+export const queryByRoleDeep: BoundFunction<QueryByRole> =
+  _queryByRoleDeep.bind(null, document.body);
+export const getAllByRoleDeep: BoundFunction<AllByRole> =
+  _getAllByRoleDeep.bind(null, document.body);
+export const getByRoleDeep: BoundFunction<GetByRole> = _getByRoleDeep.bind(
+  null,
+  document.body,
+);
+export const findAllByRoleDeep: BoundFunction<FindAllByRole> =
+  _findAllByRoleDeep.bind(null, document.body);
+export const findByRoleDeep: BoundFunction<FindByRole> = _findByRoleDeep.bind(
+  null,
+  document.body,
+);
 
-export const queryAllByTextDeep = _queryAllByTextDeep.bind(null, document.body);
-export const queryByTextDeep = _queryByTextDeep.bind(null, document.body);
-export const getAllByTextDeep = _getAllByTextDeep.bind(null, document.body);
-export const getByTextDeep = _getByTextDeep.bind(null, document.body);
-export const findAllByTextDeep = _findAllByTextDeep.bind(null, document.body);
-export const findByTextDeep = _findByTextDeep.bind(null, document.body);
+export const queryAllByTextDeep: BoundFunction<AllByText> =
+  _queryAllByTextDeep.bind(null, document.body);
+export const queryByTextDeep: BoundFunction<QueryByText> =
+  _queryByTextDeep.bind(null, document.body);
+export const getAllByTextDeep: BoundFunction<AllByText> =
+  _getAllByTextDeep.bind(null, document.body);
+export const getByTextDeep: BoundFunction<GetByText> = _getByTextDeep.bind(
+  null,
+  document.body,
+);
+export const findAllByTextDeep: BoundFunction<FindAllByText> =
+  _findAllByTextDeep.bind(null, document.body);
+export const findByTextDeep: BoundFunction<FindByText> = _findByTextDeep.bind(
+  null,
+  document.body,
+);
