@@ -1,3 +1,4 @@
+@use 'points-de-rupture' as *;
 
 * {
   box-sizing: border-box;
@@ -9,7 +10,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   padding: 0;
-  color: var(--text-default-grey)
+  color: var(--text-default-grey);
 }
 
 .carte {
@@ -34,7 +35,6 @@ header {
     }
   }
 }
-
 
 .page-accueil {
   .entete {
@@ -79,5 +79,13 @@ dsc-selection {
 
   section.section-vide {
     min-height: 400px;
+  }
+}
+
+:root {
+  --gap-dsfr-grid: 1rem;
+
+  @include a-partir-de(lg) {
+    --gap-dsfr-grid: 1.5rem;
   }
 }

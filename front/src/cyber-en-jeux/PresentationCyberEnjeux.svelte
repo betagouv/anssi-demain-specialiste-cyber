@@ -202,6 +202,7 @@
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
+  @use '../grille' as *;
 
   :root {
     --brique-carrousel-bouton-action-texte-couleur: #161616;
@@ -220,7 +221,14 @@
     .approuve {
       margin: 4.5rem auto;
       text-align: center;
-      width: clamp(200px, 100%, 792px);
+
+      @include a-partir-de(lg) {
+        max-width: taille-pour-colonnes(10);
+      }
+
+      @include a-partir-de(xl) {
+        max-width: taille-pour-colonnes(8);
+      }
 
       p {
         margin: 0 auto;

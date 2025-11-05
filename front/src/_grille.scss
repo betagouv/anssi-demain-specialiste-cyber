@@ -1,0 +1,10 @@
+$tailleDeTousLesGaps: calc(11 * var(--gap-dsfr-grid));
+$tailleUneColonne: calc(calc(100% - tailleDeTousLesGaps) / 12);
+
+@function taille-pour-colonnes($colonne) {
+  $tailleDesGapsEntreColonnes: calc(($colonne - 1) * var(--gap-dsfr-grid));
+  $tailleFinale: calc(
+    calc($tailleUneColonne * $colonne) + $tailleDesGapsEntreColonnes
+  );
+  @return round(nearest, $tailleFinale, 1px);
+}
