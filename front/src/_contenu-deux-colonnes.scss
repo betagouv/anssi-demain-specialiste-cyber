@@ -1,0 +1,34 @@
+@use 'points-de-rupture' as *;
+
+.contenu-deux-colonnes {
+  display: grid;
+  grid-template-areas:
+            'contenu'
+            'illustration';
+  gap: 2rem;
+  margin-block: 3.5rem;
+  padding-bottom: 1rem;
+
+  .contenu {
+    grid-area: contenu;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .illustration {
+    grid-area: illustration;
+    align-self: center;
+    width: 100%;
+  }
+
+  @include a-partir-de(md) {
+    grid-template-areas: 'contenu illustration';
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 0;
+
+    .description {
+      padding-bottom: 1rem;
+    }
+  }
+}

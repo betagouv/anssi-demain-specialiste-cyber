@@ -1,41 +1,12 @@
-@use 'points-de-rupture' as *;
-
 .selection-enseignants {
-  .conteneur {
-    display: grid;
-    grid-template-areas: 'description' 'illustration';
-    gap: 2rem;
-    margin-block: 3.5rem;
-    padding-bottom: 1rem;
-
-    .description {
-      grid-area: description;
-      display: flex;
-      flex-direction: column;
-
+  .contenu-deux-colonnes {
+    .contenu {
       h2 {
         margin-bottom: 0.75rem;
       }
 
       .actions {
         margin-top: 2rem;
-      }
-    }
-
-    img {
-      grid-area: illustration;
-      align-self: center;
-      width: 100%;
-    }
-
-    @include a-partir-de(md) {
-      grid-template-areas: 'description illustration';
-      gap: 1.5rem;
-      grid-template-columns: 1fr 1fr;
-      padding-bottom: 0;
-
-      .description {
-        padding-bottom: 1rem;
       }
     }
   }
