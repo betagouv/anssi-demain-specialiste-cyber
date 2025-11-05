@@ -3,11 +3,17 @@
 .contenu-deux-colonnes {
   display: grid;
   grid-template-areas:
-            'contenu'
-            'illustration';
+    'contenu'
+    'illustration';
   gap: 2rem;
   margin-block: 3.5rem;
   padding-bottom: 1rem;
+
+  &.illustration-au-dessus {
+    grid-template-areas:
+      'illustration'
+      'contenu';
+  }
 
   .contenu {
     grid-area: contenu;
@@ -27,7 +33,11 @@
     grid-template-columns: 1fr 1fr;
     padding-bottom: 0;
 
-    .description {
+    &.illustration-au-dessus {
+      grid-template-areas: 'contenu illustration';
+    }
+
+    .contenu {
       padding-bottom: 1rem;
     }
   }

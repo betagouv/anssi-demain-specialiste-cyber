@@ -94,8 +94,12 @@
     <dsfr-container>
       <div class="conteneur sombre">
         <h2>Grâce à CyberEnJeux, développez</h2>
-        <div class="contenu-deux-colonnes">
-          <img class="illustration" src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
+        <div class="contenu-deux-colonnes illustration-au-dessus">
+          <img
+            class="illustration"
+            src="/assets/images/cej/collaboration.svg"
+            alt="Collaboration"
+          />
           <div class="articles contenu">
             <article>
               <h6>Les postures collaboratives entre vos élèves</h6>
