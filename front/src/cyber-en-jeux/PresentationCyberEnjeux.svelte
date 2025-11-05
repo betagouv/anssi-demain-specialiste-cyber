@@ -295,6 +295,11 @@
     lab-anssi-marelle {
       display: block;
       margin-bottom: -3.5rem;
+      margin-inline: auto;
+
+      @include a-partir-de(xl) {
+        max-width: taille-pour-colonnes(10);
+      }
     }
 
     .etape-description {
