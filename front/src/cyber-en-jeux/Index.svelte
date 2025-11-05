@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import Accueil from './Accueil.svelte';
+  import PresentationCyberEnjeux from './PresentationCyberEnjeux.svelte';
   import Onglets from './Onglets.svelte';
   import Ressources from './Ressources.svelte';
   import VitrineDesJeux from './VitrineDesJeux.svelte';
@@ -36,7 +36,7 @@
 </dsfr-container>
 
 {#if ongletActif === 0}
-  <Accueil></Accueil>
+  <PresentationCyberEnjeux></PresentationCyberEnjeux>
 {:else if ongletActif === 1}
   <VitrineDesJeux></VitrineDesJeux>
 {:else if ongletActif === 2}
