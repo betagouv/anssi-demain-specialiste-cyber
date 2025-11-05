@@ -94,9 +94,9 @@
     <dsfr-container>
       <div class="conteneur sombre">
         <h2>Grâce à CyberEnJeux, développez</h2>
-        <div class="corps">
-          <img src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
-          <div class="articles">
+        <div class="contenu-deux-colonnes">
+          <img class="illustration" src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
+          <div class="articles contenu">
             <article>
               <h6>Les postures collaboratives entre vos élèves</h6>
               <p class="fr-text">
@@ -241,48 +241,26 @@
       .conteneur {
         color: var(--grey-1000-50);
         margin: 4.5rem 0;
-        display: grid;
 
         h2 {
           margin: 0 0 3.5rem;
         }
 
-        .corps {
-          display: flex;
-          flex-direction: column;
-          img {
-            align-self: center;
-            width: 100%;
-          }
+        .articles {
+          article {
+            margin: 1rem 0;
 
-          .articles {
-            article {
-              margin: 1rem 0;
-
-              h6 {
-                margin: 0 0 0.5rem;
-              }
-
-              p {
-                margin: 0;
-              }
+            h6 {
+              margin: 0 0 0.5rem;
             }
 
-            hr {
-              background-color: var(--border-default-pink-tuile);
+            p {
+              margin: 0;
             }
           }
 
-          @include a-partir-de(md) {
-            flex-direction: row-reverse;
-
-            img {
-              width: 50%;
-            }
-
-            .articles {
-              padding-right: 2rem;
-            }
+          hr {
+            background-color: var(--border-default-pink-tuile);
           }
         }
       }
