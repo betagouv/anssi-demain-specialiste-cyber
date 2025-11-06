@@ -162,7 +162,7 @@
                 src={lienSousTitres(ressource.lien)}
               />
             </video>
-            <h6>{ressource.titre}</h6>
+            <h3 class="fr-h6">{ressource.titre}</h3>
           </div>
         {/each}
       </div>
@@ -251,7 +251,7 @@
     gap: 1rem;
     margin-bottom: 2rem;
 
-    h6 {
+    .fr-h6 {
       margin-bottom: 0.5rem;
     }
 
