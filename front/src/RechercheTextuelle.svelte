@@ -13,4 +13,5 @@
   inputPlaceholder={miseEnAvant}
   value={recherche}
   onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
+  button-label="Rechercher"
 ></dsfr-search>
