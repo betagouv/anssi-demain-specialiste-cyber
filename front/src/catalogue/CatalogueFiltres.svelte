@@ -49,7 +49,7 @@
 
   <div class="filtres-conteneur" class:ouvert={menuContextuelEstOuvert}>
     <div class="filtres-entete" class:ouvert={menuContextuelEstOuvert}>
-      <h4>Filtres</h4>
+      <p class="fr-h6">Filtres</p>
       <dsfr-button
         class="ferme-menu"
         label="Fermer"
@@ -98,8 +98,11 @@
 <style lang="scss">
   @use '../points-de-rupture' as *;
 
-  h4 {
-    margin: 0 0 0.5rem;
+  .fr-h6 {
+    color: var(--text-title-grey);
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
   }
 
   .filtres {
