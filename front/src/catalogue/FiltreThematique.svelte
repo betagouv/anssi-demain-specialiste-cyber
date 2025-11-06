@@ -3,24 +3,22 @@
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 </script>
 
-<fieldset>
-  <legend class="fr-text">Thématique</legend>
-  <dsfr-select
-    id="thematiques"
-    value={$rechercheParThematique}
-    onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
-    placeholder="Toutes les thématiques"
-    placeholderDisabled={false}
-    options={$ressourcesCyberFiltrees.thematiques.map((thematique) => ({
-      label: thematique,
-      value: thematique,
-    }))}
-  >
-  </dsfr-select>
-</fieldset>
+<dsfr-select
+  id="thematiques"
+  label="Thématique"
+  value={$rechercheParThematique}
+  onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
+  placeholder="Toutes les thématiques"
+  placeholderDisabled={false}
+  options={$ressourcesCyberFiltrees.thematiques.map((thematique) => ({
+    label: thematique,
+    value: thematique,
+  }))}
+>
+</dsfr-select>
 
 <style lang="scss">
-  fieldset {
-    margin: 0 0 1rem;
+  dsfr-select {
+    margin-bottom: 1rem;
   }
 </style>
