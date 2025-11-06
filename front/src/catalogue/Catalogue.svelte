@@ -32,7 +32,7 @@
 
     <div class="conteneur">
       {#each $ressourcesCyberFiltrees.resultat as ressource (ressource.id)}
-        <CarteCatalogue {ressource} />
+        <CarteCatalogue {ressource} markup="h2" />
       {:else}
         {#if chargementEnCours}
           <p class="fr-text">Chargement...</p>

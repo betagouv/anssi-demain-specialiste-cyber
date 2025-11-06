@@ -4,6 +4,7 @@
     shadow: 'none',
     props: {
       ressource: { type: 'Object' },
+      markup: { type: 'String' },
     },
   }}
 />
@@ -16,8 +17,9 @@
 
   interface Props {
     ressource: RessourceCyber;
+    markup?: 'h2' | 'h3' | 'h4' | 'h5';
   }
-  const { ressource }: Props = $props();
+  const { ressource, markup = 'h3' }: Props = $props();
 
   const illustrationPetite = $derived(
     `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite.avif`,
@@ -39,6 +41,7 @@
   hasHeaderBadge
   hasDetailEnd
   size="sm"
+  {markup}
 >
   <dsfr-badges-group slot="headerbadges" {badges} size="sm"></dsfr-badges-group>
   {#if ressource.estCertifiee}
