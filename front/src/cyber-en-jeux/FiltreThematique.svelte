@@ -4,24 +4,22 @@
   import { NomsDesThematiques } from './jeu';
 </script>
 
-<fieldset>
-  <legend class="fr-text">Thématique</legend>
-  <dsfr-select
-    id="thematiques"
-    value={$rechercheParThematique}
-    onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
-    placeholder="Toutes les thématiques"
-    placeholderDisabled={false}
-    options={$jeuxFiltres.thematiques.map((thematique) => ({
-      value: thematique,
-      label: NomsDesThematiques[thematique],
-    }))}
-  >
-  </dsfr-select>
-</fieldset>
+<dsfr-select
+  id="thematiques"
+  label="Thématique"
+  value={$rechercheParThematique}
+  onvaluechanged={(e: CustomEvent) => ($rechercheParThematique = e.detail)}
+  placeholder="Toutes les thématiques"
+  placeholderDisabled={false}
+  options={$jeuxFiltres.thematiques.map((thematique) => ({
+    value: thematique,
+    label: NomsDesThematiques[thematique],
+  }))}
+>
+</dsfr-select>
 
 <style lang="scss">
-  fieldset {
-    margin: 0 0 1rem;
+  dsfr-select {
+    margin-bottom: 1rem;
   }
 </style>
