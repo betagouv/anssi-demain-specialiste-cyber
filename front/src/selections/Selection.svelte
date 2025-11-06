@@ -67,10 +67,10 @@
           <p class="fr-text--lg">{selection.explication}</p>
         </hgroup>
         <div>
-          <h4>Ressources</h4>
+          <h3 class="fr-h4">Ressources</h3>
           <div class="ressources">
             {#each selection.ressources as ressource}
-              <CarteCatalogue {ressource} />
+              <CarteCatalogue {ressource} markup="h4" />
             {/each}
           </div>
         </div>
