@@ -51,12 +51,13 @@
   <button
     class="entete"
     type="button"
-    tabindex="0"
+    aria-controls="onglets"
+    aria-expanded={open}
     use:clic={surLeClicDeLEntete}
   >
     <span>Naviguer dans CyberEnJeux</span>
   </button>
-  <div class="fr-text onglets" aria-expanded={open}>
+  <div class="fr-text onglets" id="onglets">
     <ol>
       {#each onglets as onglet, indice (onglet.label)}
         <li class={{ actif: onglets[ongletActif] === onglet }}>
@@ -77,6 +78,19 @@
 
 <style lang="scss">
   @use '../points-de-rupture' as *;
+
+  @mixin focus() {
+    &:focus {
+      outline-style: none;
+    }
+
+    &:focus-visible {
+      outline-offset: 2px;
+      outline-width: 2px;
+      outline-color: #0a76f6;
+      outline-style: solid;
+    }
+  }
 
   .menu-onglets {
     background-color: var(--background-default-grey);
@@ -134,6 +148,8 @@
         transform: rotate(0deg);
         transition: transform 0.2s ease-in-out;
       }
+
+      @include focus();
     }
 
     .onglets {
@@ -184,6 +200,8 @@
             position: absolute;
             width: 2px;
           }
+
+          @include focus();
         }
 
         &:not(:first-child) a {
@@ -236,17 +254,6 @@
             &:hover {
               background-color: var(--background-default-grey-hover);
               border-bottom-color: var(--border-constrat-grey, #929292);
-            }
-
-            &:focus {
-              outline-style: none;
-            }
-
-            &:focus-visible {
-              outline-offset: 2px;
-              outline-width: 2px;
-              outline-color: #0a76f6;
-              outline-style: solid;
             }
           }
 
