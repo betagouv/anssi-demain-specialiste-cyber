@@ -501,12 +501,9 @@ describe('Le formulaire de dépose de jeu', () => {
         });
         await user.click(boutonSupprimer);
 
-        const temoignagesApresSuppression = await queryAllByRoleDeep(
-          'textbox',
-          {
-            name: 'Témoignage',
-          },
-        );
+        const temoignagesApresSuppression = queryAllByRoleDeep('textbox', {
+          name: 'Témoignage',
+        });
         expect(temoignagesApresSuppression).toHaveLength(0);
       });
     });
@@ -983,9 +980,7 @@ describe('Le formulaire de dépose de jeu', () => {
             '/api/jeux/1234',
             {
               eleves: undefined,
-              temoignages: [
-                { prenom: 'Michel', details: 'Génial' },
-              ],
+              temoignages: [{ prenom: 'Michel', details: 'Génial' }],
             },
           );
         });
