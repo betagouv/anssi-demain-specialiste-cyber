@@ -41,6 +41,7 @@ export type Jeu = {
   eleves: string[];
   reactions: Record<string, number>;
   photos: PhotosJeu;
+  estCache: boolean;
 };
 
 export type DonneesJeu = {
@@ -63,6 +64,7 @@ export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
       niveau: item.niveau as Niveau,
       categorie: item.categorie as Categorie,
       thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
+      estCache: false,
     }))
     .sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
 };

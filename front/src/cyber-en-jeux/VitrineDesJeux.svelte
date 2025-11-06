@@ -38,18 +38,8 @@
       <VitrineFiltres />
 
       <div class="conteneur">
-        {#each $jeuxFiltres.resultat as { id, nom, thematiques, nomEtablissement, eleves, photos, reactions } (id)}
-          <CarteJeu
-            {id}
-            {nom}
-            {thematiques}
-            {nomEtablissement}
-            {eleves}
-            {reactions}
-            cheminCouverture={photos.couverture.chemin}
-            estCache={false}
-            modifieVisibiliteJeu={async () => {}}
-          />
+        {#each $jeuxFiltres.resultat as jeu, index (index)}
+          <CarteJeu {jeu} modifieVisibiliteJeu={async () => {}} />
         {:else}
           {#if chargementEnCours}
             <p class="fr-text">Chargement...</p>
