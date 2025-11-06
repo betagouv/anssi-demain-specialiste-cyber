@@ -199,20 +199,22 @@
       </section>
       <section id="temoignage">
         <h2>Témoignage{videosSousTitrees.length > 1 ? 's' : ''}</h2>
-        {#each videosSousTitrees as { video, sousTitre } (video)}
-          <dsfr-content type="video">
-            <video slot="video" controls crossorigin="anonymous">
-              <source src={video} type="video/mp4" />
-              <track
-                default
-                kind="captions"
-                srclang="fr"
-                label="Français"
-                src={sousTitre}
-              />
-            </video>
-          </dsfr-content>
-        {/each}
+        <div class="videos">
+          {#each videosSousTitrees as { video, sousTitre }, index (index)}
+            <dsfr-content type="video">
+              <video slot="video" controls crossorigin="anonymous">
+                <source src={video} type="video/mp4" />
+                <track
+                  default
+                  kind="captions"
+                  srclang="fr"
+                  label="Français"
+                  src={sousTitre}
+                />
+              </video>
+            </dsfr-content>
+          {/each}
+        </div>
       </section>
       <section id="liens-utiles">
         <h2>Liens utiles</h2>
@@ -289,12 +291,22 @@
     margin-bottom: 0;
   }
 
-  video {
-    width: 100%;
-    aspect-ratio: 16/9;
+  .videos {
+    display: grid;
+    gap: 0 1rem;
+    grid-template-columns: 1fr;
 
     @include a-partir-de(md) {
-      align-self: flex-start;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include a-partir-de(lg) {
+      gap: 0 1.5rem;
+    }
+
+    video {
+      width: 100%;
+      aspect-ratio: 16/9;
     }
   }
 
