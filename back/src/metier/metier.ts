@@ -16,6 +16,6 @@ export type Metier = {
     illustration: string;
     dataemploi: string;
     metierscope: string;
-    video: string;
+    videos: string[];
   };
 };

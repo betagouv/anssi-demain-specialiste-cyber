@@ -31,19 +31,24 @@
       illustration: string;
       dataemploi: string;
       metierscope: string;
-      video: string;
+      videos: string[];
     };
   };
 
-  let metier: Metier | undefined = $state(undefined);
-  const lienSousTitres = $derived.by(() => {
-    if (!metier || !metier.liens.video) {
-      return '';
+  const recupereLesSousTitres = (lienVideo: string) => {
+    if (!lienVideo) {
+      return { video: lienVideo, sousTitre: '' };
     }
-    const positionDernierPoint = metier.liens.video.lastIndexOf('.');
-    const lienSansExtension = metier.liens.video.slice(0, positionDernierPoint);
-    return `${lienSansExtension}.vtt`;
-  });
+
+    const positionDernierPoint = lienVideo.lastIndexOf('.');
+    const lienSansExtension = lienVideo.slice(0, positionDernierPoint);
+    return { video: lienVideo, sousTitre: `${lienSansExtension}.vtt` };
+  };
+
+  let metier: Metier | undefined = $state(undefined);
+  const videosSousTitrees = $derived.by(
+    () => metier?.liens.videos.map(recupereLesSousTitres) ?? [],
+  );
 
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');
@@ -193,19 +198,21 @@
         </ul>
       </section>
       <section id="temoignage">
-        <h2>Témoignage</h2>
-        <dsfr-content type="video">
-          <video slot="video" controls crossorigin="anonymous">
-            <source src={metier.liens.video} type="video/mp4" />
-            <track
-              default
-              kind="captions"
-              srclang="fr"
-              label="Français"
-              src={lienSousTitres}
-            />
-          </video>
-        </dsfr-content>
+        <h2>Témoignage{videosSousTitrees.length > 1 ? 's' : ''}</h2>
+        {#each videosSousTitrees as { video, sousTitre } (video)}
+          <dsfr-content type="video">
+            <video slot="video" controls crossorigin="anonymous">
+              <source src={video} type="video/mp4" />
+              <track
+                default
+                kind="captions"
+                srclang="fr"
+                label="Français"
+                src={sousTitre}
+              />
+            </video>
+          </dsfr-content>
+        {/each}
       </section>
       <section id="liens-utiles">
         <h2>Liens utiles</h2>
@@ -288,7 +295,6 @@
 
     @include a-partir-de(md) {
       align-self: flex-start;
-      width: calc(50% - 1rem);
     }
   }
 

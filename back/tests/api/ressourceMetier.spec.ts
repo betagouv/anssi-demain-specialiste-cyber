@@ -27,7 +27,7 @@ class ConstructeurMetier implements Constructeur<Metier> {
         illustration: '',
         dataemploi: '',
         metierscope: '',
-        video: '',
+        videos: [],
       },
     };
   }

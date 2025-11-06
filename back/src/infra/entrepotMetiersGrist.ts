@@ -65,7 +65,7 @@ export class EntrepotMetiersGrist
         illustration: enregistrement.fields.URL_illustration,
         dataemploi: enregistrement.fields.Fiche_data_emploi,
         metierscope: enregistrement.fields.Fiche_metierscope,
-        video: enregistrement.fields.lien_video,
+        videos: [enregistrement.fields.lien_video],
       },
     };
   }
