@@ -183,6 +183,7 @@
           description={tuile.contenu}
           action-markup="false"
           no-link
+          markupLevel="2"
         >
           <img
             src={tuile.illustration.lien}
