@@ -102,7 +102,9 @@
           />
           <div class="articles contenu">
             <article>
-              <h6>Les postures collaboratives entre vos élèves</h6>
+              <h3 class="fr-h6">
+                Les postures collaboratives entre vos élèves
+              </h3>
               <p class="fr-text">
                 Développer des compétences transverses, telles que la capacité à
                 s’organiser en groupe et à collaborer.
@@ -110,7 +112,7 @@
             </article>
             <hr />
             <article>
-              <h6>Leur autonomie</h6>
+              <h3 class="fr-h6">Leur autonomie</h3>
               <p class="fr-text">
                 Développer des compétences transverses, telles que l’autonomie,
                 la capacité à s’organiser individuellement.
@@ -118,7 +120,7 @@
             </article>
             <hr />
             <article>
-              <h6>L'apprentissage par le "faire"</h6>
+              <h3 class="fr-h6">L'apprentissage par le "faire"</h3>
               <p class="fr-text">
                 Valoriser leur travail par la production d’un objet tangible,
                 voire stimuler des élèves en difficultés scolaires.
@@ -126,7 +128,7 @@
             </article>
             <hr />
             <article>
-              <h6>L’engagement dans vos disciplines</h6>
+              <h3 class="fr-h6">L’engagement dans vos disciplines</h3>
               <p class="fr-text">
                 CyberEnJeux s’adapte à toutes les disciplines et permet aux
                 élèves de mobiliser concrètement leurs apprentissages, tout en
@@ -254,8 +256,8 @@
           article {
             margin: 1rem 0;
 
-            h6 {
-              margin: 0 0 0.5rem;
+            .fr-h6 {
+              margin-bottom: 0.5rem;
             }
 
             p {
