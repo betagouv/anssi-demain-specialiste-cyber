@@ -142,13 +142,17 @@
   </div>
 
   <dsfr-container>
-    <lab-anssi-marelle titre="Déroulé d’une séquence CyberEnJeux">
+    <lab-anssi-marelle>
+      <h2 slot="marelle-titre" class="marelle-titre">
+        Déroulé d’une séquence CyberEnJeux
+      </h2>
       {#each etapesMarelle as etape, index}
         <lab-anssi-marelle-etape
           {index}
           etapeMarelle={etape}
           pair={(index + 1) % 2 === 0}
         >
+          <h3 slot="etape-titre" class="fr-h5 etape-titre">{etape.titre}</h3>
           <p slot="etape-description" class="etape-description">
             {@html etape.description}
           </p>
@@ -284,6 +288,14 @@
       @include a-partir-de(xl) {
         max-width: taille-pour-colonnes(10);
       }
+    }
+
+    .marelle-titre {
+      text-align: center;
+    }
+
+    .etape-titre {
+      margin-bottom: 0;
     }
 
     .etape-description {
