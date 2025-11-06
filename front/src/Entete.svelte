@@ -127,6 +127,7 @@
   navigationId="navigation-principale"
   navigationAriaLabel="Menu principal"
   navigationItems={menuNavigation}
+  hasHeaderTag={false}
 >
   <dsc-zone-identification slot="toolLinks"></dsc-zone-identification>
   <dsc-zone-identification slot="modalToolLinks"></dsc-zone-identification>
