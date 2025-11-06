@@ -58,4 +58,17 @@ describe('La ressource métiers', () => {
 
     expect(reponse.status).toBe(404);
   });
+
+  it('renvoie une liste de vidéos', async () => {
+    const configurationServeur = configurationDeTestDuServeur();
+    const metier = unMetier().construis();
+    metier.liens.videos = ['https://video1.example', 'https://video2.example'];
+    await configurationServeur.entrepotMetier.ajoute(metier);
+
+    const serveur = creeServeur(configurationServeur);
+    const reponse = await request(serveur).get(`/api/metiers/${metier.id}`);
+
+    expect(reponse.status).toBe(200);
+    expect(reponse.body.liens.videos).toEqual(metier.liens.videos);
+  });
 });

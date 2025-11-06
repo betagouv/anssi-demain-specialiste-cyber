@@ -4,7 +4,7 @@ import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 
-type MetierGrist = {
+export type MetierGrist = {
   id: number;
   fields: {
     Titre_de_la_fiche: string;
@@ -65,7 +65,9 @@ export class EntrepotMetiersGrist
         illustration: enregistrement.fields.URL_illustration,
         dataemploi: enregistrement.fields.Fiche_data_emploi,
         metierscope: enregistrement.fields.Fiche_metierscope,
-        videos: [enregistrement.fields.lien_video],
+        videos: enregistrement.fields.lien_video
+          .split('\n')
+          .filter((url) => url.trim()),
       },
     };
   }
