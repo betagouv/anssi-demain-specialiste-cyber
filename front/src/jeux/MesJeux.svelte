@@ -73,17 +73,10 @@
     <div class="jeux">
       {#each listeDesJeux as jeu (jeu.id)}
         <CarteJeu
-          id={jeu.id}
-          nom={jeu.nom}
-          thematiques={[]}
-          nomEtablissement={jeu.nomEtablissement}
-          eleves={jeu.eleves || []}
-          cheminCouverture={jeu.photos.couverture.chemin}
-          estCache={jeu.estCache}
+          {jeu}
           modifieVisibiliteJeu={async () => {
             await modifieVisibiliteJeu(jeu);
           }}
-          reactions={jeu.reactions}
           estModifiable
         />
       {/each}

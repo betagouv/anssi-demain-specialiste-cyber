@@ -1,22 +1,26 @@
 <script lang="ts">
   import { clic } from '../actions.svelte';
-  import { enumerationFrancaise } from '../jeux/jeu';
+  import { enumerationFrancaise, type Jeu } from '../jeux/jeu';
   import Reactions from '../jeux/Reactions.svelte';
   import BadgesThematiques from './BadgesThematiques.svelte';
-  import type { Thematique } from './jeu';
 
   type Props = {
-    id: string;
-    nom: string;
-    eleves: string[];
-    nomEtablissement: string;
-    thematiques?: Thematique[];
-    cheminCouverture: string;
-    estCache: boolean;
-    reactions: Record<string, number>;
-    modifieVisibiliteJeu: () => Promise<void>;
+    jeu: Pick<
+      Jeu,
+      | 'id'
+      | 'nom'
+      | 'eleves'
+      | 'nomEtablissement'
+      | 'thematiques'
+      | 'photos'
+      | 'estCache'
+      | 'reactions'
+    >;
     estModifiable?: boolean;
+    modifieVisibiliteJeu: () => Promise<void>;
   };
+
+  const { jeu, modifieVisibiliteJeu, estModifiable = false }: Props = $props();
 
   const {
     id,
@@ -24,12 +28,10 @@
     eleves,
     nomEtablissement,
     thematiques,
-    cheminCouverture,
+    photos,
     estCache,
     reactions,
-    modifieVisibiliteJeu,
-    estModifiable = false,
-  }: Props = $props();
+  } = $derived(jeu);
 </script>
 
 <div class="lab-anssi-carte-jeux">
@@ -81,7 +83,7 @@
     title={nom}
     description="Élaboré par {enumerationFrancaise(eleves)}"
     href={`/jeux/${id}`}
-    src={cheminCouverture}
+    src={photos.couverture.chemin}
     hasHeaderBadge
     hasDetailStartIcon
     detailStartIcon="map-pin-2-line"
