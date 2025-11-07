@@ -6,10 +6,14 @@
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
-  import { enumerationFrancaise } from '../jeu.type';
+  import {
+    construisJeu,
+    enumerationFrancaise,
+    type DonneesJeu,
+    type Jeu,
+  } from '../jeu.type';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
-  import { type Jeu } from './jeu';
   import Reactions from './Reactions.svelte';
   import { libelleSequence } from './sequences';
 
@@ -18,8 +22,8 @@
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');
     const id = morceaux[morceaux.length - 1];
-    const reponse = await axios.get<Jeu>(`/api/jeux/${id}`);
-    jeu = reponse.data;
+    const reponse = await axios.get<DonneesJeu>(`/api/jeux/${id}`);
+    jeu = construisJeu(reponse.data);
   });
 
   $: temoignages = jeu

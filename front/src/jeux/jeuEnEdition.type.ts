@@ -1,5 +1,4 @@
-import type { NoteEvaluation } from '../jeu.type';
-import type { Jeu } from './jeu';
+import type { NoteEvaluation, Jeu } from '../jeu.type';
 
 export type Photos = {
   couverture?: Blob;

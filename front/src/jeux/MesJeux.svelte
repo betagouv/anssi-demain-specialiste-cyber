@@ -6,7 +6,7 @@
   import { clic } from '../actions.svelte';
   import CarteJeu from '../cyber-en-jeux/CarteJeu.svelte';
   import InvitationARejoindre from '../cyber-en-jeux/InvitationARejoindre.svelte';
-  import type { Jeu } from './jeu';
+  import { construisLesJeux, type DonneesJeu, type Jeu } from '../jeu.type';
 
   let listeDesJeux: Jeu[] = $state([]);
   let chargementEnCours = $state(false);
@@ -23,10 +23,8 @@
 
   onMount(async () => {
     chargementEnCours = true;
-    const reponse = await axios.get<Jeu[]>('/api/mes-jeux');
-    listeDesJeux = reponse.data.sort((jeu1, jeu2) =>
-      jeu1.nom.localeCompare(jeu2.nom),
-    );
+    const reponse = await axios.get<DonneesJeu[]>('/api/mes-jeux');
+    listeDesJeux = construisLesJeux(reponse.data);
     chargementEnCours = false;
     metAJourMessageAlerte();
   });
