@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store';
-import type { Jeu } from '../jeu';
+import type { Jeu } from '../../jeu.type';
 
 const store = writable<string>('');
 

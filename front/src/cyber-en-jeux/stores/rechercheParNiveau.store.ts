@@ -1,6 +1,5 @@
 import { get, writable } from 'svelte/store';
-import type { Niveau } from '../../jeu.type';
-import type { Jeu } from '../jeu';
+import type { Jeu, Niveau } from '../../jeu.type';
 
 const niveaux = writable<Niveau[]>([]);
 

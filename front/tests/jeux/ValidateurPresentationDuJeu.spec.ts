@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
+import type { Categorie, Thematique } from '../../src/jeu.type';
 import { ValidateurPresentationDuJeu } from '../../src/jeux/ValidateurPresentationDuJeu';
 import { type PresentationDuJeu } from '../../src/jeux/jeuEnEdition.type';
-import { type Thematique } from '../../src/jeu.type';
 
 describe('Le validateur de la présentation du jeu', () => {
   const jeuValide: PresentationDuJeu = {
     nom: 'nom du jeu',
-    categorie: 'MaCatégorie',
+    categorie: 'autre',
     thematiques: ['orientation'],
     description: 'mots'.repeat(2000),
   };
@@ -24,7 +24,7 @@ describe('Le validateur de la présentation du jeu', () => {
     it('sont invalides lorsque sa catégorie est vide', () => {
       const validation = validateur.estValide({
         ...jeuValide,
-        categorie: '  ',
+        categorie: '  ' as unknown as Categorie,
       });
       expect(validation).toBeFalsy();
     });
@@ -70,7 +70,7 @@ describe('Le validateur de la présentation du jeu', () => {
     it("'Le champ est obligatoire' lorsque qu'un champ obligatoire est vide", () => {
       const erreurs = validateur.valide({
         nom: '  ',
-        categorie: '   ',
+        categorie: '   ' as unknown as Categorie,
         thematiques: ['     '] as unknown as Thematique[],
         description: '     ',
       });

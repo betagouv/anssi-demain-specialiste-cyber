@@ -12,7 +12,6 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte';
-  import type { Jeu } from '../jeu';
   import type {
     ErreursValidationJeuEnEdition,
     EvaluationDuJeu,
@@ -170,8 +169,7 @@
   };
 
   const enregistreModifications = async () => {
-    const { id, enseignant, reactions, photos, ...reste } =
-      $jeuEnEditionStore as Partial<Jeu>;
+    const { id, enseignant, reactions, photos, ...reste } = $jeuEnEditionStore;
     await axios.patch(`/api/jeux/${id}`, {
       ...reste,
       eleves: elevesRenseignes,

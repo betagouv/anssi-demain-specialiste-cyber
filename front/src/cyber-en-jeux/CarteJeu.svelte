@@ -1,22 +1,11 @@
 <script lang="ts">
   import { clic } from '../actions.svelte';
-  import { enumerationFrancaise } from '../jeu.type';
-  import { type Jeu } from '../jeux/jeu';
+  import { enumerationFrancaise, type Jeu } from '../jeu.type';
   import Reactions from '../jeux/Reactions.svelte';
   import BadgesThematiques from './BadgesThematiques.svelte';
 
   type Props = {
-    jeu: Pick<
-      Jeu,
-      | 'id'
-      | 'nom'
-      | 'eleves'
-      | 'nomEtablissement'
-      | 'thematiques'
-      | 'photos'
-      | 'estCache'
-      | 'reactions'
-    >;
+    jeu: Jeu;
     estModifiable?: boolean;
     modifieVisibiliteJeu: () => Promise<void>;
   };

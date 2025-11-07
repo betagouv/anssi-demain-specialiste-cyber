@@ -1,5 +1,3 @@
-import type { Jeu } from './cyber-en-jeux/jeu';
-
 export type Temoignage = { prenom: string; details: string };
 
 export type Image = {
@@ -45,26 +43,61 @@ export type Niveau =
 
 export type DonneesJeu = {
   id: string;
-  nom: string;
-  description: string;
-  niveau: string;
   categorie: string;
-  thematiques: string[];
-  nomEtablissement: string;
+  classe?: string;
+  description: string;
+  discipline?: string;
   eleves: string[];
-  reactions: Record<string, number>;
+  enseignant?: string;
+  estCache?: boolean;
+  estProprietaire?: boolean;
+  niveau: string;
+  nom: string;
+  nomEtablissement: string;
   photos: PhotosJeu;
+  reactions: Record<string, number>;
+  sequence?: string;
+  temoignages?: Temoignage[];
+  thematiques: string[];
 };
+
+export type Jeu = {
+  id: string;
+  categorie: Categorie;
+  classe: string;
+  description: string;
+  discipline: string;
+  eleves: string[];
+  enseignant: string;
+  estCache: boolean;
+  estProprietaire: boolean;
+  niveau: Niveau;
+  nom: string;
+  nomEtablissement: string;
+  photos: PhotosJeu;
+  reactions: Record<string, number>;
+  sequence: string;
+  temoignages: Temoignage[];
+  thematiques: Thematique[];
+};
+
+export const construisJeu = (item: DonneesJeu): Jeu => ({
+  ...item,
+  niveau: item.niveau as Niveau,
+  categorie: item.categorie as Categorie,
+  thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
+  estCache: item.estCache ?? false,
+  enseignant: item.enseignant ?? '',
+  discipline: item.discipline ?? '',
+  estProprietaire: item.estProprietaire ?? false,
+  sequence: item.sequence ?? '',
+  temoignages: item.temoignages ?? [],
+  classe: item.classe ?? '',
+});
 
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
   return data
-    .map((item) => ({
-      ...item,
-      niveau: item.niveau as Niveau,
-      categorie: item.categorie as Categorie,
-      thematiques: item.thematiques?.map((t) => t as Thematique) ?? [],
-      estCache: false,
-    }))
+    .map(construisJeu)
     .sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
 };
 
