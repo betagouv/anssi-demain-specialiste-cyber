@@ -77,7 +77,7 @@
 </div>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   @mixin focus() {
     &:focus {

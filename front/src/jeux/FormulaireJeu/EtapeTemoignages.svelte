@@ -61,7 +61,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../points-de-rupture' as *;
+  @use '../../style/points-de-rupture' as *;
   p {
     margin-bottom: 0.5rem;
   }

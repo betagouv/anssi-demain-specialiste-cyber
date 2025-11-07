@@ -210,7 +210,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   h2 {
     margin: 0 0 0.5rem;

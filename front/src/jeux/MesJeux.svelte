@@ -102,7 +102,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   dsfr-container {
     display: block;

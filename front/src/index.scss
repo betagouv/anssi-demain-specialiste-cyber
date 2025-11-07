@@ -1,24 +1,24 @@
-@use 'fonts';
-@use 'global';
-@use 'standard';
-@use 'couleurs';
+@use 'style/fonts';
+@use 'style/global';
+@use 'style/standard';
+@use 'style/couleurs';
 
-@use 'entete';
-@use "contenu-deux-colonnes";
+@use 'style/entete';
+@use 'style/contenu-deux-colonnes';
 
-@use 'encart-selections';
-@use 'encart-cyberenjeux';
-@use 'encart-chiffres-cles';
-@use 'encart-soutiens';
+@use 'style/encart-selections';
+@use 'style/encart-cyberenjeux';
+@use 'style/encart-chiffres-cles';
+@use 'style/encart-soutiens';
 
-@use 'pages-annexes';
-@use 'page-statistiques';
+@use 'style/pages-annexes';
+@use 'style/page-statistiques';
 
-@use 'page-accueil';
-@use 'page-cyber-en-jeux';
-@use 'page-connexion';
-@use 'page-404';
-@use 'page-evenements';
-@use 'page-non-autorise';
-@use 'page-nouveau-jeu';
-@use 'page-selection-enseignants';
+@use 'style/page-accueil';
+@use 'style/page-cyber-en-jeux';
+@use 'style/page-connexion';
+@use 'style/page-404';
+@use 'style/page-evenements';
+@use 'style/page-non-autorise';
+@use 'style/page-nouveau-jeu';
+@use 'style/page-selection-enseignants';

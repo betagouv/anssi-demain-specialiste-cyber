@@ -163,7 +163,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../points-de-rupture' as *;
+  @use '../../style/points-de-rupture' as *;
   .information {
     padding: 1.5rem 0 0.5rem 0;
   }

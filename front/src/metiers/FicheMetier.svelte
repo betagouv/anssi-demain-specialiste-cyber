@@ -243,7 +243,7 @@
 {/if}
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   h1.titre-alternatif-xs {
     margin-bottom: 0.5rem;
