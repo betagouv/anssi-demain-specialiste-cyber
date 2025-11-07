@@ -1,4 +1,4 @@
-import type { DonneesJeu, Jeu } from './cyber-en-jeux/jeu';
+import type { Jeu } from './cyber-en-jeux/jeu';
 
 export type Temoignage = { prenom: string; details: string };
 
@@ -43,13 +43,19 @@ export type Niveau =
   | 'Cycle Terminal (2-T)'
   | 'Post Bac';
 
-export const enumerationFrancaise = (termes: string[]) => {
-  if (termes.length === 0) return '';
-  if (termes.length === 1) return termes[0];
-  const debut = termes.slice(0, termes.length - 1);
-  const dernier = termes[termes.length - 1];
-  return debut.join(', ') + ' et ' + dernier;
+export type DonneesJeu = {
+  id: string;
+  nom: string;
+  description: string;
+  niveau: string;
+  categorie: string;
+  thematiques: string[];
+  nomEtablissement: string;
+  eleves: string[];
+  reactions: Record<string, number>;
+  photos: PhotosJeu;
 };
+
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
   return data
     .map((item) => ({
@@ -61,6 +67,15 @@ export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
     }))
     .sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
 };
+
+export const enumerationFrancaise = (termes: string[]) => {
+  if (termes.length === 0) return '';
+  if (termes.length === 1) return termes[0];
+  const debut = termes.slice(0, termes.length - 1);
+  const dernier = termes[termes.length - 1];
+  return debut.join(', ') + ' et ' + dernier;
+};
+
 export const lesThematiques = (jeu: Jeu[]): Thematique[] => {
   return Array.from(new Set(jeu.flatMap((r) => r.thematiques))).sort();
 };
