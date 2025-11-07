@@ -1,6 +1,7 @@
 <script lang="ts">
   import { clic } from '../actions.svelte';
-  import { enumerationFrancaise, type Jeu } from '../jeux/jeu';
+  import { enumerationFrancaise } from '../jeu.type';
+  import { type Jeu } from '../jeux/jeu';
   import Reactions from '../jeux/Reactions.svelte';
   import BadgesThematiques from './BadgesThematiques.svelte';
 

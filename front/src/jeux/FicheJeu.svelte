@@ -6,9 +6,10 @@
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
+  import { enumerationFrancaise } from '../jeu.type';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
-  import { enumerationFrancaise, type Jeu } from './jeu';
+  import { type Jeu } from './jeu';
   import Reactions from './Reactions.svelte';
   import { libelleSequence } from './sequences';
 
