@@ -3,9 +3,9 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import Fiche, { type Menu } from '../composants/Fiche.svelte';
+  import Heros from '../composants/Heros.svelte';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
-  import Fiche, { type Menu } from '../Fiche.svelte';
-  import Heros from '../Heros.svelte';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
   import { enumerationFrancaise, type Jeu } from './jeu';

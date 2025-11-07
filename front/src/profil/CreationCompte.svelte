@@ -11,8 +11,8 @@
 
 <script lang="ts">
   import axios from 'axios';
-  import { clic } from './actions.svelte';
-  import { TITRE_DSC_SECABLE } from './constantes';
+  import { clic } from '../actions.svelte';
+  import { TITRE_DSC_SECABLE } from '../constantes';
 
   const { informationsProfessionnelles, token } = $props();
 

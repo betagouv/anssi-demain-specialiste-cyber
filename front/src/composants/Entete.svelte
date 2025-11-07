@@ -27,8 +27,8 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { profil } from './stores/profil';
-  import { TITRE_DSC_SECABLE } from './constantes';
+  import { profil } from '../stores/profil';
+  import { TITRE_DSC_SECABLE } from '../constantes';
 
   interface Props {
     sansNavigation?: boolean;

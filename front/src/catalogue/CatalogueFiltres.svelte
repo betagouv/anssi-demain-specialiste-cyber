@@ -1,17 +1,17 @@
 <script lang="ts">
+  import { clic } from '../actions.svelte';
+  import RechercheTextuelle from '../composants/RechercheTextuelle.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreNiveau from './FiltreNiveau.svelte';
   import FiltrePublicCible from './FiltrePublicCible.svelte';
   import FiltreThematique from './FiltreThematique.svelte';
   import FiltreType from './FiltreType.svelte';
-  import RechercheTextuelle from '../RechercheTextuelle.svelte';
-  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
-  import { rechercheParPublicCible } from './stores/rechercheParPublicCible.store';
   import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
+  import { rechercheParPublicCible } from './stores/rechercheParPublicCible.store';
   import { rechercheParThematique } from './stores/rechercheParThematique.store';
   import { rechercheParType } from './stores/rechercheParType.store';
-  import { clic } from '../actions.svelte';
+  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
   let menuContextuelEstOuvert = $state(false);
 
