@@ -11,7 +11,7 @@
 <div class="encart-declarer-action sombre">
   <div class="conteneur">
     <div class="contenu">
-      <h3>Déclarer une action</h3>
+      <h2 class="fr-h3">Déclarer une action</h2>
       <p class="fr-text">
         Faites découvrir la cybersécurité autrement&nbsp;! En déclarant votre
         séquence, vous profitez d’un accompagnement et valorisez votre
@@ -59,7 +59,7 @@
       flex: 1;
     }
 
-    h3 {
+    .fr-h3 {
       margin-bottom: 0.5rem;
     }
 
