@@ -2,9 +2,11 @@ import { render, waitFor } from '@testing-library/svelte/svelte5';
 import userEvent from '@testing-library/user-event';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type Jeu } from '../../../src/jeu.type';
 import FormulaireJeu from '../../../src/jeux/FormulaireJeu/FormulaireJeu.svelte';
 import { type ReferentielEtablissement } from '../../../src/jeux/FormulaireJeu/ReferentielEtablissement';
 import {
+  construisJeuEnEditionDepuisJeu,
   type EvaluationDuJeu,
   type InformationsGeneralesDuJeu,
   type JeuEnEdition,
@@ -933,19 +935,49 @@ describe('Le formulaire de dépose de jeu', () => {
         });
 
         it("n'envoie pas les propriétés non modifiables", async () => {
-          const jeu = {
+          const jeu: Jeu = {
             id: '1234',
             reactions: {},
             enseignant: 'Jeanne',
-            photos: 'photos',
+            photos: {
+              couverture: {
+                chemin: '',
+              },
+              photos: [],
+            },
+            categorie: 'autre',
+            classe: '3e',
+            description: '',
+            discipline: 'mathématiques',
+            eleves: [],
+            estCache: false,
+            estProprietaire: true,
+            niveau: 'Cycle 4 (5e-3e)',
+            nom: 'Nom du Jeu',
+            nomEtablissement: 'Nom etablissement',
+            sequence: 'journee',
+            temoignages: [],
+            thematiques: [],
           };
-          jeuEnEditionStore.set(jeu as JeuEnEdition);
+          jeuEnEditionStore.set(construisJeuEnEditionDepuisJeu(jeu));
 
           await engistreModification();
 
           expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
             '/api/jeux/1234',
-            {},
+            {
+              categorie: 'autre',
+              classe: '3e',
+              description: '',
+              discipline: 'mathématiques',
+              eleves: [],
+              estCache: false,
+              nom: 'Nom du Jeu',
+              nomEtablissement: 'Nom etablissement',
+              sequence: 'journee',
+              temoignages: [],
+              thematiques: [],
+            },
           );
         });
 

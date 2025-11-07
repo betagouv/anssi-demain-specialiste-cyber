@@ -1,12 +1,27 @@
-import type { NoteEvaluation, Jeu } from '../jeu.type';
+import type { Jeu, NoteEvaluation } from '../jeu.type';
 
 export type Photos = {
   couverture?: Blob;
   photos?: Blob[];
 };
 
-export type JeuEnEdition = Partial<Omit<Jeu, 'photos'>> & {
-  categorie?: string;
+export type JeuEnEdition = Partial<
+  Pick<
+    Jeu,
+    | 'categorie'
+    | 'classe'
+    | 'description'
+    | 'discipline'
+    | 'eleves'
+    | 'estCache'
+    | 'id'
+    | 'nom'
+    | 'nomEtablissement'
+    | 'sequence'
+    | 'temoignages'
+    | 'thematiques'
+  >
+> & {
   evaluationDecouverte?: NoteEvaluation;
   evaluationInteret?: NoteEvaluation;
   evaluationSatisfactionGenerale?: NoteEvaluation;
@@ -38,3 +53,19 @@ export type EvaluationDuJeu = Pick<
 >;
 
 export type PhotosDuJeu = Pick<JeuEnEdition, 'photos'>;
+
+export const construisJeuEnEditionDepuisJeu = (jeu: Jeu): JeuEnEdition => ({
+  categorie: jeu.categorie,
+  classe: jeu.classe,
+  description: jeu.description,
+  discipline: jeu.discipline,
+  eleves: jeu.eleves,
+  estCache: jeu.estCache,
+  id: jeu.id,
+  nom: jeu.nom,
+  nomEtablissement: jeu.nomEtablissement,
+  sequence: jeu.sequence,
+  temoignages: jeu.temoignages,
+  thematiques: jeu.thematiques,
+  photos: undefined,
+});
