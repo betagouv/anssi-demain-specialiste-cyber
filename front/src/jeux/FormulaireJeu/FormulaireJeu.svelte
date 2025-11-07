@@ -243,7 +243,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   .formulaire-jeu {
     max-width: 792px;

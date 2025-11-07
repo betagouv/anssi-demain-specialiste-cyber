@@ -1,5 +1,6 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vitest/config';
+import path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -12,5 +13,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/vitest-setup.ts',
     include: ['tests/**/*.{test,spec}.{js,ts}'],
+    alias: {
+      '@style': path.join(__dirname, 'src/style'),
+    },
   },
 });
