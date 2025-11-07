@@ -1,8 +1,16 @@
-$tailleDeTousLesGaps: calc(11 * var(--gap-dsfr-grid));
-$tailleUneColonne: calc(calc(100% - tailleDeTousLesGaps) / 12);
+@use 'points-de-rupture' as *;
+
+$gap-dsfr-grid: 1rem;
+
+@include a-partir-de(lg) {
+  $gap-dsfr-grid: 1.5rem;
+}
+
+$tailleDeTousLesGaps: calc(11 * $gap-dsfr-grid);
+$tailleUneColonne: calc(calc(100% - $tailleDeTousLesGaps) / 12);
 
 @function taille-pour-colonnes($colonne) {
-  $tailleDesGapsEntreColonnes: calc(($colonne - 1) * var(--gap-dsfr-grid));
+  $tailleDesGapsEntreColonnes: calc(($colonne - 1) * $gap-dsfr-grid);
   $tailleFinale: calc(
     calc($tailleUneColonne * $colonne) + $tailleDesGapsEntreColonnes
   );

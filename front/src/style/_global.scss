@@ -81,11 +81,3 @@ dsc-selection {
     min-height: 400px;
   }
 }
-
-:root {
-  --gap-dsfr-grid: 1rem;
-
-  @include a-partir-de(lg) {
-    --gap-dsfr-grid: 1.5rem;
-  }
-}
