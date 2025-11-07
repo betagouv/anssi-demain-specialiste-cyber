@@ -11,8 +11,9 @@ import {
   type PhotosDuJeu,
   type PresentationDuJeu,
 } from '../../../src/jeux/jeu';
+import { jeuEnEditionStore } from '../../../src/jeux/stores/jeuEnEdition.store';
 import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
-import { type Validateur } from '../../../src/validateur';
+import { type Validateur } from '../../../src/jeux/validateur';
 import {
   findAllByRoleDeep,
   findByRoleDeep,
@@ -22,7 +23,6 @@ import {
   queryAllByRoleDeep,
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
-import { jeuEnEditionStore } from '../../../src/jeux/stores/jeuEnEdition.store';
 
 const axiosMock = vi.hoisted(() => ({ post: vi.fn(), patch: vi.fn() }));
 
