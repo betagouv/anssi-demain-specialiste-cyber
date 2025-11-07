@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { writable } from 'svelte/store';
 
 type Profil = {
@@ -6,11 +7,11 @@ type Profil = {
 
 const { subscribe, set } = writable<Profil | undefined>();
 
-fetch('/api/profil')
-  .then((reponse) => reponse.json())
-  .then((data) => {
-    if (data.email) {
-      set({ email: data.email });
+axios
+  .get('/api/profil')
+  .then((reponse) => {
+    if (reponse.data.email) {
+      set({ email: reponse.data.email });
     }
   })
   .catch(() => set(undefined));
