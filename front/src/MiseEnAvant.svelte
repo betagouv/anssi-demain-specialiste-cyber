@@ -42,7 +42,7 @@
 </section>
 
 <style lang="scss">
-  @use './style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   .mise-en-avant {
     display: grid;

@@ -1,6 +1,7 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
 import { createLogger, defineConfig } from 'vite';
+import path from 'path';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
@@ -15,6 +16,11 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: Vite.UserConfig) => ({
+  resolve: {
+    alias: {
+      '@style': path.join(__dirname, 'src/style'),
+    },
+  },
   plugins: [svelte(), injecteNonce()],
   build: {
     manifest: true,

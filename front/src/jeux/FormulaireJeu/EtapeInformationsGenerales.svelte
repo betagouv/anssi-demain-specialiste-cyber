@@ -128,7 +128,7 @@
 </dsfr-select>
 
 <style lang="scss">
-  @use '../../style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   .eleves {
     margin: 0;

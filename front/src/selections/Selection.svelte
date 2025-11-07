@@ -84,7 +84,7 @@
 {/each}
 
 <style lang="scss">
-  @use '../style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   lab-anssi-ancres {
     display: block;

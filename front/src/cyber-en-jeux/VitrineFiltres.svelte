@@ -84,7 +84,7 @@
 </div>
 
 <style lang="scss">
-  @use '../style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   h4 {
     margin: 0 0 0.5rem;

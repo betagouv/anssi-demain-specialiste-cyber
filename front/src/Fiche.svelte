@@ -40,7 +40,7 @@
 </div>
 
 <style lang="scss">
-  @use './style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   .corps-de-fiche {
     display: grid;

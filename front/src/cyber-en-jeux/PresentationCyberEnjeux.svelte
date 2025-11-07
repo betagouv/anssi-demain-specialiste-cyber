@@ -212,8 +212,8 @@
 </div>
 
 <style lang="scss">
-  @use '../style/points-de-rupture' as *;
-  @use '../style/grille' as *;
+  @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   :root {
     --brique-carrousel-bouton-action-texte-couleur: #161616;

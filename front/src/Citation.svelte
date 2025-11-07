@@ -15,7 +15,7 @@
 </div>
 
 <style lang="scss">
-  @use './style/points-de-rupture' as *;
+  @use '@style/points-de-rupture' as *;
 
   .rejoindre-communaute {
     font-weight: bold;
