@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Citation from '../Citation.svelte';
+  import Citation from '../composants/Citation.svelte';
 </script>
 
 <Citation>

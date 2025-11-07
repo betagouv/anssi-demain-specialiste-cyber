@@ -1,6 +1,6 @@
 <script lang="ts">
-  import RechercheTextuelle from '../RechercheTextuelle.svelte';
   import { clic } from '../actions.svelte';
+  import RechercheTextuelle from '../composants/RechercheTextuelle.svelte';
   import FiltreCategorie from './FiltreCategorie.svelte';
   import FiltreNiveau from './FiltreNiveau.svelte';
   import FiltreThematique from './FiltreThematique.svelte';

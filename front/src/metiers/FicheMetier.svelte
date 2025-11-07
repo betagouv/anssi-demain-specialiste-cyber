@@ -8,9 +8,9 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Fiche, { type Menu } from '../Fiche.svelte';
-  import Heros from '../Heros.svelte';
   import { laCouleurDuBadgeSelonTypeRessourceCyber } from '../catalogue/ressourceCyber';
+  import Fiche, { type Menu } from '../composants/Fiche.svelte';
+  import Heros from '../composants/Heros.svelte';
 
   type Metier = {
     id: string;

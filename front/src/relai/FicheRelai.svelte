@@ -7,7 +7,7 @@
 
 <script lang="ts">
   import { TITRE_DSC_SECABLE } from '../constantes';
-  import Fiche from '../Fiche.svelte';
+  import Fiche from '../composants/Fiche.svelte';
   const zeroWidthSpace = '\u200b';
 </script>
 

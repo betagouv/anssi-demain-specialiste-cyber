@@ -3,7 +3,7 @@
 />
 
 <script lang="ts">
-  import { profil } from './stores/profil';
+  import { profil } from '../stores/profil';
 </script>
 
 {#if $profil}

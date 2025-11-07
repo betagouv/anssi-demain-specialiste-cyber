@@ -1,6 +1,6 @@
 <script lang="ts">
+  import MiseEnAvant from '../composants/MiseEnAvant.svelte';
   import { TITRE_DSC_SECABLE } from '../constantes';
-  import MiseEnAvant from '../MiseEnAvant.svelte';
 
   type Ressource = {
     titre: string;
