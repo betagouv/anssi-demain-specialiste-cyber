@@ -2,11 +2,14 @@ import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { profil } from '../../src/stores/profil';
 
-vi.hoisted(() => {
-  const newFetch = vi.fn().mockResolvedValue({
-    json: () => Promise.resolve({ email: 'jeanne.dupond@mail.fr' }),
-  });
-  vi.stubGlobal('fetch', newFetch);
+vi.mock('axios', () => {
+  return {
+    default: {
+      get: vi.fn().mockResolvedValue({
+        data: { email: 'jeanne.dupond@mail.fr' },
+      }),
+    },
+  };
 });
 
 describe('Le store du profil', () => {
