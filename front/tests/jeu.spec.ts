@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { enumerationFrancaise } from '../../src/jeux/jeu';
+import { enumerationFrancaise } from '../src/jeu.type';
 
 describe('Une énumération française', () => {
   describe('sait se construire, à partir des termes', () => {

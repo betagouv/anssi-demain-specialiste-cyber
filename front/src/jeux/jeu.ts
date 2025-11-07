@@ -17,11 +17,3 @@ export type Jeu = {
   estCache: boolean;
   estProprietaire: boolean;
 };
-
-export const enumerationFrancaise = (termes: string[]) => {
-  if (termes.length === 0) return '';
-  if (termes.length === 1) return termes[0];
-  const debut = termes.slice(0, termes.length - 1);
-  const dernier = termes[termes.length - 1];
-  return debut.join(', ') + ' et ' + dernier;
-};

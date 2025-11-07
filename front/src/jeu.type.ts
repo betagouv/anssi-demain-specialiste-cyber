@@ -40,3 +40,11 @@ export type Niveau =
   | 'Cycle 4 (5e-3e)'
   | 'Cycle Terminal (2-T)'
   | 'Post Bac';
+
+export const enumerationFrancaise = (termes: string[]) => {
+  if (termes.length === 0) return '';
+  if (termes.length === 1) return termes[0];
+  const debut = termes.slice(0, termes.length - 1);
+  const dernier = termes[termes.length - 1];
+  return debut.join(', ') + ' et ' + dernier;
+};
