@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { CouleurDeBadge } from '../badge.type';
+  import type { Thematique } from '../jeu.type';
   import { libelleThematique } from '../jeux/thematiques';
-  import type { Thematique } from './jeu';
 
   type Props = {
     taille: 'sm' | 'md';

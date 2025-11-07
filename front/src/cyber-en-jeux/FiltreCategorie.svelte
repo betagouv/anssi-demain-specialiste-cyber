@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { rechercheParCategorie } from './stores/rechercheParCategorie.store';
+  import { NomDesCategories } from '../jeu.type';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
-  import { NomDesCategories } from './jeu';
+  import { rechercheParCategorie } from './stores/rechercheParCategorie.store';
+
   const categories = $derived(
     $jeuxFiltres.categories.map((categorie) => ({
       value: categorie,
