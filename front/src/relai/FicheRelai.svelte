@@ -8,7 +8,6 @@
 <script lang="ts">
   import { TITRE_DSC_SECABLE } from '../constantes';
   import Fiche from '../composants/Fiche.svelte';
-  const zeroWidthSpace = '\u200b';
 </script>
 
 <dsfr-container>
@@ -24,7 +23,7 @@
       },
       {
         id: 'menu-conditions',
-        label: `Conditions d’utilisation de la marque Demain${zeroWidthSpace}Spécialiste${zeroWidthSpace}Cyber`,
+        label: `Conditions d’utilisation de la marque ${TITRE_DSC_SECABLE}`,
         href: '#conditions',
         isCollapsible: false,
         type: 'link',
