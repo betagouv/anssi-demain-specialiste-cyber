@@ -1,10 +1,14 @@
 <svelte:options customElement={{ tag: 'dsc-catalogue', shadow: 'none' }} />
 
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import CarteCatalogue from './CarteCatalogue.svelte';
   import CatalogueFiltres from './CatalogueFiltres.svelte';
-  import { lesRessourcesCyberTriees } from './ressourceCyber';
+  import {
+    lesRessourcesCyberTriees,
+    type RessourceCyber,
+  } from './ressourceCyber';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -14,8 +18,10 @@
   onMount(async () => {
     chargementEnCours = true;
     try {
-      const reponse = await fetch('/api/ressources-cyber');
-      const ressourcesCyber = lesRessourcesCyberTriees(await reponse.json());
+      const reponse = await axios.get<RessourceCyber[]>(
+        '/api/ressources-cyber',
+      );
+      const ressourcesCyber = lesRessourcesCyberTriees(reponse.data);
       ressourcesCyberStore.initialise(ressourcesCyber);
     } catch (e) {
       ressourcesNonTrouvees = true;
