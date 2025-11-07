@@ -1,10 +1,4 @@
-import type {
-  NoteEvaluation,
-  Photos,
-  PhotosJeu,
-  Temoignage,
-  Thematique,
-} from '../jeu.type';
+import type { PhotosJeu, Temoignage, Thematique } from '../jeu.type';
 
 export type Jeu = {
   id: string;
@@ -23,49 +17,6 @@ export type Jeu = {
   estCache: boolean;
   estProprietaire: boolean;
 };
-
-export type JeuEnEdition = {
-  sequence?: string;
-  nomEtablissement?: string;
-  discipline?: string;
-  classe?: string;
-  eleves?: string[];
-  nom?: string;
-  categorie?: string;
-  thematiques?: string[];
-  description?: string;
-  temoignages?: Temoignage[];
-  evaluationDecouverte?: NoteEvaluation;
-  evaluationInteret?: NoteEvaluation;
-  evaluationSatisfactionGenerale?: NoteEvaluation;
-  precisions?: string;
-  photos?: Photos;
-  consentement?: boolean;
-};
-
-export type ErreursValidationJeuEnEdition = Partial<
-  Record<keyof JeuEnEdition, string>
->;
-
-export type InformationsGeneralesDuJeu = Pick<
-  JeuEnEdition,
-  'nomEtablissement' | 'sequence' | 'discipline' | 'classe' | 'eleves'
->;
-
-export type PresentationDuJeu = Pick<
-  JeuEnEdition,
-  'nom' | 'categorie' | 'thematiques' | 'description'
->;
-
-export type EvaluationDuJeu = Pick<
-  JeuEnEdition,
-  | 'evaluationDecouverte'
-  | 'evaluationInteret'
-  | 'evaluationSatisfactionGenerale'
-  | 'precisions'
->;
-
-export type PhotosDuJeu = Pick<JeuEnEdition, 'photos'>;
 
 export const enumerationFrancaise = (termes: string[]) => {
   if (termes.length === 0) return '';

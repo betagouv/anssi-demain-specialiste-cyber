@@ -10,7 +10,7 @@ import {
   type JeuEnEdition,
   type PhotosDuJeu,
   type PresentationDuJeu,
-} from '../../../src/jeux/jeu';
+} from '../../../src/jeux/jeuEnEdition.type';
 import { jeuEnEditionStore } from '../../../src/jeux/stores/jeuEnEdition.store';
 import { photosJeuStore } from '../../../src/jeux/stores/photosJeu.store';
 import { type Validateur } from '../../../src/jeux/validateur';

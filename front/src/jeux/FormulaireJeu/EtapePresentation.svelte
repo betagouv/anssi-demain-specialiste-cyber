@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ErreursValidationJeuEnEdition } from '../jeu';
+  import type { ErreursValidationJeuEnEdition } from '../jeuEnEdition.type';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { thematiques } from '../thematiques';
 

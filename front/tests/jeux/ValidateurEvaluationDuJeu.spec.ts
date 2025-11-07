@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type EvaluationDuJeu } from '../../src/jeux/jeu';
+import { type EvaluationDuJeu } from '../../src/jeux/jeuEnEdition.type';
 import { ValidateurEvaluationDuJeu } from '../../src/jeux/ValidateurEvaluationDuJeu';
 
 describe("Le validateur de l'évaluation du jeu", () => {

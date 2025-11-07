@@ -11,11 +11,6 @@ export type PhotosJeu = {
 
 export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
 
-export type Photos = {
-  couverture?: Blob;
-  photos?: Blob[];
-};
-
 export enum NomsDesThematiques {
   'comportements-numeriques' = 'Comportements numériques',
   cyberharcelement = 'Cyberharcèlement',
