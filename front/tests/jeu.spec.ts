@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { enumerationFrancaise } from '../src/jeu.type';
+import { construisLesJeux, enumerationFrancaise } from '../src/jeu.type';
 
 describe('Une énumération française', () => {
   describe('sait se construire, à partir des termes', () => {
@@ -25,5 +25,30 @@ describe('Une énumération française', () => {
 
       expect(auteurs).toEqual('Cindy, Kylian et Branda');
     });
+  });
+});
+
+describe('La construction d’un jeu', () => {
+  const donneesJeuCommunes = {
+    id: 'x',
+    description: '',
+    niveau: 'Post Bac',
+    categorie: 'simulation',
+    thematiques: ['orientation'],
+    nomEtablissement: 'Collège',
+    eleves: ['Michel'],
+    reactions: {},
+    photos: { couverture: { chemin: '' }, photos: [] },
+  };
+
+  it('retourne la liste triée des jeux', () => {
+    const jeuxNonTries = [
+      { nom: 'Zora', ...donneesJeuCommunes },
+      { nom: 'Baltazar', ...donneesJeuCommunes },
+    ];
+    const jeuxTries = construisLesJeux(jeuxNonTries);
+
+    expect(jeuxTries[0].nom).toBe('Baltazar');
+    expect(jeuxTries[1].nom).toBe('Zora');
   });
 });

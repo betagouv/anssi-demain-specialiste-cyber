@@ -3,7 +3,7 @@
   import { jeuxStore } from './stores/jeux.store';
   import VitrineFiltres from './VitrineFiltres.svelte';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
-  import { construisLesJeux } from './jeu';
+  import { construisLesJeux } from '../jeu.type';
   import CarteJeu from './CarteJeu.svelte';
 
   let chargementEnCours = $state(false);
