@@ -1,9 +1,10 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import { jeuxStore } from './stores/jeux.store';
   import VitrineFiltres from './VitrineFiltres.svelte';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
-  import { construisLesJeux } from '../jeu.type';
+  import { construisLesJeux, type DonneesJeu } from '../jeu.type';
   import CarteJeu from './CarteJeu.svelte';
 
   let chargementEnCours = $state(false);
@@ -12,8 +13,8 @@
   onMount(async () => {
     chargementEnCours = true;
     try {
-      const reponse = await fetch('/api/jeux');
-      const tousLesJeux = construisLesJeux(await reponse.json());
+      const reponse = await axios.get<DonneesJeu[]>('/api/jeux');
+      const tousLesJeux = construisLesJeux(reponse.data);
       jeuxStore.initialise(tousLesJeux);
     } catch (e) {
       erreurChargement = true;
