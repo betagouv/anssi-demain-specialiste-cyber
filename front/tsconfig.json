@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "allowArbitraryExtensions": true,
-    "types": ["@testing-library/jest-dom"], // Utile pour rendre les types disponible dans l'IDE
+    "types": ["@testing-library/jest-dom/vitest"], // Utile pour rendre les types disponible dans l'IDE
     "paths": {
       "@style/*": ["./src/style/*"]
     }
