@@ -95,7 +95,7 @@
       padding: 0.25rem;
       cursor: pointer;
       &:focus-visible {
-        outline: 2px solid #0a76f6;
+        outline: 2px solid var(--dsfr-couleur-focus-outline);
       }
       &:hover {
         background-color: var(--background-default-grey-hover);

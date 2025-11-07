@@ -65,7 +65,7 @@
         }
 
         &:focus-visible + label {
-          outline: 2px solid #0a76f6;
+          outline: 2px solid var(--dsfr-couleur-focus-outline);
           outline-offset: 2px;
         }
 
