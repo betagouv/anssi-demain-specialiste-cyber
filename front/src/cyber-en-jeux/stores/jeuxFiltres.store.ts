@@ -1,18 +1,11 @@
 import { derived } from 'svelte/store';
+import type { Categorie, Niveau, Thematique } from '../../jeu.type';
+import { lesCategories, lesNiveaux, lesThematiques, type Jeu } from '../jeu';
+import { jeuxStore } from './jeux.store';
+import { rechercheParCategorie } from './rechercheParCategorie.store';
 import { rechercheParNiveau } from './rechercheParNiveau.store';
 import { rechercheParThematique } from './rechercheParThematique.store';
-import { rechercheParCategorie } from './rechercheParCategorie.store';
 import { rechercheTextuelle } from './rechercheTextuelle.store';
-import { jeuxStore } from './jeux.store';
-import {
-  lesCategories,
-  lesNiveaux,
-  lesThematiques,
-  type Categorie,
-  type Thematique,
-  type Jeu,
-  type Niveau,
-} from '../jeu';
 
 export type JeuxFiltres = {
   resultat: Jeu[];

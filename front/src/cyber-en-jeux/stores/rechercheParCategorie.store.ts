@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store';
-import type { Categorie, Jeu } from '../jeu';
+import type { Categorie } from '../../jeu.type';
+import type { Jeu } from '../jeu';
 
 const categorie = writable<Categorie | ''>('');
 

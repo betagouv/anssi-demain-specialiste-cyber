@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { NoteEvaluation } from '../jeu';
+  import type { NoteEvaluation } from '../../jeu.type';
 
   export let note: NoteEvaluation | undefined;
   export let nom: string;

@@ -1,4 +1,10 @@
-import type { Thematique } from '../cyber-en-jeux/jeu';
+import type {
+  NoteEvaluation,
+  Photos,
+  PhotosJeu,
+  Temoignage,
+  Thematique,
+} from '../jeu.type';
 
 export type Jeu = {
   id: string;
@@ -10,28 +16,12 @@ export type Jeu = {
   classe: string;
   discipline: string;
   description: string;
-  temoignages: { prenom: string; details: string }[];
+  temoignages: Temoignage[];
   thematiques: Thematique[];
   photos: PhotosJeu;
   reactions: Record<string, number>;
   estCache: boolean;
   estProprietaire: boolean;
-};
-
-export type Image = {
-  chemin: string;
-};
-
-export type PhotosJeu = {
-  couverture: Image;
-  photos: Image[];
-};
-
-export type NoteEvaluation = 1 | 2 | 3 | 4 | 5;
-
-type Photos = {
-  couverture?: Blob;
-  photos?: Blob[];
 };
 
 export type JeuEnEdition = {
@@ -44,7 +34,7 @@ export type JeuEnEdition = {
   categorie?: string;
   thematiques?: string[];
   description?: string;
-  temoignages?: { prenom: string; details: string }[];
+  temoignages?: Temoignage[];
   evaluationDecouverte?: NoteEvaluation;
   evaluationInteret?: NoteEvaluation;
   evaluationSatisfactionGenerale?: NoteEvaluation;

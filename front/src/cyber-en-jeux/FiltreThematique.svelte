@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { rechercheParThematique } from './stores/rechercheParThematique.store';
+  import { NomsDesThematiques } from '../jeu.type';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
-  import { NomsDesThematiques } from './jeu';
+  import { rechercheParThematique } from './stores/rechercheParThematique.store';
 </script>
 
 <dsfr-select
