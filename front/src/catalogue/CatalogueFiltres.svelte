@@ -96,7 +96,7 @@
 </div>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   .fr-h6 {
     color: var(--text-title-grey);

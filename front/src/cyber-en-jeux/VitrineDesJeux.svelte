@@ -57,7 +57,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   .vitrine-des-jeux {
     margin: 3.5rem 0;

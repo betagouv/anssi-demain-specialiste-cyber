@@ -122,7 +122,7 @@
 </section>
 
 <style lang="scss">
-  @use './points-de-rupture' as *;
+  @use './style/points-de-rupture' as *;
   .creation-compte {
     padding: 3.5rem 1rem;
 

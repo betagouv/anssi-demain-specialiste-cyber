@@ -40,7 +40,7 @@
 </div>
 
 <style lang="scss">
-  @use './points-de-rupture' as *;
+  @use './style/points-de-rupture' as *;
 
   .corps-de-fiche {
     display: grid;
@@ -68,7 +68,7 @@
     .sections {
       grid-area: sections;
       padding-top: 2rem;
-      padding-bottom: 4.5rem; 
+      padding-bottom: 4.5rem;
 
       .contenu {
         display: flex;

@@ -40,7 +40,7 @@
 </fieldset>
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   fieldset {
     margin: 0 0 0.5rem;

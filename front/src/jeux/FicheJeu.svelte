@@ -177,7 +177,7 @@
 {/if}
 
 <style lang="scss">
-  @use '../points-de-rupture' as *;
+  @use '../style/points-de-rupture' as *;
 
   .badges {
     display: none;
