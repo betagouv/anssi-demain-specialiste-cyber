@@ -87,7 +87,7 @@
     &:focus-visible {
       outline-offset: 2px;
       outline-width: 2px;
-      outline-color: #0a76f6;
+      outline-color: var(--dsfr-couleur-focus-outline);
       outline-style: solid;
     }
   }
