@@ -3,7 +3,7 @@
   import { clic } from '../../actions.svelte';
   import { classes } from '../classes';
   import { disciplines } from '../disciplines';
-  import type { ErreursValidationJeuEnEdition } from '../jeu';
+  import type { ErreursValidationJeuEnEdition } from '../jeuEnEdition.type';
   import { sequences } from '../sequences';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import NomEtablissementAutoComplete from './NomEtablissementAutoComplete.svelte';

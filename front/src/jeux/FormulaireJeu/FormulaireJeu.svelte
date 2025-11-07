@@ -10,19 +10,20 @@
 
 <script lang="ts">
   import axios from 'axios';
+  import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte';
-  import type { Validateur } from '../validateur';
+  import type { Jeu } from '../jeu';
   import type {
     ErreursValidationJeuEnEdition,
     EvaluationDuJeu,
     InformationsGeneralesDuJeu,
-    Jeu,
     JeuEnEdition,
     PhotosDuJeu,
     PresentationDuJeu,
-  } from '../jeu';
+  } from '../jeuEnEdition.type';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { photosJeuStore } from '../stores/photosJeu.store';
+  import type { Validateur } from '../validateur';
   import { ValidateurEvaluationDuJeu } from '../ValidateurEvaluationDuJeu';
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPhotosDuJeu } from '../ValidateurPhotosDuJeu';
@@ -33,6 +34,7 @@
   import EtapePresentation from './EtapePresentation.svelte';
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
+  import EtapierModifieJeu from './EtapierModifieJeu.svelte';
   import type {
     EtapeDeposeJeu,
     EtapeModificationJeu,
@@ -41,8 +43,6 @@
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
   } from './ReferentielEtablissement.js';
-  import { onMount, tick } from 'svelte';
-  import EtapierModifieJeu from './EtapierModifieJeu.svelte';
 
   interface Props {
     mode: 'creation' | 'modification';

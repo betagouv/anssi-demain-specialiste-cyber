@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { ValidateurPresentationDuJeu } from '../../src/jeux/ValidateurPresentationDuJeu';
-import { type PresentationDuJeu } from '../../src/jeux/jeu';
+import { type PresentationDuJeu } from '../../src/jeux/jeuEnEdition.type';
+import { type Thematique } from '../../src/jeu.type';
 
 describe('Le validateur de la présentation du jeu', () => {
   const jeuValide: PresentationDuJeu = {
     nom: 'nom du jeu',
     categorie: 'MaCatégorie',
-    thematiques: ['MaThématique'],
+    thematiques: ['orientation'],
     description: 'mots'.repeat(2000),
   };
   const descriptionTropLongue = 'mots'.repeat(2001);
@@ -70,7 +71,7 @@ describe('Le validateur de la présentation du jeu', () => {
       const erreurs = validateur.valide({
         nom: '  ',
         categorie: '   ',
-        thematiques: ['     '],
+        thematiques: ['     '] as unknown as Thematique[],
         description: '     ',
       });
       expect(erreurs).toEqual({

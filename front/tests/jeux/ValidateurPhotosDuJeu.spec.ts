@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { type PhotosDuJeu } from '../../src/jeux/jeu';
+import { type PhotosDuJeu } from '../../src/jeux/jeuEnEdition.type';
 import { ValidateurPhotosDuJeu } from '../../src/jeux/ValidateurPhotosDuJeu';
 
 describe('Le validateur des photos du jeu', () => {

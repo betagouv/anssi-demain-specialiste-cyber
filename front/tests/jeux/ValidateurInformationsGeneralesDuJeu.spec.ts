@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ValidateurInformationsGeneralesDuJeu } from '../../src/jeux/ValidateurInformationsGeneralesDuJeu';
-import { type JeuEnEdition } from '../../src/jeux/jeu';
+import { type JeuEnEdition } from '../../src/jeux/jeuEnEdition.type';
 
 describe('Le validateur des informations générales de jeu', () => {
   const jeuValide: JeuEnEdition = {

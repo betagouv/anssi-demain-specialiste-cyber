@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte';
-  import type { ErreursValidationJeuEnEdition } from '../jeu';
+  import type { ErreursValidationJeuEnEdition } from '../jeuEnEdition.type';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { photosJeu, photosJeuStore } from '../stores/photosJeu.store';
 
