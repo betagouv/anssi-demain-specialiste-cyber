@@ -12,13 +12,14 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte';
-  import type {
-    ErreursValidationJeuEnEdition,
-    EvaluationDuJeu,
-    InformationsGeneralesDuJeu,
-    JeuEnEdition,
-    PhotosDuJeu,
-    PresentationDuJeu,
+  import { construisJeu, type DonneesJeu } from '../../jeu.type';
+  import {
+    construisJeuEnEditionDepuisJeu,
+    type ErreursValidationJeuEnEdition,
+    type EvaluationDuJeu,
+    type InformationsGeneralesDuJeu,
+    type PhotosDuJeu,
+    type PresentationDuJeu,
   } from '../jeuEnEdition.type';
   import { jeuEnEditionStore } from '../stores/jeuEnEdition.store';
   import { photosJeuStore } from '../stores/photosJeu.store';
@@ -169,7 +170,7 @@
   };
 
   const enregistreModifications = async () => {
-    const { id, enseignant, reactions, photos, ...reste } = $jeuEnEditionStore;
+    const { id, ...reste } = $jeuEnEditionStore;
     await axios.patch(`/api/jeux/${id}`, {
       ...reste,
       eleves: elevesRenseignes,
@@ -182,8 +183,10 @@
     if (mode === 'modification') {
       const morceaux = window.location.pathname.split('/');
       const id = morceaux[morceaux.length - 1];
-      const reponse = await axios.get<JeuEnEdition>(`/api/jeux/${id}`);
-      $jeuEnEditionStore = reponse.data;
+      const reponse = await axios.get<DonneesJeu>(`/api/jeux/${id}`);
+      $jeuEnEditionStore = construisJeuEnEditionDepuisJeu(
+        construisJeu(reponse.data),
+      );
     }
   });
 </script>
