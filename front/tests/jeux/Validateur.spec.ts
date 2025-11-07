@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { extracteurErreursZod } from '../../src/validateur';
 import { ZodError } from 'zod';
+import { extracteurErreursZod } from '../../src/jeux/validateur';
 
 describe("L'extracteur d'erreur zod", () => {
   type MonType = {

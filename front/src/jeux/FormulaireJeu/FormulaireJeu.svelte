@@ -11,7 +11,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../../actions.svelte';
-  import type { Validateur } from '../../validateur';
+  import type { Validateur } from '../validateur';
   import type {
     ErreursValidationJeuEnEdition,
     EvaluationDuJeu,
