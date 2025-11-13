@@ -40,10 +40,28 @@
     );
   };
 
+  const detecterSectionVisible = () => {
+    const sections = document.querySelectorAll('section[id]');
+
+    sections.forEach((section, i) => {
+      const sectionRect = section.getBoundingClientRect();
+      const scrollPosition = document.body.scrollTop;
+
+      if (
+        sectionRect.top <= scrollPosition &&
+        sectionRect.bottom >= scrollPosition
+      ) {
+        indexActif = i;
+        return;
+      }
+    });
+  };
+
   onMount(async () => {
     const reponse = await axios.get<Selection[]>(`/api/selections-${cible}`);
     selections = reponse.data;
     window.addEventListener('hashchange', changeSectionActive);
+    window.addEventListener('scroll', detecterSectionVisible);
     changeSectionActive();
   });
 </script>
