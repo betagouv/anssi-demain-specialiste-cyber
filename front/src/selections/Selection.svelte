@@ -48,7 +48,7 @@
   });
 </script>
 
-<dsfr-container>
+<dsfr-container class="dsc-conteneur-ancres">
   <lab-anssi-ancres {ancres} {indexActif}></lab-anssi-ancres>
 </dsfr-container>
 
@@ -86,13 +86,21 @@
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
 
+  .dsc-conteneur-ancres {
+    background-color: var(--background-default-grey);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-block: 1rem;
+    margin-top: 1rem;
+  }
+
   lab-anssi-ancres {
     display: block;
-    margin-top: 2rem;
   }
 
   section {
-    padding: 3.5rem 0;
+    padding-block: 3.5rem;
 
     h2 {
       margin-bottom: 0.75rem;
