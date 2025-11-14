@@ -276,7 +276,7 @@
     }
 
     .mention {
-      margin: 0;
+      margin-bottom: 1rem;
       align-self: flex-start;
       color: #666;
     }
