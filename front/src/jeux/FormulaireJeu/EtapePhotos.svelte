@@ -173,6 +173,10 @@
     p {
       color: var(--text-mention-grey);
     }
+
+    dsfr-alert {
+      margin-top: 1.5rem;
+    }
   }
 
   .photos {

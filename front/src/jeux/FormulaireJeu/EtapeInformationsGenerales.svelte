@@ -140,6 +140,10 @@
       margin-bottom: 1rem;
     }
 
+    dsfr-alert {
+      margin-bottom: 1rem;
+    }
+
     .prenoms {
       display: grid;
       gap: 1rem;
