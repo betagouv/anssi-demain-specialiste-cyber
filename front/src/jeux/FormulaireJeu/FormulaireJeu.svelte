@@ -272,7 +272,7 @@
     }
 
     hr {
-      margin: 2rem 0;
+      margin-bottom: 2rem;
     }
 
     .mention {
