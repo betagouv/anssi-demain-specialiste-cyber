@@ -164,8 +164,9 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+
   .information {
-    padding: 1.5rem 0 0.5rem 0;
+    padding-block: 0.5rem;
   }
 
   .couverture {
