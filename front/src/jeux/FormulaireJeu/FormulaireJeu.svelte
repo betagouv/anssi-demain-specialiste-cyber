@@ -193,67 +193,83 @@
 
 <dsfr-container>
   <div class="formulaire-jeu">
-    {#if mode === 'creation'}
-      <EtapierDeposeJeu etapeCourante={etape} />
-    {:else}
-      <EtapierModifieJeu etapeCourante={etape as EtapeModificationJeu} />
-    {/if}
-    <hr />
-    {#if etape !== 'temoignages'}
-      <p class="fr-text--xs mention">
-        Sauf mention contraire, les informations demandées sont obligatoires.
-      </p>
-    {/if}
-    <form novalidate>
-      {#if etape === 'informations-generales'}
-        <EtapeInformationsGenerales {erreurs} {referentielEtablissement} />
-      {:else if etape === 'presentation'}
-        <EtapePresentation {erreurs} />
-      {:else if etape === 'photos'}
-        <EtapePhotos {erreurs} />
-      {:else if etape === 'temoignages'}
-        <EtapeTemoignages />
-      {:else if etape === 'evaluation'}
-        <EtapeEvaluation {erreurs} />
+    <div class="formulaire-jeu-conteneur">
+      {#if mode === 'creation'}
+        <EtapierDeposeJeu etapeCourante={etape} />
+      {:else}
+        <EtapierModifieJeu etapeCourante={etape as EtapeModificationJeu} />
       {/if}
+      <hr />
+      {#if etape !== 'temoignages'}
+        <p class="fr-text--xs mention">
+          Sauf mention contraire, les informations demandées sont obligatoires.
+        </p>
+      {/if}
+      <form novalidate>
+        {#if etape === 'informations-generales'}
+          <EtapeInformationsGenerales {erreurs} {referentielEtablissement} />
+        {:else if etape === 'presentation'}
+          <EtapePresentation {erreurs} />
+        {:else if etape === 'photos'}
+          <EtapePhotos {erreurs} />
+        {:else if etape === 'temoignages'}
+          <EtapeTemoignages />
+        {:else if etape === 'evaluation'}
+          <EtapeEvaluation {erreurs} />
+        {/if}
 
-      <div class="actions">
-        {#if etape !== 'informations-generales'}
-          <dsfr-button
-            label="Précédent"
-            kind="secondary"
-            use:clic={etapePrecedente}
-          ></dsfr-button>
-        {/if}
-        {#if etape === 'evaluation'}
-          <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
-          ></dsfr-button>
-        {:else if mode === 'modification' && etape === 'temoignages'}
-          <dsfr-button
-            label="Enregistrer les modifications"
-            kind="primary"
-            use:clic={enregistreModifications}
-          ></dsfr-button>
-        {:else}
-          <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
-          ></dsfr-button>
-        {/if}
-      </div>
-    </form>
+        <div class="actions">
+          {#if etape !== 'informations-generales'}
+            <dsfr-button
+              label="Précédent"
+              kind="secondary"
+              use:clic={etapePrecedente}
+            ></dsfr-button>
+          {/if}
+          {#if etape === 'evaluation'}
+            <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+            ></dsfr-button>
+          {:else if mode === 'modification' && etape === 'temoignages'}
+            <dsfr-button
+              label="Enregistrer les modifications"
+              kind="primary"
+              use:clic={enregistreModifications}
+            ></dsfr-button>
+          {:else}
+            <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
+            ></dsfr-button>
+          {/if}
+        </div>
+      </form>
+    </div>
   </div>
 </dsfr-container>
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .formulaire-jeu {
-    max-width: 792px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    justify-content: center;
-    padding: 56px 16px;
+    border: 1px solid var(--border-default-grey);
+    padding: 3.5rem 16px;
+    margin: 3.5rem auto;
+
+    @include a-partir-de(md) {
+      padding-inline: 4.625rem;
+    }
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(8);
+      padding-inline: 0;
+    }
+
+    &-conteneur {
+      margin-inline: auto;
+
+      @include a-partir-de(lg) {
+        max-width: taille-pour-colonnes(9);
+      }
+    }
 
     hr {
       margin: 2rem 0;
