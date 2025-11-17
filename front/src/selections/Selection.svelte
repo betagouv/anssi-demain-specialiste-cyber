@@ -119,6 +119,7 @@
 
   section {
     padding-block: 3.5rem;
+    scroll-margin-top: 3.5rem;
 
     h2 {
       margin-bottom: 0.75rem;
