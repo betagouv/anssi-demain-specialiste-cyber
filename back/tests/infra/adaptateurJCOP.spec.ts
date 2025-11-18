@@ -160,4 +160,30 @@ describe("L'adaptateur JCOP ", () => {
     expect(estInfecte).toBeUndefined();
     expect(estEnErreur).toBeTruthy();
   });
+
+  it('fait un appel à JCOP pour chacun des fichiers analysés, en ne passant que ce fichier', async () => {
+    const contenuFichiersTraites: string[] = [];
+
+    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async (
+      _url: string,
+      corps,
+    ) => {
+      const fichierTraite = (corps as FormData).get('file') as File;
+      const contenu = await fichierTraite.text();
+      contenuFichiersTraites.push(contenu);
+      return reponseJCOPOK;
+    };
+
+    const adaptateurJCOP = new AdaptateurJCOP(
+      fauxAdaptateurGestionErreur,
+      fauxAdaptateurEnvironnement,
+      clientHttp,
+    );
+
+    await adaptateurJCOP.analyse(desFichiersQuelconques);
+
+    expect(contenuFichiersTraites).toStrictEqual(
+      desFichiersQuelconques.map((ab) => ab.toString()),
+    );
+  });
 });

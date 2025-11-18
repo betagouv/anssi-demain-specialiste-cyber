@@ -38,8 +38,8 @@ export class AdaptateurJCOP implements AdaptateurAntivirus {
     }
 
     try {
-      const formulaire = new FormData();
       const promesses = fichiers.map(async (fichier) => {
+        const formulaire = new FormData();
         formulaire.append('file', new Blob([fichier]));
         const reponse = await this.clientHttp(
           this.adaptateurEnvironnement.antivirus().urlAnalyse,

@@ -38,7 +38,7 @@ const lanceAnalyseAntivirus = (
       erreur = 'Le traitement de vos photos n’a pu aboutir';
     }
     if (erreur) {
-      return reponse.status(400).send({ erreur });
+      return reponse.status(400).json({ erreur });
     }
     suite();
   };
