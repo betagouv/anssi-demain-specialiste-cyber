@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   AdaptateurJCOP,
   ReponseJCOP,
-} from '../../src/infra/adapateurAntivirus';
+} from '../../src/infra/adaptateurAntivirus';
 import { PosteRessourceHttp } from '../../src/infra/clientHttp';
 import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';

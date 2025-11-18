@@ -52,6 +52,7 @@ export class AdaptateurJCOP implements AdaptateurAntivirus {
         console.log('reponse JCOP : ', reponse);
         return reponse;
       });
+
       const listeDesResultats = await Promise.all(promesses);
       return {
         estInfecte: listeDesResultats.some((r) => r.is_malware),

@@ -7,14 +7,14 @@ import {
   urlencoded,
 } from 'express';
 import * as core from 'express-serve-static-core';
+import multer from 'multer';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
+import { AdaptateurAntivirus } from '../infra/adaptateurAntivirus';
+import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { Jeu } from '../metier/jeu';
 import { ConfigurationServeur } from './configurationServeur';
-import multer from 'multer';
-import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
-import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
-import { schemaCreationJeu } from './schemasJeu';
 import { filetRouteAsynchrone } from './middleware';
+import { schemaCreationJeu } from './schemasJeu';
 
 type CorpsRequeteDeJeu = {
   jeu: string;

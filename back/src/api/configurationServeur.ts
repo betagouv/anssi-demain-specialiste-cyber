@@ -15,7 +15,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotSelections } from '../metier/entrepotSelections';
-import { AdaptateurAntivirus } from '../infra/adapateurAntivirus';
+import { AdaptateurAntivirus } from '../infra/adaptateurAntivirus';
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
 
 export interface ConfigurationServeur {

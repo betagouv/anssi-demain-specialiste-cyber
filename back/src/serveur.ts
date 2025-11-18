@@ -10,7 +10,7 @@ import { moteurDeRenduExpress } from './api/moteurDeRendu';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
-import { AdaptateurJCOP } from './infra/adapateurAntivirus';
+import { AdaptateurJCOP } from './infra/adaptateurAntivirus';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { fabriqueExpediteurEmail } from './infra/adaptateurExpediteurEmail';
