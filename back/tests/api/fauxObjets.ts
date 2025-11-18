@@ -11,7 +11,7 @@ import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import {
   AdaptateurAntivirus,
   ResultatAnalyseFichier,
-} from '../../src/infra/adapateurAntivirus';
+} from '../../src/infra/adaptateurAntivirus';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';

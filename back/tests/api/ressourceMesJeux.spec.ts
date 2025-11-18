@@ -1,34 +1,32 @@
 import { Express } from 'express';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import { MIMEType } from 'node:util';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { CINQ_MO } from '../../src/api/ressourceMesJeux';
 import { JeuCree } from '../../src/bus/evenements/jeu/jeuCree';
+import { AdaptateurAntivirus } from '../../src/infra/adaptateurAntivirus';
+import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
+import { PhotosJeu } from '../../src/metier/jeu';
+import { Utilisateur } from '../../src/metier/utilisateur';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
+import { unJeu } from '../metier/constructeurJeu';
+import {
+  CorpsRequeteDeJeu,
+  uneRequeteDeJeuValide,
+} from './constructeurRequeteDeJeu';
 import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
   fauxAdaptateurTeleversement,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { PhotosJeu } from '../../src/metier/jeu';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import {
-  CorpsRequeteDeJeu,
-  uneRequeteDeJeuValide,
-} from './constructeurRequeteDeJeu';
-import { MIMEType } from 'node:util';
-import { unJeu } from '../metier/constructeurJeu';
-import { CINQ_MO } from '../../src/api/ressourceMesJeux';
-import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
-import { AdaptateurAntivirus } from '../../src/infra/adapateurAntivirus';
 
 describe('La ressource de mes jeux', () => {
   let serveur: Express;
