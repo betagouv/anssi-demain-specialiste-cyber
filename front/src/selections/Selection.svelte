@@ -40,20 +40,28 @@
     );
   };
 
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const sections = document.querySelectorAll('section[id]');
+
+        if (entry.isIntersecting) {
+          const visibleSection = entry.target as HTMLElement;
+          const sectionIndex = Array.from(sections).indexOf(visibleSection);
+          indexActif = sectionIndex;
+        }
+      });
+    },
+    {
+      rootMargin: '-78px 0px -90% 0px',
+    },
+  );
+
   const detecterSectionVisible = () => {
     const sections = document.querySelectorAll('section[id]');
 
     sections.forEach((section, i) => {
-      const sectionRect = section.getBoundingClientRect();
-      const scrollPosition = document.body.scrollTop;
-
-      if (
-        sectionRect.top <= scrollPosition &&
-        sectionRect.bottom >= scrollPosition
-      ) {
-        indexActif = i;
-        return;
-      }
+      observer.observe(section);
     });
   };
 
