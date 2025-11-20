@@ -101,10 +101,10 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   dsfr-container {
     display: block;
-    margin-bottom: 4.5rem;
   }
 
   .zone-action {
@@ -134,7 +134,15 @@
 
   .pas-de-jeu {
     margin: 4.5rem auto 7.5rem;
-    max-width: 524px;
+
+    @include a-partir-de(md) {
+      max-width: taille-pour-colonnes(10);
+    }
+
+    @include a-partir-de(xl) {
+      max-width: taille-pour-colonnes(6);
+    }
+
     .encart {
       text-align: center;
       align-items: center;
