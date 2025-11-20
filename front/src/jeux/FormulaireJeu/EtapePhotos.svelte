@@ -169,6 +169,12 @@
     padding-block: 0.5rem;
   }
 
+  legend {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
   .couverture {
     margin: 0;
 
