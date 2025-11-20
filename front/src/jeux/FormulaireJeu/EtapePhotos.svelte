@@ -170,8 +170,11 @@
   }
 
   .couverture {
+    margin: 0;
+
     p {
       color: var(--text-mention-grey);
+      margin-bottom: 1rem;
     }
 
     dsfr-alert {
@@ -180,8 +183,11 @@
   }
 
   .photos {
+    margin: 0 0 0.5rem 0;
+
     p {
       color: var(--text-mention-grey);
+      margin-bottom: 1rem;
     }
   }
 
@@ -198,7 +204,8 @@
   }
 
   .previsualisation-couverture {
-    padding-top: 2rem;
+    padding-block: 2rem 1rem;
+
     img {
       display: flex;
       height: 18.16825rem;
@@ -213,7 +220,10 @@
   .previsualisations-photo {
     display: grid;
     gap: 1.5rem;
-    padding-bottom: 1.5rem;
+
+    &:not(:empty) {
+      padding-top: 2rem;
+    }
 
     @include a-partir-de(sm) {
       grid-template-columns: repeat(1, 1fr);
@@ -232,11 +242,9 @@
         align-self: stretch;
         aspect-ratio: 4/3;
       }
+
       dsfr-button {
-        margin-top: 0.75rem;
-        @include a-partir-de(md) {
-          margin-top: 0.625rem;
-        }
+        margin-top: 1rem;
       }
     }
   }
