@@ -40,7 +40,7 @@ $ docker compose up db -d # démarre en mode daemon
 
 ```shell
 $ cd ..
-$ npm install
+$ npm ci
 ```
 
 - Sauvegarder les empreintes des secrets pour le hachage via la console d'administration
