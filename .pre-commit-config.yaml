@@ -13,13 +13,13 @@ repos:
     hooks:
       - id: prettier
         name: prettier
-        entry: npx prettier --write
+        entry: ./node_modules/.bin/prettier --write
         language: system
         files: \.(?:[jt]s?|md|svelte)$
         types: [ file ]
       - id: eslint
         name: eslint
-        entry: npx eslint
+        entry: ./node_modules/.bin/eslint
         language: system
         files: \.(?:[jt]s?|svelte)$
         types: [file]

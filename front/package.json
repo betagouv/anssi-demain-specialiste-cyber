@@ -7,8 +7,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch --mode=development",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "pretest": "npm-run-all --parallel lint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json && svelte-check"
