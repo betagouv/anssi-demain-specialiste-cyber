@@ -38,7 +38,6 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
   deploiement-prod:
@@ -72,5 +71,4 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
