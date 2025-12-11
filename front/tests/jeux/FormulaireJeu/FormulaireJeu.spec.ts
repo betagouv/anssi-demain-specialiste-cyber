@@ -19,6 +19,7 @@ import { type Validateur } from '../../../src/jeux/validateur';
 import {
   findAllByRoleDeep,
   findByRoleDeep,
+  findByTextDeep,
   getAllByRoleDeep,
   getByRoleDeep,
   getByTextDeep,
@@ -26,10 +27,14 @@ import {
   queryByRoleDeep,
 } from '../../shadow-dom-utilitaires';
 
-const axiosMock = vi.hoisted(() => ({ post: vi.fn(), patch: vi.fn() }));
+const axiosMock = vi.hoisted(() => ({
+  post: vi.fn(),
+  patch: vi.fn(),
+}));
+const isAxiosErrorMock = vi.hoisted(() => vi.fn());
 
 vi.mock('axios', () => {
-  return { default: axiosMock };
+  return { default: axiosMock, isAxiosError: isAxiosErrorMock };
 });
 
 vi.stubGlobal('URL', {
@@ -829,6 +834,28 @@ describe('Le formulaire de dépose de jeu', () => {
         expect(queryByRoleDeep('button', { name: 'Terminer' })).toBeNull(),
       );
     });
+
+    describe("affiche un message d'erreur", () => {
+      beforeEach(() => {
+        photosJeuStore.set({});
+        get(photosJeuStore).couverture = new Blob();
+      });
+      it('générique si la soumission échoue pour une raison inconnu', async () => {
+        axiosMock.post.mockRejectedValueOnce(new Error('Erreur de test API'));
+        isAxiosErrorMock.mockReturnValue(false);
+
+        render(FormulaireJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await terminer();
+
+        const erreurAPI = await findByTextDeep("Une erreur s'est produite");
+        expect(erreurAPI).toBeVisible();
+      });
+    });
   });
 
   describe('en mode modification', () => {
@@ -1015,6 +1042,18 @@ describe('Le formulaire de dépose de jeu', () => {
               temoignages: [{ prenom: 'Michel', details: 'Génial' }],
             },
           );
+        });
+
+        it('affiche une erreur si la soumission échoue', async () => {
+          axiosMock.patch.mockRejectedValueOnce(
+            new Error('Erreur de test API'),
+          );
+          isAxiosErrorMock.mockReturnValue(false);
+
+          await engistreModification();
+
+          const erreurAPI = await findByTextDeep("Une erreur s'est produite");
+          expect(erreurAPI).toBeVisible();
         });
       });
     });
