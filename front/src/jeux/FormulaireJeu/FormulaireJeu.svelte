@@ -9,7 +9,7 @@
 />
 
 <script lang="ts">
-  import axios from 'axios';
+  import axios, { isAxiosError } from 'axios';
   import { onMount } from 'svelte';
   import { clic } from '../../actions.svelte';
   import { construisJeu, type DonneesJeu } from '../../jeu.type';
@@ -71,13 +71,15 @@
     temoignages: [{ prenom: '', details: '' }],
   };
 
-  let erreurs = $state<ErreursValidationJeuEnEdition>({
+  let erreursDeFormulaire = $state<ErreursValidationJeuEnEdition>({
     nom: undefined,
     nomEtablissement: undefined,
     sequence: undefined,
     classe: undefined,
     discipline: undefined,
   });
+
+  let erreurAPI = $state<string>('');
 
   const etapePrecedente = () => {
     switch (etape) {
@@ -103,25 +105,29 @@
       case 'informations-generales':
         if (validateurInformationsGenerales.estValide($jeuEnEditionStore)) {
           etape = 'presentation';
-          erreurs = {};
+          erreursDeFormulaire = {};
         } else {
-          erreurs = validateurInformationsGenerales.valide($jeuEnEditionStore);
+          erreursDeFormulaire =
+            validateurInformationsGenerales.valide($jeuEnEditionStore);
         }
         break;
       case 'presentation':
         if (validateurPresentation.estValide($jeuEnEditionStore)) {
           etape = mode === 'modification' ? 'temoignages' : 'photos';
-          erreurs = {};
+          erreursDeFormulaire = {};
         } else {
-          erreurs = validateurPresentation.valide($jeuEnEditionStore);
+          erreursDeFormulaire =
+            validateurPresentation.valide($jeuEnEditionStore);
         }
         break;
       case 'photos':
         if (validateurPhotosDuJeu.estValide({ photos: $photosJeuStore })) {
           etape = 'temoignages';
-          erreurs = {};
+          erreursDeFormulaire = {};
         } else {
-          erreurs = validateurPhotosDuJeu.valide({ photos: $photosJeuStore });
+          erreursDeFormulaire = validateurPhotosDuJeu.valide({
+            photos: $photosJeuStore,
+          });
         }
         break;
       case 'temoignages':
@@ -160,23 +166,35 @@
       $photosJeuStore?.photos?.forEach((photo) => {
         formulaire.append('photos', photo);
       });
-
-      await axios.post('/api/mes-jeux', formulaire);
-
-      window.location.href = '/mes-jeux?jeu-ajoute';
+      try {
+        erreurAPI = '';
+        await axios.post('/api/mes-jeux', formulaire);
+        window.location.href = '/mes-jeux?jeu-ajoute';
+      } catch (e) {
+        erreurAPI = isAxiosError(e)
+          ? e.response?.data?.erreur
+          : "Une erreur s'est produite";
+      }
     } else {
-      erreurs = validateurEvaluation.valide($jeuEnEditionStore);
+      erreursDeFormulaire = validateurEvaluation.valide($jeuEnEditionStore);
     }
   };
 
   const enregistreModifications = async () => {
-    const { id, ...reste } = $jeuEnEditionStore;
-    await axios.patch(`/api/jeux/${id}`, {
-      ...reste,
-      eleves: elevesRenseignes,
-      temoignages: temoignagesRenseignes,
-    });
-    window.location.href = '/mes-jeux?jeu-modifie';
+    try {
+      erreurAPI = '';
+      const { id, ...reste } = $jeuEnEditionStore;
+      await axios.patch(`/api/jeux/${id}`, {
+        ...reste,
+        eleves: elevesRenseignes,
+        temoignages: temoignagesRenseignes,
+      });
+      window.location.href = '/mes-jeux?jeu-modifie';
+    } catch (e) {
+      erreurAPI = isAxiosError(e)
+        ? e.response?.data?.erreur
+        : "Une erreur s'est produite";
+    }
   };
 
   onMount(async () => {
@@ -207,15 +225,18 @@
       {/if}
       <form novalidate>
         {#if etape === 'informations-generales'}
-          <EtapeInformationsGenerales {erreurs} {referentielEtablissement} />
+          <EtapeInformationsGenerales
+            erreurs={erreursDeFormulaire}
+            {referentielEtablissement}
+          />
         {:else if etape === 'presentation'}
-          <EtapePresentation {erreurs} />
+          <EtapePresentation erreurs={erreursDeFormulaire} />
         {:else if etape === 'photos'}
-          <EtapePhotos {erreurs} />
+          <EtapePhotos erreurs={erreursDeFormulaire} />
         {:else if etape === 'temoignages'}
           <EtapeTemoignages />
         {:else if etape === 'evaluation'}
-          <EtapeEvaluation {erreurs} />
+          <EtapeEvaluation erreurs={erreursDeFormulaire} />
         {/if}
 
         <div class="actions">
@@ -242,6 +263,15 @@
         </div>
       </form>
     </div>
+    {#if erreurAPI}
+      <dsfr-alert
+        hasTitle="false"
+        hasDescription="true"
+        text={erreurAPI}
+        type="error"
+        icon="error"
+      ></dsfr-alert>
+    {/if}
   </div>
 </dsfr-container>
 
