@@ -43,6 +43,7 @@
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
   } from './ReferentielEtablissement.js';
+  import AlerteEnvoie from './AlerteEnvoie.svelte';
 
   interface Props {
     mode: 'creation' | 'modification';
@@ -263,15 +264,7 @@
         </div>
       </form>
     </div>
-    {#if erreurAPI}
-      <dsfr-alert
-        hasTitle="false"
-        hasDescription="true"
-        text={erreurAPI}
-        type="error"
-        icon="error"
-      ></dsfr-alert>
-    {/if}
+    <AlerteEnvoie erreur={erreurAPI} />
   </div>
 </dsfr-container>
 
