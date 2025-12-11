@@ -10,7 +10,7 @@
   inputId="recherche"
   class="recherche-textuelle"
   type="search"
-  inputPlaceholder={miseEnAvant}
+  placeholder={miseEnAvant}
   value={recherche}
   onvaluechanged={(e: CustomEvent) => (recherche = e.detail)}
   button-label="Rechercher"
