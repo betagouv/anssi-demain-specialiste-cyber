@@ -852,7 +852,51 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await terminer();
 
-        const erreurAPI = await findByTextDeep("Une erreur s'est produite");
+        const erreurAPI = await findByTextDeep(
+          'Une erreur est survenue, veuillez réessayer. Si le problème persiste veuillez contacter le support : demainspecialistecyber@education.gouv.fr',
+        );
+        expect(erreurAPI).toBeVisible();
+      });
+
+      it("et précise si la soumission échoue à cause d'une photo vérolée", async () => {
+        axiosMock.post.mockRejectedValueOnce({
+          response: { data: { erreur: 'Un des fichiers est infecté' } },
+        });
+        isAxiosErrorMock.mockReturnValue(true);
+
+        render(FormulaireJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await terminer();
+
+        const erreurAPI = await findByTextDeep(
+          'Certaines photos n’ont pas pu être ajoutées.',
+        );
+        expect(erreurAPI).toBeVisible();
+      });
+
+      it("et précise si la soumission échoue à cause d'une erreur sur le traitement des photos", async () => {
+        axiosMock.post.mockRejectedValueOnce({
+          response: {
+            data: { erreur: 'Le traitement de vos photos n’a pu aboutir' },
+          },
+        });
+        isAxiosErrorMock.mockReturnValue(true);
+
+        render(FormulaireJeu, proprietesParDefaut);
+
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await etapeSuivante();
+        await terminer();
+
+        const erreurAPI = await findByTextDeep(
+          'Certaines photos n’ont pas pu être ajoutées.',
+        );
         expect(erreurAPI).toBeVisible();
       });
     });
@@ -1052,7 +1096,9 @@ describe('Le formulaire de dépose de jeu', () => {
 
           await engistreModification();
 
-          const erreurAPI = await findByTextDeep("Une erreur s'est produite");
+          const erreurAPI = await findByTextDeep(
+            'Une erreur est survenue, veuillez réessayer. Si le problème persiste veuillez contacter le support : demainspecialistecyber@education.gouv.fr',
+          );
           expect(erreurAPI).toBeVisible();
         });
       });
