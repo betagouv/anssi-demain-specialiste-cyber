@@ -159,7 +159,6 @@ export const fabriqueMiddleware = ({
             'https://podeduc.apps.education.fr',
             'https://tube-numerique-educatif.apps.education.fr/',
             adaptateurEnvironnement.cellarPhotosJeux(),
-            'data:',
           ],
           connectSrc: [
             "'self'",
