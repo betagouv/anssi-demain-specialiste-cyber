@@ -25,6 +25,9 @@ body {
 dsc-entete {
   min-height: 162px;
   display: block;
+  &[sans-navigation] {
+    min-height: 115px;
+  }
 }
 
 header {
