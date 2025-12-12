@@ -263,7 +263,12 @@
           {/if}
         </div>
       </form>
-      <AlerteEnvoie erreur={erreurAPI} />
+      <AlerteEnvoie
+        erreur={erreurAPI}
+        redirigeVersEtape={(nouvelleEtape) => {
+          etape = nouvelleEtape;
+        }}
+      />
     </div>
   </div>
 </dsfr-container>
