@@ -20,38 +20,38 @@
     {
       titre: 'Télécharger le livret 0 : Utilisation de CyberEnJeux',
       image: '/assets/images/cej/livret-utilisation.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-0-utilisation-de-cyberenjeux.pdf',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-0-utilisation-de-cyberenjeux.pdf',
       detail: 'PDF - 176 ko',
     },
     {
       titre: 'Télécharger le livret 1 : Former à la cybersécurité',
       image: '/assets/images/cej/livret-former.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-1-former-a-la-cybersecurite.pdf',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-1-former-a-la-cybersecurite.pdf',
       detail: 'PDF - 542 ko',
     },
     {
       titre:
         'Télécharger la présentation : Acculturation aux enjeux de cybersécurité',
       image: '/assets/images/cej/livret-acculturation.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_presentation_eleves.pptx',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_presentation_eleves.pptx',
       detail: 'PPTX - 13,6 Mo',
     },
     {
       titre: 'Télécharger le livret 2 : Accompagner la création de jeux',
       image: '/assets/images/cej/livret-accompagner.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-2-accompagner-la-creation-de-jeux.pdf',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-2-accompagner-la-creation-de-jeux.pdf',
       detail: 'PDF - 238 ko',
     },
     {
       titre: 'Télécharger le livret 3 : Créer un jeu',
       image: '/assets/images/cej/livret-creer.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-3-creer-un-jeu-sur-la-cybersecurite.pdf',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_livret-3-creer-un-jeu-sur-la-cybersecurite.pdf',
       detail: 'PDF - 235 ko',
     },
     {
       titre: 'Télécharger les Cartes objectifs cyber',
       image: '/assets/images/cej/ressources.svg',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_cartes-objectifs-cyber.pdf',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_cartes-objectifs-cyber.pdf',
       detail: 'PDF - 122 ko',
     },
     {
@@ -59,14 +59,14 @@
       duree: 'Durée : 46 min',
       detail: 'podeduc.apps.education.fr',
       image: '/assets/images/fiches_pedagogiques.avif',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_webinaire_presentation.mp4',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_webinaire_presentation.mp4',
     },
     {
       titre: 'Accompagner les élèves dans la création de jeux',
       duree: 'Durée : 67 min',
       detail: 'podeduc.apps.education.fr',
       image: '/assets/images/accompagner_les_eleves.avif',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_accompagner_les_eleves.mp4',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_accompagner_les_eleves.mp4',
     },
     {
       titre:
@@ -74,7 +74,7 @@
       duree: 'Durée : 2 min',
       detail: 'tube-numerique-educatif.apps.education.fr',
       image: '/assets/images/retour_experience.avif',
-      lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/Video_lycee_matisse.mp4',
+      lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_lycee_matisse.mp4',
     },
   ];
   const ressourcesEnseignents = toutesLesRessources.slice(0, 4);
@@ -143,7 +143,7 @@
         has-icon
         icon="download-line"
         label="Télécharger toutes les ressources"
-        href="https://ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnJeux_toutes_ressources.zip"
+        href="https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnJeux_toutes_ressources.zip"
       ></dsfr-button>
     </div>
 
@@ -188,13 +188,13 @@
         {
           libelle: 'Télécharger les 6 affiches métiers',
           detail: 'ZIP - 3,3 Mo',
-          lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Affiches_et_visuels.zip',
+          lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Affiches_et_visuels.zip',
           telechargement: true,
         },
         {
           libelle: 'Télécharger le kit de communication',
           detail: 'ZIP - 47,8 Mo',
-          lien: 'https://ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Kit_Communication.zip',
+          lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Kit_Communication.zip',
           telechargement: true,
         },
       ]}
