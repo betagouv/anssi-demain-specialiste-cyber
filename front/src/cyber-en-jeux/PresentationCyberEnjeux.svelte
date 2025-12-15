@@ -77,7 +77,7 @@
   <dsfr-container>
     <div class="approuve">
       <h2>
-        Déjà testé et approuvé par plus de 800 enseignants auprès de 70 000
+        Déjà testé et approuvé par des centaines d’enseignants auprès de 210 000
         élèves
       </h2>
       <p class="fr-text--lg">
