@@ -9,6 +9,7 @@ export type TableGrist = {
   idTable: string;
 };
 export type AdaptateurEnvironnement = {
+  urlDeBase: () => string;
   chiffrement: () => {
     cleChaCha20Hex: () => string;
   };
@@ -66,6 +67,7 @@ const variablesDeTeleversement = () => ({
 });
 
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
+  urlDeBase: () => process.env.URL_BASE_DSC ?? '',
   maintenance: () => ({
     actif: () => process.env.MODE_MAINTENANCE === 'true',
     detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,

@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { NextFunction, Response } from 'express';
 import { createRequest, createResponse, MockResponse } from 'node-mocks-http';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
@@ -7,6 +7,7 @@ import {
   Middleware,
   RequeteNonTypee,
 } from '../../src/api/middleware';
+import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
@@ -19,7 +20,6 @@ import {
   fauxAdaptateurJWT,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 
 describe('Le middleware', () => {
   let requete: RequeteNonTypee & {
@@ -244,7 +244,7 @@ describe('Le middleware', () => {
         await middleware.ajouteUtilisateurARequete(
           entrepotUtilisateur,
           adaptateurHachage,
-          "souple"
+          'souple',
         )(requete, reponse, () => {});
 
         expect(requete.utilisateur).toStrictEqual(jeanneDupont);
@@ -273,6 +273,35 @@ describe('Le middleware', () => {
       });
 
       expect(laSuiteEstAppelee).toBeTruthy();
+    });
+  });
+
+  describe('sur demande de redirection', () => {
+    it("Redirige l'utilisateur vers l'url de base s'il vient d'un sous domaine", () => {
+      requete.headers['host'] = 'autredomaine:1234';
+      requete.originalUrl = '/monUrlDemandee';
+      let urlRecue = '';
+      reponse.redirect = (url) => {
+        urlRecue = url as string;
+      };
+      const suite: NextFunction = () => {};
+
+      middleware.redirigeVersUrlBase(requete, reponse, suite);
+
+      expect(urlRecue).toStrictEqual('http://domaine:1234/monUrlDemandee');
+    });
+
+    it("Ne redirige pas l'utilisateur vers l'url de base s'il en provient déjà", () => {
+      let passeDansLaSuite = false;
+      const suite: NextFunction = () => {
+        passeDansLaSuite = true;
+      };
+      requete.headers['host'] = 'domaine:1234';
+      requete.originalUrl = '/monUrlDemandee';
+
+      middleware.redirigeVersUrlBase(requete, reponse, suite);
+
+      expect(passeDansLaSuite).toBe(true);
     });
   });
 });

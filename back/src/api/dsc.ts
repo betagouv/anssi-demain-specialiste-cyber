@@ -15,6 +15,7 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { serveurLab } = configurationServeur;
   const app = creeServeurLab(serveurLab);
 
+  app.use(configurationServeur.middleware.redirigeVersUrlBase);
   app.use(configurationServeur.middleware.ajouteLeNonceALaReponse);
   app.use(configurationServeur.middleware.positionneLesCsp);
 

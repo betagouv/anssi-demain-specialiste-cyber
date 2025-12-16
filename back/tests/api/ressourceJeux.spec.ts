@@ -9,6 +9,7 @@ import { unJeu } from '../metier/constructeurJeu';
 import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
+  poursuisSansRedirection,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
 
@@ -21,6 +22,7 @@ describe('La ressource de tous les Jeux', () => {
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
     middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
+    middleware.redirigeVersUrlBase = poursuisSansRedirection;
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
       middleware,
