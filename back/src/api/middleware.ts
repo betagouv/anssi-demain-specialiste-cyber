@@ -30,6 +30,7 @@ export type Middleware = {
     adaptateurHachage: AdaptateurHachage,
     mode?: 'strict' | 'souple',
   ): FonctionMiddleware<unknown>;
+  redirigeVersUrlBase: FonctionMiddleware<unknown>;
 };
 
 export type RequeteNonTypee = Request<
@@ -181,6 +182,22 @@ export const fabriqueMiddleware = ({
       },
     })(requete, reponse, suite);
 
+  const redirigeVersUrlBase = async (
+    requete: RequeteNonTypee,
+    reponse: Response,
+    suite: NextFunction,
+  ) => {
+    if (
+      requete.headers.host === new URL(adaptateurEnvironnement.urlDeBase()).host
+    ) {
+      suite();
+      return;
+    }
+    reponse.redirect(
+      `${adaptateurEnvironnement.urlDeBase()}${requete.originalUrl}`,
+    );
+  };
+
   return {
     ajouteLeNonceALaReponse,
     positionneLesCsp,
@@ -188,6 +205,7 @@ export const fabriqueMiddleware = ({
     valideLaCoherenceDuCorps,
     verifieJWTNavigation,
     ajouteUtilisateurARequete,
+    redirigeVersUrlBase,
   };
 };
 

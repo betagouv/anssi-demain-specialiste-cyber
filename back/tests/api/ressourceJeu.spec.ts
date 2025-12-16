@@ -8,6 +8,7 @@ import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
+  poursuisSansRedirection,
 } from './fauxObjets';
 import { cyberuno, hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
@@ -28,6 +29,7 @@ describe('La ressource des jeux', () => {
     await entrepotJeux.ajoute(cyberuno);
     middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
     middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
+    middleware.redirigeVersUrlBase = poursuisSansRedirection;
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),
       middleware,
@@ -104,6 +106,7 @@ describe('La ressource des jeux', () => {
     it("utilise un mode souple pour ajouter l'utilisateur à la requête", async () => {
       let modeUtilise: 'souple' | 'strict' | undefined;
       middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
+      middleware.redirigeVersUrlBase = poursuisSansRedirection;
       middleware.ajouteUtilisateurARequete =
         (_, __, mode?) => async (_, __, suite) => {
           modeUtilise = mode;

@@ -25,6 +25,7 @@ import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
   fauxAdaptateurTeleversement,
+  poursuisSansRedirection,
 } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
 
@@ -48,6 +49,7 @@ describe('La ressource de mes jeux', () => {
     busEvenements = fabriqueBusPourLesTests();
     middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
     middleware.ajouteUtilisateurARequete = () => ajouteUtilisateurARequeteMock;
+    middleware.redirigeVersUrlBase = poursuisSansRedirection;
     adaptateurTeleversement = fauxAdaptateurTeleversement();
     serveur = creeServeur({
       ...configurationDeTestDuServeur(),

@@ -60,6 +60,7 @@ export const fauxAdaptateurHachage: AdaptateurHachage = {
 };
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  urlDeBase: () => 'http://domaine:1234',
   hachage: () => ({
     tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
   }),
@@ -198,11 +199,20 @@ const ajouteUnNonceNonAleatoireALaReponse = async (
   suite();
 };
 
+export const poursuisSansRedirection = async (
+  _requete: RequeteNonTypee,
+  _reponse: Response,
+  suite: NextFunction,
+) => {
+  suite();
+};
+
 const middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
 export const configurationDeTestDuServeur = (): ConfigurationServeur => ({
   ...configurationServeurSansMiddleware(),
   middleware: {
     ...middleware,
     ajouteLeNonceALaReponse: ajouteUnNonceNonAleatoireALaReponse,
+    redirigeVersUrlBase: poursuisSansRedirection,
   },
 });
