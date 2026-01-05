@@ -36,4 +36,4 @@ jobs:
         run: pnpm lint
 
       - name: Exécute les tests
-        run: pnpm test
+        run: pnpm test:ci

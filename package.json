@@ -16,6 +16,7 @@
     "migre-bdd": "pnpm migre-bdd --filter anssi-demain-specialiste-cyber-back",
     "start": "pnpm start --filter anssi-demain-specialiste-cyber-back",
     "test": "pnpm -r test",
+    "test:ci": "pnpm -r test:ci",
     "typecheck": "pnpm -r typecheck",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "admin:dev": "pnpm build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
