@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/betagouv/anssi-demain-specialiste-cyber.git"
   },
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "dev": "npm-run-all --parallel --race dev:front dev:back",
     "dev:front": "npm --workspace=front run dev",
