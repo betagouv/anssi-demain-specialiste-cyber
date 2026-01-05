@@ -16,7 +16,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json",
     "cree-migration": "knex migrate:make -x ts",
-    "migre-bdd": "node --env-file=.env --import tsx ../node_modules/knex/bin/cli.js migrate:latest",
+    "migre-bdd": "node --env-file=.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest",
     "migre-bdd:clever": "node ../node_modules/knex/bin/cli.js migrate:latest  --knexfile ./dist/knexfile.js"
   },
   "keywords": [],
