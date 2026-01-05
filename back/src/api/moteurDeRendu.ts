@@ -33,7 +33,7 @@ export const moteurDeRenduExpress = (
     fs.readFileSync(path.resolve('../front/package.json'), 'utf-8'),
   );
   const { devDependencies } = packageJsonFront;
-  const versionUIKit = devDependencies['@lab-anssi/ui-kit'].replace('^', '');
+  const versionUIKit = devDependencies['@lab-anssi/ui-kit'].replace('~', '');
   return {
     rends(reponse, vue, options) {
       const matomo = adaptateurEnvironnement.matomo();
