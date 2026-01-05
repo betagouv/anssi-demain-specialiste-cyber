@@ -18,7 +18,8 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
-    "admin:dev": "pnpm build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
+    "admin:dev": "pnpm build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
+    "preinstall": "npx only-allow@1.2.2 pnpm"
   },
   "devDependencies": {
     "@eslint/js": "~9.36.0",
