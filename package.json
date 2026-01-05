@@ -9,16 +9,16 @@
   "packageManager": "pnpm@10.24.0",
   "scripts": {
     "dev": "npm-run-all --parallel --race dev:front dev:back",
-    "dev:front": "npm --workspace=front run dev",
-    "dev:back": "npm --workspace=back run dev",
-    "build": "npm run build --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
-    "migre-bdd": "npm run migre-bdd --workspace=back",
-    "start": "npm start --workspace=back",
-    "test": "npm run test --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev:front": "npm --filter anssi-demain-specialiste-cyber-front run dev",
+    "dev:back": "npm --filter anssi-demain-specialiste-cyber-back run dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "migre-bdd": "pnpm migre-bdd --filter anssi-demain-specialiste-cyber-back",
+    "start": "npm start --filter anssi-demain-specialiste-cyber-back",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
-    "admin:dev": "npm run build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
+    "admin:dev": "pnpm build -w back && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
   },
   "devDependencies": {
     "@eslint/js": "~9.36.0",
