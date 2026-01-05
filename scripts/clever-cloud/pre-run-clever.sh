@@ -1,3 +1,3 @@
 #! /bin/sh
 
-npm run migre-bdd:clever -w back
+pnpm migre-bdd:clever --filter anssi-demain-specialiste-cyber-back
