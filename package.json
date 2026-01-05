@@ -35,9 +35,5 @@
     "axios": "~1.12.0",
     "zod": "~4.1.5"
   },
-  "private": true,
-  "workspaces": [
-    "back",
-    "front"
-  ]
+  "private": true
 }
