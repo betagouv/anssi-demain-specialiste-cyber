@@ -1,12 +1,12 @@
 {
-  "name": "anssi-demain-specialiste-cyber",
+  "name": "anssi-demain-specialiste-cyber-back",
   "version": "2.0.0",
   "description": "Backend « DemainSpécialisteCyber »",
   "main": "src/serveur.ts",
   "scripts": {
     "dev": "npm-run-all --parallel --race dev:bdd dev:server",
     "dev:bdd": "docker compose up db",
-    "dev:server": "sleep 3 && npm run migre-bdd && node --import tsx --env-file .env --watch src/serveur.ts",
+    "dev:server": "sleep 3 && pnpm migre-bdd && node --import tsx --env-file .env --watch src/serveur.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prestart": "tsc",
