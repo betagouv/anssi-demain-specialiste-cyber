@@ -21,14 +21,19 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Installe pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
       - name: Installe les dépendances
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Vérfie le typage
-        run: npm run typecheck
+        run: pnpm typecheck
 
       - name: Lint le projet
-        run: npm run lint
+        run: pnpm lint
 
       - name: Exécute les tests
-        run: npm run test
+        run: pnpm test
