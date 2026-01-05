@@ -20,7 +20,7 @@ On peut créer de nouveaux fichier de migration via un script NPM :
 
 ```shell
 cd back
-npm run cree-migration -- <nom_du_fichier_de_migration>
+pnpm cree-migration -- <nom_du_fichier_de_migration>
 ```
 
 ### Démarrage
@@ -40,7 +40,7 @@ $ docker compose up db -d # démarre en mode daemon
 
 ```shell
 $ cd ..
-$ npm ci
+$ pnpm install --frozen-lockfile
 ```
 
 - Sauvegarder les empreintes des secrets pour le hachage via la console d'administration
@@ -54,7 +54,7 @@ $ npm run admin:dev
 - Lancer le serveur de dev
 
 ```shell
-$ npm run dev
+$ pnpm dev
 ```
 
 - Arrivé ici, le site doit être consultable sur http://127.0.0.1:3005
