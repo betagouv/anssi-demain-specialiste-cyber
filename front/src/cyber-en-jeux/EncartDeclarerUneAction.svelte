@@ -24,7 +24,7 @@
         label="Déclarer une action"
         kind="inverted-primary"
         target="_blank"
-        href="https://grist.numerique.gouv.fr/o/docs/forms/pqCUgkBSQrZcpoTv8F9aCg/27"
+        href="https://grist.numerique.gouv.fr/o/docs/forms/tEGjbH82KUWec6LEDxnsHa/27"
         markup="a"
       ></dsfr-button>
     </div>
