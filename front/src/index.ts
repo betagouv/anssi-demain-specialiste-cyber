@@ -14,3 +14,4 @@ export * from './profil/CreationCompte.svelte';
 export * from './profil/ZoneIdentification.svelte';
 export * from './relai/FicheRelai.svelte';
 export * from './selections/Selection.svelte';
+export * from './composants/MiseEnAvantKitCommunication.svelte';
