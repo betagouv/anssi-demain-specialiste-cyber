@@ -6,8 +6,8 @@
 />
 
 <script lang="ts">
-  import { TITRE_DSC_SECABLE } from '../constantes';
   import Fiche from '../composants/Fiche.svelte';
+  import { TITRE_DSC_SECABLE } from '../constantes';
 </script>
 
 <dsfr-container>
@@ -75,6 +75,28 @@
         </li>
       </ul>
     </section>
+
+    <section id="kit-communication">
+      <h2>
+        Kit de communication {TITRE_DSC_SECABLE}
+      </h2>
+      <dsfr-link
+        label="Télécharger le kit de communication"
+        download="true"
+        href="https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Kit_Communication.zip"
+      ></dsfr-link>
+      <img
+        src="assets/images/apercu-pages-kit-communication.avif"
+        alt="Aperçu du kit de communication"
+      />
+      <dsfr-link
+        label="Haut de page"
+        href="#"
+        size="md"
+        has-icon
+        icon="arrow-up-fill"
+      ></dsfr-link>
+    </section>
   </Fiche>
 </dsfr-container>
 
@@ -82,5 +104,19 @@
   ul {
     list-style-type: disc;
     margin-left: 1.5rem;
+  }
+
+  #kit-communication {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-bottom: 2rem;
+    }
+
+    img {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
   }
 </style>
