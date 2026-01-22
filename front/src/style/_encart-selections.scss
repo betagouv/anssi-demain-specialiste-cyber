@@ -12,7 +12,7 @@
     position: relative;
 
     dsfr-card {
-      z-index: 1
+      z-index: 1;
     }
 
     @include a-partir-de(md) {
@@ -25,10 +25,11 @@
     @include a-partir-de(lg) {
       &:after {
         position: absolute;
-        content: "";
+        content: '';
         width: 100%;
         height: calc(100% + 8rem);
-        background: url(/assets/images/analyste-cyber.svg) no-repeat bottom 0 right 0;
+        background: url(/assets/images/analyste-cyber.svg) no-repeat bottom 0
+          right 0;
         background-size: auto 100%;
         z-index: 0;
         bottom: -3.5rem;
