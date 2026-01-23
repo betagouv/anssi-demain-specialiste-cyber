@@ -116,6 +116,7 @@ export const ressourceMesJeux = ({
   busEvenements,
   adaptateurTeleversement,
   adaptateurAntivirus,
+  adaptateurGestionErreur,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -206,7 +207,10 @@ export const ressourceMesJeux = ({
             ),
           );
           reponse.sendStatus(201);
-        } catch {
+        } catch (e: unknown | Error) {
+          // eslint-disable-next-line no-console
+          console.error(e);
+          adaptateurGestionErreur.erreur(e as Error, 'Erreur de création du jeu');
           reponse.sendStatus(401);
         }
       },
