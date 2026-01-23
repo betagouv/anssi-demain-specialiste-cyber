@@ -208,8 +208,6 @@ export const ressourceMesJeux = ({
           );
           reponse.sendStatus(201);
         } catch (e: unknown | Error) {
-          // eslint-disable-next-line no-console
-          console.error(e);
           adaptateurGestionErreur.erreur(e as Error, 'Erreur de création du jeu');
           reponse.sendStatus(401);
         }
