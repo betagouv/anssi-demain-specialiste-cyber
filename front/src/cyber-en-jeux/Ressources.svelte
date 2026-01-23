@@ -1,6 +1,5 @@
 <script lang="ts">
-  import MiseEnAvant from '../composants/MiseEnAvant.svelte';
-  import { TITRE_DSC_SECABLE } from '../constantes';
+  import MiseEnAvantKitCommunication from '../composants/MiseEnAvantKitCommunication.svelte';
 
   type Ressource = {
     titre: string;
@@ -178,34 +177,7 @@
       </p>
     </div>
 
-    <MiseEnAvant
-      titre={TITRE_DSC_SECABLE}
-      illustration={{
-        lien: '/assets/images/cej/hacker-ethique.png',
-        alt: 'Hacker éthique',
-      }}
-      liens={[
-        {
-          libelle: 'Télécharger les 6 affiches métiers',
-          detail: 'ZIP - 3,3 Mo',
-          lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Affiches_et_visuels.zip',
-          telechargement: true,
-        },
-        {
-          libelle: 'Télécharger le kit de communication',
-          detail: 'ZIP - 47,8 Mo',
-          lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Kit_Communication.zip',
-          telechargement: true,
-        },
-      ]}
-    >
-      <p class="fr-text--lg">
-        {TITRE_DSC_SECABLE} est une campagne nationale co-construite par l’ANSSI
-        et son laboratoire d’innovation, le Ministère de l’Education Nationale et
-        de la Jeunesse et le Campus Cyber, en vue de valoriser la cybersécurité et
-        ses métiers auprès des collégien/nes, lycéen/nes mais aussi étudiant/es.
-      </p>
-    </MiseEnAvant>
+    <MiseEnAvantKitCommunication />
   </div>
 </dsfr-container>
 
