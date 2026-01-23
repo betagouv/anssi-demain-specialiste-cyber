@@ -87,6 +87,8 @@ export class AdaptateurDeTeleversementCellar
           }),
         );
       } catch (error: unknown | Error) {
+        // eslint-disable-next-line no-console
+        console.error(error, `Impossible de téléverser la photo ${photo?.nom}`);
         this.consignateurErreur.erreur(
           error as Error,
           `Impossible de téléverser la photo ${photo.nom}.`,
@@ -95,11 +97,21 @@ export class AdaptateurDeTeleversementCellar
     };
 
     try {
+      // eslint-disable-next-line no-console
+      console.log('Sauvegarde la couverture');
       await televerseLaPhoto(photosJeu.couverture);
+
+      // eslint-disable-next-line no-console
+      console.log(
+        'Sauvegarde les photos optionnelles',
+        photosJeu.photos.length,
+      );
       for (const photo of photosJeu.photos) {
         await televerseLaPhoto(photo);
       }
     } catch (_error: unknown | Error) {
+      // eslint-disable-next-line no-console
+      console.log(_error, 'Impossible de téléverser les photos');
       throw new Error('Impossible de téléverser les photos');
     }
     return Promise.resolve();
