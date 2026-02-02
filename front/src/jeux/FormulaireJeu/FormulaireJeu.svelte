@@ -80,6 +80,8 @@
     discipline: undefined,
   });
 
+  let soumissionEnCours = $state(false);
+
   let erreurAPI = $state<string>('');
 
   const etapePrecedente = () => {
@@ -153,6 +155,7 @@
     event.preventDefault();
 
     if (validateurEvaluation.estValide($jeuEnEditionStore)) {
+      soumissionEnCours = true;
       const formulaire = new FormData();
 
       formulaire.append(
@@ -175,6 +178,8 @@
         erreurAPI = isAxiosError(e)
           ? e.response?.data?.erreur
           : "Une erreur s'est produite";
+      } finally {
+        soumissionEnCours = false;
       }
     } else {
       erreursDeFormulaire = validateurEvaluation.valide($jeuEnEditionStore);
@@ -249,12 +254,17 @@
             ></dsfr-button>
           {/if}
           {#if etape === 'evaluation'}
-            <dsfr-button label="Terminer" kind="primary" use:clic={soumets}
+            <dsfr-button
+              label="Terminer"
+              disabled={soumissionEnCours ? 'true' : undefined}
+              kind="primary"
+              use:clic={soumets}
             ></dsfr-button>
           {:else if mode === 'modification' && etape === 'temoignages'}
             <dsfr-button
               label="Enregistrer les modifications"
               kind="primary"
+              disabled={soumissionEnCours ? 'true' : undefined}
               use:clic={enregistreModifications}
             ></dsfr-button>
           {:else}

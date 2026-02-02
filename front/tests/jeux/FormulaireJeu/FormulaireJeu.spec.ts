@@ -835,6 +835,122 @@ describe('Le formulaire de dépose de jeu', () => {
       );
     });
 
+    it('Désactive le bouton de soumission le temps de la requête', async () => {
+      axiosMock.post.mockImplementationOnce(() => {
+        return new Promise((resolve) =>
+          setTimeout(() => {
+            resolve(undefined);
+          }, 100),
+        );
+      });
+      const { getAllByRole } = render(FormulaireJeu, proprietesParDefaut);
+      // Etape informations générales
+      const champNomEtablissement = await findByRoleDeep('textbox', {
+        name: 'Nom de votre établissement',
+      });
+      const champSequence = await findByRoleDeep('radio', {
+        name: 'Heure de cours',
+      });
+      const champDiscipline = await findByRoleDeep('combobox', {
+        name: 'Discipline',
+      });
+      const champClasse = await findByRoleDeep('combobox', { name: 'Classe' });
+      const champsPrenom = await findAllByRoleDeep('textbox', {
+        name: 'Prénom',
+      });
+      await user.type(champNomEtablissement, 'Mon lycée');
+      await user.click(champSequence);
+      await user.selectOptions(champDiscipline, 'Mathématiques');
+      await user.selectOptions(champClasse, 'Seconde');
+      await user.type(champsPrenom[0], 'Brice');
+      await user.type(champsPrenom[1], 'Gontran');
+
+      await etapeSuivante();
+
+      // Etape présentation
+      const champNomDuJeu = await findByRoleDeep('textbox', {
+        name: 'Nom du jeu',
+      });
+      const champCategorie = await findByRoleDeep('combobox', {
+        name: 'Catégorie',
+      });
+      const groupThematiques = await findByRoleDeep('group');
+      const champDescription = await findByRoleDeep('textbox', {
+        name: 'Description Présenter le jeu et son fonctionnement en quelques lignes.',
+      });
+
+      await user.type(champNomDuJeu, 'TEST');
+      await user.selectOptions(champCategorie, 'Simulation');
+      await user.click(groupThematiques);
+      const menaceCyber = await findByRoleDeep('checkbox', {
+        name: 'Menace cyber',
+      });
+      const orientation = await findByRoleDeep('checkbox', {
+        name: 'Orientation',
+      });
+      await user.click(menaceCyber);
+      await user.click(orientation);
+
+      await user.type(champDescription, 'Description du jeu');
+      await etapeSuivante();
+
+      // Etape Photos
+      photosJeuStore.set({});
+      get(photosJeuStore).couverture = new Blob();
+
+      const caseConsentement = await findByRoleDeep('checkbox', {
+        name: 'J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site.',
+      });
+      await user.click(caseConsentement);
+
+      await etapeSuivante();
+
+      // Etape témoignages
+      const ajouterTemoignage = await findByRoleDeep('button', {
+        name: 'Ajouter un témoignage',
+      });
+      await user.click(ajouterTemoignage);
+
+      const champsPrenomTemoignage = await findAllByRoleDeep('textbox', {
+        name: 'Prénom',
+      });
+      const champsTemoignage = await findAllByRoleDeep('textbox', {
+        name: 'Témoignage',
+      });
+      await user.type(champsPrenomTemoignage[0], 'Michel');
+      await user.type(champsTemoignage[0], "C'était super");
+      await user.type(champsPrenomTemoignage[1], 'Martin');
+      await user.type(champsTemoignage[1], "J'ai aimé");
+
+      await etapeSuivante();
+      // Etape évaluation
+      const radioEvaluationDecouverte = getAllByRole('radio', {
+        name: '2',
+      })[0];
+      const radioEvaluationInteret = getAllByRole('radio', {
+        name: '3',
+      })[1];
+      const radioEvaluationSatisfaction = getAllByRole('radio', {
+        name: '4',
+      })[2];
+      const champPrecisions = await findByRoleDeep('textbox', {
+        name: 'Souhaitez-vous nous en dire plus ? (facultatif)',
+      });
+
+      await user.click(radioEvaluationDecouverte);
+      await user.click(radioEvaluationInteret);
+      await user.click(radioEvaluationSatisfaction);
+      await user.type(champPrecisions, "j'ai bien aimé");
+      await terminer();
+
+      const boutonTerminer = await findByRoleDeep('button', {
+        name: 'Terminer',
+      });
+
+      await waitFor(() => expect(boutonTerminer).toBeDisabled());
+      await waitFor(() => expect(boutonTerminer).not.toBeDisabled());
+    });
+
     describe("affiche un message d'erreur", () => {
       beforeEach(() => {
         photosJeuStore.set({});
