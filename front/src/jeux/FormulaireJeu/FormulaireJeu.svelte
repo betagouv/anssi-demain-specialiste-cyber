@@ -178,7 +178,6 @@
         erreurAPI = isAxiosError(e)
           ? e.response?.data?.erreur
           : "Une erreur s'est produite";
-      } finally {
         soumissionEnCours = false;
       }
     } else {
@@ -188,6 +187,7 @@
 
   const enregistreModifications = async () => {
     try {
+      soumissionEnCours = true;
       erreurAPI = '';
       const { id, ...reste } = $jeuEnEditionStore;
       await axios.patch(`/api/jeux/${id}`, {
@@ -200,6 +200,7 @@
       erreurAPI = isAxiosError(e)
         ? e.response?.data?.erreur
         : "Une erreur s'est produite";
+      soumissionEnCours = false;
     }
   };
 
