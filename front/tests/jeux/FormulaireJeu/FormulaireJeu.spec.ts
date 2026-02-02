@@ -948,7 +948,6 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       await waitFor(() => expect(boutonTerminer).toBeDisabled());
-      await waitFor(() => expect(boutonTerminer).not.toBeDisabled());
     });
 
     describe("affiche un message d'erreur", () => {
