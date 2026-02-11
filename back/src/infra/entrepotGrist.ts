@@ -13,7 +13,7 @@ const CINQ_MINUTES = 5;
 export class EntrepotGrist<TYPE_DOCUMENT> {
   private readonly urlDeBase: string;
   private readonly cleApi: string;
-  private cache: Cache<Promise<ReponseGrist<TYPE_DOCUMENT>>>;
+  private cache: Cache<ReponseGrist<TYPE_DOCUMENT>>;
 
   constructor(
     private readonly ressourcesHTTPGrist: RecupereRessourceHttp<
@@ -34,15 +34,13 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
       ? `${cheminDeBase}?filter=${encodeURIComponent(JSON.stringify(filtre))}`
       : cheminDeBase;
     const url = new URL(chemin, this.urlDeBase);
-    return this.cache.get(
-      chemin,
-      async () =>
-        await this.ressourcesHTTPGrist(url.toString(), {
-          headers: {
-            authorization: `Bearer ${this.cleApi}`,
-            accept: 'application/json',
-          },
-        }),
+    return await this.cache.get(chemin, () =>
+      this.ressourcesHTTPGrist(url.toString(), {
+        headers: {
+          authorization: `Bearer ${this.cleApi}`,
+          accept: 'application/json',
+        },
+      }),
     );
   }
 
