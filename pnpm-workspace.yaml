@@ -6,4 +6,6 @@ packages:
   - 'front'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
+minimumReleaseAgeExclude:
+  - fast-xml-parser
 preferFrozenLockfile: true
