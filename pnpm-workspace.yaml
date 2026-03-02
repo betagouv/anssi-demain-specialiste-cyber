@@ -7,7 +7,7 @@ packages:
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
-  - fast-xml-parser
+  - fast-xml-parser@5.3.9
   - minimatch@3.1.4 || 9.0.7
   - svelte@5.53.5
 
