@@ -8,4 +8,6 @@ packages:
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
   - fast-xml-parser
+  - minimatch@3.1.4 || 9.0.7
+
 preferFrozenLockfile: true
