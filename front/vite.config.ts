@@ -54,7 +54,7 @@ const injecteNonceWebcomponents = (code: string) => {
   let codeAvecNonce = `const dscNonce = document.currentScript?.nonce;\n${code}`;
   codeAvecNonce = codeAvecNonce
     .replace(
-      /const (.)\s*=\s*.\(["']style["']\);/gm,
+      /const (.)=[A-Za-z]*\(["']style["']\);/gm,
       (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
     )
     .replace(
