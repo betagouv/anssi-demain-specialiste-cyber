@@ -13,6 +13,12 @@ block heros
     variant= "clair"
     ariane= ariane
   )
+    dsfr-badge(
+      label="Édition 2026 à partir du 3 avril"
+      type="accent"
+      accent="green-archipel"
+      slot="avant-titre"
+    )
     h1.titre-alternatif-xs(slot="titre") #{titrePage}
     p.fr-text--lead(slot="description") #{descriptionPage}
     .actions
@@ -23,6 +29,7 @@ block heros
         href="https://fcsc.fr/fr/"
         target="_blank"
       )
+    p.texte-detail-sm Ouverture des inscriptions la semaine du 23 mars 2026
     img.illustration(slot="illustration" src='/assets/images/logo-fcsc-2026.svg' alt='')
 
 block contenu
