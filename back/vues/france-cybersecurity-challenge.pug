@@ -1,0 +1,31 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "France Cybersecurity Challenge"
+  - var descriptionPage = "Le challenge cyber français, organisé chaque année par l'ANSSI."
+  - var classePage = "page-france-security-challenge"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'france-security-challenge', label: 'France Cybersecurity Challenge', href: '#' }
+
+block heros
+  dsc-heros(
+    variant= "clair"
+    ariane= ariane
+  )
+    h1.titre-alternatif-xs(slot="titre") #{titrePage}
+    p.fr-text--lead(slot="description") #{descriptionPage}
+    .actions
+      dsfr-button(
+        label="Participer au challenge"
+        kind="primary"
+        markup="a"
+        href="https://fcsc.fr/fr/"
+        target="_blank"
+      )
+    img.illustration(slot="illustration" src='/assets/images/logo-fcsc-2026.svg' alt='')
+
+block contenu
+  p à venir
+
+block apres-contenu

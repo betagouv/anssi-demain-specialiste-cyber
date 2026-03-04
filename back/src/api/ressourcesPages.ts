@@ -40,6 +40,7 @@ const pages: Page[] = [
   { route: '/nouveau-jeu', protegee: true },
   { route: '/selection-eleves', protegee: false },
   { route: '/selection-enseignants', protegee: false },
+  { route: '/france-cybersecurity-challenge', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {

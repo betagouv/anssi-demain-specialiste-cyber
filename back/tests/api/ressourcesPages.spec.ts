@@ -51,6 +51,10 @@ describe('Les ressources de page', () => {
     { route: '/non-autorise', vue: 'non-autorise' },
     { route: '/selection-eleves', vue: 'selection-eleves' },
     { route: '/selection-enseignants', vue: 'selection-enseignants' },
+    {
+      route: '/france-cybersecurity-challenge',
+      vue: 'france-cybersecurity-challenge',
+    },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
