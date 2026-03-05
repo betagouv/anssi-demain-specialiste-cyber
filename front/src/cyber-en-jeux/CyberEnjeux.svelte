@@ -32,7 +32,7 @@
 </script>
 
 <dsfr-container>
-  <Onglets {onglets} bind:ongletActif></Onglets>
+  <Onglets {onglets} bind:ongletActif titreReplie="Naviguer dans CyberEnJeux" />
 </dsfr-container>
 
 {#if ongletActif === 0}

@@ -15,3 +15,4 @@ export * from './profil/ZoneIdentification.svelte';
 export * from './relai/FicheRelai.svelte';
 export * from './selections/Selection.svelte';
 export * from './composants/MiseEnAvantKitCommunication.svelte';
+export * from './france-cybersecurity-challenge/FranceCybersecurityChallenge.svelte';
