@@ -55,6 +55,56 @@
   </div>
 </dsfr-container>
 
+<dsfr-container class="benefices">
+  <div class="contenu">
+    <h2>En participant au France Cybersecurity Challenge</h2>
+    <img src="/assets/images/image-generique.svg" />
+    <div class="liste-benefices">
+      <div class="benefice">
+        <h6>Teste et mesure tes compétences cyber</h6>
+        <p class="texte-standard-md">
+          Relève les épreuves dans une grande variété de domaine, conçues par
+          des experts de la cybersécurité&nbsp;: crypto, reverse, pwn, web,
+          forensics, algorithmique, hardware, etc.
+        </p>
+      </div>
+      <hr />
+      <div class="benefice">
+        <h6>Représente peut-être la France à l’ESCS</h6>
+        <p class="texte-standard-md">
+          Les 14 meilleurs/es joueurs/ses rejoindront la Team France (10
+          titulaires, 4 remplaçants/es) et affronteront une trentaine d'équipes
+          européennes dans le cadre de l’European Cybersecurity Challenge,
+          organisé par l'ENISA (European Network and Information System Security
+          Agency).
+        </p>
+        <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
+        <dsfr-link
+          href="https://ecsc.eu/"
+          label="Accéder au site de l’ECSC"
+          blank
+        ></dsfr-link>
+      </div>
+      <hr />
+      <div class="benefice">
+        <h6>Rejoue +530 épreuves du FCSC sur Hackropole</h6>
+        <p class="texte-standard-md">
+          Toutes les épreuves des FCSC des années précédentes sont accessibles
+          sur Hackropole. Une plateforme qui propose un environnement
+          d’apprentissage, sans limite de temps, et où les solutions d’une
+          épreuve peuvent être consultées sans avoir résolu le challenge.
+        </p>
+        <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
+        <dsfr-link
+          href="https://hackropole.fr/fr/"
+          label="Explorer les épreuves sur Hackropole"
+          blank
+        ></dsfr-link>
+      </div>
+    </div>
+  </div>
+</dsfr-container>
+
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
   @use '@style/grille' as *;
@@ -83,5 +133,64 @@
     flex-shrink: 0;
     min-width: 235px;
     width: calc(33% - 14px);
+  }
+
+  .benefices {
+    background: var(--background-alt-pink-tuile);
+    padding: 72px 0;
+
+    @include a-partir-de(lg) {
+      .contenu {
+        display: grid;
+        grid-template-areas:
+          'titre titre'
+          'liste image';
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+
+        h2 {
+          grid-area: titre;
+        }
+
+        img {
+          grid-area: image;
+          align-self: center;
+        }
+
+        .liste-benefices {
+          padding-right: 1.5rem;
+          grid-area: liste;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 588px;
+      margin: 3.5rem auto 2rem;
+      display: block;
+    }
+
+    .benefice {
+      padding: 1rem 0 1rem;
+
+      h6 {
+        margin-bottom: 0.5rem;
+      }
+
+      .texte-standard-md {
+        margin-bottom: 0.5rem;
+      }
+
+      lab-anssi-icone {
+        color: var(--text-action-high-blue-france);
+        margin-right: 0.5rem;
+      }
+
+      dsfr-link {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+    }
   }
 </style>
