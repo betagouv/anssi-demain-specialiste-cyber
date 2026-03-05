@@ -6,9 +6,10 @@
   type Props = {
     onglets: Onglet[];
     ongletActif: number;
+    titreReplie: string;
   };
 
-  let { onglets, ongletActif = $bindable() }: Props = $props();
+  let { onglets, ongletActif = $bindable(), titreReplie }: Props = $props();
 
   const changeLOngletCourant = () => {
     const hash = new URLSearchParams(window.location.hash?.substring(1));
@@ -55,7 +56,7 @@
     aria-expanded={open}
     use:clic={surLeClicDeLEntete}
   >
-    <span>Naviguer dans CyberEnJeux</span>
+    <span>{titreReplie}</span>
   </button>
   <div class="fr-text onglets" id="onglets">
     <ol>

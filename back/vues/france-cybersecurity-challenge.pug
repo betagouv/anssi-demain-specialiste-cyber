@@ -9,30 +9,30 @@ block variables
   - ariane[1] = { id: 'france-security-challenge', label: 'France Cybersecurity Challenge', href: '#' }
 
 block heros
-  dsc-heros(
-    variant= "clair"
-    ariane= ariane
-  )
-    dsfr-badge(
-      label="Édition 2026 à partir du 3 avril"
-      type="accent"
-      accent="green-archipel"
-      slot="avant-titre"
+    dsc-heros(
+        variant= "clair"
+        ariane= ariane
     )
-    h1.titre-alternatif-xs(slot="titre") #{titrePage}
-    p.fr-text--lead(slot="description") #{descriptionPage}
-    .actions
-      dsfr-button(
-        label="Participer au challenge"
-        kind="primary"
-        markup="a"
-        href="https://fcsc.fr/fr/"
-        target="_blank"
-      )
-    p.texte-detail-sm Ouverture des inscriptions la semaine du 23 mars 2026
-    img.illustration(slot="illustration" src='/assets/images/logo-fcsc-2026.svg' alt='')
+        dsfr-badge(
+            label="Édition 2026 à partir du 3 avril"
+            type="accent"
+            accent="green-archipel"
+            slot="avant-titre"
+        )
+        h1.titre-alternatif-xs(slot="titre") #{titrePage}
+        p.fr-text--lead(slot="description") #{descriptionPage}
+        .actions
+            dsfr-button(
+                label="Participer au challenge"
+                kind="primary"
+                markup="a"
+                href="https://fcsc.fr/fr/"
+                target="_blank"
+            )
+        p.texte-detail-sm Ouverture des inscriptions la semaine du 23 mars 2026
+        img.illustration(slot="illustration" src='/assets/images/logo-fcsc-2026.svg' alt='')
 
 block contenu
-  p à venir
+    dsc-france-cybersecurity-challenge
 
-block apres-contenu
+    block apres-contenu
