@@ -1,5 +1,6 @@
 <script lang="ts">
   import CarteParticipationFcsc from './CarteParticipationFcsc.svelte';
+  import CarteDiscordFcsc from './CarteDiscordFcsc.svelte';
 
   const tuiles = [
     {
@@ -108,7 +109,10 @@
 </dsfr-container>
 
 <dsfr-container class="cartes">
-  <CarteParticipationFcsc></CarteParticipationFcsc>
+  <div class="contenu">
+    <CarteParticipationFcsc/>
+    <CarteDiscordFcsc/>
+  </div>
 </dsfr-container>
 
 <style lang="scss">
@@ -202,5 +206,11 @@
 
   .cartes {
     padding: 72px 0;
+
+    .contenu {
+      display: flex;
+      gap: 1.5rem;
+      flex-direction: column;
+    }
   }
 </style>
