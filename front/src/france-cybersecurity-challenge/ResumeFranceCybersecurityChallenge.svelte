@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CarteParticipationFcsc from './CarteParticipationFcsc.svelte';
+
   const tuiles = [
     {
       titre: 'Plusieurs dizaines d’épreuves nouvelles chaque année',
@@ -105,6 +107,10 @@
   </div>
 </dsfr-container>
 
+<dsfr-container class="cartes">
+  <CarteParticipationFcsc></CarteParticipationFcsc>
+</dsfr-container>
+
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
   @use '@style/grille' as *;
@@ -192,5 +198,9 @@
         margin-bottom: 0.5rem;
       }
     }
+  }
+
+  .cartes {
+    padding: 72px 0;
   }
 </style>
