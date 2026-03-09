@@ -1,5 +1,6 @@
 <script lang="ts">
   import TuilesCategoriesEpreuvesFcsc from './TuilesCategoriesEpreuvesFcsc.svelte';
+  import CartesDerouleECSC from './CartesDerouleECSC.svelte';
 </script>
 
 <dsfr-container>
@@ -116,7 +117,7 @@
       </p>
     </section>
 
-    <section>
+    <section id="deroule-ecsc">
       <h3>Déroulé de l’ECSC</h3>
       <p class="texte-standard-md">
         L’European Cybersecurity Challenge (ECSC) est organisé par l'Agence
@@ -128,6 +129,7 @@
       <p class="texte-standard-md">
         Le challenge se déroule sur 2 jours en 2 temps :
       </p>
+      <CartesDerouleECSC></CartesDerouleECSC>
     </section>
 
     <dsfr-link
