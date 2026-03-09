@@ -64,8 +64,12 @@
       </p>
     </section>
 
-    <section>
+    <section id="selection-team-france">
       <h3>Sélection de la Team France pour l’ECSC</h3>
+      <img
+        src="/assets/images/fcsc/selection-team-france.svg"
+        alt="Team France avec 5 juniors et 5 seniors"
+      />
       <p class="texte-standard-md">
         La Team France qui va représenter la France lors de l’European
         Cybersecurity Challenge (ECSC) est sélectionnée parmi les joueurs(ses)
@@ -91,8 +95,12 @@
       </p>
     </section>
 
-    <section>
+    <section id="preparation-team-france-ecsc">
       <h3>Préparation de la Team France à l‘ECSC</h3>
+      <img
+        src="/assets/images/fcsc/preparation-team-france-ecsc.avif"
+        alt="Logos Team France et ECSC"
+      />
       <p class="texte-standard-md">
         Une fois la Team France (équipe de France) sélectionnée, l'ensemble des
         joueurs(es) est accompagnée par les coaches de l'ANSSI pour se préparer
@@ -143,6 +151,14 @@
 
     @include a-partir-de(lg) {
       gap: 3rem;
+    }
+
+    #selection-team-france,
+    #preparation-team-france-ecsc {
+      img {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
     }
   }
 
