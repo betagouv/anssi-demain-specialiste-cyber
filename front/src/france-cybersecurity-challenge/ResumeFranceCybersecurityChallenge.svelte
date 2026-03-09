@@ -19,6 +19,14 @@
       },
     },
   ];
+
+  const temoignages = [
+    {
+      citation:
+        'Le France Cybersecurity Challenge m’a vraiment passionnée : j’ai adoré analyser des vulnérabilités, résoudre des challenges de cryptographie et comprendre concrètement comment fonctionnent les attaques et les défenses en cybersécurité.',
+      auteur: 'Lena, élève en terminale, participante au FCSC 2023',
+    },
+  ];
 </script>
 
 <dsfr-container>
@@ -110,10 +118,15 @@
 
 <dsfr-container class="cartes">
   <div class="contenu">
-    <CarteParticipationFcsc/>
-    <CarteDiscordFcsc/>
+    <CarteParticipationFcsc />
+    <CarteDiscordFcsc />
   </div>
 </dsfr-container>
+
+<div class="temoignages">
+  <lab-anssi-temoignages titre="Témoignages" {temoignages}
+  ></lab-anssi-temoignages>
+</div>
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
@@ -212,5 +225,9 @@
       gap: 1.5rem;
       flex-direction: column;
     }
+  }
+
+  .temoignages {
+    background-color: var(--background-alt-blue-ecume);
   }
 </style>
