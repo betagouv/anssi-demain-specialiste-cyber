@@ -174,8 +174,8 @@ importers:
   front:
     devDependencies:
       '@lab-anssi/ui-kit':
-        specifier: ~1.37.2
-        version: 1.37.2(svelte@5.53.5)
+        specifier: ~1.44.3
+        version: 1.44.3(svelte@5.53.5)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.1
         version: 6.2.1(svelte@5.53.5)(vite@7.1.11(@types/node@24.5.2)(jiti@2.6.1)(sass@1.93.3)(tsx@4.20.6))
@@ -1120,8 +1120,8 @@ packages:
     peerDependencies:
       express: ^4.21.2
 
-  '@lab-anssi/ui-kit@1.37.2':
-    resolution: {integrity: sha512-vcq1Z4vFm+C10HjzKdzggaUeH49q6ovbIyZySJPo1syI1rkIFfb9bqzs43MRUW/G6Zlu9GboKx4c4Z6HhbjdJA==}
+  '@lab-anssi/ui-kit@1.44.3':
+    resolution: {integrity: sha512-VebX0lPJ6Xkufa8iiMHifj3y46d65uAEmIuIlt2jmY8JkJoBBvleAgROIPHTwh0hiTwPzDynmhOPD9N5IMHTDQ==}
     peerDependencies:
       svelte: 5.53.5
 
@@ -6284,7 +6284,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@lab-anssi/ui-kit@1.37.2(svelte@5.53.5)':
+  '@lab-anssi/ui-kit@1.44.3(svelte@5.53.5)':
     dependencies:
       svelte: 5.53.5
 
