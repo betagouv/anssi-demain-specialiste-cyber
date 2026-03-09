@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TuilesCategoriesEpreuvesFcsc from './TuilesCategoriesEpreuvesFcsc.svelte';
 </script>
 
 <dsfr-container>
@@ -42,6 +43,9 @@
         Le FCSC propose une cinquantaine d'épreuves dans plusieurs catégories
         techniques :
       </p>
+
+      <TuilesCategoriesEpreuvesFcsc/>
+
       <p class="texte-standard-md">
         Tout au long du challenge, les joueurs et joueuses sont positionnés dans
         un classement en constante évolution. Ce classement est établi sur la
