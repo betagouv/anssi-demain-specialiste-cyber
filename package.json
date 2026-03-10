@@ -29,6 +29,7 @@
     "eslint": "^9.39.3",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
+    "prettier-plugin-svelte": "^3.4.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.0",
     "vitest": "^3.2.4"
