@@ -6,6 +6,7 @@
     valeur?: string;
     messageErreur?: string;
   }
+
   let {
     messageErreur,
     referentielEtablissement,
@@ -28,9 +29,8 @@
     };
   }
 
-  const rechercheEtablissementTemporise = cadence(
-    referentielEtablissement.trouveParNom,
-    500,
+  const rechercheEtablissementTemporise = $derived(
+    cadence(referentielEtablissement.trouveParNom, 500),
   );
 
   function surSelection(nomEtablissement: string) {
@@ -73,6 +73,7 @@
 <style lang="scss">
   .conteneur-autocompletion {
     position: relative;
+
     .liste-suggestions {
       display: none;
       background-color: white;
@@ -94,9 +95,11 @@
     .option {
       padding: 0.25rem;
       cursor: pointer;
+
       &:focus-visible {
         outline: 2px solid var(--dsfr-couleur-focus-outline);
       }
+
       &:hover {
         background-color: var(--background-default-grey-hover);
       }

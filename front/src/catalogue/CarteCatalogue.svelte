@@ -19,16 +19,19 @@
     ressource: RessourceCyber;
     markup?: 'h2' | 'h3' | 'h4' | 'h5';
   }
+
   const { ressource, markup = 'h3' }: Props = $props();
 
   const illustrationPetite = $derived(
     `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite.avif`,
   );
 
-  const badges = ressource.types.map((type) => ({
-    label: type,
-    accent: laCouleurDuBadgeSelonTypeRessourceCyber(type),
-  }));
+  const badges = $derived(
+    ressource.types.map((type) => ({
+      label: type,
+      accent: laCouleurDuBadgeSelonTypeRessourceCyber(type),
+    })),
+  );
 </script>
 
 <dsfr-card
