@@ -8,7 +8,7 @@
   },
   "packageManager": "pnpm@10.24.0",
   "scripts": {
-    "dev": "pnpm -r dev",
+    "dev": "pnpm --reporter=append-only -r dev",
     "dev:front": "pnpm --filter anssi-demain-specialiste-cyber-front dev",
     "dev:back": "pnpm --filter anssi-demain-specialiste-cyber-back dev",
     "build": "pnpm -r build",
