@@ -137,7 +137,7 @@
       margin: 0 0 1.5rem;
     }
 
-    h4 {
+    .fr-h4 {
       margin-top: 0.5rem;
     }
 
