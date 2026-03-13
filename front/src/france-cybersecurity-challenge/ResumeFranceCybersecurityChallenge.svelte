@@ -69,7 +69,10 @@
 <dsfr-container class="benefices">
   <div class="contenu">
     <h2>En participant au France Cybersecurity Challenge</h2>
-    <img src="/assets/images/image-generique.svg" />
+    <img
+      src="/assets/images/fcsc/3-jeunes-supporters-fcsc.svg"
+      alt="Trois jeunes supporters souriants avec un drapeau FCSC"
+    />
     <div class="liste-benefices">
       <div class="benefice">
         <h6>Teste et mesure tes compétences cyber</h6>
