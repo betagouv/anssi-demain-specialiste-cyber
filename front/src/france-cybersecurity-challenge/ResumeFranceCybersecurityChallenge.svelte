@@ -92,12 +92,6 @@
           organisé par l'ENISA (European Network and Information System Security
           Agency).
         </p>
-        <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
-        <dsfr-link
-          href="https://ecsc.eu/"
-          label="Accéder au site de l’ECSC"
-          blank
-        ></dsfr-link>
       </div>
       <hr />
       <div class="benefice">
