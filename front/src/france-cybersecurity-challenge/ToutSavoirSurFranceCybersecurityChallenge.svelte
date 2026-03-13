@@ -94,10 +94,10 @@
           techniques :
         </p>
 
-        <TuilesCategoriesEpreuvesFcsc/>
+        <TuilesCategoriesEpreuvesFcsc />
 
         <p class="texte-standard-md">
-          Tout au long du challenge, les joueurs et joueuses sont positionnés
+          Tout au long du challenge, les joueurs et joueuses sont positionné(e)s
           dans un classement en constante évolution. Ce classement est établi
           sur la base du nombre de points collectés par chaque participant(e).
         </p>
