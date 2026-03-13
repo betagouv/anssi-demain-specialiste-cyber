@@ -16,6 +16,8 @@ overrides:
   svelte@<=5.53.4: 5.53.5
   multer@<2.1.1: '>=2.1.1'
   immutable@>=5.0.0 <5.1.5: '>=5.1.5'
+  devalue@<5.6.4: '>=5.6.4'
+  devalue@<=5.6.3: '>=5.6.4'
 
 importers:
 
@@ -2747,8 +2749,8 @@ packages:
     resolution: {integrity: sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==}
     engines: {node: '>=8'}
 
-  devalue@5.6.3:
-    resolution: {integrity: sha512-nc7XjUU/2Lb+SvEFVGcWLiKkzfw8+qHI7zn8WYXKkLMgfGSHbgCEaR6bJpev8Cm6Rmrb19Gfd/tZvGqx9is3wg==}
+  devalue@5.6.4:
+    resolution: {integrity: sha512-Gp6rDldRsFh/7XuouDbxMH3Mx8GMCcgzIb1pDTvNyn8pZGQ22u+Wa+lGV9dQCltFQ7uVw0MhRyb8XDskNFOReA==}
 
   dezalgo@1.0.4:
     resolution: {integrity: sha512-rXSP0bf+5n0Qonsb+SVVfNfIsimO4HEtmnIpPHY8Q1UCzKlQrDMfdobr8nJOOsRgWCyMRqeSBQzmWUMq7zvVig==}
@@ -8089,7 +8091,7 @@ snapshots:
 
   detect-newline@3.1.0: {}
 
-  devalue@5.6.3: {}
+  devalue@5.6.4: {}
 
   dezalgo@1.0.4:
     dependencies:
@@ -10171,7 +10173,7 @@ snapshots:
       aria-query: 5.3.1
       axobject-query: 4.1.0
       clsx: 2.1.1
-      devalue: 5.6.3
+      devalue: 5.6.4
       esm-env: 1.2.2
       esrap: 2.2.3
       is-reference: 3.0.3
