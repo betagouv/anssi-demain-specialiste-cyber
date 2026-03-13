@@ -84,7 +84,7 @@
       </div>
       <hr />
       <div class="benefice">
-        <h6>Représente peut-être la France à l’ESCS</h6>
+        <h6>Représente peut-être la France à l’ECSC</h6>
         <p class="texte-standard-md">
           Les 14 meilleurs/es joueurs/ses rejoindront la Team France (10
           titulaires, 4 remplaçants/es) et affronteront une trentaine d'équipes
