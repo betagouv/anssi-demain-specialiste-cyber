@@ -12,8 +12,8 @@
 </script>
 
 <dsfr-card
-  title="Participe au France Cybersecurity Challenge 2026&nbsp;!"
-  description="Les inscriptions au France Cybersecurity Challenge (FCSC) ouvrent la semaine du 23 mars et restent possibles jusqu’au dernier jour du challenge 😉. Le FCSC se déroulera du 3 avril 2026 (ouverture) au 12 avril (fin)."
+  title="Rejoins la communauté France Cybersecurity Challenge sur Discord"
+  hasDescription={false}
   src="/assets/images/fcsc-x-discord.svg"
   href="https://discord.com/invite/rwZY6hh8z8"
   blank
