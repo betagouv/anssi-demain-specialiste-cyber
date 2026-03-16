@@ -50,7 +50,11 @@
 
 <dsfr-container>
   <div class="contenu">
-    <dsfr-side-menu {items} buttonLabel="Dans cette page" hasTitle={false}
+    <dsfr-side-menu
+      {items}
+      buttonLabel="Dans cette page"
+      hasTitle={false}
+      buttonId="menuToutSavoir"
     ></dsfr-side-menu>
 
     <div class="sections">
