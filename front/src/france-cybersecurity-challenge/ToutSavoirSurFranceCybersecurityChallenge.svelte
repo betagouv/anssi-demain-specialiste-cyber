@@ -5,15 +5,8 @@
   const items = [
     {
       id: 'accessible-a-tous',
-      label: 'Le FCSC, un challenge accessible à tous',
+      label: 'Accessible à tous, 100% en ligne',
       href: '#tout-savoir&accessible-a-tous',
-      isCollapsible: false,
-      type: 'link',
-    },
-    {
-      id: 'menu-en-ligne',
-      label: 'Le FCSC, un challenge 100% en ligne et flexible',
-      href: '#tout-savoir&en-ligne',
       isCollapsible: false,
       type: 'link',
     },
@@ -59,27 +52,19 @@
 
     <div class="sections">
       <section id="tout-savoir&accessible-a-tous">
-        <h3>Le FCSC, un challenge accessible à tous</h3>
-
-        <dsfr-highlight
-          text="Le France Cybersecurity Challenge (FCSC) est accessible à tous !"
-        ></dsfr-highlight>
-
+        <h3>Accessible à tous, 100% en ligne</h3>
         <p class="texte-standard-md">
-          C’est l’occasion pour les jeunes âgé(e)s de 14 à 25 ans de se tester
-          et se mesurer à une grande variété d’épreuves conçues par des experts
-          de la cybersécurité. La compétition est également accessible en hors
-          catégorie pour les joueurs n'étant pas éligibles à l'European
-          Cybersecurity Challenge (âge, disponibilité, nationalité).
+          La participation au FCSC est <dsfr-link
+            label="accessible à tous"
+            href="#fcsc-2026"
+          ></dsfr-link> dès 14 ans.
         </p>
-      </section>
 
-      <section id="tout-savoir&en-ligne">
-        <h3>100% en ligne et flexible</h3>
         <p class="texte-standard-md">
           Le FCSC se déroule pendant 10 jours et la participation est
           entièrement en ligne, sans aucune contrainte horaire.
         </p>
+
         <p class="texte-standard-md">
           Chaque joueur et joueuse participe seul(e) mais peut choisir de
           rejoindre la
