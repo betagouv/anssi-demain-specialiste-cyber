@@ -24,17 +24,17 @@
     {
       citation:
         'Le France Cybersecurity Challenge m’a vraiment passionnée : j’ai adoré analyser des vulnérabilités, résoudre des challenges de cryptographie et comprendre concrètement comment fonctionnent les attaques et les défenses en cybersécurité.',
-      auteur: 'Lena, élève en terminale, participante au FCSC 2023',
+      auteur: 'Élève en terminale, participante au FCSC 2023',
     },
     {
       citation:
         'Bravo pour cette superbe édition et pour réussir à maintenir une qualité de CTF aussi haute sur plusieurs années !',
-      auteur: 'Gaspard, participant au FCSC 2025',
+      auteur: 'Participant au FCSC 2025',
     },
     {
       citation:
         'Evénement super au global, une communauté très engagée, des challenges au niveau variable selon les niveaux ce qui permet à tout un chacun d’y trouver son compte. Cet événement m’a donné très envie de consacrer plus de temps à m’entraîner sur de futurs CTF (notamment via Hackropole)',
-      auteur: 'Romane, participante au FCSC 2024',
+      auteur: 'Participante au FCSC 2024',
     },
   ];
 </script>
