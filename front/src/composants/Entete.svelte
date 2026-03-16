@@ -84,6 +84,13 @@
       active:
         cheminCourant === '/cyber-en-jeux' || cheminCourant.startsWith('/jeux'),
     },
+    {
+      id: 'france-cybersecurity-challenge',
+      label: '🛡️ France Cybersecurity Challenge',
+      type: 'link',
+      href: '/france-cybersecurity-challenge',
+      active: cheminCourant === '/france-cybersecurity-challenge',
+    },
     ...ajouteMenuSiConnecte({
       id: 'mes-jeux',
       label: 'Mes jeux',
