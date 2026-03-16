@@ -47,4 +47,7 @@
 </dsfr-card>
 
 <style lang="scss">
+  dsfr-buttons-group {
+    width: fit-content;
+  }
 </style>
