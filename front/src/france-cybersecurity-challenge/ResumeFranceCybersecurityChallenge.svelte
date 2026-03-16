@@ -185,6 +185,7 @@
         img {
           grid-area: image;
           align-self: center;
+          margin: 0;
         }
 
         .liste-benefices {
