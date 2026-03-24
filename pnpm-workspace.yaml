@@ -11,5 +11,6 @@ minimumReleaseAgeExclude:
   - "@lab-anssi/ui-kit"
   - fast-xml-parser@5.5.7
   - fast-xml-builder@1.1.4
+  - flatted@3.4.2
 
 preferFrozenLockfile: true
