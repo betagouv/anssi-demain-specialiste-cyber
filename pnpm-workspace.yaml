@@ -13,5 +13,6 @@ minimumReleaseAgeExclude:
   - fast-xml-builder@1.1.4
   - flatted@3.4.2
   - picomatch@4.0.4
+  - yaml@1.10.3
 
 preferFrozenLockfile: true
