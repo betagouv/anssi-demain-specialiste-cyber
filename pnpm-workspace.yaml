@@ -12,5 +12,6 @@ minimumReleaseAgeExclude:
   - fast-xml-parser@5.5.7
   - fast-xml-builder@1.1.4
   - flatted@3.4.2
+  - picomatch@4.0.4
 
 preferFrozenLockfile: true
