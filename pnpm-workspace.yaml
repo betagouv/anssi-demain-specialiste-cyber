@@ -7,11 +7,9 @@ packages:
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
-  - devalue@5.6.4
   - "@lab-anssi/ui-kit"
   - fast-xml-parser@5.5.7
   - fast-xml-builder@1.1.4
-  - flatted@3.4.2
   - handlebars@4.7.9
   - picomatch@4.0.4
   - path-to-regexp@0.1.13
