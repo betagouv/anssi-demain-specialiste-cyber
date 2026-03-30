@@ -15,5 +15,6 @@ minimumReleaseAgeExclude:
   - handlebars@4.7.9
   - picomatch@4.0.4
   - path-to-regexp@0.1.13
+  - brace-expansion@5.0.5 || 1.1.13
 
 preferFrozenLockfile: true
