@@ -24,6 +24,7 @@ overrides:
   path-to-regexp@<0.1.13: 0.1.13
   brace-expansion@<1.1.13: 1.1.13
   brace-expansion@>=4.0.0 <5.0.5: '>=5.0.5'
+  yaml@>=1.0.0 <1.10.3: '>=1.10.3'
 
 importers:
 
@@ -65,7 +66,7 @@ importers:
         version: 8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@25.4.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)
+        version: 3.2.4(@types/node@25.4.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
   back:
     dependencies:
@@ -177,7 +178,7 @@ importers:
         version: 8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@24.12.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)
+        version: 3.2.4(@types/node@24.12.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
   front:
     devDependencies:
@@ -186,7 +187,7 @@ importers:
         version: 1.44.5(svelte@5.53.5)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.4
-        version: 6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+        version: 6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
       '@testing-library/dom':
         specifier: ^9.3.4
         version: 9.3.4
@@ -231,7 +232,7 @@ importers:
         version: 2.8.1
       vite:
         specifier: ^7.3.1
-        version: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+        version: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
 packages:
 
@@ -4731,9 +4732,10 @@ packages:
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  yaml@1.10.2:
-    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
-    engines: {node: '>= 6'}
+  yaml@2.8.3:
+    resolution: {integrity: sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
 
   yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
@@ -6768,22 +6770,22 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
-  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)))(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
       obug: 2.1.1
       svelte: 5.53.5
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
-  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))':
+  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)))(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)))(svelte@5.53.5)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
       deepmerge: 4.3.1
       magic-string: 0.30.21
       obug: 2.1.1
       svelte: 5.53.5
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
-      vitefu: 1.1.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
+      vitefu: 1.1.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
 
   '@testing-library/dom@9.3.4':
     dependencies:
@@ -7149,13 +7151,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))':
+  '@vitest/mocker@3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -9170,7 +9172,7 @@ snapshots:
   postcss-load-config@3.1.4(postcss@8.5.8)(ts-node@10.9.2(@types/node@24.12.0)(typescript@5.9.3)):
     dependencies:
       lilconfig: 2.1.0
-      yaml: 1.10.2
+      yaml: 2.8.3
     optionalDependencies:
       postcss: 8.5.8
       ts-node: 10.9.2(@types/node@24.12.0)(typescript@5.9.3)
@@ -9887,13 +9889,13 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-node@3.2.4(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0):
+  vite-node@3.2.4(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -9908,13 +9910,13 @@ snapshots:
       - tsx
       - yaml
 
-  vite-node@3.2.4(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0):
+  vite-node@3.2.4(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -9929,7 +9931,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0):
+  vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.4)
@@ -9943,8 +9945,9 @@ snapshots:
       jiti: 2.6.1
       sass: 1.98.0
       tsx: 4.21.0
+      yaml: 2.8.3
 
-  vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0):
+  vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.4)
@@ -9958,16 +9961,17 @@ snapshots:
       jiti: 2.6.1
       sass: 1.98.0
       tsx: 4.21.0
+      yaml: 2.8.3
 
-  vitefu@1.1.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)):
+  vitefu@1.1.2(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)):
     optionalDependencies:
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
 
-  vitest@3.2.4(@types/node@24.12.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0):
+  vitest@3.2.4(@types/node@24.12.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -9985,8 +9989,8 @@ snapshots:
       tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
-      vite-node: 3.2.4(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
+      vite-node: 3.2.4(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.12.0
@@ -10005,11 +10009,11 @@ snapshots:
       - tsx
       - yaml
 
-  vitest@3.2.4(@types/node@25.4.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0):
+  vitest@3.2.4(@types/node@25.4.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@1.8.0))(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0))
+      '@vitest/mocker': 3.2.4(vite@7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -10027,8 +10031,8 @@ snapshots:
       tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
-      vite-node: 3.2.4(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)
+      vite: 7.3.1(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
+      vite-node: 3.2.4(@types/node@25.4.0)(jiti@2.6.1)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.4.0
@@ -10150,7 +10154,7 @@ snapshots:
 
   yallist@4.0.0: {}
 
-  yaml@1.10.2: {}
+  yaml@2.8.3: {}
 
   yargs-parser@21.1.1: {}
 
