@@ -36,5 +36,8 @@
   "main": "svelte.config.js",
   "directories": {
     "test": "test"
+  },
+  "dependencies": {
+    "@sentry/browser": "^10.48.0"
   }
 }
