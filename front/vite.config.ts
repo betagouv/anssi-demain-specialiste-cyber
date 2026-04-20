@@ -29,6 +29,7 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
       input: {
         // exporte tous les WebComponents dans le script dsc.js
         dsc: 'src/index.ts',
+        sentry: 'src/sentry.ts',
       },
       output:
         mode === 'development'
