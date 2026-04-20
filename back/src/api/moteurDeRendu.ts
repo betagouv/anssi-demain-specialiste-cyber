@@ -22,6 +22,7 @@ const lisLesCheminsDesFichiersGeneresParLeFront: FournisseurDeChemins = () => {
   );
   return {
     dsc: manifeste['src/index.ts'].file,
+    scriptSentry: manifeste['src/sentry.ts'].file,
     style: manifeste['style.css'].file,
   };
 };
@@ -37,6 +38,10 @@ export const moteurDeRenduExpress = (
   return {
     rends(reponse, vue, options) {
       const matomo = adaptateurEnvironnement.matomo();
+      const sentry = {
+        dsn: adaptateurEnvironnement.sentry().dsn(),
+        environnement: adaptateurEnvironnement.sentry().environnement(),
+      };
       const constantesPUG = {
         titreDSC: TITRE_DSC_SECABLE,
         versionUIKit,
@@ -50,6 +55,7 @@ export const moteurDeRenduExpress = (
         ...optionsAvecManifesteEtNonce,
         ...constantesPUG,
         ...(matomo && { matomo }),
+        ...(sentry && { sentry }),
       });
     },
   };

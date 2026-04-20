@@ -7,6 +7,9 @@ link(
     rel="stylesheet"
     nonce= nonce
 )
+if sentry
+    script(type="module" src=`/${scriptSentry}` data-sentry-dsn=`${sentry.dsn}` data-sentry-environnement=`${sentry.environnement}` id="script-sentry")
+
 if matomo
     script(type="module" src="/scripts/matomo.js" data-id-site-matomo=`${matomo.identifiant}` id="script-matomo")
     script(type="module" src="/scripts/matomoTagManager.js" data-url-tag-manager-matomo=`${matomo.tagManager}` id="script-matomo-tag-manager")
