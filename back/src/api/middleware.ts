@@ -148,7 +148,6 @@ export const fabriqueMiddleware = ({
             "'self'",
             `'nonce-${reponse.locals.nonce}'`,
             'https://stats.beta.gouv.fr',
-            'https://browser.sentry-cdn.com',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
           imgSrc: [
