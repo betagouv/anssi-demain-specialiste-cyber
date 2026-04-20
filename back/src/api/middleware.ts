@@ -165,6 +165,7 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://stats.beta.gouv.fr',
             'https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/',
+            'https://sentry.incubateur.net',
           ],
           mediaSrc: [
             "'self'",
