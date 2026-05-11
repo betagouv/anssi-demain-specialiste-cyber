@@ -52,14 +52,18 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
 }));
 
 const injecteNonceWebcomponents = (code: string) => {
-  let codeAvecNonce = `const dscNonce = document.currentScript?.nonce;\n${code}`;
+  let codeAvecNonce = `const dscNonce =
+  typeof document !== 'undefined'
+    ? document.querySelector('meta[property="csp-nonce"]')?.getAttribute('content')
+    : null;\n${code}`;
+
   codeAvecNonce = codeAvecNonce
     .replace(
-      /const (.)=[A-Za-z]*\(["']style["']\);/gm,
+      /const (\w+)\s*=\s*\w+\(["']style["']\);/gm,
       (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
     )
     .replace(
-      /const (.)\s*=\s*document\.createElement\(["']style["']\);/gm,
+      /const (\w+)\s*=\s*document\.createElement\(["']style["']\);/gm,
       (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
     );
 
