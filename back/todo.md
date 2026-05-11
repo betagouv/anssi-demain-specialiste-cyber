@@ -1,3 +1,0 @@
-- [ ] Ajouter la table de vérification des sels de hachage
-  - [ ] Ajouter knex
-  - [ ] Ajouter les migrations knex
