@@ -38,6 +38,7 @@ jobs:
   deploiement-grist:
     name: Déploiement
     runs-on: ubuntu-latest
+    needs: genere-comparaison
     environment: DEPLOIEMENT_GRIST
     steps:
       - name: Télécharger les empreintes sources
