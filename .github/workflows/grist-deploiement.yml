@@ -45,3 +45,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: empreinte-data-grist
+
+      - name: Récupère l'id source
+        run: echo EMPREINTE=$(cat empreinte.txt) >> "$GITHUB_ENV"
+
+      - name: Recopie le contenu
+        run: |
+          curl --request POST \
+            --url https://grist.numerique.gouv.fr/api/docs/${{ secrets.GRIST_PROD_DOC_ID }}/replace \
+            --header 'Authorization: Bearer ${{ secrets.GRIST_PROD_API_KEY }}' \
+            --header 'content-type: application/json' \
+            --data '{
+              "sourceDocId": "${{ env.EMPREINTE }}"
+            }' \
+            --fail || exit 1
