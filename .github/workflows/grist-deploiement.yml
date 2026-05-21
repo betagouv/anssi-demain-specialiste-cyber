@@ -12,10 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     environment: DEPLOIEMENT_GRIST
     steps:
+      - name: Récupère le snapshot
+        run: |
+          curl --request GET \
+            --url https://grist.numerique.gouv.fr/api/docs/${{ secrets.GRIST_DEMO_DOC_ID }}/snapshots \
+            --header 'Authorization: Bearer ${{ secrets.GRIST_PROD_API_KEY }}' \
+            --header 'Content-Type: application/json' \
+            | jq -r '.snapshots[0].docId' \
+            > empreinte.txt
+
       - name: Compare les contenus
         run: |
           curl --request GET \
-            --url https://grist.numerique.gouv.fr/api/docs/${{ secrets.GRIST_DEMO_DOC_ID }}/compare/${{ secrets.GRIST_PROD_DOC_ID }}?detail=true \
+            --url https://grist.numerique.gouv.fr/api/docs/$(cat empreinte.txt)/compare/${{ secrets.GRIST_PROD_DOC_ID }}?detail=true \
             --header 'Authorization: Bearer ${{ secrets.GRIST_PROD_API_KEY }}' \
             --header 'Content-Type: application/json' \
             -o resultat.txt
