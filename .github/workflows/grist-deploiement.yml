@@ -29,3 +29,9 @@ jobs:
             --header 'Content-Type: application/json' \
             -o resultat.txt
           cat resultat.txt >> $GITHUB_STEP_SUMMARY
+
+      - name: Sauvegarde l'empreinte source
+        uses: actions/upload-artifact@v4
+        with:
+          name: empreinte-data-grist
+          path: empreinte.txt
