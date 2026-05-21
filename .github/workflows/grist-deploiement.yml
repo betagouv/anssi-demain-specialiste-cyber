@@ -35,3 +35,13 @@ jobs:
         with:
           name: empreinte-data-grist
           path: empreinte.txt
+
+  deploiement-grist:
+    name: Déploiement
+    runs-on: ubuntu-latest
+    environment: DEPLOIEMENT_GRIST
+    steps:
+      - name: Télécharger les empreintes sources
+        uses: actions/download-artifact@v4
+        with:
+          name: empreinte-data-grist
