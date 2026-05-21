@@ -3,8 +3,7 @@ run-name: Compare et déploie des documents Grist
 permissions: {}
 
 on:
-  pull_request:
-    branches: ['main']
+  workflow_dispatch: # Pour activer le déclenchement manuel
 
 jobs:
   genere-comparaison:
