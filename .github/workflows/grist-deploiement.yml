@@ -1,0 +1,22 @@
+name: Déploie des Grist
+run-name: Compare et déploie des documents Grist
+permissions: {}
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  genere-comparaison:
+    name: Comparaison
+    runs-on: ubuntu-latest
+    environment: DEPLOIEMENT_GRIST
+    steps:
+      - name: Compare les contenus
+        run: |
+          curl --request GET \
+            --url https://grist.numerique.gouv.fr/api/docs/${{ secrets.GRIST_DEMO_DOC_ID }}/compare/${{ secrets.GRIST_PROD_DOC_ID }}?detail=true \
+            --header 'Authorization: Bearer ${{ secrets.GRIST_PROD_API_KEY }}' \
+            --header 'Content-Type: application/json' \
+            -o resultat.txt
+          cat resultat.txt >> $GITHUB_STEP_SUMMARY
