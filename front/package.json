@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit --project ./tsconfig.typecheck.json && svelte-check"
   },
   "devDependencies": {
-    "@lab-anssi/ui-kit": "~1.44.5",
+    "@lab-anssi/ui-kit": "~1.53.3",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.9.1",
