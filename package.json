@@ -15,7 +15,7 @@
     "lint": "pnpm -r lint",
     "migre-bdd": "pnpm --filter anssi-demain-specialiste-cyber-back migre-bdd",
     "start": "pnpm --filter anssi-demain-specialiste-cyber-back start ",
-    "test": "pnpm -r test",
+    "test": "pnpm --reporter=append-only -r test",
     "test:ci": "pnpm -r test:ci",
     "typecheck": "pnpm -r typecheck",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
