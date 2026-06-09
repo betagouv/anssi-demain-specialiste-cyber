@@ -197,8 +197,8 @@ importers:
         version: 10.48.0
     devDependencies:
       '@lab-anssi/ui-kit':
-        specifier: ~1.44.5
-        version: 1.44.5(svelte@5.53.5)
+        specifier: ~1.53.3
+        version: 1.53.3(svelte@5.53.5)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.4
         version: 6.2.4(svelte@5.53.5)(vite@7.3.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(tsx@4.21.0)(yaml@2.8.3))
@@ -991,10 +991,10 @@ packages:
     peerDependencies:
       express: ^4.21.2
 
-  '@lab-anssi/ui-kit@1.44.5':
-    resolution: {integrity: sha512-9j1H35aiNHXXdC3rGID5GQwQLFF0L1JYbvuuxf4ntOZ/xP7KzKf6IF36w3VGtWZt78HOa+xQ3Cx/adPDCmNTPw==}
+  '@lab-anssi/ui-kit@1.53.3':
+    resolution: {integrity: sha512-zi/8IX7utbl1qJM50mrQoPxpxqriEscj+h36UruMv90ELHvoaqnP7pEiR2R8Q6vYeRBzR7N4Q7hg1+Kz1gl0Bg==}
     peerDependencies:
-      svelte: 5.53.5
+      svelte: ~5.55.10
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -6042,7 +6042,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@lab-anssi/ui-kit@1.44.5(svelte@5.53.5)':
+  '@lab-anssi/ui-kit@1.53.3(svelte@5.53.5)':
     dependencies:
       svelte: 5.53.5
 
