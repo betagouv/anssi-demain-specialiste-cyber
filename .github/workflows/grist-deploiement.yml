@@ -30,7 +30,7 @@ jobs:
           cat resultat.txt >> $GITHUB_STEP_SUMMARY
 
       - name: Sauvegarde l'empreinte source
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: empreinte-data-grist
           path: empreinte.txt
@@ -42,7 +42,7 @@ jobs:
     environment: DEPLOIEMENT_GRIST
     steps:
       - name: Télécharger les empreintes sources
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: empreinte-data-grist
 
