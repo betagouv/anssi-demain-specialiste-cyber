@@ -19,5 +19,7 @@ minimumReleaseAgeExclude:
   - axios@1.15.0
   # Renovate security update: qs@6.15.2
   - qs@6.15.2
+  # Renovate security update: multer@2.2.0
+  - multer@2.2.0
 
 preferFrozenLockfile: true
