@@ -1,0 +1,31 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Opération Cactus"
+  - var descriptionPage = "L’opération nationale de sensibilisation au risque d’hameçonnage (phishing)."
+  - var classePage = "page-operation-cactus"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'operation-cactus', label: 'Opération Cactus', href: '#' }
+
+block heros
+    dsc-heros(
+        variant= "clair"
+        ariane= ariane
+    )
+        h1.titre-alternatif-xs(slot="titre") #{titrePage}
+        p.fr-text--lead(slot="description") #{descriptionPage}
+        .actions
+            dsfr-button(
+                label="Découvrez les ressources pour sensibiliser"
+                kind="primary"
+                markup="a"
+                href="#ressources"
+                blank
+            )
+        img.illustration(slot="illustration" src="/assets/images/operation-cactus/hero.jpg" alt="")
+
+block contenu
+    dsc-operation-cactus
+
+    block apres-contenu
