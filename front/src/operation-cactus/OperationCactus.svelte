@@ -5,4 +5,8 @@
   }}
 />
 
-<dsfr-container></dsfr-container>
+<script lang="ts">
+  import Presentation from './Presentation.svelte';
+</script>
+
+<Presentation />
