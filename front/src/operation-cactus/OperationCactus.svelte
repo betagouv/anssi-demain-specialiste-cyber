@@ -8,7 +8,9 @@
 <script lang="ts">
   import Presentation from './Presentation.svelte';
   import Avantages from './Avantages.svelte';
+  import PoursuivezEnClasse from './PoursuivezEnClasse.svelte';
 </script>
 
 <Presentation />
 <Avantages />
+<PoursuivezEnClasse />
