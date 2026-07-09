@@ -65,3 +65,13 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
   sur une règle globale de même classe, mais **n'annule pas** les propriétés qu'il
   ne redéclare pas (le fond / le padding globaux continuent de fuiter). D'où :
   préférer un nom unique plutôt qu'une surcharge partielle.
+- **Composants `dsfr-*` = shadow DOM `open`, sans `::part`** : le CSS externe ne
+  peut pas atteindre leur contenu interne (le mode `open` n'ouvre l'accès qu'en JS,
+  pas en CSS). Pour styler / ajuster ce contenu (ex. marge d'un `<p>`), le fournir
+  soi-même via un **slot** du composant : le contenu slotté reste en **light DOM**
+  et devient ciblable en CSS depuis le composant parent.
+- **`dsfr-highlight`** : le composant ne s'affiche que si l'**attribut `text` est
+  présent**. Donc pour maîtriser le rendu du texte (typo, marges), garder un
+  `text="…"` (valeur factice, ignorée quand le slot est fourni) **et** passer le
+  vrai contenu via `<p slot="text">`, puis annuler sa marge avec
+  `dsfr-highlight p { margin: 0 }`.
