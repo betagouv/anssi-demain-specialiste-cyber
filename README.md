@@ -16,7 +16,7 @@ Afin de s’assurer que chaque commit respecte les règles d’usage de l’équ
 
 ### Créer une migration KNEX
 
-On peut créer de nouveaux fichier de migration via un script NPM :
+On peut créer de nouveaux fichiers de migration via un script NPM :
 
 ```shell
 cd back
@@ -46,7 +46,7 @@ $ pnpm install --frozen-lockfile
 - Sauvegarder les empreintes des secrets pour le hachage via la console d'administration
 
 ```shell
-$ npm run admin:dev
+$ pnpm admin:dev
 > await admin.sauvegardeLesEmpreintesDesSecretsDeHachage()
 > .exit
 ```
