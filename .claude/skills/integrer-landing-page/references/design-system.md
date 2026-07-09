@@ -34,8 +34,12 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
   `--bouton-primaire-couleur-fond` (#000091)… + variables de thème DSFR
   (`--text-title-blue-france`, `--background-alt-blue-france`,
   `--background-alt-blue-cumulus`, `--grey-50-1000`…).
-- Classes utilitaires DSFR (`fr-text--lead`, `fr-container`…) et classes DSC
-  (`titre-alternatif-xs`…) disponibles globalement.
+- Classes utilitaires DSFR (`fr-text--lead`, `fr-text--lg`, `fr-container`…) et
+  classes de typo DSC qui mappent les noms Figma : `.texte-article-lg` (18/28,
+  « LG - Texte article »), `.texte-standard-md` (16/24, « MD - Texte standard »),
+  `.texte-detail-sm` (14/24) — elles incluent déjà `margin: 0 0 24px`. Plus
+  `.titre-alternatif-xs`. Les titres `h1`–`h6` sont stylés globalement
+  (voir `front/src/style/_standard.scss`).
 
 ## Assets
 - Emplacement disque : `front/statique/assets/` (images dans `.../images/`).
@@ -44,3 +48,20 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
 - ⚠️ Avant d'enregistrer une image tirée de Figma, **demander à l'utilisateur le
   nom de fichier et le répertoire**. Défaut proposé :
   `front/statique/assets/images/` (il choisit le sous-dossier et le nom).
+- ⚠️ **SVG exportés de Figma** : ils arrivent souvent avec
+  `preserveAspectRatio="none" width="100%" height="100%"` → ils s'étirent pour
+  remplir leur boîte (picto déformé). Normaliser la balise `<svg>` en dimensions
+  fixes (ex. `width="80" height="80"` + le `viewBox` d'origine), comme les pictos
+  qui fonctionnent (`/assets/images/cej/*.svg`).
+
+## Pièges fréquents
+- **Collision de nom de classe** : les styles de `front/src/style/` (encarts,
+  pages) sont **globaux et non scopés**. Une classe générique dans un composant
+  (ex. `.chiffres-cles`) hérite alors des styles d'un encart existant
+  (`_encart-chiffres-cles.scss` : fond bleu + padding). Utiliser des noms **distinctifs**
+  dans les composants (ex. `.cartes-cles`, `.paragraphes`) ou vérifier avant
+  (`grep -rE '\.<classe>' front/src/style`).
+- Le `<style>` d'un composant Svelte est scopé (hash) → il gagne en spécificité
+  sur une règle globale de même classe, mais **n'annule pas** les propriétés qu'il
+  ne redéclare pas (le fond / le padding globaux continuent de fuiter). D'où :
+  préférer un nom unique plutôt qu'une surcharge partielle.
