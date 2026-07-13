@@ -12,6 +12,7 @@
   import CommentParticiper from './CommentParticiper.svelte';
   import Temoignages from './Temoignages.svelte';
   import DeclarerUneAction from './DeclarerUneAction.svelte';
+  import PlusDeCtf from './PlusDeCtf.svelte';
 </script>
 
 <Presentation />
@@ -20,3 +21,4 @@
 <CommentParticiper />
 <Temoignages />
 <DeclarerUneAction />
+<PlusDeCtf />
