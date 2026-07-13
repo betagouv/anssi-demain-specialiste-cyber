@@ -23,7 +23,12 @@ block heros
                 href="https://fcsc.fr/fr/"
                 blank
             )
-        img.illustration(slot="illustration" src="/assets/images/passe-ton-hack-d-abord/hero.png" alt="")
+        picture.illustration-conteneur(slot="illustration")
+            source(
+                srcset="/assets/images/passe-ton-hack-d-abord/hero-logo.png"
+                media="(min-width: 992px)"
+            )
+            img.illustration(src="/assets/images/passe-ton-hack-d-abord/hero.png" alt="")
 
 block contenu
     dsc-passe-ton-hack-d-abord

@@ -183,7 +183,7 @@
     }
 
     &.clair {
-      background: var(--background-alt-blue-france);
+      background: var(--heros-fond, var(--background-alt-blue-france));
 
       .conteneur {
         padding: 1px 0 0;

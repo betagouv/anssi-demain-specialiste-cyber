@@ -2,6 +2,11 @@
 
 .page-passe-ton-hack-d-abord {
   dsc-heros {
+    @include a-partir-de(lg) {
+      --heros-fond: url('/assets/images/passe-ton-hack-d-abord/hero-fond.jpg')
+        center / cover no-repeat;
+    }
+
     h1.titre-alternatif-xs {
       margin: 0 0 12px;
     }
@@ -22,12 +27,24 @@
       margin-bottom: 40px;
     }
 
+    .illustration-conteneur {
+      display: contents;
+    }
+
     img.illustration {
       display: block;
       width: 100%;
       max-width: 36.75rem;
       height: auto;
       margin-bottom: 48px;
+
+      @include a-partir-de(lg) {
+        align-self: center;
+        margin-top: -3rem;
+        margin-bottom: 0;
+        margin-inline: auto;
+        max-width: 27.25rem;
+      }
     }
   }
 }
