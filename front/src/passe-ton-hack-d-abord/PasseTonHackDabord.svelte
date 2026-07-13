@@ -8,7 +8,9 @@
 <script lang="ts">
   import Presentation from './Presentation.svelte';
   import Avantages from './Avantages.svelte';
+  import Communaute from './Communaute.svelte';
 </script>
 
 <Presentation />
 <Avantages />
+<Communaute />
