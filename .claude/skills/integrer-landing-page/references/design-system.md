@@ -119,3 +119,12 @@ largeur » au-dessus des deux colonnes).
   `text="…"` (valeur factice, ignorée quand le slot est fourni) **et** passer le
   vrai contenu via `<p slot="text">`, puis annuler sa marge avec
   `dsfr-highlight p { margin: 0 }`.
+- **`dsfr-card`** : les zones optionnelles sont **gardées par un attribut `has-*`**
+  (booléen). Fournir la prop seule ne suffit pas — il faut aussi lever le flag,
+  sinon la zone ne s'affiche pas. Le plus fréquent : **`has-description`** (sans
+  lui la `description` n'apparaît pas). Idem `has-detail-start`/`detail-start`,
+  `has-detail-end`/`detail-end`, `has-badge`, `has-buttons`, `has-tag`,
+  `has-header-badge`. Autres props utiles : `href` (+ `enlarge` = carte entière
+  cliquable, `no-link` sinon), `blank` (→ `target="_blank"`, l'icône lien externe
+  remplace alors la flèche interne automatiquement, via le CSS DSFR `[target=_blank]`),
+  `markup` (niveau du titre, défaut `h3`), `size` (défaut `md`), `horizontal`, `src`/`alt`.
