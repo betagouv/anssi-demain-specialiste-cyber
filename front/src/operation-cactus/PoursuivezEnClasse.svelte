@@ -36,9 +36,17 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .poursuivez-en-classe {
     padding: 3.5rem 0 0;
+  }
+
+  @include a-partir-de(lg) {
+    .corps {
+      margin-inline: auto;
+      max-width: taille-pour-colonnes(8);
+    }
   }
 
   .corps {
