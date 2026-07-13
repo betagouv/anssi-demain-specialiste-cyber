@@ -17,3 +17,4 @@ export * from './selections/Selection.svelte';
 export * from './composants/MiseEnAvantKitCommunication.svelte';
 export * from './france-cybersecurity-challenge/FranceCybersecurityChallenge.svelte';
 export * from './operation-cactus/OperationCactus.svelte';
+export * from './passe-ton-hack-d-abord/PasseTonHackDabord.svelte';

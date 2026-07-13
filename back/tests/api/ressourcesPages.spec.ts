@@ -50,6 +50,7 @@ describe('Les ressources de page', () => {
     { route: '/metiers/1234', vue: 'metiers' },
     { route: '/non-autorise', vue: 'non-autorise' },
     { route: '/operation-cactus', vue: 'operation-cactus' },
+    { route: '/passe-ton-hack-d-abord', vue: 'passe-ton-hack-d-abord' },
     { route: '/selection-eleves', vue: 'selection-eleves' },
     { route: '/selection-enseignants', vue: 'selection-enseignants' },
     {
