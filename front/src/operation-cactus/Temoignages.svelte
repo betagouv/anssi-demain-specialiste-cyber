@@ -18,7 +18,7 @@
   @use '@style/points-de-rupture' as *;
 
   .temoignages {
-    padding: 3rem 0 3.5rem;
+    padding: 3rem 0 0;
   }
 
   .contenu {

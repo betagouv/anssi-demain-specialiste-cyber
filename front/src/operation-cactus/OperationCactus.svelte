@@ -10,9 +10,11 @@
   import Avantages from './Avantages.svelte';
   import PoursuivezEnClasse from './PoursuivezEnClasse.svelte';
   import Temoignages from './Temoignages.svelte';
+  import DeclarerUneAction from './DeclarerUneAction.svelte';
 </script>
 
 <Presentation />
 <Avantages />
 <PoursuivezEnClasse />
 <Temoignages />
+<DeclarerUneAction />
