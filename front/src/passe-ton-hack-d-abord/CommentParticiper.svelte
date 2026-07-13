@@ -82,6 +82,10 @@
     margin: 0;
     padding: 0;
     width: 100%;
+
+    @include a-partir-de(md) {
+      gap: 2rem;
+    }
   }
 
   .etape {
@@ -89,6 +93,38 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @include a-partir-de(md) {
+      column-gap: 1rem;
+      display: grid;
+      grid-template-areas: 'contenu indicateur media';
+      grid-template-columns: 1fr 6.75rem 1fr;
+
+      .etape-titre {
+        grid-area: contenu;
+      }
+
+      .indicateur {
+        grid-area: indicateur;
+        justify-self: start;
+      }
+
+      .etape-media {
+        grid-area: media;
+      }
+
+      .etape-media--3 {
+        margin-top: 3rem;
+      }
+
+      &:nth-child(even) {
+        grid-template-areas: 'media indicateur contenu';
+
+        .indicateur {
+          justify-self: end;
+        }
+      }
+    }
   }
 
   .indicateur {
