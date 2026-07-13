@@ -20,7 +20,7 @@
         <dsfr-card
           title={'Le CSAW Europe « Red Team Competition » - Épreuve lycéens'}
           description="L’épreuve «&#8239;Red Team Competition&#8239;» est dédiée aux lycéen(ne)s, avec l’objectif de sensibiliser les jeunes aux métiers de la sécurité informatique et de susciter des vocations."
-          href="#"
+          href="https://esisar.grenoble-inp.fr/fr/recherche/epreuve-red-team"
           blank
           enlarge
           has-description
@@ -28,7 +28,7 @@
         <dsfr-card
           title="Le Breizh CTF"
           description="Le BreizhCTF est une compétition de sécurité informatique de type CTF (Capture the flag) imaginée par deux spécialistes de la cybersécurité, @_SaxX_ et @kaluche_, et organisée par l’agence Bretagne Next."
-          href="#"
+          href="https://www.breizhctf.com/"
           blank
           enlarge
           has-description
