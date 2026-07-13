@@ -6,10 +6,12 @@
     <div class="contenu">
       <h2 class="titre">Témoignages</h2>
       <div class="video">
-        <img
-          src="/assets/images/passe-ton-hack-d-abord/temoignages/video-placeholder.jpg"
-          alt="Témoignage vidéo d’élèves participant au challenge"
-        />
+        <a href="https://www.youtube.com/watch?v=weCTYG3lFN0">
+          <img
+            src="/assets/images/passe-ton-hack-d-abord/temoignages/video-placeholder.jpg"
+            alt="Témoignage vidéo d’élèves participant au challenge"
+          />
+        </a>
       </div>
     </div>
   </dsfr-container>
@@ -21,7 +23,6 @@
 
   .temoignages {
     padding-top: 3.5rem;
-
 
     @include a-partir-de(lg) {
       margin: auto;
