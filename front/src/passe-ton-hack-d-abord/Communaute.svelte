@@ -33,6 +33,7 @@
   }
 
   .encart {
+    justify-content: center;
     align-items: flex-start;
     display: flex;
     gap: 0.5rem;
