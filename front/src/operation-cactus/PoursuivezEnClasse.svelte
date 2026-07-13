@@ -38,7 +38,7 @@
   @use '@style/points-de-rupture' as *;
 
   .poursuivez-en-classe {
-    padding: 3.5rem 0;
+    padding: 3.5rem 0 0;
   }
 
   .corps {
