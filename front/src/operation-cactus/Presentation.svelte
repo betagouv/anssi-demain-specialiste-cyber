@@ -151,6 +151,14 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+
+      dsfr-tile {
+        flex: 1;
+      }
+    }
   }
 
   .paragraphes p:last-child {
