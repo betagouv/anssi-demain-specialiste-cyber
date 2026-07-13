@@ -72,6 +72,27 @@
     h2 {
       margin: 0;
     }
+
+    @include a-partir-de(md) {
+      display: grid;
+      grid-template-areas:
+        'titre titre'
+        'liste illustration';
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+
+      h2 {
+        grid-area: titre;
+      }
+
+      .liste {
+        grid-area: liste;
+      }
+
+      .illustration {
+        grid-area: illustration;
+      }
+    }
   }
 
   .illustration {
