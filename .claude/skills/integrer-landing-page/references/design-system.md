@@ -41,6 +41,50 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
   `.titre-alternatif-xs`. Les titres `h1`–`h6` sont stylés globalement
   (voir `front/src/style/_standard.scss`).
 
+## Grille & largeurs max (surtout desktop `lg`/`xl`)
+
+Deux niveaux distincts — ne pas les confondre :
+
+### 1. Largeur max de page → `dsfr-container` (DSFR)
+La largeur max + le padding horizontal + le centrage de la page sont fournis par le
+`dsfr-container` (le `.fr-container` du DSFR, largeurs calées sur les breakpoints DSFR).
+**Ne pas recoder** de `max-width` de container à la main : envelopper chaque section
+dans `<dsfr-container>` (comme le font toutes les sections existantes).
+
+### 2. Grille custom 12 colonnes → `front/src/style/_grille.scss`
+Pour **borner un bloc à un nombre de colonnes** *à l'intérieur* du container (typiquement
+en desktop), utiliser la fonction `taille-pour-colonnes($n)` : elle renvoie la largeur
+de `n` colonnes sur 12 (gouttière DSFR de 1rem).
+
+- Importer : `@use '@style/grille' as *;`
+- L'appliquer en `max-width`, avec `margin-inline: auto` pour centrer, aux breakpoints
+  desktop (`lg`, `xl`).
+
+```scss
+@use '@style/grille' as *;
+
+.bloc-texte {
+  margin-inline: auto;
+
+  @include a-partir-de(lg) {
+    max-width: taille-pour-colonnes(10);   // 10/12 colonnes
+  }
+  @include a-partir-de(xl) {
+    max-width: taille-pour-colonnes(8);    // resserré à 8/12 en très large
+  }
+}
+```
+
+Exemples réels : `PresentationCyberEnjeux.svelte`, `ResumeFranceCybersecurityChallenge.svelte`,
+`MesJeux.svelte`, `FormulaireJeu.svelte`.
+
+### 3. Deux colonnes contenu | illustration → classe partagée
+`front/src/style/_contenu-deux-colonnes.scss` définit une classe **globale**
+`.contenu-deux-colonnes` (contenu | illustration, empilé en mobile → `1fr 1fr` à `md`,
+variante `.illustration-au-dessus` pour inverser l'ordre en mobile). La réutiliser plutôt
+que recoder une grille deux-colonnes, sauf besoin spécifique (ex. une ligne « titre pleine
+largeur » au-dessus des deux colonnes).
+
 ## Assets
 - Emplacement disque : `front/statique/assets/` (images dans `.../images/`).
 - Référencés dans le HTML / Pug / SCSS par `/assets/…`.
