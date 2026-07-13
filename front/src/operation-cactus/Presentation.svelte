@@ -124,12 +124,23 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .presentation {
     display: flex;
     flex-direction: column;
     gap: 3rem;
     padding: 3.5rem 0;
+  }
+
+  @include a-partir-de(lg) {
+    .intro,
+    .cartes-cles,
+    .paragraphes,
+    .partenaires {
+      margin-inline: auto;
+      max-width: taille-pour-colonnes(8);
+    }
   }
 
   .intro {
