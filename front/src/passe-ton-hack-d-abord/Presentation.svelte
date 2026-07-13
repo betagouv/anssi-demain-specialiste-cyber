@@ -54,6 +54,7 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .presentation {
     padding: 1.5rem 0 4.5rem;
@@ -64,6 +65,11 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+
+    @include a-partir-de(lg) {
+      margin: auto;
+      max-width: taille-pour-colonnes(8);
+    }
 
     > *:not(dsfr-button) {
       width: 100%;
