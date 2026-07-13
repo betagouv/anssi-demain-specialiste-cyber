@@ -11,6 +11,7 @@
   import Communaute from './Communaute.svelte';
   import CommentParticiper from './CommentParticiper.svelte';
   import Temoignages from './Temoignages.svelte';
+  import DeclarerUneAction from './DeclarerUneAction.svelte';
 </script>
 
 <Presentation />
@@ -18,3 +19,4 @@
 <Communaute />
 <CommentParticiper />
 <Temoignages />
+<DeclarerUneAction />
