@@ -56,6 +56,7 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .comment-participer {
     padding-top: 3.5rem;
@@ -85,6 +86,10 @@
 
     @include a-partir-de(md) {
       gap: 2rem;
+    }
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
     }
   }
 

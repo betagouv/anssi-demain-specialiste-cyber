@@ -17,9 +17,16 @@
 
 <style lang="scss">
   @use '@style/points-de-rupture' as *;
+  @use '@style/grille' as *;
 
   .temoignages {
     padding-top: 3.5rem;
+
+
+    @include a-partir-de(lg) {
+      margin: auto;
+      max-width: taille-pour-colonnes(6);
+    }
   }
 
   .contenu {
