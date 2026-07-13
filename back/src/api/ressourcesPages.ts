@@ -39,6 +39,7 @@ const pages: Page[] = [
   { route: '/non-autorise', protegee: false },
   { route: '/nouveau-jeu', protegee: true },
   { route: '/operation-cactus', protegee: false },
+  { route: '/passe-ton-hack-d-abord', protegee: false },
   { route: '/selection-eleves', protegee: false },
   { route: '/selection-enseignants', protegee: false },
   { route: '/france-cybersecurity-challenge', protegee: false },
