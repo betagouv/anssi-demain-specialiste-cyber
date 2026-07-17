@@ -5,11 +5,13 @@
   <dsfr-container>
     <div class="contenu">
       <h2>Témoignages</h2>
-      <img
-        class="miniature-video"
-        src="/assets/images/operation-cactus/temoignage-johanna-brousse.jpg"
-        alt="Johanna Brousse, vice-procureur, chef de la section de lutte contre la cybercriminalité (JUNALCO)"
-      />
+      <a href="https://www.youtube.com/watch?v=CcRWVS8OkVM">
+        <img
+          class="miniature-video"
+          src="/assets/images/operation-cactus/temoignage-johanna-brousse.jpg"
+          alt="Johanna Brousse, vice-procureur, chef de la section de lutte contre la cybercriminalité (JUNALCO)"
+        />
+      </a>
     </div>
   </dsfr-container>
 </div>
