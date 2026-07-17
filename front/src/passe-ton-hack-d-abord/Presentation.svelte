@@ -46,7 +46,7 @@
         label="Inscrire mes élèves"
         kind="primary"
         markup="a"
-        href="https://fcsc.fr/fr/"
+        href="https://partage02.magistere.apps.education.fr/course/section.php?id=2066"
       ></dsfr-button>
     </div>
   </dsfr-container>
@@ -58,6 +58,10 @@
 
   .presentation {
     padding: 1.5rem 0 4.5rem;
+
+    @include a-partir-de(lg) {
+      padding-top: 4.5rem;
+    }
   }
 
   .contenu {
