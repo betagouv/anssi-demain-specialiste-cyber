@@ -28,7 +28,8 @@
         label="Découvrez les ressources pour sensibiliser"
         kind="primary"
         markup="a"
-        href="#ressources"
+        href="/selection-enseignants#sensibiliser"
+        target="_blank"
       ></dsfr-button>
     </div>
   </dsfr-container>
