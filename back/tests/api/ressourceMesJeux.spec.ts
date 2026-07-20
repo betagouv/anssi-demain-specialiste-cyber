@@ -92,15 +92,18 @@ describe('La ressource de mes jeux', () => {
       expect(reponse.status).toEqual(401);
     });
 
-    it("retourne un 500 si on échoue à téléverser les photos", async () => {
+    it('retourne un 500 si on échoue à téléverser les photos', async () => {
       adaptateurTeleversement.sauvegarde = () => {
-        throw new Error("Echec sauvegarde")
-      }
+        throw new Error('Echec sauvegarde');
+      };
 
-      const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
+      const reponse = await executeLaRequete(
+        serveur,
+        uneRequeteDeJeuValide().construis(),
+      );
 
       expect(reponse.status).toEqual(500);
-    })
+    });
 
     it("ajoute un jeu dans l'entrepot des jeux", async () => {
       await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
@@ -860,6 +863,7 @@ describe('La ressource de mes jeux', () => {
         prenom: '',
         nom: '',
         siretEntite: '',
+        pixelDeSuiviAccepté: false,
       });
 
       await entrepotJeux.ajoute(
