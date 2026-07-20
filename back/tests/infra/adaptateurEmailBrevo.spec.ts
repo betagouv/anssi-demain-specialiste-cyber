@@ -33,6 +33,7 @@ describe("L'adaptateur d'email brevo", () => {
       prenom: 'Homer',
       nom: 'Simpsons',
       infolettreAcceptee: true,
+      pixelDeSuiviAccepté: true,
     });
 
     expect(urlAppelee).toEqual('https://mon-expediteur-de-mail/contacts');
@@ -43,6 +44,7 @@ describe("L'adaptateur d'email brevo", () => {
       attributes: {
         PRENOM: 'Homer',
         NOM: 'Simpsons',
+        _PIXEL_TRACKING_CONSENT: true,
       },
     });
     expect(configEnvoyee).toStrictEqual({

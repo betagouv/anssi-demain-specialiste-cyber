@@ -18,6 +18,7 @@
 
   let infolettreAcceptee = $state(false);
   let cguAcceptees = $state(false);
+  let pixelDeSuiviAccepté = $state(false);
 
   let formulaire: HTMLFormElement;
   let enCoursEnvoi = $state(false);
@@ -27,6 +28,7 @@
         enCoursEnvoi = true;
         await axios.post('/api/utilisateurs', {
           infolettreAcceptee,
+          pixelDeSuiviAccepté,
           token,
         });
         window.location.href = '/oidc/connexion';
@@ -109,6 +111,14 @@
           {TITRE_DSC_SECABLE}.
         </span>
       </dsfr-checkbox>
+      <dsfr-checkbox
+        id="pixelDeSuiviAccepte"
+        name="pixelDeSuiviAccepte"
+        status="default"
+        label="J'accepte que l'ouverture des emails qui me sont adressés puisse être mesurée afin d'en améliorer la pertinence."
+        value={pixelDeSuiviAccepté}
+        onvaluechanged={(e: CustomEvent) => (pixelDeSuiviAccepté = e.detail)}
+      ></dsfr-checkbox>
 
       <dsfr-button
         label="Créer mon compte"

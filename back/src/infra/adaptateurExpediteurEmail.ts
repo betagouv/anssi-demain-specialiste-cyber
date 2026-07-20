@@ -24,11 +24,13 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
     prenom,
     nom,
     infolettreAcceptee,
+    pixelDeSuiviAccepté,
   }: {
     email: string;
     prenom: string;
     nom: string;
     infolettreAcceptee: boolean;
+    pixelDeSuiviAccepté: boolean;
   }) {
     try {
       await this.posteurtHttp(
@@ -40,6 +42,7 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
           attributes: {
             PRENOM: prenom,
             NOM: nom,
+            _PIXEL_TRACKING_CONSENT: pixelDeSuiviAccepté,
           },
         },
         {
@@ -88,16 +91,20 @@ export class AdaptateurEmailConsole implements ExpediteurEmail {
     prenom,
     nom,
     infolettreAcceptee,
+    pixelDeSuiviAccepté,
   }: {
     email: string;
     prenom: string;
     nom: string;
     infolettreAcceptee: boolean;
+    pixelDeSuiviAccepté: boolean;
   }) {
     // eslint-disable-next-line no-console
     console.log(
       `On crée le compte pour l'utilisateur ${email} avec prénom ${prenom} et nom ${nom} avec l'infolettre ${infolettreAcceptee}`,
     );
+    // eslint-disable-next-line no-console
+    console.log(`qui consent au pixel de suivi : ${pixelDeSuiviAccepté}`);
   }
 
   async envoieEmailBienvenue({
