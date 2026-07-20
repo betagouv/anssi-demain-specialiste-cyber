@@ -3,14 +3,14 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { creeServeur } from '../../src/api/dsc';
+import { CompteCree } from '../../src/bus/evenements/compteCree/compteCree';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { CompteCree } from '../../src/bus/evenements/compteCree/compteCree';
+import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -19,6 +19,7 @@ describe('La ressource utilisateur', () => {
   let adaptateurJWT: AdaptateurJWT;
   const donneesUtilisateur = {
     infolettreAcceptee: true,
+    pixelDeSuiviAccepté: true,
     token:
       JSON.stringify({
         email: 'jeanne.dupont@user.com',
@@ -93,6 +94,7 @@ describe('La ressource utilisateur', () => {
       expect(evenement!.prenom).toBe('Jeanne');
       expect(evenement!.nom).toBe('Dupont');
       expect(evenement!.infolettreAcceptee).toBe(true);
+      expect(evenement!.pixelDeSuiviAccepté).toBe(true);
     });
   });
 
@@ -110,9 +112,22 @@ describe('La ressource utilisateur', () => {
       );
     });
 
+    it("valide l'acceptation du pixel de suivi", async () => {
+      const reponse = await request(serveur)
+        .post('/api/utilisateurs')
+        .send({
+          ...donneesUtilisateur,
+          pixelDeSuiviAccepté: 12,
+        });
+      expect(reponse.status).toBe(400);
+      expect(reponse.body.erreur).toBe(
+        "L'acceptation du pixel de suivi est invalide",
+      );
+    });
+
     describe('valide le token', () => {
       it("lorsqu'il est absent", async () => {
-        const donnees = { infolettreAcceptee: true };
+        const donnees = { infolettreAcceptee: true, pixelDeSuiviAccepté: true };
 
         const reponse = await request(serveur)
           .post('/api/utilisateurs')

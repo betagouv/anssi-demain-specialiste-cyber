@@ -4,6 +4,7 @@ interface InformationsCreationUtilisateur {
   nom: string;
   siretEntite: string;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepté: boolean;
 }
 
 export class Utilisateur {
@@ -12,6 +13,7 @@ export class Utilisateur {
   nom: string;
   infolettreAcceptee: boolean;
   siretEntite: string;
+  pixelDeSuiviAccepté: boolean;
 
   constructor({
     email,
@@ -19,11 +21,13 @@ export class Utilisateur {
     nom,
     infolettreAcceptee,
     siretEntite,
+    pixelDeSuiviAccepté,
   }: InformationsCreationUtilisateur) {
     this.email = email;
     this.prenom = prenom;
     this.nom = nom;
     this.infolettreAcceptee = infolettreAcceptee;
     this.siretEntite = siretEntite;
+    this.pixelDeSuiviAccepté = pixelDeSuiviAccepté;
   }
 }

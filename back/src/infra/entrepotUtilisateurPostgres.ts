@@ -11,6 +11,7 @@ type DonneesUtilisateurEnClair = {
   nom: string;
   siret: string;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepte?: boolean;
 };
 
 type UtilisateurBDD = {
@@ -37,7 +38,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
 
   async ajoute(utilisateur: Utilisateur): Promise<void> {
     await this.knex('utilisateurs').insert(
-      this.utilisateurBDDAvecDonneesChiffrees(utilisateur)
+      this.utilisateurBDDAvecDonneesChiffrees(utilisateur),
     );
   }
 
@@ -75,11 +76,12 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
       nom: donnees.nom,
       prenom: donnees.prenom,
       siretEntite: donnees.siret,
+      pixelDeSuiviAccepté: donnees.pixelDeSuiviAccepte ?? true,
     });
   }
 
   private utilisateurBDDAvecDonneesChiffrees(
-    utilisateur: Utilisateur
+    utilisateur: Utilisateur,
   ): UtilisateurBDD {
     const donneesEnClair: DonneesUtilisateurEnClair = {
       email: utilisateur.email,
@@ -87,6 +89,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
       nom: utilisateur.nom,
       siret: utilisateur.siretEntite,
       infolettreAcceptee: utilisateur.infolettreAcceptee,
+      pixelDeSuiviAccepte: utilisateur.pixelDeSuiviAccepté,
     };
     const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
     return {
@@ -96,7 +99,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   }
 
   private dechiffreDonneesUtilisateur(
-    utilisateur: UtilisateurBDD
+    utilisateur: UtilisateurBDD,
   ): DonneesUtilisateurEnClair {
     const { donnees } = utilisateur;
     return this.adaptateurChiffrement.dechiffre(donnees);
