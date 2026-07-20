@@ -4,5 +4,6 @@ export class CompteCree {
     public readonly prenom: string,
     public readonly nom: string,
     public readonly infolettreAcceptee: boolean,
+    public readonly pixelDeSuiviAccepté: boolean,
   ) {}
 }
