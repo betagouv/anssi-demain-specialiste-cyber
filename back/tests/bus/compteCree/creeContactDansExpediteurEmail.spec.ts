@@ -19,7 +19,7 @@ describe("L'abonnement qui crée un contact", () => {
     };
 
     creeContactDansExpediteurEmail({ expediteurEmail })(
-      new CompteCree('jeanne.dupond@mail.fr', 'Jeanne', 'Dupont', true),
+      new CompteCree('jeanne.dupond@mail.fr', 'Jeanne', 'Dupont', true, true),
     );
 
     expect(contactCree).toStrictEqual({
@@ -27,6 +27,7 @@ describe("L'abonnement qui crée un contact", () => {
       prenom: 'Jeanne',
       nom: 'Dupont',
       infolettreAcceptee: true,
+      pixelDeSuiviAccepté: true,
     });
   });
 });

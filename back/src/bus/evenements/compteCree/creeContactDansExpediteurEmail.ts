@@ -11,12 +11,14 @@ export const creeContactDansExpediteurEmail = ({
     nom,
     prenom,
     infolettreAcceptee,
+    pixelDeSuiviAccepté,
   }: CompteCree) {
     await expediteurEmail.creeContact({
       email,
       nom,
       prenom,
       infolettreAcceptee,
+      pixelDeSuiviAccepté,
     });
   };
 };
