@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { fauxAdaptateurHachage } from '../../api/fauxObjets';
-import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage';
-import { consigneEvenementCompteCreeDansJournal } from '../../../src/bus/evenements/compteCree/consigneEvenementCompteCreeDansJournal';
 import { CompteCree } from '../../../src/bus/evenements/compteCree/compteCree';
+import { consigneEvenementCompteCreeDansJournal } from '../../../src/bus/evenements/compteCree/consigneEvenementCompteCreeDansJournal';
+import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage';
 import { AdaptateurJournal } from '../../../src/infra/adaptateurJournal';
+import { fauxAdaptateurHachage } from '../../api/fauxObjets';
 import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
@@ -24,7 +24,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
     await consigneEvenementCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHachage,
-    })(new CompteCree('u1@mail.com', 'dupont', 'jean', false));
+    })(new CompteCree('u1@mail.com', 'dupont', 'jean', false, false));
 
     expect(evenementRecu).toStrictEqual({
       type: 'NOUVEL_UTILISATEUR_INSCRIT',

@@ -47,6 +47,7 @@ describe('La ressource apres authentification OIDC', () => {
           prenom: '',
           nom: '',
           siretEntite: '',
+          pixelDeSuiviAccepté: true,
         });
         await entrepotUtilisateur.ajoute(jeanneDupont);
 

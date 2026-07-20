@@ -14,7 +14,7 @@ describe("L'abonnement qui crée un contact", () => {
     };
 
     envoieEmailDeBienvenue({ expediteurEmail })(
-      new CompteCree('jeanne.dupond@mail.fr', 'Jeanne', 'Dupont', true),
+      new CompteCree('jeanne.dupond@mail.fr', 'Jeanne', 'Dupont', true, false),
     );
 
     expect(donneesRecue).toStrictEqual({

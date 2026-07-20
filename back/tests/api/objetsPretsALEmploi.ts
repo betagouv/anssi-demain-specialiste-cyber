@@ -7,6 +7,7 @@ export const jeanneDupont = new Utilisateur({
   prenom: 'Jeanne',
   nom: 'Dupont',
   siretEntite: '',
+  pixelDeSuiviAccepté: true,
 });
 
 export const hectorDurant = new Utilisateur({
@@ -15,6 +16,7 @@ export const hectorDurant = new Utilisateur({
   nom: 'Durant',
   siretEntite: '13000766900018',
   infolettreAcceptee: true,
+  pixelDeSuiviAccepté: true,
 });
 
 export const cybercluedo = unJeu()
