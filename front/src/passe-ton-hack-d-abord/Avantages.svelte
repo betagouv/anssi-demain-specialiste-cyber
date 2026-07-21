@@ -86,6 +86,7 @@
       }
 
       .liste {
+        justify-content: center;
         grid-area: liste;
       }
 
