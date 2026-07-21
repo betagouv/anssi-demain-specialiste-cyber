@@ -9,7 +9,7 @@
       <ol class="etapes">
         <li class="etape">
           <div class="indicateur" aria-hidden="true">1</div>
-          <h3 class="etape-titre">
+          <h3 class="etape-titre fr-h5">
             Pré-inscription dès septembre chaque année
           </h3>
           <img
@@ -20,7 +20,7 @@
         </li>
         <li class="etape">
           <div class="indicateur" aria-hidden="true">2</div>
-          <h3 class="etape-titre">
+          <h3 class="etape-titre fr-h5">
             Composition des équipes sur le backoffice jusque début janvier
           </h3>
           <img
@@ -31,7 +31,7 @@
         </li>
         <li class="etape">
           <div class="indicateur" aria-hidden="true">3</div>
-          <h3 class="etape-titre">
+          <h3 class="etape-titre fr-h5">
             Fin janvier organisation du challenge durant 3 semaines
           </h3>
           <img
@@ -148,10 +148,6 @@
   }
 
   .etape-titre {
-    color: var(--text-title-grey);
-    font-size: 1.375rem;
-    font-weight: 700;
-    line-height: 1.75rem;
     margin: 0;
     width: 100%;
   }
