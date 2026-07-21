@@ -8,7 +8,7 @@
         <h2>Poursuivez en classe par une action de sensibilisation</h2>
         <img
           class="illustration-sensibilisation"
-          src="/assets/images/operation-cactus/sensibilisation.jpg"
+          src="/assets/images/operation-cactus/sensibilisation.avif"
           alt=""
         />
         <p class="texte-standard-md">
