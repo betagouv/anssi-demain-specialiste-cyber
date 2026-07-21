@@ -154,7 +154,7 @@
 
       <section id="presentation">
         <h2>Présentation du jeu</h2>
-        <p class="fr-text">{jeu.description}</p>
+        <p class="fr-text presentation-riche">{jeu.description}</p>
       </section>
 
       {#if possedeDesPhotos}
@@ -253,6 +253,10 @@
           font-weight: bold;
         }
       }
+    }
+
+    .presentation-riche {
+      white-space: pre-wrap;
     }
 
     .photos {
