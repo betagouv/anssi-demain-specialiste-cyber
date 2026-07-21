@@ -109,6 +109,13 @@
 
       .conteneur {
         padding: 1px 0 0;
+
+        .illustration {
+          display: flex;
+          align-self: stretch;
+          justify-self: stretch;
+          justify-content: center;
+        }
       }
 
       @include a-partir-de(lg) {
@@ -136,10 +143,7 @@
           }
 
           .illustration {
-            display: flex;
-            align-self: stretch;
             grid-area: illustration;
-            justify-self: stretch;
           }
         }
       }
@@ -151,6 +155,13 @@
 
       .conteneur {
         padding: 1px 0 0;
+
+        .illustration {
+          display: flex;
+          align-self: stretch;
+          justify-self: stretch;
+          justify-content: center;
+        }
       }
 
       @include a-partir-de(lg) {
@@ -178,10 +189,7 @@
           }
 
           .illustration {
-            display: flex;
-            align-self: stretch;
             grid-area: illustration;
-            justify-self: stretch;
           }
         }
       }
