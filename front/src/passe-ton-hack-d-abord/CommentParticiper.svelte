@@ -101,7 +101,7 @@
     gap: 2rem;
 
     @include a-partir-de(md) {
-      column-gap: 1rem;
+      column-gap: 2.5rem;
       display: grid;
       grid-template-areas: 'contenu indicateur media';
       grid-template-columns: 1fr 6.75rem 1fr;
