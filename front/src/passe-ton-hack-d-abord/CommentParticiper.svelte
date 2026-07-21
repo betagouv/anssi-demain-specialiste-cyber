@@ -48,6 +48,7 @@
           kind="primary"
           markup="a"
           target="_blank"
+          centered
           href="https://partage02.magistere.apps.education.fr/course/section.php?id=2066"
         ></dsfr-button>
       </div>
@@ -73,6 +74,14 @@
       margin: 0;
       text-align: center;
       width: 100%;
+    }
+
+    .action {
+      width: 100%;
+
+      dsfr-button {
+        width: 100%;
+      }
     }
   }
 
