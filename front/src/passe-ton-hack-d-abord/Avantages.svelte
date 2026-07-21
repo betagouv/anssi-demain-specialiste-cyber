@@ -19,7 +19,7 @@
             src="/assets/images/passe-ton-hack-d-abord/avantages/icone-bouclier.svg"
             alt=""
           />
-          <h3 class="item-titre">Formez vos élèves à la cybersécurité</h3>
+          <h3 class="item-titre fr-h6">Formez vos élèves à la cybersécurité</h3>
         </div>
         <hr />
         <div class="item">
@@ -28,7 +28,9 @@
             src="/assets/images/passe-ton-hack-d-abord/avantages/icone-eleve.svg"
             alt=""
           />
-          <h3 class="item-titre">Développez l’esprit d’équipe de vos élèves</h3>
+          <h3 class="item-titre fr-h6">
+            Développez l’esprit d’équipe de vos élèves
+          </h3>
         </div>
         <hr />
         <div class="item">
@@ -37,7 +39,7 @@
             src="/assets/images/passe-ton-hack-d-abord/avantages/icone-loupe.svg"
             alt=""
           />
-          <h3 class="item-titre">
+          <h3 class="item-titre fr-h6">
             Faites découvrir la diversité des métiers de la cybersécurité et du
             numérique
           </h3>
@@ -49,7 +51,9 @@
             src="/assets/images/passe-ton-hack-d-abord/avantages/icone-valide.svg"
             alt=""
           />
-          <h3 class="item-titre">Certifiez les compétences de vos élèves</h3>
+          <h3 class="item-titre fr-h6">
+            Certifiez les compétences de vos élèves
+          </h3>
         </div>
       </div>
     </div>
@@ -125,10 +129,6 @@
   }
 
   .item-titre {
-    color: var(--text-title-grey);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.75rem;
     margin: 0;
   }
 </style>
