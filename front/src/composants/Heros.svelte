@@ -17,7 +17,7 @@
   };
 
   type Props = {
-    variant: 'standard' | 'alternatif';
+    variant: 'standard' | 'alternatif' | 'clair';
     ariane: Segment[];
     avecFiltres?: boolean;
   };
@@ -143,47 +143,11 @@
           }
         }
       }
-
-      .conteneur {
-        padding: 1px 0 0;
-      }
-
-      @include a-partir-de(lg) {
-        .conteneur {
-          display: grid;
-          gap: 0 1.5rem;
-          grid-template-areas:
-            'ariane ariane'
-            'principal illustration';
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto 1fr;
-
-          dsfr-breadcrumb {
-            grid-area: ariane;
-          }
-
-          .principal {
-            align-self: center;
-            grid-area: principal;
-            margin-right: 1.5rem;
-          }
-
-          hgroup {
-            margin-bottom: 1.5rem;
-          }
-
-          .illustration {
-            display: flex;
-            align-self: stretch;
-            grid-area: illustration;
-            justify-self: stretch;
-          }
-        }
-      }
     }
 
     &.clair {
       background: var(--heros-fond, var(--background-alt-blue-france));
+      padding-bottom: 3rem;
 
       .conteneur {
         padding: 1px 0 0;
