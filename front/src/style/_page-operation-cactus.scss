@@ -3,7 +3,7 @@
 .page-operation-cactus {
   dsc-heros {
     h1.titre-alternatif-xs {
-      margin: 24px 0 12px;
+      margin: 0 0 12px;
       color: var(--text-title-blue-france);
     }
 
@@ -21,6 +21,10 @@
       flex-direction: column;
       gap: 1rem;
       margin-bottom: 40px;
+
+      @include a-partir-de(lg) {
+        margin-bottom: 0;
+      }
     }
 
     img.illustration {
@@ -28,7 +32,6 @@
       width: 100%;
       max-width: 36.75rem;
       height: auto;
-      margin-bottom: 48px;
     }
   }
 }
