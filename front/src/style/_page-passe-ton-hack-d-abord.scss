@@ -3,8 +3,16 @@
 .page-passe-ton-hack-d-abord {
   dsc-heros {
     @include a-partir-de(lg) {
-      --heros-fond: url('/assets/images/passe-ton-hack-d-abord/hero-fond.jpg')
-        center / cover no-repeat;
+      --heros-fond:
+        linear-gradient(
+          90deg,
+          #ececfe 0%,
+          #ececfe 50%,
+          #f5f5fe00 calc(50% + 600px),
+          #f5f5fe00 100%
+        ),
+        url('/assets/images/passe-ton-hack-d-abord/hero-fond.avif') right
+          center / 100% repeat;
     }
 
     h1.titre-alternatif-xs {
