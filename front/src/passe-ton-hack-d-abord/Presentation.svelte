@@ -32,20 +32,22 @@
           </p>
           <p class="texte-standard-md exergue-derniere">
             La meilleure équipe de lycée générale et technologique, celle de bac
-            professionnel, la meilleure équipe du supérieur et la première équipe
-            la plus mixte sont récompensées.
+            professionnel, la meilleure équipe du supérieur et la première
+            équipe la plus mixte sont récompensées.
           </p>
         </div>
       </dsfr-highlight>
 
       <p class="texte-standard-md accroche">
-        Vous aussi, faites participer vos élèves à “Passe Ton Hack d’Abord”&nbsp;!
+        Vous aussi, faites participer vos élèves à “Passe Ton Hack
+        d’Abord”&nbsp;!
       </p>
 
       <dsfr-button
         label="Inscrire mes élèves"
         kind="primary"
         markup="a"
+        target="_blank"
         href="https://partage02.magistere.apps.education.fr/course/section.php?id=2066"
       ></dsfr-button>
     </div>
