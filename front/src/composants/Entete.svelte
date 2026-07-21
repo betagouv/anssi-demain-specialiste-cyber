@@ -77,19 +77,50 @@
       active: cheminCourant === '/selection-eleves',
     },
     {
-      id: 'cyber-en-jeux',
-      label: 'CyberEnJeux',
-      type: 'link',
-      href: '/cyber-en-jeux',
+      id: 'dispositifs-phares',
+      label: 'Dispositifs Phares',
+      type: 'menu',
+      collapsable: true,
+      collapseId: 'dispositifs-phares',
       active:
-        cheminCourant === '/cyber-en-jeux' || cheminCourant.startsWith('/jeux'),
-    },
-    {
-      id: 'france-cybersecurity-challenge',
-      label: '🛡️ France Cybersecurity Challenge',
-      type: 'link',
-      href: '/france-cybersecurity-challenge',
-      active: cheminCourant === '/france-cybersecurity-challenge',
+        [
+          '/cyber-en-jeux',
+          '/france-cybersecurity-challenge',
+          '/operation-cactus',
+          '/passe-ton-hack-d-abord',
+        ].includes(cheminCourant) || cheminCourant.startsWith('/jeux'),
+      items: [
+        {
+          id: 'cyber-en-jeux',
+          label: 'CyberEnJeux',
+          type: 'link',
+          href: '/cyber-en-jeux',
+          active:
+            cheminCourant === '/cyber-en-jeux' ||
+            cheminCourant.startsWith('/jeux'),
+        },
+        {
+          id: 'france-cybersecurity-challenge',
+          label: '🛡️ France Cybersecurity Challenge',
+          type: 'link',
+          href: '/france-cybersecurity-challenge',
+          active: cheminCourant === '/france-cybersecurity-challenge',
+        },
+        {
+          id: 'operation-cactus',
+          label: 'Opération Cactus',
+          type: 'link',
+          href: '/operation-cactus',
+          active: cheminCourant === '/operation-cactus',
+        },
+        {
+          id: 'passe-ton-hack',
+          label: "Passe Ton Hack d'Abord",
+          type: 'link',
+          href: '/passe-ton-hack-d-abord',
+          active: cheminCourant === '/passe-ton-hack-d-abord',
+        },
+      ],
     },
     ...ajouteMenuSiConnecte({
       id: 'mes-jeux',
