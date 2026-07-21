@@ -7,22 +7,7 @@ packages:
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
-  - "@lab-anssi/ui-kit"
-  - fast-xml-parser@5.5.7
-  - fast-xml-builder@1.1.4
-  - handlebars@4.7.9
-  - picomatch@4.0.4
-  - path-to-regexp@0.1.13
-  - brace-expansion@5.0.5 || 1.1.13
-  - lodash@4.18.1
-  - vite@7.3.2
-  # Renovate security update: axios@1.18.0
-  - axios@1.15.0 || 1.18.0
-  # Renovate security update: qs@6.15.2
-  - qs@6.15.2
-  # Renovate security update: multer@2.2.0
-  - multer@2.2.0
-  # Renovate security update: vitest@3.2.6
-  - vitest@3.2.6
+  - '@lab-anssi/ui-kit'
+  - axios@1.18.0
 
 preferFrozenLockfile: true
