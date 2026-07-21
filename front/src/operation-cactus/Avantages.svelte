@@ -13,8 +13,8 @@
       <div class="liste">
         <div class="item">
           <h3 class="fr-h6">
-            Apprennent à identifier les signes d’un phishing / hameçonnage sur
-            les messageries ou les posts
+            Apprennent à identifier les signes d’un <em>phishing</em> / hameçonnage
+            sur les messageries ou les posts
           </h3>
           <p class="texte-standard-md">
             Trouvez les indices d’un message frauduleux pour apprendre à les
