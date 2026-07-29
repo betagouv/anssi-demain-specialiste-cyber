@@ -4,6 +4,7 @@
 <div class="cartes">
   <dsfr-card
     title="Mode «&#8239;Jeopardy&#8239;»"
+    hasDescription
     description="En mode «&#8239;Jeopardy&#8239;» à l'image du FCSC. Des épreuves sont proposées à l'ensemble des équipes et sont résolues par chaque équipe."
     noLink
     hasTag
@@ -17,6 +18,7 @@
   </dsfr-card>
   <dsfr-card
     title="Mode «&#8239;Attaque / Défense&#8239;»"
+    hasDescription
     description="Les équipes s'affrontent en réseau autour d'un système d'information : chacune se voit confiée la gestion d'un même système d'information dans laquelle des vulnérabilités patchables ont été introduites. La mission de chaque équipe : protéger son système et exploiter les vulnérabilités non corrigées des SI des équipes adverses !"
     noLink
     hasTag
