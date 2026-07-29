@@ -71,6 +71,7 @@
 
   <dsfr-card
     title={nom}
+    hasDescription
     description="Élaboré par {enumerationFrancaise(eleves)}"
     href={`/jeux/${id}`}
     src={photos.couverture.chemin}
