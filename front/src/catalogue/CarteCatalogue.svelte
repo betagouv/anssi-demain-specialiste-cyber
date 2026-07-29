@@ -45,6 +45,7 @@
   hasDetailEnd
   size="sm"
   {markup}
+  enlarge
 >
   <dsfr-badges-group slot="headerbadges" {badges} size="sm"></dsfr-badges-group>
   {#if ressource.estCertifiee}

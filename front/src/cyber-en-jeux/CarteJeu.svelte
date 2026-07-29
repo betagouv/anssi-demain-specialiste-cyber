@@ -79,6 +79,7 @@
     detailStartIcon="map-pin-2-line"
     hasDetailStart
     detailStart={nomEtablissement}
+    enlarge
   >
     {#if thematiques && thematiques.length > 0}
       <div slot="headerbadges">
