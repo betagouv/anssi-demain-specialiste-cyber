@@ -104,6 +104,7 @@
             horizontal
             horizontal-proportion="tier"
             hasDownloadIcon
+            enlarge
           ></dsfr-card>
         {/each}
       </div>
@@ -131,6 +132,7 @@
             horizontal
             horizontal-proportion="tier"
             hasDownloadIcon
+            enlarge
           ></dsfr-card>
         {/each}
       </div>
