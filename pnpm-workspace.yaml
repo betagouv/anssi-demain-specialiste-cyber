@@ -9,5 +9,7 @@ minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
   - axios@1.18.0
+  # Renovate security update: multer@2.3.0
+  - multer@2.3.0
 
 preferFrozenLockfile: true
