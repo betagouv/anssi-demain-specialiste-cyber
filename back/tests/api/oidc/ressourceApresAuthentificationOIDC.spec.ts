@@ -67,12 +67,13 @@ describe('La ressource apres authentification OIDC', () => {
 
       it("ajoute les informations de l'utilisateur à la session", async () => {
         adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'xx', accessToken: 'y' };
+          return { idToken: 'xx', accessToken: 'y', sujet: 'sujet' };
         };
         adaptateurOIDC.recupereInformationsUtilisateur = async (
           accessToken,
+          sujet,
         ) => {
-          if (accessToken === 'y') {
+          if (accessToken === 'y' && sujet === 'sujet') {
             return {
               prenom: 'Jeanne',
               nom: 'Dupont',
@@ -80,7 +81,9 @@ describe('La ressource apres authentification OIDC', () => {
               siret: '1234',
             };
           }
-          throw new Error('Aurait du être appelé avec le bon access token');
+          throw new Error(
+            'Aurait dû être appelé avec le bon access token et le bon sujet',
+          );
         };
 
         const reponse = await requeteGet();
@@ -105,7 +108,11 @@ describe('La ressource apres authentification OIDC', () => {
 
       it('ajoute un tokenId AgentConnect à la session', async () => {
         adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'tokenAgentConnect', accessToken: 'y' };
+          return {
+            idToken: 'tokenAgentConnect',
+            accessToken: 'y',
+            sujet: 'sujet',
+          };
         };
 
         const reponse = await requeteGet();

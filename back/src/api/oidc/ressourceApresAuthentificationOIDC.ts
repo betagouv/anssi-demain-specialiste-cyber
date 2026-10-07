@@ -16,10 +16,13 @@ const ressourceApresAuthentificationOIDC = ({
     }
 
     try {
-      const { accessToken, idToken } =
+      const { accessToken, idToken, sujet } =
         await adaptateurOIDC.recupereJeton(requete);
       const informationsUtilisateur =
-        await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
+        await adaptateurOIDC.recupereInformationsUtilisateur(
+          accessToken,
+          sujet,
+        );
       const { email } = informationsUtilisateur;
 
       if (!estAutorise(email, adaptateurEnvironnement.listeEmailsAutorises())) {
