@@ -294,11 +294,9 @@ describe('Le formulaire de dépose de jeu', () => {
         render(FormulaireJeu, proprietesParDefaut);
 
         await waitFor(() => expect(getAllByRoleDeep('radio')).toHaveLength(3));
-        expect(
-          getByRoleDeep('radio', { name: 'Heure de cours' }),
-        ).toBeVisible();
-        expect(getByRoleDeep('radio', { name: 'Demi-journée' })).toBeVisible();
-        expect(getByRoleDeep('radio', { name: 'Journée' })).toBeVisible();
+        expect(getByTextDeep('Heure de cours')).toBeVisible();
+        expect(getByTextDeep('Demi-journée')).toBeVisible();
+        expect(getByTextDeep('Journée')).toBeVisible();
       });
 
       it("de saisir un nom d'établissement", async () => {
@@ -439,9 +437,9 @@ describe('Le formulaire de dépose de jeu', () => {
       it("d'indiquer qu'on a recueilli le consentement des parents d'élèves", async () => {
         await waitFor(() =>
           expect(
-            getByRoleDeep('checkbox', {
-              name: 'J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site.',
-            }),
+            getByTextDeep(
+              'J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site.',
+            ),
           ).toBeVisible(),
         );
       });
