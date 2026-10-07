@@ -11,6 +11,7 @@ This file provides guidance to AI coding agents when working with code in this r
 All commands use `pnpm`. The project is a monorepo with `back` and `front` packages.
 
 ### Root-level (runs both packages)
+
 ```bash
 pnpm dev          # Start all services in dev mode
 pnpm build        # Build all packages
@@ -20,6 +21,7 @@ pnpm typecheck    # Type-check all packages
 ```
 
 ### Backend only
+
 ```bash
 pnpm --filter anssi-demain-specialiste-cyber-back dev        # Start dev server (starts DB via docker compose)
 pnpm --filter anssi-demain-specialiste-cyber-back test       # Run backend tests (also runs typecheck + lint)
@@ -29,6 +31,7 @@ pnpm --filter anssi-demain-specialiste-cyber-back cree-migration  # Create a new
 ```
 
 ### Frontend only
+
 ```bash
 pnpm --filter anssi-demain-specialiste-cyber-front dev    # Watch mode
 pnpm --filter anssi-demain-specialiste-cyber-front build  # Vite build
@@ -36,6 +39,7 @@ pnpm --filter anssi-demain-specialiste-cyber-front test   # Run frontend tests
 ```
 
 ### Running a single test file
+
 ```bash
 # From back/ directory
 pnpm vitest run tests/metier/jeu.spec.ts
@@ -47,6 +51,7 @@ pnpm vitest run tests/composants/MonComposant.spec.ts
 ## Architecture
 
 ### Monorepo structure
+
 - `back/` — Express.js + TypeScript server (Node ≥18)
 - `front/` — Svelte 5 SPA built with Vite
 
@@ -62,6 +67,7 @@ Organized into four layers:
 The server wires everything together in `serveur.ts`, which builds the `ConfigurationServeur` object (the dependency injection container) passed to `creeServeur`.
 
 **Key external data sources:**
+
 - PostgreSQL (via Docker, port 5435) — users and jeux
 - [Grist](https://getgrist.com/) — cyber resources, métiers, and teacher/student selections (read via API)
 
@@ -70,6 +76,7 @@ The server wires everything together in `serveur.ts`, which builds the `Configur
 ### Frontend (`front/src/`)
 
 Organized by feature:
+
 - **`catalogue/`** — Filterable catalogue of cyber resources fetched from the backend
 - **`cyber-en-jeux/`** — Showcase of teacher-created jeux with filtering
 - **`jeux/`** — Game creation/editing form (`FormulaireJeu/`), detail view, reactions, and "mes jeux" teacher dashboard
@@ -81,8 +88,10 @@ Organized by feature:
 State is managed with Svelte stores (`.store.ts` files). The frontend uses `@lab-anssi/ui-kit` (ANSSI design system).
 
 ### Testing
+
 - **Backend:** Vitest with `supertest` for HTTP integration tests. Tests live in `back/tests/` mirroring `back/src/`. The `pretest` script runs `typecheck` and `lint`.
 - **Frontend:** Vitest with `jsdom` and `@testing-library/svelte`. Setup file at `front/tests/vitest-setup.ts`.
 
 ### Environment setup
+
 Copy `back/.env.template` to `back/.env` and fill in required values. The local DB runs on port 5435 (see `docker-compose.yml`). Set `NODE_ENV=developpement` for local development.

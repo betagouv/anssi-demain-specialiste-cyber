@@ -33,7 +33,7 @@ describe('La ressource des ressources cyber', () => {
         description: 'La ressource 1',
         urlIllustration: 'http://monillu.png',
         estCertifiee: true,
-        lienExterne: 'http://lien-externe.com'
+        lienExterne: 'http://lien-externe.com',
       });
 
       const reponse = await request(serveur).get('/api/ressources-cyber');
@@ -50,7 +50,7 @@ describe('La ressource des ressources cyber', () => {
           description: 'La ressource 1',
           urlIllustration: 'http://monillu.png',
           estCertifiee: true,
-          lienExterne: 'http://lien-externe.com'
+          lienExterne: 'http://lien-externe.com',
         },
       ]);
     });

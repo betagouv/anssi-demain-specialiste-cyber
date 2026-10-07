@@ -16,6 +16,6 @@ export class EntrepotSecretHachagePostgres implements EntrepotSecretHachage {
 
   async tous(): Promise<SecretHachage[]> {
     const empreintes = await this.knex('secrets_hachage');
-    return empreintes.map(({version, empreinte}) => ({version, empreinte}));
+    return empreintes.map(({ version, empreinte }) => ({ version, empreinte }));
   }
 }

@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "allowJs": false
-  },
+  }
 }

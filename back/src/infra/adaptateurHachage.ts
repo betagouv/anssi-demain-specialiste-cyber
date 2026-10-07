@@ -29,7 +29,7 @@ export const fabriqueAdaptateurHachage = ({
 
     const hashFinal = secrets.reduce(
       (acc, { secret }) => hacheAvecUnSeulSecret(acc, secret),
-      valeur
+      valeur,
     );
 
     const version = secrets

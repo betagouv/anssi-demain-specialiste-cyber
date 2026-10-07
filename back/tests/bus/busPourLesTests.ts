@@ -12,35 +12,35 @@ export class MockBusEvenement extends BusEvenements {
   }
 
   aRecuUnEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
+    typeAttendu: ClasseDEvenementDeBus<T>,
   ) {
     if (this.evenementsRecus.find((e) => e instanceof typeAttendu)) return true;
 
     throw new Error(
       `Événement attendu non reçu. Reçu : ${this.evenementsRecus
         .map((e: EvenementDuBus) => e.constructor.name)
-        .join(' ')}`
+        .join(' ')}`,
     );
   }
 
   naPasRecuDEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
+    typeAttendu: ClasseDEvenementDeBus<T>,
   ) {
     if (this.evenementsRecus.find((e) => e instanceof typeAttendu)) {
       throw new Error(
         `Événement non attendu reçu. Événements reçus : ${this.evenementsRecus
           .map((e: EvenementDuBus) => e.constructor.name)
-          .join(', ')}`
+          .join(', ')}`,
       );
     }
     return true;
   }
 
   recupereEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
+    typeAttendu: ClasseDEvenementDeBus<T>,
   ) {
     return this.evenementsRecus.find(
-      (e: EvenementDuBus) => e instanceof typeAttendu
+      (e: EvenementDuBus) => e instanceof typeAttendu,
     ) as T | undefined;
   }
 }

@@ -16,8 +16,8 @@
 </script>
 
 <p>
-  <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout
-  comme celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
+  <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout comme
+  celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
   pour faire découvrir la cybersécurité à leurs élèves.
 </p>
 {#if $jeuEnEditionStore.temoignages}

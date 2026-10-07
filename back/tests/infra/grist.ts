@@ -11,9 +11,9 @@ export interface TableauGrist<LIGNE> {
   records: LIGNE[];
 }
 
-export class ConstructeurLigneGrist<LIGNE extends LigneGrist>
-  implements ConstructeurDeTest<LIGNE>
-{
+export class ConstructeurLigneGrist<
+  LIGNE extends LigneGrist,
+> implements ConstructeurDeTest<LIGNE> {
   _idLigne: number = 0;
   _fields: { [key: string]: Valeur } = {};
 

@@ -1,5 +1,5 @@
 export type GestionnaireDEvenement<T extends EvenementDuBus> = (
-  evenement: T
+  evenement: T,
 ) => Promise<void>;
 
 export type EvenementDuBus = object;
@@ -15,7 +15,7 @@ export class BusEvenements {
 
   abonne<T extends EvenementDuBus>(
     classeEvenement: ClasseDEvenementDeBus<T>,
-    gestionnaire: GestionnaireDEvenement<T>
+    gestionnaire: GestionnaireDEvenement<T>,
   ) {
     this.gestionnaires[classeEvenement.name] ??= [];
     this.gestionnaires[classeEvenement.name].push(gestionnaire);
@@ -23,7 +23,7 @@ export class BusEvenements {
 
   abonnePlusieurs<T extends EvenementDuBus>(
     classeEvenement: ClasseDEvenementDeBus<T>,
-    gestionnaires: GestionnaireDEvenement<T>[]
+    gestionnaires: GestionnaireDEvenement<T>[],
   ) {
     gestionnaires.forEach((h) => this.abonne(classeEvenement, h));
   }
@@ -37,7 +37,7 @@ export class BusEvenements {
           // eslint-disable-next-line no-console
           console.error(`Erreur lors du traitement de l'évènement`, e.message);
         });
-      }
+      },
     );
   }
 }

@@ -17,11 +17,10 @@ describe('le jeu', () => {
   });
 
   it("empêche une réaction d'être décrémentée lorsqu’elle n’est pas définie", () => {
-    cybercluedo.reactions = {}
+    cybercluedo.reactions = {};
 
     cybercluedo.decrementeReaction('feu');
 
     expect(cybercluedo.reactions['feu']).toBe(undefined);
   });
-
 });

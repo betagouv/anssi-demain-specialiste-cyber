@@ -6,8 +6,9 @@ tag `dsc-operation-cactus`). S'en inspirer, ainsi que de
 `france-cybersecurity-challenge` et `evenements`.
 
 ## Conventions de nommage (route `/<route>`)
+
 | Pièce                      | Chemin / valeur                                                 |
-|----------------------------|-----------------------------------------------------------------|
+| -------------------------- | --------------------------------------------------------------- |
 | Vue Pug                    | `back/vues/<route>.pug`                                         |
 | Classe body (`classePage`) | `page-<route>`                                                  |
 | Dossier front              | `front/src/<route>/`                                            |
@@ -15,15 +16,19 @@ tag `dsc-operation-cactus`). S'en inspirer, ainsi que de
 | Style                      | `front/src/style/_page-<route>.scss`, sélecteur `.page-<route>` |
 
 ## 1. Route — `back/src/api/ressourcesPages.ts`
+
 Ajouter dans le tableau `pages` :
+
 ```ts
 { route: '/<route>', protegee: false },
 ```
+
 - `protegee: true` → protégée par JWT, redirige vers `/connexion` si non connecté.
 - Le moteur mappe automatiquement `route` → vue `back/vues/<route>.pug`
   (`path.join(chemin, route sans '/')`). `chemin` sert aux sous-dossiers (ex. `annexes`).
 
 ## 2. Vue Pug — `back/vues/<route>.pug`
+
 ```pug
 extends fragments/base
 
@@ -50,7 +55,9 @@ block contenu
 
     block apres-contenu
 ```
+
 Points clés :
+
 - `block heros` est **déclaré dans `fragments/entete.pug`** (inclus par `base`) ;
   le surcharger dans la page pour le customiser. Sans surcharge → héros sombre par
   défaut avec `titrePage` / `descriptionPage`.
@@ -59,6 +66,7 @@ Points clés :
   `ariane` (Array), `avec-filtres` (Boolean).
 
 ## 3. Web component — `front/src/<route>/<Composant>.svelte`
+
 ```svelte
 <svelte:options customElement={{ tag: 'dsc-<route>', shadow: 'none' }} />
 
@@ -70,33 +78,42 @@ Points clés :
   <!-- sections -->
 </dsfr-container>
 ```
+
 - `shadow: 'none'` → les styles globaux (SCSS de la page) s'appliquent au contenu.
 - Pour recevoir des attributs depuis le Pug, déclarer `props` dans `customElement`
   (voir `front/src/composants/Heros.svelte`).
 
 ## 4. Export — `front/src/index.ts`
+
 ```ts
 export * from './<route>/<Composant>.svelte';
 ```
+
 Sans cet export, le custom element n'est pas enregistré → le tag reste inerte.
 
 ## 5. Styles — `front/src/style/_page-<route>.scss`
+
 ```scss
 @use 'points-de-rupture' as *;
 
-.page-<route> {
+.page-<route > {
 }
 ```
+
 Puis l'importer dans `front/src/index.scss` :
+
 ```scss
 @use 'style/page-<route>';
 ```
 
 ## 6. Test — `back/tests/api/ressourcesPages.spec.ts`
+
 Page publique → l'ajouter au `describe.each` des pages publiques :
+
 ```ts
 { route: '/<route>', vue: '<route>' },
 ```
+
 Page protégée → l'ajouter au `describe.each` du haut (vérifie 200 connecté / 302 sinon).
 
 ## Styliser le héros et reproduire des espacements exacts
