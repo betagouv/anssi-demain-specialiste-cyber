@@ -7,30 +7,19 @@ jobs:
   build:
     name: Construction du site
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Cloner le dépôt Git
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - name: Déterminer la version de Node.js à utiliser
-        run: |
-          echo "NODE_VERSION=$(./scripts/get-node-version.sh)" >> $GITHUB_ENV
-
-      - name: Utiliser la version Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - name: Installe Node.js, pnpm et les dépendances
+        uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
         with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Installe pnpm
-        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
-        with:
-          version: 10.24.0
-
-      - name: Installe les dépendances
-        run: pnpm install --frozen-lockfile
+          require-lockfile: true
+          node-version-file: '.nvmrc'
 
       - name: Vérfie le typage
         run: pnpm typecheck
