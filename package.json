@@ -28,10 +28,10 @@
     "admin:dev": "pnpm --filter anssi-demain-specialiste-cyber-back build && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
+    "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.71.0",
     "@typescript-eslint/parser": "^8.71.0",
-    "eslint": "^9.39.4",
+    "eslint": "^10.11.0",
     "globals": "^17.5.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
