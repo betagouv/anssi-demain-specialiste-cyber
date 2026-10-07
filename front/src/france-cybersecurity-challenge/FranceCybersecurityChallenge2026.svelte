@@ -49,7 +49,7 @@
           noLink={true}
           enlarge
           hasDescription={true}
-          description='Vous ne remplissez pas un ou plusieurs des critères ci-dessus ou vous ne souhaitez pas candidater pour intégrer la "Team France".'
+          description={'Vous ne remplissez pas un ou plusieurs des critères ci-dessus ou vous ne souhaitez pas candidater pour intégrer la "Team France".'}
           horizontal={true}
         >
         </dsfr-tile>

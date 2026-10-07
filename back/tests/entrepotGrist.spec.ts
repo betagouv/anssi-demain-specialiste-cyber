@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../src/infra/clientHttp';
 import { EntrepotGrist, ReponseGrist } from '../src/infra/entrepotGrist';
-import { FournisseurHorlogeDeTest } from './infra/fournisseurHorlogeDeTest';
 import { FournisseurHorloge } from '../src/infra/FournisseurHorloge';
+import { FournisseurHorlogeDeTest } from './infra/fournisseurHorlogeDeTest';
 
 class EntrepotGristGenerique extends EntrepotGrist<{ test: string }> {
   async tous(): Promise<{ test: string }[]> {

@@ -1,7 +1,7 @@
-import { Constructeur } from '../constructeur';
-import { Selection } from '../../src/metier/selection';
 import { randomUUID } from 'crypto';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
+import { Selection } from '../../src/metier/selection';
+import { Constructeur } from '../constructeur';
 
 class ConstructeurDeSelection implements Constructeur<Selection> {
   private id: string = randomUUID();

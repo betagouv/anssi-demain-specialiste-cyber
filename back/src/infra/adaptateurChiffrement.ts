@@ -51,7 +51,7 @@ export const adaptateurChiffrement = ({
         'chacha20-poly1305',
         clefSecrete,
         Buffer.from(iv, 'hex'),
-        { authTagLength: 16 }
+        { authTagLength: 16 },
       );
       dechiffreur.setAAD(Buffer.from(aad, 'hex'), {
         plaintextLength: donnees.length,

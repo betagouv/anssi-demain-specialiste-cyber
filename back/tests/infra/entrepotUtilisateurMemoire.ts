@@ -14,7 +14,7 @@ export class EntrepotUtilisateurMemoire
     this.utilisateurs.set(
       // Nous n'importons le fauxAdaptateurHachage de api/fauxObjets pour éviter un import cyclique
       `${utilisateur.email}-hache`,
-      utilisateur
+      utilisateur,
     );
   };
 

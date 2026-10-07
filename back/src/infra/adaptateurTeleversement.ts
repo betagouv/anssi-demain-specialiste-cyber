@@ -1,7 +1,7 @@
+import { MIMEType } from 'node:util';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
 import { Request } from 'express';
-import { MIMEType } from 'node:util';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 
@@ -23,9 +23,7 @@ export type AdaptateurTeleversement = {
   recupereTypeImage(buffer?: Buffer): 'image/png' | 'image/jpeg' | undefined;
 };
 
-export class AdaptateurDeTeleversementCellar
-  implements AdaptateurTeleversement
-{
+export class AdaptateurDeTeleversementCellar implements AdaptateurTeleversement {
   constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
   photosJeu(requete: Request): PhotosJeuTeleversees {
     const estUnFichierPhoto = (

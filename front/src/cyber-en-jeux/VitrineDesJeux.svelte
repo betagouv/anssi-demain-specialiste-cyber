@@ -1,11 +1,11 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { jeuxStore } from './stores/jeux.store';
-  import VitrineFiltres from './VitrineFiltres.svelte';
-  import { jeuxFiltres } from './stores/jeuxFiltres.store';
   import { construisLesJeux, type DonneesJeu } from '../jeu.type';
   import CarteJeu from './CarteJeu.svelte';
+  import { jeuxStore } from './stores/jeux.store';
+  import { jeuxFiltres } from './stores/jeuxFiltres.store';
+  import VitrineFiltres from './VitrineFiltres.svelte';
 
   let chargementEnCours = $state(false);
   let erreurChargement = $state(false);

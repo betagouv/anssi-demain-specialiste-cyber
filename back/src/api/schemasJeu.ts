@@ -1,8 +1,8 @@
 import z from 'zod';
-import { disciplines } from '../metier/referentiels/disciplines';
-import { classes } from '../metier/referentiels/classes';
-import { sequences } from '../metier/referentiels/sequence';
 import { categoriesDeJeux } from '../metier/referentiels/categorieDeJeux';
+import { classes } from '../metier/referentiels/classes';
+import { disciplines } from '../metier/referentiels/disciplines';
+import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 
 const chaineNonVide = (message: string) =>

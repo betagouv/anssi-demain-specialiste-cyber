@@ -1,8 +1,8 @@
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { Metier } from '../metier/metier';
-import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
-import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
+import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
+import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type MetierGrist = {
   id: number;

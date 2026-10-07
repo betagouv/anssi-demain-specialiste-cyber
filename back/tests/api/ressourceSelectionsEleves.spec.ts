@@ -1,12 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest';
-import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { Express } from 'express';
 import request from 'supertest';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { creeServeur } from '../../src/api/dsc';
-import { uneSelection } from '../metier/constructeurSelection';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
+import { uneSelection } from '../metier/constructeurSelection';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('La ressource sélection élèves', () => {
   let entrepotRessourcesCyber: EntrepotRessourcesCyberMemoire;

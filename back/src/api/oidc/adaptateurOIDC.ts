@@ -24,10 +24,10 @@ export interface AdaptateurOIDC {
   genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
   recupereJeton: (requete: Request) => Promise<JetonsOIDC>;
   recupereInformationsUtilisateur: (
-    accessToken: string
+    accessToken: string,
   ) => Promise<InformationsUtilisateur>;
   genereDemandeDeconnexion: (
-    idToken: string
+    idToken: string,
   ) => Promise<{ url: string; state: string }>;
 }
 
@@ -86,7 +86,7 @@ const recupereJeton = async (requete: Request) => {
   const token = await client.callback(
     configurationOidc.urlRedirectionApresAuthentification(),
     params,
-    { nonce, state }
+    { nonce, state },
   );
 
   if (!token.id_token || !token.access_token) {

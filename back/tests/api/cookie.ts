@@ -1,4 +1,5 @@
 import { Response } from 'supertest';
+
 interface Session {
   email?: string;
   token?: string;
@@ -26,7 +27,7 @@ const decodeSessionDuCookie = (reponse: Response, indiceHeader: number) => {
     const headerCookie = reponse.headers['set-cookie'];
     const cookieSession = enObjet(headerCookie[indiceHeader]);
     return JSON.parse(
-      Buffer.from(cookieSession.session as string, 'base64').toString()
+      Buffer.from(cookieSession.session as string, 'base64').toString(),
     );
   } catch {
     return undefined;
@@ -36,7 +37,7 @@ const decodeSessionDuCookie = (reponse: Response, indiceHeader: number) => {
 const encodeSession = (contenuSession: Session) => {
   const sessionEnBase64 = Buffer.from(
     JSON.stringify(contenuSession),
-    'utf-8'
+    'utf-8',
   ).toString('base64');
   return `session=${sessionEnBase64}`;
 };

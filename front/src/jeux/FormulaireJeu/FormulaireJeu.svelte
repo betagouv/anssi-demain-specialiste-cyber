@@ -28,6 +28,7 @@
   import { ValidateurInformationsGeneralesDuJeu } from '../ValidateurInformationsGeneralesDuJeu';
   import { ValidateurPhotosDuJeu } from '../ValidateurPhotosDuJeu';
   import { ValidateurPresentationDuJeu } from '../ValidateurPresentationDuJeu';
+  import AlerteEnvoie from './AlerteEnvoi.svelte';
   import EtapeEvaluation from './EtapeEvaluation.svelte';
   import EtapeInformationsGenerales from './EtapeInformationsGenerales.svelte';
   import EtapePhotos from './EtapePhotos.svelte';
@@ -43,7 +44,6 @@
     AdaptateurAnnuaireEducationNationale,
     type ReferentielEtablissement,
   } from './ReferentielEtablissement.js';
-  import AlerteEnvoie from './AlerteEnvoi.svelte';
 
   interface Props {
     mode: 'creation' | 'modification';

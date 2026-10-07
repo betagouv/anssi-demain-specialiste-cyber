@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
   import { jeuxFiltres } from './stores/jeuxFiltres.store';
+  import { rechercheParNiveau } from './stores/rechercheParNiveau.store';
 
   const casesACocher = $derived(
     $jeuxFiltres.niveaux.map((niveau) => ({

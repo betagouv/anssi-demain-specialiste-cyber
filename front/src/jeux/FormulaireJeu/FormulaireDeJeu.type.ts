@@ -6,6 +6,4 @@ export type EtapeDeposeJeu =
   | 'evaluation';
 
 export type EtapeModificationJeu =
-  | 'informations-generales'
-  | 'presentation'
-  | 'temoignages';
+  'informations-generales' | 'presentation' | 'temoignages';

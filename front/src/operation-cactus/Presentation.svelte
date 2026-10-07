@@ -5,12 +5,13 @@
   <dsfr-container>
     <div class="intro">
       <h2>
-        Le hameçonnage ou <em>phishing</em>, premier risque cyber du grand public
+        Le hameçonnage ou <em>phishing</em>, premier risque cyber du grand
+        public
       </h2>
       <p class="fr-text--lg">
-        L’opération «&nbsp;Cactus&nbsp;» est une campagne nationale qui a pour but
-        de sensibiliser aux risques de l’hameçonnage et à renforcer les réflexes
-        numériques.
+        L’opération «&nbsp;Cactus&nbsp;» est une campagne nationale qui a pour
+        but de sensibiliser aux risques de l’hameçonnage et à renforcer les
+        réflexes numériques.
       </p>
     </div>
   </dsfr-container>
@@ -18,7 +19,7 @@
   <dsfr-container>
     <div class="cartes-cles">
       <dsfr-tile
-        title={"2 541 945 élèves ont déjà participé à une Opération Cactus dans 4 768 établissements"}
+        title={'2 541 945 élèves ont déjà participé à une Opération Cactus dans 4 768 établissements'}
         no-link
         action-markup="false"
         markup-level="3"
@@ -30,7 +31,7 @@
         />
       </dsfr-tile>
       <dsfr-tile
-        title={"67 % des établissements ont engagé une action de sensibilisation après l’exercice"}
+        title={'67 % des établissements ont engagé une action de sensibilisation après l’exercice'}
         no-link
         action-markup="false"
         markup-level="3"

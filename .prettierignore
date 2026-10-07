@@ -1,0 +1,8 @@
+# Modèles contenant des placeholders qui ne sont pas du code valide avant instanciation.
+.agents/skills/integrer-landing-page/templates/
+
+# Fichier généré par pnpm.
+pnpm-lock.yaml
+
+# Données PostgreSQL locales.
+bdd-dsc/

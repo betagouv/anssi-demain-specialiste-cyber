@@ -1,5 +1,5 @@
-import { Request } from 'express';
 import { MIMEType } from 'node:util';
+import { Request } from 'express';
 import { assert, describe, expect, it } from 'vitest';
 import {
   fabriqueAdaptateurTeleversement,

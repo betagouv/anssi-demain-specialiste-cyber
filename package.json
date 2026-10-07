@@ -18,6 +18,8 @@
     "dev:front": "pnpm --filter anssi-demain-specialiste-cyber-front dev",
     "dev:back": "pnpm --filter anssi-demain-specialiste-cyber-back dev",
     "build": "pnpm -r build",
+    "format": "prettier --write --ignore-unknown '**/*' '!bdd-dsc' '!bdd-dsc/**'",
+    "format:check": "prettier --check --ignore-unknown '**/*' '!bdd-dsc' '!bdd-dsc/**'",
     "lint": "pnpm -r lint",
     "migre-bdd": "pnpm --filter anssi-demain-specialiste-cyber-back migre-bdd",
     "start": "pnpm --filter anssi-demain-specialiste-cyber-back start ",
@@ -28,17 +30,18 @@
     "admin:dev": "pnpm --filter anssi-demain-specialiste-cyber-back build && node --env-file back/.env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@typescript-eslint/eslint-plugin": "^8.57.0",
-    "@typescript-eslint/parser": "^8.57.0",
-    "eslint": "^9.39.4",
+    "@eslint/js": "^10.0.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@typescript-eslint/eslint-plugin": "^8.71.0",
+    "@typescript-eslint/parser": "^8.71.0",
+    "eslint": "^10.11.0",
     "globals": "^17.5.0",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.8.1",
-    "prettier-plugin-svelte": "^3.5.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0",
-    "vitest": "^3.2.4"
+    "prettier": "^3.9.9",
+    "prettier-plugin-svelte": "^4.1.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.2"
   },
   "dependencies": {
     "axios": "^1.18.0",

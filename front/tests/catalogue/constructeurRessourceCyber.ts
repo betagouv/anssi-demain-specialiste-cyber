@@ -1,6 +1,6 @@
 import {
-  type TypesRessourceCyber,
   type RessourceCyber,
+  type TypesRessourceCyber,
 } from '../../src/catalogue/ressourceCyber';
 
 interface Constructeur<T> {

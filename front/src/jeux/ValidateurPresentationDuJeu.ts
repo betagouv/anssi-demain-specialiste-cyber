@@ -6,9 +6,7 @@ import type {
 } from './jeuEnEdition.type';
 import { extracteurErreursZod, type Validateur } from './validateur';
 
-export class ValidateurPresentationDuJeu
-  implements Validateur<PresentationDuJeu>
-{
+export class ValidateurPresentationDuJeu implements Validateur<PresentationDuJeu> {
   schema: z.ZodObject;
 
   constructor() {

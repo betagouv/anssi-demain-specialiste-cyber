@@ -1,7 +1,6 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-
 import { creeServeur } from '../../../src/api/dsc';
 import { AgentConnectInfo, encodeSession, enObjet } from '../cookie';
 import {
@@ -54,7 +53,7 @@ describe('La ressource deconnexion OIDC', () => {
       const cookieSession = enObjet(headerCookie[0]);
 
       expect(
-        (cookieSession.AgentConnectInfo as AgentConnectInfo).state
+        (cookieSession.AgentConnectInfo as AgentConnectInfo).state,
       ).toEqual('un faux state');
     });
   });

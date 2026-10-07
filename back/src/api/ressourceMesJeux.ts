@@ -208,7 +208,10 @@ export const ressourceMesJeux = ({
           );
           reponse.sendStatus(201);
         } catch (e: unknown | Error) {
-          adaptateurGestionErreur.erreur(e as Error, 'Erreur de création du jeu');
+          adaptateurGestionErreur.erreur(
+            e as Error,
+            'Erreur de création du jeu',
+          );
           reponse.sendStatus(500);
         }
       },

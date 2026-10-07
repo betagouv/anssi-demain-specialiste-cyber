@@ -1,6 +1,7 @@
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const config = {

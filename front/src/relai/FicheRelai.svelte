@@ -33,8 +33,8 @@
     <section>
       <p class="fr-text">
         Devenez relai de {TITRE_DSC_SECABLE}
-        en associant la marque {TITRE_DSC_SECABLE} à vos actions en faveur de la
-        formation des jeunes à la cybersécurité et la découverte de ses métiers.
+        en associant la marque {TITRE_DSC_SECABLE} à vos actions en faveur de la formation
+        des jeunes à la cybersécurité et la découverte de ses métiers.
       </p>
     </section>
 
@@ -46,8 +46,8 @@
         des jeunes et des adultes à la cybersécurité. <br /> <br />
         Vous êtes une entité publique ou une association loi 1901 à but non lucratif
         et planifiez une initiative en faveur de la sensibilisation des jeunes aux
-        bonnes pratiques, de la découverte de la cybersécurité et de ses enjeux,
-        de ses métiers et des parcours d'orientation.
+        bonnes pratiques, de la découverte de la cybersécurité et de ses enjeux, de
+        ses métiers et des parcours d'orientation.
       </p>
     </section>
 

@@ -10,8 +10,7 @@ const avantEnvoiSentry = (
   detail: Sentry.EventHint,
 ) => {
   const originalException = detail?.originalException as
-    | { code: string }
-    | undefined;
+    { code: string } | undefined;
   if (originalException?.code === 'ECONNABORTED') {
     return null;
   }

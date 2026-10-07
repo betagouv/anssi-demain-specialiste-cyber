@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest';
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
-import { Cache } from '../../src/infra/cache';
 import { add } from 'date-fns';
+import { describe, expect, it } from 'vitest';
+import { Cache } from '../../src/infra/cache';
 import { FournisseurHorloge } from '../../src/infra/FournisseurHorloge';
+import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
 
 const _24_HEURES = 1440;
 
@@ -115,7 +115,7 @@ describe('Le système de mise en cache', () => {
         throw new Error('Une erreur est survenue');
       };
 
-      expect(
+      await expect(
         async () => await cache.get('une-clef', laFonction),
       ).rejects.toEqual(new Error('Une erreur est survenue'));
     });

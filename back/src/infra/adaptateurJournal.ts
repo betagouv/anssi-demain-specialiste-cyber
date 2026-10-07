@@ -7,8 +7,7 @@ import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
 
 export type DonneesEvenement =
-  | DonneesEvenementNouvelUtilisateur
-  | DonneesEvenementJeuCree;
+  DonneesEvenementNouvelUtilisateur | DonneesEvenementJeuCree;
 
 type DonneesCommunesEvenement = {
   date: Date;

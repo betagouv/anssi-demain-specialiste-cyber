@@ -73,9 +73,7 @@ type ResultatSirene = {
   }[];
 };
 
-export class AdaptateurRechercheEntrepriseApiGouv
-  implements AdaptateurRechercheEntreprise
-{
+export class AdaptateurRechercheEntrepriseApiGouv implements AdaptateurRechercheEntreprise {
   constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
 
   async rechercheOrganisationParSiret(
