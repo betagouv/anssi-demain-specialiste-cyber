@@ -20,6 +20,11 @@
       "minimumReleaseAge": "7 days"
     },
     {
+      "description": "Group patch updates",
+      "matchUpdateTypes": ["patch"],
+      "groupName": "patch updates"
+    },
+    {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
     }
