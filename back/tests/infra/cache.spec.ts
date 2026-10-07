@@ -115,7 +115,7 @@ describe('Le système de mise en cache', () => {
         throw new Error('Une erreur est survenue');
       };
 
-      expect(
+      await expect(
         async () => await cache.get('une-clef', laFonction),
       ).rejects.toEqual(new Error('Une erreur est survenue'));
     });
