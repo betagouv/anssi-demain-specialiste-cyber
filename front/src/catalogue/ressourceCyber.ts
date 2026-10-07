@@ -21,6 +21,12 @@ export type RessourceCyber = {
   lienExterne: string;
 };
 
+export const urlDeLIllustrationPetite = (urlIllustration: string): string => {
+  if (!urlIllustration) return '/assets/images/image-generique.svg';
+
+  return `${urlIllustration.slice(0, urlIllustration.lastIndexOf('.'))}_petite.avif`;
+};
+
 export const lesRessourcesCyberTriees = (data: RessourceCyber[]) => {
   return data.sort((a, b) => a.titre.localeCompare(b.titre));
 };
