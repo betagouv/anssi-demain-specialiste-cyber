@@ -18,7 +18,7 @@ describe("L'adaptateur de hachage", () => {
       }).hache('7276abd6-98bb-4bc9-bd17-d50a56aba7e4');
 
       expect(hache).toBe(
-        'v1:1cf9d6256a25545991bb031f1bbec7837b6e76b71e567acb83d88ee82dc07178'
+        'v1:1cf9d6256a25545991bb031f1bbec7837b6e76b71e567acb83d88ee82dc07178',
       );
     });
 
@@ -38,7 +38,7 @@ describe("L'adaptateur de hachage", () => {
       }).hache('7276abd6-98bb-4bc9-bd17-d50a56aba7e4');
 
       expect(hache).toBe(
-        'v1-v2:ddb368b08519541e0e9f7c910358facac8107c763672536da06b484cec18249b'
+        'v1-v2:ddb368b08519541e0e9f7c910358facac8107c763672536da06b484cec18249b',
       );
     });
 

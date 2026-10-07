@@ -115,7 +115,7 @@ describe("La ressource des réactions d'un jeu", () => {
       });
     });
 
-    describe("pour un id au format invalide", ()=>{
+    describe('pour un id au format invalide', () => {
       it('renvoie une erreur 400', async () => {
         const reponse = await request(serveur)
           .post('/api/jeux/1/reactions')
@@ -123,6 +123,6 @@ describe("La ressource des réactions d'un jeu", () => {
 
         expect(reponse.status).toEqual(400);
       });
-    })
+    });
   });
 });

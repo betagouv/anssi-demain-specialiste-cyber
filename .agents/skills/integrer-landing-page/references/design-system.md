@@ -4,11 +4,13 @@ Les pages sont composées de web components `dsfr-*` (Système de Design de l'É
 et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-kit`.
 
 ## Sources
+
 - **Storybook** (rendu visuel + doc) : https://betagouv.github.io/lab-anssi-ui-kit/
 - **Manifest machine** (à privilégier pour la codegen) :
   https://betagouv.github.io/lab-anssi-ui-kit/ui-kit-components.json
 
 ### Manifest — mode d'emploi
+
 - ⚠️ **Demander la permission de le pull en début de tâche d'intégration.** Ne pas
   le récupérer sans accord explicite de l'utilisateur.
 - Format inspiré de custom-elements-manifest
@@ -25,6 +27,7 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
   composants ou de props.
 
 ## Conventions de style
+
 - **SCSS**, mobile-first. Breakpoints via
   `@use 'points-de-rupture' as *;` puis `@include a-partir-de(md) { … }`.
   Points de rupture : `xs` 320, `xs2` 440, `sm` 576, `md` 767, `lg` 992,
@@ -46,13 +49,15 @@ et `dsc-*` (spécifiques DemainSpécialisteCyber), fournis par `@lab-anssi/ui-ki
 Deux niveaux distincts — ne pas les confondre :
 
 ### 1. Largeur max de page → `dsfr-container` (DSFR)
+
 La largeur max + le padding horizontal + le centrage de la page sont fournis par le
 `dsfr-container` (le `.fr-container` du DSFR, largeurs calées sur les breakpoints DSFR).
 **Ne pas recoder** de `max-width` de container à la main : envelopper chaque section
 dans `<dsfr-container>` (comme le font toutes les sections existantes).
 
 ### 2. Grille custom 12 colonnes → `front/src/style/_grille.scss`
-Pour **borner un bloc à un nombre de colonnes** *à l'intérieur* du container (typiquement
+
+Pour **borner un bloc à un nombre de colonnes** _à l'intérieur_ du container (typiquement
 en desktop), utiliser la fonction `taille-pour-colonnes($n)` : elle renvoie la largeur
 de `n` colonnes sur 12 (gouttière DSFR de 1rem).
 
@@ -67,10 +72,10 @@ de `n` colonnes sur 12 (gouttière DSFR de 1rem).
   margin-inline: auto;
 
   @include a-partir-de(lg) {
-    max-width: taille-pour-colonnes(10);   // 10/12 colonnes
+    max-width: taille-pour-colonnes(10); // 10/12 colonnes
   }
   @include a-partir-de(xl) {
-    max-width: taille-pour-colonnes(8);    // resserré à 8/12 en très large
+    max-width: taille-pour-colonnes(8); // resserré à 8/12 en très large
   }
 }
 ```
@@ -79,6 +84,7 @@ Exemples réels : `PresentationCyberEnjeux.svelte`, `ResumeFranceCybersecurityCh
 `MesJeux.svelte`, `FormulaireJeu.svelte`.
 
 ### 3. Deux colonnes contenu | illustration → classe partagée
+
 `front/src/style/_contenu-deux-colonnes.scss` définit une classe **globale**
 `.contenu-deux-colonnes` (contenu | illustration, empilé en mobile → `1fr 1fr` à `md`,
 variante `.illustration-au-dessus` pour inverser l'ordre en mobile). La réutiliser plutôt
@@ -86,6 +92,7 @@ que recoder une grille deux-colonnes, sauf besoin spécifique (ex. une ligne « 
 largeur » au-dessus des deux colonnes).
 
 ## Assets
+
 - Emplacement disque : `front/statique/assets/` (images dans `.../images/`).
 - Référencés dans le HTML / Pug / SCSS par `/assets/…`.
 - Formats rencontrés : `.svg`, `.avif`.
@@ -99,6 +106,7 @@ largeur » au-dessus des deux colonnes).
   qui fonctionnent (`/assets/images/cej/*.svg`).
 
 ## Pièges fréquents
+
 - **Collision de nom de classe** : les styles de `front/src/style/` (encarts,
   pages) sont **globaux et non scopés**. Une classe générique dans un composant
   (ex. `.chiffres-cles`) hérite alors des styles d'un encart existant

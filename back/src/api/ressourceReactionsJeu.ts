@@ -3,8 +3,6 @@ import z from 'zod';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
-
-
 export const ressourceReactionsJeu = ({
   entrepotJeux,
   middleware,

@@ -17,7 +17,7 @@ repos:
         entry: ./node_modules/.bin/prettier --write
         language: system
         files: \.(?:[jt]s?|md|svelte)$
-        types: [ file ]
+        types: [file]
       - id: eslint
         name: eslint
         entry: ./node_modules/.bin/eslint

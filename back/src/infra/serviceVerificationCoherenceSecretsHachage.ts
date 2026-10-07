@@ -8,28 +8,28 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 const verifieQueChaqueSecretEstCoherent = async (
   tousLesSecretsDeHachageDeLaConfig: { version: number; secret: string }[],
   empreintesDesSecretsAppliques: SecretHachage[],
-  adaptateurHachage: AdaptateurHachage
+  adaptateurHachage: AdaptateurHachage,
 ) => {
   for (let i = 0; i < tousLesSecretsDeHachageDeLaConfig.length; i += 1) {
     const { version: versionDeLaConfig, secret: valeurSecretEnClair } =
       tousLesSecretsDeHachageDeLaConfig[i];
     const leSecretAppliqueCorrespondant = empreintesDesSecretsAppliques.find(
-      ({ version: versionEnBase }) => versionEnBase === versionDeLaConfig
+      ({ version: versionEnBase }) => versionEnBase === versionDeLaConfig,
     );
 
     if (!leSecretAppliqueCorrespondant) {
       throw new Error(
-        `💥 La version ${versionDeLaConfig} du secret noté dans la config est manquante dans la persistance.`
+        `💥 La version ${versionDeLaConfig} du secret noté dans la config est manquante dans la persistance.`,
       );
     }
     const estValide = await adaptateurHachage.compareBCrypt(
       valeurSecretEnClair,
-      leSecretAppliqueCorrespondant.empreinte
+      leSecretAppliqueCorrespondant.empreinte,
     );
 
     if (!estValide) {
       throw new Error(
-        `💥 La version ${versionDeLaConfig} du secret de la config a une valeur différente de celle déjà appliquée.`
+        `💥 La version ${versionDeLaConfig} du secret de la config a une valeur différente de celle déjà appliquée.`,
       );
     }
   }
@@ -39,11 +39,11 @@ const verifieQueChaqueSecretEstCoherent = async (
     if (
       !tousLesSecretsDeHachageDeLaConfig.some(
         ({ version: versionDansLaConfig }) =>
-          versionAppliquee === versionDansLaConfig
+          versionAppliquee === versionDansLaConfig,
       )
     ) {
       throw new Error(
-        `💥 La version ${versionAppliquee} du secret déjà appliquée est manquante dans la config.`
+        `💥 La version ${versionAppliquee} du secret déjà appliquée est manquante dans la config.`,
       );
     }
   }
@@ -76,7 +76,7 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
     await verifieQueChaqueSecretEstCoherent(
       tousLesSecretsDeHachageDeLaConfig,
       empreintesDesSecretsAppliques,
-      adaptateurHachage
+      adaptateurHachage,
     );
   },
 });

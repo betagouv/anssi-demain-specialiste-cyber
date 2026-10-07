@@ -32,7 +32,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     });
 
     await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.'
+      '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.',
     );
   });
 
@@ -64,7 +64,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     });
 
     await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.'
+      '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.',
     );
   });
 
@@ -123,7 +123,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     });
 
     await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 La version 1 du secret noté dans la config est manquante dans la persistance.'
+      '💥 La version 1 du secret noté dans la config est manquante dans la persistance.',
     );
   });
 
@@ -152,7 +152,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     });
 
     await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 La version 1 du secret déjà appliquée est manquante dans la config.'
+      '💥 La version 1 du secret déjà appliquée est manquante dans la config.',
     );
   });
 
@@ -175,7 +175,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     });
 
     await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 Aucun secret de hachage dans la config.'
+      '💥 Aucun secret de hachage dans la config.',
     );
   });
 });

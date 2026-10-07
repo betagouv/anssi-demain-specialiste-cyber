@@ -23,9 +23,7 @@ export type AdaptateurTeleversement = {
   recupereTypeImage(buffer?: Buffer): 'image/png' | 'image/jpeg' | undefined;
 };
 
-export class AdaptateurDeTeleversementCellar
-  implements AdaptateurTeleversement
-{
+export class AdaptateurDeTeleversementCellar implements AdaptateurTeleversement {
   constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
   photosJeu(requete: Request): PhotosJeuTeleversees {
     const estUnFichierPhoto = (

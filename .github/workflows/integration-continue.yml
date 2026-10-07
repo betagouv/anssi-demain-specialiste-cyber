@@ -21,6 +21,9 @@ jobs:
           require-lockfile: true
           node-version-file: '.nvmrc'
 
+      - name: Vérifie le formatage
+        run: pnpm format:check
+
       - name: Vérfie le typage
         run: pnpm typecheck
 

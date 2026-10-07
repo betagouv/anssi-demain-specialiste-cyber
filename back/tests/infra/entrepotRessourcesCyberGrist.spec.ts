@@ -378,9 +378,9 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   }
 }
 
-class ConstructeurReponseRessourceCyberGrist
-  implements ConstructeurDeTest<ReponseGrist<RessourceCyberGrist>>
-{
+class ConstructeurReponseRessourceCyberGrist implements ConstructeurDeTest<
+  ReponseGrist<RessourceCyberGrist>
+> {
   private _lignes: LigneGrist[] = [];
 
   ajouteUneLigne(ligne: LigneGrist): ConstructeurReponseRessourceCyberGrist {

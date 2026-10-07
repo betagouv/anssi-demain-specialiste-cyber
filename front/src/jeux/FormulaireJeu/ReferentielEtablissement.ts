@@ -4,9 +4,7 @@ export interface ReferentielEtablissement {
   trouveParNom: (nom: string) => Promise<string[]>;
 }
 
-export class AdaptateurAnnuaireEducationNationale
-  implements ReferentielEtablissement
-{
+export class AdaptateurAnnuaireEducationNationale implements ReferentielEtablissement {
   constructor() {}
 
   async trouveParNom(nom: string) {

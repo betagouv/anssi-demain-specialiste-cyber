@@ -54,7 +54,7 @@ describe('La ressource deconnexion OIDC', () => {
       const cookieSession = enObjet(headerCookie[0]);
 
       expect(
-        (cookieSession.AgentConnectInfo as AgentConnectInfo).state
+        (cookieSession.AgentConnectInfo as AgentConnectInfo).state,
       ).toEqual('un faux state');
     });
   });
