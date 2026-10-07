@@ -2,10 +2,23 @@ import { describe, expect, it } from 'vitest';
 import {
   lesPublicsCibleDesRessourcesCyber,
   lesThematiquesCyber,
+  urlDeLIllustrationPetite,
 } from '../../src/catalogue/ressourceCyber';
 import { unConstructeurDeRessourceCyber } from './constructeurRessourceCyber';
 
 describe('Les ressources Cyber', () => {
+  it("utilise une illustration générique en l'absence d'illustration", () => {
+    expect(urlDeLIllustrationPetite('')).toBe(
+      '/assets/images/image-generique.svg',
+    );
+  });
+
+  it("utilise la version petite de l'illustration", () => {
+    expect(
+      urlDeLIllustrationPetite('https://example.com/illustration.png'),
+    ).toBe('https://example.com/illustration_petite.avif');
+  });
+
   it('sort la liste des thématiques', () => {
     const thematiques = lesThematiquesCyber([
       unConstructeurDeRessourceCyber()
