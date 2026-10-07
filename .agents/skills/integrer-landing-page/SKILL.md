@@ -23,8 +23,8 @@ monorepo (Express + Pug côté back, Svelte web components côté front).
 5. **Styles** `front/src/style/_page-<route>.scss` + `@use` dans `index.scss`
 6. **Test** dans `back/tests/api/ressourcesPages.spec.ts`
 
-Détails exacts (chemins + snippets) → [`references/cablage-page.md`](references/cablage-page.md).
-Composants, tokens, breakpoints, assets → [`references/design-system.md`](references/design-system.md).
+Détails exacts (chemins + snippets) → [`references/cablage-page.md`](./references/cablage-page.md).
+Composants, tokens, breakpoints, assets → [`references/design-system.md`](./references/design-system.md).
 Squelettes à copier → [`templates/`](templates/).
 
 ## Cadence : petit à petit, avec validation
