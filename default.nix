@@ -10,7 +10,7 @@ let
   nodejs-slim =
     pkgs."nodejs-slim_${nodeVersion}"
       or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
-  pnpm = pkgs.pnpm_10.override { inherit nodejs-slim; };
+  pnpm = pkgs.pnpm_12.override { inherit nodejs-slim; };
 in
 {
   shell = pkgs.mkShell {
