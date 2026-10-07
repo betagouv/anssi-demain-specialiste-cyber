@@ -25,6 +25,11 @@
       "groupName": "patch updates"
     },
     {
+      "description": "Keep Node.js types on major version 24",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": ">=24 <25"
+    },
+    {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
     }
