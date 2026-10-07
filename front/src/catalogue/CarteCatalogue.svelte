@@ -12,6 +12,7 @@
 <script lang="ts">
   import {
     laCouleurDuBadgeSelonTypeRessourceCyber,
+    urlDeLIllustrationPetite,
     type RessourceCyber,
   } from './ressourceCyber';
 
@@ -23,7 +24,7 @@
   const { ressource, markup = 'h3' }: Props = $props();
 
   const illustrationPetite = $derived(
-    `${ressource.urlIllustration.slice(0, ressource.urlIllustration.lastIndexOf('.'))}_petite.avif`,
+    urlDeLIllustrationPetite(ressource.urlIllustration),
   );
 
   const badges = $derived(
@@ -40,7 +41,7 @@
   detailStart={ressource.titre}
   href={ressource.lienExterne || `/ressources-cyber/${ressource.id}`}
   blank={ressource.lienExterne.startsWith('http')}
-  src={illustrationPetite || '/assets/images/image-generique.svg'}
+  src={illustrationPetite}
   hasHeaderBadge
   hasDetailEnd
   size="sm"
