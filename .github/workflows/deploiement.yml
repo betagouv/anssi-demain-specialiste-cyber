@@ -11,7 +11,7 @@ jobs:
   deploiement-demo:
     name: Déploiement en DÉMO
     environment: DEMO
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Cloner le dépôt Git
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -44,7 +44,7 @@ jobs:
   deploiement-prod:
     name: Déploiement en PROD
     environment: PROD
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: [deploiement-demo]
     steps:
       - name: Cloner le dépôt Git
