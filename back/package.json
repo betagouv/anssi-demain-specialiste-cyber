@@ -55,7 +55,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "jiti": "^2.6.1",
-    "node-mocks-http": "^1.17.2",
+    "node-mocks-http": "^1.18.1",
     "supertest": "^7.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
