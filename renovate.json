@@ -30,6 +30,11 @@
       "allowedVersions": ">=24 <25"
     },
     {
+      "description": "Keep Sentry on major version 10",
+      "matchPackageNames": ["@sentry/node", "@sentry/browser"],
+      "allowedVersions": ">=10 <11"
+    },
+    {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
     }
