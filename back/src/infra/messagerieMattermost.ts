@@ -1,8 +1,8 @@
+import axios from 'axios';
 import {
   MessagerieInstantanee,
   RetourEvaluation,
 } from '../metier/messagerieInstantanee';
-import axios from 'axios';
 
 export const messagerieMattermost = (): MessagerieInstantanee => ({
   notifieUnRetourEvaluation: async (retourExperience: RetourEvaluation) => {

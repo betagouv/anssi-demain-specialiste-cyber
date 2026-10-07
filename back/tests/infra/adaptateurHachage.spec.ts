@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'adaptateur de hachage", () => {

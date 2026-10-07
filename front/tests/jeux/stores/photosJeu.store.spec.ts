@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
+import { describe, expect, it } from 'vitest';
 import { photosJeu } from '../../../src/jeux/stores/photosJeu.store';
 
 describe('L’ajout de photos d’un jeu', () => {

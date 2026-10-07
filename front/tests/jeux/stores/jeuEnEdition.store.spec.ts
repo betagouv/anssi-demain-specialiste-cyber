@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
+import { describe, expect, it } from 'vitest';
 import { jeuEnEditionStore } from '../../../src/jeux/stores/jeuEnEdition.store';
 
 describe("Le store d'un jeu en édition", () => {

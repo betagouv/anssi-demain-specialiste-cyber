@@ -1,9 +1,9 @@
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { EntrepotSelections } from '../metier/entrepotSelections';
 import { Selection } from '../metier/selection';
 import { adaptateurEnvironnement, TableGrist } from './adaptateurEnvironnement';
-import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
-import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
+import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type SelectionGrist = {
   id: number;

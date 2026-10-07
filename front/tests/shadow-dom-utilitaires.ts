@@ -1,13 +1,13 @@
 import {
+  buildQueries,
+  queryAllByRole,
+  queryAllByText,
   type AllByRole,
   type AllByText,
-  buildQueries,
   type ByRoleMatcher,
   type ByRoleOptions,
   type Matcher,
   type MatcherOptions,
-  queryAllByRole,
-  queryAllByText,
 } from '@testing-library/dom';
 import type { BoundFunction } from '@testing-library/dom/types/get-queries-for-element';
 import type {

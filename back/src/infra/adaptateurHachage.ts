@@ -1,6 +1,6 @@
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { createHmac } from 'node:crypto';
-import { hash as hashBCrypt, compare as compareBCrypt } from 'bcrypt';
+import { compare as compareBCrypt, hash as hashBCrypt } from 'bcrypt';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 const NOMBRE_DE_PASSES = 10;
 

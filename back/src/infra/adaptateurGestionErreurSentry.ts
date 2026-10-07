@@ -1,5 +1,5 @@
-import { Express } from 'express';
 import * as Sentry from '@sentry/node';
+import { Express } from 'express';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { fauxAdaptateurGestionErreur } from './fauxAdaptateurGestionErreur';
 

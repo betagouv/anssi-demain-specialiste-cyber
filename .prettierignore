@@ -3,3 +3,6 @@
 
 # Fichier généré par pnpm.
 pnpm-lock.yaml
+
+# Données PostgreSQL locales.
+bdd-dsc/

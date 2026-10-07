@@ -1,5 +1,4 @@
 import { Request, Response, Router } from 'express';
-
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 

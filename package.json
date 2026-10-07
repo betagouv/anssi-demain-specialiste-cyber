@@ -18,8 +18,8 @@
     "dev:front": "pnpm --filter anssi-demain-specialiste-cyber-front dev",
     "dev:back": "pnpm --filter anssi-demain-specialiste-cyber-back dev",
     "build": "pnpm -r build",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --write --ignore-unknown '**/*' '!bdd-dsc' '!bdd-dsc/**'",
+    "format:check": "prettier --check --ignore-unknown '**/*' '!bdd-dsc' '!bdd-dsc/**'",
     "lint": "pnpm -r lint",
     "migre-bdd": "pnpm --filter anssi-demain-specialiste-cyber-back migre-bdd",
     "start": "pnpm --filter anssi-demain-specialiste-cyber-back start ",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@typescript-eslint/eslint-plugin": "^8.71.0",
     "@typescript-eslint/parser": "^8.71.0",
     "eslint": "^10.11.0",

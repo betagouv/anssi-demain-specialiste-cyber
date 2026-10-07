@@ -1,6 +1,6 @@
 <script lang="ts">
-  import InvitationARejoindre from './InvitationARejoindre.svelte';
   import EncartDeclarerUneAction from './EncartDeclarerUneAction.svelte';
+  import InvitationARejoindre from './InvitationARejoindre.svelte';
 
   type Temoignage = {
     citation: string;

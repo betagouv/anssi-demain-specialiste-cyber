@@ -1,9 +1,9 @@
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurHachage } from './adaptateurHachage';
 import {
   EntrepotSecretHachage,
   SecretHachage,
 } from './entrepotSecretHachagePostgres';
-import { AdaptateurHachage } from './adaptateurHachage';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 const verifieQueChaqueSecretEstCoherent = async (
   tousLesSecretsDeHachageDeLaConfig: { version: number; secret: string }[],

@@ -1,6 +1,6 @@
+import { aseptiseVersMarkdown } from '../../../infra/markdown';
 import { MessagerieInstantanee } from '../../../metier/messagerieInstantanee';
 import { JeuCree } from './jeuCree';
-import { aseptiseVersMarkdown } from '../../../infra/markdown';
 
 export const notifieEvenementJeuCreeSurMessagerieInstantanee = (
   messagerieInstantanee: MessagerieInstantanee,

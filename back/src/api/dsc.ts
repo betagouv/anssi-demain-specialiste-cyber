@@ -2,6 +2,7 @@
 // L’initialisation de Sentry prend en compte la présence des variables
 // d’environnement nécessaires à son exécution
 import '../infra/sentry';
+import { creeServeurLab } from '@lab-anssi/lib';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
@@ -9,7 +10,6 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourcesApi } from './ressourcesApi';
 import { ressourcesOidc } from './ressourcesOidc';
 import { ressourcesPages } from './ressourcesPages';
-import { creeServeurLab } from '@lab-anssi/lib';
 
 export const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const { serveurLab } = configurationServeur;
