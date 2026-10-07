@@ -2,6 +2,7 @@ import path from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
 import { createLogger, defineConfig } from 'vite';
+import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
@@ -50,44 +51,3 @@ export default defineConfig(({ mode }: Vite.UserConfig) => ({
   },
   customLogger: loggerPersonnalise,
 }));
-
-const injecteNonceWebcomponents = (code: string) => {
-  let codeAvecNonce = `const dscNonce =
-  typeof document !== 'undefined'
-    ? document.querySelector('meta[property="csp-nonce"]')?.getAttribute('content')
-    : null;\n${code}`;
-
-  codeAvecNonce = codeAvecNonce
-    .replace(
-      /const (\w+)\s*=\s*\w+\(["']style["']\);/gm,
-      (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
-    )
-    .replace(
-      /const (\w+)\s*=\s*document\.createElement\(["']style["']\);/gm,
-      (match, nomVariable) => `${match}${nomVariable}.nonce=dscNonce;`,
-    );
-
-  return codeAvecNonce;
-};
-
-function injecteNonce(): Vite.Plugin {
-  return {
-    name: 'injecte-nonce',
-    enforce: 'post',
-    generateBundle(_options, bundle) {
-      // eslint-disable-next-line no-console
-      console.log('📝 Ajout de la gestion du Nonce');
-
-      for (const file of Object.values(bundle)) {
-        if (file.type === 'chunk' && file.code) {
-          // Remplace `const a = u("style");`
-          // par `const a = u("style");a.nonce=nonce;`
-          file.code = injecteNonceWebcomponents(file.code);
-        }
-      }
-
-      // eslint-disable-next-line no-console
-      console.log('✅');
-    },
-  };
-}
