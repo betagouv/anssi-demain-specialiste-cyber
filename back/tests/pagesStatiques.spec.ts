@@ -19,7 +19,7 @@ describe('Le serveur de pages statiques', () => {
   it('répond avec un contenu HTML', async () => {
     const reponse = await appelleUnePageStatique(serveur);
 
-    expect(reponse.headers['content-type']).toEqual('text/html; charset=UTF-8');
+    expect(reponse.headers['content-type']).toEqual('text/html; charset=utf-8');
   });
 
   it('répond avec le contenu HTML', async () => {
