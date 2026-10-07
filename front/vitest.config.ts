@@ -1,5 +1,6 @@
 import path from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
     svelte({
       compilerOptions: { customElement: true },
     }),
+    svelteTesting(),
   ],
   test: {
     globals: true,

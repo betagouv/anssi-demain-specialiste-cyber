@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/svelte/svelte5';
+import { render, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import NomEtablissementAutoComplete from '../../../src/jeux/FormulaireJeu/NomEtablissementAutoComplete.svelte';
