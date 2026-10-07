@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/svelte/svelte5';
+import { render, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -28,6 +28,7 @@ import {
 } from '../../shadow-dom-utilitaires';
 
 const axiosMock = vi.hoisted(() => ({
+  get: vi.fn(),
   post: vi.fn(),
   patch: vi.fn(),
 }));
@@ -37,9 +38,7 @@ vi.mock('axios', () => {
   return { default: axiosMock, isAxiosError: isAxiosErrorMock };
 });
 
-vi.stubGlobal('URL', {
-  createObjectURL: () => 'blob:',
-});
+vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:');
 
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
@@ -104,6 +103,30 @@ describe('Le formulaire de dépose de jeu', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    axiosMock.get.mockResolvedValue({
+      data: {
+        id: '1234',
+        categorie: 'autre',
+        classe: '3e',
+        description: '',
+        discipline: 'mathématiques',
+        eleves: [],
+        enseignant: 'Jeanne',
+        estCache: false,
+        estProprietaire: true,
+        niveau: 'Cycle 4 (5e-3e)',
+        nom: 'Nom du Jeu',
+        nomEtablissement: 'Nom etablissement',
+        photos: {
+          couverture: { chemin: '' },
+          photos: [],
+        },
+        reactions: {},
+        sequence: 'journee',
+        temoignages: [],
+        thematiques: [],
+      },
+    });
   });
 
   describe('indique', () => {
