@@ -1,6 +1,6 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Router } from 'express';
 import { Classe } from '../metier/referentiels/classes';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 type Niveau =

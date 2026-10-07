@@ -5,13 +5,13 @@ import {
   EntrepotSelectionsGrist,
   SelectionGrist,
 } from '../../src/infra/entrepotSelectionsGrist';
+import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
+import { RessourceCyber } from '../../src/metier/ressourceCyber';
 import {
   ConstructeurLigneGristSelections,
   ConstructeurReponseSelectionsGrist,
 } from './constructeurDeSelectionsGrist';
-import { RessourceCyber } from '../../src/metier/ressourceCyber';
 import { EntrepotRessourcesCyberMemoire } from './entrepotRessourceCyberMemoire';
-import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
 
 describe("L'entrepôt de sélections Grist ", () => {
   const reponseVide = { records: [] };

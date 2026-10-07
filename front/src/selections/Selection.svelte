@@ -9,9 +9,9 @@
 />
 
 <script lang="ts">
-  import CarteCatalogue from '../catalogue/CarteCatalogue.svelte';
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
+  import CarteCatalogue from '../catalogue/CarteCatalogue.svelte';
   import type { RessourceCyber } from '../catalogue/ressourceCyber';
 
   export let cible: 'enseignants' | 'eleves';

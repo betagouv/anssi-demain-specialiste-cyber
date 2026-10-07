@@ -1,5 +1,4 @@
-import { writable } from 'svelte/store';
-import { get } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 export const photosJeuStore = writable<Photos>(undefined);
 

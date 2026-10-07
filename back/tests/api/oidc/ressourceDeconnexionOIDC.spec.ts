@@ -1,7 +1,6 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-
 import { creeServeur } from '../../../src/api/dsc';
 import { AgentConnectInfo, encodeSession, enObjet } from '../cookie';
 import {

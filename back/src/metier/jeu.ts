@@ -1,10 +1,10 @@
 import { randomUUID } from 'crypto';
-import { Utilisateur } from './utilisateur';
-import { Sequence } from './referentiels/sequence';
+import { CategorieDeJeux } from './referentiels/categorieDeJeux';
 import { Classe } from './referentiels/classes';
 import { Discipline } from './referentiels/disciplines';
-import { CategorieDeJeux } from './referentiels/categorieDeJeux';
+import { Sequence } from './referentiels/sequence';
 import { ThematiqueDeJeux } from './referentiels/thematiqueDeJeux';
+import { Utilisateur } from './utilisateur';
 
 export type Temoignage = {
   prenom: string;

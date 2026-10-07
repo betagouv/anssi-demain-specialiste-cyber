@@ -1,6 +1,6 @@
-import { RecupereRessourceHttp } from './clientHttp';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { Cache } from './cache';
+import { RecupereRessourceHttp } from './clientHttp';
 
 export type ReponseGrist<TYPE_DOCUMENT> = {
   records: TYPE_DOCUMENT[];

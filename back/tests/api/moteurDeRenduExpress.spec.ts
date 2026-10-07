@@ -1,7 +1,7 @@
+import { Response } from 'express';
+import { createResponse, MockResponse } from 'node-mocks-http';
 import { describe, expect, it } from 'vitest';
 import { moteurDeRenduExpress } from '../../src/api/moteurDeRendu';
-import { createResponse, MockResponse } from 'node-mocks-http';
-import { Response } from 'express';
 
 describe('Le moteur de rendu Express', () => {
   it('utilise le nonce de la réponse', () => {

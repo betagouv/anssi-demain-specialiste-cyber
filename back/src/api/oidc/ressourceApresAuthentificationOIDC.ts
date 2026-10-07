@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import { ConfigurationServeur } from '../configurationServeur';
 
 const ressourceApresAuthentificationOIDC = ({

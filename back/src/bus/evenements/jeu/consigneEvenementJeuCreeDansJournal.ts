@@ -1,5 +1,4 @@
 import { AdaptateurHachage } from '../../../infra/adaptateurHachage';
-
 import { AdaptateurJournal } from '../../../infra/adaptateurJournal';
 import { FournisseurHorloge } from '../../../infra/FournisseurHorloge';
 import { JeuCree } from './jeuCree';

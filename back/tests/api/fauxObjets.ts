@@ -1,5 +1,5 @@
-import { NextFunction, Response } from 'express';
 import { join } from 'path';
+import { NextFunction, Response } from 'express';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
   ConfigurationServeur,

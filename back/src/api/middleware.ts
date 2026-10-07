@@ -1,12 +1,12 @@
+import { randomBytes } from 'node:crypto';
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { randomBytes } from 'node:crypto';
+import helmet from 'helmet';
 import z from 'zod';
-import { ConfigurationServeurSansMiddleware } from './configurationServeur';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Utilisateur } from '../metier/utilisateur';
-import helmet from 'helmet';
+import { ConfigurationServeurSansMiddleware } from './configurationServeur';
 
 type FonctionMiddleware<TBody> = (
   requete: Request<unknown, unknown, TBody, unknown, never>,

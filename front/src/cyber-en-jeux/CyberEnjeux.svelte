@@ -6,8 +6,8 @@
 />
 
 <script lang="ts">
-  import PresentationCyberEnjeux from './PresentationCyberEnjeux.svelte';
   import Onglets from './Onglets.svelte';
+  import PresentationCyberEnjeux from './PresentationCyberEnjeux.svelte';
   import Ressources from './Ressources.svelte';
   import VitrineDesJeux from './VitrineDesJeux.svelte';
 

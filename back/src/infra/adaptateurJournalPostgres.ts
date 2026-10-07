@@ -1,6 +1,6 @@
-import { AdaptateurJournal, DonneesEvenement } from './adaptateurJournal';
-import Knex from 'knex';
 import { randomUUID as uuidv4 } from 'crypto';
+import Knex from 'knex';
+import { AdaptateurJournal, DonneesEvenement } from './adaptateurJournal';
 
 export const adaptateurJournalPostgres = (): AdaptateurJournal => {
   const config = {

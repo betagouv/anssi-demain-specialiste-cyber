@@ -1,5 +1,5 @@
-import { Express } from 'express';
 import { MIMEType } from 'node:util';
+import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';

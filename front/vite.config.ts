@@ -1,7 +1,7 @@
+import path from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
 import { createLogger, defineConfig } from 'vite';
-import path from 'path';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;

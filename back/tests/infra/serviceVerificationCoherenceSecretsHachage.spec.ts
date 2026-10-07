@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
 import {
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
 } from '../api/fauxObjets';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
-import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 
 describe('Le service de vérification de la cohérence des secrets de hachage', () => {
   it('jette une erreur si un secret est invalide', async () => {

@@ -1,12 +1,11 @@
+import { Express } from 'express';
+import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import request from 'supertest';
-import { cybercluedo } from './objetsPretsALEmploi';
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
-
-import { Express } from 'express';
+import { configurationDeTestDuServeur } from './fauxObjets';
+import { cybercluedo } from './objetsPretsALEmploi';
 
 describe("La ressource des réactions d'un jeu", () => {
   describe('sur un POST', () => {

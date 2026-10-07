@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CarteParticipationFcsc from './CarteParticipationFcsc.svelte';
   import CarteDiscordFcsc from './CarteDiscordFcsc.svelte';
+  import CarteParticipationFcsc from './CarteParticipationFcsc.svelte';
 
   const tuiles = [
     {

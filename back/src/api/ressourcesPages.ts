@@ -1,7 +1,7 @@
+import path from 'path';
 import { Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { ressourceCreationCompte } from './ressourceCreationCompte';
-import path from 'path';
 
 type Page = {
   route: string;

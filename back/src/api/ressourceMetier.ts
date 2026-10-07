@@ -1,5 +1,5 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 export const ressourceMetier = ({ entrepotMetier }: ConfigurationServeur) => {

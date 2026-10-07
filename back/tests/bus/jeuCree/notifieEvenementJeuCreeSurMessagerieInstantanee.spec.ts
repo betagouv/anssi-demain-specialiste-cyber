@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { JeuCree } from '../../../src/bus/evenements/jeu/jeuCree';
+import { notifieEvenementJeuCreeSurMessagerieInstantanee } from '../../../src/bus/evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
 import {
   MessagerieInstantanee,
   RetourEvaluation,
 } from '../../../src/metier/messagerieInstantanee';
-import { notifieEvenementJeuCreeSurMessagerieInstantanee } from '../../../src/bus/evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
 import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermost", () => {

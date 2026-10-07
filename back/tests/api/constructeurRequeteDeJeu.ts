@@ -1,7 +1,7 @@
 import z from 'zod';
+import { schemaCreationJeu } from '../../src/api/schemasJeu';
 import { ThematiqueDeJeux } from '../../src/metier/referentiels/thematiqueDeJeux';
 import { Constructeur } from '../constructeur';
-import { schemaCreationJeu } from '../../src/api/schemasJeu';
 
 export type CorpsRequeteDeJeu = z.infer<typeof schemaCreationJeu>;
 

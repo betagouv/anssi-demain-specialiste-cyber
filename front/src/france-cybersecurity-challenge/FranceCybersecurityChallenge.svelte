@@ -7,9 +7,9 @@
 
 <script lang="ts">
   import Onglets from '../cyber-en-jeux/Onglets.svelte';
+  import FranceCybersecurityChallenge2026 from './FranceCybersecurityChallenge2026.svelte';
   import ResumeFranceCybersecurityChallenge from './ResumeFranceCybersecurityChallenge.svelte';
   import ToutSavoirSurFranceCybersecurityChallenge from './ToutSavoirSurFranceCybersecurityChallenge.svelte';
-  import FranceCybersecurityChallenge2026 from './FranceCybersecurityChallenge2026.svelte';
 
   const liens = [
     { label: 'En résumé', fragment: '#resume', emoji: '📝' },

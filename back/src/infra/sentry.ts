@@ -1,5 +1,5 @@
-import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import * as Sentry from '@sentry/node';
+import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 
 const config = adaptateurEnvironnement.sentry();
 

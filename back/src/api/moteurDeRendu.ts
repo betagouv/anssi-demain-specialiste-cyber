@@ -1,8 +1,8 @@
-import express from 'express';
 import fs from 'fs';
-import { join } from 'path';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import path from 'node:path';
+import { join } from 'path';
+import express from 'express';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 
 const TITRE_DSC_SECABLE = 'Demain\u200bSpécialiste\u200bCyber';
 

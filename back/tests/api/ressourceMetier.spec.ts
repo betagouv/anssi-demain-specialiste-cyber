@@ -1,9 +1,9 @@
+import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import request from 'supertest';
-import { Constructeur } from '../constructeur';
 import { Metier } from '../../src/metier/metier';
+import { Constructeur } from '../constructeur';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 class ConstructeurMetier implements Constructeur<Metier> {
   private id: number = Math.round(Math.random() * 1000);

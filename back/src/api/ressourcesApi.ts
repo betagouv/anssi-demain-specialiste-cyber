@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { ressourceJeu } from './ressourceJeu';
-import { ressourceMesJeux } from './ressourceMesJeux';
-import { ressourceProfil } from './ressourceProfil';
-import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
-import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceJeux } from './ressourceJeux';
+import { ressourceMesJeux } from './ressourceMesJeux';
 import { ressourceMetier } from './ressourceMetier';
-import { ressourceSelections } from './ressourceSelections';
+import { ressourceProfil } from './ressourceProfil';
 import { ressourceReactionsJeu } from './ressourceReactionsJeu';
+import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
+import { ressourceSelections } from './ressourceSelections';
+import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 
 export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
   const router = Router();

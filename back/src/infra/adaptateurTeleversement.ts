@@ -1,7 +1,7 @@
+import { MIMEType } from 'node:util';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
 import { Request } from 'express';
-import { MIMEType } from 'node:util';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import TuilesCategoriesEpreuvesFcsc from './TuilesCategoriesEpreuvesFcsc.svelte';
   import CartesDerouleECSC from './CartesDerouleECSC.svelte';
+  import TuilesCategoriesEpreuvesFcsc from './TuilesCategoriesEpreuvesFcsc.svelte';
 
   const items = [
     {

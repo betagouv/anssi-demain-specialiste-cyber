@@ -1,8 +1,8 @@
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { type RessourceCyber } from '../metier/ressourceCyber';
-import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
+import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type RessourceCyberGrist = {
   id: number;

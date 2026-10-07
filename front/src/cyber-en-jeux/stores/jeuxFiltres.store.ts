@@ -1,6 +1,13 @@
 import { derived } from 'svelte/store';
-import type { Categorie, Niveau, Thematique, Jeu } from '../../jeu.type';
-import { lesCategories, lesNiveaux, lesThematiques } from '../../jeu.type';
+import {
+  lesCategories,
+  lesNiveaux,
+  lesThematiques,
+  type Categorie,
+  type Jeu,
+  type Niveau,
+  type Thematique,
+} from '../../jeu.type';
 import { jeuxStore } from './jeux.store';
 import { rechercheParCategorie } from './rechercheParCategorie.store';
 import { rechercheParNiveau } from './rechercheParNiveau.store';
