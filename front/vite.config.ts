@@ -19,7 +19,7 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 export default defineConfig(({ mode }: Vite.UserConfig) => ({
   resolve: {
     alias: {
-      '@style': path.join(__dirname, 'src/style'),
+      '@style': path.join(import.meta.dirname, 'src/style'),
     },
   },
   plugins: [svelte(), injecteNonce()],

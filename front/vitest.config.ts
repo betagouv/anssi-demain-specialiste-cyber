@@ -16,7 +16,7 @@ export default defineConfig({
     setupFiles: './tests/vitest-setup.ts',
     include: ['tests/**/*.{test,spec}.{js,ts}'],
     alias: {
-      '@style': path.join(__dirname, 'src/style'),
+      '@style': path.join(import.meta.dirname, 'src/style'),
     },
   },
 });
