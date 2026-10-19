@@ -163,7 +163,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  yaml@>=1.0.0 <1.10.3: '>=1.10.3'
   vite@>=7.0.0 <=7.3.1: 7.3.7
   follow-redirects@<=1.15.11: '>=1.16.0'
   postcss@<8.5.10: '>=8.5.10'
@@ -4551,6 +4550,10 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
+  yaml@1.10.3:
+    resolution: {integrity: sha512-vIYeF1u3CjlhAFekPPAk2h/Kv4T3mAkMox5OymRiJQB0spDP10LHvt+K7G9Ny6NuuMAb25/6n1qyUjAcGNf/AA==}
+    engines: {node: '>= 6'}
+
   yaml@2.8.3:
     resolution: {integrity: sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==}
     engines: {node: '>= 14.6'}
@@ -8043,7 +8046,7 @@ snapshots:
   postcss-load-config@3.1.4(postcss@8.5.28)(ts-node@10.9.2(@types/node@24.19.2)(typescript@6.0.3)):
     dependencies:
       lilconfig: 2.1.0
-      yaml: 2.8.3
+      yaml: 1.10.3
     optionalDependencies:
       postcss: 8.5.28
       ts-node: 10.9.2(@types/node@24.19.2)(typescript@6.0.3)
@@ -8904,7 +8907,10 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  yaml@2.8.3: {}
+  yaml@1.10.3: {}
+
+  yaml@2.8.3:
+    optional: true
 
   yargs-parser@21.1.1: {}
 
