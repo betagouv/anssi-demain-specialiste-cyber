@@ -1,7 +1,6 @@
 color: always
 
 overrides:
-  qs: ~6.16.0
   'lodash@>=4.0.0 <=4.17.22': '>=4.17.23'
   'diff@>=4.0.0 <4.0.4': '>=4.0.4'
   fast-xml-parser: ~5.5.7
