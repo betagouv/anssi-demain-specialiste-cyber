@@ -97,7 +97,9 @@ export const fabriqueMiddleware = ({
     try {
       adaptateurJWT.decode(requete.session.token);
       suite();
-    } catch {
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Redirige vers la connexion.', e);
       reponse.redirect('/connexion');
     }
   };
