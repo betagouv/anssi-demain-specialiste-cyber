@@ -46,6 +46,11 @@
       "allowedVersions": ">=10 <11"
     },
     {
+      "description": "Limite la mise à jour de typescript à la version 6 tant que typescript-eslint ne le supporte pas",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7.0.0"
+    },
+    {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
     }
