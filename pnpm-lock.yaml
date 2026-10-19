@@ -163,7 +163,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  fast-xml-parser: ~5.5.7
   rollup@>=4.0.0 <4.59.0: '>=4.59.0'
   minimatch@<3.1.4: 3.1.5
   minimatch@>=9.0.0 <9.0.7: 9.0.9
@@ -185,7 +184,6 @@ overrides:
   postcss@<8.5.10: '>=8.5.10'
   axios@>=1.0.0 <1.15.2: '>=1.15.2'
   fast-xml-builder@<=1.1.6: '>=1.1.7'
-  fast-xml-parser@<5.7.0: '>=5.7.0'
 
 importers:
 
