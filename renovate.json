@@ -32,6 +32,15 @@
       "allowedVersions": "<27.0.0"
     },
     {
+      "description": "Regroupe les mises à jour des dépendances AWS SDK utilisées pour S3",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "@aws-sdk/client-s3",
+        "@aws-sdk/credential-providers"
+      ],
+      "groupName": "AWS SDK"
+    },
+    {
       "description": "Keep Sentry on major version 10",
       "matchPackageNames": ["@sentry/node", "@sentry/browser"],
       "allowedVersions": ">=10 <11"
