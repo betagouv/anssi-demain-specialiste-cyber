@@ -38,24 +38,6 @@ const ressourceApresAuthentificationOIDC = ({
       requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token = adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
-
-      const sessionEncodee = Buffer.from(
-        JSON.stringify(requete.session),
-      ).toString('base64');
-
-      // eslint-disable-next-line no-console
-      console.info(
-        JSON.stringify({
-          evenement: 'diagnostic-session-oidc',
-          protocol: requete.protocol,
-          secure: requete.secure,
-          forwardedProto: requete.get('x-forwarded-proto'),
-          trustProxy: requete.app.get('trust proxy'),
-          idTokenLength: idToken.length,
-          sessionCookieValueLength: Buffer.byteLength(sessionEncodee),
-        }),
-      );
-
       reponse.render(`apres-authentification`);
     } catch (e: unknown | Error) {
       // eslint-disable-next-line no-console
