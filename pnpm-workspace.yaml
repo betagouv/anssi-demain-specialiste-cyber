@@ -1,7 +1,6 @@
 color: always
 
 overrides:
-  'diff@>=4.0.0 <4.0.4': '>=4.0.4'
   fast-xml-parser: ~5.5.7
   'rollup@>=4.0.0 <4.59.0': '>=4.59.0'
   'minimatch@<3.1.4': 3.1.5
