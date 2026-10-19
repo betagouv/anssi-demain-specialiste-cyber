@@ -1,9 +1,7 @@
-# _c.f._ https://pnpm.io/settings
-
 color: always
 
 overrides:
-  qs: ~6.15.0
+  qs: ~6.16.0
   'lodash@>=4.0.0 <=4.17.22': '>=4.17.23'
   'diff@>=4.0.0 <4.0.4': '>=4.0.4'
   fast-xml-parser: ~5.5.7
@@ -39,6 +37,8 @@ minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
   - axios@1.18.0
+  # Renovate security update: qs@6.16.1
+  - qs@6.16.1
 
 preferFrozenLockfile: true
 strictDepBuilds: false
