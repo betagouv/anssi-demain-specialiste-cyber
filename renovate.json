@@ -27,9 +27,9 @@
       "schedule": ["* * * * 1,4"]
     },
     {
-      "description": "Keep Node.js types on major version 24",
+      "description": "@types/node reste aligné sur la version majeure 26 définie dans .nvmrc",
       "matchPackageNames": ["@types/node"],
-      "allowedVersions": ">=24 <25"
+      "allowedVersions": "<27.0.0"
     },
     {
       "description": "Keep Sentry on major version 10",
