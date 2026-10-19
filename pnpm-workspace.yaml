@@ -1,7 +1,6 @@
 color: always
 
 overrides:
-  'axios@>=1.0.0 <1.15.2': '>=1.15.2'
   'fast-xml-builder@<=1.1.6': '>=1.1.7'
 
 packages:
