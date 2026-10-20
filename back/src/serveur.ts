@@ -115,6 +115,10 @@ serviceCoherenceSecretsHachage
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsEntrainement(),
         ),
+        entrepôtSélectionsMesure: new EntrepotSelectionsGrist(
+          entrepotRessourcesCyber,
+          adaptateurEnvironnement.grist().selectionsMesure(),
+        ),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

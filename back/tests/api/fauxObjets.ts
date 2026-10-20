@@ -84,6 +84,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     selectionsEnseignants: () => ({ idTable: '' }),
     selectionsEleves: () => ({ idTable: '' }),
     selectionsEntrainement: () => ({ idTable: '' }),
+    selectionsMesure: () => ({ idTable: '' }),
   }),
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
@@ -192,6 +193,7 @@ export const configurationServeurSansMiddleware =
       entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
       entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
       entrepôtSélectionsEntrainement: new EntrepotSelectionsMemoire(),
+      entrepôtSélectionsMesure: new EntrepotSelectionsMemoire(),
       adaptateurGestionErreur: fauxAdaptateurGestionErreur,
     };
   };

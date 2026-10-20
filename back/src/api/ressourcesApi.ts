@@ -39,6 +39,10 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     '/selections-entrainement',
     ressourceSelections(configurationServeur.entrepôtSélectionsEntrainement),
   );
+  router.use(
+    '/selections-mesure',
+    ressourceSelections(configurationServeur.entrepôtSélectionsMesure),
+  );
 
   return router;
 };
