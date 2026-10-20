@@ -39,6 +39,7 @@ export interface ConfigurationServeur {
   entrepotSelectionsEnseignants: EntrepotSelections;
   entrepotSelectionsEleves: EntrepotSelections;
   entrepôtSélectionsEntrainement: EntrepotSelections;
+  entrepôtSélectionsMesure: EntrepotSelections;
   adaptateurGestionErreur: AdaptateurGestionErreur;
 }
 
