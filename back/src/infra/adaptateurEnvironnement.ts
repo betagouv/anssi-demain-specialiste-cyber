@@ -21,6 +21,7 @@ export type AdaptateurEnvironnement = {
     metiers: () => TableGrist;
     selectionsEnseignants: () => TableGrist;
     selectionsEleves(): TableGrist;
+    selectionsEntrainement(): TableGrist;
   };
   oidc: () => OIDC;
   hachage: () => {
@@ -96,6 +97,9 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     selectionsEleves: () => ({
       idTable: process.env.GRIST_SELECTION_ELEVES_ID_TABLE || '',
+    }),
+    selectionsEntrainement: () => ({
+      idTable: process.env.GRIST_SELECTION_ENTRAINEMENT_ID_TABLE || '',
     }),
   }),
   hachage: () => ({

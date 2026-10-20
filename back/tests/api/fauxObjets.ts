@@ -83,6 +83,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     metiers: () => ({ idTable: '' }),
     selectionsEnseignants: () => ({ idTable: '' }),
     selectionsEleves: () => ({ idTable: '' }),
+    selectionsEntrainement: () => ({ idTable: '' }),
   }),
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
@@ -190,6 +191,7 @@ export const configurationServeurSansMiddleware =
       adaptateurAntivirus: fauxAdaptateurAntivirus(),
       entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
       entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
+      entrepôtSélectionsEntrainement: new EntrepotSelectionsMemoire(),
       adaptateurGestionErreur: fauxAdaptateurGestionErreur,
     };
   };

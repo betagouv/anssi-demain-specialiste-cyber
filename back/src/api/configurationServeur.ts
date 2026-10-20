@@ -38,6 +38,7 @@ export interface ConfigurationServeur {
   adaptateurAntivirus: AdaptateurAntivirus;
   entrepotSelectionsEnseignants: EntrepotSelections;
   entrepotSelectionsEleves: EntrepotSelections;
+  entrepôtSélectionsEntrainement: EntrepotSelections;
   adaptateurGestionErreur: AdaptateurGestionErreur;
 }
 
