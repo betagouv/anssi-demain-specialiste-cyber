@@ -1,0 +1,31 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Se former et s'entraîner en ligne"
+  - var descriptionPage = "Pas besoin d'être un·e pro du numérique ! Des experts, des spécialistes et des passionné·es ont construit les parcours de cette page pour t'aider à y voir plus clair et à tracer ta route."
+  - var classePage = "page-se-former"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'se-former', label: "Se former et s'entraîner", href: '#' }
+
+block heros
+  dsc-heros(
+    variant= "clair"
+    ariane= ariane
+  )
+    h1.titre-alternatif-xs(slot="titre") #{titrePage}
+    p.fr-text--lg(slot="description") #{descriptionPage}
+    .actions
+      dsfr-button(
+        label="Tester mes connaissances"
+        kind="primary"
+        markup="a"
+        href="#"
+        target="_self"
+      )
+    img.illustration(slot="illustration" src="/assets/images/se-former/illustration-hero.svg" alt="")
+
+block contenu
+  dsc-se-former
+
+block apres-contenu
