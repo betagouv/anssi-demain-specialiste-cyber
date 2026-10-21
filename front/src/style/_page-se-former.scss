@@ -1,0 +1,93 @@
+@use 'points-de-rupture' as *;
+@use 'grille' as *;
+
+.page-se-former {
+  --yellow-moutarde-975: var(--background-alt-yellow-moutarde);
+  --pink-tuile-975: var(--background-alt-pink-tuile);
+
+  dsc-heros:not(:defined) {
+    display: none;
+  }
+
+  .illustration-hero {
+    max-width: 100%;
+  }
+
+  // Section "Introduction"
+  .introduction {
+    padding-block: 6rem;
+  }
+
+  .introduction-contenu {
+    margin-inline: auto;
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(8);
+    }
+  }
+
+  .introduction-titre,
+  .commencer-titre {
+    @include a-partir-de(lg) {
+      margin-block-end: 2rem;
+      text-align: center;
+    }
+  }
+
+  // Section "Fonctionnalités"
+  .fonctionnalites {
+    background-color: var(--background-alt-pink-tuile);
+    padding-block: 4.5rem;
+  }
+
+  .commencer {
+    padding-block-start: 3rem;
+
+    lab-anssi-filtres {
+      display: block;
+      margin-block-end: 3rem;
+    }
+  }
+
+  // Section "Métiers"
+  .metiers {
+    background-color: var(--pink-tuile-main-556);
+    padding-block: 72px;
+  }
+
+  .metiers-grille {
+    display: grid;
+    gap: 0;
+
+    @include a-partir-de(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .metiers-cartes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .metiers-illustration {
+    img {
+      display: none;
+
+      @include a-partir-de(lg) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  // Section "Enseignant"
+  .enseignant {
+    background-color: var(--background-alt-blue-france);
+    padding-block: 3rem;
+  }
+}
