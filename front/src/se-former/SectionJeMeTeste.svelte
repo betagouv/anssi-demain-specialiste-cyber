@@ -205,7 +205,7 @@
     gap: 1.5rem;
 
     @include a-partir-de(lg) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: minmax(0, 21.313rem) repeat(2, 1fr);
     }
 
     &-comment {
