@@ -152,11 +152,6 @@
   brandService={TITRE_DSC_SECABLE}
   brandLinkTitle="Retour à l'accueil du site - {TITRE_DSC_SECABLE} - République Française"
   brandLinkHref="/"
-  hasBrandTagline="true"
-  brandTagline="Innovation ANSSI"
-  hasBrandOperator="true"
-  brandOperatorAlt="ANSSI"
-  brandOperatorSrc="/assets/images/ANSSI.avif"
   menuId="menu-principal"
   menuModalId="menu-principal-modal"
   hasToolLinks={!sansZoneIdentification}
