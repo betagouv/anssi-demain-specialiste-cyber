@@ -65,6 +65,13 @@
     });
   };
 
+  const estUnFondSombre = (couleurDeFond: string | undefined) => {
+    return (
+      couleurDeFond === 'pink-tuile-sun-425-moon-750' ||
+      couleurDeFond === 'blue-ecume-sun-247-moon-675'
+    );
+  };
+
   onMount(async () => {
     const reponse = await axios.get<Selection[]>(`/api/selections-${cible}`);
     selections = reponse.data;
@@ -87,7 +94,10 @@
       : ''}
   >
     <dsfr-container>
-      <div class="conteneur" class:sombre={selection.couleurDeFond}>
+      <div
+        class="conteneur"
+        class:sombre={estUnFondSombre(selection.couleurDeFond)}
+      >
         <hgroup>
           <h2>{selection.titre}</h2>
           <p class="fr-text--lg">{selection.explication}</p>
