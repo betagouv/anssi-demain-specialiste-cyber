@@ -13,13 +13,12 @@
       </div>
 
       <p class="texte-standard-md">
-        Organisé par le Commandement de la Cyberdéfense et le Ministère de
-        l’Éducation (COMCYBER), ce challenge est ouvert à tous les élèves
-        scolarisés dans des lycées français en équipes avec un objectif de
-        mixité&nbsp;! Le challenge distingue les équipes selon les profils de
-        filières, générales et technologiques, professionnelles et du supérieur
-        en lycée (prépa, certificat de spécialisation cyber et BTS CIEL et BTS
-        SIO en lycée).
+        Organisé par le Commandement de la Cyberdéfense <abbr>(COMCYBER)</abbr> et
+        le Ministère de l’Éducation, ce challenge est ouvert à tous les élèves scolarisés
+        dans des lycées français en équipes avec un objectif de mixité&nbsp;! Le challenge
+        distingue les équipes selon les profils de filières, générales et technologiques,
+        professionnelles et du supérieur en lycée (prépa, certificat de spécialisation
+        cyber et BTS CIEL et BTS SIO en lycée).
       </p>
 
       <dsfr-highlight text="ignoré">
