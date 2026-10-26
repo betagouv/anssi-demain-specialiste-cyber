@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/betagouv/anssi-demain-specialiste-cyber.git"
   },
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
