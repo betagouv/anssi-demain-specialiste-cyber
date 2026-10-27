@@ -20,6 +20,7 @@ import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { AdaptateurRechercheEntrepriseApiGouv } from './infra/adaptateurRechercheEntreprise';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
+import { EntrepôtFamillesDeMétierGrist } from './infra/entrepotFamillesDeMetierGrist';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
@@ -119,6 +120,7 @@ serviceCoherenceSecretsHachage
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsMesure(),
         ),
+        entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

@@ -27,6 +27,7 @@ import { EntrepotMetiersMemoire } from '../infra/entrepotMetiersMemoire';
 import { EntrepotRessourcesCyberMemoire } from '../infra/entrepotRessourceCyberMemoire';
 import { EntrepotSelectionsMemoire } from '../infra/entrepotSelectionsMemoire';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
+import { EntrepôtFamillesDeMétierMémoire } from './entrepotFamillesDeMetierMemoire';
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
   recupereInformationsUtilisateur: async (_accessToken: string) => ({
@@ -195,6 +196,7 @@ export const configurationServeurSansMiddleware =
       entrepôtSélectionsEntrainement: new EntrepotSelectionsMemoire(),
       entrepôtSélectionsMesure: new EntrepotSelectionsMemoire(),
       adaptateurGestionErreur: fauxAdaptateurGestionErreur,
+      entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierMémoire(),
     };
   };
 

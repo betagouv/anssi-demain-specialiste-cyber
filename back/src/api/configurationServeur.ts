@@ -8,6 +8,7 @@ import { AdaptateurJournal } from '../infra/adaptateurJournal';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { AdaptateurTeleversement } from '../infra/adaptateurTeleversement';
 import { RecupereCheminVersFichiersStatiques } from '../infra/recupereCheminVersFichiersStatiques';
+import { EntrepôtFamillesDeMétier } from '../metier/entrepotFamillesDeMetier';
 import { EntrepotJeux } from '../metier/entrepotJeux';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
@@ -41,6 +42,7 @@ export interface ConfigurationServeur {
   entrepôtSélectionsEntrainement: EntrepotSelections;
   entrepôtSélectionsMesure: EntrepotSelections;
   adaptateurGestionErreur: AdaptateurGestionErreur;
+  entrepôtFamillesDeMétier: EntrepôtFamillesDeMétier;
 }
 
 export type ConfigurationServeurSansMiddleware = Omit<
