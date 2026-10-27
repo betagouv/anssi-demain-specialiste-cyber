@@ -41,6 +41,16 @@
       "groupName": "AWS SDK"
     },
     {
+      "description": "Regroupe les mises à jour typescript-eslint",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "typescript-eslint",
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser"
+      ],
+      "groupName": "typescript-eslint"
+    },
+    {
       "description": "Keep Sentry on major version 10",
       "matchPackageNames": ["@sentry/node", "@sentry/browser"],
       "allowedVersions": ">=10 <11"
