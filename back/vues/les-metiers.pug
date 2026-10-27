@@ -1,0 +1,35 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Les métiers de la cyber"
+  - var descriptionPage = "La cybersécurité, ce n'est pas un métier, c'est tout un univers. Trouve le profil qui te ressemble et écoute celles et ceux qui en ont fait leur quotidien."
+  - var classePage = "page-les-metiers"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'les-metiers', label: "Les métiers de la cyber", href: '#' }
+
+block heros
+    dsc-heros(
+        variant= "clair"
+        ariane= ariane
+    )
+        h1.titre-principal.titre-alternatif-xs(slot="titre") Quel métier de la cyber est fait pour toi ?
+        p.description.fr-text--lg(slot="description") #{descriptionPage}
+        .actions
+            dsfr-button(
+                label="Découvrir mon profil cyber"
+                kind="primary"
+                markup="a"
+                href="#je-me-repere"
+            )
+            dsfr-button(
+                label="Explorer tous les métiers"
+                kind="secondary"
+                markup="a"
+                href="#j-explore"
+            )
+
+block contenu
+    dsc-les-metiers
+
+    block apres-contenu
