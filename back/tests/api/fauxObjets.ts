@@ -86,6 +86,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     selectionsEleves: () => ({ idTable: '' }),
     selectionsEntrainement: () => ({ idTable: '' }),
     selectionsMesure: () => ({ idTable: '' }),
+    famillesDeMétier: () => ({ idTable: '' }),
   }),
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
