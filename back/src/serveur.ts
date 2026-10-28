@@ -73,13 +73,15 @@ serviceCoherenceSecretsHachage
     const entrepotRessourcesCyber = new EntrepotRessourcesCyberGrist();
     const adaptateurGestionErreur = fabriqueAdaptateurGestionErreur();
 
+    const entrepotMetier = new EntrepotMetiersGrist();
+
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
         adaptateurEnvironnement,
         adaptateurGestionErreur,
         adaptateurOIDC,
         serveurLab: configurationServeurLabEnvironnement(),
-        entrepotMetier: new EntrepotMetiersGrist(),
+        entrepotMetier,
         entrepotRessourcesCyber,
         adaptateurJWT,
         adaptateurHachage,
@@ -120,7 +122,9 @@ serviceCoherenceSecretsHachage
           entrepotRessourcesCyber,
           adaptateurEnvironnement.grist().selectionsMesure(),
         ),
-        entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(),
+        entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(
+          entrepotMetier,
+        ),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

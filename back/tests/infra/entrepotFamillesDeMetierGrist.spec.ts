@@ -5,10 +5,12 @@ import {
   FamilleDeMetierGrist,
 } from '../../src/infra/entrepotFamillesDeMetierGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
+import { unMetier } from '../metier/constructeurMetier';
 import {
   ConstructeurLigneGristFamillesDeMetier,
   ConstructeurRéponseFamillesDeMétierGrist,
 } from './constructeurDeFamillesDeMetierGrist';
+import { EntrepotMetiersMemoire } from './entrepotMetiersMemoire';
 
 describe('L’entrepôt des familles de métier grist', () => {
   describe('sur demande de toutes les familles', () => {
@@ -21,6 +23,7 @@ describe('L’entrepôt des familles de métier grist', () => {
         return { records: [] };
       };
       const entrepotRessourcesCyberGrist = new EntrepôtFamillesDeMétierGrist(
+        new EntrepotMetiersMemoire(),
         clientHttp,
       );
 
@@ -65,7 +68,10 @@ describe('L’entrepôt des familles de métier grist', () => {
               .construis(),
           )
           .construis();
-      const entrepôt = new EntrepôtFamillesDeMétierGrist(famillesDeMetierGrist);
+      const entrepôt = new EntrepôtFamillesDeMétierGrist(
+        new EntrepotMetiersMemoire(),
+        famillesDeMetierGrist,
+      );
 
       const familles = await entrepôt.tous();
 
@@ -79,6 +85,39 @@ describe('L’entrepôt des familles de métier grist', () => {
         { nom: 'Chiffrer', description: 'Protéger la confidentialité' },
         { nom: 'Maintenir', description: 'Administrer et mettre à jour' },
       ]);
+    });
+
+    it('sait associer les profils', async () => {
+      const famillesDeMetierGrist: RecupereRessourceHttp<
+        ReponseGrist<FamilleDeMetierGrist>
+      > = async () =>
+        new ConstructeurRéponseFamillesDeMétierGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFamillesDeMetier()
+              .avecColonneEtValeur('Tuile_1', 'A / B')
+              .avecColonneEtValeur('Tuile_2', 'A / B')
+              .avecColonneEtValeur('Tuile_3', 'A / B')
+              .avecColonneEtListeDeValeurs('Profils_de_cette_famille', [13, 17])
+              .construis(),
+          )
+          .construis();
+      const entrepôtMétiers = new EntrepotMetiersMemoire();
+      await entrepôtMétiers.ajoute(
+        unMetier().avecId(13).avecTitre('A').construis(),
+      );
+      await entrepôtMétiers.ajoute(
+        unMetier().avecId(17).avecTitre('B').construis(),
+      );
+      const entrepôt = new EntrepôtFamillesDeMétierGrist(
+        entrepôtMétiers,
+        famillesDeMetierGrist,
+      );
+
+      const familles = await entrepôt.tous();
+
+      expect(familles[0].profils).toHaveLength(2);
+      expect(familles[0].profils[0].titre).toBe('A');
+      expect(familles[0].profils[1].titre).toBe('B');
     });
   });
 });

@@ -37,6 +37,10 @@ export class EntrepotMetiersGrist
     super(metierGrist, grist.idDocument, grist.metiers().idTable);
   }
 
+  async tous(): Promise<Metier[]> {
+    return [];
+  }
+
   async parIdentifiant(identifiant: number): Promise<Metier | undefined> {
     const reponse = await this.appelleGrist({ Id_Metier: [identifiant] });
     if (!reponse.records || reponse.records.length === 0) {
