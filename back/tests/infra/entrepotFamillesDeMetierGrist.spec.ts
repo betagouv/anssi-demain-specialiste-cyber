@@ -6,11 +6,13 @@ import {
 } from '../../src/infra/entrepotFamillesDeMetierGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import { unMetier } from '../metier/constructeurMetier';
+import { uneRessourceCyber } from '../metier/constructeurRessourceCyber';
 import {
   ConstructeurLigneGristFamillesDeMetier,
   ConstructeurRéponseFamillesDeMétierGrist,
 } from './constructeurDeFamillesDeMetierGrist';
 import { EntrepotMetiersMemoire } from './entrepotMetiersMemoire';
+import { EntrepotRessourcesCyberMemoire } from './entrepotRessourceCyberMemoire';
 
 describe('L’entrepôt des familles de métier grist', () => {
   describe('sur demande de toutes les familles', () => {
@@ -24,6 +26,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       };
       const entrepotRessourcesCyberGrist = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
+        new EntrepotRessourcesCyberMemoire(),
         clientHttp,
       );
 
@@ -70,6 +73,7 @@ describe('L’entrepôt des familles de métier grist', () => {
           .construis();
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
+        new EntrepotRessourcesCyberMemoire(),
         famillesDeMetierGrist,
       );
 
@@ -110,6 +114,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       );
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         entrepôtMétiers,
+        new EntrepotRessourcesCyberMemoire(),
         famillesDeMetierGrist,
       );
 
@@ -118,6 +123,40 @@ describe('L’entrepôt des familles de métier grist', () => {
       expect(familles[0].profils).toHaveLength(2);
       expect(familles[0].profils[0].titre).toBe('A');
       expect(familles[0].profils[1].titre).toBe('B');
+    });
+
+    it('sait associer les ressources', async () => {
+      const famillesDeMetierGrist: RecupereRessourceHttp<
+        ReponseGrist<FamilleDeMetierGrist>
+      > = async () =>
+        new ConstructeurRéponseFamillesDeMétierGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFamillesDeMetier()
+              .avecColonneEtValeur('Tuile_1', 'A / B')
+              .avecColonneEtValeur('Tuile_2', 'A / B')
+              .avecColonneEtValeur('Tuile_3', 'A / B')
+              .avecColonneEtListeDeValeurs('Ressources_associees', [3, 112])
+              .construis(),
+          )
+          .construis();
+      const entrepôtRessourcesCyber = new EntrepotRessourcesCyberMemoire();
+      await entrepôtRessourcesCyber.ajoute(
+        uneRessourceCyber().avecId(3).avecTitre('Passe ton Hack').construis(),
+      );
+      await entrepôtRessourcesCyber.ajoute(
+        uneRessourceCyber().avecId(112).avecTitre('Cyber Guide').construis(),
+      );
+      const entrepôt = new EntrepôtFamillesDeMétierGrist(
+        new EntrepotMetiersMemoire(),
+        entrepôtRessourcesCyber,
+        famillesDeMetierGrist,
+      );
+
+      const familles = await entrepôt.tous();
+
+      expect(familles[0].ressourcesAssociées).toHaveLength(2);
+      expect(familles[0].ressourcesAssociées[0].titre).toBe('Passe ton Hack');
+      expect(familles[0].ressourcesAssociées[1].titre).toBe('Cyber Guide');
     });
   });
 });

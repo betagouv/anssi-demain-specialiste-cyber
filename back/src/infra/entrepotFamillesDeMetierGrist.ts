@@ -1,5 +1,6 @@
 import { EntrepôtFamillesDeMétier } from '../metier/entrepotFamillesDeMetier';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
+import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { FamilleDeMétier } from '../metier/familleDeMetier';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
@@ -15,6 +16,7 @@ export type FamilleDeMetierGrist = {
     Tuile_2: string;
     Tuile_3: string;
     Profils_de_cette_famille: number[];
+    Ressources_associees: number[];
   };
 };
 
@@ -26,6 +28,7 @@ export class EntrepôtFamillesDeMétierGrist
 
   constructor(
     entrepôtMétiers: EntrepotMetiers,
+    entrepôtRessourcesCyber: EntrepotRessourcesCyber,
     famillesDeMetierGrist: RecupereRessourceHttp<
       ReponseGrist<FamilleDeMetierGrist>
     > = creeRecupereRessourceHttp(),
@@ -35,11 +38,13 @@ export class EntrepôtFamillesDeMétierGrist
       adaptateurEnvironnement.grist().idDocument,
       adaptateurEnvironnement.grist().famillesDeMétier().idTable,
     );
+    this.entrepôtRessourcesCyber = entrepôtRessourcesCyber;
     this.entrepôtMétiers = entrepôtMétiers;
   }
 
   async tous(): Promise<FamilleDeMétier[]> {
     const métiers = await this.entrepôtMétiers.tous();
+    const ressourcesCyber = await this.entrepôtRessourcesCyber.tous();
 
     const réponse = await this.appelleGrist();
     return réponse.records.map(
@@ -59,6 +64,11 @@ export class EntrepôtFamillesDeMétierGrist
           )
             .map((profil) => métiers.find((m) => m.id === profil))
             .filter((m) => m !== undefined),
+          ressourcesAssociées: this.aseptiseListe(
+            familleGrist.fields.Ressources_associees,
+          )
+            .map((r) => ressourcesCyber.find((ressource) => ressource.id === r))
+            .filter((r) => r !== undefined),
         }),
     );
   }
@@ -68,4 +78,5 @@ export class EntrepôtFamillesDeMétierGrist
       description: champ.split('/')[1].trim(),
     };
   };
+  private entrepôtRessourcesCyber: EntrepotRessourcesCyber;
 }
