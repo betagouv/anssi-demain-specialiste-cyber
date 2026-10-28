@@ -124,6 +124,7 @@ serviceCoherenceSecretsHachage
         ),
         entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(
           entrepotMetier,
+          entrepotRessourcesCyber,
         ),
       };
     const configurationServeur: ConfigurationServeur = {
