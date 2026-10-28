@@ -10,6 +10,7 @@ export default defineConfig({
       GRIST_CLE_API: 'ma_cle_api',
       GRIST_ID_DOCUMENT: 'mon_id_document',
       GRIST_RESSOURCES_CYBER_ID_TABLE: 'mon_id_table',
+      GRIST_FAMILLES_METIER_ID_TABLE: 'id_table_familles_metier',
     },
   },
 });
