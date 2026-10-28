@@ -33,4 +33,29 @@ describe("L'entrepôt de métiers Grist ", () => {
       'https://example.com/video2.mp4',
     ]);
   });
+
+  it('sait lire tous les métiers', async () => {
+    const metiersGrist: RecupereRessourceHttp<
+      ReponseGrist<MetierGrist>
+    > = async () =>
+      new ConstructeurReponseMetiersGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGristMetiers()
+            .avecColonneEtValeur('Titre_de_la_fiche', 'Hacker')
+            .construis(),
+        )
+        .ajouteUneLigne(
+          new ConstructeurLigneGristMetiers()
+            .avecColonneEtValeur('Titre_de_la_fiche', 'Responsable')
+            .construis(),
+        )
+        .construis();
+    const entrepotMetiers = new EntrepotMetiersGrist(metiersGrist);
+
+    const métiers = await entrepotMetiers.tous();
+
+    expect(métiers).toHaveLength(2);
+    expect(métiers[0].titre).toBe('Hacker');
+    expect(métiers[1].titre).toBe('Responsable');
+  });
 });

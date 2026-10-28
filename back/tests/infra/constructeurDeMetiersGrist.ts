@@ -5,6 +5,11 @@ import { ConstructeurLigneGrist, LigneGrist } from './grist';
 export type LigneMetier = LigneGrist & MetierGrist;
 
 export class ConstructeurLigneGristMetiers extends ConstructeurLigneGrist<LigneMetier> {
+  constructor() {
+    super();
+    this.avecColonneEtValeur('lien_video', '');
+  }
+
   avecColonneVideos(videos: string): ConstructeurLigneGristMetiers {
     this.avecColonneEtValeur('lien_video', videos);
     return this;
