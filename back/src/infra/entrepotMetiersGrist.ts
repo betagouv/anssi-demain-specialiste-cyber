@@ -38,7 +38,8 @@ export class EntrepotMetiersGrist
   }
 
   async tous(): Promise<Metier[]> {
-    return [];
+    const réponse = await this.appelleGrist();
+    return réponse.records.map((mg) => this.reconstitueMétier(mg));
   }
 
   async parIdentifiant(identifiant: number): Promise<Metier | undefined> {
@@ -46,35 +47,32 @@ export class EntrepotMetiersGrist
     if (!reponse.records || reponse.records.length === 0) {
       return undefined;
     }
-    const enregistrement = reponse.records[0];
-    return {
-      id: enregistrement.id,
-      titre: enregistrement.fields.Titre_de_la_fiche,
-      fonction: enregistrement.fields.Fonction_de_la_fiche,
-      description: enregistrement.fields.En_quoi_consiste_le_metier_,
-      missionPrincipale: enregistrement.fields.Mission_principale,
-      postures: this.aseptiseListe(enregistrement.fields.Postures),
-      formationsCibles: this.aseptiseListe(
-        enregistrement.fields.Formation_cible,
-      ),
-      preRequis: this.aseptiseListe(
-        enregistrement.fields.Autre_prerequis_possibles,
-      ),
-      remuneration: {
-        junior: enregistrement.fields.Salaire_junior_annuel_brut_,
-        senior: enregistrement.fields.Salaire_senior_annuel_brut_,
-      },
-      metiersProches: this.aseptiseListe(enregistrement.fields.Metiers_proches),
-      liens: {
-        illustration: enregistrement.fields.URL_illustration,
-        dataemploi: enregistrement.fields.Fiche_data_emploi,
-        metierscope: enregistrement.fields.Fiche_metierscope,
-        videos: enregistrement.fields.lien_video
-          .split('\n')
-          .filter((url) => url.trim()),
-      },
-    };
+    return this.reconstitueMétier(reponse.records[0]);
   }
+
+  private reconstitueMétier = (metierGrist: MetierGrist) => ({
+    id: metierGrist.id,
+    titre: metierGrist.fields.Titre_de_la_fiche,
+    fonction: metierGrist.fields.Fonction_de_la_fiche,
+    description: metierGrist.fields.En_quoi_consiste_le_metier_,
+    missionPrincipale: metierGrist.fields.Mission_principale,
+    postures: this.aseptiseListe(metierGrist.fields.Postures),
+    formationsCibles: this.aseptiseListe(metierGrist.fields.Formation_cible),
+    preRequis: this.aseptiseListe(metierGrist.fields.Autre_prerequis_possibles),
+    remuneration: {
+      junior: metierGrist.fields.Salaire_junior_annuel_brut_,
+      senior: metierGrist.fields.Salaire_senior_annuel_brut_,
+    },
+    metiersProches: this.aseptiseListe(metierGrist.fields.Metiers_proches),
+    liens: {
+      illustration: metierGrist.fields.URL_illustration,
+      dataemploi: metierGrist.fields.Fiche_data_emploi,
+      metierscope: metierGrist.fields.Fiche_metierscope,
+      videos: metierGrist.fields.lien_video
+        .split('\n')
+        .filter((url) => url.trim()),
+    },
+  });
 
   async ajoute(_metier: Metier): Promise<void> {
     throw new Error('Pas supporté');
