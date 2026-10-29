@@ -1,78 +1,35 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
+  import {
+    compteFonctionsParFamille,
+    famillesUniques,
+    type FonctionMetier,
+  } from './fonctionMetier.type';
+  import { fonctionsMetierStore } from './stores/fonctionsMetier.store';
 
-  type FamillePortrait =
-    | 'pilotage'
-    | 'conception'
-    | 'incidents-et-crises'
-    | 'conseil-et-recherche'
-    | 'metiers-connexes';
-
-  type Portrait = {
-    nom: string;
-    metier: string;
-    famille: FamillePortrait;
-    image: string;
-  };
-
-  type TagFiltre = {
-    id: string;
-    label: string;
-  };
-
-  let familleActive: FamillePortrait = $state('incidents-et-crises');
-  let femmesCyberUniquement: boolean = $state(false);
+  let chargementEnCours = $state(false);
+  let erreurChargement = $state(false);
+  let fonctions: FonctionMetier[] = $state([]);
+  let familleActive: string = $state('Incidents et crises');
   let tagsGroupEl: HTMLElement | undefined = $state();
 
-  const tagsFiltres: TagFiltre[] = [
-    { id: 'pilotage', label: 'Pilotage (3)' },
-    { id: 'conception', label: 'Conception (2)' },
-    { id: 'incidents-et-crises', label: 'Incidents et crises (6)' },
-    { id: 'conseil-et-recherche', label: 'Conseils et recherche (6)' },
-    { id: 'metiers-connexes', label: 'Métiers connexes (3)' },
-  ];
+  fonctionsMetierStore.subscribe((valeur) => {
+    fonctions = valeur;
+  });
 
-  const portraits: Portrait[] = [
-    {
-      nom: 'Stéphanie Ledoux',
-      metier: 'Gestionnaire de crise cyber',
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-stephanie-ledoux.png',
-    },
-    {
-      nom: 'Archibald Thirion',
-      metier: 'Analyste SOC (security operation center)',
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-archibald-thirion.png',
-    },
-    {
-      nom: 'Chloé Maque',
-      metier: 'Premier-maître, analyste forensique systèmes',
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-chloe-maque.png',
-    },
-    {
-      nom: 'Thibault Seret',
-      metier: 'Analyste de la menace en cybersécurité',
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-thibault-seret.png',
-    },
-    {
-      nom: 'Marine Martin',
-      metier: "Responsable de l'équipe réponse aux incidents",
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-marine-martin.png',
-    },
-    {
-      nom: 'Tristan Manzano',
-      metier: 'Analyste réponse aux incidents de sécurité',
-      famille: 'incidents-et-crises',
-      image: '/assets/images/les-metiers/portrait-tristan-manzano.png',
-    },
-  ];
+  let comptesParFamille = $derived(compteFonctionsParFamille(fonctions));
+  let familles = $derived(famillesUniques(fonctions));
 
-  let portraitsFiltres = $derived(
-    portraits.filter((p) => p.famille === familleActive),
+  let tagsFiltres = $derived(
+    familles.map((famille) => ({
+      id: famille,
+      label: `${famille} (${comptesParFamille.get(famille) ?? 0})`,
+    })),
+  );
+
+  let fonctionsFiltrees = $derived(
+    fonctions.filter((f) => f.famille === familleActive),
   );
 
   function synchroniseTagsActifs() {
@@ -85,8 +42,7 @@
   }
 
   function gereSelection(e: CustomEvent<string>) {
-    familleActive = e.detail as FamillePortrait;
-
+    familleActive = e.detail;
     synchroniseTagsActifs();
   }
 
@@ -94,7 +50,21 @@
     synchroniseTagsActifs();
   }
 
-  onMount(() => {
+  onMount(async () => {
+    chargementEnCours = true;
+    try {
+      // TODO: remplacer par /api/fonctions quand l'API sera prête
+      const reponse = await axios.get<FonctionMetier[]>(
+        '/donnees/fonctions-metier.json',
+      );
+      fonctionsMetierStore.initialise(reponse.data);
+    } catch (e) {
+      erreurChargement = true;
+      console.error(e);
+    } finally {
+      chargementEnCours = false;
+    }
+
     synchroniseTagsActifs();
   });
 </script>
@@ -110,39 +80,49 @@
       </p>
     </div>
 
-    <div class="j-ecoute-les-pros-filtres">
-      <dsfr-tags-group
-        bind:this={tagsGroupEl}
-        type="pressable"
-        tags={tagsFiltres}
-        group-markup="div"
-        onselected={gereSelection}
-        onunselected={gereDeselection}
-      ></dsfr-tags-group>
-    </div>
+    {#if chargementEnCours}
+      <div class="j-ecoute-les-pros-chargement">
+        <p>Chargement des portraits…</p>
+      </div>
+    {:else if erreurChargement}
+      <div class="j-ecoute-les-pros-erreur">
+        <p>Impossible de charger les portraits.</p>
+      </div>
+    {:else}
+      <div class="j-ecoute-les-pros-filtres">
+        <dsfr-tags-group
+          bind:this={tagsGroupEl}
+          type="pressable"
+          tags={tagsFiltres}
+          group-markup="div"
+          onselected={gereSelection}
+          onunselected={gereDeselection}
+        ></dsfr-tags-group>
+      </div>
 
-    <div class="j-ecoute-les-pros-grille">
-      {#each portraitsFiltres as portrait, index}
-        <dsfr-card
-          title={portrait.nom}
-          has-tag
-          has-detail-end
-          detail-end="Accéder au témoignage"
-          size="md"
-          src={portrait.image}
-          href="https://www.onisep.fr/les-metiers-de-la-cybersecurite"
-          enlarge
-          blank
-        >
-          <dsfr-tags-group
-            slot="tagsgroup"
-            tags={[{ id: `tag-${index}`, label: `${portrait.metier}` }]}
-            size="sm"
-            group-markup="div"
-          ></dsfr-tags-group>
-        </dsfr-card>
-      {/each}
-    </div>
+      <div class="j-ecoute-les-pros-grille">
+        {#each fonctionsFiltrees as fonction, index}
+          <dsfr-card
+            title={fonction.témoignage.nom}
+            has-tag
+            has-detail-end
+            detail-end="Accéder au témoignage"
+            size="md"
+            src={fonction.témoignage.illustration}
+            href={fonction.témoignage.lien}
+            enlarge
+            blank
+          >
+            <dsfr-tags-group
+              slot="tagsgroup"
+              tags={[{ id: `tag-${index}`, label: fonction.nom }]}
+              size="sm"
+              group-markup="div"
+            ></dsfr-tags-group>
+          </dsfr-card>
+        {/each}
+      </div>
+    {/if}
   </div>
 </dsfr-container>
 
@@ -156,6 +136,14 @@
 
     &-chapeau {
       margin-block-end: 0;
+    }
+
+    &-chargement,
+    &-erreur {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      color: var(--text-mention-grey);
     }
 
     &-filtres {

@@ -1,0 +1,242 @@
+[
+  {
+    "nom": "Gestionnaire de crise cyber",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Organise la réponse de l'organisation face à une cyberattaque majeure, coordonne les équipes et pilote le retour à la normale.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Stéphanie Ledoux",
+      "femme": true,
+      "illustration": "/assets/images/les-metiers/portrait-stephanie-ledoux.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Analyste SOC (security operation center)",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Surveille en continu les systèmes d'information pour détecter les activités suspectes et les incidents de sécurité.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Archibald Thirion",
+      "femme": false,
+      "illustration": "/assets/images/les-metiers/portrait-archibald-thirion.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Analyste forensique systèmes",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Mène des investigations numériques pour comprendre comment une attaque s'est produite et en collecter les preuves.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Chloé Maque",
+      "femme": true,
+      "illustration": "/assets/images/les-metiers/portrait-chloe-maque.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Analyste de la menace en cybersécurité",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Étudie les modes opératoires des attaquants, leurs cibles et leurs motivations pour anticiper de nouvelles attaques.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Thibault Seret",
+      "femme": false,
+      "illustration": "/assets/images/les-metiers/portrait-thibault-seret.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Responsable de l'équipe réponse aux incidents",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Dirige l'équipe chargée de répondre aux incidents de sécurité et coordonne les actions de remédiation.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Marine Martin",
+      "femme": true,
+      "illustration": "/assets/images/les-metiers/portrait-marine-martin.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Analyste réponse aux incidents de sécurité",
+    "famille": "Incidents et crises",
+    "missionPrincipale": "Intervient lors d'une cyberattaque pour analyser les symptômes, qualifier la compromission et fournir des recommandations de remédiation.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Tristan Manzano",
+      "femme": false,
+      "illustration": "/assets/images/les-metiers/portrait-tristan-manzano.png",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Responsable de la sécurité des systèmes d'information (RSSI)",
+    "famille": "Pilotage",
+    "missionPrincipale": "Définit et pilote la politique de sécurité des systèmes d'information de l'organisation.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Responsable de projet de sécurité",
+    "famille": "Pilotage",
+    "missionPrincipale": "Pilote les projets de cybersécurité, de la définition du besoin à la mise en production.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Sensibilisation et formation cyber",
+    "famille": "Pilotage",
+    "missionPrincipale": "Conçoit et anime les actions de sensibilisation à la cybersécurité auprès des collaborateurs.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Architecte sécurité",
+    "famille": "Conception",
+    "missionPrincipale": "Conçoit les architectures de sécurité des systèmes d'information en intégrant la protection dès la phase de conception.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Administratrice sécurité",
+    "famille": "Conception",
+    "missionPrincipale": "Installe, configure et maintient les équipements de sécurité du système d'information.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Cryptologue",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Met au point, avec des chercheurs du monde entier, des systèmes de chiffrement qui protègent nos usages numériques.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://messervices.cyber.gouv.fr/documents/onisep#page=11"
+    }
+  },
+  {
+    "nom": "Pentester",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Teste les systèmes d'information en simulant des attaques pour identifier les vulnérabilités avant les attaquants.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Consultante en cybersécurité",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Accompagne les organisations dans l'évaluation et l'amélioration de leur posture de sécurité.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Formatrice en cybersécurité",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Forme les professionnels aux techniques et aux bonnes pratiques de la cybersécurité.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Chercheuse en sécurité informatique",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Fait progresser les connaissances en cybersécurité et développe de nouvelles méthodes de protection.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Développeur de solutions de sécurité",
+    "famille": "Conseil et recherche",
+    "missionPrincipale": "Conçoit et développe les outils et logiciels de sécurité de demain.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Juriste en cybersécurité",
+    "famille": "Métiers connexes",
+    "missionPrincipale": "Veille au respect du cadre juridique en matière de cybersécurité et de protection des données.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": true,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Délégué à la protection des données (DPO)",
+    "famille": "Métiers connexes",
+    "missionPrincipale": "Garantit la conformité de l'organisation au RGPD et aux réglementations de protection des données.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  },
+  {
+    "nom": "Gestionnaire des risques",
+    "famille": "Métiers connexes",
+    "missionPrincipale": "Identifie, évalue et hiérarchise les risques cyber pour aider l'organisation à prendre les bonnes décisions.",
+    "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite",
+    "témoignage": {
+      "nom": "Portrait à venir",
+      "femme": false,
+      "illustration": "",
+      "lien": "https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+    }
+  }
+]
