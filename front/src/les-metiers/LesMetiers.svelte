@@ -15,6 +15,7 @@
   import SectionJeMeRepere from './SectionJeMeRepere.svelte';
   import SectionJeTraceMaRoute from './SectionJeTraceMaRoute.svelte';
   import SectionJExplore from './SectionJExplore.svelte';
+  import TestMetiersCyber from './TestMetiersCyber.svelte';
 
   type Categorie =
     'je-me-repere' | 'j-explore' | 'j-ecoute-les-pros' | 'je-trace-ma-route';
@@ -108,38 +109,7 @@
   });
 </script>
 
-<section class="test-metier">
-  <dsfr-container>
-    <div class="test-metier-encart">
-      <div class="test-metier-contenu">
-        <dsfr-badge label="2 minutes" accent="green-bourgeon"></dsfr-badge>
-
-        <h2 class="test-metier-titre fr-h1">
-          Quels métiers cyber sont faits pour toi&nbsp;?
-        </h2>
-        <p class="test-metier-description">
-          Réponds spontanément à 5 questions sur ta façon de penser et d'agir au
-          quotidien. À la fin, on te montrera le profil qui te correspond le
-          mieux.
-        </p>
-
-        <dsfr-button
-          label="Démarrer le test"
-          markup="a"
-          href="#je-me-repere"
-          size="lg"
-        ></dsfr-button>
-      </div>
-
-      <div class="test-metier-illustration">
-        <img
-          src="/assets/images/les-metiers/illustration-test-metiers-cyber.avif"
-          alt=""
-        />
-      </div>
-    </div>
-  </dsfr-container>
-</section>
+<TestMetiersCyber />
 
 <section class="onisep">
   <dsfr-container>
