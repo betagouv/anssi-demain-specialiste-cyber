@@ -18,57 +18,6 @@
     }
   }
 
-  // Section "Test métier"
-  .test-metier {
-    padding-block: 4.5rem;
-  }
-
-  .test-metier-encart {
-    background-color: var(--pink-tuile-sun-425-moon-750);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    display: grid;
-
-    @include a-partir-de(lg) {
-      grid-template-columns: 1fr 1fr;
-      min-height: 31.5rem;
-    }
-  }
-
-  .test-metier-contenu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 2.5rem;
-  }
-
-  .test-metier-titre {
-    color: var(--text-inverted-grey);
-    margin-block-end: 0;
-  }
-
-  .test-metier-description {
-    color: var(--background-alt-pink-tuile);
-    font-size: 1.25rem;
-    line-height: 2rem;
-    margin-block-end: 0;
-  }
-
-  .test-metier-illustration {
-    display: none;
-
-    @include a-partir-de(lg) {
-      display: block;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-
   // Section "Onisep"
   .onisep {
     background-color: var(--background-alt-pink-tuile);
