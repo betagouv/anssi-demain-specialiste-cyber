@@ -1,0 +1,247 @@
+[
+  {
+    "code": "Pilotage",
+    "titre": "Gestion de la sécurité et pilotage des projets de sécurité",
+    "sousTitre": "Organiser, piloter, sensibiliser : les métiers de celles et ceux qui fixent le cap de la cybersécurité dans leur organisation.",
+    "description": "La cybersécurité commence par une vision claire et un cadre solide. Cette famille réunit les métiers qui définissent la stratégie de sécurité, pilotent les projets, sensibilisent les équipes et font le lien avec la direction pour protéger l'organisation.",
+    "rôles": [
+      {
+        "nom": "Définir",
+        "description": "Élaborer la politique de sécurité et fixer les priorités."
+      },
+      {
+        "nom": "Piloter",
+        "description": "Coordonner les projets de sécurité et suivre leur avancement."
+      },
+      {
+        "nom": "Sensibiliser",
+        "description": "Former les collaborateurs aux bonnes pratiques et aux risques."
+      }
+    ],
+    "profils": [],
+    "fonctions": [],
+    "ressourcesAssociées": []
+  },
+  {
+    "code": "Conception",
+    "titre": "Conception et maintien d'un système d'information sécurisé",
+    "sousTitre": "Construire, chiffrer, administrer : les métiers de celles et ceux qui intègrent la sécurité dès la conception des systèmes.",
+    "description": "Un système d'information fiable se pense dès le départ. Cette famille réunit les métiers qui conçoivent des architectures sûres, chiffrent les données, administrent les outils de protection et veillent à ce que la sécurité soit intégrée à chaque étape du cycle de vie des systèmes.",
+    "rôles": [
+      {
+        "nom": "Concevoir",
+        "description": "Définir des architectures sécurisées dès la phase de conception."
+      },
+      {
+        "nom": "Intégrer",
+        "description": "Déployer les mécanismes de sécurité dans les systèmes existants."
+      },
+      {
+        "nom": "Maintenir",
+        "description": "Administrer et mettre à jour les dispositifs de protection au quotidien."
+      }
+    ],
+    "profils": [],
+    "fonctions": [],
+    "ressourcesAssociées": []
+  },
+  {
+    "code": "Incidents et crises",
+    "titre": "Gestion des incidents et des crises de sécurité",
+    "sousTitre": "Surveiller, détecter, enquêter, réagir : les métiers de celles et ceux qui montent au front quand une attaque survient.",
+    "description": "Aucune organisation n'est à l'abri d'une cyberattaque. Cette famille réunit les métiers qui repèrent les attaques le plus tôt possible, comprennent comment les attaquants s'y sont pris, remettent les systèmes en état et pilotent la crise quand elle éclate.",
+    "rôles": [
+      {
+        "nom": "Détecter",
+        "description": "Surveiller les systèmes en continu et repérer les signaux d'une attaque."
+      },
+      {
+        "nom": "Répondre",
+        "description": "Enquêter, stopper l'attaque, assainir les systèmes et gérer la crise."
+      },
+      {
+        "nom": "Anticiper",
+        "description": "Étudier les attaquants et leurs méthodes pour préparer les défenses."
+      }
+    ],
+    "profils": [
+      {
+        "id": 13,
+        "titre": "Analyste des cyber-menaces",
+        "fonction": "Détecter et prévenir les attaques",
+        "description": "Apprend à connaître et à reconnaître les cyberattaques pour mieux s'en protéger.\n\nIl étudie les modes opératoires des attaquants, leurs cibles, leurs motivations pour détecter et anticiper de nouvelles attaques et y faire face.",
+        "missionPrincipale": "L'analyste de la menace cybersécurité étudie l'évolution des motivations et des modes opératoires des attaquants afin de permettre à l'organisation d'ajuster sa stratégie de cybersécurité. À un niveau plus opérationnel et technique, il fournit aux CERT/ CSIRT et aux SOC des renseignements fiables et contextualisés leur permettant d'adapter et d'améliorer leurs moyens de prévention, de détection et de réponse à incident.",
+        "postures": [
+          "Capacité de travail en équipe",
+          "Sens éthique",
+          "Capacité à résister à la pression",
+          "Capacité à définir des procédures",
+          "Capacité de restitution au management"
+        ],
+        "formationsCibles": [
+          "Licence",
+          "Master",
+          "Spécialisation en cybersécurité"
+        ],
+        "preRequis": [],
+        "remuneration": {
+          "junior": 40000,
+          "senior": 80000
+        },
+        "metiersProches": [
+          "Veilleur Analyste",
+          "Opérateur analyste SOC",
+          "Analyste CyberSOC",
+          "Analyste détection d'incident"
+        ],
+        "liens": {
+          "illustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Metier_Analyste.png",
+          "dataemploi": "https://dataemploi.francetravail.fr/emploi/metier/description/NAT/FR/M1844#titreMetier",
+          "metierscope": "https://candidat.francetravail.fr/metierscope/fiche-metier/M1844/analyste-en-cybersecurite",
+          "videos": [
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_Analyste.mp4",
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_Analyste_2.mp4",
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_Analyste_3.mp4",
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_mix_metiers_2.mp4"
+          ]
+        }
+      },
+      {
+        "id": 17,
+        "titre": "Expert(e) cyberdefense",
+        "fonction": "Protéger les systèmes en première ligne",
+        "description": "Porte secours aux personnes et aux organisations victimes de cyberattaques.\n\nElle cherche à comprendre comment les attaquants sont parvenus à pénétrer un système pour mettre fin à l'attaque et revenir à une situation normale.",
+        "missionPrincipale": "L'analyste réponse aux incidents de sécurité intervient généralement au sein d'un CERT (Computer Emergency Response Team) ou CSIRT (Computer Security Incident Response Team), un centre d'alerte et de réaction face aux attaques informatiques.\n\nEn cas de soupçons sur une activité malveillante ou d'attaque au sein du système d'information, l'analyste réponse aux incidents de sécurité analyse les symptômes et réalise les analyses techniques sur le système d'information. Il identifie le mode opératoire de l'attaquant et qualifie l'étendue de la compromission (faille). Il fournit des recommandations de remédiation pour assurer l'assainissement et le durcissement (la protection) des systèmes attaqués.\n\nL'analyste intervient au moment et après les incidents ou les crises.",
+        "postures": [
+          "Capacité de synthèse et de vulgarisation pour des publics non techniques",
+          "Rédaction de rapports adaptés à différents niveaux d'interlocuteurs",
+          "Sens éthique",
+          "Capacité de travail en équipe",
+          "Rigueur",
+          "Capacité à résister à la pression"
+        ],
+        "formationsCibles": [
+          "Master",
+          "Ingénieur",
+          "Spécialisation en cybersécurité"
+        ],
+        "preRequis": [],
+        "remuneration": {
+          "junior": 45000,
+          "senior": 110000
+        },
+        "metiersProches": [
+          "Analyste traitement d'incidents",
+          "Spécialiste en investigation numérique",
+          "Analyste réponse aux incidents",
+          "Analyste CSIRT",
+          "Analyste CERT"
+        ],
+        "liens": {
+          "illustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Metier_Expert_Cyberdefense.png",
+          "dataemploi": "https://dataemploi.francetravail.fr/emploi/metier/chiffres-cles/NAT/FR/M1844#titreMetier",
+          "metierscope": "https://candidat.francetravail.fr/metierscope/fiche-metier/M1844/analyste-en-cybersecurite",
+          "videos": [
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_Expert_Cyberdefense.mp4",
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_Expert_Cyberdefense_2.mp4",
+            "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_mix_metiers_2.mp4"
+          ]
+        }
+      }
+    ],
+    "fonctions": [
+      {
+        "nom": "Cryptologue",
+        "missionPrincipale": "Met au point, avec des chercheurs du monde entier, des systèmes de chiffrement qui protègent nos usages numériques.",
+        "lien": "https://www.onisep.fr/metier/des-metiers-qui-recrutent/les-metiers-de-la-cybersecurite/publication-les-metiers-de-la-cybersecurite",
+        "témoignage": {
+          "nom": "Mélissa Rossi",
+          "femme": true,
+          "lien": "https://messervices.cyber.gouv.fr/documents/onisep#page=11"
+        }
+      }
+    ],
+    "ressourcesAssociées": [
+      {
+        "id": 3,
+        "titre": "Passe ton Hack D'abord",
+        "thematiques": ["Techniques de sécurité numérique"],
+        "publicsCible": ["Elèves"],
+        "niveaux": ["Cycle terminal (2-T)", "Post Bac"],
+        "types": ["Jeux - challenges"],
+        "besoins": ["Découvrir la cyber"],
+        "description": "Apprendre la cybersécurité en équipe dans un challenge lycéen",
+        "urlIllustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Passe_ton_hack.png",
+        "estCertifiee": true,
+        "lienExterne": "https://eduscol.education.fr/3679/education-et-cybersecurite"
+      },
+      {
+        "id": 112,
+        "titre": "Pix Parcours Cyber",
+        "thematiques": [
+          "Menace cyber",
+          "Techniques de sécurité numérique",
+          "Cyberharcèlement"
+        ],
+        "publicsCible": ["Elèves", "Personnel éducatif", "Parents"],
+        "niveaux": ["Cycle 4 (5e-3e)", "Cycle terminal (2-T)", "Post Bac"],
+        "types": [
+          "Jeux - challenges",
+          "Contenus audio / vidéo",
+          "Outil technique"
+        ],
+        "besoins": ["Découvrir la cyber", "Se protéger des risques"],
+        "description": "Comprendre et tester ses compétences en cybersécurité",
+        "urlIllustration": "https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Pix.png",
+        "estCertifiee": true,
+        "lienExterne": "https://pix.fr/cybersecurite"
+      }
+    ]
+  },
+  {
+    "code": "Conseil et recherche",
+    "titre": "Conseil, services et recherche",
+    "sousTitre": "Conseiller, tester, former, inventer : les métiers de celles et ceux qui éclairent les organisations et font avancer la cybersécurité.",
+    "description": "La cybersécurité ne se limite pas à la technique. Cette famille réunit les métiers qui conseillent les organisations, testent leurs défenses, forment les équipes, développent les solutions de demain et font progresser la recherche.",
+    "rôles": [
+      {
+        "nom": "Conseiller",
+        "description": "Accompagner les organisations dans leurs choix de sécurité."
+      },
+      {
+        "nom": "Tester",
+        "description": "Éprouver les défenses en simulant des attaques."
+      },
+      {
+        "nom": "Innover",
+        "description": "Concevoir les outils et méthodes de sécurité de demain."
+      }
+    ],
+    "profils": [],
+    "fonctions": [],
+    "ressourcesAssociées": []
+  },
+  {
+    "code": "Métiers connexes",
+    "titre": "Métiers connexes",
+    "sousTitre": "Droit, données, risques, communication : les métiers de celles et ceux qui apportent une autre expertise à la cybersécurité.",
+    "description": "La cybersécurité a besoin de compétences variées, bien au-delà de la technique. Cette famille réunit les métiers qui apportent une expertise complémentaire : droit du numérique, protection des données, gestion des risques, communication de crise, développement commercial.",
+    "rôles": [
+      {
+        "nom": "Encadrer",
+        "description": "Veiller au respect du droit et des réglementations en matière de cybersécurité."
+      },
+      {
+        "nom": "Protéger",
+        "description": "Garantir la protection des données personnelles et la conformité."
+      },
+      {
+        "nom": "Accompagner",
+        "description": "Communiquer, former et développer l'offre de services cyber."
+      }
+    ],
+    "profils": [],
+    "fonctions": [],
+    "ressourcesAssociées": []
+  }
+]

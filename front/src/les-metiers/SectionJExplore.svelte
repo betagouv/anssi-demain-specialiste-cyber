@@ -1,48 +1,32 @@
 <script lang="ts">
-  type FamilleMetier = {
-    titre: string;
-    description: string;
-    badge: string;
-    badgeAccent: string;
-  };
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { accentPourFamille, type FamilleMetier } from './familleMetier.type';
+  import { famillesMetierStore } from './stores/famillesMetier.store';
 
-  const familles: FamilleMetier[] = [
-    {
-      titre: 'Gestion de la sécurité et pilotage des projets de sécurité',
-      description:
-        'Celles et ceux qui fixent le cap : définir la stratégie de cybersécurité, piloter les projets et sensibiliser les équipes, en lien avec la direction.',
-      badge: 'Pilotage',
-      badgeAccent: 'yellow-moutarde',
-    },
-    {
-      titre: "Conception et maintien d'un système d'information sécurisé",
-      description:
-        'Celles et ceux qui construisent solide : intégrer la sécurité dès la conception des systèmes, chiffrer les données, administrer les outils de protection au quotidien.',
-      badge: 'Conception',
-      badgeAccent: 'green-emeraude',
-    },
-    {
-      titre: 'Gestion des incidents et des crises de sécurité',
-      description:
-        "Celles et ceux qui montent au front : surveiller, détecter les attaques, enquêter sur ce qui s'est passé, réagir vite et piloter la crise quand elle survient.",
-      badge: 'Incidents et crises',
-      badgeAccent: 'blue-cumulus',
-    },
-    {
-      titre: 'Conseil, services et recherche',
-      description:
-        'Celles et ceux qui éclairent et inventent : conseiller les organisations, tester leurs défenses, former, développer les solutions de sécurité de demain, faire avancer la recherche.',
-      badge: 'Conseil et recherche',
-      badgeAccent: 'purple-glycine',
-    },
-    {
-      titre: 'Métiers connexes',
-      description:
-        'Celles et ceux qui apportent une autre expertise à la cyber : droit, protection des données, gestion des risques, communication, commerce, administration des systèmes.',
-      badge: 'Métiers connexes',
-      badgeAccent: 'green-archipel',
-    },
-  ];
+  let chargementEnCours = $state(false);
+  let erreurChargement = $state(false);
+  let familles: FamilleMetier[] = $state([]);
+
+  famillesMetierStore.subscribe((valeur) => {
+    familles = valeur;
+  });
+
+  onMount(async () => {
+    chargementEnCours = true;
+    try {
+      // TODO: remplacer par /api/familles-metier quand l'API sera prête
+      const reponse = await axios.get<FamilleMetier[]>(
+        '/donnees/familles-metier.json',
+      );
+      famillesMetierStore.initialise(reponse.data);
+    } catch (e) {
+      erreurChargement = true;
+      console.error(e);
+    } finally {
+      chargementEnCours = false;
+    }
+  });
 </script>
 
 <dsfr-container id="j-explore">
@@ -56,43 +40,51 @@
       </p>
     </div>
 
-    <div class="j-explore-familles">
-      {#each familles as famille, index}
-        <dsfr-card
-          title={famille.titre}
-          has-description
-          description={famille.description}
-          has-badge
-          has-links
-          no-icon
-          size="lg"
-          horizontal
-          horizontal-proportion="tier"
-          no-link
-        >
-          <div
-            class={['j-explore-image', `${famille.badgeAccent}`]}
-            slot="image"
+    {#if chargementEnCours}
+      <div class="j-explore-chargement">
+        <p>Chargement des familles de métiers…</p>
+      </div>
+    {:else if erreurChargement}
+      <div class="j-explore-erreur">
+        <p>Impossible de charger les familles de métiers.</p>
+      </div>
+    {:else}
+      <div class="j-explore-familles">
+        {#each familles as famille, index}
+          {@const accent = accentPourFamille(famille.code)}
+          <dsfr-card
+            title={famille.titre}
+            has-description
+            description={famille.sousTitre}
+            has-badge
+            has-links
+            no-icon
+            size="lg"
+            horizontal
+            horizontal-proportion="tier"
+            no-link
           >
-            <span class="j-explore-numero">{index + 1}</span>
-          </div>
-          <dsfr-badges-group
-            slot="badgesgroup"
-            badges={[{ label: famille.badge, accent: famille.badgeAccent }]}
-            size="sm"
-          ></dsfr-badges-group>
-          <dsfr-link
-            slot="linksgroup"
-            label="Explorer cette famille"
-            href="#"
-            size="md"
-            has-icon
-            icon="arrow-right-line"
-            icon-place="right"
-          ></dsfr-link>
-        </dsfr-card>
-      {/each}
-    </div>
+            <div class={['j-explore-image', accent]} slot="image">
+              <span class="j-explore-numero">{index + 1}</span>
+            </div>
+            <dsfr-badges-group
+              slot="badgesgroup"
+              badges={[{ label: famille.code, accent }]}
+              size="sm"
+            ></dsfr-badges-group>
+            <dsfr-link
+              slot="linksgroup"
+              label="Explorer cette famille"
+              href="#"
+              size="md"
+              has-icon
+              icon="arrow-right-line"
+              icon-place="right"
+            ></dsfr-link>
+          </dsfr-card>
+        {/each}
+      </div>
+    {/if}
 
     <p class="j-explore-sources fr-text--xs">
       Sources&nbsp;: ANSSI, Panorama des métiers de la cybersécurité
@@ -122,6 +114,14 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+
+    &-chargement,
+    &-erreur {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+      color: var(--text-mention-grey);
     }
 
     &-image {
