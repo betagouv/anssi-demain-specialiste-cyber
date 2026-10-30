@@ -19,8 +19,8 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     private readonly ressourcesHTTPGrist: RecupereRessourceHttp<
       ReponseGrist<TYPE_DOCUMENT>
     >,
-    private readonly schema: string,
-    private readonly table: string,
+    protected readonly schema: string,
+    protected readonly table: string,
   ) {
     const grist = adaptateurEnvironnement.grist();
     this.urlDeBase = grist.urlDeBase;
@@ -29,7 +29,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
   }
 
   protected async appelleGrist(filtre?: Filtre) {
-    const cheminDeBase = `api/docs/${this.schema}/tables/${this.table}/records`;
+    const cheminDeBase = this.cheminDeBase();
     const chemin = filtre
       ? `${cheminDeBase}?filter=${encodeURIComponent(JSON.stringify(filtre))}`
       : cheminDeBase;
@@ -43,6 +43,9 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
       }),
     );
   }
+
+  protected cheminDeBase = () =>
+    `api/docs/${this.schema}/tables/${this.table}/records`;
 
   protected aseptiseListe<T>(colonne: T[] | null | undefined): T[] {
     return colonne?.slice(1) ?? [];

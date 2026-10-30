@@ -12,6 +12,7 @@ export default defineConfig({
       GRIST_RESSOURCES_CYBER_ID_TABLE: 'mon_id_table',
       GRIST_FAMILLES_METIER_ID_TABLE: 'id_table_familles_metier',
       GRIST_FONCTIONS_ID_TABLE: 'Temoignages_et_fonctions',
+      GRIST_METIERS_ID_TABLE: 'id_table_metiers',
     },
   },
 });
