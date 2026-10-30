@@ -21,6 +21,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { AdaptateurRechercheEntrepriseApiGouv } from './infra/adaptateurRechercheEntreprise';
 import { fabriqueAdaptateurTeleversement } from './infra/adaptateurTeleversement';
 import { EntrepôtFamillesDeMétierGrist } from './infra/entrepotFamillesDeMetierGrist';
+import { EntrepôtFonctionsGrist } from './infra/entrepotFonctionsGrist';
 import { EntrepotJeuxPostgres } from './infra/entrepotJeuxPostgres';
 import { EntrepotMetiersGrist } from './infra/entrepotMetiersGrist';
 import { EntrepotRessourcesCyberGrist } from './infra/entrepotRessourcesCyberGrist';
@@ -126,6 +127,7 @@ serviceCoherenceSecretsHachage
           entrepotMetier,
           entrepotRessourcesCyber,
         ),
+        entrepôtFonctions: new EntrepôtFonctionsGrist(),
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

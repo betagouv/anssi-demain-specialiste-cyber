@@ -24,6 +24,7 @@ export type AdaptateurEnvironnement = {
     selectionsEntrainement(): TableGrist;
     selectionsMesure(): TableGrist;
     famillesDeMétier(): TableGrist;
+    fonctions(): TableGrist;
   };
   oidc: () => OIDC;
   hachage: () => {
@@ -108,6 +109,9 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     famillesDeMétier: () => ({
       idTable: process.env.GRIST_FAMILLES_METIER_ID_TABLE || '',
+    }),
+    fonctions: () => ({
+      idTable: process.env.GRIST_FONCTIONS_ID_TABLE || '',
     }),
   }),
   hachage: () => ({
