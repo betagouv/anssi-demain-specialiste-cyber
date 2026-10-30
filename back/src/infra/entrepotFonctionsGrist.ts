@@ -12,6 +12,7 @@ export type FonctionGrist = {
     Temoignages: string;
     Lien_du_temoignage: string;
     Femme_de_la_cyber: boolean;
+    Famille_de_metiers: string;
   };
 };
 
@@ -35,7 +36,7 @@ export class EntrepôtFonctionsGrist
     const réponse = await this.appelleGrist();
     return réponse.records.map((fonctionGrist) => ({
       nom: fonctionGrist.fields.Fonction,
-      famille: '',
+      famille: fonctionGrist.fields.Famille_de_metiers ?? '',
       missionPrincipale: fonctionGrist.fields.Mission_principale,
       lien: fonctionGrist.fields.Lien,
       témoignage: {
@@ -47,4 +48,9 @@ export class EntrepôtFonctionsGrist
       },
     }));
   }
+
+  protected cheminDeBase = (): string => {
+    const idTableMétiers = adaptateurEnvironnement.grist().metiers().idTable;
+    return `api/docs/${this.schema}/sql/?q=select ${this.table}.*, ${idTableMétiers}.Famille_de_metiers from ${this.table} inner join ${idTableMétiers} on ${idTableMétiers}.id=${this.table}.Famille_metiers`;
+  };
 }
