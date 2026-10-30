@@ -24,9 +24,11 @@ describe('L’entrepôt des fonctions grist', () => {
 
       await entrepôt.tous();
 
-      expect(urlAppelee).toEqual(
-        'http://example.com/api/docs/mon_id_document/sql/?q=select%20Temoignages_et_fonctions.*,%20id_table_metiers.Famille_de_metiers%20from%20Temoignages_et_fonctions%20inner%20join%20id_table_metiers%20on%20id_table_metiers.id=Temoignages_et_fonctions.Famille_metiers',
-      );
+      expect(
+        urlAppelee.startsWith(
+          'http://example.com/api/docs/mon_id_document/sql/?q=select%20Temoignages_et_fonctions.*,%20id_table_metiers.Famille_de_metiers%20from%20Temoignages_et_fonctions%20inner%20join%20id_table_metiers%20on%20id_table_metiers.id=Temoignages_et_fonctions.Famille_metiers',
+        ),
+      ).toBeTruthy();
     });
 
     it('sait reconstruire les fonctions', async () => {
@@ -116,6 +118,23 @@ describe('L’entrepôt des fonctions grist', () => {
       const fonctions = await entrepôt.tous();
 
       expect(fonctions[0].famille).toBe('Pilotage');
+    });
+
+    it('ne retourne que les fonctions publiées', async () => {
+      let urlAppelee = '';
+      const clientHttp: RecupereRessourceHttp<
+        ReponseGrist<FonctionGrist>
+      > = async (url: string) => {
+        urlAppelee = url;
+        return { records: [] };
+      };
+      const entrepôt = new EntrepôtFonctionsGrist(clientHttp);
+
+      await entrepôt.tous();
+
+      expect(
+        urlAppelee.endsWith('%20where%20Publie%20is%20not%20null'),
+      ).toBeTruthy();
     });
   });
 });
