@@ -76,5 +76,28 @@ describe('L’entrepôt des fonctions grist', () => {
       expect(fonctions[1].nom).toBe('Analyste SOC');
       expect(fonctions[1].témoignage.femme).toBe(false);
     });
+
+    it('ne prend que le premier lien du témoignage', async () => {
+      const fonctionsGrist: RecupereRessourceHttp<
+        ReponseGrist<FonctionGrist>
+      > = async () =>
+        new ConstructeurRéponseFonctionsGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFonctions()
+              .avecColonneEtValeur(
+                'Lien_du_temoignage',
+                'https://exemple.fr/temoignage ; Autre lien que je veux pas',
+              )
+              .construis(),
+          )
+          .construis();
+      const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
+
+      const fonctions = await entrepôt.tous();
+
+      expect(fonctions[0].témoignage.lien).toBe(
+        'https://exemple.fr/temoignage',
+      );
+    });
   });
 });

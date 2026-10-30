@@ -41,7 +41,9 @@ export class EntrepôtFonctionsGrist
       témoignage: {
         nom: fonctionGrist.fields.Temoignages,
         femme: fonctionGrist.fields.Femme_de_la_cyber,
-        lien: fonctionGrist.fields.Lien_du_temoignage,
+        lien: (fonctionGrist.fields.Lien_du_temoignage ?? '')
+          .split(';')[0]
+          .trim(),
       },
     }));
   }
