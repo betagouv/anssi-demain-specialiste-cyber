@@ -25,7 +25,7 @@ describe('L’entrepôt des fonctions grist', () => {
       await entrepôt.tous();
 
       expect(urlAppelee).toEqual(
-        'http://example.com/api/docs/mon_id_document/tables/Temoignages_et_fonctions/records',
+        'http://example.com/api/docs/mon_id_document/sql/?q=select%20Temoignages_et_fonctions.*,%20id_table_metiers.Famille_de_metiers%20from%20Temoignages_et_fonctions%20inner%20join%20id_table_metiers%20on%20id_table_metiers.id=Temoignages_et_fonctions.Famille_metiers',
       );
     });
 
@@ -98,6 +98,24 @@ describe('L’entrepôt des fonctions grist', () => {
       expect(fonctions[0].témoignage.lien).toBe(
         'https://exemple.fr/temoignage',
       );
+    });
+
+    it('récupère le nom de la famille', async () => {
+      const fonctionsGrist: RecupereRessourceHttp<
+        ReponseGrist<FonctionGrist>
+      > = async () =>
+        new ConstructeurRéponseFonctionsGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFonctions()
+              .avecColonneEtValeur('Famille_de_metiers', 'Pilotage')
+              .construis(),
+          )
+          .construis();
+      const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
+
+      const fonctions = await entrepôt.tous();
+
+      expect(fonctions[0].famille).toBe('Pilotage');
     });
   });
 });
