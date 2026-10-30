@@ -219,8 +219,8 @@ importers:
         specifier: ^3.1143.0
         version: 3.1155.0
       '@lab-anssi/lib':
-        specifier: ^2.3.1
-        version: 2.3.1(debug@4.4.3(supports-color@8.1.1))(express@5.3.0(supports-color@8.1.1))(supports-color@8.1.1)
+        specifier: ^3.0.0
+        version: 3.0.1(debug@4.4.3(supports-color@8.1.1))(express@5.3.0(supports-color@8.1.1))(supports-color@8.1.1)
       '@sentry/node':
         specifier: ^10.43.0
         version: 10.76.2(@opentelemetry/core@2.12.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)
@@ -1068,8 +1068,8 @@ packages:
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
-  '@lab-anssi/lib@2.3.1':
-    resolution: {integrity: sha512-nmRRy3SGVVJ8eaPkW3juYgi3sVhO+ujyuKfWX58RFGLQEQaKNGzyIlN0N7C+L4ypC+zFkRrTfFBZYx4+4orQgw==}
+  '@lab-anssi/lib@3.0.1':
+    resolution: {integrity: sha512-seUJvaIfrSbwoYYEsh/D6hYuy12N7pRtmpLe5ckbmc2gwlD1UNVps+jIrF5Ahtf6LLvqRUbVHlrTVAaZSNVOJA==}
     peerDependencies:
       express: ~5.2.1
 
@@ -5147,7 +5147,7 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
-  '@lab-anssi/lib@2.3.1(debug@4.4.3(supports-color@8.1.1))(express@5.3.0(supports-color@8.1.1))(supports-color@8.1.1)':
+  '@lab-anssi/lib@3.0.1(debug@4.4.3(supports-color@8.1.1))(express@5.3.0(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
       axios: 1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       express: 5.3.0(supports-color@8.1.1)
