@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { ressourceFamillesDeMétier } from './ressourceFamillesDeMetier';
+import { ressourceFonctions } from './ressourceFonctions';
 import { ressourceJeu } from './ressourceJeu';
 import { ressourceJeux } from './ressourceJeux';
 import { ressourceMesJeux } from './ressourceMesJeux';
@@ -49,6 +50,7 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     '/familles-metier',
     ressourceFamillesDeMétier(configurationServeur),
   );
+  router.use('/fonctions', ressourceFonctions(configurationServeur));
 
   return router;
 };
