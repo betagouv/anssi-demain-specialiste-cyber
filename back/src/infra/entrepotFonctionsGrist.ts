@@ -51,6 +51,6 @@ export class EntrepôtFonctionsGrist
 
   protected cheminDeBase = (): string => {
     const idTableMétiers = adaptateurEnvironnement.grist().metiers().idTable;
-    return `api/docs/${this.schema}/sql/?q=select ${this.table}.*, ${idTableMétiers}.Famille_de_metiers from ${this.table} inner join ${idTableMétiers} on ${idTableMétiers}.id=${this.table}.Famille_metiers`;
+    return `api/docs/${this.schema}/sql/?q=select ${this.table}.*, ${idTableMétiers}.Famille_de_metiers from ${this.table} inner join ${idTableMétiers} on ${idTableMétiers}.id=${this.table}.Famille_metiers where Publie is not null`;
   };
 }
