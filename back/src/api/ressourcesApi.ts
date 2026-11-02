@@ -9,6 +9,7 @@ import { ressourceMetier } from './ressourceMetier';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceReactionsJeu } from './ressourceReactionsJeu';
 import { ressourceRessourceCyber } from './ressourceRessourcesCyber';
+import { ressourceRésultatTestMétiers } from './ressourceResultatsTestMetiers';
 import { ressourceSelections } from './ressourceSelections';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 
@@ -33,6 +34,7 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
 
   router.use('/familles-metier', ressourceFamillesDeMétier(configurationServeur));
   router.use('/fonctions', ressourceFonctions(configurationServeur));
+  router.use('/resultats-test-metiers', ressourceRésultatTestMétiers(configurationServeur));
 
   return router;
 };
