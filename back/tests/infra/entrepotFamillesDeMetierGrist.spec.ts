@@ -37,13 +37,19 @@ describe('L’entrepôt des familles de métier grist', () => {
       );
     });
 
+    const uneLigneDeFamilleGrist = () =>
+      new ConstructeurLigneGristFamillesDeMetier()
+        .avecColonneEtValeur('Tuile_1', 'A / B')
+        .avecColonneEtValeur('Tuile_2', 'A / B')
+        .avecColonneEtValeur('Tuile_3', 'A / B');
+
     it('sait reconstruire les familles', async () => {
       const famillesDeMetierGrist: RecupereRessourceHttp<
         ReponseGrist<FamilleDeMetierGrist>
       > = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
           .ajouteUneLigne(
-            new ConstructeurLigneGristFamillesDeMetier()
+            uneLigneDeFamilleGrist()
               .avecColonneEtValeur('Famille', 'Conception')
               .avecColonneEtValeur('Titre_Hero', 'Conception et maintien...')
               .avecColonneEtValeur('Sous_texte_Hero', 'Concevoir, chiffrer...')
@@ -59,16 +65,10 @@ describe('L’entrepôt des familles de métier grist', () => {
               .avecColonneEtValeur(
                 'Tuile_3',
                 'Maintenir / Administrer et mettre à jour',
-              )
-              .construis(),
+              ),
           )
           .ajouteUneLigne(
-            new ConstructeurLigneGristFamillesDeMetier()
-              .avecColonneEtValeur('Famille', 'Pilotage')
-              .avecColonneEtValeur('Tuile_1', 'A / B')
-              .avecColonneEtValeur('Tuile_2', 'A / B')
-              .avecColonneEtValeur('Tuile_3', 'A / B')
-              .construis(),
+            uneLigneDeFamilleGrist().avecColonneEtValeur('Famille', 'Pilotage'),
           )
           .construis();
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
@@ -97,12 +97,10 @@ describe('L’entrepôt des familles de métier grist', () => {
       > = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
           .ajouteUneLigne(
-            new ConstructeurLigneGristFamillesDeMetier()
-              .avecColonneEtValeur('Tuile_1', 'A / B')
-              .avecColonneEtValeur('Tuile_2', 'A / B')
-              .avecColonneEtValeur('Tuile_3', 'A / B')
-              .avecColonneEtListeDeValeurs('Profils_de_cette_famille', [13, 17])
-              .construis(),
+            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
+              'Profils_de_cette_famille',
+              [13, 17],
+            ),
           )
           .construis();
       const entrepôtMétiers = new EntrepotMetiersMemoire();
@@ -131,12 +129,10 @@ describe('L’entrepôt des familles de métier grist', () => {
       > = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
           .ajouteUneLigne(
-            new ConstructeurLigneGristFamillesDeMetier()
-              .avecColonneEtValeur('Tuile_1', 'A / B')
-              .avecColonneEtValeur('Tuile_2', 'A / B')
-              .avecColonneEtValeur('Tuile_3', 'A / B')
-              .avecColonneEtListeDeValeurs('Ressources_associees', [3, 112])
-              .construis(),
+            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
+              'Ressources_associees',
+              [3, 112],
+            ),
           )
           .construis();
       const entrepôtRessourcesCyber = new EntrepotRessourcesCyberMemoire();

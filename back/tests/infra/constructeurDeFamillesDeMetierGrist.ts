@@ -16,8 +16,17 @@ export class ConstructeurRéponseFamillesDeMétierGrist {
 
   ajouteUneLigne(
     ligne: LigneFamilleDeMétier,
+  ): ConstructeurRéponseFamillesDeMétierGrist;
+  ajouteUneLigne(
+    ligne: ConstructeurLigneGrist<LigneFamilleDeMétier>,
+  ): ConstructeurRéponseFamillesDeMétierGrist;
+
+  ajouteUneLigne(
+    ligne: LigneFamilleDeMétier | ConstructeurLigneGrist<LigneFamilleDeMétier>,
   ): ConstructeurRéponseFamillesDeMétierGrist {
-    this._lignes.push(ligne);
+    const ligneConstruite =
+      ligne instanceof ConstructeurLigneGrist ? ligne.construis() : ligne;
+    this._lignes.push(ligneConstruite);
     return this;
   }
 
