@@ -54,34 +54,38 @@ export class EntrepôtFamillesDeMétierGrist
     const fonctions = await this.entrepôtFonctions.tous();
 
     const réponse = await this.appelleGrist();
-    return réponse.records.map(
-      (familleGrist) =>
-        new FamilleDeMétier({
-          code: familleGrist.fields.Famille,
-          titre: familleGrist.fields.Titre_Hero,
-          sousTitre: familleGrist.fields.Sous_texte_Hero,
-          description: familleGrist.fields.En_bref,
-          rôles: [
-            this.champEnRôle(familleGrist.fields.Tuile_1),
-            this.champEnRôle(familleGrist.fields.Tuile_2),
-            this.champEnRôle(familleGrist.fields.Tuile_3),
-          ],
-          profils: this.aseptiseListe(
-            familleGrist.fields.Profils_de_cette_famille,
-          )
-            .map((profil) => métiers.find((m) => m.id === profil))
-            .filter((m) => m !== undefined),
-          ressourcesAssociées: this.aseptiseListe(
-            familleGrist.fields.Ressources_associees,
-          )
-            .map((r) => ressourcesCyber.find((ressource) => ressource.id === r))
-            .filter((r) => r !== undefined),
-          fonctions: this.aseptiseListe(familleGrist.fields.Metiers)
-            .map((m) => fonctions.find((fonction) => fonction.id === m))
-            .filter((m) => m !== undefined),
-        }),
-    );
+    return réponse.records.map((familleGrist) => {
+      return new FamilleDeMétier({
+        code: familleGrist.fields.Famille,
+        titre: familleGrist.fields.Titre_Hero,
+        sousTitre: familleGrist.fields.Sous_texte_Hero,
+        description: familleGrist.fields.En_bref,
+        rôles: [
+          this.champEnRôle(familleGrist.fields.Tuile_1),
+          this.champEnRôle(familleGrist.fields.Tuile_2),
+          this.champEnRôle(familleGrist.fields.Tuile_3),
+        ],
+        profils: this.versEntités(
+          familleGrist.fields.Profils_de_cette_famille,
+          métiers,
+        ),
+        ressourcesAssociées: this.versEntités(
+          familleGrist.fields.Ressources_associees,
+          ressourcesCyber,
+        ),
+        fonctions: this.versEntités(familleGrist.fields.Metiers, fonctions),
+      });
+    });
   }
+
+  private versEntités = <T extends { id: number }>(
+    listeIdsGrist: number[],
+    listeEntités: T[],
+  ): T[] =>
+    this.aseptiseListe(listeIdsGrist)
+      .map((id) => listeEntités.find((entité) => entité.id === id))
+      .filter((entité) => entité !== undefined);
+
   private champEnRôle = (champ: string) => {
     return {
       nom: champ.split('/')[0].trim(),
