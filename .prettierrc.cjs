@@ -1,15 +1,11 @@
-const importOrder = [
-  '<BUILTIN_MODULES>',
-  '<THIRD_PARTY_MODULES>',
-  '^@style/',
-  '^[.]',
-];
+const importOrder = ['<BUILTIN_MODULES>', '<THIRD_PARTY_MODULES>', '^@style/', '^[.]'];
 
 /**
  * @see https://prettier.io/docs/configuration
  * @type {import("prettier").Config}
  */
 module.exports = {
+  printWidth: 120,
   tabWidth: 2,
   singleQuote: true,
   plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-svelte'],
