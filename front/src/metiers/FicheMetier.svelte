@@ -46,9 +46,7 @@
   };
 
   let metier: Metier | undefined = $state(undefined);
-  const videosSousTitrees = $derived.by(
-    () => metier?.liens.videos.map(recupereLesSousTitres) ?? [],
-  );
+  const videosSousTitrees = $derived.by(() => metier?.liens.videos.map(recupereLesSousTitres) ?? []);
 
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');
@@ -103,12 +101,8 @@
   ];
 
   const zeroWidthSpace = '\u200B';
-  const titre = $derived.by(() =>
-    metier ? metier.titre.trim().replace('/', `/${zeroWidthSpace}`) : '',
-  );
-  const formations = $derived.by(() =>
-    metier ? metier.formationsCibles.join(', ') : '',
-  );
+  const titre = $derived.by(() => (metier ? metier.titre.trim().replace('/', `/${zeroWidthSpace}`) : ''));
+  const formations = $derived.by(() => (metier ? metier.formationsCibles.join(', ') : ''));
 </script>
 
 {#if metier}
@@ -137,10 +131,7 @@
     <h1 class="titre-alternatif-xs" slot="titre">{titre}</h1>
     <p class="fr-text--lead" slot="description">{metier.fonction}</p>
     <picture class="illustration" slot="illustration">
-      <img
-        src={metier.liens.illustration ?? '/assets/images/image-generique.svg'}
-        alt="Couverture du métier"
-      />
+      <img src={metier.liens.illustration ?? '/assets/images/image-generique.svg'} alt="Couverture du métier" />
     </picture>
   </Heros>
 
@@ -174,19 +165,15 @@
         <h2>Rémunération brute</h2>
         <ul>
           <li>
-            Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-              metier.remuneration.junior,
-            )} euros
+            Salaire junior&nbsp;: {new Intl.NumberFormat('fr-FR').format(metier.remuneration.junior)} euros
           </li>
           <li>
-            Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(
-              metier.remuneration.senior,
-            )} euros
+            Salaire senior&nbsp;: {new Intl.NumberFormat('fr-FR').format(metier.remuneration.senior)} euros
           </li>
         </ul>
         <p class="fr-text--xs note">
-          Les rémunérations présentées sont strictement indicatives et ne
-          constituent en aucun cas une grille de rémunération préconisée
+          Les rémunérations présentées sont strictement indicatives et ne constituent en aucun cas une grille de
+          rémunération préconisée
         </p>
       </section>
       <section id="metiers-proches">
@@ -204,13 +191,7 @@
             <dsfr-content type="video">
               <video slot="video" controls crossorigin="anonymous">
                 <source src={video} type="video/mp4" />
-                <track
-                  default
-                  kind="captions"
-                  srclang="fr"
-                  label="Français"
-                  src={sousTitre}
-                />
+                <track default kind="captions" srclang="fr" label="Français" src={sousTitre} />
               </video>
             </dsfr-content>
           {/each}
@@ -218,12 +199,7 @@
       </section>
       <section id="liens-utiles">
         <h2>Liens utiles</h2>
-        <dsfr-link
-          label="Fiche métierscope"
-          href={metier.liens.metierscope}
-          blank
-          size="md"
-        ></dsfr-link>
+        <dsfr-link label="Fiche métierscope" href={metier.liens.metierscope} blank size="md"></dsfr-link>
         <dsfr-link
           label="Panorama des métiers de la cybersécurité"
           href="https://cyber.gouv.fr/sites/default/files/2021/10/anssi-panorama_metiers_cybersecurite-2020.pdf"
@@ -231,13 +207,7 @@
           size="md"
         ></dsfr-link>
       </section>
-      <dsfr-link
-        label="Haut de page"
-        href="#"
-        size="md"
-        has-icon
-        icon="arrow-up-fill"
-      ></dsfr-link>
+      <dsfr-link label="Haut de page" href="#" size="md" has-icon icon="arrow-up-fill"></dsfr-link>
     </Fiche>
   </dsfr-container>
 {/if}

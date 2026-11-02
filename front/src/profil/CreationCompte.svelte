@@ -45,8 +45,7 @@
       <h3>Finalisez votre inscription</h3>
       <fieldset>
         <legend>
-          <lab-anssi-icone taille="md" nom="account-circle-line"
-          ></lab-anssi-icone>
+          <lab-anssi-icone taille="md" nom="account-circle-line"></lab-anssi-icone>
           Votre identité</legend
         >
         <p class="fr-text">
@@ -56,28 +55,19 @@
           Nom&nbsp;: <strong>{informationsProfessionnelles.nom}</strong>
         </p>
         <p class="fr-text">
-          Mail professionnel&nbsp;: <strong
-            >{informationsProfessionnelles.email}</strong
-          >
+          Mail professionnel&nbsp;: <strong>{informationsProfessionnelles.email}</strong>
         </p>
       </fieldset>
 
       <hr />
 
       <fieldset>
-        <legend>
-          <lab-anssi-icone taille="md" nom="building-line"
-          ></lab-anssi-icone>Votre établissement</legend
-        >
+        <legend> <lab-anssi-icone taille="md" nom="building-line"></lab-anssi-icone>Votre établissement</legend>
         <p class="fr-text">
-          Dénomination légale&nbsp;: <strong
-            >{informationsProfessionnelles.organisation.nom}</strong
-          >
+          Dénomination légale&nbsp;: <strong>{informationsProfessionnelles.organisation.nom}</strong>
         </p>
         <p class="fr-text">
-          SIRET&nbsp;: <strong
-            >{informationsProfessionnelles.organisation.siret}</strong
-          >
+          SIRET&nbsp;: <strong>{informationsProfessionnelles.organisation.siret}</strong>
         </p>
         <p class="fr-text">
           Département de votre organisation&nbsp;: <strong
@@ -104,10 +94,7 @@
         onvaluechanged={(e: CustomEvent) => (cguAcceptees = e.detail)}
       >
         <span
-          >J’accepte les <dsfr-link
-            href="/cgu"
-            label="conditions générales d’utilisation"
-          ></dsfr-link>
+          >J’accepte les <dsfr-link href="/cgu" label="conditions générales d’utilisation"></dsfr-link>
           {TITRE_DSC_SECABLE}.
         </span>
       </dsfr-checkbox>

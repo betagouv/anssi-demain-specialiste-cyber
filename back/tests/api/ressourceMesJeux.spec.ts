@@ -11,16 +11,10 @@ import { AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement
 import { EntrepotJeux } from '../../src/metier/entrepotJeux';
 import { PhotosJeu } from '../../src/metier/jeu';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
 import { unJeu } from '../metier/constructeurJeu';
-import {
-  CorpsRequeteDeJeu,
-  uneRequeteDeJeuValide,
-} from './constructeurRequeteDeJeu';
+import { CorpsRequeteDeJeu, uneRequeteDeJeuValide } from './constructeurRequeteDeJeu';
 import {
   configurationDeTestDuServeur,
   configurationServeurSansMiddleware,
@@ -37,12 +31,10 @@ describe('La ressource de mes jeux', () => {
   let middleware: Middleware;
   let adaptateurTeleversement: AdaptateurTeleversement;
 
-  const ajouteUtilisateurARequeteMock = vi
-    .fn()
-    .mockImplementation((req, _res, suite) => {
-      req.utilisateur = jeanneDupont;
-      suite();
-    });
+  const ajouteUtilisateurARequeteMock = vi.fn().mockImplementation((req, _res, suite) => {
+    req.utilisateur = jeanneDupont;
+    suite();
+  });
 
   beforeEach(() => {
     entrepotJeux = new EntrepotJeuxMemoire();
@@ -61,33 +53,23 @@ describe('La ressource de mes jeux', () => {
   });
 
   describe('sur un POST', () => {
-    const executeLaRequete = (
-      serveur: Express,
-      corpsRequeteDeJeu: CorpsRequeteDeJeu | unknown,
-    ) =>
+    const executeLaRequete = (serveur: Express, corpsRequeteDeJeu: CorpsRequeteDeJeu | unknown) =>
       request(serveur)
         .post('/api/mes-jeux')
         .field('jeu', JSON.stringify(corpsRequeteDeJeu))
         .attach('couverture', Buffer.from('une-image'), 'test.jpg');
 
     it("retourne un 201 si l'utilisateur est connecté", async () => {
-      const reponse = await executeLaRequete(
-        serveur,
-        uneRequeteDeJeuValide().construis(),
-      );
+      const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(201);
     });
 
     it("retourne un 401 si il n'y a pas d'utilisateur connecté", async () => {
-      ajouteUtilisateurARequeteMock.mockImplementationOnce(
-        (_req, res, _suite) => {
-          res.sendStatus(401);
-        },
-      );
-      const reponse = await request(serveur)
-        .post('/api/mes-jeux')
-        .send(uneRequeteDeJeuValide().construis());
+      ajouteUtilisateurARequeteMock.mockImplementationOnce((_req, res, _suite) => {
+        res.sendStatus(401);
+      });
+      const reponse = await request(serveur).post('/api/mes-jeux').send(uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(401);
     });
@@ -97,10 +79,7 @@ describe('La ressource de mes jeux', () => {
         throw new Error('Echec sauvegarde');
       };
 
-      const reponse = await executeLaRequete(
-        serveur,
-        uneRequeteDeJeuValide().construis(),
-      );
+      const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().construis());
 
       expect(reponse.status).toEqual(500);
     });
@@ -142,9 +121,7 @@ describe('La ressource de mes jeux', () => {
       expect(mesJeux[0].categorie).toEqual('simulation');
       expect(mesJeux[0].thematiques).toEqual(['menace-cyber', 'orientation']);
       expect(mesJeux[0].description).toEqual('Un texte descriptif du jeu');
-      expect(mesJeux[0].temoignages).toStrictEqual([
-        { prenom: 'Michel', details: "C'était trop bien" },
-      ]);
+      expect(mesJeux[0].temoignages).toStrictEqual([{ prenom: 'Michel', details: "C'était trop bien" }]);
       expect(mesJeux[0].photos).toStrictEqual<PhotosJeu>({
         couverture: { chemin: '/le-chemin/image.jpeg' },
         photos: [],
@@ -227,10 +204,7 @@ describe('La ressource de mes jeux', () => {
     });
 
     it('publie un événement de création de jeu', async () => {
-      await executeLaRequete(
-        serveur,
-        uneRequeteDeJeuValide().avecConsentement(true).construis(),
-      );
+      await executeLaRequete(serveur, uneRequeteDeJeuValide().avecConsentement(true).construis());
 
       busEvenements.aRecuUnEvenement(JeuCree);
       const evenement = busEvenements.recupereEvenement(JeuCree)!;
@@ -287,10 +261,7 @@ describe('La ressource de mes jeux', () => {
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().avecUnNom('     ').construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().avecUnNom('     ').construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Le nom est obligatoire');
@@ -305,9 +276,7 @@ describe('La ressource de mes jeux', () => {
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le nom de l‘établissement est obligatoire',
-        );
+        expect(reponse.body.erreur).toEqual('Le nom de l‘établissement est obligatoire');
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
@@ -317,9 +286,7 @@ describe('La ressource de mes jeux', () => {
         );
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le nom de l‘établissement est obligatoire',
-        );
+        expect(reponse.body.erreur).toEqual('Le nom de l‘établissement est obligatoire');
       });
     });
 
@@ -401,25 +368,17 @@ describe('La ressource de mes jeux', () => {
 
     describe('concernant la vérification de la liste des élèves', () => {
       it('vérifie qu‘au moins un élève est renseigné', async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().sansEleves().construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().sansEleves().construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('Au moins un élève est requis');
       });
 
       it('vérifie que les prénoms fournis ne soient pas vides', async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().ajouteUnEleve('').construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().ajouteUnEleve('').construis());
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les prénoms fournis sont invalides',
-        );
+        expect(reponse.body.erreur).toEqual('Les prénoms fournis sont invalides');
       });
     });
 
@@ -447,10 +406,7 @@ describe('La ressource de mes jeux', () => {
 
     describe('concernant la vérification des thématiques', () => {
       it("vérifie qu'au moins une thématique est fournie", async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().sansThematiques().construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().sansThematiques().construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La thématique est invalide');
@@ -479,10 +435,7 @@ describe('La ressource de mes jeux', () => {
       });
 
       it("vérifie que le nom n'est pas vide", async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().avecUneDescription('   ').construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().avecUneDescription('   ').construis());
 
         expect(reponse.status).toEqual(400);
         expect(reponse.body.erreur).toEqual('La description est obligatoire');
@@ -491,15 +444,11 @@ describe('La ressource de mes jeux', () => {
       it('vérifie que la description ne dépasse pas 8000 caractères', async () => {
         const reponse = await executeLaRequete(
           serveur,
-          uneRequeteDeJeuValide()
-            .avecUneDescription('mots'.repeat(2001))
-            .construis(),
+          uneRequeteDeJeuValide().avecUneDescription('mots'.repeat(2001)).construis(),
         );
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'La description ne peut contenir que 8000 caractères maximum',
-        );
+        expect(reponse.body.erreur).toEqual('La description ne peut contenir que 8000 caractères maximum');
       });
     });
 
@@ -514,10 +463,7 @@ describe('La ressource de mes jeux', () => {
       });
 
       it('accepte les témoignages vides', async () => {
-        const reponse = await executeLaRequete(
-          serveur,
-          uneRequeteDeJeuValide().sansTemoignages().construis(),
-        );
+        const reponse = await executeLaRequete(serveur, uneRequeteDeJeuValide().sansTemoignages().construis());
 
         expect(reponse.status).toEqual(201);
       });
@@ -525,15 +471,11 @@ describe('La ressource de mes jeux', () => {
       it("vérifie que le prénom existe dans un témoignage'", async () => {
         const reponse = await executeLaRequete(serveur, {
           ...uneRequeteDeJeuValide().construis(),
-          temoignages: [
-            { nom: 'ça devrait être le prénom', details: 'un détail' },
-          ],
+          temoignages: [{ nom: 'ça devrait être le prénom', details: 'un détail' }],
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le prénom est obligatoire dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Le prénom est obligatoire dans un témoignage');
       });
 
       it("vérifie que les détails existent dans un témoignage'", async () => {
@@ -543,9 +485,7 @@ describe('La ressource de mes jeux', () => {
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les détails sont obligatoires dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Les détails sont obligatoires dans un témoignage');
       });
 
       it('vérifie que les détails ne dépassent pas 8000 caractères', async () => {
@@ -557,9 +497,7 @@ describe('La ressource de mes jeux', () => {
         );
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
-        );
+        expect(reponse.body.erreur).toEqual('Les détails d‘un témoignage ne peuvent excéder 8000 caractères');
       });
 
       it("vérifie que le prenom existe dans un témoignage'", async () => {
@@ -569,9 +507,7 @@ describe('La ressource de mes jeux', () => {
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le prénom est obligatoire dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Le prénom est obligatoire dans un témoignage');
       });
 
       it("vérifie que les détails existent dans un témoignage'", async () => {
@@ -581,9 +517,7 @@ describe('La ressource de mes jeux', () => {
         });
 
         expect(reponse.status).toEqual(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les détails sont obligatoires dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Les détails sont obligatoires dans un témoignage');
       });
     });
 
@@ -601,38 +535,32 @@ describe('La ressource de mes jeux', () => {
         {
           test: 'la note sur l‘évaluation découverte est inférieure ou égal à 5',
           evaluation: { evaluationDecouverte: 6 },
-          erreurAttendue:
-            'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
         },
         {
           test: 'la note sur l‘évaluation découverte est supérieure ou égal à 1',
           evaluation: { evaluationDecouverte: 0 },
-          erreurAttendue:
-            'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
         },
         {
           test: 'la note sur l‘évaluation intérêt est inférieure ou égal à 5',
           evaluation: { evaluationInteret: 6 },
-          erreurAttendue:
-            'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
         },
         {
           test: 'la note sur l‘évaluation intérêt est supérieure ou égal à 1',
           evaluation: { evaluationInteret: 0 },
-          erreurAttendue:
-            'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
         },
         {
           test: 'la note sur l‘évaluation satisfaction générale est inférieur ou égal à 5',
           evaluation: { evaluationSatisfactionGenerale: 6 },
-          erreurAttendue:
-            'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
         },
         {
           test: 'la note sur l‘évaluation satisfaction générale est supérieur ou égal à 1',
           evaluation: { evaluationSatisfactionGenerale: 0 },
-          erreurAttendue:
-            'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
+          erreurAttendue: 'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
         },
         {
           test: 'les précisions ne sont pas vides',
@@ -721,9 +649,7 @@ describe('La ressource de mes jeux', () => {
     });
 
     describe('concernant l’analyse antivirus', () => {
-      const televerseUnJeuAvec3Photos = async (
-        adaptateurAntivirus: AdaptateurAntivirus,
-      ) => {
+      const televerseUnJeuAvec3Photos = async (adaptateurAntivirus: AdaptateurAntivirus) => {
         serveur = creeServeur({
           ...configurationDeTestDuServeur(),
           middleware,
@@ -746,9 +672,7 @@ describe('La ressource de mes jeux', () => {
         let contenuFichiers: string[] = [];
         const adaptateurAntivirus: AdaptateurAntivirus = {
           analyse: async (fichiers) => {
-            contenuFichiers = fichiers.map((f) =>
-              new TextDecoder('utf-8').decode(f),
-            );
+            contenuFichiers = fichiers.map((f) => new TextDecoder('utf-8').decode(f));
             antivirusAppele = true;
             return { estEnErreur: false, estInfecte: false };
           },
@@ -757,11 +681,7 @@ describe('La ressource de mes jeux', () => {
         await televerseUnJeuAvec3Photos(adaptateurAntivirus);
 
         expect(antivirusAppele).toBeTruthy();
-        expect(contenuFichiers).toStrictEqual([
-          'une-image-1',
-          'une-image-2',
-          'une-image-3',
-        ]);
+        expect(contenuFichiers).toStrictEqual(['une-image-1', 'une-image-2', 'une-image-3']);
       });
 
       it('retourne une erreur 400 si l’analyse détecte des fichiers infectés', async () => {
@@ -815,11 +735,9 @@ describe('La ressource de mes jeux', () => {
     });
 
     it("retourne un 401 si il n'y a pas d'utilisateur connecté", async () => {
-      ajouteUtilisateurARequeteMock.mockImplementationOnce(
-        (_req, res, _suite) => {
-          res.sendStatus(401);
-        },
-      );
+      ajouteUtilisateurARequeteMock.mockImplementationOnce((_req, res, _suite) => {
+        res.sendStatus(401);
+      });
       const reponse = await request(serveur).get('/api/mes-jeux');
 
       expect(reponse.status).toEqual(401);
@@ -866,9 +784,7 @@ describe('La ressource de mes jeux', () => {
         pixelDeSuiviAccepté: false,
       });
 
-      await entrepotJeux.ajoute(
-        unJeu().avecUnId('1').deEnseignant(patrickDurand).construis(),
-      );
+      await entrepotJeux.ajoute(unJeu().avecUnId('1').deEnseignant(patrickDurand).construis());
       await entrepotJeux.ajoute(
         unJeu()
           .avecUnId('2')

@@ -33,11 +33,7 @@ describe('La ressource sélection élèves', () => {
 
     it('retourne la liste des sélections', async () => {
       await entrepotSelectionsEleves.ajoute(
-        uneSelection()
-          .avecUnId('former')
-          .avecUnTitre('Former')
-          .avecUneExplication('Former lorem ipsum')
-          .construis(),
+        uneSelection().avecUnId('former').avecUnTitre('Former').avecUneExplication('Former lorem ipsum').construis(),
       );
       await entrepotSelectionsEleves.ajoute(
         uneSelection()

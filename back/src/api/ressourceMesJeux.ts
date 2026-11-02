@@ -1,11 +1,4 @@
-import {
-  NextFunction,
-  Request,
-  RequestHandler,
-  Response,
-  Router,
-  urlencoded,
-} from 'express';
+import { NextFunction, Request, RequestHandler, Response, Router, urlencoded } from 'express';
 import * as core from 'express-serve-static-core';
 import multer from 'multer';
 import { JeuCree } from '../bus/evenements/jeu/jeuCree';
@@ -22,14 +15,10 @@ type CorpsRequeteDeJeu = {
 
 export const CINQ_MO = 5 * 1024 * 1024;
 
-const lanceAnalyseAntivirus = (
-  adaptateurAntivirus: AdaptateurAntivirus,
-): RequestHandler => {
+const lanceAnalyseAntivirus = (adaptateurAntivirus: AdaptateurAntivirus): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
     const lesFichiers = Object.values(requete.files ?? []).flatMap((f) => f);
-    const buffers = lesFichiers?.map((f: Express.Multer.File) =>
-      Buffer.from(f.buffer),
-    );
+    const buffers = lesFichiers?.map((f: Express.Multer.File) => Buffer.from(f.buffer));
     const resultatAnalyseFichier = await adaptateurAntivirus.analyse(buffers);
     let erreur: string | undefined = undefined;
     if (resultatAnalyseFichier.estInfecte) {
@@ -44,32 +33,15 @@ const lanceAnalyseAntivirus = (
   };
 };
 
-const valideLesPhotosTeleversees = (
-  adaptateurTeleversement: AdaptateurTeleversement,
-): RequestHandler => {
+const valideLesPhotosTeleversees = (adaptateurTeleversement: AdaptateurTeleversement): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
     const libellesErreur: Map<string, string> = new Map([
-      [
-        'photos_LIMIT_FILE_COUNT',
-        'Le nombre de photos maximum par jeu est de 5',
-      ],
-      [
-        'couverture_LIMIT_FILE_COUNT',
-        'Une seule photo de couverture est autorisée',
-      ],
-      [
-        'photos_LIMIT_UNEXPECTED_FILE',
-        'Le nombre de photos maximum par jeu est de 5',
-      ],
-      [
-        'couverture_LIMIT_UNEXPECTED_FILE',
-        'Une seule photo de couverture est autorisée',
-      ],
+      ['photos_LIMIT_FILE_COUNT', 'Le nombre de photos maximum par jeu est de 5'],
+      ['couverture_LIMIT_FILE_COUNT', 'Une seule photo de couverture est autorisée'],
+      ['photos_LIMIT_UNEXPECTED_FILE', 'Le nombre de photos maximum par jeu est de 5'],
+      ['couverture_LIMIT_UNEXPECTED_FILE', 'Une seule photo de couverture est autorisée'],
       ['photos_LIMIT_FILE_SIZE', 'Le poids maximum d’une photo est de 5MO'],
-      [
-        'couverture_LIMIT_FILE_SIZE',
-        'Le poids maximum de la couverture est de 5MO',
-      ],
+      ['couverture_LIMIT_FILE_SIZE', 'Le poids maximum de la couverture est de 5MO'],
     ]);
     return multer({
       storage: multer.memoryStorage(),
@@ -81,14 +53,9 @@ const valideLesPhotosTeleversees = (
       if (requete.files) {
         for (const fichiers of Object.values(requete.files)) {
           for (const fichier of fichiers) {
-            const mimeTypeDeLImage = adaptateurTeleversement.recupereTypeImage(
-              fichier.buffer,
-            );
+            const mimeTypeDeLImage = adaptateurTeleversement.recupereTypeImage(fichier.buffer);
             const typesAutorises = ['image/jpeg', 'image/png'];
-            if (
-              !mimeTypeDeLImage ||
-              !typesAutorises.includes(mimeTypeDeLImage)
-            ) {
+            if (!mimeTypeDeLImage || !typesAutorises.includes(mimeTypeDeLImage)) {
               return reponse.status(400).json({
                 erreur: "Le fichier n'est pas supporté",
               });
@@ -99,9 +66,7 @@ const valideLesPhotosTeleversees = (
 
       if (err && err instanceof multer.MulterError) {
         return reponse.status(400).json({
-          erreur:
-            libellesErreur.get(`${err.field}_${err.code}`) ||
-            'Une erreur est survenue',
+          erreur: libellesErreur.get(`${err.field}_${err.code}`) || 'Une erreur est survenue',
         });
       }
       return suite();
@@ -123,29 +88,19 @@ export const ressourceMesJeux = ({
   routeur.post(
     '/',
     urlencoded(),
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage,
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideLesPhotosTeleversees(adaptateurTeleversement),
     lanceAnalyseAntivirus(adaptateurAntivirus),
     filetRouteAsynchrone(
       async (
-        requete: Request<
-          core.ParamsDictionary,
-          Jeu | { erreur: string },
-          CorpsRequeteDeJeu,
-          qs.ParsedQs
-        >,
+        requete: Request<core.ParamsDictionary, Jeu | { erreur: string }, CorpsRequeteDeJeu, qs.ParsedQs>,
         reponse: Response,
       ) => {
         try {
           const corpsRequeteJeu = JSON.parse(requete.body.jeu);
           const resultat = schemaCreationJeu.safeParse(corpsRequeteJeu);
           if (!resultat.success) {
-            return reponse
-              .status(400)
-              .json({ erreur: resultat.error.issues[0].message });
+            return reponse.status(400).json({ erreur: resultat.error.issues[0].message });
           }
           const utilisateurConnecte = requete.utilisateur;
           const photosJeu = adaptateurTeleversement.photosJeu(requete);
@@ -208,10 +163,7 @@ export const ressourceMesJeux = ({
           );
           reponse.sendStatus(201);
         } catch (e: unknown | Error) {
-          adaptateurGestionErreur.erreur(
-            e as Error,
-            'Erreur de création du jeu',
-          );
+          adaptateurGestionErreur.erreur(e as Error, 'Erreur de création du jeu');
           reponse.sendStatus(500);
         }
       },
@@ -220,10 +172,7 @@ export const ressourceMesJeux = ({
 
   routeur.get(
     '/',
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage,
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete, reponse) => {
       const jeux = await entrepotJeux.lesJeuxDe(requete.utilisateur);
       reponse.send(

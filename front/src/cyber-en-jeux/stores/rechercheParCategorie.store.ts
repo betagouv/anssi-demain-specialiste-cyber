@@ -7,6 +7,5 @@ export const rechercheParCategorie = {
   subscribe: categorie.subscribe,
   set: categorie.set,
   reinitialise: () => categorie.set(''),
-  ok: (jeu: Jeu) =>
-    !get(categorie).length || get(categorie).includes(jeu.categorie),
+  ok: (jeu: Jeu) => !get(categorie).length || get(categorie).includes(jeu.categorie),
 };

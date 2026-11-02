@@ -5,9 +5,8 @@
   <dsfr-container>
     <h3 class="section-formation-titre fr-h2">Apprends à ton rythme</h3>
     <p class="section-formation-description texte-article-lg">
-      Des formations en ligne gratuites, proposées par les acteurs publics de la
-      cyber, pour comprendre les menaces, adopter les bons réflexes et découvrir
-      le droit du numérique.
+      Des formations en ligne gratuites, proposées par les acteurs publics de la cyber, pour comprendre les menaces,
+      adopter les bons réflexes et découvrir le droit du numérique.
     </p>
 
     <div class="formations">
@@ -50,9 +49,7 @@
       >
         <dsfr-badges-group
           slot="badgesgroup"
-          badges={[
-            { label: 'Enseignants et médiateurs', accent: 'pink-tuile' },
-          ]}
+          badges={[{ label: 'Enseignants et médiateurs', accent: 'pink-tuile' }]}
           size="sm"
         ></dsfr-badges-group>
       </dsfr-card>

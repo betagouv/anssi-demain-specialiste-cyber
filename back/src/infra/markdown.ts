@@ -1,24 +1,5 @@
 export const aseptiseVersMarkdown = (message: string) =>
-  [
-    '\\',
-    '!',
-    '[',
-    ']',
-    '`',
-    '{',
-    '}',
-    '*',
-    '_',
-    '<',
-    '>',
-    '(',
-    ')',
-    '#',
-    '+',
-    '-',
-    '.',
-    '|',
-  ].reduce(
+  ['\\', '!', '[', ']', '`', '{', '}', '*', '_', '<', '>', '(', ')', '#', '+', '-', '.', '|'].reduce(
     (acc, caractere) => acc.replaceAll(caractere, `\\${caractere}`),
     message,
   );

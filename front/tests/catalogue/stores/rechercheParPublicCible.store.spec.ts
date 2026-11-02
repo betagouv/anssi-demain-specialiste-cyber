@@ -14,9 +14,7 @@ describe('La recherche par public cible', () => {
   });
 
   describe('permet de filtrer les ressources Cyber', () => {
-    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
-      .avecPublicsCible(['Élèves'])
-      .construis();
+    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber().avecPublicsCible(['Élèves']).construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
       const resultat = rechercheParPublicCible.ok(ressourceCyber);

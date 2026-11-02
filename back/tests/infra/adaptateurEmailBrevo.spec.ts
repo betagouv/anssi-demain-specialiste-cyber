@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  AdaptateurEmailBrevo,
-  ReponseBrevo,
-} from '../../src/infra/adaptateurExpediteurEmail';
+import { AdaptateurEmailBrevo, ReponseBrevo } from '../../src/infra/adaptateurExpediteurEmail';
 import { PosteRessourceHttp } from '../../src/infra/clientHttp';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
@@ -11,11 +8,7 @@ describe("L'adaptateur d'email brevo", () => {
     let urlAppelee = '';
     let coprsEnvoye = {};
     let configEnvoyee = undefined;
-    const posteur: PosteRessourceHttp<ReponseBrevo> = async (
-      url,
-      corps,
-      config,
-    ) => {
+    const posteur: PosteRessourceHttp<ReponseBrevo> = async (url, corps, config) => {
       urlAppelee = url;
       coprsEnvoye = corps;
       configEnvoyee = config;
@@ -23,10 +16,7 @@ describe("L'adaptateur d'email brevo", () => {
         status: 'ok',
       };
     };
-    const adaptateur = new AdaptateurEmailBrevo(
-      fauxAdaptateurEnvironnement,
-      posteur,
-    );
+    const adaptateur = new AdaptateurEmailBrevo(fauxAdaptateurEnvironnement, posteur);
 
     await adaptateur.creeContact({
       email: 'mon.email@mail.com',
@@ -60,11 +50,7 @@ describe("L'adaptateur d'email brevo", () => {
     let urlAppelee = '';
     let coprsEnvoye = {};
     let configEnvoyee = undefined;
-    const posteur: PosteRessourceHttp<ReponseBrevo> = async (
-      url,
-      corps,
-      config,
-    ) => {
+    const posteur: PosteRessourceHttp<ReponseBrevo> = async (url, corps, config) => {
       urlAppelee = url;
       coprsEnvoye = corps;
       configEnvoyee = config;
@@ -72,10 +58,7 @@ describe("L'adaptateur d'email brevo", () => {
         status: 'ok',
       };
     };
-    const adaptateur = new AdaptateurEmailBrevo(
-      fauxAdaptateurEnvironnement,
-      posteur,
-    );
+    const adaptateur = new AdaptateurEmailBrevo(fauxAdaptateurEnvironnement, posteur);
 
     await adaptateur.envoieEmailBienvenue({
       email: 'mon.email@mail.com',

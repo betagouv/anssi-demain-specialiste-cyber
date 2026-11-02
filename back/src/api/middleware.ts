@@ -18,10 +18,7 @@ export type Middleware = {
   ajouteLeNonceALaReponse: FonctionMiddleware<unknown>;
   positionneLesCsp: FonctionMiddleware<unknown>;
   verifieModeMaintenance: FonctionMiddleware<unknown>;
-  valideLaCoherenceDuCorps: <
-    TZod extends z.ZodType,
-    TBody extends z.infer<TZod>,
-  >(
+  valideLaCoherenceDuCorps: <TZod extends z.ZodType, TBody extends z.infer<TZod>>(
     object: TZod,
   ) => FonctionMiddleware<TBody>;
   verifieJWTNavigation: FonctionMiddleware<unknown>;
@@ -33,37 +30,21 @@ export type Middleware = {
   redirigeVersUrlBase: FonctionMiddleware<unknown>;
 };
 
-export type RequeteNonTypee = Request<
-  unknown,
-  unknown,
-  unknown,
-  unknown,
-  never
->;
+export type RequeteNonTypee = Request<unknown, unknown, unknown, unknown, never>;
 
 export const fabriqueMiddleware = ({
   adaptateurEnvironnement,
   adaptateurJWT,
   moteurDeRendu,
 }: ConfigurationServeurSansMiddleware): Middleware => {
-  const ajouteLeNonceALaReponse = async (
-    _requete: RequeteNonTypee,
-    reponse: Response,
-    suite: NextFunction,
-  ) => {
+  const ajouteLeNonceALaReponse = async (_requete: RequeteNonTypee, reponse: Response, suite: NextFunction) => {
     reponse.locals.nonce = randomBytes(24).toString('base64');
     suite();
   };
 
-  const verifieModeMaintenance = async (
-    _requete: RequeteNonTypee,
-    reponse: Response,
-    suite: NextFunction,
-  ) => {
+  const verifieModeMaintenance = async (_requete: RequeteNonTypee, reponse: Response, suite: NextFunction) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
-      reponse
-        .status(HttpStatusCode.ServiceUnavailable)
-        .set('Content-Type', 'text/html');
+      reponse.status(HttpStatusCode.ServiceUnavailable).set('Content-Type', 'text/html');
 
       moteurDeRendu.rends(reponse, 'maintenance');
     } else {
@@ -73,11 +54,7 @@ export const fabriqueMiddleware = ({
 
   const valideLaCoherenceDuCorps =
     <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
-    async (
-      requete: Request<unknown, unknown, TBody, unknown, never>,
-      reponse: Response,
-      suite: NextFunction,
-    ) => {
+    async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
       const resultat = objet.safeParse(requete.body);
       if (!resultat.success) {
         reponse.status(400).json({ erreur: resultat.error.issues[0].message });
@@ -86,11 +63,7 @@ export const fabriqueMiddleware = ({
       }
     };
 
-  const verifieJWTNavigation = async (
-    requete: RequeteNonTypee,
-    reponse: Response,
-    suite: NextFunction,
-  ) => {
+  const verifieJWTNavigation = async (requete: RequeteNonTypee, reponse: Response, suite: NextFunction) => {
     if (!requete.session?.token) {
       return reponse.redirect('/connexion');
     }
@@ -126,9 +99,7 @@ export const fabriqueMiddleware = ({
       }
       try {
         requete.utilisateur = email
-          ? await entrepotUtilisateur.parEmailHache(
-              adaptateurHachage.hache(email),
-            )
+          ? await entrepotUtilisateur.parEmailHache(adaptateurHachage.hache(email))
           : undefined;
         suite();
       } catch {
@@ -136,11 +107,7 @@ export const fabriqueMiddleware = ({
       }
     };
 
-  const positionneLesCsp = async (
-    requete: RequeteNonTypee,
-    reponse: Response,
-    suite: NextFunction,
-  ) =>
+  const positionneLesCsp = async (requete: RequeteNonTypee, reponse: Response, suite: NextFunction) =>
     helmet({
       contentSecurityPolicy: {
         directives: {
@@ -182,20 +149,12 @@ export const fabriqueMiddleware = ({
       },
     })(requete, reponse, suite);
 
-  const redirigeVersUrlBase = async (
-    requete: RequeteNonTypee,
-    reponse: Response,
-    suite: NextFunction,
-  ) => {
-    if (
-      requete.headers.host === new URL(adaptateurEnvironnement.urlDeBase()).host
-    ) {
+  const redirigeVersUrlBase = async (requete: RequeteNonTypee, reponse: Response, suite: NextFunction) => {
+    if (requete.headers.host === new URL(adaptateurEnvironnement.urlDeBase()).host) {
       suite();
       return;
     }
-    reponse.redirect(
-      `${adaptateurEnvironnement.urlDeBase()}${requete.originalUrl}`,
-    );
+    reponse.redirect(`${adaptateurEnvironnement.urlDeBase()}${requete.originalUrl}`);
   };
 
   return {
@@ -210,7 +169,6 @@ export const fabriqueMiddleware = ({
 };
 
 export const filetRouteAsynchrone =
-  (route: RequestHandler) =>
-  (requete: Request, reponse: Response, suite: NextFunction) => {
+  (route: RequestHandler) => (requete: Request, reponse: Response, suite: NextFunction) => {
     Promise.resolve(route(requete, reponse, suite)).catch(suite);
   };

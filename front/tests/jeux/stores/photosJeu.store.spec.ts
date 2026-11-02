@@ -89,9 +89,7 @@ describe('L’ajout de photos d’un jeu', () => {
     const fichiersEnMemoire = get(photosJeu).photos as File[];
 
     expect(fichiersEnMemoire.map((f) => f.name)).toStrictEqual(
-      [premierePhoto, deuxiemePhoto, troisiemePhoto, quatriemePhoto].map(
-        (f) => f.name,
-      ),
+      [premierePhoto, deuxiemePhoto, troisiemePhoto, quatriemePhoto].map((f) => f.name),
     );
   });
 

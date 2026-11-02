@@ -13,10 +13,8 @@
     <div class="contenu">
       <h2 class="fr-h3">Déclarer une action</h2>
       <p class="fr-text">
-        Faites découvrir la cybersécurité autrement&nbsp;! En déclarant votre
-        séquence, vous profitez d’un accompagnement et valorisez votre
-        engagement pour une éducation au numérique plus ludique et
-        participative.
+        Faites découvrir la cybersécurité autrement&nbsp;! En déclarant votre séquence, vous profitez d’un
+        accompagnement et valorisez votre engagement pour une éducation au numérique plus ludique et participative.
       </p>
     </div>
     <div class="action">
@@ -36,11 +34,7 @@
 
   .encart-declarer-action {
     background:
-      linear-gradient(
-        90deg,
-        var(--bleu-profond-dsc) 69.49%,
-        rgb(from var(--bleu-profond-dsc) r g b/0) 100%
-      ),
+      linear-gradient(90deg, var(--bleu-profond-dsc) 69.49%, rgb(from var(--bleu-profond-dsc) r g b/0) 100%),
       url('/assets/images/cercles-fond-sombre.avif') right 20% no-repeat,
       var(--bleu-profond-dsc);
     color: var(--grey-1000-50);

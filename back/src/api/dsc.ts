@@ -25,22 +25,16 @@ export const creeServeur = (configurationServeur: ConfigurationServeur) => {
       name: 'session',
       sameSite: true,
       secret: process.env.SECRET_COOKIE,
-      secure:
-        configurationServeur.adaptateurEnvironnement.nodeEnv() !==
-        'developpement',
-      signed:
-        configurationServeur.adaptateurEnvironnement.nodeEnv() !==
-        'developpement',
+      secure: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
+      signed: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
     }),
   );
 
   app.use(cookieParser());
 
-  configurationServeur
-    .recupereCheminsVersFichiersStatiques()
-    .forEach((chemin) => {
-      app.use('/', express.static(chemin));
-    });
+  configurationServeur.recupereCheminsVersFichiersStatiques().forEach((chemin) => {
+    app.use('/', express.static(chemin));
+  });
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
   app.use('/oidc', ressourcesOidc(configurationServeur));

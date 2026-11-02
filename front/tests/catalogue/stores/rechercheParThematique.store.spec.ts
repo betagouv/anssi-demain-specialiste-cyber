@@ -14,9 +14,7 @@ describe('La recherche par thématique', () => {
   });
 
   describe('permet de filtrer les ressources Cyber', () => {
-    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
-      .avecThematiques(['Thème 1'])
-      .construis();
+    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber().avecThematiques(['Thème 1']).construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
       const resultat = rechercheParThematique.ok(ressourceCyber);

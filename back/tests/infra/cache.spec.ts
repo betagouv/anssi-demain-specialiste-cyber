@@ -7,9 +7,7 @@ import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
 const _24_HEURES = 1440;
 
 const ilSePasse25Heures = (): void => {
-  FournisseurHorlogeDeTest.initialise(
-    add(FournisseurHorloge.maintenant(), { hours: 25 }),
-  );
+  FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 25 }));
 };
 
 describe('Le système de mise en cache', () => {
@@ -115,9 +113,9 @@ describe('Le système de mise en cache', () => {
         throw new Error('Une erreur est survenue');
       };
 
-      await expect(
-        async () => await cache.get('une-clef', laFonction),
-      ).rejects.toEqual(new Error('Une erreur est survenue'));
+      await expect(async () => await cache.get('une-clef', laFonction)).rejects.toEqual(
+        new Error('Une erreur est survenue'),
+      );
     });
   });
 });

@@ -18,9 +18,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toStrictEqual([
       { version: 1, secret: 'secret1' },
@@ -35,9 +33,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toStrictEqual([
       { version: 1, secret: 'secret1' },
@@ -53,9 +49,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toStrictEqual([
       { version: 1, secret: 'secret1' },
@@ -66,9 +60,7 @@ describe("L'adaptateur environnement", () => {
   it('utilise des entiers pour les versions', () => {
     process.env = { HACHAGE_SECRET_DE_HACHAGE_1: 'secret1' };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage[0].version).toBe(1);
   });
@@ -80,9 +72,7 @@ describe("L'adaptateur environnement", () => {
 
     expect(() => {
       adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
-    }).toThrow(
-      `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide`,
-    );
+    }).toThrow(`Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide`);
   });
 
   it('ignore les clés qui ne concernent pas le hachage', () => {
@@ -103,8 +93,6 @@ describe("L'adaptateur environnement", () => {
     };
     const cellarPhotosJeux = adaptateurEnvironnement.cellarPhotosJeux();
 
-    expect(cellarPhotosJeux).toEqual(
-      'https://bucket-photos-jeux.lurl-du-cellar',
-    );
+    expect(cellarPhotosJeux).toEqual('https://bucket-photos-jeux.lurl-du-cellar');
   });
 });

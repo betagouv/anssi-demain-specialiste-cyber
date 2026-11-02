@@ -1,7 +1,4 @@
-import {
-  type RessourceCyber,
-  type TypesRessourceCyber,
-} from '../../src/catalogue/ressourceCyber';
+import { type RessourceCyber, type TypesRessourceCyber } from '../../src/catalogue/ressourceCyber';
 
 interface Constructeur<T> {
   construis(): T;
@@ -77,5 +74,4 @@ class ConstructeurRessourceCyber implements Constructeur<RessourceCyber> {
   }
 }
 
-export const unConstructeurDeRessourceCyber = () =>
-  new ConstructeurRessourceCyber();
+export const unConstructeurDeRessourceCyber = () => new ConstructeurRessourceCyber();

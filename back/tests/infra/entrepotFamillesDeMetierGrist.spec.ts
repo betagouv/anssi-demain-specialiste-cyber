@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
-import {
-  EntrepôtFamillesDeMétierGrist,
-  FamilleDeMetierGrist,
-} from '../../src/infra/entrepotFamillesDeMetierGrist';
+import { EntrepôtFamillesDeMétierGrist, FamilleDeMetierGrist } from '../../src/infra/entrepotFamillesDeMetierGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import { Fonction } from '../../src/metier/fonction';
 import { EntrepôtFonctionsMémoire } from '../api/entrepotFonctionsMemoire';
@@ -20,9 +17,7 @@ describe('L’entrepôt des familles de métier grist', () => {
   describe('sur demande de toutes les familles', () => {
     it('sait appeler la bonne ressource', async () => {
       let urlAppelee = '';
-      const clientHttp: RecupereRessourceHttp<
-        ReponseGrist<FamilleDeMetierGrist>
-      > = async (url: string) => {
+      const clientHttp: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async (url: string) => {
         urlAppelee = url;
         return { records: [] };
       };
@@ -35,9 +30,7 @@ describe('L’entrepôt des familles de métier grist', () => {
 
       await entrepotRessourcesCyberGrist.tous();
 
-      expect(urlAppelee).toEqual(
-        'http://example.com/api/docs/mon_id_document/tables/id_table_familles_metier/records',
-      );
+      expect(urlAppelee).toEqual('http://example.com/api/docs/mon_id_document/tables/id_table_familles_metier/records');
     });
 
     const uneLigneDeFamilleGrist = () =>
@@ -47,9 +40,7 @@ describe('L’entrepôt des familles de métier grist', () => {
         .avecColonneEtValeur('Tuile_3', 'A / B');
 
     it('sait reconstruire les familles', async () => {
-      const famillesDeMetierGrist: RecupereRessourceHttp<
-        ReponseGrist<FamilleDeMetierGrist>
-      > = async () =>
+      const famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
           .ajouteUneLigne(
             uneLigneDeFamilleGrist()
@@ -57,22 +48,11 @@ describe('L’entrepôt des familles de métier grist', () => {
               .avecColonneEtValeur('Titre_Hero', 'Conception et maintien...')
               .avecColonneEtValeur('Sous_texte_Hero', 'Concevoir, chiffrer...')
               .avecColonneEtValeur('En_bref', 'La sécurité se prépare...')
-              .avecColonneEtValeur(
-                'Tuile_1',
-                'Concevoir / Dessiner des systèmes',
-              )
-              .avecColonneEtValeur(
-                'Tuile_2',
-                'Chiffrer / Protéger la confidentialité',
-              )
-              .avecColonneEtValeur(
-                'Tuile_3',
-                'Maintenir / Administrer et mettre à jour',
-              ),
+              .avecColonneEtValeur('Tuile_1', 'Concevoir / Dessiner des systèmes')
+              .avecColonneEtValeur('Tuile_2', 'Chiffrer / Protéger la confidentialité')
+              .avecColonneEtValeur('Tuile_3', 'Maintenir / Administrer et mettre à jour'),
           )
-          .ajouteUneLigne(
-            uneLigneDeFamilleGrist().avecColonneEtValeur('Famille', 'Pilotage'),
-          )
+          .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtValeur('Famille', 'Pilotage'))
           .construis();
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
@@ -96,24 +76,13 @@ describe('L’entrepôt des familles de métier grist', () => {
     });
 
     it('sait associer les profils', async () => {
-      const famillesDeMetierGrist: RecupereRessourceHttp<
-        ReponseGrist<FamilleDeMetierGrist>
-      > = async () =>
+      const famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
-          .ajouteUneLigne(
-            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
-              'Profils_de_cette_famille',
-              [13, 17],
-            ),
-          )
+          .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs('Profils_de_cette_famille', [13, 17]))
           .construis();
       const entrepôtMétiers = new EntrepotMetiersMemoire();
-      await entrepôtMétiers.ajoute(
-        unMetier().avecId(13).avecTitre('A').construis(),
-      );
-      await entrepôtMétiers.ajoute(
-        unMetier().avecId(17).avecTitre('B').construis(),
-      );
+      await entrepôtMétiers.ajoute(unMetier().avecId(13).avecTitre('A').construis());
+      await entrepôtMétiers.ajoute(unMetier().avecId(17).avecTitre('B').construis());
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         entrepôtMétiers,
         new EntrepotRessourcesCyberMemoire(),
@@ -129,24 +98,13 @@ describe('L’entrepôt des familles de métier grist', () => {
     });
 
     it('sait associer les ressources', async () => {
-      const famillesDeMetierGrist: RecupereRessourceHttp<
-        ReponseGrist<FamilleDeMetierGrist>
-      > = async () =>
+      const famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
-          .ajouteUneLigne(
-            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
-              'Ressources_associees',
-              [3, 112],
-            ),
-          )
+          .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs('Ressources_associees', [3, 112]))
           .construis();
       const entrepôtRessourcesCyber = new EntrepotRessourcesCyberMemoire();
-      await entrepôtRessourcesCyber.ajoute(
-        uneRessourceCyber().avecId(3).avecTitre('Passe ton Hack').construis(),
-      );
-      await entrepôtRessourcesCyber.ajoute(
-        uneRessourceCyber().avecId(112).avecTitre('Cyber Guide').construis(),
-      );
+      await entrepôtRessourcesCyber.ajoute(uneRessourceCyber().avecId(3).avecTitre('Passe ton Hack').construis());
+      await entrepôtRessourcesCyber.ajoute(uneRessourceCyber().avecId(112).avecTitre('Cyber Guide').construis());
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
         entrepôtRessourcesCyber,
@@ -171,16 +129,9 @@ describe('L’entrepôt des familles de métier grist', () => {
     });
 
     it('sait associer les fonctions', async () => {
-      const famillesDeMetierGrist: RecupereRessourceHttp<
-        ReponseGrist<FamilleDeMetierGrist>
-      > = async () =>
+      const famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async () =>
         new ConstructeurRéponseFamillesDeMétierGrist()
-          .ajouteUneLigne(
-            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
-              'Metiers',
-              [5, 10],
-            ),
-          )
+          .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs('Metiers', [5, 10]))
           .construis();
       const entrepôtFonctions = new EntrepôtFonctionsMémoire();
       await entrepôtFonctions.ajoute(uneFonction(5, 'Cryptologue'));

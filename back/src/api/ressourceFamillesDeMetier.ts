@@ -1,9 +1,7 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 
-export const ressourceFamillesDeMétier = ({
-  entrepôtFamillesDeMétier,
-}: ConfigurationServeur) => {
+export const ressourceFamillesDeMétier = ({ entrepôtFamillesDeMétier }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get('/', async (_requête, réponse) => {

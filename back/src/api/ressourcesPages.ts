@@ -55,15 +55,10 @@ export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
 
   pages
     .filter(({ protegee }) => protegee)
-    .forEach(({ route }) =>
-      router.use(route, configurationServeur.middleware.verifieJWTNavigation),
-    );
+    .forEach(({ route }) => router.use(route, configurationServeur.middleware.verifieJWTNavigation));
 
   pages.forEach(({ route, chemin = '' }) => {
-    const vue = path.join(
-      chemin,
-      route.startsWith('/') ? route.slice(1) : route,
-    );
+    const vue = path.join(chemin, route.startsWith('/') ? route.slice(1) : route);
     router.use(route, (_, reponse) => moteurDeRendu.rends(reponse, vue));
   });
 

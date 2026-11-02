@@ -1,9 +1,5 @@
 import z from 'zod';
-import type {
-  ErreursValidationJeuEnEdition,
-  JeuEnEdition,
-  PresentationDuJeu,
-} from './jeuEnEdition.type';
+import type { ErreursValidationJeuEnEdition, JeuEnEdition, PresentationDuJeu } from './jeuEnEdition.type';
 import { extracteurErreursZod, type Validateur } from './validateur';
 
 export class ValidateurPresentationDuJeu implements Validateur<PresentationDuJeu> {

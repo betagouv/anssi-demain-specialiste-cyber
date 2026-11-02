@@ -13,9 +13,7 @@ export const adaptateurChiffrement = ({
 }: {
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): AdaptateurChiffrement => {
-  const clefSecreteEnChaine = adaptateurEnvironnement
-    .chiffrement()
-    .cleChaCha20Hex();
+  const clefSecreteEnChaine = adaptateurEnvironnement.chiffrement().cleChaCha20Hex();
   const clefSecrete = Buffer.from(clefSecreteEnChaine, 'hex');
 
   return {
@@ -31,10 +29,7 @@ export const adaptateurChiffrement = ({
         plaintextLength: Buffer.byteLength(donneesAChiffrer),
       });
 
-      const donneesChiffrees = Buffer.concat([
-        chiffreur.update(donneesAChiffrer, 'utf-8'),
-        chiffreur.final(),
-      ]);
+      const donneesChiffrees = Buffer.concat([chiffreur.update(donneesAChiffrer, 'utf-8'), chiffreur.final()]);
       const tag = chiffreur.getAuthTag();
 
       return {
@@ -47,21 +42,15 @@ export const adaptateurChiffrement = ({
     dechiffre: (donneesChiffrees) => {
       const { iv, aad, donnees, tag } = donneesChiffrees;
 
-      const dechiffreur = createDecipheriv(
-        'chacha20-poly1305',
-        clefSecrete,
-        Buffer.from(iv, 'hex'),
-        { authTagLength: 16 },
-      );
+      const dechiffreur = createDecipheriv('chacha20-poly1305', clefSecrete, Buffer.from(iv, 'hex'), {
+        authTagLength: 16,
+      });
       dechiffreur.setAAD(Buffer.from(aad, 'hex'), {
         plaintextLength: donnees.length,
       });
       dechiffreur.setAuthTag(Buffer.from(tag, 'hex'));
 
-      const chaineDechiffree = Buffer.concat([
-        dechiffreur.update(Buffer.from(donnees, 'hex')),
-        dechiffreur.final(),
-      ]);
+      const chaineDechiffree = Buffer.concat([dechiffreur.update(Buffer.from(donnees, 'hex')), dechiffreur.final()]);
       return JSON.parse(chaineDechiffree.toString());
     },
   };

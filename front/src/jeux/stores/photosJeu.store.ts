@@ -22,10 +22,7 @@ export const photosJeu = {
   },
   ajoutePhoto(photo: Blob) {
     const photosActuelles = get(photosJeuStore);
-    if (
-      photosActuelles &&
-      photosActuelles.photos?.length === NOMBRE_MAX_PHOTOS
-    ) {
+    if (photosActuelles && photosActuelles.photos?.length === NOMBRE_MAX_PHOTOS) {
       return;
     }
     photosJeuStore.set({

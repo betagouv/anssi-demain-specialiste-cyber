@@ -35,11 +35,9 @@
     sansZoneIdentification?: boolean;
   }
 
-  const { sansNavigation = false, sansZoneIdentification = false }: Props =
-    $props();
+  const { sansNavigation = false, sansZoneIdentification = false }: Props = $props();
 
-  const ajouteMenuSiConnecte = (elementDeMenu: MenuItem) =>
-    $profil ? [elementDeMenu] : [];
+  const ajouteMenuSiConnecte = (elementDeMenu: MenuItem) => ($profil ? [elementDeMenu] : []);
 
   let cheminCourant = $state('/');
   onMount(() => {
@@ -59,8 +57,7 @@
       label: 'Catalogue de ressources',
       type: 'link',
       href: '/catalogue',
-      active:
-        cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
+      active: cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
     },
     {
       id: 'selection-enseignants',
@@ -83,21 +80,16 @@
       collapsable: true,
       collapseId: 'dispositifs-phares',
       active:
-        [
-          '/cyber-en-jeux',
-          '/france-cybersecurity-challenge',
-          '/operation-cactus',
-          '/passe-ton-hack-d-abord',
-        ].includes(cheminCourant) || cheminCourant.startsWith('/jeux'),
+        ['/cyber-en-jeux', '/france-cybersecurity-challenge', '/operation-cactus', '/passe-ton-hack-d-abord'].includes(
+          cheminCourant,
+        ) || cheminCourant.startsWith('/jeux'),
       items: [
         {
           id: 'cyber-en-jeux',
           label: 'CyberEnJeux',
           type: 'link',
           href: '/cyber-en-jeux',
-          active:
-            cheminCourant === '/cyber-en-jeux' ||
-            cheminCourant.startsWith('/jeux'),
+          active: cheminCourant === '/cyber-en-jeux' || cheminCourant.startsWith('/jeux'),
         },
         {
           id: 'france-cybersecurity-challenge',

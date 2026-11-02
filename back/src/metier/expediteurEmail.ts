@@ -13,11 +13,5 @@ export interface ExpediteurEmail {
     pixelDeSuiviAccepté: boolean;
   }) => Promise<void>;
 
-  envoieEmailBienvenue: ({
-    email,
-    prenom,
-  }: {
-    email: string;
-    prenom: string;
-  }) => Promise<void>;
+  envoieEmailBienvenue: ({ email, prenom }: { email: string; prenom: string }) => Promise<void>;
 }

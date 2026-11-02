@@ -40,10 +40,7 @@ type JeuEnDBLecture = {
   est_cache: boolean;
 };
 
-type JeuEnDBEcriture = Omit<
-  JeuEnDBLecture,
-  'eleves' | 'thematiques' | 'temoignages'
-> & {
+type JeuEnDBEcriture = Omit<JeuEnDBLecture, 'eleves' | 'thematiques' | 'temoignages'> & {
   eleves: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
   thematiques: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
   temoignages: string; // IMPORTANT, Knex ne sait pas gérer l'insertion de tableau directement, cf : https://knexjs.org/guide/schema-builder.html#json
@@ -71,9 +68,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
   }
 
   async metsAjour(jeu: Jeu): Promise<void> {
-    await this.knex('jeux')
-      .where({ id: jeu.id })
-      .update(this.metierVersdonneesEnDb(jeu));
+    await this.knex('jeux').where({ id: jeu.id }).update(this.metierVersdonneesEnDb(jeu));
   }
 
   async ajoute(jeu: Jeu): Promise<void> {
@@ -82,8 +77,8 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
 
   async tous(): Promise<Jeu[]> {
     return Promise.all(
-      (await this.knex<JeuEnDBLecture>('jeux').where({ est_cache: false })).map(
-        (jeu) => this.donneesEnDbVersMetier(jeu),
+      (await this.knex<JeuEnDBLecture>('jeux').where({ est_cache: false })).map((jeu) =>
+        this.donneesEnDbVersMetier(jeu),
       ),
     );
   }
@@ -131,8 +126,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       categorie: jeuEnDB.categorie as CategorieDeJeux,
       thematiques: (jeuEnDB.thematiques ?? []) as ThematiqueDeJeux[],
       description: jeuEnDB.description,
-      temoignages:
-        jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
+      temoignages: jeuEnDB.temoignages?.map((j) => j as unknown as Temoignage) ?? [],
       photos: {
         couverture: this.prefixeCheminParUrl(jeuEnDB.photos.couverture),
         photos: jeuEnDB.photos.photos.map((p) => this.prefixeCheminParUrl(p)),
@@ -148,9 +142,7 @@ export class EntrepotJeuxPostgres implements EntrepotJeux {
       id: jeu.id,
       nom: jeu.nom,
       sequence: jeu.sequence,
-      id_enseignant: jeu.enseignant
-        ? this.adaptateurHachage.hache(jeu.enseignant.email)
-        : null,
+      id_enseignant: jeu.enseignant ? this.adaptateurHachage.hache(jeu.enseignant.email) : null,
       nom_etablissement: jeu.nomEtablissement,
       classe: jeu.classe,
       discipline: jeu.discipline,

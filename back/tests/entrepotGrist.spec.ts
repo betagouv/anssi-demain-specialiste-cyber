@@ -21,24 +21,16 @@ describe("L'entrepôt Grist générique", () => {
   };
 
   const ilSePasse2Heures = (): void => {
-    FournisseurHorlogeDeTest.initialise(
-      add(FournisseurHorloge.maintenant(), { hours: 2 }),
-    );
+    FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 2 }));
   };
 
   it('mets en cache le résultat de l’appel à Grist', async () => {
     let nombreAppel = 0;
-    const clientHttp: RecupereRessourceHttp<
-      ReponseGrist<{ test: string }>
-    > = async (_url: string) => {
+    const clientHttp: RecupereRessourceHttp<ReponseGrist<{ test: string }>> = async (_url: string) => {
       nombreAppel++;
       return { records: [{ test: 'une chaine' }] };
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'schema',
-      'table',
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'schema', 'table');
 
     await entrepotRessourcesCyberGrist.tous();
     const resultat = await entrepotRessourcesCyberGrist.tous();
@@ -48,16 +40,10 @@ describe("L'entrepôt Grist générique", () => {
   });
 
   it("mets en cache les résultats d'appels à Grist avec des filtres différents", async () => {
-    const clientHttp: RecupereRessourceHttp<
-      ReponseGrist<{ test: string }>
-    > = async (url: string) => {
+    const clientHttp: RecupereRessourceHttp<ReponseGrist<{ test: string }>> = async (url: string) => {
       return { records: [{ test: 'une chaine de ' + url }] };
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'schema',
-      'table',
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'schema', 'table');
 
     const premier = await entrepotRessourcesCyberGrist.avecFiltre(1);
     const second = await entrepotRessourcesCyberGrist.avecFiltre(2);
@@ -67,9 +53,7 @@ describe("L'entrepôt Grist générique", () => {
 
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {
     let i = 0;
-    const clientHttp: RecupereRessourceHttp<
-      ReponseGrist<{ test: string }>
-    > = async (_url: string) => {
+    const clientHttp: RecupereRessourceHttp<ReponseGrist<{ test: string }>> = async (_url: string) => {
       if (i === 0) {
         i++;
         return { records: [{ test: 'une chaine' }] };
@@ -77,11 +61,7 @@ describe("L'entrepôt Grist générique", () => {
       return Promise.reject(new Error('Erreur 404'));
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'urlDeBase',
-      'cleApi',
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi');
     await entrepotRessourcesCyberGrist.tous();
     ilSePasse2Heures();
 

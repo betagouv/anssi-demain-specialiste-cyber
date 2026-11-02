@@ -11,11 +11,7 @@
     $photosJeuStore ??= {};
   });
 
-  async function redimensionnePhoto(
-    file: File,
-    targetWidth: number,
-    quality: number,
-  ): Promise<Blob> {
+  async function redimensionnePhoto(file: File, targetWidth: number, quality: number): Promise<Blob> {
     const bitmap = await createImageBitmap(file);
 
     const echelle = targetWidth / bitmap.width;
@@ -100,10 +96,7 @@
   {/if}
   {#if $photosJeuStore && $photosJeuStore.couverture}
     <div class="previsualisation-couverture">
-      <img
-        src={URL.createObjectURL($photosJeuStore.couverture)}
-        alt="Couverture"
-      />
+      <img src={URL.createObjectURL($photosJeuStore.couverture)} alt="Couverture" />
     </div>
     <dsfr-button
       label="Supprimer"
@@ -153,12 +146,11 @@
     status="default"
     label="J’atteste avoir recueilli le consentement des parents de tous les élèves présents sur les photos pour leur diffusion sur ce site."
     value={$jeuEnEditionStore.consentement}
-    onvaluechanged={(e: CustomEvent) =>
-      ($jeuEnEditionStore.consentement = e.detail)}
+    onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.consentement = e.detail)}
   ></dsfr-checkbox>
   <p>
-    Si aucun visage n’apparaît sur les images, cette case n’a pas besoin d’être
-    cochée. Vous pouvez passer à l’étape suivante.
+    Si aucun visage n’apparaît sur les images, cette case n’a pas besoin d’être cochée. Vous pouvez passer à l’étape
+    suivante.
   </p>
 </div>
 

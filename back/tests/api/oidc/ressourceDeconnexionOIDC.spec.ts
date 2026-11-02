@@ -3,10 +3,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/dsc';
 import { AgentConnectInfo, encodeSession, enObjet } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurOIDC,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets';
 
 describe('La ressource deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/deconnexion', () => {
@@ -32,9 +29,7 @@ describe('La ressource deconnexion OIDC', () => {
         AgentConnectIdToken: 'idToken',
       });
 
-      const reponse = await request(serveur)
-        .get('/oidc/deconnexion')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
 
       expect(reponse.status).toEqual(302);
       expect(reponse.headers.location).toEqual('une-adresse-proconnect');
@@ -46,15 +41,11 @@ describe('La ressource deconnexion OIDC', () => {
         AgentConnectIdToken: 'idToken',
       });
 
-      const reponse = await request(serveur)
-        .get('/oidc/deconnexion')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
       const headerCookie = reponse.headers['set-cookie'];
       const cookieSession = enObjet(headerCookie[0]);
 
-      expect(
-        (cookieSession.AgentConnectInfo as AgentConnectInfo).state,
-      ).toEqual('un faux state');
+      expect((cookieSession.AgentConnectInfo as AgentConnectInfo).state).toEqual('un faux state');
     });
   });
 });

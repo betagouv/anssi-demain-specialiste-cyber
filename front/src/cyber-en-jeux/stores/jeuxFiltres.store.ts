@@ -22,13 +22,7 @@ export type JeuxFiltres = {
 };
 
 export const jeuxFiltres = derived(
-  [
-    jeuxStore,
-    rechercheParThematique,
-    rechercheParCategorie,
-    rechercheParNiveau,
-    rechercheTextuelle,
-  ],
+  [jeuxStore, rechercheParThematique, rechercheParCategorie, rechercheParNiveau, rechercheTextuelle],
   ([$store]): JeuxFiltres => {
     const resultat = $store.filter(
       (jeu: Jeu) =>

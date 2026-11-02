@@ -2,18 +2,15 @@ import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 
-export const ressourceDeconnexionOIDC = (
-  configurationServeur: ConfigurationServeur,
-) => {
+export const ressourceDeconnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routes = Router();
 
   routes.get(
     '/',
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { url, state } =
-        await configurationServeur.adaptateurOIDC.genereDemandeDeconnexion(
-          requete.session!.AgentConnectIdToken,
-        );
+      const { url, state } = await configurationServeur.adaptateurOIDC.genereDemandeDeconnexion(
+        requete.session!.AgentConnectIdToken,
+      );
 
       reponse.cookie(
         'AgentConnectInfo',

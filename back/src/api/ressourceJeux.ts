@@ -4,12 +4,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 type Niveau =
-  | 'Cycle 1 (PS-GS)'
-  | 'Cycle 2 (CP-CE2)'
-  | 'Cycle 3 (CM1-6e)'
-  | 'Cycle 4 (5e-3e)'
-  | 'Cycle Terminal (2-T)'
-  | 'Post Bac';
+  'Cycle 1 (PS-GS)' | 'Cycle 2 (CP-CE2)' | 'Cycle 3 (CM1-6e)' | 'Cycle 4 (5e-3e)' | 'Cycle Terminal (2-T)' | 'Post Bac';
 
 const classeVersNiveau = (classe: Classe): Niveau => {
   switch (classe) {
@@ -45,18 +40,8 @@ export const ressourceJeux = ({ entrepotJeux }: ConfigurationServeur) => {
       const tousLesJeux = await entrepotJeux.tous();
       return reponse.send(
         tousLesJeux.map((jeu) => {
-          const {
-            id,
-            nom,
-            description,
-            classe,
-            categorie,
-            thematiques,
-            nomEtablissement,
-            eleves,
-            photos,
-            reactions,
-          } = jeu;
+          const { id, nom, description, classe, categorie, thematiques, nomEtablissement, eleves, photos, reactions } =
+            jeu;
           return {
             id,
             nom,

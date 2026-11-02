@@ -47,7 +47,4 @@ export interface ConfigurationServeur {
   entrepôtFonctions: EntrepôtFonctions;
 }
 
-export type ConfigurationServeurSansMiddleware = Omit<
-  ConfigurationServeur,
-  'middleware'
->;
+export type ConfigurationServeurSansMiddleware = Omit<ConfigurationServeur, 'middleware'>;

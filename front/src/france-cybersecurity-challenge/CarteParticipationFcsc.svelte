@@ -43,8 +43,7 @@
     badges={[{ label: 'du 3 au 12 avril 2026', accent: 'green-archipel' }]}
     size="md"
   ></dsfr-badges-group>
-  <dsfr-buttons-group slot="buttonsgroup" buttons={boutons}
-  ></dsfr-buttons-group>
+  <dsfr-buttons-group slot="buttonsgroup" buttons={boutons}></dsfr-buttons-group>
 </dsfr-card>
 
 <style lang="scss">

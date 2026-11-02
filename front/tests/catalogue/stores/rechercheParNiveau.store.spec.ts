@@ -20,9 +20,7 @@ describe('La recherche par niveau', () => {
   });
 
   describe('permet de filtrer les ressources Cyber', () => {
-    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber()
-      .avecNiveaux(['Cycle 2'])
-      .construis();
+    const ressourceCyber: RessourceCyber = unConstructeurDeRessourceCyber().avecNiveaux(['Cycle 2']).construis();
 
     it("en incluant une ressource si il n'y pas de filtre actif", () => {
       const resultat = rechercheParNiveau.ok(ressourceCyber);

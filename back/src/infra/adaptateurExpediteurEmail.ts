@@ -50,31 +50,18 @@ export class AdaptateurEmailBrevo implements ExpediteurEmail {
         },
       );
     } catch (e) {
-      if (
-        !isAxiosError(e) ||
-        e.response?.data.message !== 'Contact already exist'
-      ) {
+      if (!isAxiosError(e) || e.response?.data.message !== 'Contact already exist') {
         throw e;
       }
     }
   }
 
-  async envoieEmailBienvenue({
-    email,
-    prenom,
-  }: {
-    email: string;
-    prenom: string;
-  }) {
+  async envoieEmailBienvenue({ email, prenom }: { email: string; prenom: string }) {
     await this.posteurtHttp(
       `${this.adaptateurEnvironnement.expediteurEmail().urlDeBase()}smtp/email`,
       {
         to: [{ email }],
-        templateId: Number(
-          this.adaptateurEnvironnement
-            .expediteurEmail()
-            .idTemplateEmailBienvenue(),
-        ),
+        templateId: Number(this.adaptateurEnvironnement.expediteurEmail().idTemplateEmailBienvenue()),
         PRENOM: prenom,
       },
       {
@@ -107,17 +94,9 @@ export class AdaptateurEmailConsole implements ExpediteurEmail {
     console.log(`qui consent au pixel de suivi : ${pixelDeSuiviAccepté}`);
   }
 
-  async envoieEmailBienvenue({
-    email,
-    prenom,
-  }: {
-    email: string;
-    prenom: string;
-  }) {
+  async envoieEmailBienvenue({ email, prenom }: { email: string; prenom: string }) {
     // eslint-disable-next-line no-console
-    console.log(
-      `Envoie d'email de bienvenue pour l'utilisateur ${email} avec prénom ${prenom}`,
-    );
+    console.log(`Envoie d'email de bienvenue pour l'utilisateur ${email} avec prénom ${prenom}`);
   }
 }
 
@@ -128,10 +107,7 @@ export const fabriqueExpediteurEmail = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
   posteurtHttp?: PosteRessourceHttp<ReponseBrevo>;
 }) => {
-  if (
-    adaptateurEnvironnement.expediteurEmail().urlDeBase() &&
-    adaptateurEnvironnement.expediteurEmail().cleAPI()
-  ) {
+  if (adaptateurEnvironnement.expediteurEmail().urlDeBase() && adaptateurEnvironnement.expediteurEmail().cleAPI()) {
     return new AdaptateurEmailBrevo(adaptateurEnvironnement, posteurtHttp);
   }
   return new AdaptateurEmailConsole();

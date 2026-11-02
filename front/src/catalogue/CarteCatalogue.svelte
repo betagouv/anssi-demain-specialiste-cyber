@@ -23,9 +23,7 @@
 
   const { ressource, markup = 'h3' }: Props = $props();
 
-  const illustrationPetite = $derived(
-    urlDeLIllustrationPetite(ressource.urlIllustration),
-  );
+  const illustrationPetite = $derived(urlDeLIllustrationPetite(ressource.urlIllustration));
 
   const badges = $derived(
     ressource.types.map((type) => ({

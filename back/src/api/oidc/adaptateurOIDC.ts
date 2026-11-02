@@ -32,29 +32,20 @@ type JetonsOIDC = {
 export interface AdaptateurOIDC {
   genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
   recupereJeton: (requete: Request) => Promise<JetonsOIDC>;
-  recupereInformationsUtilisateur: (
-    accessToken: string,
-    sujet: string,
-  ) => Promise<InformationsUtilisateur>;
-  genereDemandeDeconnexion: (
-    idToken: string,
-  ) => Promise<{ url: string; state: string }>;
+  recupereInformationsUtilisateur: (accessToken: string, sujet: string) => Promise<InformationsUtilisateur>;
+  genereDemandeDeconnexion: (idToken: string) => Promise<{ url: string; state: string }>;
 }
 
 const configurationOidc = adaptateurEnvironnement.oidc();
 
 async function recupereClient() {
-  return discovery(
-    new URL(configurationOidc.urlBase()),
-    configurationOidc.clientId(),
-    {
-      client_secret: configurationOidc.clientSecret(),
-      redirect_uris: [configurationOidc.urlRedirectionApresAuthentification()],
-      response_types: ['code'],
-      id_token_signed_response_alg: 'RS256',
-      userinfo_signed_response_alg: 'RS256',
-    },
-  );
+  return discovery(new URL(configurationOidc.urlBase()), configurationOidc.clientId(), {
+    client_secret: configurationOidc.clientSecret(),
+    redirect_uris: [configurationOidc.urlRedirectionApresAuthentification()],
+    response_types: ['code'],
+    id_token_signed_response_alg: 'RS256',
+    userinfo_signed_response_alg: 'RS256',
+  });
 }
 
 const genereDemandeAutorisation = async () => {
@@ -79,8 +70,7 @@ const genereDemandeDeconnexion = async (idToken: string) => {
   const state = randomState();
   const client = await recupereClient();
   const url = buildEndSessionUrl(client, {
-    post_logout_redirect_uri:
-      configurationOidc.urlRedirectionApresDeconnexion(),
+    post_logout_redirect_uri: configurationOidc.urlRedirectionApresDeconnexion(),
     id_token_hint: idToken,
     state,
   });
@@ -94,9 +84,7 @@ const genereDemandeDeconnexion = async (idToken: string) => {
 const recupereJeton = async (requete: Request) => {
   const client = await recupereClient();
   const { nonce, state } = requete.cookies.AgentConnectInfo;
-  const callbackUrl = new URL(
-    configurationOidc.urlRedirectionApresAuthentification(),
-  );
+  const callbackUrl = new URL(configurationOidc.urlRedirectionApresAuthentification());
   callbackUrl.search = new URL(requete.originalUrl, callbackUrl).search;
   const token = await authorizationCodeGrant(client, callbackUrl, {
     expectedNonce: nonce,
@@ -110,9 +98,7 @@ const recupereJeton = async (requete: Request) => {
 
   const claims = token.claims();
   if (!claims) {
-    throw new Error(
-      "Les claims du token d'identité n'ont pas pu être récupérés",
-    );
+    throw new Error("Les claims du token d'identité n'ont pas pu être récupérés");
   }
 
   return {
@@ -122,17 +108,9 @@ const recupereJeton = async (requete: Request) => {
   };
 };
 
-const recupereInformationsUtilisateur = async (
-  accessToken: string,
-  sujet: string,
-) => {
+const recupereInformationsUtilisateur = async (accessToken: string, sujet: string) => {
   const client = await recupereClient();
-  const {
-    given_name: prenom,
-    usual_name: nom,
-    email,
-    siret,
-  } = await fetchUserInfo(client, accessToken, sujet);
+  const { given_name: prenom, usual_name: nom, email, siret } = await fetchUserInfo(client, accessToken, sujet);
   return { prenom, nom, email, siret } as InformationsUtilisateur;
 };
 

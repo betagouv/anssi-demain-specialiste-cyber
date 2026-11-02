@@ -12,7 +12,6 @@ export const rechercheTextuelle = {
 };
 
 function contientLaRechercheSansDiacritique(a: string, b: string): boolean {
-  const normalize = (str: string) =>
-    str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const normalize = (str: string) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   return normalize(a.toLowerCase()).includes(normalize(b.toLowerCase()));
 }

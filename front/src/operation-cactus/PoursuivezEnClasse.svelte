@@ -6,21 +6,14 @@
     <div class="corps">
       <div class="contenu">
         <h2>Poursuivez en classe par une action de sensibilisation</h2>
-        <img
-          class="illustration-sensibilisation"
-          src="/assets/images/operation-cactus/sensibilisation.avif"
-          alt=""
-        />
+        <img class="illustration-sensibilisation" src="/assets/images/operation-cactus/sensibilisation.avif" alt="" />
         <p class="texte-standard-md">
-          Juste après l’opération, une première séance pour activer des réflexes
-          peut se décliner par d’autres actions perlées en lien avec les
-          programmes scolaires ou des événements de l’école ou de
-          l’établissement.
+          Juste après l’opération, une première séance pour activer des réflexes peut se décliner par d’autres actions
+          perlées en lien avec les programmes scolaires ou des événements de l’école ou de l’établissement.
         </p>
         <dsfr-highlight text="ignoré">
           <p slot="text" class="texte-standard-md">
-            La sensibilisation est plus effective si elle est faite tout au long
-            de l’année.
+            La sensibilisation est plus effective si elle est faite tout au long de l’année.
           </p>
         </dsfr-highlight>
       </div>

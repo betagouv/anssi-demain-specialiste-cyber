@@ -1,6 +1,4 @@
-<svelte:options
-  customElement={{ tag: 'dsc-zone-identification', shadow: 'none' }}
-/>
+<svelte:options customElement={{ tag: 'dsc-zone-identification', shadow: 'none' }} />
 
 <script lang="ts">
   import { profil } from '../stores/profil';

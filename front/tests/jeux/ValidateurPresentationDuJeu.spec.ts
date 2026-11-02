@@ -88,8 +88,7 @@ describe('Le validateur de la présentation du jeu', () => {
         description: descriptionTropLongue,
       });
       expect(erreurs).toEqual({
-        description:
-          'La description ne peut contenir que 8000 caractères maximum',
+        description: 'La description ne peut contenir que 8000 caractères maximum',
       });
     });
   });

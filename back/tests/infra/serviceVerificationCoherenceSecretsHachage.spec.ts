@@ -2,19 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
-import {
-  fauxAdaptateurEnvironnement,
-  fauxAdaptateurHachage,
-} from '../api/fauxObjets';
+import { fauxAdaptateurEnvironnement, fauxAdaptateurHachage } from '../api/fauxObjets';
 
 describe('Le service de vérification de la cohérence des secrets de hachage', () => {
   it('jette une erreur si un secret est invalide', async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
       hachage: () => ({
-        tousLesSecretsDeHachage: () => [
-          { version: 1, secret: 'unAutreSecret' },
-        ],
+        tousLesSecretsDeHachage: () => [{ version: 1, secret: 'unAutreSecret' }],
       }),
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
@@ -174,8 +169,6 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow(
-      '💥 Aucun secret de hachage dans la config.',
-    );
+    await expect(() => service.verifieCoherenceSecrets()).rejects.toThrow('💥 Aucun secret de hachage dans la config.');
   });
 });

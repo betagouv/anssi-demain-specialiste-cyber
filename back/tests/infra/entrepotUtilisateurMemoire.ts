@@ -2,10 +2,7 @@ import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotMemoire } from './entrepotMemoire';
 
-export class EntrepotUtilisateurMemoire
-  extends EntrepotMemoire<Utilisateur>
-  implements EntrepotUtilisateur
-{
+export class EntrepotUtilisateurMemoire extends EntrepotMemoire<Utilisateur> implements EntrepotUtilisateur {
   utilisateurs: Map<string, Utilisateur> = new Map<string, Utilisateur>();
   _echoueSurRechercheParMail = false;
 
@@ -27,6 +24,5 @@ export class EntrepotUtilisateurMemoire
     return this.utilisateurs.get(emailHache);
   };
 
-  existe = async (emailHache: string) =>
-    !!(await this.parEmailHache(emailHache));
+  existe = async (emailHache: string) => !!(await this.parEmailHache(emailHache));
 }

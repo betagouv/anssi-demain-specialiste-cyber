@@ -1,16 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
-import {
-  EntrepotSelectionsGrist,
-  SelectionGrist,
-} from '../../src/infra/entrepotSelectionsGrist';
+import { EntrepotSelectionsGrist, SelectionGrist } from '../../src/infra/entrepotSelectionsGrist';
 import { EntrepotRessourcesCyber } from '../../src/metier/entrepotRessourcesCyber';
 import { RessourceCyber } from '../../src/metier/ressourceCyber';
-import {
-  ConstructeurLigneGristSelections,
-  ConstructeurReponseSelectionsGrist,
-} from './constructeurDeSelectionsGrist';
+import { ConstructeurLigneGristSelections, ConstructeurReponseSelectionsGrist } from './constructeurDeSelectionsGrist';
 import { EntrepotRessourcesCyberMemoire } from './entrepotRessourceCyberMemoire';
 
 describe("L'entrepôt de sélections Grist ", () => {
@@ -23,9 +17,7 @@ describe("L'entrepôt de sélections Grist ", () => {
 
   it('sait appeler la bonne ressource', async () => {
     let urlAppelee = '';
-    const clientHttp: RecupereRessourceHttp<
-      ReponseGrist<SelectionGrist>
-    > = async (url: string) => {
+    const clientHttp: RecupereRessourceHttp<ReponseGrist<SelectionGrist>> = async (url: string) => {
       urlAppelee = url;
       return reponseVide;
     };
@@ -37,21 +29,14 @@ describe("L'entrepôt de sélections Grist ", () => {
 
     await entrepotRessourcesCyberGrist.tous();
 
-    expect(urlAppelee).toEqual(
-      'http://example.com/api/docs/mon_id_document/tables/selection_enseignants/records',
-    );
+    expect(urlAppelee).toEqual('http://example.com/api/docs/mon_id_document/tables/selection_enseignants/records');
   });
 
   it('sait récupérer les sélections en appelant Grist', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<SelectionGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<SelectionGrist>> = async () => {
       return new ConstructeurReponseSelectionsGrist()
         .ajouteUneLigne(
-          new ConstructeurLigneGristSelections()
-            .avecColonneId('se-former')
-            .avecColonneTitre('Se former')
-            .construis(),
+          new ConstructeurLigneGristSelections().avecColonneId('se-former').avecColonneTitre('Se former').construis(),
         )
         .construis();
     };
@@ -83,15 +68,10 @@ describe("L'entrepôt de sélections Grist ", () => {
     };
     await entrepotRessourcesCyber.ajoute(osintProject);
 
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<SelectionGrist>
-    > = async () =>
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<SelectionGrist>> = async () =>
       new ConstructeurReponseSelectionsGrist()
         .ajouteUneLigne(
-          new ConstructeurLigneGristSelections()
-            .avecColonneId('se-former')
-            .avecColonneRessources([13])
-            .construis(),
+          new ConstructeurLigneGristSelections().avecColonneId('se-former').avecColonneRessources([13]).construis(),
         )
         .construis();
     const entrepotRessourcesCyberGrist = new EntrepotSelectionsGrist(

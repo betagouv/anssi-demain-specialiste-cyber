@@ -33,7 +33,6 @@
 >
   <p class="fr-text--lg">
     Devenez relai de {TITRE_DSC_SECABLE} en associant la marque {TITRE_DSC_SECABLE}
-    à vos actions en faveur de la formation des jeunes à la cybersécurité et la découverte
-    de ses métiers.
+    à vos actions en faveur de la formation des jeunes à la cybersécurité et la découverte de ses métiers.
   </p>
 </MiseEnAvant>

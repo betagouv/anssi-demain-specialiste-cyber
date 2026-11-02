@@ -7,12 +7,7 @@ describe("L'abonnement qui crée un contact", () => {
   it("crée un contact dans l'expediteur de mails", () => {
     let contactCree;
     const expediteurEmail: ExpediteurEmail = {
-      creeContact: async (donneesRecu: {
-        email: string;
-        nom: string;
-        prenom: string;
-        infolettreAcceptee: boolean;
-      }) => {
+      creeContact: async (donneesRecu: { email: string; nom: string; prenom: string; infolettreAcceptee: boolean }) => {
         contactCree = { ...donneesRecu };
       },
       envoieEmailBienvenue: async function (): Promise<void> {},

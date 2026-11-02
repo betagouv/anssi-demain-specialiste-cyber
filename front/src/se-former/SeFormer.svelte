@@ -15,8 +15,7 @@
   import SectionJeMeForme from './SectionJeMeForme.svelte';
   import SectionJeMeTeste from './SectionJeMeTeste.svelte';
 
-  type Categorie =
-    'je-me-teste' | 'je-me-forme' | 'je-mentraine' | 'je-me-mesure';
+  type Categorie = 'je-me-teste' | 'je-me-forme' | 'je-mentraine' | 'je-me-mesure';
 
   type Fonctionnalite = {
     titre: string;
@@ -36,8 +35,7 @@
   const fonctionnalitesPix: Fonctionnalite[] = [
     {
       titre: 'Des parcours adaptés à chacun',
-      description:
-        'Débutant(e) ou futur(e) pro, choisis ton parcours, relève les défis et développe tes compétences !',
+      description: 'Débutant(e) ou futur(e) pro, choisis ton parcours, relève les défis et développe tes compétences !',
     },
     {
       titre: 'Des défis inspirés de cas concrets',
@@ -55,32 +53,28 @@
     {
       icone: IconeJeMeTeste,
       libelle: '1. Je me teste',
-      description:
-        'Fais le point sur tes connaissances cyber avec les parcours Pix.',
+      description: 'Fais le point sur tes connaissances cyber avec les parcours Pix.',
       valeur: 'je-me-teste',
       href: '#je-me-teste',
     },
     {
       icone: IconeJeMeForme,
       libelle: '2. Je me forme',
-      description:
-        'Suis une formation en ligne gratuite pour comprendre les menaces et les',
+      description: 'Suis une formation en ligne gratuite pour comprendre les menaces et les',
       valeur: 'je-me-forme',
       href: '#je-me-forme',
     },
     {
       icone: IconeJeMEntraine,
       libelle: "3. Je m'entraîne",
-      description:
-        'Résous des challenges quand tu veux, seul(e) ou avec ta classe.',
+      description: 'Résous des challenges quand tu veux, seul(e) ou avec ta classe.',
       valeur: 'je-mentraine',
       href: '#je-mentraine',
     },
     {
       icone: IconeJeMeMesure,
       libelle: '4. Je me mesure',
-      description:
-        "Rejoins une compétition et affronte d'autres équipes partout en France.",
+      description: "Rejoins une compétition et affronte d'autres équipes partout en France.",
       valeur: 'je-me-mesure',
       href: '#je-me-mesure',
     },
@@ -103,29 +97,26 @@
   onMount(() => {
     synchroniseDepuisLeHash();
     window.addEventListener('hashchange', synchroniseDepuisLeHash);
-    return () =>
-      window.removeEventListener('hashchange', synchroniseDepuisLeHash);
+    return () => window.removeEventListener('hashchange', synchroniseDepuisLeHash);
   });
 </script>
 
 <section class="introduction">
   <dsfr-container>
     <article class="introduction-contenu">
-      <h2 class="introduction-titre fr-h1">
-        La cyber, ça commence maintenant&nbsp;!
-      </h2>
+      <h2 class="introduction-titre fr-h1">La cyber, ça commence maintenant&nbsp;!</h2>
 
       <p class="texte-article-lg">
         Mots de passe, phishing, réseaux, cryptographie… <strong>
           La cybersécurité, ça s'apprend surtout en pratiquant.
         </strong>
-        Les plateformes rassemblées ici sont proposées ou recommandées par des acteurs
-        publics de la cyber, accessibles en ligne et pour la plupart gratuites.
+        Les plateformes rassemblées ici sont proposées ou recommandées par des acteurs publics de la cyber, accessibles en
+        ligne et pour la plupart gratuites.
       </p>
       <p class="texte-article-lg">
         <strong>
-          Simple curiosité ou vraie envie d'en faire ton métier&nbsp;: choisis
-          ton point de départ et avance à ton rythme.
+          Simple curiosité ou vraie envie d'en faire ton métier&nbsp;: choisis ton point de départ et avance à ton
+          rythme.
         </strong>
       </p>
     </article>
@@ -141,12 +132,7 @@
       avec-cta
       image-placeholder="/assets/images/se-former/illustration-pix-3-amis-avec-ordinateur.avif"
     >
-      <dsfr-button
-        slot="cta"
-        label="Découvrir les parcours Pix"
-        markup="a"
-        href="#je-me-teste"
-      ></dsfr-button>
+      <dsfr-button slot="cta" label="Découvrir les parcours Pix" markup="a" href="#je-me-teste"></dsfr-button>
     </lab-anssi-fonctionnalites>
   </dsfr-container>
 </section>
@@ -155,11 +141,7 @@
   <dsfr-container>
     <h2 class="commencer-titre fr-h1">Par où commencer&nbsp;?</h2>
 
-    <lab-anssi-filtres
-      type="liens"
-      elements={filtresCategories}
-      elementActif={categorieActive}
-    ></lab-anssi-filtres>
+    <lab-anssi-filtres type="liens" elements={filtresCategories} elementActif={categorieActive}></lab-anssi-filtres>
   </dsfr-container>
 
   {#if categorieActive === 'je-me-teste'}
@@ -170,19 +152,17 @@
     <dsfr-container id="je-mentraine">
       <h3 class="commencer-sous-titre fr-h2">Passe à la pratique</h3>
       <p class="texte-article-lg">
-        Des challenges disponibles toute l'année&nbsp;: crypto, réseau, web,
-        OSINT, stéganographie… Commence en douceur, puis monte en niveau.
+        Des challenges disponibles toute l'année&nbsp;: crypto, réseau, web, OSINT, stéganographie… Commence en douceur,
+        puis monte en niveau.
       </p>
     </dsfr-container>
     <dsc-selection cible="entrainement"></dsc-selection>
   {:else if categorieActive === 'je-me-mesure'}
     <dsfr-container id="je-me-mesure">
-      <h3 class="commencer-sous-titre fr-h2">
-        Prêt(e) pour la compétition&nbsp;?
-      </h3>
+      <h3 class="commencer-sous-titre fr-h2">Prêt(e) pour la compétition&nbsp;?</h3>
       <p class="texte-article-lg">
-        Avec ta classe, en solo ou près de chez toi&nbsp;: choisis le challenge
-        qui te correspond et vois où tu te situes.
+        Avec ta classe, en solo ou près de chez toi&nbsp;: choisis le challenge qui te correspond et vois où tu te
+        situes.
       </p>
     </dsfr-container>
     <dsc-selection cible="mesure"></dsc-selection>
@@ -233,10 +213,7 @@
       </div>
 
       <div class="metiers-illustration">
-        <img
-          src="/assets/images/se-former/illustration-fond-metier-hacker-ethique.avif"
-          alt=""
-        />
+        <img src="/assets/images/se-former/illustration-fond-metier-hacker-ethique.avif" alt="" />
       </div>
     </div>
   </dsfr-container>

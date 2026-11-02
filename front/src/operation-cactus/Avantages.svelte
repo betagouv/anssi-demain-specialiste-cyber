@@ -5,38 +5,27 @@
   <dsfr-container>
     <div class="contenu">
       <h2>Grâce à Cactus, enseignants, élèves, familles…</h2>
-      <img
-        class="illustration"
-        src="/assets/images/operation-cactus/avantages.png"
-        alt=""
-      />
+      <img class="illustration" src="/assets/images/operation-cactus/avantages.png" alt="" />
       <div class="liste">
         <div class="item">
           <h3 class="fr-h6">
-            Apprennent à identifier les signes d’un <em>phishing</em> / hameçonnage
-            sur les messageries ou les posts
+            Apprennent à identifier les signes d’un <em>phishing</em> / hameçonnage sur les messageries ou les posts
           </h3>
           <p class="texte-standard-md">
-            Trouvez les indices d’un message frauduleux pour apprendre à les
-            déjouer (adresse, signature, tonalité ou contenu du message…).
+            Trouvez les indices d’un message frauduleux pour apprendre à les déjouer (adresse, signature, tonalité ou
+            contenu du message…).
           </p>
         </div>
         <hr />
         <div class="item">
           <h3 class="fr-h6">Adoptent les bons réflexes</h3>
-          <p class="texte-standard-md">
-            Des réflexes simples : ne pas cliquer, vérifier, signaler.
-          </p>
+          <p class="texte-standard-md">Des réflexes simples : ne pas cliquer, vérifier, signaler.</p>
         </div>
         <hr />
         <div class="item">
-          <h3 class="fr-h6">
-            Deviennent des relais dans la chaine de sensibilisation tout au long
-            de l’année
-          </h3>
+          <h3 class="fr-h6">Deviennent des relais dans la chaine de sensibilisation tout au long de l’année</h3>
           <p class="texte-standard-md">
-            Partager les réflexes, transmettre et aider les autres, plus jeunes
-            ou plus âgés à ne pas se faire piéger.
+            Partager les réflexes, transmettre et aider les autres, plus jeunes ou plus âgés à ne pas se faire piéger.
           </p>
         </div>
       </div>

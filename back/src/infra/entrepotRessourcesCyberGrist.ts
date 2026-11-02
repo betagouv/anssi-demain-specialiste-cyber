@@ -28,16 +28,10 @@ export class EntrepotRessourcesCyberGrist
   implements EntrepotRessourcesCyber
 {
   constructor(
-    ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = creeRecupereRessourceHttp(),
+    ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
-    super(
-      ressourcesCyberGrist,
-      grist.idDocument,
-      grist.ressourcesCyber().idTable,
-    );
+    super(ressourcesCyberGrist, grist.idDocument, grist.ressourcesCyber().idTable);
   }
 
   async tous(): Promise<RessourceCyber[]> {

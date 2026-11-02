@@ -37,24 +37,18 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   }
 
   async ajoute(utilisateur: Utilisateur): Promise<void> {
-    await this.knex('utilisateurs').insert(
-      this.utilisateurBDDAvecDonneesChiffrees(utilisateur),
-    );
+    await this.knex('utilisateurs').insert(this.utilisateurBDDAvecDonneesChiffrees(utilisateur));
   }
 
   async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
     if (!emailHache) return undefined;
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email_hache: emailHache })
-      .first();
+    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
     if (!utilisateur) return undefined;
     return this.hydrateUtilisateur(utilisateur);
   }
 
   async existe(emailHache: string): Promise<boolean> {
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email_hache: emailHache })
-      .first();
+    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
     return !!utilisateur;
   }
 
@@ -80,9 +74,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     });
   }
 
-  private utilisateurBDDAvecDonneesChiffrees(
-    utilisateur: Utilisateur,
-  ): UtilisateurBDD {
+  private utilisateurBDDAvecDonneesChiffrees(utilisateur: Utilisateur): UtilisateurBDD {
     const donneesEnClair: DonneesUtilisateurEnClair = {
       email: utilisateur.email,
       prenom: utilisateur.prenom,
@@ -98,9 +90,7 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     };
   }
 
-  private dechiffreDonneesUtilisateur(
-    utilisateur: UtilisateurBDD,
-  ): DonneesUtilisateurEnClair {
+  private dechiffreDonneesUtilisateur(utilisateur: UtilisateurBDD): DonneesUtilisateurEnClair {
     const { donnees } = utilisateur;
     return this.adaptateurChiffrement.dechiffre(donnees);
   }

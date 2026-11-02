@@ -27,19 +27,13 @@ describe('La ressource sélection entrainement', () => {
 
   describe('sur une demande GET', () => {
     it('renvoie un 200', async () => {
-      const reponse = await request(serveur).get(
-        '/api/selections-entrainement',
-      );
+      const reponse = await request(serveur).get('/api/selections-entrainement');
       expect(reponse.status).toEqual(200);
     });
 
     it('retourne la liste des sélections', async () => {
       await entrepôtSélectionsEntrainement.ajoute(
-        uneSelection()
-          .avecUnId('former')
-          .avecUnTitre('Former')
-          .avecUneExplication('Former lorem ipsum')
-          .construis(),
+        uneSelection().avecUnId('former').avecUnTitre('Former').avecUneExplication('Former lorem ipsum').construis(),
       );
       await entrepôtSélectionsEntrainement.ajoute(
         uneSelection()
@@ -49,9 +43,7 @@ describe('La ressource sélection entrainement', () => {
           .construis(),
       );
 
-      const reponse = await request(serveur).get(
-        '/api/selections-entrainement',
-      );
+      const reponse = await request(serveur).get('/api/selections-entrainement');
 
       expect(reponse.body).toStrictEqual([
         {

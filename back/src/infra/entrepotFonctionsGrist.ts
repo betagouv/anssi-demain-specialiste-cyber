@@ -17,15 +17,8 @@ export type FonctionGrist = {
   };
 };
 
-export class EntrepôtFonctionsGrist
-  extends EntrepotGrist<FonctionGrist>
-  implements EntrepôtFonctions
-{
-  constructor(
-    fonctionsGrist: RecupereRessourceHttp<
-      ReponseGrist<FonctionGrist>
-    > = creeRecupereRessourceHttp(),
-  ) {
+export class EntrepôtFonctionsGrist extends EntrepotGrist<FonctionGrist> implements EntrepôtFonctions {
+  constructor(fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = creeRecupereRessourceHttp()) {
     super(
       fonctionsGrist,
       adaptateurEnvironnement.grist().idDocument,
@@ -44,9 +37,7 @@ export class EntrepôtFonctionsGrist
       témoignage: {
         nom: fonctionGrist.fields.Temoignages,
         femme: fonctionGrist.fields.Femme_de_la_cyber === 1,
-        lien: (fonctionGrist.fields.Lien_du_temoignage ?? '')
-          .split(';')[0]
-          .trim(),
+        lien: (fonctionGrist.fields.Lien_du_temoignage ?? '').split(';')[0].trim(),
       },
     }));
   }

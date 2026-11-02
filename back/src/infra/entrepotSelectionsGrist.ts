@@ -16,16 +16,11 @@ export type SelectionGrist = {
   };
 };
 
-export class EntrepotSelectionsGrist
-  extends EntrepotGrist<SelectionGrist>
-  implements EntrepotSelections
-{
+export class EntrepotSelectionsGrist extends EntrepotGrist<SelectionGrist> implements EntrepotSelections {
   constructor(
     private entrepotRessourcesCyber: EntrepotRessourcesCyber,
     tableGrist: TableGrist,
-    ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<SelectionGrist>
-    > = creeRecupereRessourceHttp(),
+    ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<SelectionGrist>> = creeRecupereRessourceHttp(),
   ) {
     const grist = adaptateurEnvironnement.grist();
     super(ressourcesCyberGrist, grist.idDocument, tableGrist.idTable);
@@ -42,11 +37,8 @@ export class EntrepotSelectionsGrist
           id: record.fields.Id2,
           titre: record.fields.Titre,
           explication: record.fields.Explication,
-          ressources: this.aseptiseListe(record.fields.Ressources).map(
-            (idRessource) =>
-              toutesLesRessourcesCyber.find(
-                (ressource) => ressource.id === idRessource,
-              )!,
+          ressources: this.aseptiseListe(record.fields.Ressources).map((idRessource) =>
+            toutesLesRessourcesCyber.find((ressource) => ressource.id === idRessource)!,
           ),
           couleurDeFond: record.fields.Couleur_de_fond,
         }),

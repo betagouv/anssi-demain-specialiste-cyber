@@ -8,9 +8,7 @@ export const ressourceMetier = ({ entrepotMetier }: ConfigurationServeur) => {
   routeur.get(
     '/:id',
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const metier = await entrepotMetier.parIdentifiant(
-        Number(requete.params.id),
-      );
+      const metier = await entrepotMetier.parIdentifiant(Number(requete.params.id));
       if (!metier) {
         return reponse.sendStatus(404);
       }

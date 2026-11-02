@@ -1,10 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import {
-  AdaptateurHachage,
-  fabriqueAdaptateurHachage,
-} from '../infra/adaptateurHachage';
+import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
 
 export class ConsoleAdministration {
   private readonly adaptateurHachage: AdaptateurHachage;
@@ -19,16 +16,11 @@ export class ConsoleAdministration {
 
   async sauvegardeLesEmpreintesDesSecretsDeHachage() {
     await this.knex.transaction(async (trx) => {
-      const tousLesSecretsDeHachage = adaptateurEnvironnement
-        .hachage()
-        .tousLesSecretsDeHachage();
+      const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
       const maj = tousLesSecretsDeHachage.map(async ({ version, secret }) => {
         const empreinte = await this.adaptateurHachage.hacheBCrypt(secret);
-        return trx('secrets_hachage')
-          .insert({ version, empreinte })
-          .onConflict()
-          .ignore();
+        return trx('secrets_hachage').insert({ version, empreinte }).onConflict().ignore();
       });
 
       await Promise.all(maj);

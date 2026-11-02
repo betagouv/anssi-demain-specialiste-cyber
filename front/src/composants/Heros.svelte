@@ -22,22 +22,14 @@
     avecFiltres?: boolean;
   };
 
-  const {
-    variant = 'standard',
-    ariane = [],
-    avecFiltres = false,
-  }: Props = $props();
+  const { variant = 'standard', ariane = [], avecFiltres = false }: Props = $props();
 </script>
 
 <div class={['heros', variant]}>
   <dsfr-container>
     <div class="conteneur" class:avec-filtres={avecFiltres}>
       <slot name="ariane">
-        <dsfr-breadcrumb
-          inverse={variant === 'standard'}
-          buttonLabel="Voir le fil d'Ariane"
-          segments={ariane}
-        >
+        <dsfr-breadcrumb inverse={variant === 'standard'} buttonLabel="Voir le fil d'Ariane" segments={ariane}>
         </dsfr-breadcrumb>
       </slot>
       <div class="principal">
@@ -71,11 +63,7 @@
   .heros {
     &.standard {
       background:
-        linear-gradient(
-          90deg,
-          var(--bleu-profond-dsc) 69.49%,
-          rgb(from var(--bleu-profond-dsc) r g b / 0) 100%
-        ),
+        linear-gradient(90deg, var(--bleu-profond-dsc) 69.49%, rgb(from var(--bleu-profond-dsc) r g b / 0) 100%),
         url('/assets/images/cercles-fond-sombre.avif') right 20% no-repeat,
         var(--bleu-profond-dsc);
 

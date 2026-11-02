@@ -43,11 +43,10 @@ vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:');
 describe('Le formulaire de dépose de jeu', () => {
   const user = userEvent.setup();
 
-  const validateurInformationsGeneralesEnSucces: Validateur<InformationsGeneralesDuJeu> =
-    {
-      estValide: vi.fn().mockReturnValue(true),
-      valide: () => ({}),
-    };
+  const validateurInformationsGeneralesEnSucces: Validateur<InformationsGeneralesDuJeu> = {
+    estValide: vi.fn().mockReturnValue(true),
+    valide: () => ({}),
+  };
   const validateurPresentationEnSucces: Validateur<PresentationDuJeu> = {
     estValide: vi.fn().mockReturnValue(true),
     valide: () => ({}),
@@ -109,19 +108,13 @@ describe('Le formulaire de dépose de jeu', () => {
     it('que tous les champs sont obligatoire sauf mention contraire', async () => {
       const { getByText } = render(FormulaireJeu, proprietesParDefaut);
 
-      expect(
-        getByText(
-          'Sauf mention contraire, les informations demandées sont obligatoires.',
-        ),
-      ).toBeVisible();
+      expect(getByText('Sauf mention contraire, les informations demandées sont obligatoires.')).toBeVisible();
     });
     describe("lors de l'étape des informations générales", () => {
       it("qu'on est à l'étape 1 sur 5", async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(getByTextDeep('Étape 1 sur 5')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Étape 1 sur 5')).toBeVisible());
       });
 
       it("qu'on est à l'étape 'Informations Générales'", async () => {
@@ -139,9 +132,7 @@ describe('Le formulaire de dépose de jeu', () => {
       it("que l'étape suivante est 'Présentation du jeu'", async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(getByTextDeep('Présentation du jeu')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Présentation du jeu')).toBeVisible());
       });
     });
 
@@ -153,9 +144,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("qu'on est à l'étape 2 sur 5", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Étape 2 sur 5')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Étape 2 sur 5')).toBeVisible());
       });
 
       it("qu'on est à l'étape 'Présentation du jeu'", async () => {
@@ -182,9 +171,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("qu'on est à l'étape 3 sur 5", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Étape 3 sur 5')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Étape 3 sur 5')).toBeVisible());
       });
 
       it("qu'on est à l'étape 'Photos'", async () => {
@@ -198,9 +185,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("que l'étape suivante est 'Témoignages (facultatif)'", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Témoignages (facultatif)')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Témoignages (facultatif)')).toBeVisible());
       });
     });
 
@@ -214,9 +199,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("qu'on est à l'étape 4 sur 5", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Étape 4 sur 5')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Étape 4 sur 5')).toBeVisible());
       });
 
       it("qu'on est à l'étape 'Témoignages (facultatif)'", async () => {
@@ -230,9 +213,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("que l'étape suivante est 'Votre avis nous intéresse'", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Votre avis nous intéresse')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Votre avis nous intéresse')).toBeVisible());
       });
     });
 
@@ -247,9 +228,7 @@ describe('Le formulaire de dépose de jeu', () => {
       });
 
       it("qu'on est à l'étape 5 sur 5", async () => {
-        await waitFor(() =>
-          expect(getByTextDeep('Étape 5 sur 5')).toBeVisible(),
-        );
+        await waitFor(() => expect(getByTextDeep('Étape 5 sur 5')).toBeVisible());
       });
 
       it("qu'on est à l'étape 'Votre avis nous intéresse'", async () => {
@@ -278,49 +257,31 @@ describe('Le formulaire de dépose de jeu', () => {
       it("de saisir un nom d'établissement", async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('textbox', { name: 'Nom de votre établissement' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('textbox', { name: 'Nom de votre établissement' })).toBeVisible());
       });
 
       it('de selectionner une discipline', async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('combobox', { name: 'Discipline' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('combobox', { name: 'Discipline' })).toBeVisible());
       });
 
       it('de selectionner une classe', async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(getByRoleDeep('combobox', { name: 'Classe' })).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('combobox', { name: 'Classe' })).toBeVisible());
       });
 
       it('de saisir 4 prénoms', async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(
-            4,
-          ),
-        );
+        await waitFor(() => expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(4));
       });
 
       it('d‘ajouter un prénom d‘élève', async () => {
         render(FormulaireJeu, proprietesParDefaut);
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('button', { name: 'Ajouter un élève' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('button', { name: 'Ajouter un élève' })).toBeVisible());
       });
 
       it('de saisir plus que 4 élèves', async () => {
@@ -332,11 +293,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await user.click(boutonAjouterEleve);
         await user.click(boutonAjouterEleve);
 
-        await waitFor(() =>
-          expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(
-            6,
-          ),
-        );
+        await waitFor(() => expect(getAllByRoleDeep('textbox', { name: 'Prénom' })).toHaveLength(6));
       });
     });
 
@@ -346,11 +303,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
         await etapeSuivante();
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('textbox', { name: 'Nom du jeu' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('textbox', { name: 'Nom du jeu' })).toBeVisible());
       });
 
       it('de selectionner la catégorie du jeu', async () => {
@@ -358,11 +311,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
         await etapeSuivante();
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('combobox', { name: 'Catégorie' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('combobox', { name: 'Catégorie' })).toBeVisible());
       });
 
       it('de selectionner la thématique du jeu', async () => {
@@ -394,11 +343,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await etapePrecedente();
 
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('textbox', { name: 'Nom de votre établissement' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('textbox', { name: 'Nom de votre établissement' })).toBeVisible());
       });
     });
 
@@ -455,14 +400,8 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await etapeSuivante();
 
-        await waitFor(() =>
-          expect(getByRoleDeep('textbox', { name: 'Prénom' })).toBeVisible(),
-        );
-        await waitFor(() =>
-          expect(
-            getByRoleDeep('textbox', { name: 'Témoignage' }),
-          ).toBeVisible(),
-        );
+        await waitFor(() => expect(getByRoleDeep('textbox', { name: 'Prénom' })).toBeVisible());
+        await waitFor(() => expect(getByRoleDeep('textbox', { name: 'Témoignage' })).toBeVisible());
       });
 
       it("d'ajouter un témoignage", async () => {
@@ -514,10 +453,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
     describe("lors de l'étape de l'évaluation", () => {
       it("d'évaluer la découverte des métiers de la cyber par les élèves", async () => {
-        const { getAllByRole, getByText } = render(
-          FormulaireJeu,
-          proprietesParDefaut,
-        );
+        const { getAllByRole, getByText } = render(FormulaireJeu, proprietesParDefaut);
 
         await etapeSuivante();
         await etapeSuivante();
@@ -546,28 +482,24 @@ describe('Le formulaire de dépose de jeu', () => {
   describe('lors de la validation', () => {
     describe("de l'étape des informations générales", () => {
       it("affiche pour chaque champ non valide, un message d'erreur", async () => {
-        const validateurInformationsGeneralesEnErreur: Validateur<InformationsGeneralesDuJeu> =
-          {
-            estValide: () => false,
-            valide: () => ({
-              nomEtablissement: 'Le nom de l‘établissement est obligatoire',
-              sequence: 'La séquence est obligatoire',
-              discipline: 'La discipline est obligatoire',
-              classe: 'La classe est obligatoire',
-              eleves: 'Au moins un élève est requis',
-            }),
-          };
+        const validateurInformationsGeneralesEnErreur: Validateur<InformationsGeneralesDuJeu> = {
+          estValide: () => false,
+          valide: () => ({
+            nomEtablissement: 'Le nom de l‘établissement est obligatoire',
+            sequence: 'La séquence est obligatoire',
+            discipline: 'La discipline est obligatoire',
+            classe: 'La classe est obligatoire',
+            eleves: 'Au moins un élève est requis',
+          }),
+        };
         render(FormulaireJeu, {
           ...proprietesParDefaut,
-          validateurInformationsGenerales:
-            validateurInformationsGeneralesEnErreur,
+          validateurInformationsGenerales: validateurInformationsGeneralesEnErreur,
         });
         await etapeSuivante();
 
         expect(axiosMock.post).not.toHaveBeenCalled();
-        await waitFor(() =>
-          getByTextDeep('Le nom de l‘établissement est obligatoire'),
-        );
+        await waitFor(() => getByTextDeep('Le nom de l‘établissement est obligatoire'));
         expect(getByTextDeep('La séquence est obligatoire')).toBeVisible();
         expect(getByTextDeep('La discipline est obligatoire')).toBeVisible();
         expect(getByTextDeep('La classe est obligatoire')).toBeVisible();
@@ -629,8 +561,7 @@ describe('Le formulaire de dépose de jeu', () => {
           valide: () => ({
             evaluationDecouverte: 'Le score de découverte est obligatoire',
             evaluationInteret: "Le score de l'intérêt est obligatoire",
-            evaluationSatisfactionGenerale:
-              'Le score de satisfaction est obligatoire',
+            evaluationSatisfactionGenerale: 'Le score de satisfaction est obligatoire',
           }),
         };
         render(FormulaireJeu, {
@@ -645,15 +576,9 @@ describe('Le formulaire de dépose de jeu', () => {
 
         expect(axiosMock.post).not.toHaveBeenCalled();
 
-        await waitFor(() =>
-          getByTextDeep('Le score de découverte est obligatoire'),
-        );
-        expect(
-          getByTextDeep("Le score de l'intérêt est obligatoire"),
-        ).toBeVisible();
-        expect(
-          getByTextDeep('Le score de satisfaction est obligatoire'),
-        ).toBeVisible();
+        await waitFor(() => getByTextDeep('Le score de découverte est obligatoire'));
+        expect(getByTextDeep("Le score de l'intérêt est obligatoire")).toBeVisible();
+        expect(getByTextDeep('Le score de satisfaction est obligatoire')).toBeVisible();
       });
     });
   });
@@ -690,10 +615,7 @@ describe('Le formulaire de dépose de jeu', () => {
         ...donneesJeuAttenduesALaValidation,
         eleves: ['Brice', 'Gontran'],
       };
-      const { queryAllByRole, getAllByRole } = render(
-        FormulaireJeu,
-        proprietesParDefaut,
-      );
+      const { queryAllByRole, getAllByRole } = render(FormulaireJeu, proprietesParDefaut);
       // Etape informations générales
       const champNomEtablissement = await findByRoleDeep('textbox', {
         name: 'Nom de votre établissement',
@@ -794,25 +716,18 @@ describe('Le formulaire de dépose de jeu', () => {
 
       await terminer();
 
-      expect(
-        validateurInformationsGeneralesEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
-      expect(
-        validateurPresentationEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
-
-      expect(
-        validateurEvaluationEnSucces.estValide,
-      ).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
-
-      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith(
-        '/api/mes-jeux',
-        expect.any(FormData),
+      expect(validateurInformationsGeneralesEnSucces.estValide).toHaveBeenCalledExactlyOnceWith(
+        donneesJeuAttenduesALaValidation,
       );
+      expect(validateurPresentationEnSucces.estValide).toHaveBeenCalledExactlyOnceWith(
+        donneesJeuAttenduesALaValidation,
+      );
+
+      expect(validateurEvaluationEnSucces.estValide).toHaveBeenCalledExactlyOnceWith(donneesJeuAttenduesALaValidation);
+
+      expect(axiosMock.post).toHaveBeenCalledExactlyOnceWith('/api/mes-jeux', expect.any(FormData));
       const formDataEnvoye = formDataVersObjet(axiosMock.post.mock.calls[0][1]);
-      expect(JSON.parse(formDataEnvoye.jeu as string)).toEqual(
-        donneesAttenduesALaSoumission,
-      );
+      expect(JSON.parse(formDataEnvoye.jeu as string)).toEqual(donneesAttenduesALaSoumission);
       expect(queryAllByRole('alert')).toHaveLength(0);
     });
 
@@ -827,9 +742,7 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
       await etapeSuivante();
 
-      await waitFor(() =>
-        expect(queryByRoleDeep('button', { name: 'Terminer' })).toBeNull(),
-      );
+      await waitFor(() => expect(queryByRoleDeep('button', { name: 'Terminer' })).toBeNull());
     });
 
     it('Désactive le bouton de soumission le temps de la requête', async () => {
@@ -984,9 +897,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await terminer();
 
-        const erreurAPI = await findByTextDeep(
-          'Certaines photos n’ont pas pu être ajoutées.',
-        );
+        const erreurAPI = await findByTextDeep('Certaines photos n’ont pas pu être ajoutées.');
         expect(erreurAPI).toBeVisible();
       });
 
@@ -1006,9 +917,7 @@ describe('Le formulaire de dépose de jeu', () => {
         await etapeSuivante();
         await terminer();
 
-        const erreurAPI = await findByTextDeep(
-          'Certaines photos n’ont pas pu être ajoutées.',
-        );
+        const erreurAPI = await findByTextDeep('Certaines photos n’ont pas pu être ajoutées.');
         expect(erreurAPI).toBeVisible();
       });
     });
@@ -1065,9 +974,7 @@ describe('Le formulaire de dépose de jeu', () => {
       await etapeSuivante();
       await etapePrecedente();
 
-      await waitFor(() =>
-        expect(getByTextDeep('Présentation du jeu')).toBeVisible(),
-      );
+      await waitFor(() => expect(getByTextDeep('Présentation du jeu')).toBeVisible());
     });
 
     it("on n'a que 3 étapes", async () => {
@@ -1125,21 +1032,18 @@ describe('Le formulaire de dépose de jeu', () => {
 
           await engistreModification();
 
-          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
-            '/api/jeux/1234',
-            {
-              sequence: 'heure',
-              nomEtablissement: 'Mon lycée',
-              discipline: 'mathematiques',
-              classe: 'seconde',
-              eleves: ['Brice', 'Gontran'],
-              nom: 'TEST',
-              categorie: 'simulation',
-              thematiques: ['menace-cyber', 'orientation'],
-              description: 'Description du jeu',
-              temoignages: [{ prenom: 'Michel', details: "C'était super" }],
-            },
-          );
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith('/api/jeux/1234', {
+            sequence: 'heure',
+            nomEtablissement: 'Mon lycée',
+            discipline: 'mathematiques',
+            classe: 'seconde',
+            eleves: ['Brice', 'Gontran'],
+            nom: 'TEST',
+            categorie: 'simulation',
+            thematiques: ['menace-cyber', 'orientation'],
+            description: 'Description du jeu',
+            temoignages: [{ prenom: 'Michel', details: "C'était super" }],
+          });
         });
 
         it("n'envoie pas les propriétés non modifiables", async () => {
@@ -1171,22 +1075,19 @@ describe('Le formulaire de dépose de jeu', () => {
 
           await engistreModification();
 
-          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
-            '/api/jeux/1234',
-            {
-              categorie: 'autre',
-              classe: '3e',
-              description: '',
-              discipline: 'mathématiques',
-              eleves: [],
-              estCache: false,
-              nom: 'Nom du Jeu',
-              nomEtablissement: 'Nom etablissement',
-              sequence: 'journee',
-              temoignages: [],
-              thematiques: [],
-            },
-          );
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith('/api/jeux/1234', {
+            categorie: 'autre',
+            classe: '3e',
+            description: '',
+            discipline: 'mathématiques',
+            eleves: [],
+            estCache: false,
+            nom: 'Nom du Jeu',
+            nomEtablissement: 'Nom etablissement',
+            sequence: 'journee',
+            temoignages: [],
+            thematiques: [],
+          });
         });
 
         it('supprime les élèves non renseignés', async () => {
@@ -1197,10 +1098,7 @@ describe('Le formulaire de dépose de jeu', () => {
 
           await engistreModification();
 
-          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
-            '/api/jeux/1234',
-            { eleves: ['Michel'] },
-          );
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith('/api/jeux/1234', { eleves: ['Michel'] });
         });
 
         it('supprime les témoignages non renseignés', async () => {
@@ -1216,19 +1114,14 @@ describe('Le formulaire de dépose de jeu', () => {
 
           await engistreModification();
 
-          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith(
-            '/api/jeux/1234',
-            {
-              eleves: undefined,
-              temoignages: [{ prenom: 'Michel', details: 'Génial' }],
-            },
-          );
+          expect(axiosMock.patch).toHaveBeenCalledExactlyOnceWith('/api/jeux/1234', {
+            eleves: undefined,
+            temoignages: [{ prenom: 'Michel', details: 'Génial' }],
+          });
         });
 
         it('affiche une erreur si la soumission échoue', async () => {
-          axiosMock.patch.mockRejectedValueOnce(
-            new Error('Erreur de test API'),
-          );
+          axiosMock.patch.mockRejectedValueOnce(new Error('Erreur de test API'));
           isAxiosErrorMock.mockReturnValue(false);
 
           await engistreModification();

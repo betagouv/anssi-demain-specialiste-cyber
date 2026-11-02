@@ -22,42 +22,30 @@ const ressourceUtilisateurs = ({
     token: z.string('Le token est invalide'),
   });
 
-  routeur.post(
-    '/',
-    middleware.valideLaCoherenceDuCorps(schema),
-    async (requete, reponse) => {
-      const { infolettreAcceptee, pixelDeSuiviAccepté, token } = requete.body;
+  routeur.post('/', middleware.valideLaCoherenceDuCorps(schema), async (requete, reponse) => {
+    const { infolettreAcceptee, pixelDeSuiviAccepté, token } = requete.body;
 
-      try {
-        const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
+    try {
+      const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
 
-        const utilisateur = new Utilisateur({
-          email,
-          prenom,
-          nom,
-          siretEntite: siret,
-          infolettreAcceptee,
-          pixelDeSuiviAccepté,
-        });
+      const utilisateur = new Utilisateur({
+        email,
+        prenom,
+        nom,
+        siretEntite: siret,
+        infolettreAcceptee,
+        pixelDeSuiviAccepté,
+      });
 
-        await entrepotUtilisateur.ajoute(utilisateur);
+      await entrepotUtilisateur.ajoute(utilisateur);
 
-        await busEvenements.publie(
-          new CompteCree(
-            email,
-            prenom,
-            nom,
-            infolettreAcceptee,
-            pixelDeSuiviAccepté,
-          ),
-        );
+      await busEvenements.publie(new CompteCree(email, prenom, nom, infolettreAcceptee, pixelDeSuiviAccepté));
 
-        reponse.sendStatus(201);
-      } catch {
-        reponse.status(400).send({ erreur: 'Le token est invalide' });
-      }
-    },
-  );
+      reponse.sendStatus(201);
+    } catch {
+      reponse.status(400).send({ erreur: 'Le token est invalide' });
+    }
+  });
   return routeur;
 };
 

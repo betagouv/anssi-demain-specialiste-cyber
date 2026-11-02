@@ -19,8 +19,7 @@
     });
     reactions = reactions.map((reaction) => ({
       ...reaction,
-      compteur:
-        reaction.id === e.detail ? reaction.compteur + 1 : reaction.compteur,
+      compteur: reaction.id === e.detail ? reaction.compteur + 1 : reaction.compteur,
       actif: reaction.id === e.detail ? true : reaction.actif,
     }));
     localStorage.setItem(`reaction_${idJeu}_${e.detail}`, 'true');
@@ -33,8 +32,7 @@
     });
     reactions = reactions.map((reaction) => ({
       ...reaction,
-      compteur:
-        reaction.id === e.detail ? reaction.compteur - 1 : reaction.compteur,
+      compteur: reaction.id === e.detail ? reaction.compteur - 1 : reaction.compteur,
       actif: reaction.id === e.detail ? false : reaction.actif,
     }));
     localStorage.removeItem(`reaction_${idJeu}_${e.detail}`);

@@ -20,5 +20,4 @@ export const classes = [
   },
 ];
 
-export const libelleClasse = (code: string): string | undefined =>
-  classes.find((c) => c.code === code)?.libelle;
+export const libelleClasse = (code: string): string | undefined => classes.find((c) => c.code === code)?.libelle;

@@ -5,10 +5,7 @@
   import { onMount } from 'svelte';
   import CarteCatalogue from './CarteCatalogue.svelte';
   import CatalogueFiltres from './CatalogueFiltres.svelte';
-  import {
-    lesRessourcesCyberTriees,
-    type RessourceCyber,
-  } from './ressourceCyber';
+  import { lesRessourcesCyberTriees, type RessourceCyber } from './ressourceCyber';
   import { ressourcesCyberStore } from './stores/ressourcesCyber.store';
   import { ressourcesCyberFiltrees } from './stores/ressourcesCyberFiltrees.store';
 
@@ -18,9 +15,7 @@
   onMount(async () => {
     chargementEnCours = true;
     try {
-      const reponse = await axios.get<RessourceCyber[]>(
-        '/api/ressources-cyber',
-      );
+      const reponse = await axios.get<RessourceCyber[]>('/api/ressources-cyber');
       const ressourcesCyber = lesRessourcesCyberTriees(reponse.data);
       ressourcesCyberStore.initialise(ressourcesCyber);
     } catch (e) {
@@ -45,9 +40,7 @@
         {:else if ressourcesNonTrouvees}
           <p class="fr-text">Impossible de récupérer les ressources.</p>
         {:else}
-          <p class="fr-text">
-            Aucune ressource trouvée correspondant aux critères de recherche.
-          </p>
+          <p class="fr-text">Aucune ressource trouvée correspondant aux critères de recherche.</p>
         {/if}
       {/each}
     </div>

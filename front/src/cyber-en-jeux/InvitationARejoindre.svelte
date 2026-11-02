@@ -3,8 +3,9 @@
 </script>
 
 <Citation>
-  Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager votre
-  expérience. <span class="lien-communaute">
+  Rejoignez la communauté CyberEnJeux pour poser vos questions ou partager votre expérience. <span
+    class="lien-communaute"
+  >
     <dsfr-link
       label="Rejoindre la communauté"
       target="_blank"

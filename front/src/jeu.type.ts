@@ -34,12 +34,7 @@ export enum NomDesCategories {
 export type Categorie = keyof typeof NomDesCategories;
 
 export type Niveau =
-  | 'Cycle 1 (PS-GS)'
-  | 'Cycle 2 (CP-CE2)'
-  | 'Cycle 3 (CM1-6e)'
-  | 'Cycle 4 (5e-3e)'
-  | 'Cycle Terminal (2-T)'
-  | 'Post Bac';
+  'Cycle 1 (PS-GS)' | 'Cycle 2 (CP-CE2)' | 'Cycle 3 (CM1-6e)' | 'Cycle 4 (5e-3e)' | 'Cycle Terminal (2-T)' | 'Post Bac';
 
 export type DonneesJeu = {
   id: string;
@@ -96,9 +91,7 @@ export const construisJeu = (item: DonneesJeu): Jeu => ({
 });
 
 export const construisLesJeux = (data: DonneesJeu[]): Jeu[] => {
-  return data
-    .map(construisJeu)
-    .sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
+  return data.map(construisJeu).sort((jeu1, jeu2) => jeu1.nom.localeCompare(jeu2.nom));
 };
 
 export const enumerationFrancaise = (termes: string[]) => {
@@ -114,13 +107,9 @@ export const lesThematiques = (jeu: Jeu[]): Thematique[] => {
 };
 
 export const lesCategories = (jeu: Jeu[]): Categorie[] => {
-  return Array.from(new Set(jeu.flatMap((r) => r.categorie))).sort((s1, s2) =>
-    s1.localeCompare(s2),
-  );
+  return Array.from(new Set(jeu.flatMap((r) => r.categorie))).sort((s1, s2) => s1.localeCompare(s2));
 };
 
 export const lesNiveaux = (jeu: Jeu[]): Niveau[] => {
-  return Array.from(new Set(jeu.flatMap((r) => r.niveau))).sort((n1, n2) =>
-    n1.localeCompare(n2),
-  );
+  return Array.from(new Set(jeu.flatMap((r) => r.niveau))).sort((n1, n2) => n1.localeCompare(n2));
 };

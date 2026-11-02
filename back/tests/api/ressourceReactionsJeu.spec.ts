@@ -25,13 +25,8 @@ describe("La ressource des réactions d'un jeu", () => {
         await entrepotJeux.ajoute(cybercluedo);
       });
 
-      function posteReactionSurCyberCluedo(corps: {
-        action: string;
-        type: string;
-      }) {
-        return request(serveur)
-          .post(`/api/jeux/${cybercluedo.id}/reactions`)
-          .send(corps);
+      function posteReactionSurCyberCluedo(corps: { action: string; type: string }) {
+        return request(serveur).post(`/api/jeux/${cybercluedo.id}/reactions`).send(corps);
       }
 
       it('retourne un 200', async () => {
@@ -116,9 +111,7 @@ describe("La ressource des réactions d'un jeu", () => {
 
     describe('pour un id au format invalide', () => {
       it('renvoie une erreur 400', async () => {
-        const reponse = await request(serveur)
-          .post('/api/jeux/1/reactions')
-          .send({ action: 'ajout', type: '❤️' });
+        const reponse = await request(serveur).post('/api/jeux/1/reactions').send({ action: 'ajout', type: '❤️' });
 
         expect(reponse.status).toEqual(400);
       });

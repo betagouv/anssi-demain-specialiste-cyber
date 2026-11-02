@@ -30,8 +30,7 @@
     <hgroup>
       <h2>Explorez les jeux créés par les élèves</h2>
       <p class="fr-text--lg description">
-        Mettez en avant la créativité de vos élèves en partageant leurs jeux
-        depuis votre espace enseignant.
+        Mettez en avant la créativité de vos élèves en partageant leurs jeux depuis votre espace enseignant.
       </p>
     </hgroup>
 
@@ -47,9 +46,7 @@
           {:else if erreurChargement}
             <p class="fr-text">Impossible de récupérer les jeux.</p>
           {:else}
-            <p class="fr-text">
-              Aucun jeu trouvé correspondant aux critères de recherche.
-            </p>
+            <p class="fr-text">Aucun jeu trouvé correspondant aux critères de recherche.</p>
           {/if}
         {/each}
       </div>

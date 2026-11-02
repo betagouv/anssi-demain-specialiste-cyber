@@ -5,8 +5,7 @@
   <dsfr-container>
     <div class="contenu">
       <h2 class="titre">
-        Participez à d’autres challenges régionaux et internationaux ouverts aux
-        scolaires et aux étudiants
+        Participez à d’autres challenges régionaux et internationaux ouverts aux scolaires et aux étudiants
       </h2>
 
       <div class="cartes">

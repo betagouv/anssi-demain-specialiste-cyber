@@ -5,10 +5,7 @@ import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { creeServeur } from '../../src/api/dsc';
 import { CompteCree } from '../../src/bus/evenements/compteCree/compteCree';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
 import { EntrepotUtilisateurMemoire } from '../infra/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -52,31 +49,26 @@ describe('La ressource utilisateur', () => {
 
   describe('sur demande POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur)
-        .post('/api/utilisateurs')
-        .send(donneesUtilisateur);
+      const reponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       expect(reponse.status).toBe(201);
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
-      adaptateurRechercheEntreprise.rechercheOrganisationParSiret =
-        async () => ({
-          nom: '',
-          departement: '',
-          siret: '13000766900018',
-          codeTrancheEffectif: '01',
-          codeRegion: 'FR-ARA',
-          codeSecteur: 'D',
-          estAssociation: false,
-          estCollectivite: false,
-        });
+      adaptateurRechercheEntreprise.rechercheOrganisationParSiret = async () => ({
+        nom: '',
+        departement: '',
+        siret: '13000766900018',
+        codeTrancheEffectif: '01',
+        codeRegion: 'FR-ARA',
+        codeSecteur: 'D',
+        estAssociation: false,
+        estCollectivite: false,
+      });
 
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
-      const jeanne = await entrepotUtilisateur.parEmailHache(
-        'jeanne.dupont@user.com-hache',
-      );
+      const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
       expect(jeanne).toBeDefined();
       expect(jeanne?.email).toBe('jeanne.dupont@user.com');
       expect(jeanne?.prenom).toBe('Jeanne');
@@ -107,9 +99,7 @@ describe('La ressource utilisateur', () => {
           infolettreAcceptee: 12,
         });
       expect(reponse.status).toBe(400);
-      expect(reponse.body.erreur).toBe(
-        "L'acceptation de l'infolettre est invalide",
-      );
+      expect(reponse.body.erreur).toBe("L'acceptation de l'infolettre est invalide");
     });
 
     it("valide l'acceptation du pixel de suivi", async () => {
@@ -120,18 +110,14 @@ describe('La ressource utilisateur', () => {
           pixelDeSuiviAccepté: 12,
         });
       expect(reponse.status).toBe(400);
-      expect(reponse.body.erreur).toBe(
-        "L'acceptation du pixel de suivi est invalide",
-      );
+      expect(reponse.body.erreur).toBe("L'acceptation du pixel de suivi est invalide");
     });
 
     describe('valide le token', () => {
       it("lorsqu'il est absent", async () => {
         const donnees = { infolettreAcceptee: true, pixelDeSuiviAccepté: true };
 
-        const reponse = await request(serveur)
-          .post('/api/utilisateurs')
-          .send(donnees);
+        const reponse = await request(serveur).post('/api/utilisateurs').send(donnees);
 
         expect(reponse.status).toBe(400);
         expect(reponse.body.erreur).toBe('Le token est invalide');

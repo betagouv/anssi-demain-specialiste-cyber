@@ -21,15 +21,8 @@
     dismissible
   >
     <div slot="description">
-      <p>
-        Remplacez-les par des images sûres, dont vous connaissez la provenance,
-        puis réessayez.
-      </p>
-      <dsfr-button
-        label="Accéder aux photos"
-        kind="tertiary"
-        size="sm"
-        use:clic={() => redirigeVersEtape('photos')}
+      <p>Remplacez-les par des images sûres, dont vous connaissez la provenance, puis réessayez.</p>
+      <dsfr-button label="Accéder aux photos" kind="tertiary" size="sm" use:clic={() => redirigeVersEtape('photos')}
       ></dsfr-button>
     </div>
   </dsfr-alert>

@@ -6,12 +6,7 @@
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
   import BadgesThematiques from '../cyber-en-jeux/BadgesThematiques.svelte';
-  import {
-    construisJeu,
-    enumerationFrancaise,
-    type DonneesJeu,
-    type Jeu,
-  } from '../jeu.type';
+  import { construisJeu, enumerationFrancaise, type DonneesJeu, type Jeu } from '../jeu.type';
   import { libelleClasse } from './classes';
   import { libelleDiscipline } from './disciplines';
   import Reactions from './Reactions.svelte';
@@ -170,11 +165,7 @@
 
       {#snippet apresContenu()}
         {#if possedeDesTemoignages}
-          <lab-anssi-temoignages
-            titre="Témoignages"
-            {temoignages}
-            id="temoignages"
-          ></lab-anssi-temoignages>
+          <lab-anssi-temoignages titre="Témoignages" {temoignages} id="temoignages"></lab-anssi-temoignages>
         {/if}
       {/snippet}
     </Fiche>

@@ -24,15 +24,8 @@ export type MetierGrist = {
   };
 };
 
-export class EntrepotMetiersGrist
-  extends EntrepotGrist<MetierGrist>
-  implements EntrepotMetiers
-{
-  constructor(
-    metierGrist: RecupereRessourceHttp<
-      ReponseGrist<MetierGrist>
-    > = creeRecupereRessourceHttp(),
-  ) {
+export class EntrepotMetiersGrist extends EntrepotGrist<MetierGrist> implements EntrepotMetiers {
+  constructor(metierGrist: RecupereRessourceHttp<ReponseGrist<MetierGrist>> = creeRecupereRessourceHttp()) {
     const grist = adaptateurEnvironnement.grist();
     super(metierGrist, grist.idDocument, grist.metiers().idTable);
   }
@@ -68,9 +61,7 @@ export class EntrepotMetiersGrist
       illustration: metierGrist.fields.URL_illustration,
       dataemploi: metierGrist.fields.Fiche_data_emploi,
       metierscope: metierGrist.fields.Fiche_metierscope,
-      videos: metierGrist.fields.lien_video
-        .split('\n')
-        .filter((url) => url.trim()),
+      videos: metierGrist.fields.lien_video.split('\n').filter((url) => url.trim()),
     },
   });
 

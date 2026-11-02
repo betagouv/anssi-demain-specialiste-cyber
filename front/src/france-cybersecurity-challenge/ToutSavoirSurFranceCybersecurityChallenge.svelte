@@ -43,35 +43,23 @@
 
 <dsfr-container>
   <div class="contenu">
-    <dsfr-side-menu
-      {items}
-      buttonLabel="Dans cette page"
-      hasTitle={false}
-      buttonId="menuToutSavoir"
-    ></dsfr-side-menu>
+    <dsfr-side-menu {items} buttonLabel="Dans cette page" hasTitle={false} buttonId="menuToutSavoir"></dsfr-side-menu>
 
     <div class="sections">
       <section id="tout-savoir&accessible-a-tous">
         <h3>Accessible à tous, 100% en ligne</h3>
         <p class="texte-standard-md">
-          La participation au FCSC est <dsfr-link
-            label="accessible à tous"
-            href="#fcsc-2026"
-          ></dsfr-link> dès 14 ans.
+          La participation au FCSC est <dsfr-link label="accessible à tous" href="#fcsc-2026"></dsfr-link> dès 14 ans.
         </p>
 
         <p class="texte-standard-md">
-          Le FCSC se déroule pendant 10 jours et la participation est
-          entièrement en ligne, sans aucune contrainte horaire.
+          Le FCSC se déroule pendant 10 jours et la participation est entièrement en ligne, sans aucune contrainte
+          horaire.
         </p>
 
         <p class="texte-standard-md">
-          Chaque joueur et joueuse participe seul(e) mais peut choisir de
-          rejoindre la
-          <dsfr-link
-            label="communauté FCSC sur Discord"
-            href="https://discord.com/invite/rwZY6hh8z8"
-          ></dsfr-link>
+          Chaque joueur et joueuse participe seul(e) mais peut choisir de rejoindre la
+          <dsfr-link label="communauté FCSC sur Discord" href="https://discord.com/invite/rwZY6hh8z8"></dsfr-link>
           pour échanger avec les autres participant(e)s.
         </p>
       </section>
@@ -79,109 +67,77 @@
       <section id="tout-savoir&classement">
         <h3>Comment est établi le classement du FCSC&nbsp;?</h3>
         <p class="texte-standard-md">
-          Le FCSC propose une cinquantaine d'épreuves dans plusieurs catégories
-          techniques :
+          Le FCSC propose une cinquantaine d'épreuves dans plusieurs catégories techniques :
         </p>
 
         <TuilesCategoriesEpreuvesFcsc />
 
         <p class="texte-standard-md">
-          Tout au long du challenge, les joueurs et joueuses sont positionné(e)s
-          dans un classement en constante évolution. Ce classement est établi
-          sur la base du nombre de points collectés par chaque participant(e).
+          Tout au long du challenge, les joueurs et joueuses sont positionné(e)s dans un classement en constante
+          évolution. Ce classement est établi sur la base du nombre de points collectés par chaque participant(e).
         </p>
         <p class="texte-standard-md">
-          Chaque épreuve vaut au démarrage 500 points mais voit sa valeur
-          évoluer au fil du challenge en fonction du nombre de personnes qui
-          sont parvenues à les résoudre (scoring dynamique) : plus une épreuve a
-          été résolue, plus sa valeur en point diminue !
+          Chaque épreuve vaut au démarrage 500 points mais voit sa valeur évoluer au fil du challenge en fonction du
+          nombre de personnes qui sont parvenues à les résoudre (scoring dynamique) : plus une épreuve a été résolue,
+          plus sa valeur en point diminue !
         </p>
         <p class="texte-standard-md">
-          Avant la conclusion du challenge, il est demandé à chaque
-          participant(e) de partager deux solutions rédigées ("write-up") qui
-          seront examinées en cas de sélection pour les entretiens de sélection
-          pour l'équipe France.
+          Avant la conclusion du challenge, il est demandé à chaque participant(e) de partager deux solutions rédigées
+          ("write-up") qui seront examinées en cas de sélection pour les entretiens de sélection pour l'équipe France.
         </p>
       </section>
 
       <section id="tout-savoir&selection" class="selection-team-france">
         <h3>Sélection de la Team France pour l’ECSC</h3>
-        <img
-          src="/assets/images/fcsc/selection-team-france.svg"
-          alt="Team France avec 5 juniors et 5 seniors"
-        />
+        <img src="/assets/images/fcsc/selection-team-france.svg" alt="Team France avec 5 juniors et 5 seniors" />
         <p class="texte-standard-md">
-          La Team France qui va représenter la France lors de l’European
-          Cybersecurity Challenge (ECSC) est sélectionnée parmi les joueurs(ses)
-          les mieux classés dans chaque catégorie technique, parmi les
-          participants(e)s junior et senior (les personnes "Hors catégorie" ne
-          sont pas éligibles à la participation au challenge européen).
+          La Team France qui va représenter la France lors de l’European Cybersecurity Challenge (ECSC) est sélectionnée
+          parmi les joueurs(ses) les mieux classés dans chaque catégorie technique, parmi les participants(e)s junior et
+          senior (les personnes "Hors catégorie" ne sont pas éligibles à la participation au challenge européen).
         </p>
         <p class="texte-standard-md">
-          Les 3 meilleurs(es) joueur(ses) junior et senior (soit 6 personnes)
-          dans chacune des 5 catégories (soit un maximum de 30 personnes, une
-          personne pouvant être présente dans plusieurs catégories) sont reçus
-          en entretien à distance par les spécialistes de l'ANSSI.
+          Les 3 meilleurs(es) joueur(ses) junior et senior (soit 6 personnes) dans chacune des 5 catégories (soit un
+          maximum de 30 personnes, une personne pouvant être présente dans plusieurs catégories) sont reçus en entretien
+          à distance par les spécialistes de l'ANSSI.
         </p>
         <p class="texte-standard-md">
           <b
-            >Suite à ces entretiens, 14 personnes sont sélectionnées : 5 junior
-            et 5 seniors ainsi que 2 remplaçants(e)s dans chaque catégorie
-            d'âge.</b
+            >Suite à ces entretiens, 14 personnes sont sélectionnées : 5 junior et 5 seniors ainsi que 2 remplaçants(e)s
+            dans chaque catégorie d'âge.</b
           >
         </p>
         <p class="texte-standard-md">
-          Les entretiens se déroulent en général courant juin et la sélection
-          est finalisée fin juin / début juillet.
+          Les entretiens se déroulent en général courant juin et la sélection est finalisée fin juin / début juillet.
         </p>
       </section>
 
-      <section
-        id="tout-savoir&preparation"
-        class="preparation-team-france-ecsc"
-      >
+      <section id="tout-savoir&preparation" class="preparation-team-france-ecsc">
         <h3>Préparation de la Team France à l‘ECSC</h3>
-        <img
-          src="/assets/images/fcsc/preparation-team-france-ecsc.avif"
-          alt="Logos Team France et ECSC"
-        />
+        <img src="/assets/images/fcsc/preparation-team-france-ecsc.avif" alt="Logos Team France et ECSC" />
         <p class="texte-standard-md">
-          Une fois la Team France (équipe de France) sélectionnée, l'ensemble
-          des joueurs(es) est accompagnée par les coaches de l'ANSSI pour se
-          préparer au challenge européen qui se déroule au 3e trimestre de
-          l'année. Durant l'été, l'équipe est invitée à relever ensemble des
-          challenges, avec le soutien de l'ANSSI.
+          Une fois la Team France (équipe de France) sélectionnée, l'ensemble des joueurs(es) est accompagnée par les
+          coaches de l'ANSSI pour se préparer au challenge européen qui se déroule au 3e trimestre de l'année. Durant
+          l'été, l'équipe est invitée à relever ensemble des challenges, avec le soutien de l'ANSSI.
         </p>
         <p class="texte-standard-md">
-          Un entraînement de l'ensemble des équipes des États membres de l'Union
-          européenne est généralement organisé en septembre. À cette occasion,
-          l'équipe France est invitée à se réunir dans les locaux de l'ANSSI
-          pour participer.
+          Un entraînement de l'ensemble des équipes des États membres de l'Union européenne est généralement organisé en
+          septembre. À cette occasion, l'équipe France est invitée à se réunir dans les locaux de l'ANSSI pour
+          participer.
         </p>
       </section>
 
       <section id="tout-savoir&deroule-ecsc">
         <h3>Déroulé de l’ECSC</h3>
         <p class="texte-standard-md">
-          L’European Cybersecurity Challenge (ECSC) est organisé par l'Agence
-          européenne pour la cybersécurité - l'ENISA - et se déroule chaque
-          année pendant 2 jours dans un Etat membre de l'Union européenne.
+          L’European Cybersecurity Challenge (ECSC) est organisé par l'Agence européenne pour la cybersécurité - l'ENISA
+          - et se déroule chaque année pendant 2 jours dans un Etat membre de l'Union européenne.
         </p>
-        <dsfr-highlight text="En 2026, l'ECSC se déroule en Allemagne."
-        ></dsfr-highlight>
-        <p class="texte-standard-md">
-          Le challenge se déroule sur 2 jours en 2 temps :
-        </p>
+        <dsfr-highlight text="En 2026, l'ECSC se déroule en Allemagne."></dsfr-highlight>
+        <p class="texte-standard-md">Le challenge se déroule sur 2 jours en 2 temps :</p>
         <CartesDerouleECSC></CartesDerouleECSC>
       </section>
 
-      <dsfr-link
-        href="#"
-        label="Haut de page"
-        size="md"
-        has-icon
-        icon="arrow-up-fill"
-      ></dsfr-link>
+      <dsfr-link href="#" label="Haut de page" size="md" has-icon icon="arrow-up-fill"></dsfr-link>
     </div>
   </div>
 </dsfr-container>
