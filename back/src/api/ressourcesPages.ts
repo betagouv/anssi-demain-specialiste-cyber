@@ -43,6 +43,7 @@ const pages: Page[] = [
   { route: '/selection-eleves', protegee: false },
   { route: '/selection-enseignants', protegee: false },
   { route: '/france-cybersecurity-challenge', protegee: false },
+  { route: '/les-metiers', protegee: false },
   { route: '/se-former', protegee: false },
 ];
 
