@@ -28,6 +28,7 @@ describe('La ressource des fonctions', () => {
 
     it('renvoie les fonctions', async () => {
       await entrepôtFonctions.ajoute({
+        id: 1,
         nom: 'Cryptologue',
         famille: 'Pilotage',
         missionPrincipale:
@@ -40,6 +41,7 @@ describe('La ressource des fonctions', () => {
         },
       });
       await entrepôtFonctions.ajoute({
+        id: 2,
         nom: 'Analyste SOC',
         famille: 'Opérations',
         missionPrincipale: '',
@@ -52,6 +54,7 @@ describe('La ressource des fonctions', () => {
       const corps = réponse.body;
       expect(corps).toHaveLength(2);
       expect(corps[0]).toStrictEqual({
+        id: 1,
         nom: 'Cryptologue',
         famille: 'Pilotage',
         missionPrincipale:

@@ -6,6 +6,7 @@ import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type FonctionGrist = {
   fields: {
+    id: number;
     Fonction: string;
     Mission_principale: string;
     Lien: string;
@@ -35,6 +36,7 @@ export class EntrepôtFonctionsGrist
   async tous(): Promise<Fonction[]> {
     const réponse = await this.appelleGrist();
     return réponse.records.map((fonctionGrist) => ({
+      id: fonctionGrist.fields.id,
       nom: fonctionGrist.fields.Fonction,
       famille: fonctionGrist.fields.Famille_de_metiers ?? '',
       missionPrincipale: fonctionGrist.fields.Mission_principale,
