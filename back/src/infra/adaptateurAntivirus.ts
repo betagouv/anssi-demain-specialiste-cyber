@@ -30,10 +30,7 @@ export class AdaptateurJCOP implements AdaptateurAntivirus {
   }
 
   async analyse(fichiers: Buffer<ArrayBuffer>[]) {
-    if (
-      !fichiers.length ||
-      !this.adaptateurEnvironnement.antivirus().analyseActive
-    ) {
+    if (!fichiers.length || !this.adaptateurEnvironnement.antivirus().analyseActive) {
       return { estEnErreur: false };
     }
 
@@ -41,13 +38,9 @@ export class AdaptateurJCOP implements AdaptateurAntivirus {
       const promesses = fichiers.map(async (fichier) => {
         const formulaire = new FormData();
         formulaire.append('file', new Blob([fichier]));
-        const reponse = await this.clientHttp(
-          this.adaptateurEnvironnement.antivirus().urlAnalyse,
-          formulaire,
-          {
-            headers: this.headers,
-          },
-        );
+        const reponse = await this.clientHttp(this.adaptateurEnvironnement.antivirus().urlAnalyse, formulaire, {
+          headers: this.headers,
+        });
         // eslint-disable-next-line no-console
         console.log('reponse JCOP : ', reponse);
         return reponse;

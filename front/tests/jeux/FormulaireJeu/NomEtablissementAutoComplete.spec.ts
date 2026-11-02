@@ -8,11 +8,7 @@ import { findByRoleDeep } from '../../shadow-dom-utilitaires';
 describe("Le champ de saisie du nom de l'établissement", () => {
   const user = userEvent.setup();
   const referentielEtablissement: ReferentielEtablissement = {
-    trouveParNom: vi
-      .fn()
-      .mockImplementation(() =>
-        Promise.resolve(['Lycée 1', 'Lycée 42', 'Lycée de la mer']),
-      ),
+    trouveParNom: vi.fn().mockImplementation(() => Promise.resolve(['Lycée 1', 'Lycée 42', 'Lycée de la mer'])),
   };
   it('est visible', async () => {
     render(NomEtablissementAutoComplete, { referentielEtablissement });
@@ -30,11 +26,7 @@ describe("Le champ de saisie du nom de l'établissement", () => {
       name: 'Nom de votre établissement',
     });
     await user.type(champ, 'lycée');
-    await waitFor(() =>
-      expect(
-        referentielEtablissement.trouveParNom,
-      ).toHaveBeenCalledExactlyOnceWith('lycée'),
-    );
+    await waitFor(() => expect(referentielEtablissement.trouveParNom).toHaveBeenCalledExactlyOnceWith('lycée'));
   });
 
   it("affiche les propositions trouvées lorsqu'on tape quelque chose", async () => {

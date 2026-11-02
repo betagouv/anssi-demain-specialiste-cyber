@@ -3,10 +3,7 @@
 
   let { etapeCourante }: { etapeCourante: EtapeDeposeJeu } = $props();
 
-  const etapes: Record<
-    EtapeDeposeJeu,
-    { index: number; titre: string; etapeSuivante?: EtapeDeposeJeu }
-  > = {
+  const etapes: Record<EtapeDeposeJeu, { index: number; titre: string; etapeSuivante?: EtapeDeposeJeu }> = {
     'informations-generales': {
       index: 1,
       titre: 'Informations générales',
@@ -35,9 +32,7 @@
 
   const infosEtapeCourant = $derived.by(() => etapes[etapeCourante]);
   const titreEtapeSuivante = $derived.by(() =>
-    infosEtapeCourant.etapeSuivante
-      ? etapes[infosEtapeCourant.etapeSuivante].titre
-      : '',
+    infosEtapeCourant.etapeSuivante ? etapes[infosEtapeCourant.etapeSuivante].titre : '',
   );
 </script>
 

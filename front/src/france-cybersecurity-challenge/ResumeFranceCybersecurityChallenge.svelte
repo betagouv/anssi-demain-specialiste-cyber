@@ -43,36 +43,19 @@
   <div class="participe">
     <h2>Participe au France Cybersecurity Challenge !</h2>
     <p class="texte-article-lg">
-      Chaque année plusieurs milliers de personnes participent au France
-      Cybersecurity Challenge (FCSC). Organisé par l'Agence nationale de la
-      sécurité des systèmes d'information (ANSSI), le FCSC est ouvert à toutes
-      et tous. Les participant(e)s de 14 à 25 ans qui le souhaitent peuvent
-      tenter d'être sélectionné(e)s pour rejoindre la Team France et participer
-      au challenge européen.
+      Chaque année plusieurs milliers de personnes participent au France Cybersecurity Challenge (FCSC). Organisé par
+      l'Agence nationale de la sécurité des systèmes d'information (ANSSI), le FCSC est ouvert à toutes et tous. Les
+      participant(e)s de 14 à 25 ans qui le souhaitent peuvent tenter d'être sélectionné(e)s pour rejoindre la Team
+      France et participer au challenge européen.
     </p>
     <lab-anssi-carrousel-tuiles>
       {#each tuiles as tuile, index (index)}
-        <dsfr-tile
-          title={tuile.titre}
-          action-markup="false"
-          no-link
-          markupLevel="2"
-        >
-          <img
-            src={tuile.illustration.lien}
-            alt={tuile.illustration.alt}
-            slot="pictogram"
-          />
+        <dsfr-tile title={tuile.titre} action-markup="false" no-link markupLevel="2">
+          <img src={tuile.illustration.lien} alt={tuile.illustration.alt} slot="pictogram" />
         </dsfr-tile>
       {/each}
     </lab-anssi-carrousel-tuiles>
-    <dsfr-button
-      href="https://fcsc.fr/fr/"
-      label="Participer au challenge"
-      markup="a"
-      target="_blank"
-    >
-    </dsfr-button>
+    <dsfr-button href="https://fcsc.fr/fr/" label="Participer au challenge" markup="a" target="_blank"> </dsfr-button>
   </div>
 </dsfr-container>
 
@@ -87,37 +70,29 @@
       <div class="benefice">
         <h6>Teste et mesure tes compétences cyber</h6>
         <p class="texte-standard-md">
-          Relève les épreuves dans une grande variété de domaine, conçues par
-          des experts de la cybersécurité&nbsp;: crypto, reverse, pwn, web,
-          forensics, algorithmique, hardware, etc.
+          Relève les épreuves dans une grande variété de domaine, conçues par des experts de la cybersécurité&nbsp;:
+          crypto, reverse, pwn, web, forensics, algorithmique, hardware, etc.
         </p>
       </div>
       <hr />
       <div class="benefice">
         <h6>Représente peut-être la France à l’ECSC</h6>
         <p class="texte-standard-md">
-          Les 14 meilleurs/es joueurs/ses rejoindront la Team France (10
-          titulaires, 4 remplaçants/es) et affronteront une trentaine d'équipes
-          européennes dans le cadre de l’European Cybersecurity Challenge,
-          organisé par l'ENISA (European Network and Information System Security
-          Agency).
+          Les 14 meilleurs/es joueurs/ses rejoindront la Team France (10 titulaires, 4 remplaçants/es) et affronteront
+          une trentaine d'équipes européennes dans le cadre de l’European Cybersecurity Challenge, organisé par l'ENISA
+          (European Network and Information System Security Agency).
         </p>
       </div>
       <hr />
       <div class="benefice">
         <h6>Rejoue +530 épreuves du FCSC sur Hackropole</h6>
         <p class="texte-standard-md">
-          Toutes les épreuves des FCSC des années précédentes sont accessibles
-          sur Hackropole. Une plateforme qui propose un environnement
-          d’apprentissage, sans limite de temps, et où les solutions d’une
-          épreuve peuvent être consultées sans avoir résolu le challenge.
+          Toutes les épreuves des FCSC des années précédentes sont accessibles sur Hackropole. Une plateforme qui
+          propose un environnement d’apprentissage, sans limite de temps, et où les solutions d’une épreuve peuvent être
+          consultées sans avoir résolu le challenge.
         </p>
         <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
-        <dsfr-link
-          href="https://hackropole.fr/fr/"
-          label="Explorer les épreuves sur Hackropole"
-          blank
-        ></dsfr-link>
+        <dsfr-link href="https://hackropole.fr/fr/" label="Explorer les épreuves sur Hackropole" blank></dsfr-link>
       </div>
     </div>
   </div>
@@ -131,8 +106,7 @@
 </dsfr-container>
 
 <div class="temoignages">
-  <lab-anssi-temoignages titre="Témoignages" {temoignages}
-  ></lab-anssi-temoignages>
+  <lab-anssi-temoignages titre="Témoignages" {temoignages}></lab-anssi-temoignages>
 </div>
 
 <style lang="scss">

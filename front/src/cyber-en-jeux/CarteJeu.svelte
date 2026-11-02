@@ -12,16 +12,7 @@
 
   const { jeu, modifieVisibiliteJeu, estModifiable = false }: Props = $props();
 
-  const {
-    id,
-    nom,
-    eleves,
-    nomEtablissement,
-    thematiques,
-    photos,
-    estCache,
-    reactions,
-  } = $derived(jeu);
+  const { id, nom, eleves, nomEtablissement, thematiques, photos, estCache, reactions } = $derived(jeu);
 </script>
 
 <div class="lab-anssi-carte-jeux">
@@ -89,11 +80,7 @@
     {/if}
   </dsfr-card>
   <div class="lab-anssi-carte-jeux__reactions">
-    <Reactions
-      idJeu={id}
-      reactionsDuJeu={reactions}
-      variant="tertiaire-sans-bordure"
-    />
+    <Reactions idJeu={id} reactionsDuJeu={reactions} variant="tertiaire-sans-bordure" />
   </div>
 </div>
 

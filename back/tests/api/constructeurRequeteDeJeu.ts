@@ -54,9 +54,7 @@ class ConstructeurRequeteDeJeu implements Constructeur<CorpsRequeteDeJeu> {
     return this;
   }
 
-  avecTemoignages(
-    temoignages: { details: string; prenom: string }[],
-  ): ConstructeurRequeteDeJeu {
+  avecTemoignages(temoignages: { details: string; prenom: string }[]): ConstructeurRequeteDeJeu {
     this.temoignages = temoignages;
     return this;
   }

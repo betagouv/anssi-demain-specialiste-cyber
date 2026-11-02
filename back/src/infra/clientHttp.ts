@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-export type RecupereRessourceHttp<T> = (
-  url: string,
-  config?: { headers?: Record<string, string> },
-) => Promise<T>;
+export type RecupereRessourceHttp<T> = (url: string, config?: { headers?: Record<string, string> }) => Promise<T>;
 
 export const creeRecupereRessourceHttp = <T>() => {
   return async (url: string, config?: { headers?: Record<string, string> }) => {

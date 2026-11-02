@@ -77,10 +77,8 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,
   }),
   oidc: (): OIDC => ({
-    urlRedirectionApresAuthentification: () =>
-      `${process.env.URL_BASE_DSC}/oidc/apres-authentification`,
-    urlRedirectionApresDeconnexion: () =>
-      `${process.env.URL_BASE_DSC}/oidc/apres-deconnexion`,
+    urlRedirectionApresAuthentification: () => `${process.env.URL_BASE_DSC}/oidc/apres-authentification`,
+    urlRedirectionApresDeconnexion: () => `${process.env.URL_BASE_DSC}/oidc/apres-deconnexion`,
     urlBase: () => process.env.OIDC_URL_BASE || '/',
     clientId: () => process.env.OIDC_CLIENT_ID || '',
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
@@ -129,27 +127,21 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
         .filter((objet): objet is VersionDeSecret => !!objet.version)
         .map(({ version, valeur }) => {
           if (!valeur) {
-            throw new Error(
-              `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`,
-            );
+            throw new Error(`Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`);
           }
           return {
             version: parseInt(version, 10),
             secret: valeur,
           };
         })
-        .sort(
-          ({ version: version1 }, { version: version2 }) => version1 - version2,
-        );
+        .sort(({ version: version1 }, { version: version2 }) => version1 - version2);
     },
   }),
   chiffrement: () => ({
     cleChaCha20Hex: () => {
       const cleHex = process.env.CHIFFREMENT_CHACHA20_CLE_HEX;
       if (!cleHex) {
-        throw new Error(
-          `La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`,
-        );
+        throw new Error(`La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`);
       }
       return cleHex;
     },
@@ -167,15 +159,13 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     return undefined;
   },
   nodeEnv: () => process.env.NODE_ENV,
-  televersementEnMemoire: (): boolean =>
-    process.env.S3_CELLAR_EN_MEMOIRE === 'true',
+  televersementEnMemoire: (): boolean => process.env.S3_CELLAR_EN_MEMOIRE === 'true',
   televersement: (): {
     urlCellar: string;
     bucketPhotosJeux: string;
     region: string;
   } => {
-    const { urlCellar, bucketPhotosJeux, region, enMemoire } =
-      variablesDeTeleversement();
+    const { urlCellar, bucketPhotosJeux, region, enMemoire } = variablesDeTeleversement();
     if (urlCellar && bucketPhotosJeux && region && !enMemoire) {
       return {
         urlCellar,
@@ -183,13 +173,10 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
         region,
       };
     }
-    throw new Error(
-      'L’URL du Cellar doit être définie lorsque DSC est configuré pour Cellar.',
-    );
+    throw new Error('L’URL du Cellar doit être définie lorsque DSC est configuré pour Cellar.');
   },
   cellarPhotosJeux: (): string => {
-    const { urlCellar, bucketPhotosJeux, enMemoire } =
-      variablesDeTeleversement();
+    const { urlCellar, bucketPhotosJeux, enMemoire } = variablesDeTeleversement();
     if (enMemoire) return '';
     const [schema, autorite] = urlCellar!.split('//');
     return `${schema}//${bucketPhotosJeux}.${autorite}`;
@@ -206,14 +193,10 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     dsn: () => process.env.SENTRY_DSN,
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
-  listeEmailsAutorises: () =>
-    process.env.LISTE_EMAILS_AUTORISES?.split(',').map((email) =>
-      email.trim(),
-    ) ?? [],
+  listeEmailsAutorises: () => process.env.LISTE_EMAILS_AUTORISES?.split(',').map((email) => email.trim()) ?? [],
   expediteurEmail: () => ({
     urlDeBase: () => process.env.BREVO_API_URL_BASE ?? '',
     cleAPI: () => process.env.BREVO_CLE_API ?? '',
-    idTemplateEmailBienvenue: () =>
-      process.env.BREVO_ID_TEMPLATE_BIENVENUE ?? '',
+    idTemplateEmailBienvenue: () => process.env.BREVO_ID_TEMPLATE_BIENVENUE ?? '',
   }),
 };

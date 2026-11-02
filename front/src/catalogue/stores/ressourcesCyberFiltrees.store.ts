@@ -52,9 +52,7 @@ export const ressourcesCyberFiltrees = derived(
           rechercheParBesoin.ok(ressourceCyber) &&
           rechercheTextuelle.ok(ressourceCyber),
       )
-      .sort((a, b) =>
-        a.estCertifiee === b.estCertifiee ? 0 : a.estCertifiee ? -1 : 1,
-      );
+      .sort((a, b) => (a.estCertifiee === b.estCertifiee ? 0 : a.estCertifiee ? -1 : 1));
 
     const thematiques = lesThematiquesCyber($store);
     const publicsCible = lesPublicsCibleDesRessourcesCyber($store);

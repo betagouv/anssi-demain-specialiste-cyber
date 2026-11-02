@@ -24,32 +24,14 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
     ressourceJeu(configurationServeur),
     ressourceReactionsJeu(configurationServeur),
   );
-  router.use(
-    '/ressources-cyber',
-    ressourceRessourceCyber(configurationServeur),
-  );
+  router.use('/ressources-cyber', ressourceRessourceCyber(configurationServeur));
   router.use('/metiers', ressourceMetier(configurationServeur));
-  router.use(
-    '/selections-enseignants',
-    ressourceSelections(configurationServeur.entrepotSelectionsEnseignants),
-  );
-  router.use(
-    '/selections-eleves',
-    ressourceSelections(configurationServeur.entrepotSelectionsEleves),
-  );
-  router.use(
-    '/selections-entrainement',
-    ressourceSelections(configurationServeur.entrepôtSélectionsEntrainement),
-  );
-  router.use(
-    '/selections-mesure',
-    ressourceSelections(configurationServeur.entrepôtSélectionsMesure),
-  );
+  router.use('/selections-enseignants', ressourceSelections(configurationServeur.entrepotSelectionsEnseignants));
+  router.use('/selections-eleves', ressourceSelections(configurationServeur.entrepotSelectionsEleves));
+  router.use('/selections-entrainement', ressourceSelections(configurationServeur.entrepôtSélectionsEntrainement));
+  router.use('/selections-mesure', ressourceSelections(configurationServeur.entrepôtSélectionsMesure));
 
-  router.use(
-    '/familles-metier',
-    ressourceFamillesDeMétier(configurationServeur),
-  );
+  router.use('/familles-metier', ressourceFamillesDeMétier(configurationServeur));
   router.use('/fonctions', ressourceFonctions(configurationServeur));
 
   return router;

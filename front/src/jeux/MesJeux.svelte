@@ -50,12 +50,7 @@
   {/if}
   {#if listeDesJeux.length > 0}
     <div class="zone-action">
-      <dsfr-button
-        label="Déposer un jeu"
-        kind="secondary"
-        hasIcon="true"
-        icon="add-line"
-        use:clic={deposeUnJeu}
+      <dsfr-button label="Déposer un jeu" kind="secondary" hasIcon="true" icon="add-line" use:clic={deposeUnJeu}
       ></dsfr-button>
     </div>
     {#if messageDeRetour}
@@ -83,16 +78,8 @@
     <div class="pas-de-jeu">
       <div class="encart">
         <h4>Valorisez la créativité de vos élèves</h4>
-        <p class="fr-text">
-          Partagez les jeux élaborés par vos élèves lors de séquence
-          CyberEnJeux.
-        </p>
-        <dsfr-button
-          label="Déposer un jeu"
-          hasIcon="true"
-          icon="add-line"
-          use:clic={deposeUnJeu}
-        ></dsfr-button>
+        <p class="fr-text">Partagez les jeux élaborés par vos élèves lors de séquence CyberEnJeux.</p>
+        <dsfr-button label="Déposer un jeu" hasIcon="true" icon="add-line" use:clic={deposeUnJeu}></dsfr-button>
       </div>
       <InvitationARejoindre />
     </div>

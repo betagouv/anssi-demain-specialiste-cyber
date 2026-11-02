@@ -15,8 +15,7 @@
     const hash = new URLSearchParams(window.location.hash?.substring(1));
     const ongletDansLUrl = Array.from(hash)[0];
     if (ongletDansLUrl) {
-      ongletActif =
-        onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
+      ongletActif = onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
     }
   };
 
@@ -42,23 +41,14 @@
 </script>
 
 <div class={['menu-onglets', { open }]}>
-  <button
-    class="entete"
-    type="button"
-    aria-controls="onglets"
-    aria-expanded={open}
-    use:clic={surLeClicDeLEntete}
-  >
+  <button class="entete" type="button" aria-controls="onglets" aria-expanded={open} use:clic={surLeClicDeLEntete}>
     <span>{titreReplie}</span>
   </button>
   <div class="fr-text onglets" id="onglets">
     <ol>
       {#each onglets as onglet, indice (onglet.label)}
         <li class={{ actif: onglets[ongletActif] === onglet }}>
-          <a
-            href={onglet.fragment}
-            use:clic={() => surLeClicDUnOnglet(onglet, indice)}
-          >
+          <a href={onglet.fragment} use:clic={() => surLeClicDUnOnglet(onglet, indice)}>
             {#if onglet.emoji}
               <span aria-hidden="true">{onglet.emoji}</span>
             {/if}

@@ -9,9 +9,7 @@
       <ol class="etapes">
         <li class="etape">
           <div class="indicateur" aria-hidden="true">1</div>
-          <h3 class="etape-titre fr-h5">
-            Pré-inscription dès septembre chaque année
-          </h3>
+          <h3 class="etape-titre fr-h5">Pré-inscription dès septembre chaque année</h3>
           <img
             class="etape-media etape-media--1"
             src="/assets/images/passe-ton-hack-d-abord/comment-participer/etape-1.png"
@@ -20,9 +18,7 @@
         </li>
         <li class="etape">
           <div class="indicateur" aria-hidden="true">2</div>
-          <h3 class="etape-titre fr-h5">
-            Composition des équipes sur le backoffice jusque début janvier
-          </h3>
+          <h3 class="etape-titre fr-h5">Composition des équipes sur le backoffice jusque début janvier</h3>
           <img
             class="etape-media etape-media--2"
             src="/assets/images/passe-ton-hack-d-abord/comment-participer/etape-2.png"
@@ -31,9 +27,7 @@
         </li>
         <li class="etape">
           <div class="indicateur" aria-hidden="true">3</div>
-          <h3 class="etape-titre fr-h5">
-            Fin janvier organisation du challenge durant 3 semaines
-          </h3>
+          <h3 class="etape-titre fr-h5">Fin janvier organisation du challenge durant 3 semaines</h3>
           <img
             class="etape-media etape-media--3"
             src="/assets/images/passe-ton-hack-d-abord/comment-participer/etape-3.png"

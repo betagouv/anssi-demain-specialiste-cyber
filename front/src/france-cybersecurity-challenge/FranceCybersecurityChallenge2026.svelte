@@ -20,9 +20,7 @@
           <ul slot="description">
             <li>Être né(e)s en 2005, 2006, 2007, 2008, 2009, 2010 ou 2011.</li>
             <li>Être de nationalité française.</li>
-            <li>
-              Candidater pour intégrer la Team France et participer à l’ECSC.
-            </li>
+            <li>Candidater pour intégrer la Team France et participer à l’ECSC.</li>
           </ul>
         </dsfr-tile>
         <dsfr-tile
@@ -37,9 +35,7 @@
           <ul slot="description">
             <li>Être né(e)s en 2000, 2001, 2002, 2003 ou 2004.</li>
             <li>Être de nationalité française.</li>
-            <li>
-              Candidater pour intégrer la Team France et participer à l’ECSC.
-            </li>
+            <li>Candidater pour intégrer la Team France et participer à l’ECSC.</li>
           </ul>
         </dsfr-tile>
         <dsfr-tile

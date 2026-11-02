@@ -1,9 +1,5 @@
 import z from 'zod';
-import type {
-  ErreursValidationJeuEnEdition,
-  EvaluationDuJeu,
-  JeuEnEdition,
-} from './jeuEnEdition.type';
+import type { ErreursValidationJeuEnEdition, EvaluationDuJeu, JeuEnEdition } from './jeuEnEdition.type';
 import { extracteurErreursZod, type Validateur } from './validateur';
 
 export class ValidateurEvaluationDuJeu implements Validateur<EvaluationDuJeu> {
@@ -13,13 +9,8 @@ export class ValidateurEvaluationDuJeu implements Validateur<EvaluationDuJeu> {
     this.schema = z.object({
       evaluationDecouverte: z.number('Cette information est obligatoire'),
       evaluationInteret: z.number('Cette information est obligatoire'),
-      evaluationSatisfactionGenerale: z.number(
-        'Cette information est obligatoire',
-      ),
-      precisions: z
-        .string()
-        .max(8000, 'La précision ne peut contenir que 8000 caractères maximum')
-        .optional(),
+      evaluationSatisfactionGenerale: z.number('Cette information est obligatoire'),
+      precisions: z.string().max(8000, 'La précision ne peut contenir que 8000 caractères maximum').optional(),
     });
   }
   valide(jeu: JeuEnEdition): ErreursValidationJeuEnEdition {

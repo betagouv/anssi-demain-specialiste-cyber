@@ -14,18 +14,13 @@ export class ConstructeurLigneGristFamillesDeMetier extends ConstructeurLigneGri
 export class ConstructeurRéponseFamillesDeMétierGrist {
   private _lignes: LigneFamilleDeMétier[] = [];
 
-  ajouteUneLigne(
-    ligne: LigneFamilleDeMétier,
-  ): ConstructeurRéponseFamillesDeMétierGrist;
-  ajouteUneLigne(
-    ligne: ConstructeurLigneGrist<LigneFamilleDeMétier>,
-  ): ConstructeurRéponseFamillesDeMétierGrist;
+  ajouteUneLigne(ligne: LigneFamilleDeMétier): ConstructeurRéponseFamillesDeMétierGrist;
+  ajouteUneLigne(ligne: ConstructeurLigneGrist<LigneFamilleDeMétier>): ConstructeurRéponseFamillesDeMétierGrist;
 
   ajouteUneLigne(
     ligne: LigneFamilleDeMétier | ConstructeurLigneGrist<LigneFamilleDeMétier>,
   ): ConstructeurRéponseFamillesDeMétierGrist {
-    const ligneConstruite =
-      ligne instanceof ConstructeurLigneGrist ? ligne.construis() : ligne;
+    const ligneConstruite = ligne instanceof ConstructeurLigneGrist ? ligne.construis() : ligne;
     this._lignes.push(ligneConstruite);
     return this;
   }

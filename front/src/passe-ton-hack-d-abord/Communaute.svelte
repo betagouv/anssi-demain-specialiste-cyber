@@ -4,16 +4,9 @@
 <div class="communaute">
   <dsfr-container>
     <div class="encart">
-      <img
-        class="icone"
-        src="/assets/images/passe-ton-hack-d-abord/tchat.svg"
-        alt=""
-      />
+      <img class="icone" src="/assets/images/passe-ton-hack-d-abord/tchat.svg" alt="" />
       <p class="texte-standard-md">
-        <strong>
-          Rejoignez la communauté enseignante “Passe ton Hack d’Abord” sur
-          Magistère.
-        </strong>
+        <strong> Rejoignez la communauté enseignante “Passe ton Hack d’Abord” sur Magistère. </strong>
         <a
           class="lien"
           href="https://magistere.apps.education.fr/?wantsurl=aHR0cHM6Ly9wYXJ0YWdlMDIubWFnaXN0ZXJlLmFwcHMuZWR1Y2F0aW9uLmZyL2NvdXJzZS92aWV3LnBocD9pZD0zMDA%3D"

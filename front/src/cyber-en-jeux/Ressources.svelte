@@ -29,8 +29,7 @@
       detail: 'PDF - 542 ko',
     },
     {
-      titre:
-        'Télécharger la présentation : Acculturation aux enjeux de cybersécurité',
+      titre: 'Télécharger la présentation : Acculturation aux enjeux de cybersécurité',
       image: '/assets/images/cej/livret-acculturation.svg',
       lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/CyberEnjeux_presentation_eleves.pptx',
       detail: 'PPTX - 13,6 Mo',
@@ -68,8 +67,7 @@
       lien: 'https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/Video_accompagner_les_eleves.mp4',
     },
     {
-      titre:
-        "Retour d'expérience CyberEnjeux au lycée H. Matisse de Cugnaux (31)",
+      titre: "Retour d'expérience CyberEnjeux au lycée H. Matisse de Cugnaux (31)",
       duree: 'Durée : 2 min',
       detail: 'tube-numerique-educatif.apps.education.fr',
       image: '/assets/images/retour_experience.avif',
@@ -87,8 +85,8 @@
       <hgroup>
         <h2>Ressources enseignants</h2>
         <p class="fr-text--lg description">
-          Des ressources pour découvrir CyberEnJeux et guider vos élèves pas à
-          pas dans la création de leurs propres jeux.
+          Des ressources pour découvrir CyberEnJeux et guider vos élèves pas à pas dans la création de leurs propres
+          jeux.
         </p>
       </hgroup>
       <div class="conteneur">
@@ -114,9 +112,8 @@
       <hgroup>
         <h2>Ressources élèves</h2>
         <p class="fr-text--lg description">
-          Un guide pour aider les élèves à créer leur jeu en autonomie,
-          accompagné de 13 cartes Objectifs Cyber pour orienter le choix des
-          thèmes.
+          Un guide pour aider les élèves à créer leur jeu en autonomie, accompagné de 13 cartes Objectifs Cyber pour
+          orienter le choix des thèmes.
         </p>
       </hgroup>
       <div class="conteneur">
@@ -155,13 +152,7 @@
           <div>
             <video controls crossorigin="anonymous" poster={ressource.image}>
               <source src={ressource.lien} type="video/mp4" />
-              <track
-                default
-                kind="captions"
-                srclang="fr"
-                label="Français"
-                src={lienSousTitres(ressource.lien)}
-              />
+              <track default kind="captions" srclang="fr" label="Français" src={lienSousTitres(ressource.lien)} />
             </video>
             <h3 class="fr-h6">{ressource.titre}</h3>
           </div>
@@ -172,9 +163,8 @@
     <div class="ressources-3d">
       <h2>Ressources 3D</h2>
       <p class="fr-text--lg description">
-        Si votre établissement dispose d’une imprimante 3D vous pouvez
-        télécharger et imprimer des accessoires en 3D gratuitement (dés, pions,
-        jetons…) pour animer vos séquences CyberEnJeux. Rendez-vous sur :
+        Si votre établissement dispose d’une imprimante 3D vous pouvez télécharger et imprimer des accessoires en 3D
+        gratuitement (dés, pions, jetons…) pour animer vos séquences CyberEnJeux. Rendez-vous sur :
         https://www.turbosquid.com
       </p>
     </div>

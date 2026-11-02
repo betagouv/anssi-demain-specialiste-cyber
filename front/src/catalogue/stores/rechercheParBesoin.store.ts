@@ -7,6 +7,5 @@ export const rechercheParBesoin = {
   subscribe: besoin.subscribe,
   set: besoin.set,
   reinitialise: () => besoin.set(''),
-  ok: (ressourceCyber: RessourceCyber) =>
-    get(besoin) === '' || ressourceCyber.besoins.includes(get(besoin)),
+  ok: (ressourceCyber: RessourceCyber) => get(besoin) === '' || ressourceCyber.besoins.includes(get(besoin)),
 };

@@ -38,13 +38,9 @@ export class AdaptateurDeTeleversementCellar implements AdaptateurTeleversement 
       return !!fichier && !Array.isArray(fichier) && !!fichier[clef];
     };
 
-    const lesPhotos = estUnFichierPhoto(requete.files, 'photos')
-      ? requete.files['photos']
-      : [];
+    const lesPhotos = estUnFichierPhoto(requete.files, 'photos') ? requete.files['photos'] : [];
 
-    const couverture = estUnFichierPhoto(requete.files, 'couverture')
-      ? requete.files['couverture'][0]
-      : undefined;
+    const couverture = estUnFichierPhoto(requete.files, 'couverture') ? requete.files['couverture'][0] : undefined;
 
     if (!couverture) {
       throw new Error('La photo de couverture n’est pas fournie.');
@@ -86,10 +82,7 @@ export class AdaptateurDeTeleversementCellar implements AdaptateurTeleversement 
           }),
         );
       } catch (error: unknown | Error) {
-        this.consignateurErreur.erreur(
-          error as Error,
-          `Impossible de téléverser la photo ${photo.nom}.`,
-        );
+        this.consignateurErreur.erreur(error as Error, `Impossible de téléverser la photo ${photo.nom}.`);
       }
     };
 
@@ -99,13 +92,8 @@ export class AdaptateurDeTeleversementCellar implements AdaptateurTeleversement 
     }
   }
   recupereTypeImage(buffer: Buffer) {
-    const valideLaSignatureDuFichier = (
-      tableauDOctets: Uint8Array,
-      signaturesValides: Array<number[]>,
-    ): boolean => {
-      return signaturesValides.some((signature) =>
-        signature.every((octet, index) => octet === tableauDOctets[index]),
-      );
+    const valideLaSignatureDuFichier = (tableauDOctets: Uint8Array, signaturesValides: Array<number[]>): boolean => {
+      return signaturesValides.some((signature) => signature.every((octet, index) => octet === tableauDOctets[index]));
     };
 
     if (!buffer) return undefined;

@@ -9,10 +9,7 @@ export const ressourcesOidc = (configurationServeur: ConfigurationServeur) => {
   const router = Router();
 
   router.use('/connexion', ressourceConnexionOIDC(configurationServeur));
-  router.use(
-    '/apres-authentification',
-    ressourceApresAuthentificationOIDC(configurationServeur),
-  );
+  router.use('/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
   router.use('/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
   router.use('/apres-deconnexion', ressourceApresDeconnexionOIDC());
 

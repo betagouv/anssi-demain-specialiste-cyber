@@ -81,21 +81,12 @@
         id="prenom-{index}"
         value={eleve}
         onvaluechanged={(e: CustomEvent) =>
-          ($jeuEnEditionStore.eleves = $jeuEnEditionStore.eleves?.toSpliced(
-            index,
-            1,
-            e.detail,
-          ))}
+          ($jeuEnEditionStore.eleves = $jeuEnEditionStore.eleves?.toSpliced(index, 1, e.detail))}
       ></dsfr-input>
     {/each}
   </div>
   <div class="actions">
-    <dsfr-button
-      label="Ajouter un élève"
-      kind="secondary"
-      hasIcon="true"
-      icon="user-add-line"
-      use:clic={ajouteEleve}
+    <dsfr-button label="Ajouter un élève" kind="secondary" hasIcon="true" icon="user-add-line" use:clic={ajouteEleve}
     ></dsfr-button>
   </div>
 </fieldset>
@@ -105,8 +96,7 @@
   id="discipline"
   label="Discipline"
   value={$jeuEnEditionStore.discipline ?? ''}
-  onvaluechanged={(e: CustomEvent) =>
-    ($jeuEnEditionStore.discipline = e.detail)}
+  onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.discipline = e.detail)}
   options={optionsDisciplines}
   placeholder="Sélectionner une option"
   placeholderDisabled={true}

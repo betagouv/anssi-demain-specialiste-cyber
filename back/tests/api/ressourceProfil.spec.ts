@@ -28,9 +28,7 @@ describe('La ressource Profil', () => {
         email: 'jeanne.dupont@mail.com',
       });
 
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       expect(reponse.status).toEqual(200);
     });
@@ -40,9 +38,7 @@ describe('La ressource Profil', () => {
         email: 'jeanne.dupont@mail.com',
       });
 
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       expect(reponse.body.email).toEqual('jeanne.dupont@mail.com');
     });
@@ -65,9 +61,7 @@ describe('La ressource Profil', () => {
           },
         },
       });
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookieSession]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
       expect(headerCookie).toBeDefined();

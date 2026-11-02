@@ -7,39 +7,31 @@
       <div class="intro">
         <h2>Une approche ludique et immersive</h2>
         <p class="fr-text--lg">
-          Vos élèves intègrent une équipe de réponse à un incident cyber pour
-          résoudre un conflit informatique et géopolitique
+          Vos élèves intègrent une équipe de réponse à un incident cyber pour résoudre un conflit informatique et
+          géopolitique
         </p>
       </div>
 
       <p class="texte-standard-md">
-        Organisé par le Commandement de la Cyberdéfense <abbr>(COMCYBER)</abbr> et
-        le Ministère de l’Éducation, ce challenge est ouvert à tous les élèves scolarisés
-        dans des lycées français en équipes avec un objectif de mixité&nbsp;! Le challenge
-        distingue les équipes selon les profils de filières, générales et technologiques,
-        professionnelles et du supérieur en lycée (prépa, certificat de spécialisation
-        cyber et BTS CIEL et BTS SIO en lycée).
+        Organisé par le Commandement de la Cyberdéfense <abbr>(COMCYBER)</abbr> et le Ministère de l’Éducation, ce challenge
+        est ouvert à tous les élèves scolarisés dans des lycées français en équipes avec un objectif de mixité&nbsp;! Le challenge
+        distingue les équipes selon les profils de filières, générales et technologiques, professionnelles et du supérieur
+        en lycée (prépa, certificat de spécialisation cyber et BTS CIEL et BTS SIO en lycée).
       </p>
 
       <dsfr-highlight text="ignoré">
         <div slot="text" class="exergue">
-          <p class="exergue-titre">
-            Déjà +10&nbsp;000 élèves répartis dans +2&nbsp;000 équipes&nbsp;!
-          </p>
-          <p class="texte-standard-md">
-            Le challenge est organisé chaque année en janvier.
-          </p>
+          <p class="exergue-titre">Déjà +10&nbsp;000 élèves répartis dans +2&nbsp;000 équipes&nbsp;!</p>
+          <p class="texte-standard-md">Le challenge est organisé chaque année en janvier.</p>
           <p class="texte-standard-md exergue-derniere">
-            La meilleure équipe de lycée générale et technologique, celle de bac
-            professionnel, la meilleure équipe du supérieur et la première
-            équipe la plus mixte sont récompensées.
+            La meilleure équipe de lycée générale et technologique, celle de bac professionnel, la meilleure équipe du
+            supérieur et la première équipe la plus mixte sont récompensées.
           </p>
         </div>
       </dsfr-highlight>
 
       <p class="texte-standard-md accroche">
-        Vous aussi, faites participer vos élèves à “Passe Ton Hack
-        d’Abord”&nbsp;!
+        Vous aussi, faites participer vos élèves à “Passe Ton Hack d’Abord”&nbsp;!
       </p>
 
       <dsfr-button

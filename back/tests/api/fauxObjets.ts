@@ -1,25 +1,16 @@
 import { join } from 'path';
 import { NextFunction, Response } from 'express';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import {
-  ConfigurationServeur,
-  ConfigurationServeurSansMiddleware,
-} from '../../src/api/configurationServeur';
+import { ConfigurationServeur, ConfigurationServeurSansMiddleware } from '../../src/api/configurationServeur';
 import { fabriqueMiddleware, RequeteNonTypee } from '../../src/api/middleware';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
-import {
-  AdaptateurAntivirus,
-  ResultatAnalyseFichier,
-} from '../../src/infra/adaptateurAntivirus';
+import { AdaptateurAntivirus, ResultatAnalyseFichier } from '../../src/infra/adaptateurAntivirus';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { adaptateurJournalMemoire } from '../../src/infra/adaptateurJournal';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import {
-  AdaptateurDeTeleversementMemoire,
-  AdaptateurTeleversement,
-} from '../../src/infra/adaptateurTeleversement';
+import { AdaptateurDeTeleversementMemoire, AdaptateurTeleversement } from '../../src/infra/adaptateurTeleversement';
 import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { EntrepotJeuxMemoire } from '../infra/entrepotJeuxMemoire';
@@ -57,12 +48,8 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
   hache: (valeur: string): string => `${valeur}-hache`,
-  hacheBCrypt: async (valeur: string): Promise<string> =>
-    `${valeur}-hacheBCrypt`,
-  compareBCrypt: async (
-    _valeurEnClair: string,
-    _empreinte: string,
-  ): Promise<boolean> => true,
+  hacheBCrypt: async (valeur: string): Promise<string> => `${valeur}-hacheBCrypt`,
+  compareBCrypt: async (_valeurEnClair: string, _empreinte: string): Promise<boolean> => true,
 };
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -137,18 +124,16 @@ export type ConfigurationServeurDeTest = ConfigurationServeur & {
 };
 
 const fauxMoteurDeRendu: MoteurDeRendu = {
-  rends: (reponse, _vue, _options) =>
-    reponse.sendStatus(reponse.statusCode || 200),
+  rends: (reponse, _vue, _options) => reponse.sendStatus(reponse.statusCode || 200),
 };
 
-export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
-  {
-    rechercheOrganisationParSiret: async (siret: string) => ({
-      nom: 'TEST',
-      departement: '86',
-      siret,
-    }),
-  };
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+  rechercheOrganisationParSiret: async (siret: string) => ({
+    nom: 'TEST',
+    departement: '86',
+    siret,
+  }),
+};
 
 export const fauxAdaptateurTeleversement = (): AdaptateurTeleversement => {
   return new (class extends AdaptateurDeTeleversementMemoire {
@@ -166,43 +151,40 @@ const fauxAdaptateurAntivirus = (): AdaptateurAntivirus => {
   };
 };
 
-export const configurationServeurSansMiddleware =
-  (): ConfigurationServeurSansMiddleware => {
-    const entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
-    return {
-      serveurLab: {
-        reseau: {
-          trustProxy: '0',
-          maxRequetesParMinute: 1000,
-          ipAutorisees: false,
-        },
+export const configurationServeurSansMiddleware = (): ConfigurationServeurSansMiddleware => {
+  const entrepotRessourcesCyber = new EntrepotRessourcesCyberMemoire();
+  return {
+    serveurLab: {
+      reseau: {
+        trustProxy: '0',
+        maxRequetesParMinute: 1000,
+        ipAutorisees: false,
       },
-      entrepotRessourcesCyber,
-      entrepotMetier: new EntrepotMetiersMemoire(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurHachage: fauxAdaptateurHachage,
-      adaptateurJWT: fauxAdaptateurJWT,
-      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-      recupereCheminsVersFichiersStatiques: () => [
-        join(__dirname, '../pagesDeTest'),
-      ],
-      moteurDeRendu: fauxMoteurDeRendu,
-      busEvenements: fabriqueBusPourLesTests(),
-      entrepotJeux: new EntrepotJeuxMemoire(),
-      adaptateurEnvironnement: fauxAdaptateurEnvironnement,
-      adaptateurJournal: adaptateurJournalMemoire,
-      adaptateurTeleversement: fauxAdaptateurTeleversement(),
-      adaptateurAntivirus: fauxAdaptateurAntivirus(),
-      entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
-      entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
-      entrepôtSélectionsEntrainement: new EntrepotSelectionsMemoire(),
-      entrepôtSélectionsMesure: new EntrepotSelectionsMemoire(),
-      adaptateurGestionErreur: fauxAdaptateurGestionErreur,
-      entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierMémoire(),
-      entrepôtFonctions: new EntrepôtFonctionsMémoire(),
-    };
+    },
+    entrepotRessourcesCyber,
+    entrepotMetier: new EntrepotMetiersMemoire(),
+    adaptateurOIDC: fauxAdaptateurOIDC,
+    adaptateurHachage: fauxAdaptateurHachage,
+    adaptateurJWT: fauxAdaptateurJWT,
+    adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+    entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+    recupereCheminsVersFichiersStatiques: () => [join(__dirname, '../pagesDeTest')],
+    moteurDeRendu: fauxMoteurDeRendu,
+    busEvenements: fabriqueBusPourLesTests(),
+    entrepotJeux: new EntrepotJeuxMemoire(),
+    adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+    adaptateurJournal: adaptateurJournalMemoire,
+    adaptateurTeleversement: fauxAdaptateurTeleversement(),
+    adaptateurAntivirus: fauxAdaptateurAntivirus(),
+    entrepotSelectionsEnseignants: new EntrepotSelectionsMemoire(),
+    entrepotSelectionsEleves: new EntrepotSelectionsMemoire(),
+    entrepôtSélectionsEntrainement: new EntrepotSelectionsMemoire(),
+    entrepôtSélectionsMesure: new EntrepotSelectionsMemoire(),
+    adaptateurGestionErreur: fauxAdaptateurGestionErreur,
+    entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierMémoire(),
+    entrepôtFonctions: new EntrepôtFonctionsMémoire(),
   };
+};
 
 const ajouteUnNonceNonAleatoireALaReponse = async (
   _requete: RequeteNonTypee,
@@ -213,11 +195,7 @@ const ajouteUnNonceNonAleatoireALaReponse = async (
   suite();
 };
 
-export const poursuisSansRedirection = async (
-  _requete: RequeteNonTypee,
-  _reponse: Response,
-  suite: NextFunction,
-) => {
+export const poursuisSansRedirection = async (_requete: RequeteNonTypee, _reponse: Response, suite: NextFunction) => {
   suite();
 };
 

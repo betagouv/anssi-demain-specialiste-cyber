@@ -17,12 +17,10 @@ describe('La ressource des jeux', () => {
   let entrepotJeux: EntrepotJeux;
   let middleware: Middleware;
 
-  const ajouteUtilisateurARequeteMock = vi
-    .fn()
-    .mockImplementation((req, _res, suite) => {
-      req.utilisateur = jeanneDupont;
-      suite();
-    });
+  const ajouteUtilisateurARequeteMock = vi.fn().mockImplementation((req, _res, suite) => {
+    req.utilisateur = jeanneDupont;
+    suite();
+  });
 
   beforeEach(async () => {
     entrepotJeux = new EntrepotJeuxMemoire();
@@ -38,8 +36,7 @@ describe('La ressource des jeux', () => {
   });
 
   describe('sur un GET', () => {
-    const recupereCyberUno = async () =>
-      request(serveur).get('/api/jeux/' + cyberuno.id);
+    const recupereCyberUno = async () => request(serveur).get('/api/jeux/' + cyberuno.id);
 
     it('retourne un 200', async () => {
       const reponse = await recupereCyberUno();
@@ -54,9 +51,7 @@ describe('La ressource des jeux', () => {
     });
 
     it("retourne un 404 lorsque le jeu n'existe pas", async () => {
-      const reponse = await request(serveur).get(
-        '/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b',
-      );
+      const reponse = await request(serveur).get('/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b');
 
       expect(reponse.status).toEqual(404);
     });
@@ -91,12 +86,10 @@ describe('La ressource des jeux', () => {
     });
 
     it("vérifie qu'un jeu n'appartient à l'utilisateur connecté si c'est le cas", async () => {
-      ajouteUtilisateurARequeteMock.mockImplementationOnce(
-        (req, _res, suite) => {
-          req.utilisateur = hectorDurant;
-          suite();
-        },
-      );
+      ajouteUtilisateurARequeteMock.mockImplementationOnce((req, _res, suite) => {
+        req.utilisateur = hectorDurant;
+        suite();
+      });
 
       const reponse = await recupereCyberUno();
 
@@ -107,11 +100,10 @@ describe('La ressource des jeux', () => {
       let modeUtilise: 'souple' | 'strict' | undefined;
       middleware = fabriqueMiddleware(configurationServeurSansMiddleware());
       middleware.redirigeVersUrlBase = poursuisSansRedirection;
-      middleware.ajouteUtilisateurARequete =
-        (_, __, mode?) => async (_, __, suite) => {
-          modeUtilise = mode;
-          suite();
-        };
+      middleware.ajouteUtilisateurARequete = (_, __, mode?) => async (_, __, suite) => {
+        modeUtilise = mode;
+        suite();
+      };
       serveur = creeServeur({
         ...configurationDeTestDuServeur(),
         middleware,
@@ -146,11 +138,9 @@ describe('La ressource des jeux', () => {
     });
 
     it("retourne un 404 lorsque le jeu n'existe pas", async () => {
-      const reponse = await request(serveur)
-        .patch('/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b')
-        .send({
-          estCache: true,
-        });
+      const reponse = await request(serveur).patch('/api/jeux/37e9d5e4-6861-46ae-92c2-1a6c79daba7b').send({
+        estCache: true,
+      });
       expect(reponse.status).toEqual(404);
     });
 
@@ -159,12 +149,7 @@ describe('La ressource des jeux', () => {
         estCache: true,
       });
 
-      const {
-        decrementeReaction: _d,
-        incrementeReaction: _i,
-        enseignant,
-        ...rest
-      } = cyberuno;
+      const { decrementeReaction: _d, incrementeReaction: _i, enseignant, ...rest } = cyberuno;
       expect(reponse.body).toEqual({
         ...rest,
         enseignant: enseignant?.prenom,
@@ -177,12 +162,10 @@ describe('La ressource des jeux', () => {
     });
 
     it("interdit la modification d'un jeu qui ne nous appartient pas", async () => {
-      ajouteUtilisateurARequeteMock.mockImplementationOnce(
-        (req, _res, suite) => {
-          req.utilisateur = hectorDurant;
-          suite();
-        },
-      );
+      ajouteUtilisateurARequeteMock.mockImplementationOnce((req, _res, suite) => {
+        req.utilisateur = hectorDurant;
+        suite();
+      });
       const reponse = await modifieCyberUno({
         estCache: true,
       });
@@ -190,12 +173,10 @@ describe('La ressource des jeux', () => {
     });
 
     it("interdit la modification d'un jeu si l'utilisateur est inconnu", async () => {
-      ajouteUtilisateurARequeteMock.mockImplementationOnce(
-        (req, _res, suite) => {
-          req.utilisateur = undefined;
-          suite();
-        },
-      );
+      ajouteUtilisateurARequeteMock.mockImplementationOnce((req, _res, suite) => {
+        req.utilisateur = undefined;
+        suite();
+      });
       const reponse = await modifieCyberUno({
         estCache: true,
       });
@@ -240,10 +221,7 @@ describe('La ressource des jeux', () => {
       expect(jeuModifie.classe).toBe('cm2');
       expect(jeuModifie.nom).toBe('Nouveau nom du jeu');
       expect(jeuModifie.categorie).toBe('jeu-plateau');
-      expect(jeuModifie.thematiques).toEqual([
-        'cyberharcelement',
-        'gestion-crise-cyber',
-      ]);
+      expect(jeuModifie.thematiques).toEqual(['cyberharcelement', 'gestion-crise-cyber']);
       expect(jeuModifie.description).toBe('Nouvelle description');
       expect(jeuModifie.consentement).toBe(true);
       expect(jeuModifie.temoignages).toEqual([
@@ -261,9 +239,7 @@ describe('La ressource des jeux', () => {
         });
 
         expect(reponse.status).toBe(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le nom de l‘établissement est obligatoire',
-        );
+        expect(reponse.body.erreur).toEqual('Le nom de l‘établissement est obligatoire');
       });
 
       it('vérifie que le nom du jeu est non vide', async () => {
@@ -326,9 +302,7 @@ describe('La ressource des jeux', () => {
         });
 
         expect(reponse.status).toBe(400);
-        expect(reponse.body.erreur).toEqual(
-          'La description ne peut contenir que 8000 caractères maximum',
-        );
+        expect(reponse.body.erreur).toEqual('La description ne peut contenir que 8000 caractères maximum');
       });
 
       it("vérifie que le prénom des témoignages n'est pas vide", async () => {
@@ -337,9 +311,7 @@ describe('La ressource des jeux', () => {
         });
 
         expect(reponse.status).toBe(400);
-        expect(reponse.body.erreur).toEqual(
-          'Le prénom est obligatoire dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Le prénom est obligatoire dans un témoignage');
       });
 
       it('vérifie que les détails des témoignages ne sont pas vides', async () => {
@@ -348,9 +320,7 @@ describe('La ressource des jeux', () => {
         });
 
         expect(reponse.status).toBe(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les détails sont obligatoires dans un témoignage',
-        );
+        expect(reponse.body.erreur).toEqual('Les détails sont obligatoires dans un témoignage');
       });
 
       it('vérifie que les détails des témoignages ne dépassent pas 8000 caractères', async () => {
@@ -359,9 +329,7 @@ describe('La ressource des jeux', () => {
         });
 
         expect(reponse.status).toBe(400);
-        expect(reponse.body.erreur).toEqual(
-          'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
-        );
+        expect(reponse.body.erreur).toEqual('Les détails d‘un témoignage ne peuvent excéder 8000 caractères');
       });
     });
   });

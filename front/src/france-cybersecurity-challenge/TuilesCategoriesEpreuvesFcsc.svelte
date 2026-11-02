@@ -18,18 +18,8 @@
 
 <div class="categories-epreuves">
   {#each categories as { titre, pictogramme } (titre)}
-    <dsfr-tile
-      title={titre}
-      size="sm"
-      actionMarkup="false"
-      noLink={true}
-      enlarge
-    >
-      <img
-        src={`/assets/images/fcsc/${pictogramme}.svg`}
-        slot="pictogram"
-        alt="Cadenas"
-      />
+    <dsfr-tile title={titre} size="sm" actionMarkup="false" noLink={true} enlarge>
+      <img src={`/assets/images/fcsc/${pictogramme}.svg`} slot="pictogram" alt="Cadenas" />
     </dsfr-tile>
   {/each}
 </div>

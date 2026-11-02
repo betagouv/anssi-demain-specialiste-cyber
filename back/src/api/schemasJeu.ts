@@ -5,8 +5,7 @@ import { disciplines } from '../metier/referentiels/disciplines';
 import { sequences } from '../metier/referentiels/sequence';
 import { thematiquesDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 
-const chaineNonVide = (message: string) =>
-  z.string(message).trim().min(1, message);
+const chaineNonVide = (message: string) => z.string(message).trim().min(1, message);
 
 const verifieNoteEvaluation = (message: string) =>
   z
@@ -19,9 +18,7 @@ const verifieNoteEvaluation = (message: string) =>
     });
 
 const nom = chaineNonVide('Le nom est obligatoire');
-const nomEtablissement = chaineNonVide(
-  'Le nom de l‘établissement est obligatoire',
-);
+const nomEtablissement = chaineNonVide('Le nom de l‘établissement est obligatoire');
 const discipline = z.enum(disciplines, {
   error: 'La discipline est invalide',
 });
@@ -43,16 +40,12 @@ const description = chaineNonVide('La description est obligatoire').max(
   8000,
   'La description ne peut contenir que 8000 caractères maximum',
 );
-const eleves = z
-  .array(chaineNonVide('Les prénoms fournis sont invalides'))
-  .nonempty('Au moins un élève est requis');
+const eleves = z.array(chaineNonVide('Les prénoms fournis sont invalides')).nonempty('Au moins un élève est requis');
 const temoignages = z
   .array(
     z.strictObject({
       prenom: chaineNonVide('Le prénom est obligatoire dans un témoignage'),
-      details: chaineNonVide(
-        'Les détails sont obligatoires dans un témoignage',
-      ).max(
+      details: chaineNonVide('Les détails sont obligatoires dans un témoignage').max(
         8000,
         'Les détails d‘un témoignage ne peuvent excéder 8000 caractères',
       ),
@@ -80,17 +73,11 @@ export const schemaCreationJeu = z.strictObject({
   evaluationDecouverte: verifieNoteEvaluation(
     'La note d‘évaluation pour la découverte doit être comprise entre 1 et 5',
   ),
-  evaluationInteret: verifieNoteEvaluation(
-    'La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5',
-  ),
+  evaluationInteret: verifieNoteEvaluation('La note d‘évaluation pour l‘intérêt doit être comprise entre 1 et 5'),
   evaluationSatisfactionGenerale: verifieNoteEvaluation(
     'La note d‘évaluation pour la satisfaction générale doit être comprise entre 1 et 5',
   ),
-  precisions: z
-    .string()
-    .trim()
-    .nonempty('Les précisions ne peuvent pas être vides')
-    .optional(),
+  precisions: z.string().trim().nonempty('Les précisions ne peuvent pas être vides').optional(),
 });
 
 export const schemaModificationJeu = z

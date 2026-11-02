@@ -34,17 +34,8 @@
 </script>
 
 <div class="filtres">
-  <RechercheTextuelle
-    bind:recherche={$rechercheTextuelle}
-    miseEnAvant="Rechercher une ressource"
-  />
-  <dsfr-button
-    class="affiche-filtres"
-    label="Voir les filtres"
-    kind="secondary"
-    centered
-    use:clic={afficheLesFiltres}
-  >
+  <RechercheTextuelle bind:recherche={$rechercheTextuelle} miseEnAvant="Rechercher une ressource" />
+  <dsfr-button class="affiche-filtres" label="Voir les filtres" kind="secondary" centered use:clic={afficheLesFiltres}>
   </dsfr-button>
 
   <div class="filtres-conteneur" class:ouvert={menuContextuelEstOuvert}>
@@ -86,11 +77,7 @@
       <FiltreNiveau />
     </div>
     <div class="applique-filtres" class:ouvert={menuContextuelEstOuvert}>
-      <dsfr-button
-        label="Afficher les ressources"
-        kind="primary"
-        use:clic={ferme}
-      ></dsfr-button>
+      <dsfr-button label="Afficher les ressources" kind="primary" use:clic={ferme}></dsfr-button>
     </div>
   </div>
 </div>

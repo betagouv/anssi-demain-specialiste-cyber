@@ -6,10 +6,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 import { schemaModificationJeu } from './schemasJeu';
 
-type ReponseJeu = Omit<
-  Jeu,
-  'enseignant' | 'incrementeReaction' | 'decrementeReaction'
-> & {
+type ReponseJeu = Omit<Jeu, 'enseignant' | 'incrementeReaction' | 'decrementeReaction'> & {
   enseignant: string;
   estProprietaire: boolean;
 };
@@ -35,16 +32,10 @@ export const ressourceJeu = ({
   routeur.get(
     '/:id',
     validateurJeuId,
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage,
-      'souple',
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage, 'souple'),
     filetRouteAsynchrone(async (requete, reponse) => {
       const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
-      const jeu = await entrepotJeux.parId(
-        (requete.params as Record<string, string>).id,
-      );
+      const jeu = await entrepotJeux.parId((requete.params as Record<string, string>).id);
       if (!jeu) {
         return reponse.sendStatus(404);
       }
@@ -56,15 +47,10 @@ export const ressourceJeu = ({
     '/:id',
     validateurJeuId,
     middleware.valideLaCoherenceDuCorps(schemaModificationJeu),
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage,
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete, reponse) => {
       const { utilisateur }: { utilisateur: Utilisateur | undefined } = requete;
-      const jeu = await entrepotJeux.parId(
-        (requete.params as Record<string, string>).id,
-      );
+      const jeu = await entrepotJeux.parId((requete.params as Record<string, string>).id);
       if (!jeu) {
         return reponse.sendStatus(404);
       }
@@ -73,8 +59,7 @@ export const ressourceJeu = ({
         return reponse.sendStatus(403);
       }
 
-      jeu.nomEtablissement =
-        requete.body.nomEtablissement ?? jeu.nomEtablissement;
+      jeu.nomEtablissement = requete.body.nomEtablissement ?? jeu.nomEtablissement;
       jeu.sequence = requete.body.sequence ?? jeu.sequence;
       jeu.eleves = requete.body.eleves ?? jeu.eleves;
       jeu.discipline = requete.body.discipline ?? jeu.discipline;
@@ -95,13 +80,8 @@ export const ressourceJeu = ({
   return routeur;
 };
 
-const enReponseJeu = (
-  jeu: Jeu,
-  utilisateur: Utilisateur | undefined,
-): ReponseJeu => ({
+const enReponseJeu = (jeu: Jeu, utilisateur: Utilisateur | undefined): ReponseJeu => ({
   ...jeu,
   enseignant: jeu.enseignant?.prenom ?? '',
-  estProprietaire: utilisateur
-    ? utilisateur.email === jeu.enseignant?.email
-    : false,
+  estProprietaire: utilisateur ? utilisateur.email === jeu.enseignant?.email : false,
 });

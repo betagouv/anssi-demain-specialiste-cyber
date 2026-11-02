@@ -7,8 +7,7 @@ import { configurationDeTestDuServeur } from './api/fauxObjets';
 describe('Le serveur de pages statiques', () => {
   const serveur = creeServeur(configurationDeTestDuServeur());
 
-  const appelleUnePageStatique = (serveur: Express) =>
-    request(serveur).get('/');
+  const appelleUnePageStatique = (serveur: Express) => request(serveur).get('/');
 
   it('répond 200', async () => {
     const reponse = await appelleUnePageStatique(serveur);

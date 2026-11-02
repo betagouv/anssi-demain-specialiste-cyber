@@ -3,10 +3,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/dsc';
 import { AgentConnectInfo, enObjet } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurOIDC,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {

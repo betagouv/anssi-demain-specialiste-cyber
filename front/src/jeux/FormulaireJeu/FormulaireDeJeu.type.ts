@@ -1,9 +1,3 @@
-export type EtapeDeposeJeu =
-  | 'informations-generales'
-  | 'presentation'
-  | 'photos'
-  | 'temoignages'
-  | 'evaluation';
+export type EtapeDeposeJeu = 'informations-generales' | 'presentation' | 'photos' | 'temoignages' | 'evaluation';
 
-export type EtapeModificationJeu =
-  'informations-generales' | 'presentation' | 'temoignages';
+export type EtapeModificationJeu = 'informations-generales' | 'presentation' | 'temoignages';

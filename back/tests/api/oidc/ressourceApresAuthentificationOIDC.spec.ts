@@ -8,11 +8,7 @@ import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../../infra/entrepotUtilisateurMemoire';
 import { decodeSessionDuCookie } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT, fauxAdaptateurOIDC } from '../fauxObjets';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -35,9 +31,7 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     const requeteGet = () =>
-      request(serveur)
-        .get('/oidc/apres-authentification')
-        .set('Cookie', ['AgentConnectInfo={}']);
+      request(serveur).get('/oidc/apres-authentification').set('Cookie', ['AgentConnectInfo={}']);
 
     describe("si l'utilisateur est connu", () => {
       beforeEach(async () => {
@@ -69,10 +63,7 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC.recupereJeton = async () => {
           return { idToken: 'xx', accessToken: 'y', sujet: 'sujet' };
         };
-        adaptateurOIDC.recupereInformationsUtilisateur = async (
-          accessToken,
-          sujet,
-        ) => {
+        adaptateurOIDC.recupereInformationsUtilisateur = async (accessToken, sujet) => {
           if (accessToken === 'y' && sujet === 'sujet') {
             return {
               prenom: 'Jeanne',
@@ -81,9 +72,7 @@ describe('La ressource apres authentification OIDC', () => {
               siret: '1234',
             };
           }
-          throw new Error(
-            'Aurait dû être appelé avec le bon access token et le bon sujet',
-          );
+          throw new Error('Aurait dû être appelé avec le bon access token et le bon sujet');
         };
 
         const reponse = await requeteGet();
@@ -97,8 +86,7 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un token JWT à la session', async () => {
-        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) =>
-          `tokenJWT-${donnees.email}`;
+        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) => `tokenJWT-${donnees.email}`;
 
         const reponse = await requeteGet();
 
@@ -124,9 +112,7 @@ describe('La ressource apres authentification OIDC', () => {
       it('sert la page apres-authentification', async () => {
         const reponse = await requeteGet();
 
-        expect(reponse.headers['content-type']).toEqual(
-          'text/html; charset=utf-8',
-        );
+        expect(reponse.headers['content-type']).toEqual('text/html; charset=utf-8');
         expect(reponse.text).toMatchSnapshot();
       });
     });
@@ -169,15 +155,12 @@ describe('La ressource apres authentification OIDC', () => {
           email: 'jeanne.dupont@mail.com',
           siret: '1234',
         });
-        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) =>
-          `tokenJWT-${donnees.email}`;
+        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) => `tokenJWT-${donnees.email}`;
 
         const reponse = await requeteGet();
 
         expect(reponse.status).toBe(302);
-        expect(reponse.headers.location).toBe(
-          '/creation-compte?token=tokenJWT-jeanne.dupont@mail.com',
-        );
+        expect(reponse.headers.location).toBe('/creation-compte?token=tokenJWT-jeanne.dupont@mail.com');
       });
     });
   });

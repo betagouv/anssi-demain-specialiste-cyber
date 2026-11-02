@@ -75,9 +75,7 @@ describe('La ressource création de compte', () => {
       ...configurationDeTestDuServeur(),
       adaptateurJWT,
     });
-    const reponse = await request(serveur).get(
-      '/creation-compte?token=TOKEN-jeanne',
-    );
+    const reponse = await request(serveur).get('/creation-compte?token=TOKEN-jeanne');
 
     expect(reponse.status).toBe(400);
   });

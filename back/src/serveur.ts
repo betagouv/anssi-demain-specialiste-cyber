@@ -1,9 +1,6 @@
 import { configurationServeurLabEnvironnement } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT';
-import {
-  ConfigurationServeur,
-  ConfigurationServeurSansMiddleware,
-} from './api/configurationServeur';
+import { ConfigurationServeur, ConfigurationServeurSansMiddleware } from './api/configurationServeur';
 import { creeServeur } from './api/dsc';
 import { fabriqueMiddleware } from './api/middleware';
 import { moteurDeRenduExpress } from './api/moteurDeRendu';
@@ -47,12 +44,11 @@ cableTousLesAbonnes({
   expediteurEmail: fabriqueExpediteurEmail({ adaptateurEnvironnement }),
 });
 
-const serviceCoherenceSecretsHachage =
-  fabriqueServiceVerificationCoherenceSecretsHachage({
-    adaptateurEnvironnement,
-    entrepotSecretHachage,
-    adaptateurHachage,
-  });
+const serviceCoherenceSecretsHachage = fabriqueServiceVerificationCoherenceSecretsHachage({
+  adaptateurEnvironnement,
+  entrepotSecretHachage,
+  adaptateurHachage,
+});
 
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
@@ -77,60 +73,51 @@ serviceCoherenceSecretsHachage
     const entrepotMetier = new EntrepotMetiersGrist();
     const entrepôtFonctions = new EntrepôtFonctionsGrist();
 
-    const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
-      {
+    const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware = {
+      adaptateurEnvironnement,
+      adaptateurGestionErreur,
+      adaptateurOIDC,
+      serveurLab: configurationServeurLabEnvironnement(),
+      entrepotMetier,
+      entrepotRessourcesCyber,
+      adaptateurJWT,
+      adaptateurHachage,
+      adaptateurRechercheEntreprise: new AdaptateurRechercheEntrepriseApiGouv(adaptateurGestionErreur),
+      entrepotUtilisateur,
+      recupereCheminsVersFichiersStatiques: recupereCheminVersFichiersStatiquesParDefaut,
+      moteurDeRendu: moteurDeRenduExpress(),
+      entrepotJeux: new EntrepotJeuxPostgres({
         adaptateurEnvironnement,
-        adaptateurGestionErreur,
-        adaptateurOIDC,
-        serveurLab: configurationServeurLabEnvironnement(),
+        adaptateurHachage,
+        entrepotUtilisateur,
+      }),
+      busEvenements,
+      adaptateurJournal: fabriqueAdaptateurJournal(),
+      adaptateurTeleversement: fabriqueAdaptateurTeleversement(adaptateurGestionErreur),
+      adaptateurAntivirus: new AdaptateurJCOP(adaptateurGestionErreur, adaptateurEnvironnement),
+      entrepotSelectionsEnseignants: new EntrepotSelectionsGrist(
+        entrepotRessourcesCyber,
+        adaptateurEnvironnement.grist().selectionsEnseignants(),
+      ),
+      entrepotSelectionsEleves: new EntrepotSelectionsGrist(
+        entrepotRessourcesCyber,
+        adaptateurEnvironnement.grist().selectionsEleves(),
+      ),
+      entrepôtSélectionsEntrainement: new EntrepotSelectionsGrist(
+        entrepotRessourcesCyber,
+        adaptateurEnvironnement.grist().selectionsEntrainement(),
+      ),
+      entrepôtSélectionsMesure: new EntrepotSelectionsGrist(
+        entrepotRessourcesCyber,
+        adaptateurEnvironnement.grist().selectionsMesure(),
+      ),
+      entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(
         entrepotMetier,
         entrepotRessourcesCyber,
-        adaptateurJWT,
-        adaptateurHachage,
-        adaptateurRechercheEntreprise: new AdaptateurRechercheEntrepriseApiGouv(
-          adaptateurGestionErreur,
-        ),
-        entrepotUtilisateur,
-        recupereCheminsVersFichiersStatiques:
-          recupereCheminVersFichiersStatiquesParDefaut,
-        moteurDeRendu: moteurDeRenduExpress(),
-        entrepotJeux: new EntrepotJeuxPostgres({
-          adaptateurEnvironnement,
-          adaptateurHachage,
-          entrepotUtilisateur,
-        }),
-        busEvenements,
-        adaptateurJournal: fabriqueAdaptateurJournal(),
-        adaptateurTeleversement: fabriqueAdaptateurTeleversement(
-          adaptateurGestionErreur,
-        ),
-        adaptateurAntivirus: new AdaptateurJCOP(
-          adaptateurGestionErreur,
-          adaptateurEnvironnement,
-        ),
-        entrepotSelectionsEnseignants: new EntrepotSelectionsGrist(
-          entrepotRessourcesCyber,
-          adaptateurEnvironnement.grist().selectionsEnseignants(),
-        ),
-        entrepotSelectionsEleves: new EntrepotSelectionsGrist(
-          entrepotRessourcesCyber,
-          adaptateurEnvironnement.grist().selectionsEleves(),
-        ),
-        entrepôtSélectionsEntrainement: new EntrepotSelectionsGrist(
-          entrepotRessourcesCyber,
-          adaptateurEnvironnement.grist().selectionsEntrainement(),
-        ),
-        entrepôtSélectionsMesure: new EntrepotSelectionsGrist(
-          entrepotRessourcesCyber,
-          adaptateurEnvironnement.grist().selectionsMesure(),
-        ),
-        entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(
-          entrepotMetier,
-          entrepotRessourcesCyber,
-          entrepôtFonctions,
-        ),
         entrepôtFonctions,
-      };
+      ),
+      entrepôtFonctions,
+    };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,
       middleware: fabriqueMiddleware(configurationServeurSansMiddleware),

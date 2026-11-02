@@ -2,9 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
 
 export interface AdaptateurRechercheEntreprise {
-  rechercheOrganisationParSiret(
-    siret: string,
-  ): Promise<ResultatRechercheEntreprise | undefined>;
+  rechercheOrganisationParSiret(siret: string): Promise<ResultatRechercheEntreprise | undefined>;
 }
 
 export type ResultatRechercheEntreprise = {
@@ -18,15 +16,10 @@ const extraisDepartement = (commune: string | undefined) => {
     return null;
   }
 
-  return commune.startsWith('97') || commune.startsWith('98')
-    ? commune.slice(0, 3)
-    : commune.slice(0, 2);
+  return commune.startsWith('97') || commune.startsWith('98') ? commune.slice(0, 3) : commune.slice(0, 2);
 };
 
-const extraisInfosEtablissement = (
-  terme: string,
-  resultat: ResultatSirene,
-): ResultatRechercheEntreprise => {
+const extraisInfosEtablissement = (terme: string, resultat: ResultatSirene): ResultatRechercheEntreprise => {
   let nom = resultat.nom_complet;
   const { departement, siret } = resultat.siege;
   let departementRetour: string | null = departement;
@@ -34,9 +27,7 @@ const extraisInfosEtablissement = (
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
-  const aUnEtablissement =
-    resultat.matching_etablissements &&
-    resultat.matching_etablissements.length > 0;
+  const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
 
   if (estUneRechercheParSiret && aUnEtablissement) {
     const aUneListeEnseigne =
@@ -45,9 +36,7 @@ const extraisInfosEtablissement = (
     if (aUneListeEnseigne) {
       nom = resultat.matching_etablissements[0].liste_enseignes[0];
     }
-    departementRetour = extraisDepartement(
-      resultat.matching_etablissements[0].commune,
-    );
+    departementRetour = extraisDepartement(resultat.matching_etablissements[0].commune);
     siretRetour = resultat.matching_etablissements[0].siret;
   }
 
@@ -76,23 +65,18 @@ type ResultatSirene = {
 export class AdaptateurRechercheEntrepriseApiGouv implements AdaptateurRechercheEntreprise {
   constructor(private readonly consignateurErreur: AdaptateurGestionErreur) {}
 
-  async rechercheOrganisationParSiret(
-    siret: string,
-  ): Promise<ResultatRechercheEntreprise | undefined> {
+  async rechercheOrganisationParSiret(siret: string): Promise<ResultatRechercheEntreprise | undefined> {
     try {
-      const reponse = await axios.get(
-        'https://recherche-entreprises.api.gouv.fr/search',
-        {
-          params: {
-            q: siret,
-            per_page: 25,
-            page: 1,
-            limite_matching_etablissements: 1,
-            est_entrepreneur_individuel: false,
-            mtm_campaign: 'demain-specialiste-cyber',
-          },
+      const reponse = await axios.get('https://recherche-entreprises.api.gouv.fr/search', {
+        params: {
+          q: siret,
+          per_page: 25,
+          page: 1,
+          limite_matching_etablissements: 1,
+          est_entrepreneur_individuel: false,
+          mtm_campaign: 'demain-specialiste-cyber',
         },
-      );
+      });
 
       const organisations = reponse.data.results
         .filter((r: ResultatSirene) => r.siege.departement !== null)
@@ -101,10 +85,7 @@ export class AdaptateurRechercheEntrepriseApiGouv implements AdaptateurRecherche
       return organisations.length === 0 ? undefined : organisations[0];
     } catch (e: unknown | Error) {
       if (e instanceof AxiosError) {
-        this.consignateurErreur.erreur(
-          e,
-          `Erreur renvoyée par API recherche-entreprise : ${e.cause}`,
-        );
+        this.consignateurErreur.erreur(e, `Erreur renvoyée par API recherche-entreprise : ${e.cause}`);
       } else {
         this.consignateurErreur.erreur(e as Error);
       }

@@ -8,7 +8,5 @@ export const rechercheParType = {
   set: types.set,
   reinitialise: () => types.set([]),
   ok: (ressourceCyber: RessourceCyber) =>
-    ressourceCyber.types.some(
-      (type) => !get(types).length || get(types).includes(type),
-    ),
+    ressourceCyber.types.some((type) => !get(types).length || get(types).includes(type)),
 };

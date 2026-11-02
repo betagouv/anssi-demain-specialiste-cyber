@@ -5,13 +5,11 @@
   <dsfr-container>
     <div class="intro">
       <h2>
-        Le hameçonnage ou <em>phishing</em>, premier risque cyber du grand
-        public
+        Le hameçonnage ou <em>phishing</em>, premier risque cyber du grand public
       </h2>
       <p class="fr-text--lg">
-        L’opération «&nbsp;Cactus&nbsp;» est une campagne nationale qui a pour
-        but de sensibiliser aux risques de l’hameçonnage et à renforcer les
-        réflexes numériques.
+        L’opération «&nbsp;Cactus&nbsp;» est une campagne nationale qui a pour but de sensibiliser aux risques de
+        l’hameçonnage et à renforcer les réflexes numériques.
       </p>
     </div>
   </dsfr-container>
@@ -24,11 +22,7 @@
         action-markup="false"
         markup-level="3"
       >
-        <img
-          slot="pictogram"
-          src="/assets/images/operation-cactus/picto-eleves.svg"
-          alt=""
-        />
+        <img slot="pictogram" src="/assets/images/operation-cactus/picto-eleves.svg" alt="" />
       </dsfr-tile>
       <dsfr-tile
         title={'67 % des établissements ont engagé une action de sensibilisation après l’exercice'}
@@ -36,11 +30,7 @@
         action-markup="false"
         markup-level="3"
       >
-        <img
-          slot="pictogram"
-          src="/assets/images/operation-cactus/picto-etablissements.svg"
-          alt=""
-        />
+        <img slot="pictogram" src="/assets/images/operation-cactus/picto-etablissements.svg" alt="" />
       </dsfr-tile>
     </div>
   </dsfr-container>
@@ -48,23 +38,18 @@
   <dsfr-container>
     <div class="paragraphes">
       <p class="texte-standard-md">
-        Depuis 2025, initié par le Parquet de Paris en charge de la
-        cybercriminalité avec le MEN et de nombreux partenaires, un faux message
-        est envoyé sur les messageries des espaces numériques de travail et les
-        outils de vie scolaire des établissements volontaires dans toute la
-        France.
+        Depuis 2025, initié par le Parquet de Paris en charge de la cybercriminalité avec le MEN et de nombreux
+        partenaires, un faux message est envoyé sur les messageries des espaces numériques de travail et les outils de
+        vie scolaire des établissements volontaires dans toute la France.
       </p>
       <p class="texte-standard-md">
-        Elle cible à la fois les collégiens, les lycéens, leurs parents et les
-        personnels d’éducation.
+        Elle cible à la fois les collégiens, les lycéens, leurs parents et les personnels d’éducation.
       </p>
       <p class="texte-standard-md">
-        Un poster est affiché dans les établissements pour initier le débat dans
-        les collèges et les lycées. Un second message permet d’expliquer la
-        démarche et de proposer des réflexes de sécurité numérique pour
-        identifier et réagir face à l’hameçonnage. Les enseignants sont ensuite
-        invités à engager une séance de sensibilisation pour travailler ces
-        réflexes.
+        Un poster est affiché dans les établissements pour initier le débat dans les collèges et les lycées. Un second
+        message permet d’expliquer la démarche et de proposer des réflexes de sécurité numérique pour identifier et
+        réagir face à l’hameçonnage. Les enseignants sont ensuite invités à engager une séance de sensibilisation pour
+        travailler ces réflexes.
       </p>
     </div>
   </dsfr-container>
@@ -73,51 +58,23 @@
     <div class="partenaires">
       <h3>Les partenaires</h3>
       <p class="texte-standard-md">
-        Une action collective nationale avec la participation en territoires des
-        régions académiques et de leurs partenaires (collectivités et
-        entreprises opérant les services d’ENT et de vie scolaire).
+        Une action collective nationale avec la participation en territoires des régions académiques et de leurs
+        partenaires (collectivités et entreprises opérant les services d’ENT et de vie scolaire).
       </p>
       <div class="logos">
         <img
           src="/assets/images/operation-cactus/partenaires/educ-nationale.svg"
           alt="Ministère de l’Éducation nationale"
         />
-        <img
-          src="/assets/images/operation-cactus/partenaires/parquet-paris.svg"
-          alt="Parquet de Paris"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/justice.svg"
-          alt="Ministère de la Justice"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/cybermalveillance.svg"
-          alt="CyberMalveillance.gouv.fr"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/comcyber-mi.svg"
-          alt="COMCYBER-MI"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/interieur.svg"
-          alt="Ministère de l’Intérieur"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/cnil.svg"
-          alt="CNIL"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/unaf.svg"
-          alt="Unaf"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/e-enfance.svg"
-          alt="e-Enfance"
-        />
-        <img
-          src="/assets/images/operation-cactus/partenaires/france-tv.svg"
-          alt="france.tv"
-        />
+        <img src="/assets/images/operation-cactus/partenaires/parquet-paris.svg" alt="Parquet de Paris" />
+        <img src="/assets/images/operation-cactus/partenaires/justice.svg" alt="Ministère de la Justice" />
+        <img src="/assets/images/operation-cactus/partenaires/cybermalveillance.svg" alt="CyberMalveillance.gouv.fr" />
+        <img src="/assets/images/operation-cactus/partenaires/comcyber-mi.svg" alt="COMCYBER-MI" />
+        <img src="/assets/images/operation-cactus/partenaires/interieur.svg" alt="Ministère de l’Intérieur" />
+        <img src="/assets/images/operation-cactus/partenaires/cnil.svg" alt="CNIL" />
+        <img src="/assets/images/operation-cactus/partenaires/unaf.svg" alt="Unaf" />
+        <img src="/assets/images/operation-cactus/partenaires/e-enfance.svg" alt="e-Enfance" />
+        <img src="/assets/images/operation-cactus/partenaires/france-tv.svg" alt="france.tv" />
       </div>
     </div>
   </dsfr-container>

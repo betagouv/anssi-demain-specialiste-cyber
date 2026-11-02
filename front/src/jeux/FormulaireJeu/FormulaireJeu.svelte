@@ -36,14 +36,8 @@
   import EtapeTemoignages from './EtapeTemoignages.svelte';
   import EtapierDeposeJeu from './EtapierDeposeJeu.svelte';
   import EtapierModifieJeu from './EtapierModifieJeu.svelte';
-  import type {
-    EtapeDeposeJeu,
-    EtapeModificationJeu,
-  } from './FormulaireDeJeu.type.js';
-  import {
-    AdaptateurAnnuaireEducationNationale,
-    type ReferentielEtablissement,
-  } from './ReferentielEtablissement.js';
+  import type { EtapeDeposeJeu, EtapeModificationJeu } from './FormulaireDeJeu.type.js';
+  import { AdaptateurAnnuaireEducationNationale, type ReferentielEtablissement } from './ReferentielEtablissement.js';
 
   interface Props {
     mode: 'creation' | 'modification';
@@ -63,9 +57,7 @@
     referentielEtablissement = new AdaptateurAnnuaireEducationNationale(),
   }: Props = $props();
 
-  let etape = $state<EtapeDeposeJeu | EtapeModificationJeu>(
-    'informations-generales',
-  );
+  let etape = $state<EtapeDeposeJeu | EtapeModificationJeu>('informations-generales');
 
   $jeuEnEditionStore = {
     eleves: ['', '', '', ''],
@@ -110,8 +102,7 @@
           etape = 'presentation';
           erreursDeFormulaire = {};
         } else {
-          erreursDeFormulaire =
-            validateurInformationsGenerales.valide($jeuEnEditionStore);
+          erreursDeFormulaire = validateurInformationsGenerales.valide($jeuEnEditionStore);
         }
         break;
       case 'presentation':
@@ -119,8 +110,7 @@
           etape = mode === 'modification' ? 'temoignages' : 'photos';
           erreursDeFormulaire = {};
         } else {
-          erreursDeFormulaire =
-            validateurPresentation.valide($jeuEnEditionStore);
+          erreursDeFormulaire = validateurPresentation.valide($jeuEnEditionStore);
         }
         break;
       case 'photos':
@@ -141,14 +131,10 @@
     }
   };
 
-  const elevesRenseignes = $derived(
-    $jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()),
-  );
+  const elevesRenseignes = $derived($jeuEnEditionStore.eleves?.filter((e) => !!e?.trim()));
 
   const temoignagesRenseignes = $derived(
-    $jeuEnEditionStore.temoignages?.filter(
-      (t) => !!t.prenom.trim() && !!t.details.trim(),
-    ),
+    $jeuEnEditionStore.temoignages?.filter((t) => !!t.prenom.trim() && !!t.details.trim()),
   );
 
   const soumets = async (event: Event) => {
@@ -175,9 +161,7 @@
         await axios.post('/api/mes-jeux', formulaire);
         window.location.href = '/mes-jeux?jeu-ajoute';
       } catch (e) {
-        erreurAPI = isAxiosError(e)
-          ? e.response?.data?.erreur
-          : "Une erreur s'est produite";
+        erreurAPI = isAxiosError(e) ? e.response?.data?.erreur : "Une erreur s'est produite";
         soumissionEnCours = false;
       }
     } else {
@@ -197,9 +181,7 @@
       });
       window.location.href = '/mes-jeux?jeu-modifie';
     } catch (e) {
-      erreurAPI = isAxiosError(e)
-        ? e.response?.data?.erreur
-        : "Une erreur s'est produite";
+      erreurAPI = isAxiosError(e) ? e.response?.data?.erreur : "Une erreur s'est produite";
       soumissionEnCours = false;
     }
   };
@@ -209,9 +191,7 @@
       const morceaux = window.location.pathname.split('/');
       const id = morceaux[morceaux.length - 1];
       const reponse = await axios.get<DonneesJeu>(`/api/jeux/${id}`);
-      $jeuEnEditionStore = construisJeuEnEditionDepuisJeu(
-        construisJeu(reponse.data),
-      );
+      $jeuEnEditionStore = construisJeuEnEditionDepuisJeu(construisJeu(reponse.data));
     }
   });
 </script>
@@ -226,16 +206,11 @@
       {/if}
       <hr />
       {#if etape !== 'temoignages'}
-        <p class="fr-text--xs mention">
-          Sauf mention contraire, les informations demandées sont obligatoires.
-        </p>
+        <p class="fr-text--xs mention">Sauf mention contraire, les informations demandées sont obligatoires.</p>
       {/if}
       <form novalidate>
         {#if etape === 'informations-generales'}
-          <EtapeInformationsGenerales
-            erreurs={erreursDeFormulaire}
-            {referentielEtablissement}
-          />
+          <EtapeInformationsGenerales erreurs={erreursDeFormulaire} {referentielEtablissement} />
         {:else if etape === 'presentation'}
           <EtapePresentation erreurs={erreursDeFormulaire} />
         {:else if etape === 'photos'}
@@ -248,11 +223,7 @@
 
         <div class="actions">
           {#if etape !== 'informations-generales'}
-            <dsfr-button
-              label="Précédent"
-              kind="secondary"
-              use:clic={etapePrecedente}
-            ></dsfr-button>
+            <dsfr-button label="Précédent" kind="secondary" use:clic={etapePrecedente}></dsfr-button>
           {/if}
           {#if etape === 'evaluation'}
             <dsfr-button
@@ -269,8 +240,7 @@
               use:clic={enregistreModifications}
             ></dsfr-button>
           {:else}
-            <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}
-            ></dsfr-button>
+            <dsfr-button label="Suivant" kind="primary" use:clic={etapeSuivante}></dsfr-button>
           {/if}
         </div>
       </form>

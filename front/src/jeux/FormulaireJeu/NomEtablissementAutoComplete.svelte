@@ -7,18 +7,11 @@
     messageErreur?: string;
   }
 
-  let {
-    messageErreur,
-    referentielEtablissement,
-    valeur = $bindable(),
-  }: Props = $props();
+  let { messageErreur, referentielEtablissement, valeur = $bindable() }: Props = $props();
 
   let suggestions: string[] = $state([]);
 
-  function cadence(
-    fonction: (str: string) => Promise<string[]>,
-    delai: number,
-  ): (terme: string) => void {
+  function cadence(fonction: (str: string) => Promise<string[]>, delai: number): (terme: string) => void {
     let minuteur: ReturnType<typeof setTimeout>;
 
     return (terme): void => {
@@ -29,9 +22,7 @@
     };
   }
 
-  const rechercheEtablissementTemporise = $derived(
-    cadence(referentielEtablissement.trouveParNom, 500),
-  );
+  const rechercheEtablissementTemporise = $derived(cadence(referentielEtablissement.trouveParNom, 500));
 
   function surSelection(nomEtablissement: string) {
     suggestions = [];

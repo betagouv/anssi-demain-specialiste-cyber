@@ -6,54 +6,29 @@
     <div class="contenu">
       <h2>En rejoignant le challenge</h2>
 
-      <img
-        class="illustration"
-        src="/assets/images/passe-ton-hack-d-abord/avantages/illustration.png"
-        alt=""
-      />
+      <img class="illustration" src="/assets/images/passe-ton-hack-d-abord/avantages/illustration.png" alt="" />
 
       <div class="liste">
         <div class="item">
-          <img
-            class="icone"
-            src="/assets/images/passe-ton-hack-d-abord/avantages/icone-bouclier.svg"
-            alt=""
-          />
+          <img class="icone" src="/assets/images/passe-ton-hack-d-abord/avantages/icone-bouclier.svg" alt="" />
           <h3 class="item-titre fr-h6">Formez vos élèves à la cybersécurité</h3>
         </div>
         <hr />
         <div class="item">
-          <img
-            class="icone"
-            src="/assets/images/passe-ton-hack-d-abord/avantages/icone-eleve.svg"
-            alt=""
-          />
+          <img class="icone" src="/assets/images/passe-ton-hack-d-abord/avantages/icone-eleve.svg" alt="" />
+          <h3 class="item-titre fr-h6">Développez l’esprit d’équipe de vos élèves</h3>
+        </div>
+        <hr />
+        <div class="item">
+          <img class="icone" src="/assets/images/passe-ton-hack-d-abord/avantages/icone-loupe.svg" alt="" />
           <h3 class="item-titre fr-h6">
-            Développez l’esprit d’équipe de vos élèves
+            Faites découvrir la diversité des métiers de la cybersécurité et du numérique
           </h3>
         </div>
         <hr />
         <div class="item">
-          <img
-            class="icone"
-            src="/assets/images/passe-ton-hack-d-abord/avantages/icone-loupe.svg"
-            alt=""
-          />
-          <h3 class="item-titre fr-h6">
-            Faites découvrir la diversité des métiers de la cybersécurité et du
-            numérique
-          </h3>
-        </div>
-        <hr />
-        <div class="item">
-          <img
-            class="icone"
-            src="/assets/images/passe-ton-hack-d-abord/avantages/icone-valide.svg"
-            alt=""
-          />
-          <h3 class="item-titre fr-h6">
-            Certifiez les compétences de vos élèves
-          </h3>
+          <img class="icone" src="/assets/images/passe-ton-hack-d-abord/avantages/icone-valide.svg" alt="" />
+          <h3 class="item-titre fr-h6">Certifiez les compétences de vos élèves</h3>
         </div>
       </div>
     </div>

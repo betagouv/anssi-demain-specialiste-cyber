@@ -23,12 +23,7 @@
 </script>
 
 <div class="corps-de-fiche">
-  <dsfr-side-menu
-    title=""
-    items={menu}
-    buttonLabel="Dans cette fiche"
-    buttonId={menuId}
-    hasTitle={false}
+  <dsfr-side-menu title="" items={menu} buttonLabel="Dans cette fiche" buttonId={menuId} hasTitle={false}
   ></dsfr-side-menu>
 
   <div class="sections">

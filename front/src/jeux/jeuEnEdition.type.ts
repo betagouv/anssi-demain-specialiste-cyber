@@ -30,26 +30,18 @@ export type JeuEnEdition = Partial<
   consentement?: boolean;
 };
 
-export type ErreursValidationJeuEnEdition = Partial<
-  Record<keyof JeuEnEdition, string>
->;
+export type ErreursValidationJeuEnEdition = Partial<Record<keyof JeuEnEdition, string>>;
 
 export type InformationsGeneralesDuJeu = Pick<
   JeuEnEdition,
   'nomEtablissement' | 'sequence' | 'discipline' | 'classe' | 'eleves'
 >;
 
-export type PresentationDuJeu = Pick<
-  JeuEnEdition,
-  'nom' | 'categorie' | 'thematiques' | 'description'
->;
+export type PresentationDuJeu = Pick<JeuEnEdition, 'nom' | 'categorie' | 'thematiques' | 'description'>;
 
 export type EvaluationDuJeu = Pick<
   JeuEnEdition,
-  | 'evaluationDecouverte'
-  | 'evaluationInteret'
-  | 'evaluationSatisfactionGenerale'
-  | 'precisions'
+  'evaluationDecouverte' | 'evaluationInteret' | 'evaluationSatisfactionGenerale' | 'precisions'
 >;
 
 export type PhotosDuJeu = Pick<JeuEnEdition, 'photos'>;

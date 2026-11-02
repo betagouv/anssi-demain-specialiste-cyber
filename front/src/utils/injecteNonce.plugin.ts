@@ -11,9 +11,7 @@ const injecteNonceRuntimeSvelte = (code: string): string => {
   const CREATION_STYLE_SVELTE = "const style = create_element('style');";
 
   if (!code.includes(CREATION_STYLE_SVELTE)) {
-    throw new Error(
-      "Impossible d'ajouter le nonce : le runtime CSS de Svelte a changé",
-    );
+    throw new Error("Impossible d'ajouter le nonce : le runtime CSS de Svelte a changé");
   }
 
   const récupérationNonce = `const __anssiCspNonce =

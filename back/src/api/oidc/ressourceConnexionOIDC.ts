@@ -7,8 +7,7 @@ const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   routeur.get(
     '/',
     filetRouteAsynchrone(async (_requete, reponse) => {
-      const demandeAutorisation =
-        await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
+      const demandeAutorisation = await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
 
       const { url, state, nonce } = demandeAutorisation;
       reponse.cookie(

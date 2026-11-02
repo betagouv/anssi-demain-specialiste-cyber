@@ -10,11 +10,7 @@
     hasTag
     enlarge={false}
   >
-    <dsfr-tags-group
-      slot="tagsgroup"
-      tags={[{ label: 'Jour 1' }]}
-      groupMarkup="div"
-    ></dsfr-tags-group>
+    <dsfr-tags-group slot="tagsgroup" tags={[{ label: 'Jour 1' }]} groupMarkup="div"></dsfr-tags-group>
   </dsfr-card>
   <dsfr-card
     title="Mode «&#8239;Attaque / Défense&#8239;»"
@@ -24,11 +20,7 @@
     hasTag
     enlarge={false}
   >
-    <dsfr-tags-group
-      slot="tagsgroup"
-      tags={[{ label: 'Jour 2' }]}
-      groupMarkup="div"
-    ></dsfr-tags-group>
+    <dsfr-tags-group slot="tagsgroup" tags={[{ label: 'Jour 2' }]} groupMarkup="div"></dsfr-tags-group>
   </dsfr-card>
 </div>
 

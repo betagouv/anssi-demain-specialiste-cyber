@@ -1,44 +1,34 @@
 import { describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
-import {
-  EntrepotRessourcesCyberGrist,
-  RessourceCyberGrist,
-} from '../../src/infra/entrepotRessourcesCyberGrist';
+import { EntrepotRessourcesCyberGrist, RessourceCyberGrist } from '../../src/infra/entrepotRessourcesCyberGrist';
 
 describe("L'entrepôt de ressources cyber Grist ", () => {
   const reponseVide = { records: [] };
 
   it('sait appeler la bonne ressource', async () => {
     let urlAppelee = '';
-    const clientHttp: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async (url: string) => {
+    const clientHttp: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async (url: string) => {
       urlAppelee = url;
       return reponseVide;
     };
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      clientHttp,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(clientHttp);
 
     await entrepotRessourcesCyberGrist.tous();
 
-    expect(urlAppelee).toEqual(
-      'http://example.com/api/docs/mon_id_document/tables/mon_id_table/records',
-    );
+    expect(urlAppelee).toEqual('http://example.com/api/docs/mon_id_document/tables/mon_id_table/records');
   });
 
   it("vérifie l'entête d'authentification", async () => {
     let enteteAuthorisation: string | undefined = undefined;
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async (_url: string, config) => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async (
+      _url: string,
+      config,
+    ) => {
       enteteAuthorisation = config?.headers?.['authorization'];
       return reponseVide;
     };
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
 
     await entrepotRessourcesCyberGrist.tous();
 
@@ -46,21 +36,12 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecId(1)
-            .avecTitre('CyberEnJeux')
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecId(1).avecTitre('CyberEnJeux').construis())
         .construis();
     };
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
 
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -69,9 +50,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne thématiques', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
           new ConstructeurLigneGrist()
@@ -84,9 +63,7 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
         )
         .construis();
     };
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
 
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
@@ -98,177 +75,106 @@ describe("L'entrepôt de ressources cyber Grist ", () => {
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne publics cible', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecPublicsCible(['Parents', 'Élèves'])
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecPublicsCible(['Parents', 'Élèves']).construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].publicsCible).toStrictEqual([
-      'Parents',
-      'Élèves',
-    ]);
+    expect(ressourcesCyber[0].publicsCible).toStrictEqual(['Parents', 'Élèves']);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne niveau', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecNiveaux(['Cycle 1', 'Cycle 2'])
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecNiveaux(['Cycle 1', 'Cycle 2']).construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     expect(ressourcesCyber[0].niveaux).toStrictEqual(['Cycle 1', 'Cycle 2']);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne type', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
         .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecTypes(['Jeux & challenge', 'Parcours de formation'])
-            .construis(),
+          new ConstructeurLigneGrist().avecTypes(['Jeux & challenge', 'Parcours de formation']).construis(),
         )
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].types).toStrictEqual([
-      'Jeux & challenge',
-      'Parcours de formation',
-    ]);
+    expect(ressourcesCyber[0].types).toStrictEqual(['Jeux & challenge', 'Parcours de formation']);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne besoins', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecBesoins(['Découvrir', 'Se protéger'])
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecBesoins(['Découvrir', 'Se protéger']).construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].besoins).toStrictEqual([
-      'Découvrir',
-      'Se protéger',
-    ]);
+    expect(ressourcesCyber[0].besoins).toStrictEqual(['Découvrir', 'Se protéger']);
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne description', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecDescription('Lorem ipsum')
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecDescription('Lorem ipsum').construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     expect(ressourcesCyber[0].description).toStrictEqual('Lorem ipsum');
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne URL illustration', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecURLIllustration('https/monillu.png')
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecURLIllustration('https/monillu.png').construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
-    expect(ressourcesCyber[0].urlIllustration).toStrictEqual(
-      'https/monillu.png',
-    );
+    expect(ressourcesCyber[0].urlIllustration).toStrictEqual('https/monillu.png');
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Label DSC', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist().avecLabelDSC(true).construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecLabelDSC(true).construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     expect(ressourcesCyber[0].estCertifiee).toBeTruthy();
   });
 
   it('sait récupérer des ressources Cyber en appelant Grist avec la colonne Lien', async () => {
-    const ressourcesCyberGrist: RecupereRessourceHttp<
-      ReponseGrist<RessourceCyberGrist>
-    > = async () => {
+    const ressourcesCyberGrist: RecupereRessourceHttp<ReponseGrist<RessourceCyberGrist>> = async () => {
       return new ConstructeurReponseRessourceCyberGrist()
-        .ajouteUneLigne(
-          new ConstructeurLigneGrist()
-            .avecLien('http://mon-url.com')
-            .construis(),
-        )
+        .ajouteUneLigne(new ConstructeurLigneGrist().avecLien('http://mon-url.com').construis())
         .construis();
     };
 
-    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(
-      ressourcesCyberGrist,
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotRessourcesCyberGrist(ressourcesCyberGrist);
     const ressourcesCyber = await entrepotRessourcesCyberGrist.tous();
 
     expect(ressourcesCyber[0].lienExterne).toEqual('http://mon-url.com');
@@ -378,9 +284,7 @@ class ConstructeurLigneGrist implements ConstructeurDeTest<LigneGrist> {
   }
 }
 
-class ConstructeurReponseRessourceCyberGrist implements ConstructeurDeTest<
-  ReponseGrist<RessourceCyberGrist>
-> {
+class ConstructeurReponseRessourceCyberGrist implements ConstructeurDeTest<ReponseGrist<RessourceCyberGrist>> {
   private _lignes: LigneGrist[] = [];
 
   ajouteUneLigne(ligne: LigneGrist): ConstructeurReponseRessourceCyberGrist {

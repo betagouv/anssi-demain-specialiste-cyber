@@ -11,9 +11,7 @@ export interface TableauGrist<LIGNE> {
   records: LIGNE[];
 }
 
-export class ConstructeurLigneGrist<
-  LIGNE extends LigneGrist,
-> implements ConstructeurDeTest<LIGNE> {
+export class ConstructeurLigneGrist<LIGNE extends LigneGrist> implements ConstructeurDeTest<LIGNE> {
   _idLigne: number = 0;
   _fields: { [key: string]: Valeur } = {};
 
@@ -22,18 +20,12 @@ export class ConstructeurLigneGrist<
     return this;
   }
 
-  avecColonneEtValeur(
-    colonne: string,
-    valeur: boolean | string | number,
-  ): ConstructeurLigneGrist<LIGNE> {
+  avecColonneEtValeur(colonne: string, valeur: boolean | string | number): ConstructeurLigneGrist<LIGNE> {
     this._fields[colonne] = valeur;
     return this;
   }
 
-  avecColonneEtListeDeValeurs(
-    colonne: string,
-    valeur: (string | number)[],
-  ): ConstructeurLigneGrist<LIGNE> {
+  avecColonneEtListeDeValeurs(colonne: string, valeur: (string | number)[]): ConstructeurLigneGrist<LIGNE> {
     this._fields[colonne] = ['L', ...valeur];
     return this;
   }

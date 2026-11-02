@@ -66,8 +66,7 @@
   options={optionsThematiques}
   placeholder="Sélectionner une ou plusieurs options"
   values={$jeuEnEditionStore.thematiques}
-  onvaluechanged={(e: CustomEvent) =>
-    ($jeuEnEditionStore.thematiques = e.detail)}
+  onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.thematiques = e.detail)}
   status={erreurs.thematiques ? 'error' : 'default'}
   errorMessage={erreurs.thematiques}
 ></lab-anssi-multi-select>
@@ -77,8 +76,7 @@
   hint="Présenter le jeu et son fonctionnement en quelques lignes."
   id="description"
   label="Description"
-  onvaluechanged={(e: CustomEvent) =>
-    ($jeuEnEditionStore.description = e.detail)}
+  onvaluechanged={(e: CustomEvent) => ($jeuEnEditionStore.description = e.detail)}
   rows={8}
   status={erreurs.description ? 'error' : 'default'}
   value={$jeuEnEditionStore.description}

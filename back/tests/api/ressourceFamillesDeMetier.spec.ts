@@ -38,13 +38,11 @@ describe('La ressource des familles de métier', () => {
           rôles: [
             {
               nom: 'Définir',
-              description:
-                "Fixer la stratégie et les règles de sécurité de l'organisation.",
+              description: "Fixer la stratégie et les règles de sécurité de l'organisation.",
             },
             {
               nom: 'Coordonner',
-              description:
-                'Piloter les projets et faire travailler ensemble technique et métiers.',
+              description: 'Piloter les projets et faire travailler ensemble technique et métiers.',
             },
           ],
         }),
@@ -65,25 +63,19 @@ describe('La ressource des familles de métier', () => {
       expect(corps).toHaveLength(2);
       const premièreFamille = corps[0];
       expect(premièreFamille.code).toBe('Pilotage');
-      expect(premièreFamille.titre).toBe(
-        'Gestion de la sécurité et pilotage des projets de sécurité',
-      );
+      expect(premièreFamille.titre).toBe('Gestion de la sécurité et pilotage des projets de sécurité');
       expect(premièreFamille.sousTitre).toBe(
         'Définir, coordonner, sensibiliser : les métiers de celles et ceux qui fixent le cap de la cybersécurité.',
       );
-      expect(premièreFamille.description).toBe(
-        "Une organisation bien protégée a besoin d'un cap...",
-      );
+      expect(premièreFamille.description).toBe("Une organisation bien protégée a besoin d'un cap...");
       expect(premièreFamille.rôles).toStrictEqual([
         {
           nom: 'Définir',
-          description:
-            "Fixer la stratégie et les règles de sécurité de l'organisation.",
+          description: "Fixer la stratégie et les règles de sécurité de l'organisation.",
         },
         {
           nom: 'Coordonner',
-          description:
-            'Piloter les projets et faire travailler ensemble technique et métiers.',
+          description: 'Piloter les projets et faire travailler ensemble technique et métiers.',
         },
       ]);
 

@@ -34,9 +34,7 @@ export class EntrepôtFamillesDeMétierGrist
     entrepôtMétiers: EntrepotMetiers,
     entrepôtRessourcesCyber: EntrepotRessourcesCyber,
     entrepôtFonctions: EntrepôtFonctions,
-    famillesDeMetierGrist: RecupereRessourceHttp<
-      ReponseGrist<FamilleDeMetierGrist>
-    > = creeRecupereRessourceHttp(),
+    famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = creeRecupereRessourceHttp(),
   ) {
     super(
       famillesDeMetierGrist,
@@ -65,23 +63,14 @@ export class EntrepôtFamillesDeMétierGrist
           this.champEnRôle(familleGrist.fields.Tuile_2),
           this.champEnRôle(familleGrist.fields.Tuile_3),
         ],
-        profils: this.versEntités(
-          familleGrist.fields.Profils_de_cette_famille,
-          métiers,
-        ),
-        ressourcesAssociées: this.versEntités(
-          familleGrist.fields.Ressources_associees,
-          ressourcesCyber,
-        ),
+        profils: this.versEntités(familleGrist.fields.Profils_de_cette_famille, métiers),
+        ressourcesAssociées: this.versEntités(familleGrist.fields.Ressources_associees, ressourcesCyber),
         fonctions: this.versEntités(familleGrist.fields.Metiers, fonctions),
       });
     });
   }
 
-  private versEntités = <T extends { id: number }>(
-    listeIdsGrist: number[],
-    listeEntités: T[],
-  ): T[] =>
+  private versEntités = <T extends { id: number }>(listeIdsGrist: number[], listeEntités: T[]): T[] =>
     this.aseptiseListe(listeIdsGrist)
       .map((id) => listeEntités.find((entité) => entité.id === id))
       .filter((entité) => entité !== undefined);

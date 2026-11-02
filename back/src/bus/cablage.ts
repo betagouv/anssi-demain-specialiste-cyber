@@ -47,8 +47,5 @@ export const cableTousLesAbonnes = ({
     }),
   );
 
-  busEvenements.abonne(
-    JeuCree,
-    notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee),
-  );
+  busEvenements.abonne(JeuCree, notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee));
 };

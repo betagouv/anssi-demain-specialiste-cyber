@@ -25,8 +25,7 @@ export class AdaptateurAnnuaireEducationNationale implements ReferentielEtabliss
         record: {
           fields: { nom_etablissement: string; code_departement: string };
         };
-      }) =>
-        `${record.record.fields.nom_etablissement} (${Number(record.record.fields.code_departement)})`,
+      }) => `${record.record.fields.nom_etablissement} (${Number(record.record.fields.code_departement)})`,
     );
 
     return resultats;

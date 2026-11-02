@@ -33,21 +33,19 @@
     <section>
       <p class="fr-text">
         Devenez relai de {TITRE_DSC_SECABLE}
-        en associant la marque {TITRE_DSC_SECABLE} à vos actions en faveur de la formation
-        des jeunes à la cybersécurité et la découverte de ses métiers.
+        en associant la marque {TITRE_DSC_SECABLE} à vos actions en faveur de la formation des jeunes à la cybersécurité et
+        la découverte de ses métiers.
       </p>
     </section>
 
     <section id="qui">
       <h2>Qui peut devenir un relai&nbsp;?</h2>
       <p class="fr-text">
-        Vous représentez un établissement d'enseignement primaire, secondaire,
-        supérieure ou de formation continue œuvrant en faveur de la formation
-        des jeunes et des adultes à la cybersécurité. <br /> <br />
-        Vous êtes une entité publique ou une association loi 1901 à but non lucratif
-        et planifiez une initiative en faveur de la sensibilisation des jeunes aux
-        bonnes pratiques, de la découverte de la cybersécurité et de ses enjeux, de
-        ses métiers et des parcours d'orientation.
+        Vous représentez un établissement d'enseignement primaire, secondaire, supérieure ou de formation continue
+        œuvrant en faveur de la formation des jeunes et des adultes à la cybersécurité. <br /> <br />
+        Vous êtes une entité publique ou une association loi 1901 à but non lucratif et planifiez une initiative en faveur
+        de la sensibilisation des jeunes aux bonnes pratiques, de la découverte de la cybersécurité et de ses enjeux, de ses
+        métiers et des parcours d'orientation.
       </p>
     </section>
 
@@ -70,8 +68,8 @@
           L'université x est relai de {TITRE_DSC_SECABLE}
         </li>
         <li>
-          L'université x soutient {TITRE_DSC_SECABLE}&nbsp;: la plateforme pour
-          découvrir la cybersécurité et ses métiers.
+          L'université x soutient {TITRE_DSC_SECABLE}&nbsp;: la plateforme pour découvrir la cybersécurité et ses
+          métiers.
         </li>
       </ul>
     </section>
@@ -85,17 +83,8 @@
         download="true"
         href="https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/DemainSpecialisteCyber_Kit_Communication.zip"
       ></dsfr-link>
-      <img
-        src="assets/images/apercu-pages-kit-communication.avif"
-        alt="Aperçu du kit de communication"
-      />
-      <dsfr-link
-        label="Haut de page"
-        href="#"
-        size="md"
-        has-icon
-        icon="arrow-up-fill"
-      ></dsfr-link>
+      <img src="assets/images/apercu-pages-kit-communication.avif" alt="Aperçu du kit de communication" />
+      <dsfr-link label="Haut de page" href="#" size="md" has-icon icon="arrow-up-fill"></dsfr-link>
     </section>
   </Fiche>
 </dsfr-container>

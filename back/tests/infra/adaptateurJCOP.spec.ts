@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  AdaptateurJCOP,
-  ReponseJCOP,
-} from '../../src/infra/adaptateurAntivirus';
+import { AdaptateurJCOP, ReponseJCOP } from '../../src/infra/adaptateurAntivirus';
 import { PosteRessourceHttp } from '../../src/infra/clientHttp';
 import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
@@ -22,11 +19,7 @@ describe("L'adaptateur JCOP ", () => {
   };
 
   it('sait analyser un fichier non infecté', async () => {
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      fauxClientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, fauxClientHttp);
     const { estInfecte } = await adaptateurJCOP.analyse(desFichiersQuelconques);
 
     expect(estInfecte).toBeFalsy();
@@ -39,11 +32,7 @@ describe("L'adaptateur JCOP ", () => {
       return reponseJCOPOK;
     };
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
     const { estEnErreur } = await adaptateurJCOP.analyse([]);
 
@@ -73,9 +62,7 @@ describe("L'adaptateur JCOP ", () => {
       clientHttp,
     );
 
-    const { estEnErreur } = await adaptateurJCOP.analyse(
-      desFichiersQuelconques,
-    );
+    const { estEnErreur } = await adaptateurJCOP.analyse(desFichiersQuelconques);
 
     expect(estAppele).toBeFalsy();
     expect(estEnErreur).toBeFalsy();
@@ -84,21 +71,13 @@ describe("L'adaptateur JCOP ", () => {
   it("sait appeler l'API JCOP avec les bons paramètres", async () => {
     let urlAppelee = '';
     let jetonAuth = '';
-    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async (
-      url: string,
-      _corps,
-      config,
-    ) => {
+    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async (url: string, _corps, config) => {
       urlAppelee = url;
       jetonAuth = config?.headers?.['X-Auth-Token'] || '';
       return reponseJCOPOK;
     };
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
     await adaptateurJCOP.analyse(desFichiersQuelconques);
 
@@ -114,15 +93,9 @@ describe("L'adaptateur JCOP ", () => {
       status: false,
     });
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
-    const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
-      desFichiersQuelconques,
-    );
+    const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(desFichiersQuelconques);
     expect(estInfecte).toBeFalsy();
     expect(estEnErreur).toBeTruthy();
   });
@@ -133,11 +106,7 @@ describe("L'adaptateur JCOP ", () => {
       status: true,
     });
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
     const { estInfecte } = await adaptateurJCOP.analyse(desFichiersQuelconques);
     expect(estInfecte).toBeTruthy();
@@ -148,15 +117,9 @@ describe("L'adaptateur JCOP ", () => {
       throw new Error('http erreur levée manuellement');
     };
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
-    const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(
-      desFichiersQuelconques,
-    );
+    const { estInfecte, estEnErreur } = await adaptateurJCOP.analyse(desFichiersQuelconques);
     expect(estInfecte).toBeUndefined();
     expect(estEnErreur).toBeTruthy();
   });
@@ -164,26 +127,17 @@ describe("L'adaptateur JCOP ", () => {
   it('fait un appel à JCOP pour chacun des fichiers analysés, en ne passant que ce fichier', async () => {
     const contenuFichiersTraites: string[] = [];
 
-    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async (
-      _url: string,
-      corps,
-    ) => {
+    const clientHttp: PosteRessourceHttp<ReponseJCOP> = async (_url: string, corps) => {
       const fichierTraite = (corps as FormData).get('file') as File;
       const contenu = await fichierTraite.text();
       contenuFichiersTraites.push(contenu);
       return reponseJCOPOK;
     };
 
-    const adaptateurJCOP = new AdaptateurJCOP(
-      fauxAdaptateurGestionErreur,
-      fauxAdaptateurEnvironnement,
-      clientHttp,
-    );
+    const adaptateurJCOP = new AdaptateurJCOP(fauxAdaptateurGestionErreur, fauxAdaptateurEnvironnement, clientHttp);
 
     await adaptateurJCOP.analyse(desFichiersQuelconques);
 
-    expect(contenuFichiersTraites).toStrictEqual(
-      desFichiersQuelconques.map((ab) => ab.toString()),
-    );
+    expect(contenuFichiersTraites).toStrictEqual(desFichiersQuelconques.map((ab) => ab.toString()));
   });
 });

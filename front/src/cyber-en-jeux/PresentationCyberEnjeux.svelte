@@ -60,8 +60,7 @@
     },
     {
       titre: 'Dès le cycle 3',
-      contenu:
-        'CyberEnJeux peut être organisé à partir de 10 ans et tout au long de la scolarité et au-delà !',
+      contenu: 'CyberEnJeux peut être organisé à partir de 10 ans et tout au long de la scolarité et au-delà !',
       illustration: { lien: '/assets/images/cej/backpack.svg', alt: '' },
     },
     {
@@ -76,16 +75,12 @@
 <div class="accueil">
   <dsfr-container>
     <div class="approuve">
-      <h2>
-        Déjà testé et approuvé par des centaines d’enseignants auprès de 210 000
-        élèves
-      </h2>
+      <h2>Déjà testé et approuvé par des centaines d’enseignants auprès de 210 000 élèves</h2>
       <p class="fr-text--lg">
-        Imaginé par le laboratoire d’innovation de l’ANSSI et co-construit avec
-        le ministère de l’Education nationale et l’association Open Serious
-        Game, CyberEnJeux est un dispositif pédagogique innovant permettant de
-        former des élèves à la cybersécurité dans le cadre de leurs
-        enseignements… par la création de jeux par les élèves eux-mêmes.
+        Imaginé par le laboratoire d’innovation de l’ANSSI et co-construit avec le ministère de l’Education nationale et
+        l’association Open Serious Game, CyberEnJeux est un dispositif pédagogique innovant permettant de former des
+        élèves à la cybersécurité dans le cadre de leurs enseignements… par la création de jeux par les élèves
+        eux-mêmes.
       </p>
     </div>
   </dsfr-container>
@@ -95,44 +90,36 @@
       <div class="conteneur sombre">
         <h2>Grâce à CyberEnJeux, développez</h2>
         <div class="contenu-deux-colonnes illustration-au-dessus">
-          <img
-            class="illustration"
-            src="/assets/images/cej/collaboration.svg"
-            alt="Collaboration"
-          />
+          <img class="illustration" src="/assets/images/cej/collaboration.svg" alt="Collaboration" />
           <div class="articles contenu">
             <article>
-              <h3 class="fr-h6">
-                Les postures collaboratives entre vos élèves
-              </h3>
+              <h3 class="fr-h6">Les postures collaboratives entre vos élèves</h3>
               <p class="fr-text">
-                Développer des compétences transverses, telles que la capacité à
-                s’organiser en groupe et à collaborer.
+                Développer des compétences transverses, telles que la capacité à s’organiser en groupe et à collaborer.
               </p>
             </article>
             <hr />
             <article>
               <h3 class="fr-h6">Leur autonomie</h3>
               <p class="fr-text">
-                Développer des compétences transverses, telles que l’autonomie,
-                la capacité à s’organiser individuellement.
+                Développer des compétences transverses, telles que l’autonomie, la capacité à s’organiser
+                individuellement.
               </p>
             </article>
             <hr />
             <article>
               <h3 class="fr-h6">L'apprentissage par le "faire"</h3>
               <p class="fr-text">
-                Valoriser leur travail par la production d’un objet tangible,
-                voire stimuler des élèves en difficultés scolaires.
+                Valoriser leur travail par la production d’un objet tangible, voire stimuler des élèves en difficultés
+                scolaires.
               </p>
             </article>
             <hr />
             <article>
               <h3 class="fr-h6">L’engagement dans vos disciplines</h3>
               <p class="fr-text">
-                CyberEnJeux s’adapte à toutes les disciplines et permet aux
-                élèves de mobiliser concrètement leurs apprentissages, tout en
-                renforçant leur motivation.
+                CyberEnJeux s’adapte à toutes les disciplines et permet aux élèves de mobiliser concrètement leurs
+                apprentissages, tout en renforçant leur motivation.
               </p>
             </article>
           </div>
@@ -143,23 +130,16 @@
 
   <dsfr-container>
     <lab-anssi-marelle>
-      <h2 slot="marelle-titre" class="marelle-titre">
-        Déroulé d’une séquence CyberEnJeux
-      </h2>
+      <h2 slot="marelle-titre" class="marelle-titre">Déroulé d’une séquence CyberEnJeux</h2>
       {#each etapesMarelle as etape, index}
-        <lab-anssi-marelle-etape
-          {index}
-          etapeMarelle={etape}
-          pair={(index + 1) % 2 === 0}
-        >
+        <lab-anssi-marelle-etape {index} etapeMarelle={etape} pair={(index + 1) % 2 === 0}>
           <h3 slot="etape-titre" class="fr-h5 etape-titre">{etape.titre}</h3>
           <p slot="etape-description" class="etape-description">
             {@html etape.description}
           </p>
           <span slot="etape-lien" class="etape-lien-conteneur">
             <lab-anssi-icone nom="arrow-right-line" size="sm"></lab-anssi-icone>
-            <dsfr-link label={etape.lien.texte} href={etape.lien.href}
-            ></dsfr-link>
+            <dsfr-link label={etape.lien.texte} href={etape.lien.href}></dsfr-link>
           </span>
         </lab-anssi-marelle-etape>
       {/each}
@@ -185,11 +165,7 @@
           no-link
           markupLevel="2"
         >
-          <img
-            src={tuile.illustration.lien}
-            alt={tuile.illustration.alt}
-            slot="pictogram"
-          />
+          <img src={tuile.illustration.lien} alt={tuile.illustration.alt} slot="pictogram" />
         </dsfr-tile>
       {/each}
     </lab-anssi-carrousel-tuiles>
@@ -202,10 +178,7 @@
   {#if temoignages.length > 0}
     <div class="temoignages">
       <dsfr-container>
-        <lab-anssi-temoignages
-          titre="Les élèves adorent CyberEnJeux !"
-          {temoignages}
-        ></lab-anssi-temoignages>
+        <lab-anssi-temoignages titre="Les élèves adorent CyberEnJeux !" {temoignages}></lab-anssi-temoignages>
       </dsfr-container>
     </div>
   {/if}
@@ -218,9 +191,7 @@
   :root {
     --brique-carrousel-bouton-action-texte-couleur: #161616;
     --brique-marelle-titre-couleur: #161616;
-    --brique-marelle-etapes-numero-etape-couleur: var(
-      --background-flat-pink-tuile
-    );
+    --brique-marelle-etapes-numero-etape-couleur: var(--background-flat-pink-tuile);
     --brique-temoignages-titre-couleur: #070707;
   }
 

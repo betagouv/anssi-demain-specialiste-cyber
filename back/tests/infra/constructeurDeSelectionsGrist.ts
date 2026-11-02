@@ -20,9 +20,7 @@ export class ConstructeurLigneGristSelections extends ConstructeurLigneGrist<Lig
     return this;
   }
 
-  avecColonneRessources(
-    idsRessources: number[],
-  ): ConstructeurLigneGristSelections {
+  avecColonneRessources(idsRessources: number[]): ConstructeurLigneGristSelections {
     this.avecColonneEtListeDeValeurs('Ressources', idsRessources);
     return this;
   }

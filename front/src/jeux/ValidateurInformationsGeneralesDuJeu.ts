@@ -1,9 +1,5 @@
 import z from 'zod';
-import type {
-  ErreursValidationJeuEnEdition,
-  InformationsGeneralesDuJeu,
-  JeuEnEdition,
-} from './jeuEnEdition.type';
+import type { ErreursValidationJeuEnEdition, InformationsGeneralesDuJeu, JeuEnEdition } from './jeuEnEdition.type';
 import { extracteurErreursZod, type Validateur } from './validateur';
 
 export class ValidateurInformationsGeneralesDuJeu implements Validateur<InformationsGeneralesDuJeu> {
@@ -21,8 +17,7 @@ export class ValidateurInformationsGeneralesDuJeu implements Validateur<Informat
       eleves: z
         .array(z.string())
         .refine(
-          (prenoms) =>
-            !!prenoms?.length && prenoms.some((prenom) => !!prenom.trim()),
+          (prenoms) => !!prenoms?.length && prenoms.some((prenom) => !!prenom.trim()),
           'Cette information est obligatoire',
         ),
     });

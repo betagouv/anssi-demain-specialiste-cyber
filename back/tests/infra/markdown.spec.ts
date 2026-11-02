@@ -8,28 +8,12 @@ describe('Le markdown', () => {
     expect('bonjour tout le monde').toBe(markdown);
   });
 
-  it.each([
-    '!',
-    '\\',
-    '[',
-    ']',
-    '`',
-    '{',
-    '}',
-    '*',
-    '_',
-    '<',
-    '>',
-    '(',
-    ')',
-    '#',
-    '+',
-    '-',
-    '.',
-    '|',
-  ])(`échappe les %s`, (caractereAEchapper) => {
-    const markdown = aseptiseVersMarkdown(caractereAEchapper);
+  it.each(['!', '\\', '[', ']', '`', '{', '}', '*', '_', '<', '>', '(', ')', '#', '+', '-', '.', '|'])(
+    `échappe les %s`,
+    (caractereAEchapper) => {
+      const markdown = aseptiseVersMarkdown(caractereAEchapper);
 
-    expect(`\\${caractereAEchapper}`).toBe(markdown);
-  });
+      expect(`\\${caractereAEchapper}`).toBe(markdown);
+    },
+  );
 });

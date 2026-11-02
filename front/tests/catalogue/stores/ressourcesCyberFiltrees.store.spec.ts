@@ -24,11 +24,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
       unConstructeurDeRessourceCyber()
         .avecTitre('Sécurité numérique')
         .avecDescription('Former à la cybersécurité par le jeu')
-        .avecThematiques([
-          'Techniques de sécurité numérique',
-          'Valoriser les talents féminins',
-          'Orientation',
-        ])
+        .avecThematiques(['Techniques de sécurité numérique', 'Valoriser les talents féminins', 'Orientation'])
         .avecPublicsCible(['Élèves', 'Enseignants'])
         .avecNiveaux(['Cycle 1', 'Cycle 2'])
         .avecTypes(['Jeux - challenges', 'Contenus audio / vidéo'])
@@ -70,9 +66,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
-    expect(resultat).toStrictEqual<RessourceCyber[]>([
-      get(ressourcesCyberStore)[0],
-    ]);
+    expect(resultat).toStrictEqual<RessourceCyber[]>([get(ressourcesCyberStore)[0]]);
   });
 
   it('effectue le filtre en fonction du niveau', () => {
@@ -80,9 +74,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
-    expect(resultat).toStrictEqual<RessourceCyber[]>([
-      get(ressourcesCyberStore)[0],
-    ]);
+    expect(resultat).toStrictEqual<RessourceCyber[]>([get(ressourcesCyberStore)[0]]);
   });
 
   it('retourne la liste dédupliquée des niveaux existants', () => {
@@ -96,19 +88,13 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
-    expect(resultat).toStrictEqual<RessourceCyber[]>([
-      get(ressourcesCyberStore)[0],
-    ]);
+    expect(resultat).toStrictEqual<RessourceCyber[]>([get(ressourcesCyberStore)[0]]);
   });
 
   it('retourne la liste dédupliquée des types existants', () => {
     const resultat = get(ressourcesCyberFiltrees).types;
 
-    expect(resultat).toEqual([
-      'Contenus audio / vidéo',
-      'Jeux - challenges',
-      'Outil technique',
-    ]);
+    expect(resultat).toEqual(['Contenus audio / vidéo', 'Jeux - challenges', 'Outil technique']);
   });
 
   it('effectue le filtre en fonction du besoin', () => {
@@ -116,9 +102,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
 
     const { resultat } = get(ressourcesCyberFiltrees);
 
-    expect(resultat).toStrictEqual<RessourceCyber[]>([
-      get(ressourcesCyberStore)[0],
-    ]);
+    expect(resultat).toStrictEqual<RessourceCyber[]>([get(ressourcesCyberStore)[0]]);
   });
 
   describe('sur recherche textuelle', () => {
@@ -172,10 +156,7 @@ describe('Le store qui contient la liste des ressources Cyber', () => {
     it('les ressources certifiées sont en premier', () => {
       const { resultat } = get(ressourcesCyberFiltrees);
 
-      expect(resultat).toStrictEqual<RessourceCyber[]>([
-        get(ressourcesCyberStore)[1],
-        get(ressourcesCyberStore)[0],
-      ]);
+      expect(resultat).toStrictEqual<RessourceCyber[]>([get(ressourcesCyberStore)[1], get(ressourcesCyberStore)[0]]);
     });
   });
 });

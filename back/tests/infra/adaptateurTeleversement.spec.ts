@@ -1,25 +1,18 @@
 import { MIMEType } from 'node:util';
 import { Request } from 'express';
 import { assert, describe, expect, it } from 'vitest';
-import {
-  fabriqueAdaptateurTeleversement,
-  PhotosJeuTeleversees,
-} from '../../src/infra/adaptateurTeleversement';
+import { fabriqueAdaptateurTeleversement, PhotosJeuTeleversees } from '../../src/infra/adaptateurTeleversement';
 import { fauxAdaptateurGestionErreur } from '../../src/infra/fauxAdaptateurGestionErreur';
 
 describe('L’adaptateur de téléversement', () => {
   it('détermine la photo de couverture', () => {
     const requete: Request = {
       files: {
-        couverture: [
-          { mimetype: 'image/jpeg', buffer: Buffer.from('une-image') },
-        ],
+        couverture: [{ mimetype: 'image/jpeg', buffer: Buffer.from('une-image') }],
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement(
-      fauxAdaptateurGestionErreur,
-    ).photosJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).photosJeu(requete);
 
     expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
@@ -36,30 +29,22 @@ describe('L’adaptateur de téléversement', () => {
   it('lève une exception si la couverture ne peut être déterminée', () => {
     const requete: Request = {
       files: {
-        'pas-de-couverture': [
-          { mimetype: 'image/jpeg', buffer: Buffer.from('une-image') },
-        ],
+        'pas-de-couverture': [{ mimetype: 'image/jpeg', buffer: Buffer.from('une-image') }],
       },
     } as unknown as Request;
 
     try {
-      fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).photosJeu(
-        requete,
-      );
+      fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).photosJeu(requete);
       assert.fail('La couverture est présente !');
     } catch (e: unknown | Error) {
-      expect((e as Error).message).toBe(
-        'La photo de couverture n’est pas fournie.',
-      );
+      expect((e as Error).message).toBe('La photo de couverture n’est pas fournie.');
     }
   });
 
   it('détermine les photos supplémentaires', () => {
     const requete: Request = {
       files: {
-        couverture: [
-          { mimetype: 'image/jpeg', buffer: Buffer.from('une-image') },
-        ],
+        couverture: [{ mimetype: 'image/jpeg', buffer: Buffer.from('une-image') }],
         photos: [
           {
             mimetype: 'image/jpeg',
@@ -75,9 +60,7 @@ describe('L’adaptateur de téléversement', () => {
       },
     } as unknown as Request;
 
-    const imagesJeu = fabriqueAdaptateurTeleversement(
-      fauxAdaptateurGestionErreur,
-    ).photosJeu(requete);
+    const imagesJeu = fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).photosJeu(requete);
 
     expect(imagesJeu).toStrictEqual<PhotosJeuTeleversees>({
       couverture: {
@@ -128,21 +111,15 @@ describe('L’adaptateur de téléversement', () => {
         attendu: 'image/jpeg',
       },
     ])('pour une image $nom', ({ buffer, attendu }) => {
-      const mimeType = fabriqueAdaptateurTeleversement(
-        fauxAdaptateurGestionErreur,
-      ).recupereTypeImage(buffer);
+      const mimeType = fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).recupereTypeImage(buffer);
 
       expect(mimeType).toBe(attendu);
     });
 
     it('pour un fichier inconnu', () => {
-      const bufferInconnu = Buffer.from([
-        0xff, 0xff, 0xff, 0xff, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01,
-      ]);
+      const bufferInconnu = Buffer.from([0xff, 0xff, 0xff, 0xff, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01]);
 
-      const mimeType = fabriqueAdaptateurTeleversement(
-        fauxAdaptateurGestionErreur,
-      ).recupereTypeImage(bufferInconnu);
+      const mimeType = fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).recupereTypeImage(bufferInconnu);
 
       expect(mimeType).toBeUndefined();
     });
@@ -150,9 +127,7 @@ describe('L’adaptateur de téléversement', () => {
     it('pour un fichier indéfini', () => {
       const bufferIndefini = undefined;
 
-      const mimeType = fabriqueAdaptateurTeleversement(
-        fauxAdaptateurGestionErreur,
-      ).recupereTypeImage(bufferIndefini);
+      const mimeType = fabriqueAdaptateurTeleversement(fauxAdaptateurGestionErreur).recupereTypeImage(bufferIndefini);
 
       expect(mimeType).toBeUndefined();
     });

@@ -3,10 +3,7 @@ import z from 'zod';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
-export const ressourceReactionsJeu = ({
-  entrepotJeux,
-  middleware,
-}: ConfigurationServeur) => {
+export const ressourceReactionsJeu = ({ entrepotJeux, middleware }: ConfigurationServeur) => {
   const routeur = Router();
   const schema = z.strictObject({
     action: z.enum(['ajout', 'retrait']),
@@ -28,9 +25,7 @@ export const ressourceReactionsJeu = ({
     middleware.valideLaCoherenceDuCorps(schema),
     validateurJeuId,
     filetRouteAsynchrone(async (requete, reponse) => {
-      const jeu = await entrepotJeux.parId(
-        (requete.params as Record<string, string>).idJeu,
-      );
+      const jeu = await entrepotJeux.parId((requete.params as Record<string, string>).idJeu);
 
       if (!jeu) return reponse.sendStatus(404);
 

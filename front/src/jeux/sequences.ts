@@ -4,5 +4,4 @@ export const sequences = [
   { code: 'journee', libelle: 'Journée' },
 ];
 
-export const libelleSequence = (code: string): string | undefined =>
-  sequences.find((c) => c.code === code)?.libelle;
+export const libelleSequence = (code: string): string | undefined => sequences.find((c) => c.code === code)?.libelle;

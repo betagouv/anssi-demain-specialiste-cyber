@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { JeuCree } from '../../../src/bus/evenements/jeu/jeuCree';
 import { notifieEvenementJeuCreeSurMessagerieInstantanee } from '../../../src/bus/evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
-import {
-  MessagerieInstantanee,
-  RetourEvaluation,
-} from '../../../src/metier/messagerieInstantanee';
+import { MessagerieInstantanee, RetourEvaluation } from '../../../src/metier/messagerieInstantanee';
 import { FournisseurHorlogeDeTest } from '../../infra/fournisseurHorlogeDeTest';
 
 describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermost", () => {
@@ -17,9 +14,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
     };
     FournisseurHorlogeDeTest.initialise(new Date('2025-03-10'));
 
-    await notifieEvenementJeuCreeSurMessagerieInstantanee(
-      messagerieInstantanee,
-    )(
+    await notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee)(
       new JeuCree(
         'u1@mail.com',
         'cyberUno',
@@ -54,9 +49,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
     };
     FournisseurHorlogeDeTest.initialise(new Date('2025-03-10'));
 
-    await notifieEvenementJeuCreeSurMessagerieInstantanee(
-      messagerieInstantanee,
-    )(
+    await notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee)(
       new JeuCree(
         'u1@mail.com',
         'cyberUno',
@@ -91,9 +84,7 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
     };
     FournisseurHorlogeDeTest.initialise(new Date('2025-03-10'));
 
-    await notifieEvenementJeuCreeSurMessagerieInstantanee(
-      messagerieInstantanee,
-    )(
+    await notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee)(
       new JeuCree(
         'u1@mail.com',
         '## cyberUno',
@@ -122,17 +113,13 @@ describe("L'abonnement qui consigne la création d'un nouveau jeu dans Mattermos
   it('ne notifie pas un évènement de JeuCree si il n’y a pas de précisions', async () => {
     let retourRecu = false;
     const messagerieInstantanee: MessagerieInstantanee = {
-      notifieUnRetourEvaluation: async (
-        _retourExperience: RetourEvaluation,
-      ) => {
+      notifieUnRetourEvaluation: async (_retourExperience: RetourEvaluation) => {
         retourRecu = true;
       },
     };
     FournisseurHorlogeDeTest.initialise(new Date('2025-03-10'));
 
-    await notifieEvenementJeuCreeSurMessagerieInstantanee(
-      messagerieInstantanee,
-    )(
+    await notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee)(
       new JeuCree(
         'u1@mail.com',
         'cyberUno',

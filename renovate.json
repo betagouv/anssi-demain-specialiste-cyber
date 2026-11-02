@@ -9,14 +9,7 @@
   "packageRules": [
     {
       "description": "lockFileMaintenance",
-      "matchUpdateTypes": [
-        "pin",
-        "digest",
-        "patch",
-        "minor",
-        "major",
-        "lockFileMaintenance"
-      ],
+      "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
     },
     {
@@ -34,20 +27,13 @@
     {
       "description": "Regroupe les mises à jour des dépendances AWS SDK utilisées pour S3",
       "matchManagers": ["npm"],
-      "matchPackageNames": [
-        "@aws-sdk/client-s3",
-        "@aws-sdk/credential-providers"
-      ],
+      "matchPackageNames": ["@aws-sdk/client-s3", "@aws-sdk/credential-providers"],
       "groupName": "AWS SDK"
     },
     {
       "description": "Regroupe les mises à jour typescript-eslint",
       "matchManagers": ["npm"],
-      "matchPackageNames": [
-        "typescript-eslint",
-        "@typescript-eslint/eslint-plugin",
-        "@typescript-eslint/parser"
-      ],
+      "matchPackageNames": ["typescript-eslint", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser"],
       "groupName": "typescript-eslint"
     },
     {

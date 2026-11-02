@@ -1,22 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { RecupereRessourceHttp } from '../../src/infra/clientHttp';
-import {
-  EntrepôtFonctionsGrist,
-  FonctionGrist,
-} from '../../src/infra/entrepotFonctionsGrist';
+import { EntrepôtFonctionsGrist, FonctionGrist } from '../../src/infra/entrepotFonctionsGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
-import {
-  ConstructeurLigneGristFonctions,
-  ConstructeurRéponseFonctionsGrist,
-} from './constructeurDeFonctionsGrist';
+import { ConstructeurLigneGristFonctions, ConstructeurRéponseFonctionsGrist } from './constructeurDeFonctionsGrist';
 
 describe('L’entrepôt des fonctions grist', () => {
   describe('sur demande de toutes les fonctions', () => {
     it('sait appeler la bonne ressource', async () => {
       let urlAppelee = '';
-      const clientHttp: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async (url: string) => {
+      const clientHttp: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async (url: string) => {
         urlAppelee = url;
         return { records: [] };
       };
@@ -32,23 +24,15 @@ describe('L’entrepôt des fonctions grist', () => {
     });
 
     it('sait reconstruire les fonctions', async () => {
-      const fonctionsGrist: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async () =>
+      const fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async () =>
         new ConstructeurRéponseFonctionsGrist()
           .ajouteUneLigne(
             new ConstructeurLigneGristFonctions()
               .avecColonneEtValeur('Fonction', 'Cryptologue')
-              .avecColonneEtValeur(
-                'Mission_principale',
-                'Met au point des systèmes de chiffrement.',
-              )
+              .avecColonneEtValeur('Mission_principale', 'Met au point des systèmes de chiffrement.')
               .avecColonneEtValeur('Lien', 'https://exemple.fr/cryptologue')
               .avecColonneEtValeur('Temoignages', 'Mélissa Rossi')
-              .avecColonneEtValeur(
-                'Lien_du_temoignage',
-                'https://exemple.fr/temoignage',
-              )
+              .avecColonneEtValeur('Lien_du_temoignage', 'https://exemple.fr/temoignage')
               .avecColonneEtValeur('Femme_de_la_cyber', 1)
               .construis(),
           )
@@ -81,16 +65,11 @@ describe('L’entrepôt des fonctions grist', () => {
     });
 
     it('ne prend que le premier lien du témoignage', async () => {
-      const fonctionsGrist: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async () =>
+      const fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async () =>
         new ConstructeurRéponseFonctionsGrist()
           .ajouteUneLigne(
             new ConstructeurLigneGristFonctions()
-              .avecColonneEtValeur(
-                'Lien_du_temoignage',
-                'https://exemple.fr/temoignage ; Autre lien que je veux pas',
-              )
+              .avecColonneEtValeur('Lien_du_temoignage', 'https://exemple.fr/temoignage ; Autre lien que je veux pas')
               .construis(),
           )
           .construis();
@@ -98,20 +77,14 @@ describe('L’entrepôt des fonctions grist', () => {
 
       const fonctions = await entrepôt.tous();
 
-      expect(fonctions[0].témoignage.lien).toBe(
-        'https://exemple.fr/temoignage',
-      );
+      expect(fonctions[0].témoignage.lien).toBe('https://exemple.fr/temoignage');
     });
 
     it('récupère le nom de la famille', async () => {
-      const fonctionsGrist: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async () =>
+      const fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async () =>
         new ConstructeurRéponseFonctionsGrist()
           .ajouteUneLigne(
-            new ConstructeurLigneGristFonctions()
-              .avecColonneEtValeur('Famille_de_metiers', 'Pilotage')
-              .construis(),
+            new ConstructeurLigneGristFonctions().avecColonneEtValeur('Famille_de_metiers', 'Pilotage').construis(),
           )
           .construis();
       const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
@@ -123,9 +96,7 @@ describe('L’entrepôt des fonctions grist', () => {
 
     it('ne retourne que les fonctions publiées', async () => {
       let urlAppelee = '';
-      const clientHttp: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async (url: string) => {
+      const clientHttp: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async (url: string) => {
         urlAppelee = url;
         return { records: [] };
       };
@@ -133,21 +104,13 @@ describe('L’entrepôt des fonctions grist', () => {
 
       await entrepôt.tous();
 
-      expect(
-        urlAppelee.endsWith('%20where%20Publie%20is%20not%20null'),
-      ).toBeTruthy();
+      expect(urlAppelee.endsWith('%20where%20Publie%20is%20not%20null')).toBeTruthy();
     });
 
     it('retourne l’id', async () => {
-      const fonctionsGrist: RecupereRessourceHttp<
-        ReponseGrist<FonctionGrist>
-      > = async () =>
+      const fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async () =>
         new ConstructeurRéponseFonctionsGrist()
-          .ajouteUneLigne(
-            new ConstructeurLigneGristFonctions()
-              .avecColonneEtValeur('id', 28)
-              .construis(),
-          )
+          .ajouteUneLigne(new ConstructeurLigneGristFonctions().avecColonneEtValeur('id', 28).construis())
           .construis();
       const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
 

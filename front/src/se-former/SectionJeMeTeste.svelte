@@ -2,13 +2,11 @@
 
 <article id="je-me-teste" class="section-pix">
   <dsfr-container>
-    <h3 class="section-pix-titre fr-h2">
-      Fais le point sur ton niveau avec Pix
-    </h3>
+    <h3 class="section-pix-titre fr-h2">Fais le point sur ton niveau avec Pix</h3>
 
     <p class="section-pix-description texte-article-lg">
-      Deux parcours Pix pour tester ce que tu sais déjà et repérer ce qu'il te
-      reste à apprendre, question après question.
+      Deux parcours Pix pour tester ce que tu sais déjà et repérer ce qu'il te reste à apprendre, question après
+      question.
     </p>
 
     <div class="parcours">
@@ -32,8 +30,8 @@
         <div class="parcours-etape">
           <span class="parcours-numero">3</span>
           <p>
-            <strong>Réponds à ton rythme&nbsp;:</strong> le parcours s'adapte à ton
-            niveau et tu découvres ton résultat à la fin&nbsp;!
+            <strong>Réponds à ton rythme&nbsp;:</strong> le parcours s'adapte à ton niveau et tu découvres ton résultat à
+            la fin&nbsp;!
           </p>
         </div>
       </div>
@@ -48,10 +46,7 @@
         src="/assets/images/se-former/illustration-pix-garcon-pull-bleu-ordinateur-etape-1.avif"
         no-link
       >
-        <dsfr-badges-group
-          slot="badgesgroup"
-          badges={[{ label: 'Débutant', accent: 'green-emeraude' }]}
-          size="sm"
+        <dsfr-badges-group slot="badgesgroup" badges={[{ label: 'Débutant', accent: 'green-emeraude' }]} size="sm"
         ></dsfr-badges-group>
 
         <dsfr-button
@@ -75,10 +70,7 @@
         src="/assets/images/se-former/illustration-pix-fille-tshirt-orange-ordinateur-etape-2.avif"
         no-link
       >
-        <dsfr-badges-group
-          slot="badgesgroup"
-          badges={[{ label: 'Confirmé', accent: 'blue-cumulus' }]}
-          size="sm"
+        <dsfr-badges-group slot="badgesgroup" badges={[{ label: 'Confirmé', accent: 'blue-cumulus' }]} size="sm"
         ></dsfr-badges-group>
 
         <dsfr-button
@@ -95,9 +87,7 @@
 
 <article class="section-cyber">
   <dsfr-container>
-    <h3 class="section-cyber-titre fr-h4">
-      Aller plus loin dans la cyber&nbsp;!
-    </h3>
+    <h3 class="section-cyber-titre fr-h4">Aller plus loin dans la cyber&nbsp;!</h3>
 
     <div class="ressources">
       <dsfr-card
@@ -132,11 +122,7 @@
         size="md"
         src="/assets/images/se-former/illustration-pix-trophee-avec-certificat.avif"
       >
-        <dsfr-link
-          slot="linksgroup"
-          label="Voir les plateformes d'entrainement"
-          href="#je-m-entraine"
-          size="md"
+        <dsfr-link slot="linksgroup" label="Voir les plateformes d'entrainement" href="#je-m-entraine" size="md"
         ></dsfr-link>
       </dsfr-card>
 
@@ -151,12 +137,7 @@
         size="md"
         src="/assets/images/se-former/illustration-carte-metier-hacker-ethique.avif"
       >
-        <dsfr-link
-          slot="linksgroup"
-          label="Explorer les métiers cyber"
-          href="/metiers"
-          size="md"
-        ></dsfr-link>
+        <dsfr-link slot="linksgroup" label="Explorer les métiers cyber" href="/metiers" size="md"></dsfr-link>
       </dsfr-card>
     </div>
 

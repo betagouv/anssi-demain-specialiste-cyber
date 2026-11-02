@@ -25,8 +25,7 @@ export const consigneEvenementJeuCreeDansJournal = ({
         nombreTemoignages: evenement.nombreTemoignages,
         evaluationDecouverte: evenement.evaluationDecouverte,
         evaluationInteret: evenement.evaluationInteret,
-        evaluationSatisfactionGenerale:
-          evenement.evaluationSatisfactionGenerale,
+        evaluationSatisfactionGenerale: evenement.evaluationSatisfactionGenerale,
         consentement: evenement.consentement,
       },
       type: 'JEU_CREE',

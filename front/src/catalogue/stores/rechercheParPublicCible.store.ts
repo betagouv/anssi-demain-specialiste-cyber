@@ -9,9 +9,6 @@ export const rechercheParPublicCible = {
   reinitialise: () => publicsCible.set([]),
   ok: (ressourcesCyber: RessourceCyber) => {
     const valeurFiltre = get(publicsCible);
-    return (
-      !valeurFiltre.length ||
-      ressourcesCyber.publicsCible.some((s) => valeurFiltre.includes(s))
-    );
+    return !valeurFiltre.length || ressourcesCyber.publicsCible.some((s) => valeurFiltre.includes(s));
   },
 };

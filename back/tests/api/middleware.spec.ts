@@ -2,11 +2,7 @@ import { NextFunction, Response } from 'express';
 import { createRequest, createResponse, MockResponse } from 'node-mocks-http';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import {
-  fabriqueMiddleware,
-  Middleware,
-  RequeteNonTypee,
-} from '../../src/api/middleware';
+import { fabriqueMiddleware, Middleware, RequeteNonTypee } from '../../src/api/middleware';
 import { MoteurDeRendu } from '../../src/api/moteurDeRendu';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
@@ -129,10 +125,7 @@ describe('Le middleware', () => {
       });
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       expect(requete.utilisateur).toStrictEqual(jeanneDupont);
     });
@@ -140,10 +133,7 @@ describe('Le middleware', () => {
     it("n'assigne pas l'utilisateur si non défini dans la session", async () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       expect(requete.utilisateur).toBeUndefined();
     });
@@ -151,10 +141,7 @@ describe('Le middleware', () => {
     it('appelle la suite', async () => {
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 
@@ -167,10 +154,7 @@ describe('Le middleware', () => {
       };
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 
@@ -186,10 +170,7 @@ describe('Le middleware', () => {
       };
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage,
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 
@@ -204,10 +185,7 @@ describe('Le middleware', () => {
         };
         let suiteAppelee = false;
 
-        await middleware.ajouteUtilisateurARequete(
-          entrepotUtilisateur,
-          adaptateurHachage,
-        )(requete, reponse, () => {
+        await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
           suiteAppelee = true;
         });
 
@@ -223,13 +201,13 @@ describe('Le middleware', () => {
         };
         let suiteAppelee = false;
 
-        await middleware.ajouteUtilisateurARequete(
-          entrepotUtilisateur,
-          adaptateurHachage,
-          'souple',
-        )(requete, reponse, () => {
-          suiteAppelee = true;
-        });
+        await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage, 'souple')(
+          requete,
+          reponse,
+          () => {
+            suiteAppelee = true;
+          },
+        );
 
         expect(suiteAppelee).toBeTruthy();
         expect(requete.utilisateur).toBeUndefined();
@@ -241,11 +219,11 @@ describe('Le middleware', () => {
         });
         await entrepotUtilisateur.ajoute(jeanneDupont);
 
-        await middleware.ajouteUtilisateurARequete(
-          entrepotUtilisateur,
-          adaptateurHachage,
-          'souple',
-        )(requete, reponse, () => {});
+        await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage, 'souple')(
+          requete,
+          reponse,
+          () => {},
+        );
 
         expect(requete.utilisateur).toStrictEqual(jeanneDupont);
       });

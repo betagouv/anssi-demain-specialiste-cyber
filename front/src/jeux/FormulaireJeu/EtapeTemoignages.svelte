@@ -8,17 +8,13 @@
   };
 
   const supprimeTemoignage = (index: number) => {
-    $jeuEnEditionStore.temoignages = $jeuEnEditionStore.temoignages?.toSpliced(
-      index,
-      1,
-    );
+    $jeuEnEditionStore.temoignages = $jeuEnEditionStore.temoignages?.toSpliced(index, 1);
   };
 </script>
 
 <p>
-  <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout comme
-  celui de vos élèves, peut inspirer d’autres enseignants à organiser CyberEnJeux
-  pour faire découvrir la cybersécurité à leurs élèves.
+  <strong>Cette étape est facultative.</strong> Néanmoins votre témoignage, tout comme celui de vos élèves, peut inspirer
+  d’autres enseignants à organiser CyberEnJeux pour faire découvrir la cybersécurité à leurs élèves.
 </p>
 {#if $jeuEnEditionStore.temoignages}
   {#each $jeuEnEditionStore.temoignages as temoignage, index}
@@ -51,12 +47,7 @@
   {/each}
 {/if}
 <div class="actions">
-  <dsfr-button
-    label="Ajouter un témoignage"
-    kind="secondary"
-    hasIcon="true"
-    icon="add-line"
-    use:clic={ajouteTemoignage}
+  <dsfr-button label="Ajouter un témoignage" kind="secondary" hasIcon="true" icon="add-line" use:clic={ajouteTemoignage}
   ></dsfr-button>
 </div>
 

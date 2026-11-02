@@ -33,11 +33,7 @@ describe('La ressource sélection entrainement', () => {
 
     it('retourne la liste des sélections', async () => {
       await entrepôtSélectionsMesure.ajoute(
-        uneSelection()
-          .avecUnId('former')
-          .avecUnTitre('Former')
-          .avecUneExplication('Former lorem ipsum')
-          .construis(),
+        uneSelection().avecUnId('former').avecUnTitre('Former').avecUneExplication('Former lorem ipsum').construis(),
       );
       await entrepôtSélectionsMesure.ajoute(
         uneSelection()

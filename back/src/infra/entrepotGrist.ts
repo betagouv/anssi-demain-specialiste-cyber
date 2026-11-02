@@ -16,9 +16,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
   private cache: Cache<ReponseGrist<TYPE_DOCUMENT>>;
 
   constructor(
-    private readonly ressourcesHTTPGrist: RecupereRessourceHttp<
-      ReponseGrist<TYPE_DOCUMENT>
-    >,
+    private readonly ressourcesHTTPGrist: RecupereRessourceHttp<ReponseGrist<TYPE_DOCUMENT>>,
     protected readonly schema: string,
     protected readonly table: string,
   ) {
@@ -30,9 +28,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
 
   protected async appelleGrist(filtre?: Filtre) {
     const cheminDeBase = this.cheminDeBase();
-    const chemin = filtre
-      ? `${cheminDeBase}?filter=${encodeURIComponent(JSON.stringify(filtre))}`
-      : cheminDeBase;
+    const chemin = filtre ? `${cheminDeBase}?filter=${encodeURIComponent(JSON.stringify(filtre))}` : cheminDeBase;
     const url = new URL(chemin, this.urlDeBase);
     return await this.cache.get(chemin, () =>
       this.ressourcesHTTPGrist(url.toString(), {
@@ -44,8 +40,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     );
   }
 
-  protected cheminDeBase = () =>
-    `api/docs/${this.schema}/tables/${this.table}/records`;
+  protected cheminDeBase = () => `api/docs/${this.schema}/tables/${this.table}/records`;
 
   protected aseptiseListe<T>(colonne: T[] | null | undefined): T[] {
     return colonne?.slice(1) ?? [];
