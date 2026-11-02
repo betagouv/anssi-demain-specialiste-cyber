@@ -75,6 +75,7 @@ serviceCoherenceSecretsHachage
     const adaptateurGestionErreur = fabriqueAdaptateurGestionErreur();
 
     const entrepotMetier = new EntrepotMetiersGrist();
+    const entrepôtFonctions = new EntrepôtFonctionsGrist();
 
     const configurationServeurSansMiddleware: ConfigurationServeurSansMiddleware =
       {
@@ -126,8 +127,9 @@ serviceCoherenceSecretsHachage
         entrepôtFamillesDeMétier: new EntrepôtFamillesDeMétierGrist(
           entrepotMetier,
           entrepotRessourcesCyber,
+          entrepôtFonctions,
         ),
-        entrepôtFonctions: new EntrepôtFonctionsGrist(),
+        entrepôtFonctions,
       };
     const configurationServeur: ConfigurationServeur = {
       ...configurationServeurSansMiddleware,

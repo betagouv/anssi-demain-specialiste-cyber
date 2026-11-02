@@ -1,3 +1,4 @@
+import { Fonction } from './fonction';
 import { Metier } from './metier';
 import { RessourceCyber } from './ressourceCyber';
 
@@ -14,6 +15,7 @@ export class FamilleDeMétier {
   rôles: Rôle[];
   profils: Metier[];
   ressourcesAssociées: RessourceCyber[];
+  fonctions: Fonction[];
 
   constructor(données: {
     code: string;
@@ -23,6 +25,7 @@ export class FamilleDeMétier {
     rôles: Rôle[];
     profils?: Metier[];
     ressourcesAssociées?: RessourceCyber[];
+    fonctions?: Fonction[];
   }) {
     this.code = données.code;
     this.titre = données.titre;
@@ -31,5 +34,6 @@ export class FamilleDeMétier {
     this.rôles = données.rôles;
     this.profils = données.profils ?? [];
     this.ressourcesAssociées = données.ressourcesAssociées ?? [];
+    this.fonctions = données.fonctions ?? [];
   }
 }

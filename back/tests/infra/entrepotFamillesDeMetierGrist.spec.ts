@@ -5,6 +5,8 @@ import {
   FamilleDeMetierGrist,
 } from '../../src/infra/entrepotFamillesDeMetierGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
+import { Fonction } from '../../src/metier/fonction';
+import { EntrepôtFonctionsMémoire } from '../api/entrepotFonctionsMemoire';
 import { unMetier } from '../metier/constructeurMetier';
 import { uneRessourceCyber } from '../metier/constructeurRessourceCyber';
 import {
@@ -27,6 +29,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       const entrepotRessourcesCyberGrist = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
         new EntrepotRessourcesCyberMemoire(),
+        new EntrepôtFonctionsMémoire(),
         clientHttp,
       );
 
@@ -74,6 +77,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
         new EntrepotRessourcesCyberMemoire(),
+        new EntrepôtFonctionsMémoire(),
         famillesDeMetierGrist,
       );
 
@@ -113,6 +117,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         entrepôtMétiers,
         new EntrepotRessourcesCyberMemoire(),
+        new EntrepôtFonctionsMémoire(),
         famillesDeMetierGrist,
       );
 
@@ -145,6 +150,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         new EntrepotMetiersMemoire(),
         entrepôtRessourcesCyber,
+        new EntrepôtFonctionsMémoire(),
         famillesDeMetierGrist,
       );
 
@@ -153,6 +159,45 @@ describe('L’entrepôt des familles de métier grist', () => {
       expect(familles[0].ressourcesAssociées).toHaveLength(2);
       expect(familles[0].ressourcesAssociées[0].titre).toBe('Passe ton Hack');
       expect(familles[0].ressourcesAssociées[1].titre).toBe('Cyber Guide');
+    });
+
+    const uneFonction = (id: number, nom: string): Fonction => ({
+      id,
+      nom,
+      famille: '',
+      témoignage: { nom: '', lien: '', femme: true },
+      missionPrincipale: '',
+      lien: '',
+    });
+
+    it('sait associer les fonctions', async () => {
+      const famillesDeMetierGrist: RecupereRessourceHttp<
+        ReponseGrist<FamilleDeMetierGrist>
+      > = async () =>
+        new ConstructeurRéponseFamillesDeMétierGrist()
+          .ajouteUneLigne(
+            uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs(
+              'Metiers',
+              [5, 10],
+            ),
+          )
+          .construis();
+      const entrepôtFonctions = new EntrepôtFonctionsMémoire();
+      await entrepôtFonctions.ajoute(uneFonction(5, 'Cryptologue'));
+      await entrepôtFonctions.ajoute(uneFonction(10, 'Analyste SOC'));
+
+      const entrepôt = new EntrepôtFamillesDeMétierGrist(
+        new EntrepotMetiersMemoire(),
+        new EntrepotRessourcesCyberMemoire(),
+        entrepôtFonctions,
+        famillesDeMetierGrist,
+      );
+
+      const familles = await entrepôt.tous();
+
+      expect(familles[0].fonctions).toHaveLength(2);
+      expect(familles[0].fonctions[0].nom).toBe('Cryptologue');
+      expect(familles[0].fonctions[1].nom).toBe('Analyste SOC');
     });
   });
 });

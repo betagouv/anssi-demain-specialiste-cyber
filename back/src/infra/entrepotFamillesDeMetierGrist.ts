@@ -1,4 +1,5 @@
 import { EntrepôtFamillesDeMétier } from '../metier/entrepotFamillesDeMetier';
+import { EntrepôtFonctions } from '../metier/entrepotFonctions';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { FamilleDeMétier } from '../metier/familleDeMetier';
@@ -17,6 +18,7 @@ export type FamilleDeMetierGrist = {
     Tuile_3: string;
     Profils_de_cette_famille: number[];
     Ressources_associees: number[];
+    Metiers: number[];
   };
 };
 
@@ -25,10 +27,13 @@ export class EntrepôtFamillesDeMétierGrist
   implements EntrepôtFamillesDeMétier
 {
   private entrepôtMétiers: EntrepotMetiers;
+  private entrepôtRessourcesCyber: EntrepotRessourcesCyber;
+  private entrepôtFonctions: EntrepôtFonctions;
 
   constructor(
     entrepôtMétiers: EntrepotMetiers,
     entrepôtRessourcesCyber: EntrepotRessourcesCyber,
+    entrepôtFonctions: EntrepôtFonctions,
     famillesDeMetierGrist: RecupereRessourceHttp<
       ReponseGrist<FamilleDeMetierGrist>
     > = creeRecupereRessourceHttp(),
@@ -38,6 +43,7 @@ export class EntrepôtFamillesDeMétierGrist
       adaptateurEnvironnement.grist().idDocument,
       adaptateurEnvironnement.grist().famillesDeMétier().idTable,
     );
+    this.entrepôtFonctions = entrepôtFonctions;
     this.entrepôtRessourcesCyber = entrepôtRessourcesCyber;
     this.entrepôtMétiers = entrepôtMétiers;
   }
@@ -45,6 +51,7 @@ export class EntrepôtFamillesDeMétierGrist
   async tous(): Promise<FamilleDeMétier[]> {
     const métiers = await this.entrepôtMétiers.tous();
     const ressourcesCyber = await this.entrepôtRessourcesCyber.tous();
+    const fonctions = await this.entrepôtFonctions.tous();
 
     const réponse = await this.appelleGrist();
     return réponse.records.map(
@@ -69,6 +76,9 @@ export class EntrepôtFamillesDeMétierGrist
           )
             .map((r) => ressourcesCyber.find((ressource) => ressource.id === r))
             .filter((r) => r !== undefined),
+          fonctions: this.aseptiseListe(familleGrist.fields.Metiers)
+            .map((m) => fonctions.find((fonction) => fonction.id === m))
+            .filter((m) => m !== undefined),
         }),
     );
   }
@@ -78,5 +88,4 @@ export class EntrepôtFamillesDeMétierGrist
       description: champ.split('/')[1].trim(),
     };
   };
-  private entrepôtRessourcesCyber: EntrepotRessourcesCyber;
 }
