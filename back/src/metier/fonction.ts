@@ -5,6 +5,7 @@ export type Témoignage = {
 };
 
 export type Fonction = {
+  id: number;
   nom: string;
   famille: string;
   missionPrincipale: string;

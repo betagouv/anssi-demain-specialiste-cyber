@@ -65,6 +65,7 @@ describe('L’entrepôt des fonctions grist', () => {
 
       expect(fonctions).toHaveLength(2);
       expect(fonctions[0]).toStrictEqual({
+        id: undefined,
         nom: 'Cryptologue',
         famille: '',
         missionPrincipale: 'Met au point des systèmes de chiffrement.',
@@ -135,6 +136,24 @@ describe('L’entrepôt des fonctions grist', () => {
       expect(
         urlAppelee.endsWith('%20where%20Publie%20is%20not%20null'),
       ).toBeTruthy();
+    });
+
+    it('retourne l’id', async () => {
+      const fonctionsGrist: RecupereRessourceHttp<
+        ReponseGrist<FonctionGrist>
+      > = async () =>
+        new ConstructeurRéponseFonctionsGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFonctions()
+              .avecColonneEtValeur('id', 28)
+              .construis(),
+          )
+          .construis();
+      const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
+
+      const fonctions = await entrepôt.tous();
+
+      expect(fonctions[0].id).toBe(28);
     });
   });
 });
