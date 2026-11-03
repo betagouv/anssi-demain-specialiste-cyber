@@ -7,9 +7,11 @@ import { CompteCree } from './evenements/compteCree/compteCree';
 import { consigneEvenementCompteCreeDansJournal } from './evenements/compteCree/consigneEvenementCompteCreeDansJournal';
 import { creeContactDansExpediteurEmail } from './evenements/compteCree/creeContactDansExpediteurEmail';
 import { envoieEmailDeBienvenue } from './evenements/compteCree/envoieEmailDeBienvenue';
+import { consigneEvenementTestMétiersRéaliséDansJournal } from './evenements/consigneEvenementTestMetiersRealiseDansJournal';
 import { consigneEvenementJeuCreeDansJournal } from './evenements/jeu/consigneEvenementJeuCreeDansJournal';
 import { JeuCree } from './evenements/jeu/jeuCree';
 import { notifieEvenementJeuCreeSurMessagerieInstantanee } from './evenements/jeu/notifieEvenementJeuCreeSurMessagerieInstantanee';
+import { TestMétiersRéalisé } from './evenements/TestMetiersRealise';
 
 type Cablage = {
   adaptateurJournal: AdaptateurJournal;
@@ -48,4 +50,6 @@ export const cableTousLesAbonnes = ({
   );
 
   busEvenements.abonne(JeuCree, notifieEvenementJeuCreeSurMessagerieInstantanee(messagerieInstantanee));
+
+  busEvenements.abonne(TestMétiersRéalisé, consigneEvenementTestMétiersRéaliséDansJournal({ adaptateurJournal }));
 };
