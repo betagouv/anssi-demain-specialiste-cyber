@@ -6,7 +6,8 @@ import { ThematiqueDeJeux } from '../metier/referentiels/thematiqueDeJeux';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
 
-export type DonneesEvenement = DonneesEvenementNouvelUtilisateur | DonneesEvenementJeuCree;
+export type DonneesEvenement =
+  DonneesEvenementNouvelUtilisateur | DonneesEvenementJeuCree | DonneesEvenementTestMétierRéalisé;
 
 type DonneesCommunesEvenement = {
   date: Date;
@@ -38,6 +39,14 @@ type DonneesEvenementJeuCree = DonneesCommunesEvenement & {
     consentement: boolean;
   };
   type: 'JEU_CREE';
+};
+
+type DonneesEvenementTestMétierRéalisé = DonneesCommunesEvenement & {
+  donnees: {
+    réponses: number[];
+    suggestions: { correspondance: number; nom: string }[];
+  };
+  type: 'TEST_MÉTIER_RÉALISÉ';
 };
 
 export type AdaptateurJournal = {
