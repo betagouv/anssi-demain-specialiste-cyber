@@ -12,6 +12,7 @@
   import IconeJExplore from '../../statique/assets/images/se-former/icone-personnage-devant-ordinateur.svg?raw';
   import IconeJeMeRepere from '../../statique/assets/images/se-former/icone-rond-avec-coche-rouge.svg?raw';
   import SectionJeTraceMaRoute from './SectionJeTraceMaRoute.svelte';
+  import TestMetiersCyber from './TestMetiersCyber.svelte';
 
   type Categorie = 'je-me-repere' | 'j-explore' | 'j-ecoute-les-pros' | 'je-trace-ma-route';
 
@@ -96,6 +97,8 @@
     return () => window.removeEventListener('hashchange', synchroniseDepuisLeHash);
   });
 </script>
+
+<TestMetiersCyber />
 
 <section class="onisep">
   <dsfr-container>
