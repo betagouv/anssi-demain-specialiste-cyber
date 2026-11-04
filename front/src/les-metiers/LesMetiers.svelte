@@ -13,6 +13,7 @@
   import IconeJeMeRepere from '../../statique/assets/images/se-former/icone-rond-avec-coche-rouge.svg?raw';
   import SectionJEcouteLesPros from './SectionJEcouteLesPros.svelte';
   import SectionJeTraceMaRoute from './SectionJeTraceMaRoute.svelte';
+  import SectionJExplore from './SectionJExplore.svelte';
   import TestMetiersCyber from './TestMetiersCyber.svelte';
 
   type Categorie = 'je-me-repere' | 'j-explore' | 'j-ecoute-les-pros' | 'je-trace-ma-route';
@@ -146,7 +147,7 @@
   {#if categorieActive === 'je-me-repere'}
     Section "Je me repère"
   {:else if categorieActive === 'j-explore'}
-    Section "J'explore"
+    <SectionJExplore />
   {:else if categorieActive === 'j-ecoute-les-pros'}
     <SectionJEcouteLesPros />
   {:else if categorieActive === 'je-trace-ma-route'}
