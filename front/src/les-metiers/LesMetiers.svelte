@@ -11,6 +11,7 @@
   import IconeJeTraceMaRoute from '../../statique/assets/images/les-metiers/icone-sac-a-dos.svg?raw';
   import IconeJExplore from '../../statique/assets/images/se-former/icone-personnage-devant-ordinateur.svg?raw';
   import IconeJeMeRepere from '../../statique/assets/images/se-former/icone-rond-avec-coche-rouge.svg?raw';
+  import SectionJEcouteLesPros from './SectionJEcouteLesPros.svelte';
   import SectionJeTraceMaRoute from './SectionJeTraceMaRoute.svelte';
 
   type Categorie = 'je-me-repere' | 'j-explore' | 'j-ecoute-les-pros' | 'je-trace-ma-route';
@@ -144,7 +145,7 @@
   {:else if categorieActive === 'j-explore'}
     Section "J'explore"
   {:else if categorieActive === 'j-ecoute-les-pros'}
-    Section "J'écoute les pros"
+    <SectionJEcouteLesPros />
   {:else if categorieActive === 'je-trace-ma-route'}
     <SectionJeTraceMaRoute />
   {/if}
