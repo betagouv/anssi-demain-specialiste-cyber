@@ -68,7 +68,7 @@
       .contenu {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: var(--espacement-sections-contenu, 2rem);
 
         @include a-partir-de(md) {
           padding-left: 0;

@@ -10,6 +10,7 @@ export * from './jeux/FicheJeu.svelte';
 export * from './jeux/FormulaireJeu/FormulaireJeu.svelte';
 export * from './jeux/MesJeux.svelte';
 export * from './metiers/FicheMetier.svelte';
+export * from './familles-metier/FicheFamilleMetier.svelte';
 export * from './profil/CreationCompte.svelte';
 export * from './profil/ZoneIdentification.svelte';
 export * from './relai/FicheRelai.svelte';
