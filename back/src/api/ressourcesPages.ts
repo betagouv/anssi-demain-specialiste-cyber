@@ -44,6 +44,7 @@ const pages: Page[] = [
   { route: '/selection-enseignants', protegee: false },
   { route: '/france-cybersecurity-challenge', protegee: false },
   { route: '/se-former', protegee: false },
+  { route: '/familles-metier', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {

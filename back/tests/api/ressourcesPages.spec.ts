@@ -53,6 +53,10 @@ describe('Les ressources de page', () => {
       vue: 'france-cybersecurity-challenge',
     },
     { route: '/se-former', vue: 'se-former' },
+    {
+      route: '/familles-metier/pilotage',
+      vue: 'familles-metier',
+    },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';
