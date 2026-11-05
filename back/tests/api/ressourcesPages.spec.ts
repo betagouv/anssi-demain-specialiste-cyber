@@ -54,6 +54,10 @@ describe('Les ressources de page', () => {
     },
     { route: '/les-metiers', vue: 'les-metiers' },
     { route: '/se-former', vue: 'se-former' },
+    {
+      route: '/familles-metier/pilotage',
+      vue: 'familles-metier',
+    },
   ])('concernant la page $route', ({ route, vue }) => {
     it('renvoie la page', async () => {
       let vueRendue = '';

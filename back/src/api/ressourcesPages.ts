@@ -45,6 +45,7 @@ const pages: Page[] = [
   { route: '/france-cybersecurity-challenge', protegee: false },
   { route: '/les-metiers', protegee: false },
   { route: '/se-former', protegee: false },
+  { route: '/familles-metier', protegee: false },
 ];
 
 export const ressourcesPages = (configurationServeur: ConfigurationServeur) => {
