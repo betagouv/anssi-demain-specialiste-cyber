@@ -5,6 +5,7 @@
       variant: { attribute: 'variant', type: 'String' },
       ariane: { attribute: 'ariane', type: 'Array' },
       avecFiltres: { attribute: 'avec-filtres', type: 'Boolean' },
+      sansImageDeFond: { attribute: 'sans-image-de-fond', type: 'Boolean' },
     },
   }}
 />
@@ -20,12 +21,13 @@
     variant: 'standard' | 'alternatif' | 'clair';
     ariane: Segment[];
     avecFiltres?: boolean;
+    sansImageDeFond?: boolean;
   };
 
-  const { variant = 'standard', ariane = [], avecFiltres = false }: Props = $props();
+  const { variant = 'standard', ariane = [], avecFiltres = false, sansImageDeFond = false }: Props = $props();
 </script>
 
-<div class={['heros', variant]}>
+<div class={['heros', variant, sansImageDeFond ? 'sans-image-de-fond' : '']}>
   <dsfr-container>
     <div class="conteneur" class:avec-filtres={avecFiltres}>
       <slot name="ariane">
@@ -181,6 +183,10 @@
           }
         }
       }
+    }
+
+    &.sans-image-de-fond {
+      background: var(--heros-fond, var(--background-alt-blue-france));
     }
 
     .conteneur {
