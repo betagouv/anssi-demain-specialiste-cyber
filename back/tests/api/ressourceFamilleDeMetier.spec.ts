@@ -4,6 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { FamilleDeMétier } from '../../src/metier/familleDeMetier';
+import { unMetier } from '../metier/constructeurMetier';
 import { EntrepôtFamillesDeMétierMémoire } from './entrepotFamillesDeMetierMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -43,6 +44,23 @@ describe('La ressource d’une famille de métier', () => {
       const réponse = await request(serveur).get('/api/familles-metier/inexistant');
 
       expect(réponse.status).toBe(HttpStatusCode.NotFound);
+    });
+
+    it('n’expose pas l’id interne', async () => {
+      await entrepôtFamillesDeMétier.ajoute(
+        new FamilleDeMétier({
+          code: 'Incidents et crises',
+          titre: '',
+          sousTitre: '',
+          description: '',
+          rôles: [],
+          profils: [unMetier().avecIdInterne(99).construis()],
+        }),
+      );
+
+      const réponse = await request(serveur).get('/api/familles-metier/incidents-et-crises');
+
+      expect(réponse.body.profils[0].idInterne).toBeUndefined();
     });
   });
 });

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { FamilleDeMétier } from '../metier/familleDeMetier';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
@@ -21,9 +22,14 @@ export const ressourceFamilleDeMétier = ({ entrepôtFamillesDeMétier }: Config
       if (!famille) {
         return réponse.sendStatus(404);
       }
-      return réponse.send(famille);
+      return réponse.send(familleDeMétierPrésentation(famille));
     }),
   );
 
   return routeur;
 };
+
+export const familleDeMétierPrésentation = (famille: FamilleDeMétier) => ({
+  ...famille,
+  profils: famille.profils.map((p) => ({ ...p, idInterne: undefined })),
+});
