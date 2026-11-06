@@ -61,7 +61,7 @@
           badge: famille.code,
           badgeAccent: accentPourFamille(famille.code),
           image: metier.liens.illustration,
-          href: fonction?.témoignage?.lien ?? '',
+          href: `/metiers/${metier.id}`,
         };
       }),
     );
