@@ -3,6 +3,7 @@ import { EntrepôtFonctions } from '../metier/entrepotFonctions';
 import { EntrepotMetiers } from '../metier/entrepotMetiers';
 import { EntrepotRessourcesCyber } from '../metier/entrepotRessourcesCyber';
 import { FamilleDeMétier } from '../metier/familleDeMetier';
+import { Metier } from '../metier/metier';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement';
 import { creeRecupereRessourceHttp, RecupereRessourceHttp } from './clientHttp';
 import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
@@ -63,7 +64,7 @@ export class EntrepôtFamillesDeMétierGrist
           this.champEnRôle(familleGrist.fields.Tuile_2),
           this.champEnRôle(familleGrist.fields.Tuile_3),
         ],
-        profils: this.versEntités(familleGrist.fields.Profils_de_cette_famille, métiers),
+        profils: this.versEntitésMétier(familleGrist.fields.Profils_de_cette_famille, métiers),
         ressourcesAssociées: this.versEntités(familleGrist.fields.Ressources_associees, ressourcesCyber),
         fonctions: this.versEntités(familleGrist.fields.Metiers, fonctions),
       });
@@ -73,6 +74,11 @@ export class EntrepôtFamillesDeMétierGrist
   private versEntités = <T extends { id: number }>(listeIdsGrist: number[], listeEntités: T[]): T[] =>
     this.aseptiseListe(listeIdsGrist)
       .map((id) => listeEntités.find((entité) => entité.id === id))
+      .filter((entité) => entité !== undefined);
+
+  private versEntitésMétier = (listeIdsGrist: number[], listeEntités: Metier[]): Metier[] =>
+    this.aseptiseListe(listeIdsGrist)
+      .map((id) => listeEntités.find((entité) => entité.idInterne === id))
       .filter((entité) => entité !== undefined);
 
   private champEnRôle = (champ: string) => {
