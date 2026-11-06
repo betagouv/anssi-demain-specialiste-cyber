@@ -12,6 +12,7 @@
   import IconeJExplore from '../../statique/assets/images/se-former/icone-personnage-devant-ordinateur.svg?raw';
   import IconeJeMeRepere from '../../statique/assets/images/se-former/icone-rond-avec-coche-rouge.svg?raw';
   import SectionJEcouteLesPros from './SectionJEcouteLesPros.svelte';
+  import SectionJeMeRepere from './SectionJeMeRepere.svelte';
   import SectionJeTraceMaRoute from './SectionJeTraceMaRoute.svelte';
   import SectionJExplore from './SectionJExplore.svelte';
   import TestMetiersCyber from './TestMetiersCyber.svelte';
@@ -145,7 +146,7 @@
   </dsfr-container>
 
   {#if categorieActive === 'je-me-repere'}
-    Section "Je me repère"
+    <SectionJeMeRepere />
   {:else if categorieActive === 'j-explore'}
     <SectionJExplore />
   {:else if categorieActive === 'j-ecoute-les-pros'}

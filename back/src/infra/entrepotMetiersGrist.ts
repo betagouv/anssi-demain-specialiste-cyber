@@ -7,6 +7,7 @@ import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 export type MetierGrist = {
   id: number;
   fields: {
+    Id_Metier: number;
     Titre_de_la_fiche: string;
     Fonction_de_la_fiche: string;
     En_quoi_consiste_le_metier_: string;
@@ -44,7 +45,8 @@ export class EntrepotMetiersGrist extends EntrepotGrist<MetierGrist> implements 
   }
 
   private reconstitueMétier = (metierGrist: MetierGrist) => ({
-    id: metierGrist.id,
+    id: metierGrist.fields.Id_Metier,
+    idInterne: metierGrist.id,
     titre: metierGrist.fields.Titre_de_la_fiche,
     fonction: metierGrist.fields.Fonction_de_la_fiche,
     description: metierGrist.fields.En_quoi_consiste_le_metier_,
