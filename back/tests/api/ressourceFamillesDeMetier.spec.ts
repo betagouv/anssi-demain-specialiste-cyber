@@ -4,6 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/dsc';
 import { FamilleDeMétier } from '../../src/metier/familleDeMetier';
+import { unMetier } from '../metier/constructeurMetier';
 import { EntrepôtFamillesDeMétierMémoire } from './entrepotFamillesDeMetierMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -80,6 +81,24 @@ describe('La ressource des familles de métier', () => {
       ]);
 
       expect(corps[1].code).toBe('Conception');
+    });
+
+    it('n’expose pas l’id interne des métiers', async () => {
+      await entrepôtFamillesDeMétier.ajoute(
+        new FamilleDeMétier({
+          code: 'Pilotage',
+          titre: '',
+          sousTitre: '',
+          description: '',
+          rôles: [],
+          profils: [unMetier().avecIdInterne(8).construis()],
+        }),
+      );
+
+      const réponse = await request(serveur).get('/api/familles-metier');
+
+      const corps = réponse.body;
+      expect(corps[0].profils[0].idInterne).toBeUndefined();
     });
   });
 });
