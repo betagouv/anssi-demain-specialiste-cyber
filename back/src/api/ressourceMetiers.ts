@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { metierPresentation } from './ressourceMetier';
 
 export const ressourceMetiers = ({ entrepotMetier }: ConfigurationServeur) => {
   const routeur = Router();
@@ -9,7 +10,7 @@ export const ressourceMetiers = ({ entrepotMetier }: ConfigurationServeur) => {
     '/',
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const metiers = await entrepotMetier.tous();
-      reponse.send(metiers);
+      reponse.send(metiers.map((m) => metierPresentation(m)));
     }),
   );
 

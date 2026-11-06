@@ -3,10 +3,16 @@ import { Constructeur } from '../constructeur';
 
 export class ConstructeurMetier implements Constructeur<Metier> {
   private id: number = Math.round(Math.random() * 1000);
+  private idInterne: number = Math.round(Math.random() * 1000);
   private titre: string = 'Un titre';
 
   avecId(id: number) {
     this.id = id;
+    return this;
+  }
+
+  avecIdInterne(id: number) {
+    this.idInterne = id;
     return this;
   }
 
@@ -18,6 +24,7 @@ export class ConstructeurMetier implements Constructeur<Metier> {
   construis(): Metier {
     return {
       id: this.id,
+      idInterne: this.idInterne,
       titre: this.titre,
       fonction: 'Une fonction',
       description: 'Une description',

@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { Metier } from '../metier/metier';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
@@ -12,9 +13,11 @@ export const ressourceMetier = ({ entrepotMetier }: ConfigurationServeur) => {
       if (!metier) {
         return reponse.sendStatus(404);
       }
-      return reponse.send(metier);
+      return reponse.send(metierPresentation(metier));
     }),
   );
 
   return routeur;
 };
+
+export const metierPresentation = (metier: Metier) => ({ ...metier, idInterne: undefined });
