@@ -50,31 +50,31 @@
   const parcoursPros: ExempleParcours[] = [
     {
       nom: 'Tristan, 33 ans',
-      image: '/assets/images/les-metiers/illustration-parcours-tristan.avif',
+      image: '/assets/images/les-metiers/pros/tristan-manzano.avif',
       etapes: ['Bac Pro', 'BTS'],
       metier: 'Analyste réponse aux incidents',
     },
     {
       nom: 'Lucie, 28 ans',
-      image: '/assets/images/les-metiers/illustration-parcours-lucie.avif',
+      image: '/assets/images/les-metiers/pros/lucie-m.avif',
       etapes: ['Bac STI2D', 'BTS'],
       metier: 'Administratrice système',
     },
     {
       nom: 'Mickaël, 46 ans',
-      image: '/assets/images/les-metiers/illustration-parcours-mickael.avif',
+      image: '/assets/images/les-metiers/pros/mickael-sabelle.avif',
       etapes: ['Bac STI2D', 'DUT', 'Licence puis master'],
       metier: 'Responsable cybersécurité produits',
     },
     {
       nom: 'Marine, 32 ans',
-      image: '/assets/images/les-metiers/illustration-parcours-marine.avif',
+      image: '/assets/images/les-metiers/pros/marine-martin.avif',
       etapes: ['Bac général', 'Prépa scientifique', "Diplôme d'ingénieur"],
       metier: 'Responsable réponse aux incidents',
     },
     {
       nom: 'Thierry, 59 ans',
-      image: '/assets/images/les-metiers/illustration-parcours-thierry.avif',
+      image: '/assets/images/les-metiers/pros/thierry-berthier.avif',
       etapes: ['Bac général', 'Licence puis master de maths', 'Doctorat'],
       metier: 'Enseignant-chercheur',
     },
