@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
+import { ressourceFamilleDeMétier } from './ressourceFamilleDeMetier';
 import { ressourceFamillesDeMétier } from './ressourceFamillesDeMetier';
 import { ressourceFonctions } from './ressourceFonctions';
 import { ressourceJeu } from './ressourceJeu';
@@ -33,7 +34,11 @@ export const ressourcesApi = (configurationServeur: ConfigurationServeur) => {
   router.use('/selections-entrainement', ressourceSelections(configurationServeur.entrepôtSélectionsEntrainement));
   router.use('/selections-mesure', ressourceSelections(configurationServeur.entrepôtSélectionsMesure));
 
-  router.use('/familles-metier', ressourceFamillesDeMétier(configurationServeur));
+  router.use(
+    '/familles-metier',
+    ressourceFamillesDeMétier(configurationServeur),
+    ressourceFamilleDeMétier(configurationServeur),
+  );
   router.use('/fonctions', ressourceFonctions(configurationServeur));
   router.use('/resultats-test-metiers', ressourceRésultatTestMétiers(configurationServeur));
 
