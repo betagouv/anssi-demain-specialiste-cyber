@@ -46,6 +46,7 @@ export class EntrepotMetiersGrist extends EntrepotGrist<MetierGrist> implements 
 
   private reconstitueMétier = (metierGrist: MetierGrist) => ({
     id: metierGrist.fields.Id_Metier,
+    idInterne: metierGrist.id,
     titre: metierGrist.fields.Titre_de_la_fiche,
     fonction: metierGrist.fields.Fonction_de_la_fiche,
     description: metierGrist.fields.En_quoi_consiste_le_metier_,

@@ -18,4 +18,5 @@ export type Metier = {
     metierscope: string;
     videos: string[];
   };
+  idInterne?: number;
 };
