@@ -81,8 +81,8 @@ describe('L’entrepôt des familles de métier grist', () => {
           .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtListeDeValeurs('Profils_de_cette_famille', [13, 17]))
           .construis();
       const entrepôtMétiers = new EntrepotMetiersMemoire();
-      await entrepôtMétiers.ajoute(unMetier().avecId(13).avecTitre('A').construis());
-      await entrepôtMétiers.ajoute(unMetier().avecId(17).avecTitre('B').construis());
+      await entrepôtMétiers.ajoute(unMetier().avecIdInterne(13).avecTitre('A').construis());
+      await entrepôtMétiers.ajoute(unMetier().avecIdInterne(17).avecTitre('B').construis());
       const entrepôt = new EntrepôtFamillesDeMétierGrist(
         entrepôtMétiers,
         new EntrepotRessourcesCyberMemoire(),
