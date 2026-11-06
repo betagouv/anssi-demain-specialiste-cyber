@@ -118,7 +118,6 @@
             has-detail-end
             detail-end="Accéder au témoignage"
             size="md"
-            src={fonction.témoignage.illustration}
             href={fonction.témoignage.lien}
             enlarge
             blank
@@ -129,6 +128,14 @@
               size="sm"
               group-markup="div"
             ></dsfr-tags-group>
+            <div slot="image">
+              <picture>
+                <img
+                  src={`/assets/images/les-metiers/pros/${fonction.témoignage.idVignette}.avif`}
+                  alt={`Photo de ${fonction.témoignage.nom}`}
+                />
+              </picture>
+            </div>
           </dsfr-card>
         {/each}
       </div>
@@ -170,6 +177,39 @@
 
       @include a-partir-de(lg) {
         grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    dsfr-card {
+      picture {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        height: auto;
+        background-color: var(--couleur-fond-vignette);
+        img {
+          height: 90%;
+          border-radius: 50%;
+        }
+      }
+      &:nth-child(1) {
+        --couleur-fond-vignette: var(--artwork-background-green-archipel);
+      }
+      &:nth-child(2) {
+        --couleur-fond-vignette: var(--artwork-background-brown-opera);
+      }
+      &:nth-child(3) {
+        --couleur-fond-vignette: var(--artwork-background-yellow-tournesol);
+      }
+      &:nth-child(4) {
+        --couleur-fond-vignette: var(--artwork-background-green-menthe);
+      }
+      &:nth-child(5) {
+        --couleur-fond-vignette: var(--artwork-background-brown-cafe-creme);
+      }
+      &:nth-child(6) {
+        --couleur-fond-vignette: var(--artwork-background-brown-caramel);
       }
     }
   }
