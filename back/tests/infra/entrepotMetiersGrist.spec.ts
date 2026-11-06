@@ -51,4 +51,18 @@ describe("L'entrepôt de métiers Grist ", () => {
 
     expect(metier!.id).toBe(1234);
   });
+
+  it('retourne l’id interne', async () => {
+    const metiersGrist: RecupereRessourceHttp<ReponseGrist<MetierGrist>> = async () =>
+      new ConstructeurReponseMetiersGrist()
+        .ajouteUneLigne(
+          new ConstructeurLigneGristMetiers().avecId(789).avecColonneEtValeur('Id_Metier', 1234).construis(),
+        )
+        .construis();
+    const entrepotMetiers = new EntrepotMetiersGrist(metiersGrist);
+
+    const metier = await entrepotMetiers.parIdentifiant(1234);
+
+    expect(metier!.idInterne).toBe(789);
+  });
 });
