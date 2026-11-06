@@ -12,6 +12,7 @@ export type FonctionGrist = {
     Lien: string;
     Temoignages: string;
     Lien_du_temoignage: string;
+    Id_vignette: string;
     Femme_de_la_cyber: number;
     Famille_de_metiers: string;
   };
@@ -38,6 +39,7 @@ export class EntrepôtFonctionsGrist extends EntrepotGrist<FonctionGrist> implem
         nom: fonctionGrist.fields.Temoignages,
         femme: fonctionGrist.fields.Femme_de_la_cyber === 1,
         lien: (fonctionGrist.fields.Lien_du_temoignage ?? '').split(';')[0].trim(),
+        idVignette: fonctionGrist.fields.Id_vignette ?? '',
       },
     }));
   }

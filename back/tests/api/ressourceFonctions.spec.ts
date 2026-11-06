@@ -38,6 +38,7 @@ describe('La ressource des fonctions', () => {
           nom: 'Mélissa Rossi',
           femme: true,
           lien: 'https://messervices.cyber.gouv.fr/documents/onisep#page=11',
+          idVignette: 'melissa-rossi',
         },
       });
       await entrepôtFonctions.ajoute({
@@ -46,7 +47,7 @@ describe('La ressource des fonctions', () => {
         famille: 'Opérations',
         missionPrincipale: '',
         lien: '',
-        témoignage: { nom: '', femme: false, lien: '' },
+        témoignage: { nom: '', femme: false, lien: '', idVignette: '' },
       });
 
       const réponse = await request(serveur).get('/api/fonctions');
@@ -64,6 +65,7 @@ describe('La ressource des fonctions', () => {
           nom: 'Mélissa Rossi',
           femme: true,
           lien: 'https://messervices.cyber.gouv.fr/documents/onisep#page=11',
+          idVignette: 'melissa-rossi',
         },
       });
       expect(corps[1].nom).toBe('Analyste SOC');

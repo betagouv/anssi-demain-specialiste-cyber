@@ -58,6 +58,7 @@ describe('L’entrepôt des fonctions grist', () => {
           nom: 'Mélissa Rossi',
           femme: true,
           lien: 'https://exemple.fr/temoignage',
+          idVignette: '',
         },
       });
       expect(fonctions[1].nom).toBe('Analyste SOC');
@@ -105,6 +106,20 @@ describe('L’entrepôt des fonctions grist', () => {
       await entrepôt.tous();
 
       expect(urlAppelee.endsWith('%20where%20Publie%20is%20not%20null')).toBeTruthy();
+    });
+
+    it('retourne l’id de la vignette du témoignage', async () => {
+      const fonctionsGrist: RecupereRessourceHttp<ReponseGrist<FonctionGrist>> = async () =>
+        new ConstructeurRéponseFonctionsGrist()
+          .ajouteUneLigne(
+            new ConstructeurLigneGristFonctions().avecColonneEtValeur('Id_vignette', 'melissa-rossi').construis(),
+          )
+          .construis();
+      const entrepôt = new EntrepôtFonctionsGrist(fonctionsGrist);
+
+      const fonctions = await entrepôt.tous();
+
+      expect(fonctions[0].témoignage.idVignette).toBe('melissa-rossi');
     });
 
     it('retourne l’id', async () => {

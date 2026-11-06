@@ -2,6 +2,7 @@ export type Témoignage = {
   nom: string;
   femme: boolean;
   lien: string;
+  idVignette: string;
 };
 
 export type Fonction = {

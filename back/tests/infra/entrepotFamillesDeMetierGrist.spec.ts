@@ -123,7 +123,7 @@ describe('L’entrepôt des familles de métier grist', () => {
       id,
       nom,
       famille: '',
-      témoignage: { nom: '', lien: '', femme: true },
+      témoignage: { nom: '', lien: '', femme: true, idVignette: '' },
       missionPrincipale: '',
       lien: '',
     });
