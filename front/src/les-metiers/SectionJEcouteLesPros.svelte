@@ -7,7 +7,7 @@
   let chargementEnCours = $state(false);
   let erreurChargement = $state(false);
   let fonctions: FonctionMetier[] = $state([]);
-  let familleActive: string = $state('Incidents et crises');
+  let familleActive: string = $state('');
   let filtreFemmes = $state(false);
   let tagsGroupEl: HTMLElement | undefined = $state();
 
