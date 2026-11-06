@@ -35,5 +35,13 @@ describe('La ressource de la liste des métiers', () => {
       expect(réponse.body[0].titre).toBe('Premier métier');
       expect(réponse.body[1].titre).toBe('Second métier');
     });
+
+    it('n’expose pas l’id interne', async () => {
+      await configurationServeur.entrepotMetier.ajoute(unMetier().avecIdInterne(3).avecId(1).construis());
+
+      const réponse = await request(serveur).get('/api/metiers');
+
+      expect(réponse.body[0].idInterne).toBe(undefined);
+    });
   });
 });
