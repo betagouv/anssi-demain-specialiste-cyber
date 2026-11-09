@@ -25,6 +25,7 @@ describe('La ressource d’une famille de métier', () => {
     it('renvoie la famille correspondant au code slugifié', async () => {
       await entrepôtFamillesDeMétier.ajoute(
         new FamilleDeMétier({
+          numéro: 1,
           code: 'Incidents et crises',
           titre: 'Gestion des incidents et des crises de sécurité',
           sousTitre: 'Surveiller, détecter, enquêter, réagir.',
@@ -49,6 +50,7 @@ describe('La ressource d’une famille de métier', () => {
     it('n’expose pas l’id interne', async () => {
       await entrepôtFamillesDeMétier.ajoute(
         new FamilleDeMétier({
+          numéro: 1,
           code: 'Incidents et crises',
           titre: '',
           sousTitre: '',

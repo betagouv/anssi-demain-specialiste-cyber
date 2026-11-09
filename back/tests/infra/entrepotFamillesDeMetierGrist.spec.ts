@@ -150,5 +150,22 @@ describe('L’entrepôt des familles de métier grist', () => {
       expect(familles[0].fonctions[0].nom).toBe('Cryptologue');
       expect(familles[0].fonctions[1].nom).toBe('Analyste SOC');
     });
+
+    it('sait récupérer le numéro', async () => {
+      const famillesDeMetierGrist: RecupereRessourceHttp<ReponseGrist<FamilleDeMetierGrist>> = async () =>
+        new ConstructeurRéponseFamillesDeMétierGrist()
+          .ajouteUneLigne(uneLigneDeFamilleGrist().avecColonneEtValeur('Numero', 3))
+          .construis();
+      const entrepôt = new EntrepôtFamillesDeMétierGrist(
+        new EntrepotMetiersMemoire(),
+        new EntrepotRessourcesCyberMemoire(),
+        new EntrepôtFonctionsMémoire(),
+        famillesDeMetierGrist,
+      );
+
+      const familles = await entrepôt.tous();
+
+      expect(familles[0].numéro).toBe(3);
+    });
   });
 });
