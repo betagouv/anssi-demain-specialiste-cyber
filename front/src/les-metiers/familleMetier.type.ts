@@ -9,6 +9,7 @@ export type Role = {
 
 export type FamilleMetier = {
   code: string;
+  numéro: number;
   titre: string;
   sousTitre: string;
   description: string;

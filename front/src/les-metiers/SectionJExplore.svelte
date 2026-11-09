@@ -70,7 +70,7 @@
             no-link
           >
             <div class={['j-explore-image', accent]} slot="image">
-              <span class="j-explore-numero">{index + 1}</span>
+              <span class="j-explore-numero">{famille.numéro}</span>
             </div>
             <dsfr-badges-group slot="badgesgroup" badges={[{ label: famille.code, accent }]} size="sm"
             ></dsfr-badges-group>
