@@ -6,6 +6,6 @@ const { subscribe, set } = writable<FamilleMetier[]>([]);
 export const famillesMetierStore = {
   subscribe,
   initialise: (familles: FamilleMetier[]) => {
-    set([...familles]);
+    set([...familles.toSorted((a, b) => a.numéro - b.numéro)]);
   },
 };
