@@ -10,16 +10,7 @@
   import { onMount } from 'svelte';
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
-
-  type AccentDsfr = 'yellow-moutarde' | 'green-bourgeon' | 'blue-cumulus' | 'purple-glycine' | 'green-archipel';
-  const accentParFamille: Record<string, AccentDsfr> = {
-    Pilotage: 'yellow-moutarde',
-    Conception: 'green-bourgeon',
-    'Incidents et crises': 'blue-cumulus',
-    'Conseil et recherche': 'purple-glycine',
-    'Métiers connexes': 'green-archipel',
-  };
-  const accentPourFamille = (code: string): string => accentParFamille[code] ?? 'blue-france';
+  import { accentPourFamille } from '../les-metiers/familleMetier.type';
 
   type Témoignage = {
     nom: string;
