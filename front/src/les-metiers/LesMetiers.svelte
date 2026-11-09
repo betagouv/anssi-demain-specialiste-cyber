@@ -113,24 +113,21 @@
     >
       <div slot="media" class="onisep-media">
         <img src="/assets/images/les-metiers/illustration-brochure-onisep.avif" alt="" />
-        <dsfr-link label="Consulter le Zoom" size="sm" href="#" blank></dsfr-link>
+        <dsfr-link
+          label="Consulter le Zoom"
+          size="sm"
+          href="https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/onisep-zoom-metiers-cybersecurite-2025.pdf"
+          blank
+        ></dsfr-link>
       </div>
       <div slot="cta" class="onisep-cta">
-        <dsfr-button
-          label="Découvrir les 20 portraits"
-          kind="primary"
-          size="lg"
-          has-icon
-          markup="a"
-          href="https://www.onisep.fr/les-metiers-de-la-cybersecurite"
-          icon="arrow-right-line"
-          icon-place="right"
+        <dsfr-button label="Découvrir les 20 portraits" kind="primary" size="lg" markup="a" href="#j-ecoute-les-pros"
         ></dsfr-button>
         <dsfr-button
           label="Voir le dossier en ligne"
           kind="tertiary-no-outline"
           markup="a"
-          href="https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+          href="https://www.onisep.fr/metier/des-metiers-qui-recrutent/les-metiers-de-la-cybersecurite"
           target="_blank"
         ></dsfr-button>
       </div>
@@ -194,7 +191,7 @@
         <p>Et il n'y a pas que les bac + 5&nbsp;: les diplômés de bac + 2 et bac + 3 sont tout autant recherchés.</p>
         <dsfr-link
           label="Voir les offres d'emploi sur Campus Cyber"
-          href="https://campuscyber.fr/emploi"
+          href="https://evolution.campuscyber.fr/emplois"
           size="md"
           blank
         ></dsfr-link>
