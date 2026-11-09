@@ -1,7 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { accentPourFamille, type FamilleMetier, type Fonction } from './familleMetier.type';
+  import { accentPourFamille, type FamilleMetier } from './familleMetier.type';
+  import type { FonctionMetier } from './fonctionMetier.type';
   import { famillesMetierStore } from './stores/famillesMetier.store';
 
   type ProfilAffiche = {
@@ -25,14 +26,14 @@
 
   function trouveFonctionPourProfil(
     titreProfil: string,
-    fonctions: Fonction[],
+    fonctions: FonctionMetier[],
     indexProfil: number,
-  ): Fonction | undefined {
+  ): FonctionMetier | undefined {
     if (fonctions.length === 0) return undefined;
 
     const motsProfil = normalise(titreProfil);
     let meilleurScore = 0;
-    let meilleureFonction: Fonction | undefined;
+    let meilleureFonction: FonctionMetier | undefined;
 
     for (const fonction of fonctions) {
       const motsFonction = normalise(fonction.nom);
