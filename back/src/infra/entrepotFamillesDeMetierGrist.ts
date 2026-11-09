@@ -10,6 +10,7 @@ import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type FamilleDeMetierGrist = {
   fields: {
+    Numero: number;
     Famille: string;
     Titre_Hero: string;
     Sous_texte_Hero: string;
@@ -55,6 +56,7 @@ export class EntrepôtFamillesDeMétierGrist
     const réponse = await this.appelleGrist();
     return réponse.records.map((familleGrist) => {
       return new FamilleDeMétier({
+        numéro: familleGrist.fields.Numero,
         code: familleGrist.fields.Famille,
         titre: familleGrist.fields.Titre_Hero,
         sousTitre: familleGrist.fields.Sous_texte_Hero,

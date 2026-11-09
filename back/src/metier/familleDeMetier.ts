@@ -8,6 +8,7 @@ export type Rôle = {
 };
 
 export class FamilleDeMétier {
+  numéro: number;
   code: string;
   titre: string;
   sousTitre: string;
@@ -18,6 +19,7 @@ export class FamilleDeMétier {
   fonctions: Fonction[];
 
   constructor(données: {
+    numéro: number;
     code: string;
     titre: string;
     sousTitre: string;
@@ -27,6 +29,7 @@ export class FamilleDeMétier {
     ressourcesAssociées?: RessourceCyber[];
     fonctions?: Fonction[];
   }) {
+    this.numéro = données.numéro;
     this.code = données.code;
     this.titre = données.titre;
     this.sousTitre = données.sousTitre;

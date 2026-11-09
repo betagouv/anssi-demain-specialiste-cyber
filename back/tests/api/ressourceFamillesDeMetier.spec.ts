@@ -31,6 +31,7 @@ describe('La ressource des familles de métier', () => {
     it('renvoie les familles', async () => {
       await entrepôtFamillesDeMétier.ajoute(
         new FamilleDeMétier({
+          numéro: 1,
           code: 'Pilotage',
           titre: 'Gestion de la sécurité et pilotage des projets de sécurité',
           sousTitre:
@@ -50,6 +51,7 @@ describe('La ressource des familles de métier', () => {
       );
       await entrepôtFamillesDeMétier.ajoute(
         new FamilleDeMétier({
+          numéro: 2,
           code: 'Conception',
           titre: '',
           sousTitre: '',
@@ -86,6 +88,7 @@ describe('La ressource des familles de métier', () => {
     it('n’expose pas l’id interne des métiers', async () => {
       await entrepôtFamillesDeMétier.ajoute(
         new FamilleDeMétier({
+          numéro: 1,
           code: 'Pilotage',
           titre: '',
           sousTitre: '',
