@@ -282,7 +282,7 @@
   }
 </script>
 
-<section class="test-cyber" bind:this={sectionEl}>
+<section id="test-cyber" class="test-cyber" bind:this={sectionEl}>
   <dsfr-container>
     <div class={['test-cyber-encart', etape !== 'intro' ? 'test-cyber-encart--test' : '']}>
       <div class="test-cyber-colonne-gauche">

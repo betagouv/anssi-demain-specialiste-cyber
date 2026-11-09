@@ -175,7 +175,7 @@
         Retrouve leur parcours dans le Zoom «&nbsp;Les métiers de la cybersécurité&nbsp;» de l'Onisep.
         <dsfr-link
           label="Consulter le Zoom"
-          href="https://www.onisep.fr/les-metiers-de-la-cybersecurite"
+          href="https://prod-ressources-cyber.cellar-c2.services.clever-cloud.com/onisep-zoom-metiers-cybersecurite-2025.pdf"
           size="md"
           blank
           neutral
