@@ -11,29 +11,7 @@
   import { laCouleurDuBadgeSelonTypeRessourceCyber } from '../catalogue/ressourceCyber';
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
-
-  type Metier = {
-    id: string;
-    titre: string;
-    fonction: string;
-    image: { chemin: string };
-    description: string;
-    missionPrincipale: string;
-    postures: string[];
-    formationsCibles: string[];
-    preRequis: string[];
-    remuneration: {
-      junior: number;
-      senior: number;
-    };
-    metiersProches: string[];
-    liens: {
-      illustration: string;
-      dataemploi: string;
-      metierscope: string;
-      videos: string[];
-    };
-  };
+  import type { Metier } from './metiers';
 
   const recupereLesSousTitres = (lienVideo: string) => {
     if (!lienVideo) {

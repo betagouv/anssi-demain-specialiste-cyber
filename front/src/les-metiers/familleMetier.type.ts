@@ -1,59 +1,10 @@
+import type { RessourceCyber } from '../catalogue/ressourceCyber';
+import type { Metier } from '../metiers/metiers';
+import type { FonctionMetier } from './fonctionMetier.type';
+
 export type Role = {
   nom: string;
   description: string;
-};
-
-export type Remuneration = {
-  junior: number;
-  senior: number;
-};
-
-export type LiensProfil = {
-  illustration: string;
-  dataemploi: string;
-  metierscope: string;
-  videos: string[];
-};
-
-export type Profil = {
-  id: number;
-  titre: string;
-  fonction: string;
-  description: string;
-  missionPrincipale: string;
-  postures: string[];
-  formationsCibles: string[];
-  preRequis: string[];
-  remuneration: Remuneration;
-  metiersProches: string[];
-  liens: LiensProfil;
-};
-
-export type Temoignage = {
-  nom: string;
-  femme: boolean;
-  lien: string;
-};
-
-export type Fonction = {
-  nom: string;
-  missionPrincipale: string;
-  lien: string;
-  témoignage: Temoignage;
-};
-
-export type RessourceAssociee = {
-  id: number;
-  titre: string;
-  thematiques: string[];
-  publicsCible: string[];
-  niveaux: string[];
-  types: string[];
-  besoins: string[];
-  description: string;
-  urlIllustration: string;
-  estCertifiee: boolean;
-  lienExterne: string;
 };
 
 export type FamilleMetier = {
@@ -62,9 +13,9 @@ export type FamilleMetier = {
   sousTitre: string;
   description: string;
   rôles: Role[];
-  profils: Profil[];
-  fonctions: Fonction[];
-  ressourcesAssociées: RessourceAssociee[];
+  profils: Metier[];
+  fonctions: FonctionMetier[];
+  ressourcesAssociées: RessourceCyber[];
 };
 
 export type AccentDsfr = 'yellow-moutarde' | 'green-emeraude' | 'blue-cumulus' | 'purple-glycine' | 'green-archipel';
