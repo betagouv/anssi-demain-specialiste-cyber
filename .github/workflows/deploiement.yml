@@ -19,9 +19,10 @@ jobs:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
           persist-credentials: false
 
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: npm install -g clever-tools@4.4.0
+      - name: Installe Node.js, pnpm et les dépendances
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          require-lockfile: true
 
       - name: Déployer en DÉMO
         env:
@@ -29,8 +30,8 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          clever link "$ID_APP"
-          clever deploy --force --same-commit-policy=rebuild
+          pnpm exec clever link "$ID_APP"
+          pnpm exec clever deploy --force --same-commit-policy=rebuild
 
   deploiement-prod:
     name: Déploiement en PROD
@@ -44,9 +45,10 @@ jobs:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
           persist-credentials: false
 
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: npm install -g clever-tools@4.4.0
+      - name: Installe Node.js, pnpm et les dépendances
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          require-lockfile: true
 
       - name: Déployer en PROD
         env:
@@ -54,5 +56,5 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          clever link "$ID_APP"
-          clever deploy --force --same-commit-policy=rebuild
+          pnpm exec clever link "$ID_APP"
+          pnpm exec clever deploy --force --same-commit-policy=rebuild
