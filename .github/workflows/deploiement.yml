@@ -23,22 +23,13 @@ jobs:
         shell: bash
         run: npm install -g clever-tools@4.4.0
 
-      - name: Spécifier la version de Node.js à utiliser auprès de Clever Cloud
-        env:
-          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
-          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
-          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-        run: |
-          NODE_VERSION="$(./scripts/get-node-version.sh)"
-          clever link "$ID_APP"
-          clever env set CC_NODE_VERSION "$NODE_VERSION"
-
       - name: Déployer en DÉMO
         env:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
   deploiement-prod:
@@ -57,20 +48,11 @@ jobs:
         shell: bash
         run: npm install -g clever-tools@4.4.0
 
-      - name: Spécifier la version de Node.js à utiliser auprès de Clever Cloud
-        env:
-          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
-          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
-          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-        run: |
-          NODE_VERSION="$(./scripts/get-node-version.sh)"
-          clever link "$ID_APP"
-          clever env set CC_NODE_VERSION "$NODE_VERSION"
-
       - name: Déployer en PROD
         env:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
