@@ -1,4 +1,6 @@
 <script lang="ts">
+  import SectionRepereLesPieges from './SectionRepereLesPieges.svelte';
+
   type Precaution = {
     titre: string;
     pictogram: string;
@@ -6,25 +8,28 @@
 
   const precautions: Precaution[] = [
     {
-      titre: 'Protège tes comptes : mots de passe longs et double authentification',
-      pictogram: '/artwork/icone-cadenas.svg',
+      titre: 'Protège tes comptes\u00A0: mots de passe longs et double authentification',
+      pictogram: '/pictogrammes/pictogramme-cadenas.svg',
     },
     {
       titre: 'Installe uniquement des applis officielles et fais les mises à jour',
-      pictogram: '/artwork/icone-succes.svg',
+      pictogram: '/pictogrammes/pictogramme-succes.svg',
     },
     {
       titre: 'Sauvegarde tes données importantes sur un support déconnecté',
-      pictogram: '/artwork/icone-institution-publique.svg',
+      pictogram: '/pictogrammes/pictogramme-institution-publique.svg',
     },
-    { titre: 'Évite les réseaux wifi publics sans mot de passe', pictogram: '/artwork/icone-institution-publique.svg' },
+    {
+      titre: 'Évite les réseaux wifi publics sans mot de passe',
+      pictogram: '/pictogrammes/pictogramme-institution-publique.svg',
+    },
     {
       titre: 'Protège ton téléphone et ta tablette comme un ordinateur',
-      pictogram: '/artwork/icone-protection-donnees.svg',
+      pictogram: '/pictogrammes/pictogramme-protection-donnees.svg',
     },
     {
       titre: "Partage le moins possible d'informations personnelles en ligne",
-      pictogram: '/artwork/icone-institution-publique.svg',
+      pictogram: '/pictogrammes/pictogramme-institution-publique.svg',
     },
   ];
 </script>
@@ -46,6 +51,8 @@
           </dsfr-tile>
         {/each}
       </div>
+
+      <SectionRepereLesPieges />
     </div>
   </dsfr-container>
 </section>
