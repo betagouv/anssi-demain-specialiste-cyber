@@ -28,6 +28,7 @@ const pages: Page[] = [
   { route: '/statistiques', protegee: false, chemin: 'annexes' },
   // Pages principales
   { route: '/catalogue', protegee: false },
+  { route: '/la-cybersecurite', protegee: false },
   { route: '/connexion', protegee: false },
   { route: '/cyber-en-jeux', protegee: false },
   { route: '/devenir-relai', protegee: false },

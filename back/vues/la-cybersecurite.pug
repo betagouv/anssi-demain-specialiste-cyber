@@ -1,0 +1,39 @@
+extends fragments/base
+
+block variables
+  - var titrePage = "Qu'est-ce que la cybersécurité ?"
+  - var descriptionPage = "Pirates, rançongiciels, mots de passe, codes secrets… En 10 minutes, comprends comment est protégé le monde numérique, qui l'attaque et pourquoi ça pourrait devenir ton métier."
+  - var classePage = "page-la-cybersecurite"
+  - var ariane = []
+  - ariane[0] = { id: 'accueil', label: 'Accueil', href: '/' }
+  - ariane[1] = { id: 'cybersecurite', label: "La cybersécurité, c'est quoi ?", href: '#' }
+
+block heros
+    dsc-heros(
+        variant= "clair"
+        ariane= ariane
+    )
+        h1.titre-hero.titre-alternatif-xs(slot="titre") #{titrePage}
+        p.chapeau-hero.fr-text--lg(slot="description") #{descriptionPage}
+        .actions-hero
+            dsfr-button(
+                label="Tester mes connaissances"
+                kind="primary"
+                markup="a"
+                href="#quiz"
+            )
+            dsfr-button(
+                label="Télécharger le livret"
+                kind="secondary"
+                markup="a"
+                href="#ressources"
+                has-icon
+                icon="download-line"
+                icon-place="left"
+            )
+        img.illustration-hero(slot="illustration" src="/assets/images/cybersecurite/illustration-personnage-reflechit-cybersecurite.avif" alt="")
+
+block contenu
+    dsc-cybersecurite
+
+    block apres-contenu

@@ -39,6 +39,7 @@ describe('Les ressources de page', () => {
     { route: '/statistiques', vue: 'annexes/statistiques' },
     // Pages principales
     { route: '/catalogue', vue: 'catalogue' },
+    { route: '/la-cybersecurite', vue: 'la-cybersecurite' },
     { route: '/cyber-en-jeux', vue: 'cyber-en-jeux' },
     { route: '/evenements', vue: 'evenements' },
     { route: '/jeux/1234', vue: 'jeux' },

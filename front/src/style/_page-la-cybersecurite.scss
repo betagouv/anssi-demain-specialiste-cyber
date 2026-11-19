@@ -1,0 +1,53 @@
+@use 'points-de-rupture' as *;
+@use 'grille' as *;
+
+.page-la-cybersecurite {
+  dsc-heros {
+    &:not(:defined) {
+      display: none;
+    }
+  }
+
+  .titre-hero {
+    margin-block-end: 0.75rem;
+  }
+
+  .chapeau-hero {
+    margin-block-end: 0;
+  }
+
+  .actions-hero {
+    display: flex;
+    flex-direction: column;
+    margin-block: 1.5rem;
+    gap: 1rem;
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+      margin-block: 0;
+    }
+  }
+
+  .illustration-hero {
+    max-width: 100%;
+  }
+
+  .entete {
+    &-section {
+      text-align: center;
+
+      @include a-partir-de(lg) {
+        max-width: taille-pour-colonnes(8);
+        margin-inline: auto;
+      }
+    }
+
+    &-titre {
+      margin-block-end: 1.5rem;
+    }
+
+    &-chapeau {
+      margin-block-end: 0;
+    }
+  }
+}
