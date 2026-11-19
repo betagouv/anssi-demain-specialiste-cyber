@@ -12,6 +12,7 @@
   import SectionCyberespace from './SectionCyberespace.svelte';
   import SectionCybersecurite from './SectionCybersecurite.svelte';
   import SectionDonnees from './SectionDonnees.svelte';
+  import SectionPrecautions from './SectionPrecautions.svelte';
 </script>
 
 <SectionCyberespace />
@@ -20,3 +21,4 @@
 <SectionCyberattaques />
 <SectionCybersecurite />
 <SectionCryptographie />
+<SectionPrecautions />
