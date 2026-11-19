@@ -7,6 +7,7 @@
 
 <script lang="ts">
   import SectionAttaquants from './SectionAttaquants.svelte';
+  import SectionCetaitPourRire from './SectionCetaitPourRire.svelte';
   import SectionCryptographie from './SectionCryptographie.svelte';
   import SectionCyberattaques from './SectionCyberattaques.svelte';
   import SectionCyberespace from './SectionCyberespace.svelte';
@@ -22,3 +23,4 @@
 <SectionCybersecurite />
 <SectionCryptographie />
 <SectionPrecautions />
+<SectionCetaitPourRire />
