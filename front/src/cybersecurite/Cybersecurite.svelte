@@ -14,6 +14,7 @@
   import SectionCybersecurite from './SectionCybersecurite.svelte';
   import SectionDonnees from './SectionDonnees.svelte';
   import SectionPrecautions from './SectionPrecautions.svelte';
+  import SectionQuiz from './SectionQuiz.svelte';
 </script>
 
 <SectionCyberespace />
@@ -24,3 +25,4 @@
 <SectionCryptographie />
 <SectionPrecautions />
 <SectionCetaitPourRire />
+<SectionQuiz />
