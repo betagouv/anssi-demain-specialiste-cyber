@@ -15,6 +15,7 @@
   import SectionDonnees from './SectionDonnees.svelte';
   import SectionPrecautions from './SectionPrecautions.svelte';
   import SectionQuiz from './SectionQuiz.svelte';
+  import TelechargerRessources from './TelechargerRessources.svelte';
 </script>
 
 <SectionCyberespace />
@@ -26,3 +27,4 @@
 <SectionPrecautions />
 <SectionCetaitPourRire />
 <SectionQuiz />
+<TelechargerRessources />
