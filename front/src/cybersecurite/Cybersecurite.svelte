@@ -5,4 +5,8 @@
   }}
 />
 
-<script lang="ts"></script>
+<script lang="ts">
+  import SectionCyberespace from './SectionCyberespace.svelte';
+</script>
+
+<SectionCyberespace />
