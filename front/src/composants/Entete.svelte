@@ -46,32 +46,25 @@
 
   const menuNavigation: MenuItem[] = $derived([
     {
-      id: 'accueil',
-      label: 'Accueil',
+      id: 'la-cybersecurite',
+      label: 'Qu’est-ce que la cybersécurité ?',
       type: 'link',
-      href: '/',
-      active: cheminCourant === '/',
+      href: '/la-cybersecurite',
+      active: cheminCourant === '/la-cybersecurite',
     },
     {
-      id: 'catalogue',
-      label: 'Catalogue de ressources',
+      id: 'se-former',
+      label: 'Se former et s’entrainer',
       type: 'link',
-      href: '/catalogue',
-      active: cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
+      href: '/se-former',
+      active: cheminCourant === '/se-former',
     },
     {
-      id: 'selection-enseignants',
-      label: 'Sélection enseignants',
+      id: 'les-metiers',
+      label: 'Découvrir les métiers',
       type: 'link',
-      href: '/selection-enseignants',
-      active: cheminCourant === '/selection-enseignants',
-    },
-    {
-      id: 'selection-eleves',
-      label: 'Sélection élèves',
-      type: 'link',
-      href: '/selection-eleves',
-      active: cheminCourant === '/selection-eleves',
+      href: '/les-metiers',
+      active: cheminCourant === '/les-metiers' || cheminCourant.startsWith('/familles-metier'),
     },
     {
       id: 'dispositifs-phares',
@@ -84,13 +77,6 @@
           cheminCourant,
         ) || cheminCourant.startsWith('/jeux'),
       items: [
-        {
-          id: 'cyber-en-jeux',
-          label: 'CyberEnJeux',
-          type: 'link',
-          href: '/cyber-en-jeux',
-          active: cheminCourant === '/cyber-en-jeux' || cheminCourant.startsWith('/jeux'),
-        },
         {
           id: 'france-cybersecurity-challenge',
           label: '🛡️ France Cybersecurity Challenge',
@@ -114,6 +100,39 @@
         },
       ],
     },
+    {
+      id: 'catalogue-et-selections',
+      label: 'Catalogue et sélections',
+      type: 'menu',
+      collapsable: true,
+      collapseId: 'catalogue-et-selections',
+      active:
+        ['/catalogue', '/selection-enseignants', '/selection-eleves'].includes(cheminCourant) ||
+        cheminCourant.startsWith('/metiers'),
+      items: [
+        {
+          id: 'catalogue',
+          label: 'Catalogue de ressources',
+          type: 'link',
+          href: '/catalogue',
+          active: cheminCourant === '/catalogue' || cheminCourant.startsWith('/metiers'),
+        },
+        {
+          id: 'selection-enseignants',
+          label: 'Sélection enseignants',
+          type: 'link',
+          href: '/selection-enseignants',
+          active: cheminCourant === '/selection-enseignants',
+        },
+        {
+          id: 'selection-eleves',
+          label: 'Sélection élèves',
+          type: 'link',
+          href: '/selection-eleves',
+          active: cheminCourant === '/selection-eleves',
+        },
+      ],
+    },
     ...ajouteMenuSiConnecte({
       id: 'mes-jeux',
       label: 'Mes jeux',
@@ -121,20 +140,6 @@
       href: '/mes-jeux',
       active: cheminCourant === '/mes-jeux',
     }),
-    {
-      id: 'evenements',
-      label: 'Événements',
-      type: 'link',
-      href: '/evenements',
-      active: cheminCourant === '/evenements',
-    },
-    {
-      id: 'devenir-relai',
-      label: 'Relais',
-      type: 'link',
-      href: '/devenir-relai',
-      active: cheminCourant === '/devenir-relai',
-    },
   ]);
 </script>
 
@@ -153,7 +158,22 @@
   navigationAriaLabel="Menu principal"
   navigationItems={menuNavigation}
   hasHeaderTag={false}
+  hasSlotAfterNavigation={true}
 >
   <dsc-zone-identification slot="toolLinks"></dsc-zone-identification>
   <dsc-zone-identification slot="modalToolLinks"></dsc-zone-identification>
+  <a slot="afternavigation" href="/cyber-en-jeux" class="lien-cyberenjeux">🎲 CyberEnJeux</a>
 </dsfr-header>
+
+<style lang="scss">
+  .lien-cyberenjeux {
+    background-color: var(--background-alt-yellow-moutarde);
+    box-shadow: inset 0 1px 0 0 var(--border-default-grey);
+    display: flex;
+    align-items: center;
+    color: var(--text-action-high-grey);
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    padding: 1rem;
+  }
+</style>
