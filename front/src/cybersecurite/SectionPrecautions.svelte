@@ -70,7 +70,9 @@
 
   .entete-section,
   .liste-precautions {
-    max-width: taille-pour-colonnes(10);
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
+    }
   }
 
   .liste-precautions {
