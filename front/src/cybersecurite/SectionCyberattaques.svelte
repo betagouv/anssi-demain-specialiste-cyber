@@ -75,7 +75,7 @@
 
       <div class="vecteurs">
         <h3 class="sous-titre fr-h5">
-          Les vecteurs d'attaques&nbsp;: par quels chemins les attaquants parviennent-ils à leurs fins&nbsp;?
+          Les vecteurs d'attaque&nbsp;: par quels chemins les attaquants parviennent-ils à leurs fins&nbsp;?
         </h3>
 
         <div class="contenu-cartes">

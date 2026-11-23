@@ -18,7 +18,7 @@
     },
     {
       titre: 'Réagir une fois une attaque identifiée',
-      description: `Comprendre l'attaque, contenir, désinfecter, restaurer. Les équipes CSIRT - ou équipes de réponse à incidents informatiques - sont les «\u00A0médecins\u00A0» et les «\u00A0pompiers\u00A0» de la cyber.`,
+      description: `Comprendre l'attaque, contenir, désinfecter, restaurer. Les équipes CSIRT - ou équipes de réponse aux incidents informatiques - sont les «\u00A0médecins\u00A0» et les «\u00A0pompiers\u00A0» de la cyber.`,
       image: '/assets/images/cybersecurite/illustration-ecran-parametres-securite.avif',
     },
   ];
@@ -29,7 +29,7 @@
     <header class="entete-section">
       <h2 class="entete-titre fr-h1">La cybersécurité</h2>
       <p class="entete-chapeau texte-standard-md">
-        Protéger les systèmes d'information, les données et les personnes, est un défi passionnant et complexe&nbsp;!
+        Protéger les systèmes d'information, les données et les personnes est un défi passionnant et complexe&nbsp;!
         L'avantage va souvent aux attaquants&nbsp;: ils peuvent rester discrets, attaquer depuis l'autre bout du monde
         et choisir leur moment. Pour réduire les risques de cyberattaques et se préparer à y répondre, la cybersécurité
         repose sur plusieurs grands piliers.
