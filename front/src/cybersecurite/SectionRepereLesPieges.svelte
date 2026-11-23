@@ -379,6 +379,6 @@
     background-color: var(--artwork-minor-blue-france);
     border-radius: 0.25rem;
     color: var(--text-inverted-grey);
-    padding: 0.25rem 0.5rem;
+    padding: 0.125rem 0.5rem;
   }
 </style>
