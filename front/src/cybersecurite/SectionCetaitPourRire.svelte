@@ -100,8 +100,8 @@
           <p class="mention">Déroule une phrase pour découvrir ce que dit la loi.</p>
         </div>
 
-        {#each accordeons as accordeon}
-          <dsfr-accordion id={accordeon.id} label={accordeon.label} is-expanded>
+        {#each accordeons as accordeon, index}
+          <dsfr-accordion id={accordeon.id} label={accordeon.label} is-expanded={index === 0 ? true : undefined}>
             <div class="contenu">
               <dsfr-badge label="Ce que dit la loi" type="status" status="info" size="sm"></dsfr-badge>
 
