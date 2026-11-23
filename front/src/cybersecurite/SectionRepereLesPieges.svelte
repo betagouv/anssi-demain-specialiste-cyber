@@ -192,7 +192,11 @@
 
   .pieges {
     background-color: var(--background-alt-purple-glycine);
-    padding: 2.5rem 2.5rem 1.5rem;
+    padding: 1.5rem;
+
+    @include a-partir-de(lg) {
+      padding: 2.5rem 2.5rem 1.5rem;
+    }
   }
 
   .conteneur {
@@ -261,7 +265,10 @@
     background-color: var(--background-alt-grey);
     border-radius: 0.5rem;
     padding: 1rem;
-    max-width: 78%;
+
+    @include a-partir-de(lg) {
+      max-width: 78%;
+    }
 
     p {
       margin-block-end: 1.5rem;
@@ -290,7 +297,9 @@
   }
 
   .colonne-indices {
-    padding: 1rem;
+    @include a-partir-de(lg) {
+      padding: 1rem;
+    }
   }
 
   .indices-entete {
@@ -299,6 +308,7 @@
     gap: 1rem;
     justify-content: space-between;
     margin-block-end: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .sous-titre {
