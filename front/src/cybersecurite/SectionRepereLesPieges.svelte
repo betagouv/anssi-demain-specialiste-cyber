@@ -27,7 +27,7 @@
       explication: `L'adresse ne correspond pas au site officiel. Ne clique pas\u00A0: ouvre toi-même l'appli ou le site officiel.`,
     },
     {
-      passage: 'renvoie-le nous en réponse',
+      passage: 'renvoie-le-nous en réponse',
       titre: 'On te demande un code',
       explication: `Un code reçu par SMS, c'est la clé de ton compte. Personne de sérieux ne te le demandera jamais.`,
     },
@@ -153,7 +153,7 @@
 
     <div class="colonne-indices">
       <div class="indices-entete">
-        <h3 class="sous-titre fr-h6">5 Indices à trouver</h3>
+        <h3 class="sous-titre fr-h6">5 indices à trouver</h3>
 
         <dsfr-toggle
           label="Afficher les indices"
