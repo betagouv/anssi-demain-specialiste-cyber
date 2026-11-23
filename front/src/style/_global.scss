@@ -23,10 +23,17 @@ body {
 /* règle les problèmatiques de décalage de contenu avant le chargement complet (CLS)*/
 
 dsc-entete {
-  min-height: 162px;
+  min-height: 127px;
   display: block;
+
+  @include a-partir-de(lg) {
+    min-height: 159px;
+  }
+
   &[sans-navigation] {
-    min-height: 115px;
+    @include a-partir-de(lg) {
+      min-height: 103px;
+    }
   }
 }
 
