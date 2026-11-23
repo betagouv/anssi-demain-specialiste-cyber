@@ -68,7 +68,7 @@
       <div class="message">
         <div class="entete">
           <div class="avatar">
-            <span class="fr-icon-user-fill" aria-hidden="true"></span>
+            <img src="/assets/images/cybersecurite/avatar-utilisateur.svg" alt="Avatar utilisateur" />
           </div>
           <div class="expediteur">
             <button
@@ -236,6 +236,11 @@
     border-radius: 50%;
     height: 3.5rem;
     width: 3.5rem;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
 
   .numero {
