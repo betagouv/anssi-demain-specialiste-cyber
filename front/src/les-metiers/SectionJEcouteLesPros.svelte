@@ -72,7 +72,7 @@
   });
 </script>
 
-<dsfr-container id="jecoute-les-pros">
+<dsfr-container id="j-ecoute-les-pros">
   <div class="jecoute-les-pros">
     <div class="jecoute-les-pros-entete">
       <h3 class="fr-h2">20 pros te racontent leur métier</h3>
