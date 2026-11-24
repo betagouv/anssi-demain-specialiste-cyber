@@ -206,7 +206,7 @@
             slot="buttonsgroup"
             label="Explorer les métiers cyber"
             markup="a"
-            href="/metiers"
+            href="/les-metiers"
             kind="secondary"
           ></dsfr-button>
         </dsfr-card>
