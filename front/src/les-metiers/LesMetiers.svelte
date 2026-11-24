@@ -309,7 +309,7 @@
       label="Haut de page"
       href="#"
       has-icon
-      icon="arrow-up-line"
+      icon="arrow-up-fill"
       icon-place="left"
       size="md"
     ></dsfr-link>
