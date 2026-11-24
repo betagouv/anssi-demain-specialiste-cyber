@@ -26,7 +26,9 @@
     })),
   );
 
-  let fonctionsFiltrees = $derived(fonctionsVisibles.filter((f) => f.famille === familleActive));
+  let fonctionsFiltrees = $derived(
+    familleActive ? fonctionsVisibles.filter((f) => f.famille === familleActive) : fonctionsVisibles,
+  );
 
   function synchroniseTagsActifs() {
     const racine = tagsGroupEl?.shadowRoot;
@@ -38,8 +40,8 @@
   }
 
   $effect(() => {
-    if (familles.length > 0 && !familles.includes(familleActive)) {
-      familleActive = familles[0];
+    if (familleActive && !familles.includes(familleActive)) {
+      familleActive = '';
     }
   });
 
@@ -49,6 +51,7 @@
   }
 
   function gereDeselection() {
+    familleActive = '';
     synchroniseTagsActifs();
   }
 
