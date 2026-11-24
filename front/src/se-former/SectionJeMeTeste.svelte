@@ -137,7 +137,7 @@
         title="Révèle ton potentiel cyber !"
         hasDescription
         description="Les métiers de la cybersécurité cherchent de nouveaux talents. Les compétences que tu valides aujourd'hui sur Pix sont peut-être la première étape de ta future carrière."
-        href="/metiers"
+        href="/les-metiers"
         enlarge
         no-icon
         has-links
@@ -147,7 +147,7 @@
         <dsfr-link
           slot="linksgroup"
           label="Explorer les métiers cyber"
-          href="/metiers"
+          href="/les-metiers"
           size="md"
           has-icon
           icon="arrow-right-line"
