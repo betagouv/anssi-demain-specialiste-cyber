@@ -319,16 +319,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-
-      @media (max-width: 576px) {
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-
-      @include a-partir-de(md) {
-        flex-wrap: wrap;
-        flex-direction: row;
-      }
+      flex-wrap: wrap;
     }
 
     &-fleche {
