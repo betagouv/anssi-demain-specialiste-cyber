@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import IconeJecouteLesPros from '../../statique/assets/images/les-metiers/icone-lecteur-video.svg?raw';
   import IconeJeTraceMaRoute from '../../statique/assets/images/les-metiers/icone-sac-a-dos.svg?raw';
   import IconeJExplore from '../../statique/assets/images/se-former/icone-personnage-devant-ordinateur.svg?raw';
@@ -87,10 +87,12 @@
     return (valeursCategories as string[]).includes(valeur);
   }
 
-  function synchroniseDepuisLeHash(): void {
+  async function synchroniseDepuisLeHash(): Promise<void> {
     const hash = window.location.hash.substring(1);
     if (estUneCategorie(hash)) {
       categorieActive = hash;
+      await tick();
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
