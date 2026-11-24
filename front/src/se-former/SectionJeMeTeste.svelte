@@ -122,7 +122,14 @@
         size="md"
         src="/assets/images/se-former/illustration-pix-trophee-avec-certificat.avif"
       >
-        <dsfr-link slot="linksgroup" label="Voir les plateformes d'entrainement" href="#je-m-entraine" size="md"
+        <dsfr-link
+          slot="linksgroup"
+          label="Voir les plateformes d'entrainement"
+          href="#je-m-entraine"
+          size="md"
+          has-icon
+          icon="arrow-right-line"
+          icon-place="right"
         ></dsfr-link>
       </dsfr-card>
 
@@ -137,7 +144,15 @@
         size="md"
         src="/assets/images/se-former/illustration-carte-metier-hacker-ethique.avif"
       >
-        <dsfr-link slot="linksgroup" label="Explorer les métiers cyber" href="/metiers" size="md"></dsfr-link>
+        <dsfr-link
+          slot="linksgroup"
+          label="Explorer les métiers cyber"
+          href="/metiers"
+          size="md"
+          has-icon
+          icon="arrow-right-line"
+          icon-place="right"
+        ></dsfr-link>
       </dsfr-card>
     </div>
 
