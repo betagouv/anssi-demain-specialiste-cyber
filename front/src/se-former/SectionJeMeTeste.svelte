@@ -115,7 +115,7 @@
         title="Tu as terminé tes parcours ?"
         hasDescription
         description="Continue l'aventure ! Entraîne-toi sur de vrais challenges et prépare-toi aux compétitions."
-        href="#je-m-entraine"
+        href="#je-mentraine"
         enlarge
         no-icon
         has-links
@@ -125,7 +125,7 @@
         <dsfr-link
           slot="linksgroup"
           label="Voir les plateformes d'entrainement"
-          href="#je-m-entraine"
+          href="#je-mentraine"
           size="md"
           has-icon
           icon="arrow-right-line"
