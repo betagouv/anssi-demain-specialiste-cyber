@@ -466,9 +466,10 @@
     }
 
     &--test {
-      padding: 2.5rem;
+      padding: 1.5rem;
 
       @include a-partir-de(lg) {
+        padding: 2.5rem;
         grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.8fr);
         align-items: stretch;
       }
@@ -498,7 +499,11 @@
   }
 
   .test-cyber-intro {
-    padding: 2.5rem;
+    padding: 1.5rem;
+
+    @include a-partir-de(lg) {
+      padding: 2.5rem;
+    }
   }
 
   .test-cyber-titre {
@@ -547,6 +552,7 @@
     display: flex;
     gap: 1rem;
     margin-block-start: 2rem;
+    flex-wrap: wrap;
   }
 
   .test-cyber-resultat-titre {
