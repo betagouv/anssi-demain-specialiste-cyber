@@ -1,5 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
+  import type { Metier } from '../metiers/metiers';
+  import type { FamilleMetier } from './familleMetier.type';
+  import { famillesMetierStore } from './stores/famillesMetier.store';
 
   type Option = {
     libelle: string;
@@ -16,6 +19,8 @@
     nom: string;
     description: string;
     formations: string[];
+    image?: string;
+    href: string;
   };
 
   type ProfilClasse = Profil & {
@@ -31,7 +36,19 @@
   const ORDRE_DEPARTAGE = [1, 2, 3, 4, 0];
   const INDEX_Q5 = 4;
   const INDEX_CRYPTOLOGUE = 4;
-  const FORMATIONS_COMMUNES = ['Master', 'Spécialisation en cybersécurité'];
+  const LISTE_METIERS: [string, string][] = [
+    ['Responsable cyber-sécurité', '2'],
+    ['Hacker éthique / Pentester', '1'],
+    ['Expert(e) cyberdéfense', '5'],
+    ['Analyste des cyber-menaces', '4'],
+    ['Cryptologue', '3'],
+    ['Juriste cyber', '6'],
+  ];
+
+  let famillesMetier: FamilleMetier[] = $state([]);
+  famillesMetierStore.subscribe((valeur) => {
+    famillesMetier = valeur;
+  });
 
   const questions: Question[] = [
     {
@@ -118,44 +135,66 @@
     },
   ];
 
-  const profils: Profil[] = [
+  const profilsParDefaut: Profil[] = [
     {
       nom: 'Responsable cyber-sécurité',
       description:
         "Pilote la sécurité informatique d'une organisation. Il fixe les objectifs de cybersécurité, coordonne l'ensemble des services concernés et sensibilise les membres de son organisation aux bonnes pratiques de cybersécurité.",
-      formations: ['Ingénieur'],
+      formations: ['Ingénieur', 'Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/2',
     },
     {
       nom: 'Hacker éthique / Pentester',
       description:
         "Recherche les failles de sécurité pour les corriger avant que des attaquants ne puissent les exploiter. Il cherche à comprendre le fonctionnement des systèmes informatiques au niveau technique, réalise des tests d'intrusion et réfléchit à comment améliorer la sécurité de ces systèmes.",
-      formations: ['Licence', 'Ingénieur'],
+      formations: ['Licence', 'Ingénieur', 'Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/1',
     },
     {
       nom: 'Expert(e) cyberdéfense',
       description:
         "Porte secours aux personnes et aux organisations victimes de cyberattaques. Elle cherche à comprendre comment les attaquants sont parvenus à pénétrer un système pour mettre fin à l'attaque et revenir à une situation normale.",
-      formations: ['Ingénieur'],
+      formations: ['Ingénieur', 'Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/5',
     },
     {
       nom: 'Analyste des cyber-menaces',
       description:
         "Apprend à connaître et à reconnaître les cyberattaques pour mieux s'en protéger. Il étudie les modes opératoires des attaquants, leurs cibles, leurs motivations pour détecter et anticiper de nouvelles attaques et y faire face.",
-      formations: ['Licence'],
+      formations: ['Licence', 'Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/4',
     },
     {
       nom: 'Cryptologue',
       description:
         "Protège les informations sensibles détenues par les organisations. Il conçoit des algorithmes de sécurité permettant de chiffrer les échanges d'informations numériques pour assurer leur confidentialité et leur intégrité.",
-      formations: ['Ingénieur', 'Doctorat / Post-doctorat'],
+      formations: ['Ingénieur', 'Doctorat / Post-doctorat', 'Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/3',
     },
     {
       nom: 'Juriste cyber',
       description:
         "Aide à protéger et défendre juridiquement les organisations face aux menaces informatiques. Elle veille à l'application de la réglementation en matière de cybersécurité et conseille sur les mesures juridiques permettant de prévenir et de faire face aux cyberattaques.",
-      formations: [],
+      formations: ['Master', 'Spécialisation en cybersécurité'],
+      href: '/metiers/6',
     },
   ];
+
+  let tousLesMetiers: Metier[] = $derived(famillesMetier.flatMap((f) => f.profils));
+
+  let profils: Profil[] = $derived(
+    LISTE_METIERS.map(([, id], i) => {
+      const metier = tousLesMetiers.find((m) => String(m.id) === id);
+      if (!metier) return profilsParDefaut[i];
+      return {
+        nom: metier.titre,
+        description: metier.description || metier.missionPrincipale,
+        formations: metier.formationsCibles.length > 0 ? metier.formationsCibles : profilsParDefaut[i].formations,
+        image: metier.liens.illustration,
+        href: `/metiers/${metier.id}`,
+      };
+    }),
+  );
 
   const maximaParProfil = Array.from({ length: NOMBRE_PROFILS }, (_, i) =>
     questions.reduce((sum, q) => sum + Math.max(...q.options.map((o) => o.points[i])), 0),
@@ -408,6 +447,7 @@
                     has-detail-end
                     has-links
                     no-link
+                    src={profil.image}
                     size="sm"
                   >
                     <dsfr-badge
@@ -421,7 +461,7 @@
                     <div slot="contentend" class="test-cyber-profil-formation">
                       <p class="test-cyber-profil-formation-titre fr-text--xs">Formation</p>
                       <div class="test-cyber-profil-formation-tags">
-                        {#each [...profil.formations, ...FORMATIONS_COMMUNES] as formation}
+                        {#each profil.formations as formation}
                           <dsfr-tag label={formation}></dsfr-tag>
                         {/each}
                       </div>
@@ -430,7 +470,7 @@
                     <dsfr-link
                       slot="linksgroup"
                       label="Découvrir le métier"
-                      href="#j-ecoute-les-pros"
+                      href={profil.href}
                       has-icon
                       icon="arrow-right-line"
                       icon-place="right"
