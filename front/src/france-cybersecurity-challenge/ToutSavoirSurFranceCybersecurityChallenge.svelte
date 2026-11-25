@@ -101,10 +101,10 @@
           à distance par les spécialistes de l'ANSSI.
         </p>
         <p class="texte-standard-md">
-          <b
-            >Suite à ces entretiens, 14 personnes sont sélectionnées : 5 junior et 5 seniors ainsi que 2 remplaçants(e)s
-            dans chaque catégorie d'âge.</b
-          >
+          <b>
+            Suite à ces entretiens, 14 personnes sont sélectionnées : 5 junior et 5 seniors ainsi que 2 remplaçants(e)s
+            dans chaque catégorie d'âge.
+          </b>
         </p>
         <p class="texte-standard-md">
           Les entretiens se déroulent en général courant juin et la sélection est finalisée fin juin / début juillet.

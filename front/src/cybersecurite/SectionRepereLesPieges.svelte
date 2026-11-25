@@ -92,15 +92,19 @@
               class="hotspot"
               class:actif={indicesTrouves[1]}
               aria-pressed={indicesTrouves[1] ? 'true' : 'false'}
-              onclick={() => activeLindice(1)}>{indices[1].passage}</button
-            >, ton compte CinéJeunes+ va être
+              onclick={() => activeLindice(1)}
+            >
+              {indices[1].passage}
+            </button>, ton compte CinéJeunes+ va être
             <button
               type="button"
               class="hotspot"
               class:actif={indicesTrouves[2]}
               aria-pressed={indicesTrouves[2] ? 'true' : 'false'}
-              onclick={() => activeLindice(2)}>{indices[2].passage}</button
+              onclick={() => activeLindice(2)}
             >
+              {indices[2].passage}
+            </button>
             suite à une activité inhabituelle. Pour le garder, confirme ton identité ici&nbsp;:
             <span
               class="hotspot"
@@ -134,8 +138,10 @@
               class="hotspot"
               class:actif={indicesTrouves[4]}
               aria-pressed={indicesTrouves[4] ? 'true' : 'false'}
-              onclick={() => activeLindice(4)}>{indices[4].passage}</button
+              onclick={() => activeLindice(4)}
             >
+              {indices[4].passage}
+            </button>
             pour valider.
           </p>
         </div>
