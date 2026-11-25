@@ -283,13 +283,8 @@
   @use '@style/points-de-rupture' as *;
 
   .hero {
-    &-chapeau {
-      margin-block-end: 0;
-    }
-
     &-illustration {
       background-color: var(--image-couleur-fond);
-      aspect-ratio: 588 / 331;
       display: flex;
       align-items: center;
       justify-content: center;
