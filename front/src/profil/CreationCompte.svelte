@@ -46,8 +46,8 @@
       <fieldset>
         <legend>
           <lab-anssi-icone taille="md" nom="account-circle-line"></lab-anssi-icone>
-          Votre identité</legend
-        >
+          Votre identité
+        </legend>
         <p class="fr-text">
           Prénom&nbsp;: <strong>{informationsProfessionnelles.prenom}</strong>
         </p>
@@ -70,9 +70,9 @@
           SIRET&nbsp;: <strong>{informationsProfessionnelles.organisation.siret}</strong>
         </p>
         <p class="fr-text">
-          Département de votre organisation&nbsp;: <strong
-            >{informationsProfessionnelles.organisation.departement}</strong
-          >
+          Département de votre organisation&nbsp;: <strong>
+            {informationsProfessionnelles.organisation.departement}
+          </strong>
         </p>
       </fieldset>
 
@@ -93,8 +93,8 @@
         value={cguAcceptees}
         onvaluechanged={(e: CustomEvent) => (cguAcceptees = e.detail)}
       >
-        <span
-          >J’accepte les <dsfr-link href="/cgu" label="conditions générales d’utilisation"></dsfr-link>
+        <span>
+          J’accepte les <dsfr-link href="/cgu" label="conditions générales d’utilisation"></dsfr-link>
           {TITRE_DSC_SECABLE}.
         </span>
       </dsfr-checkbox>

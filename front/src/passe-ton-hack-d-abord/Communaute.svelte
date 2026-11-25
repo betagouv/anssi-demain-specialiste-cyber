@@ -10,8 +10,9 @@
         <a
           class="lien"
           href="https://magistere.apps.education.fr/?wantsurl=aHR0cHM6Ly9wYXJ0YWdlMDIubWFnaXN0ZXJlLmFwcHMuZWR1Y2F0aW9uLmZyL2NvdXJzZS92aWV3LnBocD9pZD0zMDA%3D"
-          >Rejoindre la communauté</a
         >
+          Rejoindre la communauté
+        </a>
       </p>
     </div>
     <hr class="separateur" />
