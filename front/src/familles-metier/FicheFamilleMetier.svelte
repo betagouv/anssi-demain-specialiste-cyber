@@ -61,6 +61,7 @@
 
   let famille: FamilleDeMétier | undefined = $state(undefined);
   let toutesFamilles: FamilleDeMétier[] = $state([]);
+  let chargementEnCours = $state(true);
   const autresFamilles = $derived(toutesFamilles.filter((f) => f.code !== famille?.code));
   const numeroFamille = $derived(famille ? toutesFamilles.findIndex((f) => f.code === famille!.code) + 1 : 0);
 
@@ -72,6 +73,7 @@
 
     const reponseTous = await axios.get<FamilleDeMétier[]>('/api/familles-metier');
     toutesFamilles = reponseTous.data;
+    chargementEnCours = false;
   });
 
   const menu: Menu = [
@@ -106,7 +108,11 @@
   ];
 </script>
 
-{#if famille}
+{#if chargementEnCours}
+  <dsfr-container class="conteneur-chargement">
+    <dsfr-alert title="Chargement de la famille de métiers…" type="info"></dsfr-alert>
+  </dsfr-container>
+{:else if famille}
   <Heros
     variant="alternatif"
     ariane={[
@@ -324,6 +330,10 @@
       font-weight: bold;
       width: var(--numero-dimension);
     }
+  }
+
+  .conteneur-chargement {
+    padding-block: 2rem;
   }
 
   .conteneur-fiche-famille {
