@@ -10,7 +10,7 @@
   import { onMount } from 'svelte';
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
-  import { accentPourFamille } from '../les-metiers/familleMetier.type';
+  import { accentPourFamille, slugifie } from '../les-metiers/familleMetier.type';
 
   type Témoignage = {
     nom: string;
@@ -63,14 +63,6 @@
   let toutesFamilles: FamilleDeMétier[] = $state([]);
   const autresFamilles = $derived(toutesFamilles.filter((f) => f.code !== famille?.code));
   const numeroFamille = $derived(famille ? toutesFamilles.findIndex((f) => f.code === famille!.code) + 1 : 0);
-
-  const slugifie = (code: string): string =>
-    code
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
 
   onMount(async () => {
     const morceaux = window.location.pathname.split('/');

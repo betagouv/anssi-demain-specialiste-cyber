@@ -32,3 +32,11 @@ const accentsParCode: Record<string, AccentDsfr> = {
 export function accentPourFamille(code: string): AccentDsfr {
   return accentsParCode[code] ?? 'blue-cumulus';
 }
+
+export const slugifie = (code: string): string =>
+  code
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');

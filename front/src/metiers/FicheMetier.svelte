@@ -11,6 +11,8 @@
   import { laCouleurDuBadgeSelonTypeRessourceCyber } from '../catalogue/ressourceCyber';
   import Fiche, { type Menu } from '../composants/Fiche.svelte';
   import Heros from '../composants/Heros.svelte';
+  import CarteFamilleMetier from '../les-metiers/CarteFamilleMetier.svelte';
+  import type { FamilleMetier } from '../les-metiers/familleMetier.type';
   import type { Metier } from './metiers';
 
   const recupereLesSousTitres = (lienVideo: string) => {
@@ -24,6 +26,8 @@
   };
 
   let metier: Metier | undefined = $state(undefined);
+  let familleMetier: FamilleMetier | undefined = $state(undefined);
+  let chargementFamilleEnCours = $state(true);
   const videosSousTitrees = $derived.by(() => metier?.liens.videos.map(recupereLesSousTitres) ?? []);
 
   onMount(async () => {
@@ -31,6 +35,12 @@
     const id = morceaux[morceaux.length - 1];
     const reponse = await axios.get<Metier>(`/api/metiers/${id}`);
     metier = reponse.data;
+
+    const reponseFamilles = await axios.get<FamilleMetier[]>('/api/familles-metier');
+    familleMetier = reponseFamilles.data.find((famille) =>
+      famille.profils.some((profil) => String(profil.id) === String(metier!.id)),
+    );
+    chargementFamilleEnCours = false;
   });
 
   const menu: Menu = [
@@ -128,6 +138,13 @@
           {/each}
         </ul>
       </section>
+      <div id="famille-metier" class="famille-metier">
+        {#if chargementFamilleEnCours}
+          <dsfr-alert title="Chargement de la famille de métiers…" type="info"></dsfr-alert>
+        {:else if familleMetier}
+          <CarteFamilleMetier famille={familleMetier} enlarge />
+        {/if}
+      </div>
       <section id="formation">
         <h2>Formation</h2>
         <ul>
