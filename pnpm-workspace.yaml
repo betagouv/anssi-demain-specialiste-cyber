@@ -10,6 +10,8 @@ minimumReleaseAgeExclude:
   - '@lab-anssi/lib'
   # Renovate security update: qs@6.16.1
   - qs@6.16.1
+  # Renovate security update: multer@2.5.0
+  - multer@2.5.0
 
 preferFrozenLockfile: true
 strictDepBuilds: false
