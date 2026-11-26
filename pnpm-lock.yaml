@@ -214,7 +214,7 @@ importers:
         version: 3.10.1
       prettier-plugin-svelte:
         specifier: ^4.1.1
-        version: 4.1.1(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2))
+        version: 4.2.0(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2))
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -375,7 +375,7 @@ importers:
         version: 3.10.1
       prettier-plugin-svelte:
         specifier: ^4.1.1
-        version: 4.1.1(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2))
+        version: 4.2.0(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2))
       sass:
         specifier: ^1.105.1
         version: 1.108.2
@@ -4041,8 +4041,8 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier-plugin-svelte@4.1.1:
-    resolution: {integrity: sha512-wXvbXMjSvb4C9ENWTHXyd+ihakKCsJ6rJhLP6/8HFNj4GkZr48jqL9PoKsl2sk7SyCZRTnJ7O2TTowUpOxP/KA==}
+  prettier-plugin-svelte@4.2.0:
+    resolution: {integrity: sha512-VgUFSR6+7/KLloVSIgKMwY/9OFxaixY/xsOBUCP95ZKaxSa6JBtLKzq6L1L/Tw6Jc1C7K+op7D1Yu5qD+YdPHA==}
     engines: {node: '>=20'}
     peerDependencies:
       prettier: ^3.0.0
@@ -8572,7 +8572,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-svelte@4.1.1(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2)):
+  prettier-plugin-svelte@4.2.0(prettier@3.10.1)(svelte@5.58.0(@typescript-eslint/types@8.71.2)):
     dependencies:
       prettier: 3.10.1
       svelte: 5.58.0(@typescript-eslint/types@8.71.2)
